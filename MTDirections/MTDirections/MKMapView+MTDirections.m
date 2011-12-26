@@ -154,4 +154,8 @@ static char requestKey;
     objc_setAssociatedObject(self, &requestKey, mt_request, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
+- (MTDirectionRequest *)mt_request {
+    return objc_getAssociatedObject(self, &requestKey);
+}
+
 @end
