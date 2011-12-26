@@ -1,21 +1,21 @@
-//
-//  MKMapView+MTDirections.m
-//  WhereTU
-//
-//  Created by Tretter Matthias on 25.12.11.
-//  Copyright (c) 2011 NOUS Wissensmanagement GmbH. All rights reserved.
-//
-
 #import "MKMapView+MTDirections.h"
 #import "MTWaypoint.h"
 #import "MTDirectionRequest.h"
 #import <objc/runtime.h>
 
-#define kMTDirectionDefaultColor    [UIColor colorWithRed:0.0f green:0.0f blue:1.0f alpha:0.5f]
+#define kMTDirectionDefaultColor        [UIColor colorWithRed:0.0f green:0.0f blue:1.0f alpha:0.5f]
+#define kMTDirectionDefaultLineWidth    5.f
 
 static char waypointsKey;
 static char overlayKey;
 static char colorKey;
+static char requestKey;
+
+@interface MKMapView ()
+
+@property (nonatomic, strong, setter = mt_setRequest:) MTDirectionRequest *mt_request;
+
+@end
 
 @implementation MKMapView (MTDirections)
 
@@ -30,18 +30,19 @@ static char colorKey;
 	CLLocationDegrees minLat = 90.0f;
 	CLLocationDegrees minLon = 180.0f;
 	
-	for (int i = 0; i < waypoints.count; i++) {
+	for (NSUInteger i=0; i<waypoints.count; i++) {
 		MTWaypoint *currentLocation = [waypoints objectAtIndex:i];
-		if(currentLocation.coordinate.latitude > maxLat) {
+		
+        if (currentLocation.coordinate.latitude > maxLat) {
 			maxLat = currentLocation.coordinate.latitude;
 		}
-		if(currentLocation.coordinate.latitude < minLat) {
+		if (currentLocation.coordinate.latitude < minLat) {
 			minLat = currentLocation.coordinate.latitude;
 		}
-		if(currentLocation.coordinate.longitude > maxLon) {
+		if (currentLocation.coordinate.longitude > maxLon) {
 			maxLon = currentLocation.coordinate.longitude;
 		}
-		if(currentLocation.coordinate.longitude < minLon) {
+		if (currentLocation.coordinate.longitude < minLon) {
 			minLon = currentLocation.coordinate.longitude;
 		}
 	}
@@ -66,7 +67,7 @@ static char colorKey;
     
 	routeLineView.fillColor = self.routeOverlayColor;
 	routeLineView.strokeColor = self.routeOverlayColor;
-	routeLineView.lineWidth = 4;
+	routeLineView.lineWidth = kMTDirectionDefaultLineWidth;
 	
     return routeLineView;
 }
@@ -76,17 +77,18 @@ static char colorKey;
       zoomToShowRoute:(BOOL)zoomToShowRoute {
     __unsafe_unretained MKMapView *blockSelf = self;
     
-    MTDirectionRequest *request = [[MTDirectionRequest alloc] initFrom:fromCoordinate
-                                                                    to:toCoordinate
-                                                            completion:^(NSArray *waypoints) {
-                                                                blockSelf.waypoints = waypoints; 
-                                                                
-                                                                if (zoomToShowRoute) {
-                                                                    [blockSelf zoomToShowRouteAnimated:YES];
-                                                                }
-                                                            }];
+    [self.mt_request cancel];
+    self.mt_request = [[MTDirectionRequest alloc] initFrom:fromCoordinate
+                                                        to:toCoordinate
+                                                completion:^(NSArray *waypoints) {
+                                                    blockSelf.waypoints = waypoints; 
+                                                    
+                                                    if (zoomToShowRoute) {
+                                                        [blockSelf zoomToShowRouteAnimated:YES];
+                                                    }
+                                                }];
     
-    [request start];
+    [self.mt_request start];
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -95,7 +97,7 @@ static char colorKey;
 
 - (void)setWaypoints:(NSArray *)waypoints {
     MKMapPoint *points = malloc(sizeof(CLLocationCoordinate2D) * waypoints.count);
-
+    
 	for (NSUInteger i = 0; i < waypoints.count; i++) {
 		MTWaypoint *waypoint = [waypoints objectAtIndex:i];
 		MKMapPoint point = MKMapPointForCoordinate(waypoint.coordinate);
@@ -146,6 +148,10 @@ static char colorKey;
     }
     
     return color;
+}
+
+- (void)mt_setRequest:(MTDirectionRequest *)mt_request {
+    objc_setAssociatedObject(self, &requestKey, mt_request, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end

@@ -1,5 +1,5 @@
 //
-//  MTDirections.h
+//  MKMapView+MTDirections.h
 //  MTDirections
 //
 //  Created by Matthias Tretter on 21.01.11.
@@ -13,8 +13,20 @@
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+#import <MapKit/MapKit.h>
 
-#import "MTDirectionRequest.h"
-#import "MTDirectionRouteType.h"
-#import "MTWaypoint.h"
-#import "MKMapView+MTDirections.h"
+@interface MKMapView (MTDirections)
+
+@property (nonatomic, strong) NSArray *waypoints;
+@property (nonatomic, strong) MKPolyline *routeOverlay;
+@property (nonatomic, strong) UIColor *routeOverlayColor;
+
+- (void)zoomToShowRouteAnimated:(BOOL)animated;
+
+- (void)loadRouteFrom:(CLLocationCoordinate2D)fromCoordinate
+                   to:(CLLocationCoordinate2D)toCoordinate
+      zoomToShowRoute:(BOOL)zoomToShowRoute;
+
+- (MKOverlayView *)viewForDirectionsOverlay:(id<MKOverlay>)overlay;
+
+@end

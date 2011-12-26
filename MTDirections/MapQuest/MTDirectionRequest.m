@@ -1,15 +1,9 @@
-//
-//  MTDirectionRequest.m
-//  WhereTU
-//
-//  Created by Tretter Matthias on 25.12.11.
-//  Copyright (c) 2011 NOUS Wissensmanagement GmbH. All rights reserved.
-//
-
 #import "MTDirectionRequest.h"
+#import "MTDirectionAPI.h"
 #import "MTWaypoint.h"
 #import "MTXMLFetcher.h"
 #import "MTXPathResultNode.h"
+
 
 #define kMTDirectionBaseURL         @"http://open.mapquestapi.com/directions/v0/route?outFormat=xml&unit=k&narrativeType=none"
 #define kMTDirectionXPathQuery      @"//startPoint"
@@ -61,7 +55,7 @@
                              kMTDirectionBaseURL, 
                              fromCoordinate.latitude, fromCoordinate.longitude,
                              toCoordinate.latitude, toCoordinate.longitude,
-                             MTDirectionAPIStringForDirectionRouteType(routeType)];
+                             MTDirectionStringForDirectionRouteType(routeType)];
         
         fetcher_ = [[MTXMLFetcher alloc] initWithURLString:address
                                                 xPathQuery:kMTDirectionXPathQuery
@@ -112,7 +106,9 @@
     // add end coordinate
     [waypoints addObject:[MTWaypoint waypointWithCoordinate:self.toCoordinate]];
     
-    self.completion(waypoints);
+    if (self.completion != nil) {
+        self.completion(waypoints);
+    }
 }
 
 @end

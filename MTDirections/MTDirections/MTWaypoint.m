@@ -1,11 +1,3 @@
-//
-//  MTWaypoint.m
-//  WhereTU
-//
-//  Created by Tretter Matthias on 25.12.11.
-//  Copyright (c) 2011 NOUS Wissensmanagement GmbH. All rights reserved.
-//
-
 #import "MTWaypoint.h"
 
 @implementation MTWaypoint
