@@ -17,22 +17,22 @@
 
 
 /** MapQuest Open API */
-#define kMTDirectionsActiveAPIMapQuest      1
+typedef enum {
+    MTDirectionAPIMapQuest,
+    MTDirectionAPICount
+} MTDirectionAPI;
 
 /** Active API Used */
-#define kMTDirectionsActiveAPI              kMTDirectionsActiveAPIMapQuest
+#define kMTDirectionsActiveAPI              MTDirectionAPIMapQuest
 
-
-#if kMTDirectionsActiveAPI == kMTDirectionsAPIMapQuest
 
 NS_INLINE NSString* MTDirectionStringForDirectionRouteType(MTDirectionRouteType routeType) {
-    return MTDirectionStringForDirectionRouteTypeMapQuest(routeType);
+    switch (kMTDirectionsActiveAPI) {
+        case MTDirectionAPIMapQuest:
+            return MTDirectionStringForDirectionRouteTypeMapQuest(routeType);
+            
+        default:
+            return @"";
+    }
+    
 }
-
-#else
-
-NS_INLINE NSString* MTDirectionStringForDirectionRouteType(MTDirectionRouteType routeType) {
-    return nil;
-}
-
-#endif
