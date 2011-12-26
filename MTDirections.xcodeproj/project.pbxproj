@@ -259,6 +259,10 @@
 		9B6C18CE14A7E18200087893 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					i386,
+					armv7,
+				);
 				DSTROOT = /tmp/MTDirections.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MTDirections/Prefix.pch;
@@ -271,6 +275,10 @@
 		9B6C18CF14A7E18200087893 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					i386,
+					armv7,
+				);
 				DSTROOT = /tmp/MTDirections.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MTDirections/Prefix.pch;
@@ -299,6 +307,7 @@
 				9B6C18CF14A7E18200087893 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
