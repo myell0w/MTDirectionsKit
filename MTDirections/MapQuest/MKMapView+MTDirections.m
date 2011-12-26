@@ -8,7 +8,7 @@
 
 #import "MKMapView+MTDirections.h"
 #import "MTWaypoint.h"
-#import "MTDirectionRequest.m"
+#import "MTDirectionRequest.h"
 #import <objc/runtime.h>
 
 #define kMTDirectionDefaultColor    [UIColor colorWithRed:0.0f green:0.0f blue:1.0f alpha:0.5f]
