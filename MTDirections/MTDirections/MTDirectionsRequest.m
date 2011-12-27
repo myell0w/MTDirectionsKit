@@ -1,4 +1,5 @@
 #import "MTDirectionsRequest.h"
+#import "MTDirectionsRequestMapQuest.h"
 #import "MTDirectionsAPI.h"
 
 @implementation MTDirectionsRequest
@@ -28,10 +29,10 @@
     
     switch (kMTDirectionsActiveAPI) {
         case MTDirectionsAPIMapQuest:
-            request = [[MTDirectionsRequest alloc] initFrom:fromCoordinate
-                                                        to:toCoordinate
-                                                 routeType:routeType
-                                                completion:completion];
+            request = [[MTDirectionsRequestMapQuest alloc] initFrom:fromCoordinate
+                                                                 to:toCoordinate
+                                                          routeType:routeType
+                                                         completion:completion];
             break;
             
         default:

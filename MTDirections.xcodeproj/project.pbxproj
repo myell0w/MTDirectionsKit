@@ -16,8 +16,8 @@
 		9B6C18E114A7E20900087893 /* MTXPathResultNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6C18D814A7E20900087893 /* MTXPathResultNode.m */; };
 		9B6C18F214A7E24200087893 /* MTDirections.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B6C18F114A7E24200087893 /* MTDirections.h */; };
 		9B6C18F414A7E40A00087893 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18F314A7E40A00087893 /* libxml2.dylib */; };
-		9BB7005014AA6B24001642E7 /* MTDirectionRequestMapQuest.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB7003D14AA6B24001642E7 /* MTDirectionRequestMapQuest.h */; };
-		9BB7005114AA6B24001642E7 /* MTDirectionRequestMapQuest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB7003E14AA6B24001642E7 /* MTDirectionRequestMapQuest.m */; };
+		9BB7005014AA6B24001642E7 /* MTDirectionsRequestMapQuest.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB7003D14AA6B24001642E7 /* MTDirectionsRequestMapQuest.h */; };
+		9BB7005114AA6B24001642E7 /* MTDirectionsRequestMapQuest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB7003E14AA6B24001642E7 /* MTDirectionsRequestMapQuest.m */; };
 		9BB7005214AA6B24001642E7 /* MTDirectionsParserMapQuest.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB7003F14AA6B24001642E7 /* MTDirectionsParserMapQuest.h */; };
 		9BB7005314AA6B24001642E7 /* MTDirectionsParserMapQuest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB7004014AA6B24001642E7 /* MTDirectionsParserMapQuest.m */; };
 		9BB7005414AA6B24001642E7 /* MTDirectionsRouteType+MapQuest.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB7004114AA6B24001642E7 /* MTDirectionsRouteType+MapQuest.h */; };
@@ -48,8 +48,8 @@
 		9B6C18D814A7E20900087893 /* MTXPathResultNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTXPathResultNode.m; sourceTree = "<group>"; };
 		9B6C18F114A7E24200087893 /* MTDirections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDirections.h; sourceTree = "<group>"; };
 		9B6C18F314A7E40A00087893 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
-		9BB7003D14AA6B24001642E7 /* MTDirectionRequestMapQuest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDirectionRequestMapQuest.h; sourceTree = "<group>"; };
-		9BB7003E14AA6B24001642E7 /* MTDirectionRequestMapQuest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDirectionRequestMapQuest.m; sourceTree = "<group>"; };
+		9BB7003D14AA6B24001642E7 /* MTDirectionsRequestMapQuest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDirectionsRequestMapQuest.h; sourceTree = "<group>"; };
+		9BB7003E14AA6B24001642E7 /* MTDirectionsRequestMapQuest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDirectionsRequestMapQuest.m; sourceTree = "<group>"; };
 		9BB7003F14AA6B24001642E7 /* MTDirectionsParserMapQuest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDirectionsParserMapQuest.h; sourceTree = "<group>"; };
 		9BB7004014AA6B24001642E7 /* MTDirectionsParserMapQuest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDirectionsParserMapQuest.m; sourceTree = "<group>"; };
 		9BB7004114AA6B24001642E7 /* MTDirectionsRouteType+MapQuest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTDirectionsRouteType+MapQuest.h"; sourceTree = "<group>"; };
@@ -151,8 +151,8 @@
 		9BB7003C14AA6B24001642E7 /* MapQuest */ = {
 			isa = PBXGroup;
 			children = (
-				9BB7003D14AA6B24001642E7 /* MTDirectionRequestMapQuest.h */,
-				9BB7003E14AA6B24001642E7 /* MTDirectionRequestMapQuest.m */,
+				9BB7003D14AA6B24001642E7 /* MTDirectionsRequestMapQuest.h */,
+				9BB7003E14AA6B24001642E7 /* MTDirectionsRequestMapQuest.m */,
 				9BB7003F14AA6B24001642E7 /* MTDirectionsParserMapQuest.h */,
 				9BB7004014AA6B24001642E7 /* MTDirectionsParserMapQuest.m */,
 				9BB7004114AA6B24001642E7 /* MTDirectionsRouteType+MapQuest.h */,
@@ -191,7 +191,7 @@
 				9B6C18DE14A7E20900087893 /* MTXMLFetcher.h in Headers */,
 				9B6C18E014A7E20900087893 /* MTXPathResultNode.h in Headers */,
 				9B6C18F214A7E24200087893 /* MTDirections.h in Headers */,
-				9BB7005014AA6B24001642E7 /* MTDirectionRequestMapQuest.h in Headers */,
+				9BB7005014AA6B24001642E7 /* MTDirectionsRequestMapQuest.h in Headers */,
 				9BB7005214AA6B24001642E7 /* MTDirectionsParserMapQuest.h in Headers */,
 				9BB7005414AA6B24001642E7 /* MTDirectionsRouteType+MapQuest.h in Headers */,
 				9BB7005514AA6B24001642E7 /* MKMapView+MTDirections.h in Headers */,
@@ -259,7 +259,7 @@
 				9B6C18DB14A7E20900087893 /* MTHTTPFetcher.m in Sources */,
 				9B6C18DF14A7E20900087893 /* MTXMLFetcher.m in Sources */,
 				9B6C18E114A7E20900087893 /* MTXPathResultNode.m in Sources */,
-				9BB7005114AA6B24001642E7 /* MTDirectionRequestMapQuest.m in Sources */,
+				9BB7005114AA6B24001642E7 /* MTDirectionsRequestMapQuest.m in Sources */,
 				9BB7005314AA6B24001642E7 /* MTDirectionsParserMapQuest.m in Sources */,
 				9BB7005614AA6B24001642E7 /* MKMapView+MTDirections.m in Sources */,
 				9BB7005A14AA6B24001642E7 /* MTDirectionsOverlay.m in Sources */,

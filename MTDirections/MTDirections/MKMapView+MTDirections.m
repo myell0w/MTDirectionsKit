@@ -66,7 +66,7 @@ static char requestKey;
         return nil;
     }
     
-	MKPolylineView *directionsLineView = [[MKPolylineView alloc] initWithPolyline:directionsOverlay];
+	MKPolylineView *directionsLineView = [[MKPolylineView alloc] initWithPolyline:directionsOverlay.polyline];
     
 	directionsLineView.strokeColor = self.directionsOverlayColor;
 	directionsLineView.lineWidth = kMTDirectionsDefaultLineWidth;

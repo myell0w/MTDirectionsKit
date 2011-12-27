@@ -1,4 +1,4 @@
-#import "MTDirectionRequestMapQuest.h"
+#import "MTDirectionsRequestMapQuest.h"
 #import "MTXMLFetcher.h"
 #import "MTDirectionsRouteType+MapQuest.h"
 #import "MTDirectionsParserMapQuest.h"
@@ -6,7 +6,7 @@
 #define kMTDirectionBaseURL         @"http://open.mapquestapi.com/directions/v0/route?outFormat=xml&unit=k&narrativeType=none"
 #define kMTDirectionXPathQuery      @"//startPoint"
 
-@interface MTDirectionRequestMapQuest ()
+@interface MTDirectionsRequestMapQuest ()
 
 @property (nonatomic, strong) MTXMLFetcher *fetcher;
 
@@ -14,7 +14,7 @@
 
 @end
 
-@implementation MTDirectionRequestMapQuest
+@implementation MTDirectionsRequestMapQuest
 
 @synthesize fetcher = fetcher_;
 

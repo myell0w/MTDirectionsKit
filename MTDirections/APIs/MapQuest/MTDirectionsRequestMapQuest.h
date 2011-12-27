@@ -15,6 +15,6 @@
 
 #import "MTDirectionsRequest.h"
 
-@interface MTDirectionRequestMapQuest : MTDirectionsRequest
+@interface MTDirectionsRequestMapQuest : MTDirectionsRequest
 
 @end
