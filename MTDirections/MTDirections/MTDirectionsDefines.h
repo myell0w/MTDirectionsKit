@@ -1,5 +1,5 @@
 //
-//  MTWaypoint.h
+//  MTDirectionsDefines.h
 //  MTDirections
 //
 //  Created by Matthias Tretter on 21.01.11.
@@ -14,15 +14,4 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-/**
- MTDirection-Wrapper for a CoreLocation-coordinate
- */
-@interface MTWaypoint : NSObject
-
-@property (nonatomic, assign) CLLocationCoordinate2D coordinate;
-
-+ (MTWaypoint *)waypointWithCoordinate:(CLLocationCoordinate2D)coordinate;
-
-- (id)initWithCoordinate:(CLLocationCoordinate2D)coordinate;
-
-@end
+typedef void (^mt_direction_block)(NSArray *waypoints);

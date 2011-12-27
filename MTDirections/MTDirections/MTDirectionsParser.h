@@ -1,5 +1,5 @@
 //
-//  MTWaypoint.h
+//  MTDirectionsParser.h
 //  MTDirections
 //
 //  Created by Matthias Tretter on 21.01.11.
@@ -13,16 +13,18 @@
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+#import "MTDirectionsDefines.h"
 
-/**
- MTDirection-Wrapper for a CoreLocation-coordinate
- */
-@interface MTWaypoint : NSObject
+@interface MTDirectionsParser : NSObject
 
-@property (nonatomic, assign) CLLocationCoordinate2D coordinate;
+@property (nonatomic, strong, readonly) id data;
+@property (nonatomic, assign, readonly) CLLocationCoordinate2D fromCoordinate;
+@property (nonatomic, assign, readonly) CLLocationCoordinate2D toCoordinate;
 
-+ (MTWaypoint *)waypointWithCoordinate:(CLLocationCoordinate2D)coordinate;
+- (id)initWithFromCoordinate:(CLLocationCoordinate2D)fromCoordinate
+                toCoordinate:(CLLocationCoordinate2D)toCoordinate
+                        data:(id)data;
 
-- (id)initWithCoordinate:(CLLocationCoordinate2D)coordinate;
+- (void)parseWithCompletion:(mt_direction_block)completion;
 
 @end

@@ -1,5 +1,5 @@
 //
-//  MTWaypoint.h
+//  MTDirectionRequest.h
 //  MTDirections
 //
 //  Created by Matthias Tretter on 21.01.11.
@@ -13,16 +13,37 @@
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+#import "MTDirectionsRouteType.h"
+#import "MTDirectionsDefines.h"
+
+@interface MTDirectionsRequest : NSObject
+
+@property (nonatomic, assign) CLLocationCoordinate2D fromCoordinate;
+@property (nonatomic, assign) CLLocationCoordinate2D toCoordinate;
+@property (nonatomic, copy) mt_direction_block completion;
+
++ (id)requestFrom:(CLLocationCoordinate2D)fromCoordinate
+               to:(CLLocationCoordinate2D)toCoordinate
+       completion:(mt_direction_block)completion;
+
++ (id)requestFrom:(CLLocationCoordinate2D)fromCoordinate
+               to:(CLLocationCoordinate2D)toCoordinate
+        routeType:(MTDirectionsRouteType)routeType
+       completion:(mt_direction_block)completion;
+
+- (id)initFrom:(CLLocationCoordinate2D)fromCoordinate
+            to:(CLLocationCoordinate2D)toCoordinate
+    completion:(mt_direction_block)completion;
 
 /**
- MTDirection-Wrapper for a CoreLocation-coordinate
+ The designated initializer
  */
-@interface MTWaypoint : NSObject
+- (id)initFrom:(CLLocationCoordinate2D)fromCoordinate
+            to:(CLLocationCoordinate2D)toCoordinate
+     routeType:(MTDirectionsRouteType)routeType
+    completion:(mt_direction_block)completion;
 
-@property (nonatomic, assign) CLLocationCoordinate2D coordinate;
-
-+ (MTWaypoint *)waypointWithCoordinate:(CLLocationCoordinate2D)coordinate;
-
-- (id)initWithCoordinate:(CLLocationCoordinate2D)coordinate;
+- (void)start;
+- (void)cancel;
 
 @end

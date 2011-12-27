@@ -1,5 +1,5 @@
 //
-//  MTWaypoint.h
+//  MTDirectionsParserMapQuest.h
 //  MTDirections
 //
 //  Created by Matthias Tretter on 21.01.11.
@@ -13,16 +13,8 @@
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+#import "MTDirectionsParser.h"
 
-/**
- MTDirection-Wrapper for a CoreLocation-coordinate
- */
-@interface MTWaypoint : NSObject
-
-@property (nonatomic, assign) CLLocationCoordinate2D coordinate;
-
-+ (MTWaypoint *)waypointWithCoordinate:(CLLocationCoordinate2D)coordinate;
-
-- (id)initWithCoordinate:(CLLocationCoordinate2D)coordinate;
+@interface MTDirectionsParserMapQuest : MTDirectionsParser
 
 @end

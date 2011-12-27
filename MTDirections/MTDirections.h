@@ -15,6 +15,6 @@
 
 
 #import "MTDirectionRequest.h"
-#import "MTDirectionRouteType.h"
+#import "MTDirectionsRouteType.h"
 #import "MTWaypoint.h"
 #import "MKMapView+MTDirections.h"

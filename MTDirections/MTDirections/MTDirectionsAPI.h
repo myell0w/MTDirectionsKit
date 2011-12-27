@@ -1,5 +1,5 @@
 //
-//  MTDirectionRequest.h
+//  MTDirectionAPI.h
 //  MTDirections
 //
 //  Created by Matthias Tretter on 21.01.11.
@@ -13,24 +13,15 @@
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
-#import <CoreLocation/CoreLocation.h>
-#import "MTDirectionRouteType.h"
+#import "MTDirectionsRouteType+MapQuest.h"
 
-typedef void (^mt_direction_block)(NSArray *waypoints);
+/**
+ All supported APIs for Direction Retreival
+ */
+typedef enum {
+    MTDirectionsAPIMapQuest,
+    MTDirectionsAPICount
+} MTDirectionsAPI;
 
-@interface MTDirectionRequest : NSObject
-
-- (id)initFrom:(CLLocationCoordinate2D)fromCoordinate
-            to:(CLLocationCoordinate2D)toCoordinate
-    completion:(mt_direction_block)completion;
-
-- (id)initFrom:(CLLocationCoordinate2D)fromCoordinate
-            to:(CLLocationCoordinate2D)toCoordinate
-     routeType:(MTDirectionRouteType)routeType
-    completion:(mt_direction_block)completion;
-
-- (void)start;
-- (void)cancel;
-
-@end
+/** Active API Used */
+#define kMTDirectionsActiveAPI              MTDirectionsAPIMapQuest

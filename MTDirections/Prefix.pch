@@ -4,5 +4,7 @@
 
 #ifdef __OBJC__
     #import <Foundation/Foundation.h>
+    #import <CoreLocation/CoreLocation.h>
+    #import <MapKit/MapKit.h>
 #endif
 

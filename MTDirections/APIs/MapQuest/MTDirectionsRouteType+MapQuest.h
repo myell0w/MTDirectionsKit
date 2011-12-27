@@ -1,5 +1,5 @@
 //
-//  MTDirectionRouteType+MapQuest.h
+//  MTDirectionsRouteType+MapQuest.h
 //  MTDirections
 //
 //  Created by Matthias Tretter on 21.01.11.
@@ -13,23 +13,23 @@
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "MTDirectionRouteType.h"
+#import "MTDirectionsRouteType.h"
 
-NS_INLINE NSString* MTDirectionStringForDirectionRouteTypeMapQuest(MTDirectionRouteType routeType) {
+NS_INLINE NSString* MTDirectionStringForDirectionRouteTypeMapQuest(MTDirectionsRouteType routeType) {
     switch (routeType) {
-        case MTDirectionRouteTypeFastestDriving:
+        case MTDirectionsRouteTypeFastestDriving:
             return @"fastest";
             
-        case MTDirectionRouteTypeShortestDriving:
+        case MTDirectionsRouteTypeShortestDriving:
             return @"shortest";
             
-        case MTDirectionRouteTypePedestrian:
+        case MTDirectionsRouteTypePedestrian:
             return @"pedestrian";
             
-        case MTDirectionRouteTypePedestrianIncludingPublicTransport:
+        case MTDirectionsRouteTypePedestrianIncludingPublicTransport:
             return @"multimodal";
             
-        case MTDirectionRouteTypeBicycle:
+        case MTDirectionsRouteTypeBicycle:
         default:
             return @"bicycle";
             

@@ -1,5 +1,5 @@
 //
-//  MTDirectionAPI.h
+//  MTDirectionRequestMapQuest.h
 //  MTDirections
 //
 //  Created by Matthias Tretter on 21.01.11.
@@ -13,26 +13,8 @@
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "MTDirectionRouteType+MapQuest.h"
+#import "MTDirectionsRequest.h"
 
+@interface MTDirectionRequestMapQuest : MTDirectionsRequest
 
-/** MapQuest Open API */
-typedef enum {
-    MTDirectionAPIMapQuest,
-    MTDirectionAPICount
-} MTDirectionAPI;
-
-/** Active API Used */
-#define kMTDirectionsActiveAPI              MTDirectionAPIMapQuest
-
-
-NS_INLINE NSString* MTDirectionStringForDirectionRouteType(MTDirectionRouteType routeType) {
-    switch (kMTDirectionsActiveAPI) {
-        case MTDirectionAPIMapQuest:
-            return MTDirectionStringForDirectionRouteTypeMapQuest(routeType);
-            
-        default:
-            return @"";
-    }
-    
-}
+@end

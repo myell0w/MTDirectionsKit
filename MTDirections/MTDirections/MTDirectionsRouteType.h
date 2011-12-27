@@ -1,5 +1,5 @@
 //
-//  MTDirectionRouteType.h
+//  MTDirectionsRouteType.h
 //  MTDirections
 //
 //  Created by Matthias Tretter on 21.01.11.
@@ -13,10 +13,16 @@
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+/**
+ The type of route we want to request
+ */
 typedef enum {
-    MTDirectionRouteTypeFastestDriving,
-    MTDirectionRouteTypeShortestDriving,
-    MTDirectionRouteTypePedestrian,
-    MTDirectionRouteTypePedestrianIncludingPublicTransport,
-    MTDirectionRouteTypeBicycle
-} MTDirectionRouteType;
+    MTDirectionsRouteTypeFastestDriving,
+    MTDirectionsRouteTypeShortestDriving,
+    MTDirectionsRouteTypePedestrian,
+    MTDirectionsRouteTypePedestrianIncludingPublicTransport,
+    MTDirectionsRouteTypeBicycle
+} MTDirectionsRouteType;
+
+/** The default route type used when not specified */
+#define kMTDefaultDirectionsRouteType        MTDirectionsRouteTypePedestrian
