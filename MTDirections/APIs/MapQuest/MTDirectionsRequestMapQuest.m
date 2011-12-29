@@ -3,7 +3,7 @@
 #import "MTDirectionsRouteType+MapQuest.h"
 #import "MTDirectionsParserMapQuest.h"
 
-#define kMTDirectionBaseURL         @"http://open.mapquestapi.com/directions/v0/route?outFormat=xml&unit=k&narrativeType=none&shapeFormat=raw"
+#define kMTDirectionBaseURL         @"http://open.mapquestapi.com/directions/v0/route?outFormat=xml&unit=k&narrativeType=none&shapeFormat=raw&generalize=50"
 #define kMTDirectionXPathQuery      @"//shapePoints"
 
 @interface MTDirectionsRequestMapQuest ()
