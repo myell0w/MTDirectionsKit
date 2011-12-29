@@ -75,12 +75,14 @@ static char requestKey;
 
 - (void)loadDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate
                         to:(CLLocationCoordinate2D)toCoordinate
+                 routeType:(MTDirectionsRouteType)routeType
       zoomToShowDirections:(BOOL)zoomToShowDirections {
     __unsafe_unretained MKMapView *blockSelf = self;
     
     [self.mt_request cancel];
     self.mt_request = [MTDirectionsRequest requestFrom:fromCoordinate
                                                     to:toCoordinate
+                                             routeType:routeType
                                             completion:^(NSArray *waypoints) {
                                                 blockSelf.waypoints = waypoints; 
                                                 

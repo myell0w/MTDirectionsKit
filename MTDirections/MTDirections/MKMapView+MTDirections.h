@@ -13,6 +13,8 @@
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+#import "MTDirectionsRouteType.h"
+
 @class MTDirectionsOverlay;
 
 @interface MKMapView (MTDirections)
@@ -31,10 +33,12 @@
  
  @param fromCoordinate the start point of the direction
  @param toCoordinate the end point of the direction
+ @param routeType the type of the route request, e.g. pedestrian, cycling, fastest driving
  @param zoomToShowDirections flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)
  */
 - (void)loadDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate
                         to:(CLLocationCoordinate2D)toCoordinate
+                 routeType:(MTDirectionsRouteType)routeType
       zoomToShowDirections:(BOOL)zoomToShowDirections;
 
 /**
