@@ -17,7 +17,7 @@
  The type of route we want to request
  */
 typedef enum {
-    MTDirectionsRouteTypeFastestDriving,
+    MTDirectionsRouteTypeFastestDriving = 0,
     MTDirectionsRouteTypeShortestDriving,
     MTDirectionsRouteTypePedestrian,
     MTDirectionsRouteTypePedestrianIncludingPublicTransport,

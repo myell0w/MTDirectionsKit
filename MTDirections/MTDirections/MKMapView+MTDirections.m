@@ -86,7 +86,9 @@ static char requestKey;
                                             completion:^(NSArray *waypoints) {
                                                 blockSelf.waypoints = waypoints; 
                                                 
-                                                if (zoomToShowDirections) {
+                                                // If we found at least one waypoint (start and end are always contained)
+                                                // zoom the mapView to show the whole direction
+                                                if (zoomToShowDirections && waypoints.count > 2) {
                                                     [blockSelf setRegionToShowDirectionsAnimated:YES];
                                                 }
                                             }];
