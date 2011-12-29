@@ -31,7 +31,7 @@ NS_INLINE BOOL MTDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMap
 - (void)drawMapRect:(MKMapRect)mapRect
           zoomScale:(MKZoomScale)zoomScale
           inContext:(CGContextRef)context {
-    CGFloat lineWidth = MKRoadWidthAtZoomScale(zoomScale);
+    CGFloat lineWidth = MKRoadWidthAtZoomScale(zoomScale) * 2.f;
     
     // outset the map rect by the line width so that points just outside
     // of the currently drawn rect are included in the generated path.
@@ -43,11 +43,11 @@ NS_INLINE BOOL MTDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMap
                                      zoomScale:zoomScale];
     
     if (path != nil) {
-        CGContextAddPath(context, path);
-        CGContextSetRGBStrokeColor(context, 0, 0, 1.0, 0.5);
+        CGContextSetRGBStrokeColor(context, 0, 0.25, 1.0, 0.5);
         CGContextSetLineJoin(context, kCGLineJoinRound);
         CGContextSetLineCap(context, kCGLineCapRound);
         CGContextSetLineWidth(context, lineWidth);
+        CGContextAddPath(context, path);
         CGContextStrokePath(context);
         CGPathRelease(path);
     }
