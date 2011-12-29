@@ -1,6 +1,8 @@
 #import "MKMapView+MTDirections.h"
 #import "MTWaypoint.h"
 #import "MTDirectionsRequest.h"
+#import "MTDirectionsOverlay.h"
+#import "MTDirectionsOverlayView.h"
 #import <objc/runtime.h>
 
 #define kMTDirectionsDefaultColor        [UIColor colorWithRed:0.0f green:0.0f blue:1.0f alpha:0.6f]
@@ -66,12 +68,9 @@ static char requestKey;
         return nil;
     }
     
-	MKPolylineView *directionsLineView = [[MKPolylineView alloc] initWithPolyline:directionsOverlay.polyline];
-    
-	directionsLineView.strokeColor = self.directionsOverlayColor;
-	directionsLineView.lineWidth = kMTDirectionsDefaultLineWidth;
+    MTDirectionsOverlayView *overlayView = [[MTDirectionsOverlayView alloc] initWithOverlay:directionsOverlay];
 	
-    return directionsLineView;
+    return overlayView;
 }
 
 - (void)loadDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate

@@ -1,5 +1,5 @@
 //
-//  MTDirections.h
+//  MTDirectionsOverlayView.h
 //  MTDirections
 //
 //  Created by Matthias Tretter on 21.01.11.
@@ -14,9 +14,6 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-#import "MTDirectionsRequest.h"
-#import "MTDirectionsRouteType.h"
-#import "MTWaypoint.h"
-#import "MKMapView+MTDirections.h"
-#import "MTDirectionsOverlay.h"
-#import "MTDirectionsOverlayView.h"
+@interface MTDirectionsOverlayView : MKOverlayView
+
+@end

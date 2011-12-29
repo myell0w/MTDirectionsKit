@@ -34,6 +34,8 @@
 		9BB7005F14AA6B24001642E7 /* MTDirectionsRouteType.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB7004D14AA6B24001642E7 /* MTDirectionsRouteType.h */; };
 		9BB7006014AA6B24001642E7 /* MTWaypoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB7004E14AA6B24001642E7 /* MTWaypoint.h */; };
 		9BB7006114AA6B24001642E7 /* MTWaypoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB7004F14AA6B24001642E7 /* MTWaypoint.m */; };
+		9BEF056B14AD1BD1002D6008 /* MTDirectionsOverlayView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BEF056914AD1BD1002D6008 /* MTDirectionsOverlayView.h */; };
+		9BEF056C14AD1BD1002D6008 /* MTDirectionsOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEF056A14AD1BD1002D6008 /* MTDirectionsOverlayView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +68,8 @@
 		9BB7004D14AA6B24001642E7 /* MTDirectionsRouteType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDirectionsRouteType.h; sourceTree = "<group>"; };
 		9BB7004E14AA6B24001642E7 /* MTWaypoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTWaypoint.h; sourceTree = "<group>"; };
 		9BB7004F14AA6B24001642E7 /* MTWaypoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTWaypoint.m; sourceTree = "<group>"; };
+		9BEF056914AD1BD1002D6008 /* MTDirectionsOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDirectionsOverlayView.h; sourceTree = "<group>"; };
+		9BEF056A14AD1BD1002D6008 /* MTDirectionsOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDirectionsOverlayView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +180,8 @@
 				9BB7004D14AA6B24001642E7 /* MTDirectionsRouteType.h */,
 				9BB7004E14AA6B24001642E7 /* MTWaypoint.h */,
 				9BB7004F14AA6B24001642E7 /* MTWaypoint.m */,
+				9BEF056914AD1BD1002D6008 /* MTDirectionsOverlayView.h */,
+				9BEF056A14AD1BD1002D6008 /* MTDirectionsOverlayView.m */,
 			);
 			path = MTDirections;
 			sourceTree = "<group>";
@@ -202,6 +208,7 @@
 				9BB7005D14AA6B24001642E7 /* MTDirectionsRequest.h in Headers */,
 				9BB7005F14AA6B24001642E7 /* MTDirectionsRouteType.h in Headers */,
 				9BB7006014AA6B24001642E7 /* MTWaypoint.h in Headers */,
+				9BEF056B14AD1BD1002D6008 /* MTDirectionsOverlayView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,6 +273,7 @@
 				9BB7005C14AA6B24001642E7 /* MTDirectionsParser.m in Sources */,
 				9BB7005E14AA6B24001642E7 /* MTDirectionsRequest.m in Sources */,
 				9BB7006114AA6B24001642E7 /* MTWaypoint.m in Sources */,
+				9BEF056C14AD1BD1002D6008 /* MTDirectionsOverlayView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
