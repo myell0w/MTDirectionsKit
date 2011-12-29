@@ -2,8 +2,9 @@
 #import "MTWaypoint.h"
 #import "MTXPathResultNode.h"
 
-#define kMTDirectionLatitudeNode    @"lat"
-#define kMTDirectionLongitudeNode   @"lng"
+#define kMTDirectionsCoordinateNode     @"latLng"
+#define kMTDirectionsLatitudeNode       @"lat"
+#define kMTDirectionsLongitudeNode      @"lng"
 
 @implementation MTDirectionsParserMapQuest
 
@@ -18,19 +19,22 @@
     // add start coordinate
     [waypoints addObject:[MTWaypoint waypointWithCoordinate:self.fromCoordinate]];
     
-    // add all maneuvers
+    // There should only be one element "shapePoints"
     for (MTXPathResultNode *resultNode in results) {
-        CLLocationCoordinate2D coordinate;
-        
+        // latLng childs
         for (MTXPathResultNode *childNode in resultNode.childNodes) {
-            if ([childNode.name isEqualToString:kMTDirectionLatitudeNode]) {
-                coordinate.latitude = [childNode.contentString doubleValue];
-            } else if ([childNode.name isEqualToString:kMTDirectionLongitudeNode]) {
-                coordinate.longitude = [childNode.contentString doubleValue];
+            MTXPathResultNode *latitudeNode = [childNode firstChildNodeWithName:kMTDirectionsLatitudeNode];
+            MTXPathResultNode *longitudeNode = [childNode firstChildNodeWithName:kMTDirectionsLongitudeNode];
+            
+            if (latitudeNode != nil && longitudeNode != nil) {
+                CLLocationCoordinate2D coordinate;
+                
+                coordinate.latitude = [latitudeNode.contentString doubleValue];
+                coordinate.longitude = [longitudeNode.contentString doubleValue];
+                
+                [waypoints addObject:[MTWaypoint waypointWithCoordinate:coordinate]];
             }
         }
-        
-        [waypoints addObject:[MTWaypoint waypointWithCoordinate:coordinate]];
     }
     
     // add end coordinate

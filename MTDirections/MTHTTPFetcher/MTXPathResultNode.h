@@ -48,4 +48,6 @@
 + (NSArray *)nodesForXPathQuery:(NSString *)query onHTML:(NSData *)htmlData;
 + (NSArray *)nodesForXPathQuery:(NSString *)query onXML:(NSData *)xmlData;
 
+- (MTXPathResultNode *)firstChildNodeWithName:(NSString *)name;
+
 @end

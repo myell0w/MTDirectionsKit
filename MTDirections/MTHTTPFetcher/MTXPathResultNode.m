@@ -24,34 +24,6 @@
 #pragma mark - Lifecycle
 ////////////////////////////////////////////////////////////////////////
 
-////////////////////////////////////////////////////////////////////////
-#pragma mark - NSObject
-////////////////////////////////////////////////////////////////////////
-
-- (NSString *)description {
-	NSMutableString *description = [NSMutableString string];
-	[description appendFormat:@"<%@", name];
-	
-    for (NSString *attributeName in attributes) {
-		NSString *attributeValue = [attributes objectForKey:attributeName];
-		[description appendFormat:@" %@=\"%@\"", attributeName, attributeValue];
-	}
-	
-	if ([content count] > 0) {
-		[description appendString:@">"];
-        
-		for (id object in content) {
-			[description appendString:[object description]];
-		}
-        
-		[description appendFormat:@"</%@>", name];
-	} else {
-		[description appendString:@"/>"];
-	}
-    
-	return description;
-}
-
 + (MTXPathResultNode *)nodefromLibXMLNode:(xmlNodePtr)libXMLNode parentNode:(MTXPathResultNode *)parentNode {
 	MTXPathResultNode *node = [[MTXPathResultNode alloc] init];
 	
@@ -223,6 +195,34 @@
 }
 
 ////////////////////////////////////////////////////////////////////////
+#pragma mark - NSObject
+////////////////////////////////////////////////////////////////////////
+
+- (NSString *)description {
+	NSMutableString *description = [NSMutableString string];
+	[description appendFormat:@"<%@", name];
+	
+    for (NSString *attributeName in attributes) {
+		NSString *attributeValue = [attributes objectForKey:attributeName];
+		[description appendFormat:@" %@=\"%@\"", attributeName, attributeValue];
+	}
+	
+	if ([content count] > 0) {
+		[description appendString:@">"];
+        
+		for (id object in content) {
+			[description appendString:[object description]];
+		}
+        
+		[description appendFormat:@"</%@>", name];
+	} else {
+		[description appendString:@"/>"];
+	}
+    
+	return description;
+}
+
+////////////////////////////////////////////////////////////////////////
 #pragma mark - MTXPathResultNode
 ////////////////////////////////////////////////////////////////////////
 
@@ -272,6 +272,19 @@
 	}
 	
 	return result;
+}
+
+- (MTXPathResultNode *)firstChildNodeWithName:(NSString *)aName {
+    NSArray *foundNodes = [self.childNodes filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        return [[evaluatedObject name] isEqualToString:aName];
+    }]];
+    
+    if (foundNodes.count > 0) {
+        return [foundNodes objectAtIndex:0];
+    }
+    
+    return nil;
+                           
 }
 
 @end
