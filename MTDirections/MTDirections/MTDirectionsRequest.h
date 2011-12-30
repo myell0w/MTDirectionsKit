@@ -31,10 +31,6 @@
         routeType:(MTDirectionsRouteType)routeType
        completion:(mt_direction_block)completion;
 
-- (id)initFrom:(CLLocationCoordinate2D)fromCoordinate
-            to:(CLLocationCoordinate2D)toCoordinate
-    completion:(mt_direction_block)completion;
-
 /**
  The designated initializer
  */

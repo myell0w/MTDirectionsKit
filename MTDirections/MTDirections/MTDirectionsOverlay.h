@@ -13,11 +13,25 @@
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+#import "MTDirectionsRouteType.h"
 
 @interface MTDirectionsOverlay : NSObject <MKOverlay>
 
+/** 
+ Internally using a MKPolyline to represent the overlay since MKPolyline cannot be subclassed
+ and we don't want to reinvent the wheel here
+ */
 @property (nonatomic, strong) MKPolyline *polyline;
 
-+ (MTDirectionsOverlay *)overlayWithWaypoints:(NSArray *)waypoints;
+/** all waypoints of the current active direction */
+@property (nonatomic, strong) NSArray *waypoints;
+/** the distance of the directions */
+@property (nonatomic, assign, readonly) CLLocationDistance distance;
+/** the routeType used to compute the directions */
+@property (nonatomic, assign, readonly) MTDirectionsRouteType routeType;
+
++ (MTDirectionsOverlay *)overlayWithWaypoints:(NSArray *)waypoints 
+                                     distance:(CLLocationDistance)distance
+                                    routeType:(MTDirectionsRouteType)routeType;
 
 @end

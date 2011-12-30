@@ -14,15 +14,18 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "MTDirectionsDefines.h"
+#import "MTDirectionsRouteType.h"
 
 @interface MTDirectionsParser : NSObject
 
 @property (nonatomic, strong, readonly) id data;
 @property (nonatomic, assign, readonly) CLLocationCoordinate2D fromCoordinate;
 @property (nonatomic, assign, readonly) CLLocationCoordinate2D toCoordinate;
+@property (nonatomic, assign, readonly) MTDirectionsRouteType routeType;
 
 - (id)initWithFromCoordinate:(CLLocationCoordinate2D)fromCoordinate
                 toCoordinate:(CLLocationCoordinate2D)toCoordinate
+                   routeType:(MTDirectionsRouteType)routeType
                         data:(id)data;
 
 - (void)parseWithCompletion:(mt_direction_block)completion;

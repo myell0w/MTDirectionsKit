@@ -19,12 +19,8 @@
 
 @interface MKMapView (MTDirections)
 
-/** all waypoints of the current active direction */
-@property (nonatomic, strong) NSArray *waypoints;
 /** the current active direction overlay */
 @property (nonatomic, strong) MTDirectionsOverlay *directionsOverlay;
-/** the color of the current active overlay */
-@property (nonatomic, strong) UIColor *directionsOverlayColor;
 
 /**
  Starts a request and loads the directions between the specified coordinates.

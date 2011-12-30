@@ -5,12 +5,7 @@
 #import "MTDirectionsOverlayView.h"
 #import <objc/runtime.h>
 
-#define kMTDirectionsDefaultColor        [UIColor colorWithRed:0.0f green:0.0f blue:1.0f alpha:0.6f]
-#define kMTDirectionsDefaultLineWidth    9.f
-
-static char waypointsKey;
 static char overlayKey;
-static char colorKey;
 static char requestKey;
 
 @interface MKMapView ()
@@ -26,9 +21,9 @@ static char requestKey;
 ////////////////////////////////////////////////////////////////////////
 
 - (void)setRegionToShowDirectionsAnimated:(BOOL)animated {
-    NSArray *waypoints = self.waypoints;
+    NSArray *waypoints = self.directionsOverlay.waypoints;
     
-    if (self.waypoints != nil) {
+    if (waypoints != nil) {
         CLLocationDegrees maxLat = -90.0f;
         CLLocationDegrees maxLon = -180.0f;
         CLLocationDegrees minLat = 90.0f;
@@ -83,12 +78,12 @@ static char requestKey;
     self.mt_request = [MTDirectionsRequest requestFrom:fromCoordinate
                                                     to:toCoordinate
                                              routeType:routeType
-                                            completion:^(NSArray *waypoints) {
-                                                blockSelf.waypoints = waypoints; 
+                                            completion:^(MTDirectionsOverlay *overlay) {
+                                                blockSelf.directionsOverlay = overlay; 
                                                 
                                                 // If we found at least one waypoint (start and end are always contained)
                                                 // zoom the mapView to show the whole direction
-                                                if (zoomToShowDirections && waypoints.count > 2) {
+                                                if (zoomToShowDirections && overlay.waypoints.count > 2) {
                                                     [blockSelf setRegionToShowDirectionsAnimated:YES];
                                                 }
                                             }];
@@ -99,15 +94,6 @@ static char requestKey;
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Properties
 ////////////////////////////////////////////////////////////////////////
-
-- (void)setWaypoints:(NSArray *)waypoints {
-    self.directionsOverlay = [MTDirectionsOverlay overlayWithWaypoints:waypoints];
-    objc_setAssociatedObject(self, &waypointsKey, waypoints, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (NSArray *)waypoints {
-    return objc_getAssociatedObject(self, &waypointsKey);
-}
 
 - (void)setDirectionsOverlay:(MTDirectionsOverlay *)directionsOverlay {
     MTDirectionsOverlay *overlay = self.directionsOverlay;
@@ -127,21 +113,6 @@ static char requestKey;
 
 - (MTDirectionsOverlay *)directionsOverlay {
     return objc_getAssociatedObject(self, &overlayKey);
-}
-
-- (void)setDirectionsOverlayColor:(UIColor *)color {
-    objc_setAssociatedObject(self, &colorKey, color, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (UIColor *)directionsOverlayColor {
-    UIColor *color = (UIColor *)objc_getAssociatedObject(self, &colorKey);
-    
-    if (color == nil) {
-        self.directionsOverlayColor = kMTDirectionsDefaultColor;
-        return kMTDirectionsDefaultColor;
-    }
-    
-    return color;
 }
 
 - (void)mt_setRequest:(MTDirectionsRequest *)mt_request {

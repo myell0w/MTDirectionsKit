@@ -13,16 +13,21 @@
 @synthesize data = data_;
 @synthesize fromCoordinate = fromCoordinate_;
 @synthesize toCoordinate = toCoordinate_;
+@synthesize routeType = routeType_;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
 ////////////////////////////////////////////////////////////////////////
 
-- (id)initWithFromCoordinate:(CLLocationCoordinate2D)fromCoordinate toCoordinate:(CLLocationCoordinate2D)toCoordinate data:(id)data {
+- (id)initWithFromCoordinate:(CLLocationCoordinate2D)fromCoordinate
+                toCoordinate:(CLLocationCoordinate2D)toCoordinate
+                   routeType:(MTDirectionsRouteType)routeType
+                        data:(id)data {
     if ((self = [super init])) {
         fromCoordinate_ = fromCoordinate;
         toCoordinate_ = toCoordinate;
         data_ = data;
+        routeType_ = routeType;
     }
     
     return self;

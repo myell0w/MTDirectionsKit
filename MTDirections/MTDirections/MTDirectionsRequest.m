@@ -45,15 +45,6 @@
 
 - (id)initFrom:(CLLocationCoordinate2D)fromCoordinate
             to:(CLLocationCoordinate2D)toCoordinate
-    completion:(mt_direction_block)completion {
-    return [self initFrom:fromCoordinate
-                       to:toCoordinate
-                routeType:kMTDefaultDirectionsRouteType
-               completion:completion];
-}
-
-- (id)initFrom:(CLLocationCoordinate2D)fromCoordinate
-            to:(CLLocationCoordinate2D)toCoordinate
      routeType:(MTDirectionsRouteType)routeType
     completion:(mt_direction_block)completion {
     if ((self = [super init])) {

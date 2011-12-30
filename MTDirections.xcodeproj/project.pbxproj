@@ -10,8 +10,6 @@
 		9B6C18C414A7E18200087893 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18C314A7E18200087893 /* Foundation.framework */; };
 		9B6C18DA14A7E20900087893 /* MTHTTPFetcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B6C18D114A7E20900087893 /* MTHTTPFetcher.h */; };
 		9B6C18DB14A7E20900087893 /* MTHTTPFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6C18D214A7E20900087893 /* MTHTTPFetcher.m */; };
-		9B6C18DE14A7E20900087893 /* MTXMLFetcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B6C18D514A7E20900087893 /* MTXMLFetcher.h */; };
-		9B6C18DF14A7E20900087893 /* MTXMLFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6C18D614A7E20900087893 /* MTXMLFetcher.m */; };
 		9B6C18E014A7E20900087893 /* MTXPathResultNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B6C18D714A7E20900087893 /* MTXPathResultNode.h */; };
 		9B6C18E114A7E20900087893 /* MTXPathResultNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6C18D814A7E20900087893 /* MTXPathResultNode.m */; };
 		9B6C18F214A7E24200087893 /* MTDirections.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B6C18F114A7E24200087893 /* MTDirections.h */; };
@@ -44,8 +42,6 @@
 		9B6C18C714A7E18200087893 /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		9B6C18D114A7E20900087893 /* MTHTTPFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTHTTPFetcher.h; sourceTree = "<group>"; };
 		9B6C18D214A7E20900087893 /* MTHTTPFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTHTTPFetcher.m; sourceTree = "<group>"; };
-		9B6C18D514A7E20900087893 /* MTXMLFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTXMLFetcher.h; sourceTree = "<group>"; };
-		9B6C18D614A7E20900087893 /* MTXMLFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTXMLFetcher.m; sourceTree = "<group>"; };
 		9B6C18D714A7E20900087893 /* MTXPathResultNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTXPathResultNode.h; sourceTree = "<group>"; };
 		9B6C18D814A7E20900087893 /* MTXPathResultNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTXPathResultNode.m; sourceTree = "<group>"; };
 		9B6C18F114A7E24200087893 /* MTDirections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDirections.h; sourceTree = "<group>"; };
@@ -136,8 +132,6 @@
 			children = (
 				9B6C18D114A7E20900087893 /* MTHTTPFetcher.h */,
 				9B6C18D214A7E20900087893 /* MTHTTPFetcher.m */,
-				9B6C18D514A7E20900087893 /* MTXMLFetcher.h */,
-				9B6C18D614A7E20900087893 /* MTXMLFetcher.m */,
 				9B6C18D714A7E20900087893 /* MTXPathResultNode.h */,
 				9B6C18D814A7E20900087893 /* MTXPathResultNode.m */,
 			);
@@ -194,7 +188,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B6C18DA14A7E20900087893 /* MTHTTPFetcher.h in Headers */,
-				9B6C18DE14A7E20900087893 /* MTXMLFetcher.h in Headers */,
 				9B6C18E014A7E20900087893 /* MTXPathResultNode.h in Headers */,
 				9B6C18F214A7E24200087893 /* MTDirections.h in Headers */,
 				9BB7005014AA6B24001642E7 /* MTDirectionsRequestMapQuest.h in Headers */,
@@ -264,7 +257,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B6C18DB14A7E20900087893 /* MTHTTPFetcher.m in Sources */,
-				9B6C18DF14A7E20900087893 /* MTXMLFetcher.m in Sources */,
 				9B6C18E114A7E20900087893 /* MTXPathResultNode.m in Sources */,
 				9BB7005114AA6B24001642E7 /* MTDirectionsRequestMapQuest.m in Sources */,
 				9BB7005314AA6B24001642E7 /* MTDirectionsParserMapQuest.m in Sources */,

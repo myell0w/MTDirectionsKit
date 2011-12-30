@@ -1,22 +1,23 @@
 #import "MTDirectionsRequestMapQuest.h"
-#import "MTXMLFetcher.h"
+#import "MTHTTPFetcher.h"
 #import "MTDirectionsRouteType+MapQuest.h"
 #import "MTDirectionsParserMapQuest.h"
 
 #define kMTDirectionBaseURL         @"http://open.mapquestapi.com/directions/v0/route?outFormat=xml&unit=k&narrativeType=none&shapeFormat=raw&generalize=50"
-#define kMTDirectionXPathQuery      @"//shapePoints"
 
 @interface MTDirectionsRequestMapQuest ()
 
-@property (nonatomic, strong) MTXMLFetcher *fetcher;
+@property (nonatomic, strong) MTHTTPFetcher *fetcher;
+@property (nonatomic, assign) MTDirectionsRouteType routeType;
 
-- (void)requestFinished:(MTXMLFetcher *)fetcher;
+- (void)requestFinished:(MTHTTPFetcher *)fetcher;
 
 @end
 
 @implementation MTDirectionsRequestMapQuest
 
 @synthesize fetcher = fetcher_;
+@synthesize routeType = routeType_;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
@@ -33,8 +34,8 @@
                              toCoordinate.latitude, toCoordinate.longitude,
                              MTDirectionStringForDirectionRouteTypeMapQuest(routeType)];
         
-        fetcher_ = [[MTXMLFetcher alloc] initWithURLString:address
-                                                xPathQuery:kMTDirectionXPathQuery
+        routeType_ = routeType;
+        fetcher_ = [[MTHTTPFetcher alloc] initWithURLString:address
                                                   receiver:self
                                                     action:@selector(requestFinished:)];
     }
@@ -58,10 +59,11 @@
 #pragma mark - Private
 ////////////////////////////////////////////////////////////////////////
 
-- (void)requestFinished:(MTXMLFetcher *)fetcher {
+- (void)requestFinished:(MTHTTPFetcher *)fetcher {
     MTDirectionsParser *parser = [[MTDirectionsParserMapQuest alloc] initWithFromCoordinate:self.fromCoordinate
                                                                                toCoordinate:self.toCoordinate
-                                                                                       data:fetcher.results];
+                                                                                  routeType:self.routeType
+                                                                                       data:fetcher.data];
     
     [parser parseWithCompletion:self.completion];
 }
