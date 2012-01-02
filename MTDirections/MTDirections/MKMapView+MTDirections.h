@@ -38,6 +38,11 @@
       zoomToShowDirections:(BOOL)zoomToShowDirections;
 
 /**
+ Cancels a possible ongoing request for loading directions
+ */
+- (void)cancelLoadOfDirections;
+
+/**
  Sets the region of the MapView to show the whole directionOverlay at once.
  
  @param animated flag whether the region gets set animated
