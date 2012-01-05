@@ -15,7 +15,7 @@
     if ((self = [super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier])) {
         self.opaque = NO;
         self.canShowCallout = NO;
-        self.frame = CGRectMake(0.f,0.f,9.f,9.f);
+        self.frame = CGRectMake(0.f,0.f,15.f,15.f);
     }
     
     return self;
@@ -30,14 +30,15 @@
     CGContextSaveGState(context);
     CGFloat centerX = CGRectGetMidX(self.bounds);
     CGFloat centerY = CGRectGetMidY(self.bounds);
-    CGFloat radius = self.bounds.size.width;
+    CGFloat radius = self.bounds.size.width/2.f;
     
     {
         CGContextBeginPath(context);
+        CGContextSetLineWidth(context,2.f);
         CGContextSetFillColorWithColor(context, [[UIColor blueColor] colorWithAlphaComponent:0.4].CGColor);
         CGContextSetStrokeColorWithColor(context, [UIColor blueColor].CGColor);
         CGContextAddEllipseInRect(context, CGRectMake(centerX - radius, centerY - radius, 2*radius, 2*radius));
-        CGContextStrokePath(context);
+        CGContextFillPath(context);
     }
     
     CGContextRestoreGState(context);
