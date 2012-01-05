@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		9B34E0D414B5F10F000E9C5D /* MTManeuver.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B34E0D214B5F10F000E9C5D /* MTManeuver.h */; };
 		9B34E0D514B5F10F000E9C5D /* MTManeuver.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B34E0D314B5F10F000E9C5D /* MTManeuver.m */; };
+		9B34E0DB14B5FF67000E9C5D /* MTManeuverAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B34E0D914B5FF66000E9C5D /* MTManeuverAnnotationView.h */; };
+		9B34E0DC14B5FF67000E9C5D /* MTManeuverAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B34E0DA14B5FF67000E9C5D /* MTManeuverAnnotationView.m */; };
 		9B6C18C414A7E18200087893 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18C314A7E18200087893 /* Foundation.framework */; };
 		9B6C18DA14A7E20900087893 /* MTHTTPFetcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B6C18D114A7E20900087893 /* MTHTTPFetcher.h */; };
 		9B6C18DB14A7E20900087893 /* MTHTTPFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6C18D214A7E20900087893 /* MTHTTPFetcher.m */; };
@@ -41,6 +43,8 @@
 /* Begin PBXFileReference section */
 		9B34E0D214B5F10F000E9C5D /* MTManeuver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTManeuver.h; sourceTree = "<group>"; };
 		9B34E0D314B5F10F000E9C5D /* MTManeuver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTManeuver.m; sourceTree = "<group>"; };
+		9B34E0D914B5FF66000E9C5D /* MTManeuverAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTManeuverAnnotationView.h; sourceTree = "<group>"; };
+		9B34E0DA14B5FF67000E9C5D /* MTManeuverAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTManeuverAnnotationView.m; sourceTree = "<group>"; };
 		9B6C18C014A7E18200087893 /* libMTDirections.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMTDirections.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B6C18C314A7E18200087893 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9B6C18C714A7E18200087893 /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
@@ -171,17 +175,19 @@
 				9BB7004614AA6B24001642E7 /* MTDirectionsDefines.h */,
 				9BB7004714AA6B24001642E7 /* MTDirectionsOverlay.h */,
 				9BB7004814AA6B24001642E7 /* MTDirectionsOverlay.m */,
+				9BEF056914AD1BD1002D6008 /* MTDirectionsOverlayView.h */,
+				9BEF056A14AD1BD1002D6008 /* MTDirectionsOverlayView.m */,
 				9BB7004914AA6B24001642E7 /* MTDirectionsParser.h */,
 				9BB7004A14AA6B24001642E7 /* MTDirectionsParser.m */,
 				9BB7004B14AA6B24001642E7 /* MTDirectionsRequest.h */,
 				9BB7004C14AA6B24001642E7 /* MTDirectionsRequest.m */,
 				9BB7004D14AA6B24001642E7 /* MTDirectionsRouteType.h */,
-				9BB7004E14AA6B24001642E7 /* MTWaypoint.h */,
-				9BB7004F14AA6B24001642E7 /* MTWaypoint.m */,
-				9BEF056914AD1BD1002D6008 /* MTDirectionsOverlayView.h */,
-				9BEF056A14AD1BD1002D6008 /* MTDirectionsOverlayView.m */,
 				9B34E0D214B5F10F000E9C5D /* MTManeuver.h */,
 				9B34E0D314B5F10F000E9C5D /* MTManeuver.m */,
+				9B34E0D914B5FF66000E9C5D /* MTManeuverAnnotationView.h */,
+				9B34E0DA14B5FF67000E9C5D /* MTManeuverAnnotationView.m */,
+				9BB7004E14AA6B24001642E7 /* MTWaypoint.h */,
+				9BB7004F14AA6B24001642E7 /* MTWaypoint.m */,
 			);
 			path = MTDirections;
 			sourceTree = "<group>";
@@ -209,6 +215,7 @@
 				9BB7006014AA6B24001642E7 /* MTWaypoint.h in Headers */,
 				9BEF056B14AD1BD1002D6008 /* MTDirectionsOverlayView.h in Headers */,
 				9B34E0D414B5F10F000E9C5D /* MTManeuver.h in Headers */,
+				9B34E0DB14B5FF67000E9C5D /* MTManeuverAnnotationView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +281,7 @@
 				9BB7006114AA6B24001642E7 /* MTWaypoint.m in Sources */,
 				9BEF056C14AD1BD1002D6008 /* MTDirectionsOverlayView.m in Sources */,
 				9B34E0D514B5F10F000E9C5D /* MTManeuver.m in Sources */,
+				9B34E0DC14B5FF67000E9C5D /* MTManeuverAnnotationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
