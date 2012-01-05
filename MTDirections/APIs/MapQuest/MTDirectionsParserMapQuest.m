@@ -3,6 +3,7 @@
 #import "MTDirectionsOverlay.h"
 #import "MTDirectionsRouteType.h"
 #import "MTXPathResultNode.h"
+#import "MTManeuver.h"
 
 #define kMTDirectionsLatitudeNode       @"lat"
 #define kMTDirectionsLongitudeNode      @"lng"

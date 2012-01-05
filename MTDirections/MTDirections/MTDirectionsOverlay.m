@@ -10,6 +10,7 @@
 @property (nonatomic, strong) MKPolyline *polyline;
 
 // Re-defining properties as readwrite
+@property (nonatomic, strong, readwrite) NSArray *waypoints;
 @property (nonatomic, assign, readwrite) CLLocationDistance distance;
 @property (nonatomic, assign, readwrite) MTDirectionsRouteType routeType;
 
@@ -21,6 +22,7 @@
 @synthesize waypoints = waypoints_;
 @synthesize distance = distance_;
 @synthesize routeType = routeType_;
+@synthesize maneuvers = maneuvers_;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle

@@ -1,5 +1,5 @@
 //
-//  MTDirectionOverlay.h
+//  MTManeuver.h
 //  MTDirections
 //
 //  Created by Matthias Tretter on 21.01.11.
@@ -13,26 +13,18 @@
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "MTDirectionsRouteType.h"
 
-@interface MTDirectionsOverlay : NSObject <MKOverlay>
+@class MTWaypoint;
 
-/** all waypoints of the current active direction */
-@property (nonatomic, strong, readonly) NSArray *waypoints;
-/** the distance of the directions */
-@property (nonatomic, assign, readonly) CLLocationDistance distance;
-/** the routeType used to compute the directions */
-@property (nonatomic, assign, readonly) MTDirectionsRouteType routeType;
+@interface MTManeuver : NSObject
 
-/** all mapPoints of the polyline */
-@property (nonatomic, readonly) MKMapPoint *points;
-/** the number of mapPoints of the polyline */
-@property (nonatomic, readonly) NSUInteger pointCount;
+@property (nonatomic, strong) MTWaypoint *waypoint;
+@property (nonatomic, assign) CLLocationDistance distance;
+@property (nonatomic, assign) NSTimeInterval time;
 
-@property (nonatomic, strong) NSArray *maneuvers;
-
-+ (MTDirectionsOverlay *)overlayWithWaypoints:(NSArray *)waypoints 
-                                     distance:(CLLocationDistance)distance
-                                    routeType:(MTDirectionsRouteType)routeType;
+- (id)init;
+- (id)initWithWaypoint:(MTWaypoint *)waypoint
+              distance:(CLLocationDistance)distance
+                  time:(NSTimeInterval)time;
 
 @end
