@@ -3,6 +3,12 @@
 
 @interface MTDirectionsOverlay ()
 
+/** 
+ Internally using a MKPolyline to represent the overlay since MKPolyline cannot be subclassed
+ and we don't want to reinvent the wheel here
+ */
+@property (nonatomic, strong) MKPolyline *polyline;
+
 // Re-defining properties as readwrite
 @property (nonatomic, assign, readwrite) CLLocationDistance distance;
 @property (nonatomic, assign, readwrite) MTDirectionsRouteType routeType;
@@ -57,6 +63,18 @@
 
 - (BOOL)intersectsMapRect:(MKMapRect)mapRect {
     return [self.polyline intersectsMapRect:mapRect];
+}
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - MTDirectionsOverlay
+////////////////////////////////////////////////////////////////////////
+
+- (MKMapPoint *)points {
+    return self.polyline.points;
+}
+
+- (NSUInteger)pointCount {
+    return self.polyline.pointCount;
 }
 
 @end

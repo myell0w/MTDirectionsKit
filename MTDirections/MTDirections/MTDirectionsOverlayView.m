@@ -37,8 +37,8 @@ NS_INLINE BOOL MTDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMap
     // of the currently drawn rect are included in the generated path.
     MKMapRect clipRect = MKMapRectInset(mapRect, -lineWidth, -lineWidth);
     
-    CGPathRef path = [self mt_newPathForPoints:self.directionsOverlay.polyline.points
-                                    pointCount:self.directionsOverlay.polyline.pointCount
+    CGPathRef path = [self mt_newPathForPoints:self.directionsOverlay.points
+                                    pointCount:self.directionsOverlay.pointCount
                                       clipRect:clipRect
                                      zoomScale:zoomScale];
     

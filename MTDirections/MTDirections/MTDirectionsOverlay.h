@@ -17,18 +17,17 @@
 
 @interface MTDirectionsOverlay : NSObject <MKOverlay>
 
-/** 
- Internally using a MKPolyline to represent the overlay since MKPolyline cannot be subclassed
- and we don't want to reinvent the wheel here
- */
-@property (nonatomic, strong) MKPolyline *polyline;
-
 /** all waypoints of the current active direction */
 @property (nonatomic, strong) NSArray *waypoints;
 /** the distance of the directions */
 @property (nonatomic, assign, readonly) CLLocationDistance distance;
 /** the routeType used to compute the directions */
 @property (nonatomic, assign, readonly) MTDirectionsRouteType routeType;
+
+/** all mapPoints of the polyline */
+@property (nonatomic, readonly) MKMapPoint *points;
+/** the number of mapPoints of the polyline */
+@property (nonatomic, readonly) NSUInteger pointCount;
 
 + (MTDirectionsOverlay *)overlayWithWaypoints:(NSArray *)waypoints 
                                      distance:(CLLocationDistance)distance
