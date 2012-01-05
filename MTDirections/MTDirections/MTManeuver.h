@@ -22,6 +22,10 @@
 @property (nonatomic, assign) CLLocationDistance distance;
 @property (nonatomic, assign) NSTimeInterval time;
 
++ (MTManeuver *)maneuverWithWaypoint:(MTWaypoint *)waypoint
+                            distance:(CLLocationDistance)distance
+                                time:(NSTimeInterval)time;
+
 - (id)init;
 - (id)initWithWaypoint:(MTWaypoint *)waypoint
               distance:(CLLocationDistance)distance
