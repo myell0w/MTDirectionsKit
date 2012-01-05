@@ -1,5 +1,6 @@
 #import "MKMapView+MTDirections.h"
 #import "MTWaypoint.h"
+#import "MTManeuver.h"
 #import "MTDirectionsRequest.h"
 #import "MTDirectionsOverlay.h"
 #import "MTDirectionsOverlayView.h"
@@ -79,7 +80,7 @@ static char requestKey;
                                                     to:toCoordinate
                                              routeType:routeType
                                             completion:^(MTDirectionsOverlay *overlay) {
-                                                blockSelf.directionsOverlay = overlay; 
+                                                blockSelf.directionsOverlay = overlay;
                                                 
                                                 // If we found at least one waypoint (start and end are always contained)
                                                 // zoom the mapView to show the whole direction
@@ -103,14 +104,16 @@ static char requestKey;
 - (void)setDirectionsOverlay:(MTDirectionsOverlay *)directionsOverlay {
     MTDirectionsOverlay *overlay = self.directionsOverlay;
     
-    // remove old overlay
+    // remove old overlay and annotations
     if (overlay != nil) {
+        [self removeAnnotations:overlay.maneuvers];
         [self removeOverlay:overlay];
     }
     
     // add new overlay
     if (directionsOverlay != nil) {
         [self addOverlay:directionsOverlay];
+        [self addAnnotations:directionsOverlay.maneuvers];
     }
     
     objc_setAssociatedObject(self, &overlayKey, directionsOverlay, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
