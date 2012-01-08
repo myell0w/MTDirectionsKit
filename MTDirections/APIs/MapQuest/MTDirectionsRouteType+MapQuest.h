@@ -17,9 +17,6 @@
 
 NS_INLINE NSString* MTDirectionStringForDirectionRouteTypeMapQuest(MTDirectionsRouteType routeType) {
     switch (routeType) {
-        case MTDirectionsRouteTypeFastestDriving:
-            return @"fastest";
-            
         case MTDirectionsRouteTypeShortestDriving:
             return @"shortest";
             
@@ -30,10 +27,11 @@ NS_INLINE NSString* MTDirectionStringForDirectionRouteTypeMapQuest(MTDirectionsR
             return @"multimodal";
             
         case MTDirectionsRouteTypeBicycle:
-        default:
             return @"bicycle";
             
+        case MTDirectionsRouteTypeFastestDriving:
+        default:
+            return @"fastest";
+            
     }
-    
-    return @"bicycle";
 }
