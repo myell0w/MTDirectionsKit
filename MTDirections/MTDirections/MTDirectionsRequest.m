@@ -28,7 +28,7 @@
        completion:(mt_direction_block)completion {
     MTDirectionsRequest *request = nil;
     
-    switch (kMTDirectionsActiveAPI) {
+    switch (MTDirectionsGetActiveAPI()) {
         case MTDirectionsAPIGoogle:
             request = [[MTDirectionsRequestGoogle alloc] initFrom:fromCoordinate
                                                                to:toCoordinate

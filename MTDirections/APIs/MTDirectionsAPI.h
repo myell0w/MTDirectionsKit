@@ -24,5 +24,8 @@ typedef enum {
     MTDirectionsAPICount
 } MTDirectionsAPI;
 
-/** Active API Used */
-#define kMTDirectionsActiveAPI              MTDirectionsAPIMapQuest
+/** Retreive the current use API for directions */
+MTDirectionsAPI MTDirectionsGetActiveAPI(void);
+
+/** Set the current use API for directions */
+void MTDirectionsSetActiveAPI(MTDirectionsAPI activeAPI);

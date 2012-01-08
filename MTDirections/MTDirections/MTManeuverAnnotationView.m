@@ -27,10 +27,11 @@
 
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSaveGState(context);
     CGFloat centerX = CGRectGetMidX(self.bounds);
     CGFloat centerY = CGRectGetMidY(self.bounds);
     CGFloat radius = self.bounds.size.width/2.f;
+    
+    CGContextSaveGState(context);
     
     {
         CGContextBeginPath(context);
