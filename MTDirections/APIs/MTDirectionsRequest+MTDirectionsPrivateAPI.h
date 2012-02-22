@@ -1,5 +1,5 @@
 //
-//  MTDirectionRequest.h
+//  MTDirectionsRequest+MTDirectionsPrivateAPI.h
 //  MTDirections
 //
 //  Created by Matthias Tretter on 21.01.11.
@@ -13,35 +13,14 @@
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "MTDirectionsRouteType.h"
-#import "MTDirectionsDefines.h"
-#import "MTHTTPFetcher.h"
+#import "MTDirectionsRequest.h"
 
-@interface MTDirectionsRequest : NSObject
+@interface MTDirectionsRequest (MTPrivateAPI)
 
-@property (nonatomic, assign) CLLocationCoordinate2D fromCoordinate;
-@property (nonatomic, assign) CLLocationCoordinate2D toCoordinate;
-@property (nonatomic, copy) mt_direction_block completion;
-@property (nonatomic, assign) MTDirectionsRouteType routeType;
+@property (nonatomic, strong) MTHTTPFetcher *fetcher;
+@property (nonatomic, copy) NSString *fetcherAddress;
+@property (nonatomic, assign) Class parserClass;
 
-+ (id)requestFrom:(CLLocationCoordinate2D)fromCoordinate
-               to:(CLLocationCoordinate2D)toCoordinate
-       completion:(mt_direction_block)completion;
-
-+ (id)requestFrom:(CLLocationCoordinate2D)fromCoordinate
-               to:(CLLocationCoordinate2D)toCoordinate
-        routeType:(MTDirectionsRouteType)routeType
-       completion:(mt_direction_block)completion;
-
-/**
- The designated initializer
- */
-- (id)initFrom:(CLLocationCoordinate2D)fromCoordinate
-            to:(CLLocationCoordinate2D)toCoordinate
-     routeType:(MTDirectionsRouteType)routeType
-    completion:(mt_direction_block)completion;
-
-- (void)start;
-- (void)cancel;
+- (void)requestFinished:(MTHTTPFetcher *)fetcher;
 
 @end

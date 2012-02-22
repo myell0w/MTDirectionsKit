@@ -25,6 +25,7 @@
 		9B6C18E114A7E20900087893 /* MTXPathResultNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6C18D814A7E20900087893 /* MTXPathResultNode.m */; };
 		9B6C18F214A7E24200087893 /* MTDirections.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B6C18F114A7E24200087893 /* MTDirections.h */; };
 		9B6C18F414A7E40A00087893 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18F314A7E40A00087893 /* libxml2.dylib */; };
+		9B7C475114F57017006C2CC6 /* MTDirectionsRequest+MTDirectionsPrivateAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B7C474F14F57017006C2CC6 /* MTDirectionsRequest+MTDirectionsPrivateAPI.h */; };
 		9BB7005014AA6B24001642E7 /* MTDirectionsRequestMapQuest.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB7003D14AA6B24001642E7 /* MTDirectionsRequestMapQuest.h */; };
 		9BB7005114AA6B24001642E7 /* MTDirectionsRequestMapQuest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB7003E14AA6B24001642E7 /* MTDirectionsRequestMapQuest.m */; };
 		9BB7005214AA6B24001642E7 /* MTDirectionsParserMapQuest.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB7003F14AA6B24001642E7 /* MTDirectionsParserMapQuest.h */; };
@@ -67,6 +68,7 @@
 		9B6C18D814A7E20900087893 /* MTXPathResultNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTXPathResultNode.m; sourceTree = "<group>"; };
 		9B6C18F114A7E24200087893 /* MTDirections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDirections.h; sourceTree = "<group>"; };
 		9B6C18F314A7E40A00087893 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		9B7C474F14F57017006C2CC6 /* MTDirectionsRequest+MTDirectionsPrivateAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTDirectionsRequest+MTDirectionsPrivateAPI.h"; sourceTree = "<group>"; };
 		9BB7003D14AA6B24001642E7 /* MTDirectionsRequestMapQuest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDirectionsRequestMapQuest.h; sourceTree = "<group>"; };
 		9BB7003E14AA6B24001642E7 /* MTDirectionsRequestMapQuest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDirectionsRequestMapQuest.m; sourceTree = "<group>"; };
 		9BB7003F14AA6B24001642E7 /* MTDirectionsParserMapQuest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDirectionsParserMapQuest.h; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			children = (
 				9B34E0EE14BA0FB8000E9C5D /* MTDirectionsAPI.h */,
 				9B34E0F014BA0FE4000E9C5D /* MTDirectionsAPI.m */,
+				9B7C474F14F57017006C2CC6 /* MTDirectionsRequest+MTDirectionsPrivateAPI.h */,
 				9B34E0E014BA0B1A000E9C5D /* Google */,
 				9BB7003C14AA6B24001642E7 /* MapQuest */,
 			);
@@ -245,6 +248,7 @@
 				9B34E0E714BA0B4D000E9C5D /* MTDirectionsParserGoogle.h in Headers */,
 				9B34E0EA14BA0B61000E9C5D /* MTDirectionsRouteType+Google.h in Headers */,
 				9B34E0EF14BA0FB8000E9C5D /* MTDirectionsAPI.h in Headers */,
+				9B7C475114F57017006C2CC6 /* MTDirectionsRequest+MTDirectionsPrivateAPI.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

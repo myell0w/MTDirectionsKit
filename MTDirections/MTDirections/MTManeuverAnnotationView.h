@@ -23,6 +23,9 @@
 
 @property (nonatomic, readonly) MTManeuver *maneuver;
 
++ (NSString *)reuseIdentifer;
++ (id)annotationViewForMapView:(MKMapView *)mapView maneuver:(MTManeuver *)maneuver;
+
 - (id)initWithManeuver:(MTManeuver *)maneuver;
 
 @end

@@ -1,23 +1,12 @@
 #import "MTDirectionsRequestMapQuest.h"
-#import "MTHTTPFetcher.h"
+#import "MTDirectionsRequest+MTDirectionsPrivateAPI.h"
 #import "MTDirectionsRouteType+MapQuest.h"
 #import "MTDirectionsParserMapQuest.h"
 
 #define kMTDirectionBaseURL         @"http://open.mapquestapi.com/directions/v0/route?outFormat=xml&unit=k&narrativeType=none&shapeFormat=raw&generalize=50"
 
-@interface MTDirectionsRequestMapQuest ()
-
-@property (nonatomic, strong) MTHTTPFetcher *fetcher;
-@property (nonatomic, assign) MTDirectionsRouteType routeType;
-
-- (void)requestFinished:(MTHTTPFetcher *)fetcher;
-
-@end
 
 @implementation MTDirectionsRequestMapQuest
-
-@synthesize fetcher = fetcher_;
-@synthesize routeType = routeType_;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
@@ -34,39 +23,11 @@
                              toCoordinate.latitude, toCoordinate.longitude,
                              MTDirectionStringForDirectionRouteTypeMapQuest(routeType)];
         
-        routeType_ = routeType;
-        fetcher_ = [[MTHTTPFetcher alloc] initWithURLString:address
-                                                  receiver:self
-                                                    action:@selector(requestFinished:)];
+        self.parserClass = [MTDirectionsParserMapQuest class];
+        self.fetcherAddress = address;
     }
     
     return self;
 }
-
-////////////////////////////////////////////////////////////////////////
-#pragma mark - MTDirectionRequest
-////////////////////////////////////////////////////////////////////////
-
-- (void)start {
-    [self.fetcher start];
-}
-
-- (void)cancel {
-    [self.fetcher cancel];
-}
-
-////////////////////////////////////////////////////////////////////////
-#pragma mark - Private
-////////////////////////////////////////////////////////////////////////
-
-- (void)requestFinished:(MTHTTPFetcher *)fetcher {
-    MTDirectionsParser *parser = [[MTDirectionsParserMapQuest alloc] initWithFromCoordinate:self.fromCoordinate
-                                                                               toCoordinate:self.toCoordinate
-                                                                                  routeType:self.routeType
-                                                                                       data:fetcher.data];
-    
-    [parser parseWithCompletion:self.completion];
-}
-
 
 @end

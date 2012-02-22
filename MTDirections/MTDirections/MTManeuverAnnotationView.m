@@ -7,14 +7,32 @@
 #pragma mark - Lifecycle
 ////////////////////////////////////////////////////////////////////////
 
++ (NSString *)reuseIdentifer {
+    return NSStringFromClass([self class]);
+}
+
++ (id)annotationViewForMapView:(MKMapView *)mapView maneuver:(MTManeuver *)maneuver {
+    NSString *reuseIdentifier = [self reuseIdentifer];
+    MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:reuseIdentifier];
+    
+    if (annotationView == nil) {
+        annotationView = [[self alloc] initWithManeuver:maneuver];
+    } else {
+        annotationView.annotation = maneuver;
+    }
+    
+    return annotationView; 
+}
+
 - (id)initWithManeuver:(MTManeuver *)maneuver {
     return [self initWithAnnotation:maneuver reuseIdentifier:kMTManeuverAnnotationViewReuseIdentifier];
 }
 
-- (id)initWithAnnotation:(id <MKAnnotation>)annotation reuseIdentifier:(NSString *)reuseIdentifier {
+- (id)initWithAnnotation:(id<MKAnnotation>)annotation reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier])) {
         self.opaque = NO;
         self.canShowCallout = NO;
+        self.clipsToBounds = NO;
         self.frame = CGRectMake(0.f,0.f,15.f,15.f);
     }
     

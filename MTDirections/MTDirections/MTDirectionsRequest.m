@@ -1,13 +1,25 @@
 #import "MTDirectionsRequest.h"
 #import "MTDirectionsRequestMapQuest.h"
 #import "MTDirectionsRequestGoogle.h"
+#import "MTDirectionsParser.h"
 #import "MTDirectionsAPI.h"
+
+@interface MTDirectionsRequest ()
+
+@property (nonatomic, strong) MTHTTPFetcher *fetcher;
+@property (nonatomic, copy) NSString *fetcherAddress;
+@property (nonatomic, assign) Class parserClass;
+
+@end
 
 @implementation MTDirectionsRequest
 
 @synthesize fromCoordinate = fromCoordinate_;
 @synthesize toCoordinate = toCoordinate_;
 @synthesize completion = completion_;
+@synthesize routeType = routeType_;
+@synthesize fetcher = fetcher_;
+@synthesize parserClass = parserClass_;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
@@ -57,6 +69,7 @@
         fromCoordinate_ = fromCoordinate;
         toCoordinate_ = toCoordinate;
         completion_ = completion;
+        routeType_ = routeType;
     }
     
     return self;
@@ -66,12 +79,33 @@
 #pragma mark - MTDirectionRequest
 ////////////////////////////////////////////////////////////////////////
 
+- (void)setFetcherAddress:(NSString *)fetcherAddress {
+    self.fetcher = [[MTHTTPFetcher alloc] initWithURLString:fetcherAddress
+                                                   receiver:self
+                                                     action:@selector(requestFinished:)];
+}
+
+- (NSString *)fetcherAddress {
+    return self.fetcher.urlRequest.URL.absoluteString;
+}
+
 - (void)start {
-    [self doesNotRecognizeSelector:_cmd];
+    [self.fetcher start];
 }
 
 - (void)cancel {
-    [self doesNotRecognizeSelector:_cmd];
+    [self.fetcher cancel];
+}
+
+- (void)requestFinished:(MTHTTPFetcher *)fetcher {
+    NSAssert([self.parserClass isSubclassOfClass:[MTDirectionsParser class]], @"Parser class must be subclass of MTDirectionsParser.");
+    
+    MTDirectionsParser *parser = [[self.parserClass alloc] initWithFromCoordinate:self.fromCoordinate
+                                                                     toCoordinate:self.toCoordinate
+                                                                        routeType:self.routeType
+                                                                             data:fetcher.data];
+    
+    [parser parseWithCompletion:self.completion];
 }
 
 @end

@@ -18,7 +18,7 @@ NS_INLINE BOOL MTDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMap
 - (CGPathRef)mt_newPathForPoints:(MKMapPoint *)points
                       pointCount:(NSUInteger)pointCount
                         clipRect:(MKMapRect)mapRect
-                       zoomScale:(MKZoomScale)zoomScale;
+                       zoomScale:(MKZoomScale)zoomScale CF_RETURNS_RETAINED;
 
 @end
 
