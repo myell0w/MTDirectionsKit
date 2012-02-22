@@ -2,7 +2,7 @@
 //  MKMapView+MTDirections.h
 //  MTDirections
 //
-//  Created by Matthias Tretter on 21.01.11.
+//  Created by Matthias Tretter on 21.01.12.
 //  Copyright (c) 2009-2012  Matthias Tretter, @myell0w. All rights reserved.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"),
@@ -14,6 +14,7 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "MTDirectionsRouteType.h"
+#import "MTDirectionsDisplayType.h"
 
 @class MTDirectionsOverlay;
 
@@ -21,6 +22,8 @@
 
 /** the current active direction overlay */
 @property (nonatomic, strong) MTDirectionsOverlay *directionsOverlay;
+/** the display type of the current direction */
+@property (nonatomic, assign) MTDirectionsDisplayType directionsDisplayType;
 
 /**
  Starts a request and loads the directions between the specified coordinates.
@@ -48,6 +51,21 @@
  @param animated flag whether the region gets set animated
  */
 - (void)setRegionToShowDirectionsAnimated:(BOOL)animated;
+
+/**
+ When the MapView is in the mode to show Maneuvers this method shows the next maneuver in detail (if possible).
+ 
+ @return YES if there is a next maneuver to show, NO otherwise
+ */
+- (BOOL)showNextManeuver;
+
+/**
+ When the MapView is in the mode to show Maneuvers this method shows the previous maneuver in detail (if possible).
+ 
+ @return YES if there is a previous maneuver to show, NO otherwise
+ */
+- (BOOL)showPreviousManeuver;
+
 
 /**
  Returns a corresponding overlayView for the given directionsOverlay.

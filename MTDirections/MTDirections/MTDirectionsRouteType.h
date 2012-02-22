@@ -2,7 +2,7 @@
 //  MTDirectionsRouteType.h
 //  MTDirections
 //
-//  Created by Matthias Tretter on 21.01.11.
+//  Created by Matthias Tretter on 21.01.12.
 //  Copyright (c) 2009-2012  Matthias Tretter, @myell0w. All rights reserved.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"),
@@ -13,9 +13,7 @@
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-/**
- The type of route we want to request
- */
+/** The type of route we want to request */
 typedef enum {
     MTDirectionsRouteTypeFastestDriving = 0,
     MTDirectionsRouteTypeShortestDriving,

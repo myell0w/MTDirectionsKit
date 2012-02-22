@@ -2,7 +2,7 @@
 //  MTDirections.h
 //  MTDirections
 //
-//  Created by Matthias Tretter on 21.01.11.
+//  Created by Matthias Tretter on 21.01.12.
 //  Copyright (c) 2009-2012  Matthias Tretter, @myell0w. All rights reserved.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"),
@@ -17,6 +17,7 @@
 #import "MKMapView+MTDirections.h"
 #import "MTDirectionsRequest.h"
 #import "MTDirectionsRouteType.h"
+#import "MTDirectionsDisplayType.h"
 #import "MTWaypoint.h"
 #import "MTManeuver.h"
 #import "MTDirectionsOverlay.h"

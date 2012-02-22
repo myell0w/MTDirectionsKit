@@ -24,6 +24,7 @@
 		9B6C18F214A7E24200087893 /* MTDirections.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B6C18F114A7E24200087893 /* MTDirections.h */; };
 		9B6C18F414A7E40A00087893 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18F314A7E40A00087893 /* libxml2.dylib */; };
 		9B7C475114F57017006C2CC6 /* MTDirectionsRequest+MTDirectionsPrivateAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B7C474F14F57017006C2CC6 /* MTDirectionsRequest+MTDirectionsPrivateAPI.h */; };
+		9B7C476014F57C53006C2CC6 /* MTDirectionsDisplayType.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B7C475F14F57C53006C2CC6 /* MTDirectionsDisplayType.h */; };
 		9BB7005014AA6B24001642E7 /* MTDirectionsRequestMapQuest.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB7003D14AA6B24001642E7 /* MTDirectionsRequestMapQuest.h */; };
 		9BB7005114AA6B24001642E7 /* MTDirectionsRequestMapQuest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB7003E14AA6B24001642E7 /* MTDirectionsRequestMapQuest.m */; };
 		9BB7005214AA6B24001642E7 /* MTDirectionsParserMapQuest.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB7003F14AA6B24001642E7 /* MTDirectionsParserMapQuest.h */; };
@@ -65,6 +66,8 @@
 		9B6C18F114A7E24200087893 /* MTDirections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDirections.h; sourceTree = "<group>"; };
 		9B6C18F314A7E40A00087893 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		9B7C474F14F57017006C2CC6 /* MTDirectionsRequest+MTDirectionsPrivateAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTDirectionsRequest+MTDirectionsPrivateAPI.h"; sourceTree = "<group>"; };
+		9B7C475E14F5790B006C2CC6 /* MTDirections.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MTDirections.bundle; path = Resources/MTDirections.bundle; sourceTree = "<group>"; };
+		9B7C475F14F57C53006C2CC6 /* MTDirectionsDisplayType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDirectionsDisplayType.h; sourceTree = "<group>"; };
 		9BB7003D14AA6B24001642E7 /* MTDirectionsRequestMapQuest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDirectionsRequestMapQuest.h; sourceTree = "<group>"; };
 		9BB7003E14AA6B24001642E7 /* MTDirectionsRequestMapQuest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDirectionsRequestMapQuest.m; sourceTree = "<group>"; };
 		9BB7003F14AA6B24001642E7 /* MTDirectionsParserMapQuest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDirectionsParserMapQuest.h; sourceTree = "<group>"; };
@@ -115,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				9B6C18C514A7E18200087893 /* MTDirections */,
+				9B7C475C14F57894006C2CC6 /* Resources */,
 				9B6C18C214A7E18200087893 /* Frameworks */,
 				9B6C18C114A7E18200087893 /* Products */,
 			);
@@ -168,6 +172,14 @@
 			path = MTHTTPFetcher;
 			sourceTree = "<group>";
 		};
+		9B7C475C14F57894006C2CC6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9B7C475E14F5790B006C2CC6 /* MTDirections.bundle */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		9BB7003B14AA6B24001642E7 /* APIs */ = {
 			isa = PBXGroup;
 			children = (
@@ -198,6 +210,7 @@
 				9BB7004314AA6B24001642E7 /* MKMapView+MTDirections.h */,
 				9BB7004414AA6B24001642E7 /* MKMapView+MTDirections.m */,
 				9BB7004614AA6B24001642E7 /* MTDirectionsDefines.h */,
+				9B7C475F14F57C53006C2CC6 /* MTDirectionsDisplayType.h */,
 				9BB7004714AA6B24001642E7 /* MTDirectionsOverlay.h */,
 				9BB7004814AA6B24001642E7 /* MTDirectionsOverlay.m */,
 				9BEF056914AD1BD1002D6008 /* MTDirectionsOverlayView.h */,
@@ -242,6 +255,7 @@
 				9B34E0EA14BA0B61000E9C5D /* MTDirectionsRouteType+Google.h in Headers */,
 				9B34E0EF14BA0FB8000E9C5D /* MTDirectionsAPI.h in Headers */,
 				9B7C475114F57017006C2CC6 /* MTDirectionsRequest+MTDirectionsPrivateAPI.h in Headers */,
+				9B7C476014F57C53006C2CC6 /* MTDirectionsDisplayType.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

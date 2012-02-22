@@ -2,7 +2,7 @@
 //  MTDirectionsRequest+MTDirectionsPrivateAPI.h
 //  MTDirections
 //
-//  Created by Matthias Tretter on 21.01.11.
+//  Created by Matthias Tretter on 21.01.12.
 //  Copyright (c) 2009-2012  Matthias Tretter, @myell0w. All rights reserved.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"),
@@ -15,6 +15,7 @@
 
 #import "MTDirectionsRequest.h"
 
+/** Exposes Private API to other classes of MTDirection to not generate warnings when using them. */
 @interface MTDirectionsRequest (MTPrivateAPI)
 
 @property (nonatomic, strong) MTHTTPFetcher *fetcher;
