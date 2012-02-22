@@ -18,7 +18,7 @@ static char maneuverIndexKey;
 
 - (void)mt_updateUIForDirectionsDisplayType:(MTDirectionsDisplayType)displayType;
 - (void)mt_showManeuverStartingFromIndex:(NSUInteger)maneuverStartIndex;
-- (void)mt_setRegionFromWaypoints:(NSArray *)waypoints animated:(BOOL)animated;
+- (void)mt_setRegionFromWaypoints:(NSArray *)waypoints edgePadding:(UIEdgeInsets)edgePadding animated:(BOOL)animated;
 
 @end
 
@@ -29,40 +29,36 @@ static char maneuverIndexKey;
 ////////////////////////////////////////////////////////////////////////
 
 - (void)setRegionToShowDirectionsAnimated:(BOOL)animated {
-    [self mt_setRegionFromWaypoints:self.directionsOverlay.waypoints animated:animated];
+    [self mt_setRegionFromWaypoints:self.directionsOverlay.waypoints edgePadding:UIEdgeInsetsZero animated:animated];
 }
 
-- (void)mt_setRegionFromWaypoints:(NSArray *)waypoints animated:(BOOL)animated {
+- (void)mt_setRegionFromWaypoints:(NSArray *)waypoints edgePadding:(UIEdgeInsets)edgePadding animated:(BOOL)animated {
     if (waypoints != nil) {
-        CLLocationDegrees maxLat = -90.f;
-        CLLocationDegrees maxLon = -180.f;
-        CLLocationDegrees minLat = 90.f;
-        CLLocationDegrees minLon = 180.f;
-        MKCoordinateRegion region;
+        CLLocationDegrees maxX = DBL_MIN;
+        CLLocationDegrees maxY = DBL_MIN;
+        CLLocationDegrees minX = DBL_MAX;
+        CLLocationDegrees minY = DBL_MAX;
         
         for (NSUInteger i=0; i<waypoints.count; i++) {
             MTWaypoint *currentLocation = [waypoints objectAtIndex:i];
+            MKMapPoint mapPoint = MKMapPointForCoordinate(currentLocation.coordinate);
             
-            if (currentLocation.coordinate.latitude > maxLat) {
-                maxLat = currentLocation.coordinate.latitude;
+            if (mapPoint.x > maxX) {
+                maxX = mapPoint.x;
             }
-            if (currentLocation.coordinate.latitude < minLat) {
-                minLat = currentLocation.coordinate.latitude;
+            if (mapPoint.x < minX) {
+                minX = mapPoint.x;
             }
-            if (currentLocation.coordinate.longitude > maxLon) {
-                maxLon = currentLocation.coordinate.longitude;
+            if (mapPoint.y > maxY) {
+                maxY = mapPoint.y;
             }
-            if (currentLocation.coordinate.longitude < minLon) {
-                minLon = currentLocation.coordinate.longitude;
+            if (mapPoint.y < minY) {
+                minY = mapPoint.y;
             }
         }
         
-        region.center.latitude = (maxLat + minLat) / 2.f;
-        region.center.longitude = (maxLon + minLon) / 2.f;
-        region.span.latitudeDelta = maxLat - minLat;
-        region.span.longitudeDelta = maxLon - minLon;
-        
-        [self setRegion:region animated:animated];
+        MKMapRect mapRect = MKMapRectMake(minX,minY,maxX-minX,maxY-minY);
+        [self setVisibleMapRect:mapRect edgePadding:edgePadding animated:animated];
     }
 }
 
@@ -189,7 +185,7 @@ static char maneuverIndexKey;
         MTManeuver *endManeuver = [self.directionsOverlay.maneuvers objectAtIndex:maneuverEndIndex];
         NSArray *waypoints = [NSArray arrayWithObjects:startManeuver.waypoint, endManeuver.waypoint, nil];
         
-        [self mt_setRegionFromWaypoints:waypoints animated:YES];
+        [self mt_setRegionFromWaypoints:waypoints edgePadding:UIEdgeInsetsMake(10.f,10.f,10.f,10.f) animated:YES];
     }
 }
 
