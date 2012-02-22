@@ -1,5 +1,6 @@
 #import "MTDirectionsOverlayView.h"
 #import "MTDirectionsOverlay.h"
+#import "MTManeuver.h"
 
 NS_INLINE BOOL MTDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMapRect r) {
     double minX = MIN(p0.x, p1.x);
@@ -14,6 +15,8 @@ NS_INLINE BOOL MTDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMap
 @interface MTDirectionsOverlayView ()
 
 @property (nonatomic, readonly) MTDirectionsOverlay *directionsOverlay;
+
+- (void)drawManeuver:(MTManeuver *)maneuver zoomScale:(MKZoomScale)zoomScale inContext:(CGContextRef)context;
 
 - (CGPathRef)mt_newPathForPoints:(MKMapPoint *)points
                       pointCount:(NSUInteger)pointCount
@@ -42,14 +45,25 @@ NS_INLINE BOOL MTDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMap
                                       clipRect:clipRect
                                      zoomScale:zoomScale];
     
-    if (path != nil) {
-        CGContextSetRGBStrokeColor(context, 0, 0.25, 1.0, 0.5);
-        CGContextSetLineJoin(context, kCGLineJoinRound);
-        CGContextSetLineCap(context, kCGLineCapRound);
-        CGContextSetLineWidth(context, lineWidth);
-        CGContextAddPath(context, path);
-        CGContextStrokePath(context);
-        CGPathRelease(path);
+    if (path != NULL) {
+        CGContextSaveGState(context);
+        
+        {
+            CGContextSetRGBStrokeColor(context, 0, 0.25, 1.0, 0.5);
+            CGContextSetLineJoin(context, kCGLineJoinRound);
+            CGContextSetLineCap(context, kCGLineCapRound);
+            CGContextSetLineWidth(context, lineWidth);
+            CGContextAddPath(context, path);
+            CGContextStrokePath(context);
+            CGPathRelease(path);
+        }
+        
+        
+        for (MTManeuver *maneuver in self.directionsOverlay.maneuvers) {
+            [self drawManeuver:maneuver zoomScale:zoomScale inContext:context];
+        }
+        
+        CGContextRestoreGState(context);
     }
 }
 
@@ -60,6 +74,23 @@ NS_INLINE BOOL MTDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMap
 - (MTDirectionsOverlay *)directionsOverlay {
     return (MTDirectionsOverlay *)self.overlay;
 }
+
+- (void)drawManeuver:(MTManeuver *)maneuver zoomScale:(MKZoomScale)zoomScale inContext:(CGContextRef)context {
+    CGFloat roadWidth = MKRoadWidthAtZoomScale(zoomScale);
+    MKMapPoint mapPoint = MKMapPointForCoordinate(maneuver.coordinate);
+    CGPoint point = [self pointForMapPoint:mapPoint];
+    CGFloat radius = roadWidth * 1.5f;
+    
+    // NOTE: Internal method, we don't save/restore state here for performance reasons
+    
+    CGContextBeginPath(context);
+    CGContextSetLineWidth(context,2.f);
+    CGContextSetFillColorWithColor(context, [[UIColor blueColor] colorWithAlphaComponent:0.4].CGColor);
+    CGContextSetStrokeColorWithColor(context, [UIColor blueColor].CGColor);
+    CGContextAddEllipseInRect(context, CGRectMake(point.x - radius, point.y - radius, 2.f*radius, 2.f*radius));
+    CGContextFillPath(context);
+}
+
 
 - (CGPathRef)mt_newPathForPoints:(MKMapPoint *)points
                       pointCount:(NSUInteger)pointCount

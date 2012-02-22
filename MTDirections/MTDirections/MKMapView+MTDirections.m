@@ -4,7 +4,6 @@
 #import "MTDirectionsRequest.h"
 #import "MTDirectionsOverlay.h"
 #import "MTDirectionsOverlayView.h"
-#import "MTManeuverAnnotationView.h"
 #import <objc/runtime.h>
 
 static char overlayKey;
@@ -68,22 +67,6 @@ static char requestKey;
     MTDirectionsOverlayView *overlayView = [[MTDirectionsOverlayView alloc] initWithOverlay:directionsOverlay];
 	
     return overlayView;
-}
-
-- (MKAnnotationView *)viewForDirectionManeuver:(id<MKAnnotation>)annotation {
-    MTDirectionsOverlay *directionsOverlay = self.directionsOverlay;
-    
-    if (![annotation isKindOfClass:[MTManeuver class]] || directionsOverlay == nil) {
-        return nil;
-    }
-    
-    MTManeuverAnnotationView *annotationView = (MTManeuverAnnotationView *)[self dequeueReusableAnnotationViewWithIdentifier:kMTManeuverAnnotationViewReuseIdentifier];
-    
-    if (annotationView == nil) {
-        annotationView = [[MTManeuverAnnotationView alloc] initWithManeuver:(MTManeuver *)annotation];
-    }
-    
-    return annotationView;
 }
 
 - (void)loadDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate

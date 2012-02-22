@@ -16,7 +16,7 @@
 
 @class MTWaypoint;
 
-@interface MTManeuver : NSObject <MKAnnotation>
+@interface MTManeuver : NSObject
 
 @property (nonatomic, strong) MTWaypoint *waypoint;
 @property (nonatomic, assign) CLLocationDistance distance;

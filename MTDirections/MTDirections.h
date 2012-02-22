@@ -19,6 +19,5 @@
 #import "MTDirectionsRouteType.h"
 #import "MTWaypoint.h"
 #import "MTManeuver.h"
-#import "MTManeuverAnnotationView.h"
 #import "MTDirectionsOverlay.h"
 #import "MTDirectionsOverlayView.h"

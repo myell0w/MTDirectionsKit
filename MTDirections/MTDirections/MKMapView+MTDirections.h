@@ -58,6 +58,5 @@
  @return an overlay view or nil
  */
 - (MKOverlayView *)viewForDirectionsOverlay:(id<MKOverlay>)overlay;
-- (MKAnnotationView *)viewForDirectionManeuver:(id<MKAnnotation>)annotation;
 
 @end
