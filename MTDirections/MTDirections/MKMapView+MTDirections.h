@@ -17,11 +17,14 @@
 #import "MTDirectionsDisplayType.h"
 
 @class MTDirectionsOverlay;
+@class MTDirectionsOverlayView;
 
 @interface MKMapView (MTDirections)
 
 /** the current active direction overlay */
 @property (nonatomic, strong) MTDirectionsOverlay *directionsOverlay;
+/** the current active direction overlay view */
+@property (nonatomic, strong) MTDirectionsOverlayView *directionsOverlayView;
 /** the display type of the current direction */
 @property (nonatomic, assign) MTDirectionsDisplayType directionsDisplayType;
 

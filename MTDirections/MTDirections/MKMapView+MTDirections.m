@@ -7,6 +7,7 @@
 #import <objc/runtime.h>
 
 static char overlayKey;
+static char overlayViewKey;
 static char displayKey;
 static char requestKey;
 static char maneuverIndexKey;
@@ -34,8 +35,8 @@ static char maneuverIndexKey;
 
 - (void)mt_setRegionFromWaypoints:(NSArray *)waypoints edgePadding:(UIEdgeInsets)edgePadding animated:(BOOL)animated {
     if (waypoints != nil) {
-        CLLocationDegrees maxX = DBL_MIN;
-        CLLocationDegrees maxY = DBL_MIN;
+        CLLocationDegrees maxX = -DBL_MAX;
+        CLLocationDegrees maxY = -DBL_MAX;
         CLLocationDegrees minX = DBL_MAX;
         CLLocationDegrees minY = DBL_MAX;
         
@@ -80,6 +81,8 @@ static char maneuverIndexKey;
     
     MTDirectionsOverlayView *overlayView = [[MTDirectionsOverlayView alloc] initWithOverlay:directionsOverlay];
 	
+    self.directionsOverlayView = overlayView;
+    
     return overlayView;
 }
 
@@ -211,6 +214,14 @@ static char maneuverIndexKey;
 
 - (MTDirectionsOverlay *)directionsOverlay {
     return objc_getAssociatedObject(self, &overlayKey);
+}
+
+- (void)setDirectionsOverlayView:(MTDirectionsOverlayView *)directionsOverlayView {
+    objc_setAssociatedObject(self, &overlayViewKey, directionsOverlayView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (MTDirectionsOverlayView *)directionsOverlayView {
+    return objc_getAssociatedObject(self, &overlayViewKey);
 }
 
 - (void)setDirectionsDisplayType:(MTDirectionsDisplayType)directionsDisplayType {
