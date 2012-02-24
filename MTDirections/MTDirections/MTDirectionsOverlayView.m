@@ -27,6 +27,8 @@ NS_INLINE BOOL MTDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMap
 
 @implementation MTDirectionsOverlayView
 
+@synthesize drawManeuvers = _drawManeuvers;
+
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - MKOverlayView
 ////////////////////////////////////////////////////////////////////////
@@ -34,7 +36,7 @@ NS_INLINE BOOL MTDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMap
 - (void)drawMapRect:(MKMapRect)mapRect
           zoomScale:(MKZoomScale)zoomScale
           inContext:(CGContextRef)context {
-    CGFloat lineWidth = MKRoadWidthAtZoomScale(zoomScale) * 2.f;
+    CGFloat lineWidth = MKRoadWidthAtZoomScale(zoomScale) * 1.8f;
     
     // outset the map rect by the line width so that points just outside
     // of the currently drawn rect are included in the generated path.
@@ -58,9 +60,10 @@ NS_INLINE BOOL MTDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMap
             CGPathRelease(path);
         }
         
-        
-        for (MTManeuver *maneuver in self.directionsOverlay.maneuvers) {
-            [self drawManeuver:maneuver zoomScale:zoomScale inContext:context];
+        if (self.drawManeuvers) {
+            for (MTManeuver *maneuver in self.directionsOverlay.maneuvers) {
+                [self drawManeuver:maneuver zoomScale:zoomScale inContext:context];
+            }
         }
         
         CGContextRestoreGState(context);
@@ -79,16 +82,21 @@ NS_INLINE BOOL MTDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMap
     CGFloat roadWidth = MKRoadWidthAtZoomScale(zoomScale);
     MKMapPoint mapPoint = MKMapPointForCoordinate(maneuver.coordinate);
     CGPoint point = [self pointForMapPoint:mapPoint];
-    CGFloat radius = roadWidth * 1.5f;
+    CGFloat radius = roadWidth * 0.85f;
+    CGRect circleRect = CGRectMake(point.x - radius, point.y - radius, 2.f*radius, 2.f*radius);
     
     // NOTE: Internal method, we don't save/restore state here for performance reasons
     
     CGContextBeginPath(context);
     CGContextSetLineWidth(context,2.f);
-    CGContextSetFillColorWithColor(context, [[UIColor blueColor] colorWithAlphaComponent:0.4].CGColor);
-    CGContextSetStrokeColorWithColor(context, [UIColor blueColor].CGColor);
-    CGContextAddEllipseInRect(context, CGRectMake(point.x - radius, point.y - radius, 2.f*radius, 2.f*radius));
+    CGContextSetFillColorWithColor(context, [UIColor colorWithRed:0.f green:90.f/255.f blue:1.f alpha:0.9f].CGColor);
+    CGContextAddEllipseInRect(context, circleRect);
     CGContextFillPath(context);
+    
+    CGContextBeginPath(context);
+    CGContextSetStrokeColorWithColor(context, [UIColor colorWithRed:40.f/255.f green:90.f/255.f blue:200.f/255.f alpha:0.9f].CGColor);
+    CGContextAddEllipseInRect(context, circleRect);
+    CGContextStrokePath(context);
 }
 
 

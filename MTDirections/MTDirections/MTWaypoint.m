@@ -2,7 +2,7 @@
 
 @implementation MTWaypoint
 
-@synthesize coordinate = coordinate_;
+@synthesize coordinate = _coordinate;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
@@ -14,7 +14,7 @@
 
 - (id)initWithCoordinate:(CLLocationCoordinate2D)coordinate {
     if ((self = [super init])) {
-        coordinate_ = coordinate;
+        _coordinate = coordinate;
     }
     
     return self;

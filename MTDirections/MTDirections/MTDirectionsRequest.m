@@ -14,12 +14,12 @@
 
 @implementation MTDirectionsRequest
 
-@synthesize fromCoordinate = fromCoordinate_;
-@synthesize toCoordinate = toCoordinate_;
-@synthesize completion = completion_;
-@synthesize routeType = routeType_;
-@synthesize fetcher = fetcher_;
-@synthesize parserClass = parserClass_;
+@synthesize fromCoordinate = _fromCoordinate;
+@synthesize toCoordinate = _toCoordinate;
+@synthesize completion = _completion;
+@synthesize routeType = _routeType;
+@synthesize fetcher = _fetcher;
+@synthesize parserClass = _parserClass;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
@@ -66,10 +66,10 @@
      routeType:(MTDirectionsRouteType)routeType
     completion:(mt_direction_block)completion {
     if ((self = [super init])) {
-        fromCoordinate_ = fromCoordinate;
-        toCoordinate_ = toCoordinate;
-        completion_ = completion;
-        routeType_ = routeType;
+        _fromCoordinate = fromCoordinate;
+        _toCoordinate = toCoordinate;
+        _completion = completion;
+        _routeType = routeType;
     }
     
     return self;

@@ -10,10 +10,10 @@
 
 @implementation MTDirectionsParser
 
-@synthesize data = data_;
-@synthesize fromCoordinate = fromCoordinate_;
-@synthesize toCoordinate = toCoordinate_;
-@synthesize routeType = routeType_;
+@synthesize data = _data;
+@synthesize fromCoordinate = _fromCoordinate;
+@synthesize toCoordinate = _toCoordinate;
+@synthesize routeType = _routeType;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
@@ -24,10 +24,10 @@
                    routeType:(MTDirectionsRouteType)routeType
                         data:(id)data {
     if ((self = [super init])) {
-        fromCoordinate_ = fromCoordinate;
-        toCoordinate_ = toCoordinate;
-        data_ = data;
-        routeType_ = routeType;
+        _fromCoordinate = fromCoordinate;
+        _toCoordinate = toCoordinate;
+        _data = data;
+        _routeType = routeType;
     }
     
     return self;

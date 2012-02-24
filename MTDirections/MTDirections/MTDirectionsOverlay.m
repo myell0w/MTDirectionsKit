@@ -18,11 +18,11 @@
 
 @implementation MTDirectionsOverlay
 
-@synthesize polyline = polyline_;
-@synthesize waypoints = waypoints_;
-@synthesize distance = distance_;
-@synthesize routeType = routeType_;
-@synthesize maneuvers = maneuvers_;
+@synthesize polyline = _polyline;
+@synthesize waypoints = _waypoints;
+@synthesize distance = _distance;
+@synthesize routeType = _routeType;
+@synthesize maneuvers = _maneuvers;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle

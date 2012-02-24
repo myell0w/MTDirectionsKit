@@ -3,9 +3,9 @@
 
 @implementation MTManeuver
 
-@synthesize waypoint = waypoint_;
-@synthesize distance = distance_;
-@synthesize time = time_;
+@synthesize waypoint = _waypoint;
+@synthesize distance = _distance;
+@synthesize time = _time;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
@@ -25,9 +25,9 @@
               distance:(CLLocationDistance)distance
                   time:(NSTimeInterval)time {
     if ((self = [super init])) {
-        waypoint_ = waypoint;
-        distance_ = distance;
-        time_ = time;
+        _waypoint = waypoint;
+        _distance = distance;
+        _time = time;
     }
     
     return self;
