@@ -6,11 +6,15 @@
 #import "MTDirectionsOverlayView.h"
 
 
+#define kMTCircleMoveDuration       0.3
+
+
 @interface MTMapView () <MKMapViewDelegate>
 
 @property (nonatomic, unsafe_unretained) id<MKMapViewDelegate> trueDelegate;
 @property (nonatomic, strong) MTDirectionsRequest *request;
 @property (nonatomic, assign) NSUInteger activeManeuverIndex;
+@property (nonatomic, strong) UIImageView *circleView;
 
 - (void)setup;
 
@@ -30,6 +34,7 @@
 @synthesize trueDelegate = _trueDelegate;
 @synthesize request = _request;
 @synthesize activeManeuverIndex = _activeManeuverIndex;
+@synthesize circleView = _circleView;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
@@ -104,6 +109,7 @@
     }
     
     if (self.directionsDisplayType != MTDirectionsDisplayTypeDetailedManeuvers) {
+        // this call updates the UI to show first maneuver
         self.directionsDisplayType = MTDirectionsDisplayTypeDetailedManeuvers;
         return YES;
     }
@@ -127,6 +133,54 @@
     [self showManeuverStartingFromIndex:activeManeuverIndex];
     
     return YES;
+}
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - Properties
+////////////////////////////////////////////////////////////////////////
+
+- (void)setDirectionsOverlay:(MTDirectionsOverlay *)directionsOverlay {
+    if (directionsOverlay != _directionsOverlay) {    
+        // remove old overlay and annotations
+        if (_directionsOverlay != nil) {
+            [self removeOverlay:_directionsOverlay];
+        }
+        
+        // add new overlay
+        if (directionsOverlay != nil) {
+            [self addOverlay:directionsOverlay];
+        }
+        
+        _directionsOverlay = directionsOverlay;
+    }
+}
+
+- (void)setDirectionsDisplayType:(MTDirectionsDisplayType)directionsDisplayType {
+    if (directionsDisplayType != _directionsDisplayType) {
+        // we first update the UI to have access to the old display type here
+        [self updateUIForDirectionsDisplayType:directionsDisplayType];
+        
+        _directionsDisplayType = directionsDisplayType;
+    }
+}
+
+- (void)setDelegate:(id<MKMapViewDelegate>)delegate {
+    _trueDelegate = delegate;
+}
+
+- (id<MKMapViewDelegate>)delegate {
+    return _trueDelegate;
+}
+
+- (UIImageView *)circleView {
+    if (_circleView == nil) {
+        _circleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MTDirections.bundle/DirectionsCircleShiny"]];
+        [self addSubview:_circleView];
+    }
+    
+    [self bringSubviewToFront:_circleView];
+    
+    return _circleView;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -250,43 +304,6 @@
 }
 
 ////////////////////////////////////////////////////////////////////////
-#pragma mark - Properties
-////////////////////////////////////////////////////////////////////////
-
-- (void)setDirectionsOverlay:(MTDirectionsOverlay *)directionsOverlay {
-    if (directionsOverlay != _directionsOverlay) {    
-        // remove old overlay and annotations
-        if (_directionsOverlay != nil) {
-            [self removeOverlay:_directionsOverlay];
-        }
-        
-        // add new overlay
-        if (directionsOverlay != nil) {
-            [self addOverlay:directionsOverlay];
-        }
-        
-        _directionsOverlay = directionsOverlay;
-    }
-}
-
-- (void)setDirectionsDisplayType:(MTDirectionsDisplayType)directionsDisplayType {
-    if (directionsDisplayType != _directionsDisplayType) {
-        // we first update the UI to have access to the old display type here
-        [self updateUIForDirectionsDisplayType:directionsDisplayType];
-        
-        _directionsDisplayType = directionsDisplayType;
-    }
-}
-
-- (void)setDelegate:(id<MKMapViewDelegate>)delegate {
-    _trueDelegate = delegate;
-}
-
-- (id<MKMapViewDelegate>)delegate {
-    return _trueDelegate;
-}
-
-////////////////////////////////////////////////////////////////////////
 #pragma mark - Private
 ////////////////////////////////////////////////////////////////////////
 
@@ -362,6 +379,12 @@
         MTManeuver *startManeuver = [self.directionsOverlay.maneuvers objectAtIndex:maneuverStartIndex];
         MTManeuver *endManeuver = [self.directionsOverlay.maneuvers objectAtIndex:maneuverEndIndex];
         NSArray *waypoints = [NSArray arrayWithObjects:startManeuver.waypoint, endManeuver.waypoint, nil];
+        
+        CGPoint circlePoint = [self convertCoordinate:startManeuver.coordinate toPointToView:self];
+        [UIView animateWithDuration:kMTCircleMoveDuration
+                         animations:^{
+                             self.circleView.center = circlePoint;
+                         }];
         
         [self setRegionFromWaypoints:waypoints edgePadding:UIEdgeInsetsMake(10.f,10.f,10.f,10.f) animated:YES];
     }
