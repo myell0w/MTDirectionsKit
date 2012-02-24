@@ -19,7 +19,7 @@
 @class MTDirectionsOverlay;
 @class MTDirectionsOverlayView;
 
-@interface MKMapView (MTDirections)
+@interface MTMapView : MKMapView
 
 /** the current active direction overlay */
 @property (nonatomic, strong) MTDirectionsOverlay *directionsOverlay;
@@ -69,15 +69,5 @@
  */
 - (BOOL)showPreviousManeuver;
 
-
-/**
- Returns a corresponding overlayView for the given directionsOverlay.
- If there is no overlay set yet or overlay is not kind of MTDirectionsOverlay
- this method returns nil
- 
- @param overlay the overlay to return the corresponding view, must be a subclass of MTDirectionsOverlay
- @return an overlay view or nil
- */
-- (MKOverlayView *)viewForDirectionsOverlay:(id<MKOverlay>)overlay;
 
 @end

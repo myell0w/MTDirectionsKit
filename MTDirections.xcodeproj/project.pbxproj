@@ -30,8 +30,8 @@
 		9BB7005214AA6B24001642E7 /* MTDirectionsParserMapQuest.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB7003F14AA6B24001642E7 /* MTDirectionsParserMapQuest.h */; };
 		9BB7005314AA6B24001642E7 /* MTDirectionsParserMapQuest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB7004014AA6B24001642E7 /* MTDirectionsParserMapQuest.m */; };
 		9BB7005414AA6B24001642E7 /* MTDirectionsRouteType+MapQuest.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB7004114AA6B24001642E7 /* MTDirectionsRouteType+MapQuest.h */; };
-		9BB7005514AA6B24001642E7 /* MKMapView+MTDirections.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB7004314AA6B24001642E7 /* MKMapView+MTDirections.h */; };
-		9BB7005614AA6B24001642E7 /* MKMapView+MTDirections.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB7004414AA6B24001642E7 /* MKMapView+MTDirections.m */; };
+		9BB7005514AA6B24001642E7 /* MTMapView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB7004314AA6B24001642E7 /* MTMapView.h */; };
+		9BB7005614AA6B24001642E7 /* MTMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB7004414AA6B24001642E7 /* MTMapView.m */; };
 		9BB7005814AA6B24001642E7 /* MTDirectionsDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB7004614AA6B24001642E7 /* MTDirectionsDefines.h */; };
 		9BB7005914AA6B24001642E7 /* MTDirectionsOverlay.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB7004714AA6B24001642E7 /* MTDirectionsOverlay.h */; };
 		9BB7005A14AA6B24001642E7 /* MTDirectionsOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB7004814AA6B24001642E7 /* MTDirectionsOverlay.m */; };
@@ -73,8 +73,8 @@
 		9BB7003F14AA6B24001642E7 /* MTDirectionsParserMapQuest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDirectionsParserMapQuest.h; sourceTree = "<group>"; };
 		9BB7004014AA6B24001642E7 /* MTDirectionsParserMapQuest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDirectionsParserMapQuest.m; sourceTree = "<group>"; };
 		9BB7004114AA6B24001642E7 /* MTDirectionsRouteType+MapQuest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTDirectionsRouteType+MapQuest.h"; sourceTree = "<group>"; };
-		9BB7004314AA6B24001642E7 /* MKMapView+MTDirections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+MTDirections.h"; sourceTree = "<group>"; };
-		9BB7004414AA6B24001642E7 /* MKMapView+MTDirections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+MTDirections.m"; sourceTree = "<group>"; };
+		9BB7004314AA6B24001642E7 /* MTMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMapView.h; sourceTree = "<group>"; };
+		9BB7004414AA6B24001642E7 /* MTMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMapView.m; sourceTree = "<group>"; };
 		9BB7004614AA6B24001642E7 /* MTDirectionsDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDirectionsDefines.h; sourceTree = "<group>"; };
 		9BB7004714AA6B24001642E7 /* MTDirectionsOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDirectionsOverlay.h; sourceTree = "<group>"; };
 		9BB7004814AA6B24001642E7 /* MTDirectionsOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDirectionsOverlay.m; sourceTree = "<group>"; };
@@ -207,8 +207,8 @@
 		9BB7004214AA6B24001642E7 /* MTDirections */ = {
 			isa = PBXGroup;
 			children = (
-				9BB7004314AA6B24001642E7 /* MKMapView+MTDirections.h */,
-				9BB7004414AA6B24001642E7 /* MKMapView+MTDirections.m */,
+				9BB7004314AA6B24001642E7 /* MTMapView.h */,
+				9BB7004414AA6B24001642E7 /* MTMapView.m */,
 				9BB7004614AA6B24001642E7 /* MTDirectionsDefines.h */,
 				9B7C475F14F57C53006C2CC6 /* MTDirectionsDisplayType.h */,
 				9BB7004714AA6B24001642E7 /* MTDirectionsOverlay.h */,
@@ -241,7 +241,7 @@
 				9BB7005014AA6B24001642E7 /* MTDirectionsRequestMapQuest.h in Headers */,
 				9BB7005214AA6B24001642E7 /* MTDirectionsParserMapQuest.h in Headers */,
 				9BB7005414AA6B24001642E7 /* MTDirectionsRouteType+MapQuest.h in Headers */,
-				9BB7005514AA6B24001642E7 /* MKMapView+MTDirections.h in Headers */,
+				9BB7005514AA6B24001642E7 /* MTMapView.h in Headers */,
 				9BB7005814AA6B24001642E7 /* MTDirectionsDefines.h in Headers */,
 				9BB7005914AA6B24001642E7 /* MTDirectionsOverlay.h in Headers */,
 				9BB7005B14AA6B24001642E7 /* MTDirectionsParser.h in Headers */,
@@ -314,7 +314,7 @@
 				9B6C18E114A7E20900087893 /* MTXPathResultNode.m in Sources */,
 				9BB7005114AA6B24001642E7 /* MTDirectionsRequestMapQuest.m in Sources */,
 				9BB7005314AA6B24001642E7 /* MTDirectionsParserMapQuest.m in Sources */,
-				9BB7005614AA6B24001642E7 /* MKMapView+MTDirections.m in Sources */,
+				9BB7005614AA6B24001642E7 /* MTMapView.m in Sources */,
 				9BB7005A14AA6B24001642E7 /* MTDirectionsOverlay.m in Sources */,
 				9BB7005C14AA6B24001642E7 /* MTDirectionsParser.m in Sources */,
 				9BB7005E14AA6B24001642E7 /* MTDirectionsRequest.m in Sources */,
