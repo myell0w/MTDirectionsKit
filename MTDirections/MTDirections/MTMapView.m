@@ -4,6 +4,7 @@
 #import "MTDirectionsRequest.h"
 #import "MTDirectionsOverlay.h"
 #import "MTDirectionsOverlayView.h"
+#import "MTManeuverInfoView.h"
 
 
 #define kMTCircleMoveDuration       0.3
@@ -15,6 +16,7 @@
 @property (nonatomic, strong) MTDirectionsRequest *request;
 @property (nonatomic, assign) NSUInteger activeManeuverIndex;
 @property (nonatomic, strong) UIImageView *circleView;
+@property (nonatomic, strong) MTManeuverInfoView *maneuverInfoView;
 
 - (void)setup;
 
@@ -35,6 +37,7 @@
 @synthesize request = _request;
 @synthesize activeManeuverIndex = _activeManeuverIndex;
 @synthesize circleView = _circleView;
+@synthesize maneuverInfoView = _maneuverInfoView;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
@@ -179,9 +182,20 @@
         [self addSubview:_circleView];
     }
     
-    [self.superview bringSubviewToFront:_circleView];
+    [self bringSubviewToFront:_circleView];
     
     return _circleView;
+}
+
+- (MTManeuverInfoView *)maneuverInfoView {
+    if (_maneuverInfoView == nil) {
+        _maneuverInfoView = [MTManeuverInfoView infoViewForMapView:self];
+        [self addSubview:_maneuverInfoView];
+    }
+    
+    [self bringSubviewToFront:_maneuverInfoView];
+    
+    return _maneuverInfoView;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -205,21 +219,8 @@
         MTManeuver *activeManeuver = [self.directionsOverlay.maneuvers objectAtIndex:self.activeManeuverIndex];
         CGPoint circlePoint = [self convertCoordinate:activeManeuver.coordinate toPointToView:self];
         
-        // first move to previous maneuver
-        if (self.activeManeuverIndex > 1) {
-            MTManeuver *oldManeuver = [self.directionsOverlay.maneuvers objectAtIndex:self.activeManeuverIndex-1];
-            CGPoint oldCirclePoint = [self convertCoordinate:oldManeuver.coordinate toPointToView:self];
-            
-            self.circleView.center = oldCirclePoint;
-        }
-        
         self.circleView.alpha = 1.f;
-        
-        // then animate to new maneuver
-        [UIView animateWithDuration:kMTCircleMoveDuration
-                         animations:^{
-                             self.circleView.center = circlePoint;
-                         }];
+        self.circleView.center = circlePoint;
     }
 }
 
@@ -409,8 +410,20 @@
         MTManeuver *startManeuver = [self.directionsOverlay.maneuvers objectAtIndex:maneuverStartIndex];
         MTManeuver *endManeuver = [self.directionsOverlay.maneuvers objectAtIndex:maneuverEndIndex];
         NSArray *waypoints = [NSArray arrayWithObjects:startManeuver.waypoint, endManeuver.waypoint, nil];
+        CGPoint circlePoint = [self convertCoordinate:startManeuver.coordinate toPointToView:self];
         
-        [self setRegionFromWaypoints:waypoints edgePadding:UIEdgeInsetsMake(10.f,10.f,10.f,10.f) animated:YES];
+        self.maneuverInfoView.infoText = [NSString stringWithFormat:@"Distanz: %f", startManeuver.distance];
+        
+        [UIView animateWithDuration:kMTCircleMoveDuration
+                         animations:^{
+                             self.circleView.center = circlePoint;
+                         } completion:^(BOOL finished) {
+                             if (finished) {
+                                 [self setRegionFromWaypoints:waypoints 
+                                                  edgePadding:UIEdgeInsetsMake(10.f,10.f,10.f,10.f)
+                                                     animated:YES];
+                             }
+                         }];
     }
 }
 

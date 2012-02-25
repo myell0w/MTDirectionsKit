@@ -42,6 +42,8 @@
 		9BB7005F14AA6B24001642E7 /* MTDirectionsRouteType.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB7004D14AA6B24001642E7 /* MTDirectionsRouteType.h */; };
 		9BB7006014AA6B24001642E7 /* MTWaypoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB7004E14AA6B24001642E7 /* MTWaypoint.h */; };
 		9BB7006114AA6B24001642E7 /* MTWaypoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB7004F14AA6B24001642E7 /* MTWaypoint.m */; };
+		9BE761FA14F8E3A7005B4302 /* MTManeuverInfoView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BE761F814F8E3A7005B4302 /* MTManeuverInfoView.h */; };
+		9BE761FB14F8E3A7005B4302 /* MTManeuverInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE761F914F8E3A7005B4302 /* MTManeuverInfoView.m */; };
 		9BEF056B14AD1BD1002D6008 /* MTDirectionsOverlayView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BEF056914AD1BD1002D6008 /* MTDirectionsOverlayView.h */; };
 		9BEF056C14AD1BD1002D6008 /* MTDirectionsOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEF056A14AD1BD1002D6008 /* MTDirectionsOverlayView.m */; };
 /* End PBXBuildFile section */
@@ -85,6 +87,8 @@
 		9BB7004D14AA6B24001642E7 /* MTDirectionsRouteType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDirectionsRouteType.h; sourceTree = "<group>"; };
 		9BB7004E14AA6B24001642E7 /* MTWaypoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTWaypoint.h; sourceTree = "<group>"; };
 		9BB7004F14AA6B24001642E7 /* MTWaypoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTWaypoint.m; sourceTree = "<group>"; };
+		9BE761F814F8E3A7005B4302 /* MTManeuverInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTManeuverInfoView.h; sourceTree = "<group>"; };
+		9BE761F914F8E3A7005B4302 /* MTManeuverInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTManeuverInfoView.m; sourceTree = "<group>"; };
 		9BEF056914AD1BD1002D6008 /* MTDirectionsOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDirectionsOverlayView.h; sourceTree = "<group>"; };
 		9BEF056A14AD1BD1002D6008 /* MTDirectionsOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDirectionsOverlayView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -207,8 +211,6 @@
 		9BB7004214AA6B24001642E7 /* MTDirections */ = {
 			isa = PBXGroup;
 			children = (
-				9BB7004314AA6B24001642E7 /* MTMapView.h */,
-				9BB7004414AA6B24001642E7 /* MTMapView.m */,
 				9BB7004614AA6B24001642E7 /* MTDirectionsDefines.h */,
 				9B7C475F14F57C53006C2CC6 /* MTDirectionsDisplayType.h */,
 				9BB7004714AA6B24001642E7 /* MTDirectionsOverlay.h */,
@@ -222,6 +224,10 @@
 				9BB7004D14AA6B24001642E7 /* MTDirectionsRouteType.h */,
 				9B34E0D214B5F10F000E9C5D /* MTManeuver.h */,
 				9B34E0D314B5F10F000E9C5D /* MTManeuver.m */,
+				9BE761F814F8E3A7005B4302 /* MTManeuverInfoView.h */,
+				9BE761F914F8E3A7005B4302 /* MTManeuverInfoView.m */,
+				9BB7004314AA6B24001642E7 /* MTMapView.h */,
+				9BB7004414AA6B24001642E7 /* MTMapView.m */,
 				9BB7004E14AA6B24001642E7 /* MTWaypoint.h */,
 				9BB7004F14AA6B24001642E7 /* MTWaypoint.m */,
 			);
@@ -256,6 +262,7 @@
 				9B34E0EF14BA0FB8000E9C5D /* MTDirectionsAPI.h in Headers */,
 				9B7C475114F57017006C2CC6 /* MTDirectionsRequest+MTDirectionsPrivateAPI.h in Headers */,
 				9B7C476014F57C53006C2CC6 /* MTDirectionsDisplayType.h in Headers */,
+				9BE761FA14F8E3A7005B4302 /* MTManeuverInfoView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +331,7 @@
 				9B34E0E414BA0B38000E9C5D /* MTDirectionsRequestGoogle.m in Sources */,
 				9B34E0E814BA0B4D000E9C5D /* MTDirectionsParserGoogle.m in Sources */,
 				9B34E0F114BA0FE4000E9C5D /* MTDirectionsAPI.m in Sources */,
+				9BE761FB14F8E3A7005B4302 /* MTManeuverInfoView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
