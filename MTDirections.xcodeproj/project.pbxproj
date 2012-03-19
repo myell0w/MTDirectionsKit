@@ -292,7 +292,7 @@
 		9B6C18B714A7E18200087893 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = "NOUS Wissensmanagement GmbH";
 			};
 			buildConfigurationList = 9B6C18BA14A7E18200087893 /* Build configuration list for PBXProject "MTDirections" */;
