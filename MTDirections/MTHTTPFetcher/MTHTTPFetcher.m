@@ -9,8 +9,6 @@
 	NSURLAuthenticationChallenge *challenge;
 }
 
-@property (nonatomic, strong, readwrite) NSMutableData *data;
-
 @end
 
 @implementation MTHTTPFetcher
