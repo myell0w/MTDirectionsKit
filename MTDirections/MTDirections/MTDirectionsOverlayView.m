@@ -48,15 +48,18 @@ NS_INLINE BOOL MTDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMap
                                      zoomScale:zoomScale];
     
     if (path != NULL) {
+        UIColor *fillColor = [UIColor colorWithRed:0.f green:0.25f blue:1.f alpha:0.5f];
+        
         CGContextSaveGState(context);
         
         {
-            CGContextSetRGBStrokeColor(context, 0, 0.25, 1.0, 0.5);
+            CGContextSetFillColorWithColor(context, fillColor.CGColor);
             CGContextSetLineJoin(context, kCGLineJoinRound);
             CGContextSetLineCap(context, kCGLineCapRound);
             CGContextSetLineWidth(context, lineWidth);
             CGContextAddPath(context, path);
-            CGContextStrokePath(context);
+            CGContextReplacePathWithStrokedPath(context);
+            CGContextFillPath(context);
             CGPathRelease(path);
         }
         
