@@ -78,26 +78,34 @@
     __block __typeof__(self) blockSelf = self;
     
     [self.request cancel];
-    self.request = [MTDirectionsRequest requestFrom:fromCoordinate
-                                                 to:toCoordinate
-                                          routeType:routeType
-                                         completion:^(MTDirectionsOverlay *overlay) {
-                                             blockSelf.directionsDisplayType = MTDirectionsDisplayTypeOverview;
-                                             blockSelf.directionsOverlay = overlay;
-                                             
-                                             // If we found at least one waypoint (start and end are always contained)
-                                             // zoom the mapView to show the whole direction
-                                             if (zoomToShowDirections && overlay.waypoints.count > 2) {
-                                                 [blockSelf setRegionToShowDirectionsAnimated:YES];
-                                             }
-                                         }];
     
-    [self.request start];
+    if (CLLocationCoordinate2DIsValid(fromCoordinate) && CLLocationCoordinate2DIsValid(toCoordinate)) {
+        self.request = [MTDirectionsRequest requestFrom:fromCoordinate
+                                                     to:toCoordinate
+                                              routeType:routeType
+                                             completion:^(MTDirectionsOverlay *overlay) {
+                                                 blockSelf.directionsDisplayType = MTDirectionsDisplayTypeOverview;
+                                                 blockSelf.directionsOverlay = overlay;
+                                                 
+                                                 // If we found at least one waypoint (start and end are always contained)
+                                                 // zoom the mapView to show the whole direction
+                                                 if (zoomToShowDirections && overlay.waypoints.count > 2) {
+                                                     [blockSelf setRegionToShowDirectionsAnimated:YES];
+                                                 }
+                                             }];
+        
+        [self.request start];
+    }
 }
 
 - (void)cancelLoadOfDirections {
     [self.request cancel];
     self.request = nil;
+}
+
+- (void)removeDirectionsOverlay {
+    self.directionsOverlay = nil;
+    self.directionsOverlayView = nil;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -116,7 +124,7 @@
     if (activeManeuverIndex >= self.directionsOverlay.maneuvers.count - 1) {
         return NO;
     }
-
+    
     activeManeuverIndex++;
     self.activeManeuverIndex = activeManeuverIndex;
     [self showManeuverStartingFromIndex:activeManeuverIndex];

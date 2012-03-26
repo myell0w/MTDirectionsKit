@@ -37,11 +37,9 @@ NS_INLINE BOOL MTDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMap
           zoomScale:(MKZoomScale)zoomScale
           inContext:(CGContextRef)context {
     CGFloat lineWidth = MKRoadWidthAtZoomScale(zoomScale) * 1.8f;
-    
     // outset the map rect by the line width so that points just outside
     // of the currently drawn rect are included in the generated path.
     MKMapRect clipRect = MKMapRectInset(mapRect, -lineWidth, -lineWidth);
-    
     CGPathRef path = [self mt_newPathForPoints:self.directionsOverlay.points
                                     pointCount:self.directionsOverlay.pointCount
                                       clipRect:clipRect

@@ -49,6 +49,11 @@
 - (void)cancelLoadOfDirections;
 
 /**
+ Removes the currenty displayed directions overlay view from the MapView
+ */
+- (void)removeDirectionsOverlay;
+
+/**
  Sets the region of the MapView to show the whole directionOverlay at once.
  
  @param animated flag whether the region gets set animated
