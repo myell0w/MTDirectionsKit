@@ -1,5 +1,5 @@
 //
-//  MTDDirectionOverlay.h
+//  MTDManeuver.h
 //  MTDirectionsKit
 //
 //  Created by Matthias Tretter on 21.01.12.
@@ -13,26 +13,24 @@
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "MTDDirectionsRouteType.h"
 
-@interface MTDDirectionsOverlay : NSObject <MKOverlay>
+@class MTDWaypoint;
 
-/** all waypoints of the current active direction */
-@property (nonatomic, strong, readonly) NSArray *waypoints;
-/** the distance of the directions */
-@property (nonatomic, assign, readonly) CLLocationDistance distance;
-/** the routeType used to compute the directions */
-@property (nonatomic, assign, readonly) MTDDirectionsRouteType routeType;
 
-/** all mapPoints of the polyline */
-@property (nonatomic, readonly) MKMapPoint *points;
-/** the number of mapPoints of the polyline */
-@property (nonatomic, readonly) NSUInteger pointCount;
+@interface MTDManeuver : NSObject
 
-@property (nonatomic, strong) NSArray *maneuvers;
+@property (nonatomic, strong) MTDWaypoint *waypoint;
+@property (nonatomic, assign) CLLocationDistance distance;
+@property (nonatomic, assign) NSTimeInterval time;
+@property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
 
-+ (MTDDirectionsOverlay *)overlayWithWaypoints:(NSArray *)waypoints 
-                                     distance:(CLLocationDistance)distance
-                                    routeType:(MTDDirectionsRouteType)routeType;
++ (MTDManeuver *)maneuverWithWaypoint:(MTDWaypoint *)waypoint
+                            distance:(CLLocationDistance)distance
+                                time:(NSTimeInterval)time;
+
+- (id)init;
+- (id)initWithWaypoint:(MTDWaypoint *)waypoint
+              distance:(CLLocationDistance)distance
+                  time:(NSTimeInterval)time;
 
 @end

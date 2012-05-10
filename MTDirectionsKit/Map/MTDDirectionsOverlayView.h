@@ -16,4 +16,7 @@
 
 @interface MTDDirectionsOverlayView : MKOverlayView
 
+/** Flag that indicates whether the maneuver points are drawn */
+@property (nonatomic, assign) BOOL drawManeuvers;
+
 @end

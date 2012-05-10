@@ -1,18 +1,27 @@
 #import "MTDMapView.h"
 #import "MTDWaypoint.h"
+#import "MTDManeuver.h"
 #import "MTDDirectionsRequest.h"
 #import "MTDDirectionsOverlay.h"
 #import "MTDDirectionsOverlayView.h"
+#import "MTDManeuverInfoView.h"
+
+
+#define kMTCircleMoveDuration       0.3
 
 
 @interface MTDMapView () <MKMapViewDelegate>
 
 @property (nonatomic, unsafe_unretained) id<MKMapViewDelegate> trueDelegate;
 @property (nonatomic, strong) MTDDirectionsRequest *request;
+@property (nonatomic, assign) NSUInteger activeManeuverIndex;
+@property (nonatomic, strong) UIImageView *circleView;
+@property (nonatomic, strong) MTDManeuverInfoView *maneuverInfoView;
 
 - (void)setup;
 
 - (void)updateUIForDirectionsDisplayType:(MTDDirectionsDisplayType)displayType;
+- (void)showManeuverStartingFromIndex:(NSUInteger)maneuverStartIndex;
 - (void)setRegionFromWaypoints:(NSArray *)waypoints edgePadding:(UIEdgeInsets)edgePadding animated:(BOOL)animated;
 
 - (MKOverlayView *)viewForDirectionsOverlay:(id<MKOverlay>)overlay;
@@ -27,6 +36,9 @@
 @synthesize directionsDisplayType = _directionsDisplayType;
 @synthesize trueDelegate = _trueDelegate;
 @synthesize request = _request;
+@synthesize activeManeuverIndex = _activeManeuverIndex;
+@synthesize circleView = _circleView;
+@synthesize maneuverInfoView = _maneuverInfoView;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
@@ -98,6 +110,44 @@
 }
 
 ////////////////////////////////////////////////////////////////////////
+#pragma mark - Maneuvers
+////////////////////////////////////////////////////////////////////////
+
+- (BOOL)showNextManeuver {
+    if (self.directionsDisplayType != MTDDirectionsDisplayTypeDetailedManeuvers) {
+        // this call updates the UI to show first maneuver
+        self.directionsDisplayType = MTDDirectionsDisplayTypeDetailedManeuvers;
+        return YES;
+    }
+    
+    NSUInteger activeManeuverIndex = self.activeManeuverIndex;
+    
+    if (activeManeuverIndex >= self.directionsOverlay.maneuvers.count - 1) {
+        return NO;
+    }
+    
+    activeManeuverIndex++;
+    self.activeManeuverIndex = activeManeuverIndex;
+    [self showManeuverStartingFromIndex:activeManeuverIndex];
+    
+    return YES;
+}
+
+- (BOOL)showPreviousManeuver {
+    NSUInteger activeManeuverIndex = self.activeManeuverIndex;
+    
+    if (activeManeuverIndex == 0) {
+        return NO;
+    }
+    
+    activeManeuverIndex--;
+    self.activeManeuverIndex = activeManeuverIndex;
+    [self showManeuverStartingFromIndex:activeManeuverIndex];
+    
+    return YES;
+}
+
+////////////////////////////////////////////////////////////////////////
 #pragma mark - Properties
 ////////////////////////////////////////////////////////////////////////
 
@@ -122,6 +172,7 @@
         // we first update the UI to have access to the old display type here
         [self updateUIForDirectionsDisplayType:directionsDisplayType];
         
+        self.directionsOverlayView.drawManeuvers = (self.directionsDisplayType == MTDDirectionsDisplayTypeDetailedManeuvers);
         _directionsDisplayType = directionsDisplayType;
     }
 }
@@ -134,6 +185,28 @@
     return _trueDelegate;
 }
 
+- (UIImageView *)circleView {
+    if (_circleView == nil) {
+        _circleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MTDirectionsKit.bundle/DirectionsCircleShiny"]];
+        [self addSubview:_circleView];
+    }
+    
+    [self bringSubviewToFront:_circleView];
+    
+    return _circleView;
+}
+
+- (MTDManeuverInfoView *)maneuverInfoView {
+    if (_maneuverInfoView == nil) {
+        _maneuverInfoView = [MTDManeuverInfoView infoViewForMapView:self];
+        [self addSubview:_maneuverInfoView];
+    }
+    
+    [self bringSubviewToFront:_maneuverInfoView];
+    
+    return _maneuverInfoView;
+}
+
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - MKMapViewDelegate Proxies
 ////////////////////////////////////////////////////////////////////////
@@ -142,11 +215,21 @@
     if ([self.trueDelegate respondsToSelector:@selector(mapView:regionWillChangeAnimated:)]) {
         [self.trueDelegate mapView:mapView regionWillChangeAnimated:animated];
     }
+    
+    self.circleView.alpha = 0.f;
 }
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
     if ([self.trueDelegate respondsToSelector:@selector(mapView:regionDidChangeAnimated:)]) {
         [self.trueDelegate mapView:mapView regionDidChangeAnimated:animated];
+    }
+    
+    if (self.activeManeuverIndex != NSNotFound && self.directionsDisplayType == MTDDirectionsDisplayTypeDetailedManeuvers) {
+        MTDManeuver *activeManeuver = [self.directionsOverlay.maneuvers objectAtIndex:self.activeManeuverIndex];
+        CGPoint circlePoint = [self convertCoordinate:activeManeuver.coordinate toPointToView:self];
+        
+        self.circleView.alpha = 1.f;
+        self.circleView.center = circlePoint;
     }
 }
 
@@ -263,6 +346,7 @@
     [super setDelegate:self];
     
     _directionsDisplayType = MTDDirectionsDisplayTypeOverview;
+    _activeManeuverIndex = NSNotFound;
 }
 
 - (void)setRegionFromWaypoints:(NSArray *)waypoints edgePadding:(UIEdgeInsets)edgePadding animated:(BOOL)animated {
@@ -303,11 +387,20 @@
         
         switch (displayType) {    
             case MTDDirectionsDisplayTypeOverview: {
+                self.activeManeuverIndex = NSNotFound;
+                break;
+            }
+                
+            case MTDDirectionsDisplayTypeDetailedManeuvers: {
+                self.activeManeuverIndex = 0;
+                [self showManeuverStartingFromIndex:0];
                 break;
             }
                 
             case MTDDirectionsDisplayTypeNone: 
             default: {
+                self.activeManeuverIndex = NSNotFound;
+                
                 NSArray *overlays = self.overlays;
                 
                 // re-draw overlays
@@ -316,6 +409,30 @@
                 break;
             }
         }
+    }
+}
+
+- (void)showManeuverStartingFromIndex:(NSUInteger)maneuverStartIndex {
+    NSUInteger maneuverEndIndex = maneuverStartIndex + 1;
+    
+    if (maneuverEndIndex < self.directionsOverlay.maneuvers.count) {
+        MTDManeuver *startManeuver = [self.directionsOverlay.maneuvers objectAtIndex:maneuverStartIndex];
+        MTDManeuver *endManeuver = [self.directionsOverlay.maneuvers objectAtIndex:maneuverEndIndex];
+        NSArray *waypoints = [NSArray arrayWithObjects:startManeuver.waypoint, endManeuver.waypoint, nil];
+        CGPoint circlePoint = [self convertCoordinate:startManeuver.coordinate toPointToView:self];
+        
+        self.maneuverInfoView.infoText = [NSString stringWithFormat:@"Distanz: %f", startManeuver.distance];
+        
+        [UIView animateWithDuration:kMTCircleMoveDuration
+                         animations:^{
+                             self.circleView.center = circlePoint;
+                         } completion:^(BOOL finished) {
+                             if (finished) {
+                                 [self setRegionFromWaypoints:waypoints 
+                                                  edgePadding:UIEdgeInsetsMake(10.f,10.f,10.f,10.f)
+                                                     animated:YES];
+                             }
+                         }];
     }
 }
 
@@ -330,6 +447,7 @@
     }
     
     self.directionsOverlayView = [[MTDDirectionsOverlayView alloc] initWithOverlay:self.directionsOverlay];
+    self.directionsOverlayView.drawManeuvers = (self.directionsDisplayType == MTDDirectionsDisplayTypeDetailedManeuvers);
     
     return self.directionsOverlayView;
 }

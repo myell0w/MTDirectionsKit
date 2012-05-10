@@ -23,6 +23,7 @@
 @synthesize waypoints = _waypoints;
 @synthesize distance = _distance;
 @synthesize routeType = _routeType;
+@synthesize maneuvers = _maneuvers;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle

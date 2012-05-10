@@ -1,5 +1,5 @@
 //
-//  MTDDirectionOverlay.h
+//  MTDManeuverInfoView.h
 //  MTDirectionsKit
 //
 //  Created by Matthias Tretter on 21.01.12.
@@ -13,26 +13,11 @@
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "MTDDirectionsRouteType.h"
 
-@interface MTDDirectionsOverlay : NSObject <MKOverlay>
+@interface MTDManeuverInfoView : UIView
 
-/** all waypoints of the current active direction */
-@property (nonatomic, strong, readonly) NSArray *waypoints;
-/** the distance of the directions */
-@property (nonatomic, assign, readonly) CLLocationDistance distance;
-/** the routeType used to compute the directions */
-@property (nonatomic, assign, readonly) MTDDirectionsRouteType routeType;
+@property (nonatomic, copy) NSString *infoText;
 
-/** all mapPoints of the polyline */
-@property (nonatomic, readonly) MKMapPoint *points;
-/** the number of mapPoints of the polyline */
-@property (nonatomic, readonly) NSUInteger pointCount;
-
-@property (nonatomic, strong) NSArray *maneuvers;
-
-+ (MTDDirectionsOverlay *)overlayWithWaypoints:(NSArray *)waypoints 
-                                     distance:(CLLocationDistance)distance
-                                    routeType:(MTDDirectionsRouteType)routeType;
++ (MTDManeuverInfoView *)infoViewForMapView:(MKMapView *)mapView;
 
 @end
