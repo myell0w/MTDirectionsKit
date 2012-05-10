@@ -7,29 +7,18 @@
 //
 
 #import "MTDirectionsSampleViewController.h"
-#import "MTDirections.h"
+#import "MTDirectionsKit.h"
 
 @interface MTDirectionsSampleViewController () <MKMapViewDelegate>
 
-@property (nonatomic, strong) MTMapView *mapView;
+@property (nonatomic, strong) MTDMapView *mapView;
 
 @end
+
 
 @implementation MTDirectionsSampleViewController
 
 @synthesize mapView = _mapView;
-
-////////////////////////////////////////////////////////////////////////
-#pragma mark - Lifecycle
-////////////////////////////////////////////////////////////////////////
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - UIViewController
@@ -38,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-	self.mapView = [[MTMapView alloc] initWithFrame:self.view.bounds];
+	self.mapView = [[MTDMapView alloc] initWithFrame:self.view.bounds];
     self.mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.mapView.delegate = self;
     self.mapView.region = MKCoordinateRegionMake(CLLocationCoordinate2DMake(51.459596, -0.973277),
@@ -48,7 +37,10 @@
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
+    
+    [self.mapView removeFromSuperview];
+    self.mapView.delegate = nil;
+    self.mapView = nil;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -62,7 +54,7 @@
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [self.mapView loadDirectionsFrom:from
                                       to:to
-                               routeType:MTDirectionsRouteTypeFastestDriving
+                               routeType:MTDDirectionsRouteTypeFastestDriving
                     zoomToShowDirections:YES];
     });
 }

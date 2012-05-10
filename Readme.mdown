@@ -1,7 +1,7 @@
 Read Me
 =====================
 
-MTDirections is based on the
+MTDirectionsKit is based on the
 [MapQuest Open Directions API](http://open.mapquestapi.com/directions/ "MapQuest Open Directions API") and can be used to display directions on top of MKMapView.
 
 
@@ -14,7 +14,7 @@ Currently it is possible to display a Polyline from one point to another on top 
 Build Notes
 -----------------
 
-To build MTDirections your target should have 
+To build MTDirectionsKit your target should have 
 
      $(SDK_ROOT)/usr/include/libxml2
      
