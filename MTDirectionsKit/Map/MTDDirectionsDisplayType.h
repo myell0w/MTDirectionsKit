@@ -19,6 +19,5 @@
  */
 typedef enum {
     MTDDirectionsDisplayTypeNone = 0,
-    MTDDirectionsDisplayTypeOverview,
-    MTDDirectionsDisplayTypeDetailedManeuvers
+    MTDDirectionsDisplayTypeOverview
 } MTDDirectionsDisplayType;

@@ -29,8 +29,6 @@
 /** the number of mapPoints of the polyline */
 @property (nonatomic, readonly) NSUInteger pointCount;
 
-@property (nonatomic, strong) NSArray *maneuvers;
-
 + (MTDDirectionsOverlay *)overlayWithWaypoints:(NSArray *)waypoints 
                                      distance:(CLLocationDistance)distance
                                     routeType:(MTDDirectionsRouteType)routeType;

@@ -63,19 +63,5 @@
  */
 - (void)setRegionToShowDirectionsAnimated:(BOOL)animated;
 
-/**
- When the MapView is in the mode to show Maneuvers this method shows the next maneuver in detail (if possible).
- 
- @return YES if there is a next maneuver to show, NO otherwise
- */
-- (BOOL)showNextManeuver;
-
-/**
- When the MapView is in the mode to show Maneuvers this method shows the previous maneuver in detail (if possible).
- 
- @return YES if there is a previous maneuver to show, NO otherwise
- */
-- (BOOL)showPreviousManeuver;
-
 
 @end

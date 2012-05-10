@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9B8F5169155C54BD00A9C10C /* MTDirectionsKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9B8F5168155C54BD00A9C10C /* MTDirectionsKit.bundle */; };
 		9B8F5175155C54D900A9C10C /* libMTDirectionsKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B8F5172155C54CE00A9C10C /* libMTDirectionsKit.a */; };
 		9BB9AD191517602C003FC9F7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB9AD181517602C003FC9F7 /* UIKit.framework */; };
 		9BB9AD1B1517602C003FC9F7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB9AD1A1517602C003FC9F7 /* Foundation.framework */; };
@@ -39,16 +38,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9B8F5168155C54BD00A9C10C /* MTDirectionsKit.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MTDirectionsKit.bundle; path = ../Resources/MTDirectionsKit.bundle; sourceTree = "<group>"; };
 		9B8F516A155C54CD00A9C10C /* MTDirectionsKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MTDirectionsKit.xcodeproj; path = ../MTDirectionsKit.xcodeproj; sourceTree = "<group>"; };
 		9BB9AD141517602C003FC9F7 /* MTDirectionsKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTDirectionsKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB9AD181517602C003FC9F7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9BB9AD1A1517602C003FC9F7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9BB9AD1C1517602C003FC9F7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		9BB9AD201517602C003FC9F7 /* MTDirectionsKitDemo-Info.plist */ = {isa = PBXFileReference; path = "MTDirectionsKitDemo-Info.plist"; sourceTree = "<group>"; };
+		9BB9AD201517602C003FC9F7 /* MTDirectionsKitDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MTDirectionsKitDemo-Info.plist"; sourceTree = "<group>"; };
 		9BB9AD221517602C003FC9F7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9BB9AD241517602C003FC9F7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		9BB9AD261517602C003FC9F7 /* MTDirectionsKitDemo-Prefix.pch */ = {isa = PBXFileReference; path = "MTDirectionsKitDemo-Prefix.pch"; sourceTree = "<group>"; };
+		9BB9AD261517602C003FC9F7 /* MTDirectionsKitDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MTDirectionsKitDemo-Prefix.pch"; sourceTree = "<group>"; };
 		9BB9AD271517602C003FC9F7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9BB9AD281517602C003FC9F7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9BB9AD2F15176048003FC9F7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -143,7 +141,6 @@
 		9BB9AD391517605D003FC9F7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				9B8F5168155C54BD00A9C10C /* MTDirectionsKit.bundle */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -217,7 +214,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BB9AD231517602C003FC9F7 /* InfoPlist.strings in Resources */,
-				9B8F5169155C54BD00A9C10C /* MTDirectionsKit.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

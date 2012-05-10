@@ -20,7 +20,6 @@
  */
 typedef enum {
     MTDDirectionsAPIMapQuest,
-    MTDDirectionsAPIGoogle,
     MTDDirectionsAPICount
 } MTDDirectionsAPI;
 

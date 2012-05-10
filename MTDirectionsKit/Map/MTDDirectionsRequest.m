@@ -1,6 +1,5 @@
 #import "MTDDirectionsRequest.h"
 #import "MTDDirectionsRequestMapQuest.h"
-#import "MTDDirectionsRequestGoogle.h"
 #import "MTDDirectionsParser.h"
 #import "MTDDirectionsAPI.h"
 
@@ -43,13 +42,6 @@
     MTDDirectionsRequest *request = nil;
     
     switch (MTDDirectionsGetActiveAPI()) {
-        case MTDDirectionsAPIGoogle:
-            request = [[MTDDirectionsRequestGoogle alloc] initFrom:fromCoordinate
-                                                               to:toCoordinate
-                                                        routeType:routeType
-                                                       completion:completion];
-            break;
-            
         case MTDDirectionsAPIMapQuest:
         default:
             request = [[MTDDirectionsRequestMapQuest alloc] initFrom:fromCoordinate
