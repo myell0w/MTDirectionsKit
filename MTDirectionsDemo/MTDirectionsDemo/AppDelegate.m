@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "MTDirectionsSampleViewController.h"
+#import "MTDirectionsXIBSampleViewController.h"
 
 @implementation AppDelegate
 
@@ -17,7 +17,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-    MTDirectionsSampleViewController *viewController = [[MTDirectionsSampleViewController alloc] initWithNibName:nil bundle:nil];
+    MTDirectionsXIBSampleViewController *viewController = [[MTDirectionsXIBSampleViewController alloc] initWithNibName:nil bundle:nil];
     self.window.rootViewController = viewController;
     
     self.window.backgroundColor = [UIColor whiteColor];
