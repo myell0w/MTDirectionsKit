@@ -1,5 +1,6 @@
 #import "MTDDirectionsRequest.h"
 #import "MTDDirectionsRequestMapQuest.h"
+#import "MTDDirectionsRequestGoogle.h"
 #import "MTDDirectionsParser.h"
 #import "MTDDirectionsAPI.h"
 
@@ -42,12 +43,19 @@
     MTDDirectionsRequest *request = nil;
     
     switch (MTDDirectionsGetActiveAPI()) {
+        case MTDDirectionsAPIGoogle:
+            request = [[MTDDirectionsRequestGoogle alloc] initFrom:fromCoordinate
+                                                                to:toCoordinate
+                                                         routeType:routeType
+                                                        completion:completion];
+            break;
+            
         case MTDDirectionsAPIMapQuest:
         default:
             request = [[MTDDirectionsRequestMapQuest alloc] initFrom:fromCoordinate
-                                                                 to:toCoordinate
-                                                          routeType:routeType
-                                                         completion:completion];
+                                                                  to:toCoordinate
+                                                           routeType:routeType
+                                                          completion:completion];
             break;
             
     }
@@ -95,9 +103,9 @@
     NSAssert([self.parserClass isSubclassOfClass:[MTDDirectionsParser class]], @"Parser class must be subclass of MTDDirectionsParser.");
     
     MTDDirectionsParser *parser = [[self.parserClass alloc] initWithFromCoordinate:self.fromCoordinate
-                                                                     toCoordinate:self.toCoordinate
-                                                                        routeType:self.routeType
-                                                                             data:fetcher.data];
+                                                                      toCoordinate:self.toCoordinate
+                                                                         routeType:self.routeType
+                                                                              data:fetcher.data];
     
     [parser parseWithCompletion:self.completion];
 }

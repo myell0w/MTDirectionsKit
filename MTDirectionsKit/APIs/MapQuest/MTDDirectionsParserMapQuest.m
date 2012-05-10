@@ -4,13 +4,11 @@
 #import "MTDDirectionsRouteType.h"
 #import "MTXPathResultNode.h"
 
-
 #define kMTDDirectionsStartPointNode     @"startPoint"
 #define kMTDDirectionsDistanceNode       @"distance"
 #define kMTDDirectionsTimeNode           @"time"
 #define kMTDDirectionsLatitudeNode       @"lat"
 #define kMTDDirectionsLongitudeNode      @"lng"
-
 
 @implementation MTDDirectionsParserMapQuest
 

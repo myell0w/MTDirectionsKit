@@ -1,5 +1,5 @@
 //
-//  MTDDirectionAPI.h
+//  MTDDirectionsRequestGoogle.h
 //  MTDirectionsKit
 //
 //  Created by Matthias Tretter on 21.01.12.
@@ -13,19 +13,8 @@
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "MTDDirectionsRouteType+MapQuest.h"
+#import "MTDDirectionsRequest.h"
 
-/**
- All supported APIs for Direction Retreival
- */
-typedef enum {
-    MTDDirectionsAPIMapQuest,
-    MTDDirectionsAPIGoogle,
-    MTDDirectionsAPICount
-} MTDDirectionsAPI;
+@interface MTDDirectionsRequestGoogle : MTDDirectionsRequest
 
-/** Retreive the current use API for directions */
-MTDDirectionsAPI MTDDirectionsGetActiveAPI(void);
-
-/** Set the current use API for directions */
-void MTDDirectionsSetActiveAPI(MTDDirectionsAPI activeAPI);
+@end

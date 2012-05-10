@@ -1,5 +1,5 @@
 //
-//  MTDDirectionAPI.h
+//  MTDDirectionsRouteType+Google.h
 //  MTDirectionsKit
 //
 //  Created by Matthias Tretter on 21.01.12.
@@ -13,19 +13,21 @@
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "MTDDirectionsRouteType+MapQuest.h"
+#import "MTDDirectionsRouteType.h"
 
-/**
- All supported APIs for Direction Retreival
- */
-typedef enum {
-    MTDDirectionsAPIMapQuest,
-    MTDDirectionsAPIGoogle,
-    MTDDirectionsAPICount
-} MTDDirectionsAPI;
-
-/** Retreive the current use API for directions */
-MTDDirectionsAPI MTDDirectionsGetActiveAPI(void);
-
-/** Set the current use API for directions */
-void MTDDirectionsSetActiveAPI(MTDDirectionsAPI activeAPI);
+NS_INLINE NSString* MTDDirectionStringForDirectionRouteTypeGoogle(MTDDirectionsRouteType routeType) {
+    switch (routeType) {    
+        case MTDDirectionsRouteTypePedestrian:
+        case MTDDirectionsRouteTypePedestrianIncludingPublicTransport:
+            return @"walking";
+            
+        case MTDDirectionsRouteTypeBicycle:
+            return @"bicycling";
+            
+        case MTDDirectionsRouteTypeShortestDriving:
+        case MTDDirectionsRouteTypeFastestDriving:
+        default:
+            return @"driving";
+            
+    }
+}
