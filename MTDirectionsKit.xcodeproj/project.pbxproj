@@ -22,6 +22,11 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		9B10A99F155D5867002A3052 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B10A99E155D5867002A3052 /* SenTestingKit.framework */; };
+		9B10A9A1155D5867002A3052 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B10A9A0155D5867002A3052 /* UIKit.framework */; };
+		9B10A9A2155D5867002A3052 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18C314A7E18200087893 /* Foundation.framework */; };
+		9B10A9A8155D5867002A3052 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9B10A9A6155D5867002A3052 /* InfoPlist.strings */; };
+		9B10A9AB155D5867002A3052 /* MTDirectionsKitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B10A9AA155D5867002A3052 /* MTDirectionsKitTest.m */; };
 		9B6C18C414A7E18200087893 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18C314A7E18200087893 /* Foundation.framework */; };
 		9B6C18F414A7E40A00087893 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18F314A7E40A00087893 /* libxml2.dylib */; };
 		9B8F513A155C513900A9C10C /* MTDDirectionsDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B8F5112155C513900A9C10C /* MTDDirectionsDefines.h */; };
@@ -63,9 +68,24 @@
 			remoteGlobalIDString = 9B6C18BF14A7E18200087893;
 			remoteInfo = MTDirectionsKit;
 		};
+		9B10A9B0155D5876002A3052 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9B6C18B714A7E18200087893 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B6C18BF14A7E18200087893;
+			remoteInfo = MTDirectionsKit;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9B10A99D155D5867002A3052 /* MTDirectionsKitTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MTDirectionsKitTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B10A99E155D5867002A3052 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		9B10A9A0155D5867002A3052 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		9B10A9A5155D5867002A3052 /* MTDirectionsKitTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MTDirectionsKitTest-Info.plist"; sourceTree = "<group>"; };
+		9B10A9A7155D5867002A3052 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9B10A9A9155D5867002A3052 /* MTDirectionsKitTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTDirectionsKitTest.h; sourceTree = "<group>"; };
+		9B10A9AA155D5867002A3052 /* MTDirectionsKitTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTDirectionsKitTest.m; sourceTree = "<group>"; };
+		9B10A9AC155D5867002A3052 /* MTDirectionsKitTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MTDirectionsKitTest-Prefix.pch"; sourceTree = "<group>"; };
 		9B6C18C014A7E18200087893 /* libMTDirectionsKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMTDirectionsKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B6C18C314A7E18200087893 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9B6C18F314A7E40A00087893 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
@@ -101,6 +121,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9B10A999155D5867002A3052 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B10A99F155D5867002A3052 /* SenTestingKit.framework in Frameworks */,
+				9B10A9A1155D5867002A3052 /* UIKit.framework in Frameworks */,
+				9B10A9A2155D5867002A3052 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B6C18BD14A7E18200087893 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -113,10 +143,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9B10A9A3155D5867002A3052 /* MTDirectionsKitTest */ = {
+			isa = PBXGroup;
+			children = (
+				9B10A9A9155D5867002A3052 /* MTDirectionsKitTest.h */,
+				9B10A9AA155D5867002A3052 /* MTDirectionsKitTest.m */,
+				9B10A9A4155D5867002A3052 /* Supporting Files */,
+			);
+			path = MTDirectionsKitTest;
+			sourceTree = "<group>";
+		};
+		9B10A9A4155D5867002A3052 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9B10A9A5155D5867002A3052 /* MTDirectionsKitTest-Info.plist */,
+				9B10A9A6155D5867002A3052 /* InfoPlist.strings */,
+				9B10A9AC155D5867002A3052 /* MTDirectionsKitTest-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		9B6C18B514A7E18200087893 = {
 			isa = PBXGroup;
 			children = (
 				9B6C18C514A7E18200087893 /* MTDirectionsKit */,
+				9B10A9A3155D5867002A3052 /* MTDirectionsKitTest */,
 				9B6C18C214A7E18200087893 /* Frameworks */,
 				9B6C18C114A7E18200087893 /* Products */,
 			);
@@ -126,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				9B6C18C014A7E18200087893 /* libMTDirectionsKit.a */,
+				9B10A99D155D5867002A3052 /* MTDirectionsKitTest.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -135,6 +187,8 @@
 			children = (
 				9B6C18F314A7E40A00087893 /* libxml2.dylib */,
 				9B6C18C314A7E18200087893 /* Foundation.framework */,
+				9B10A99E155D5867002A3052 /* SenTestingKit.framework */,
+				9B10A9A0155D5867002A3052 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -250,6 +304,25 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		9B10A99C155D5867002A3052 /* MTDirectionsKitTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B10A9AD155D5867002A3052 /* Build configuration list for PBXNativeTarget "MTDirectionsKitTest" */;
+			buildPhases = (
+				9B10A998155D5867002A3052 /* Sources */,
+				9B10A999155D5867002A3052 /* Frameworks */,
+				9B10A99A155D5867002A3052 /* Resources */,
+				9B10A99B155D5867002A3052 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9B10A9B1155D5876002A3052 /* PBXTargetDependency */,
+			);
+			name = MTDirectionsKitTest;
+			productName = MTDirectionsKitTest;
+			productReference = 9B10A99D155D5867002A3052 /* MTDirectionsKitTest.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		9B6C18BF14A7E18200087893 /* MTDirectionsKit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9B6C18CD14A7E18200087893 /* Build configuration list for PBXNativeTarget "MTDirectionsKit" */;
@@ -290,9 +363,21 @@
 			targets = (
 				9B6C18BF14A7E18200087893 /* MTDirectionsKit */,
 				9B10A96A155D4A06002A3052 /* Documentation */,
+				9B10A99C155D5867002A3052 /* MTDirectionsKitTest */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9B10A99A155D5867002A3052 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B10A9A8155D5867002A3052 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		9B10A971155D4A0F002A3052 /* ShellScript */ = {
@@ -308,9 +393,30 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/appledoc \\\n--project-name \"MTDirectionsKit\" \\\n--project-company \"@myell0w\" \\\n--company-id \"at.myell0w\" \\\n--docset-atom-filename \"MTDirectionsKit.atom\" \\\n--docset-feed-url \"http://myell0w.github.com/MTDirectionsKit/%DOCSETATOMFILENAME\" \\\n--docset-package-url \"http://myell0w.github.com/MTDirectionsKit/%DOCSETPACKAGEFILENAME\" \\\n--docset-fallback-url \"http://myell0w.github.com/MTDirectionsKit/\" \\\n--output \"~/Projects/Documentation\" \\\n--publish-docset \\\n--logformat xcode \\\n--keep-undocumented-objects \\\n--keep-undocumented-members \\\n--keep-intermediate-files \\\n--no-repeat-first-par \\\n--no-warn-invalid-crossref \\\n--ignore \"*.m\" \\\n--ignore \"MTDDirectionsRequest+MTDDirectionsPrivateAPI.h\" \\\n--ignore \"MTDirectionsDemo\" \\\n--index-desc \"${PROJECT_DIR}/Readme.mdown\" \\\n\"${PROJECT_DIR}\"";
 		};
+		9B10A99B155D5867002A3052 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		9B10A998155D5867002A3052 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B10A9AB155D5867002A3052 /* MTDirectionsKitTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B6C18BC14A7E18200087893 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -337,7 +443,23 @@
 			target = 9B6C18BF14A7E18200087893 /* MTDirectionsKit */;
 			targetProxy = 9B10A96F155D4A0B002A3052 /* PBXContainerItemProxy */;
 		};
+		9B10A9B1155D5876002A3052 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B6C18BF14A7E18200087893 /* MTDirectionsKit */;
+			targetProxy = 9B10A9B0155D5876002A3052 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		9B10A9A6155D5867002A3052 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9B10A9A7155D5867002A3052 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		9B10A96B155D4A06002A3052 /* Debug */ = {
@@ -351,6 +473,40 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		9B10A9AE155D5867002A3052 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MTDirectionsKitTest/MTDirectionsKitTest-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INFOPLIST_FILE = "MTDirectionsKitTest/MTDirectionsKitTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		9B10A9AF155D5867002A3052 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MTDirectionsKitTest/MTDirectionsKitTest-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INFOPLIST_FILE = "MTDirectionsKitTest/MTDirectionsKitTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};
@@ -441,6 +597,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		9B10A9AD155D5867002A3052 /* Build configuration list for PBXNativeTarget "MTDirectionsKitTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B10A9AE155D5867002A3052 /* Debug */,
+				9B10A9AF155D5867002A3052 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		9B6C18BA14A7E18200087893 /* Build configuration list for PBXProject "MTDirectionsKit" */ = {
 			isa = XCConfigurationList;
