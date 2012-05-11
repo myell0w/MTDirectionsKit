@@ -26,7 +26,10 @@
 		9B10A9A1155D5867002A3052 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B10A9A0155D5867002A3052 /* UIKit.framework */; };
 		9B10A9A2155D5867002A3052 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18C314A7E18200087893 /* Foundation.framework */; };
 		9B10A9A8155D5867002A3052 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9B10A9A6155D5867002A3052 /* InfoPlist.strings */; };
-		9B10A9AB155D5867002A3052 /* MTDirectionsKitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B10A9AA155D5867002A3052 /* MTDirectionsKitTest.m */; };
+		9B10A9AB155D5867002A3052 /* MTDWaypointTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B10A9AA155D5867002A3052 /* MTDWaypointTest.m */; };
+		9B10A9B6155D5A4D002A3052 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B10A9B2155D5A17002A3052 /* CoreLocation.framework */; };
+		9B10A9B7155D5A6C002A3052 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B10A9B4155D5A1B002A3052 /* MapKit.framework */; };
+		9B10A9B8155D5A94002A3052 /* libMTDirectionsKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18C014A7E18200087893 /* libMTDirectionsKit.a */; };
 		9B6C18C414A7E18200087893 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18C314A7E18200087893 /* Foundation.framework */; };
 		9B6C18F414A7E40A00087893 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18F314A7E40A00087893 /* libxml2.dylib */; };
 		9B8F513A155C513900A9C10C /* MTDDirectionsDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B8F5112155C513900A9C10C /* MTDDirectionsDefines.h */; };
@@ -83,9 +86,11 @@
 		9B10A9A0155D5867002A3052 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		9B10A9A5155D5867002A3052 /* MTDirectionsKitTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MTDirectionsKitTest-Info.plist"; sourceTree = "<group>"; };
 		9B10A9A7155D5867002A3052 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		9B10A9A9155D5867002A3052 /* MTDirectionsKitTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTDirectionsKitTest.h; sourceTree = "<group>"; };
-		9B10A9AA155D5867002A3052 /* MTDirectionsKitTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTDirectionsKitTest.m; sourceTree = "<group>"; };
+		9B10A9A9155D5867002A3052 /* MTDWaypointTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTDWaypointTest.h; sourceTree = "<group>"; };
+		9B10A9AA155D5867002A3052 /* MTDWaypointTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTDWaypointTest.m; sourceTree = "<group>"; };
 		9B10A9AC155D5867002A3052 /* MTDirectionsKitTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MTDirectionsKitTest-Prefix.pch"; sourceTree = "<group>"; };
+		9B10A9B2155D5A17002A3052 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		9B10A9B4155D5A1B002A3052 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9B6C18C014A7E18200087893 /* libMTDirectionsKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMTDirectionsKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B6C18C314A7E18200087893 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9B6C18F314A7E40A00087893 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
@@ -125,6 +130,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B10A9B8155D5A94002A3052 /* libMTDirectionsKit.a in Frameworks */,
+				9B10A9B7155D5A6C002A3052 /* MapKit.framework in Frameworks */,
+				9B10A9B6155D5A4D002A3052 /* CoreLocation.framework in Frameworks */,
 				9B10A99F155D5867002A3052 /* SenTestingKit.framework in Frameworks */,
 				9B10A9A1155D5867002A3052 /* UIKit.framework in Frameworks */,
 				9B10A9A2155D5867002A3052 /* Foundation.framework in Frameworks */,
@@ -146,8 +154,8 @@
 		9B10A9A3155D5867002A3052 /* MTDirectionsKitTest */ = {
 			isa = PBXGroup;
 			children = (
-				9B10A9A9155D5867002A3052 /* MTDirectionsKitTest.h */,
-				9B10A9AA155D5867002A3052 /* MTDirectionsKitTest.m */,
+				9B10A9A9155D5867002A3052 /* MTDWaypointTest.h */,
+				9B10A9AA155D5867002A3052 /* MTDWaypointTest.m */,
 				9B10A9A4155D5867002A3052 /* Supporting Files */,
 			);
 			path = MTDirectionsKitTest;
@@ -186,7 +194,9 @@
 			isa = PBXGroup;
 			children = (
 				9B6C18F314A7E40A00087893 /* libxml2.dylib */,
+				9B10A9B2155D5A17002A3052 /* CoreLocation.framework */,
 				9B6C18C314A7E18200087893 /* Foundation.framework */,
+				9B10A9B4155D5A1B002A3052 /* MapKit.framework */,
 				9B10A99E155D5867002A3052 /* SenTestingKit.framework */,
 				9B10A9A0155D5867002A3052 /* UIKit.framework */,
 			);
@@ -413,7 +423,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B10A9AB155D5867002A3052 /* MTDirectionsKitTest.m in Sources */,
+				9B10A9AB155D5867002A3052 /* MTDWaypointTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

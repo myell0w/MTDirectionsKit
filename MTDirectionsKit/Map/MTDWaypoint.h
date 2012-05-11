@@ -14,6 +14,8 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
+#import <CoreLocation/CoreLocation.h>
+
 /**
  An instance of MTDWaypoint is a lightweight immutable object wrapper for a CLLocationCoordinate2D coordinate.
  It is used internally in MTDDirectionsKit to save coordinates in collections like NSArray.

@@ -7,7 +7,11 @@
 //
 
 #import <SenTestingKit/SenTestingKit.h>
+#import "MTDWaypoint.h"
 
-@interface MTDirectionsKitTest : SenTestCase
+@interface MTDWaypointTest : SenTestCase {
+    MTDWaypoint *waypoint1;
+    MTDWaypoint *waypoint2;
+}
 
 @end
