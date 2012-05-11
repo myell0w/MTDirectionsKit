@@ -15,6 +15,10 @@
 
 #import "MTDDirectionsParser.h"
 
+/**
+ An instance of MTDDirectionsParserMapQuest is a concrete instance used to parse data obtained from MapQuest.
+ MTDDirectionsParserMapQuest is a subclass of the abstract MTDDirectionsParser.
+ */
 @interface MTDDirectionsParserMapQuest : MTDDirectionsParser
 
 @end

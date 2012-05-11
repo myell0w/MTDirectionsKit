@@ -1,5 +1,5 @@
 //
-//  MTDDirectionsParser.h
+//  MTDWaypoint.h
 //  MTDirectionsKit
 //
 //  Created by Matthias Tretter on 21.01.12.
@@ -13,21 +13,43 @@
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "MTDDirectionsDefines.h"
-#import "MTDDirectionsRouteType.h"
 
-@interface MTDDirectionsParser : NSObject
+#import <CoreLocation/CoreLocation.h>
 
-@property (nonatomic, strong, readonly) id data;
-@property (nonatomic, assign, readonly) CLLocationCoordinate2D fromCoordinate;
-@property (nonatomic, assign, readonly) CLLocationCoordinate2D toCoordinate;
-@property (nonatomic, assign, readonly) MTDDirectionsRouteType routeType;
+/**
+ An instance of MTDWaypoint is a lightweight immutable object wrapper for a CLLocationCoordinate2D coordinate.
+ It is used internally in MTDDirectionsKit to save coordinates in collections like NSArray.
+ */
+@interface MTDWaypoint : NSObject
 
-- (id)initWithFromCoordinate:(CLLocationCoordinate2D)fromCoordinate
-                toCoordinate:(CLLocationCoordinate2D)toCoordinate
-                   routeType:(MTDDirectionsRouteType)routeType
-                        data:(id)data;
+/******************************************
+ @name Location
+ ******************************************/
 
-- (void)parseWithCompletion:(mtd_direction_block)completion;
+/** the coordinate wrapped */
+@property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
+
+/******************************************
+ @name Lifecycle
+ ******************************************/
+
+/**
+ This method is used to create an instance of MTDWaypoint with a given coordinate.
+ 
+ @param coordinate the coordinate to save
+ @return the wrapper object created to store the coordinate
+ 
+ @see initWithCoordinate:
+ */
++ (MTDWaypoint *)waypointWithCoordinate:(CLLocationCoordinate2D)coordinate;
+
+/**
+ The designated initializer of MTDWaypoint, used to create an instance of MTDWaypoint that wraps
+ a given coordinate.
+ 
+ @param coordinate the coordinate to save
+ @return the wrapper object created to store the coordinate
+ */
+- (id)initWithCoordinate:(CLLocationCoordinate2D)coordinate;
 
 @end

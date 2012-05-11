@@ -15,6 +15,10 @@
 
 #import "MTDDirectionsRequest.h"
 
+/**
+ An instance of MTDDirectionsRequestMapQuest is a concrete instance to request data of a route
+ from MapQuest. MTDDirectionsRequestMapQuest is a subclass of the abstract MTDDireciontsRequest.
+ */
 @interface MTDDirectionsRequestMapQuest : MTDDirectionsRequest
 
 @end
