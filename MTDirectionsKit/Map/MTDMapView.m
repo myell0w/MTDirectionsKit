@@ -12,6 +12,7 @@
 
 @interface MTDMapView () <MKMapViewDelegate>
 
+@property (nonatomic, strong, readwrite) MTDDirectionsOverlayView *directionsOverlayView; // re-defined as read/write
 @property (nonatomic, unsafe_unretained) id<MKMapViewDelegate> trueDelegate;
 @property (nonatomic, strong) MTDDirectionsRequest *request;
 @property (nonatomic, assign) NSUInteger activeManeuverIndex;
