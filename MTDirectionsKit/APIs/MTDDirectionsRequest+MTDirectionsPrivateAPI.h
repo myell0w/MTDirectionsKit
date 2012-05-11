@@ -15,13 +15,24 @@
 
 #import "MTDDirectionsRequest.h"
 
-/** Exposes Private API to other classes of MTDirection to not generate warnings when using them. */
+/** 
+ This category exposes private API used in MTDirectionsKit to other classes to not generate warnings when using them. 
+ You should not use the properties and methods exposed here directly in your code.
+ */
 @interface MTDDirectionsRequest (MTDPrivateAPI)
 
+/** object used to perform a HTTP request */
 @property (nonatomic, strong) MTHTTPFetcher *fetcher;
+/** the address of the the request to perform */
 @property (nonatomic, copy) NSString *fetcherAddress;
+/** the class of the parser used to parse the obtained data */
 @property (nonatomic, assign) Class parserClass;
 
+/** 
+ This method is called once the request is finished.
+ 
+ @param fetcher the object used to perform the request
+ */
 - (void)requestFinished:(MTHTTPFetcher *)fetcher;
 
 @end

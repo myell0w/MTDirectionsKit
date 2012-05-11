@@ -15,7 +15,15 @@
 
 #import "MTDDirectionsRouteType.h"
 
+/**
+ An instance of MTDirectionsOverlay implements MKOverlay and represents an overlay used to store information
+ about a route with given waypoints.
+ */
 @interface MTDDirectionsOverlay : NSObject <MKOverlay>
+
+/******************************************
+ @name Directions-Route
+ ******************************************/
 
 /** all waypoints of the current active direction */
 @property (nonatomic, strong, readonly) NSArray *waypoints;
@@ -29,6 +37,14 @@
 /** the number of mapPoints of the polyline */
 @property (nonatomic, readonly) NSUInteger pointCount;
 
+/**
+ Creates an overlay with the given waypoints, distance and routeType.
+ 
+ @param waypoints the waypoints of the route
+ @param distance the total distance from the first to the last waypoint
+ @param routeType the type of route computed
+ @return an overlay encapsulating the given route-information
+ */
 + (MTDDirectionsOverlay *)overlayWithWaypoints:(NSArray *)waypoints 
                                      distance:(CLLocationDistance)distance
                                     routeType:(MTDDirectionsRouteType)routeType;

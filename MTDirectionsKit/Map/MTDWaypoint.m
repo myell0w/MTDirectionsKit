@@ -36,9 +36,17 @@
     }
     
     MTDWaypoint *otherWaypoint = (MTDWaypoint *)object;
+    double epsilon = 0.0000001;
     
-    return (self.coordinate.latitude == otherWaypoint.coordinate.latitude &&
-            self.coordinate.longitude == otherWaypoint.coordinate.longitude);
+    return (fabs(self.coordinate.latitude - otherWaypoint.coordinate.latitude) < epsilon &&
+            fabs(self.coordinate.longitude - otherWaypoint.coordinate.longitude) < epsilon);
+}
+
+- (NSUInteger)hash {
+    NSNumber *latitudeNumber = [NSNumber numberWithDouble:self.coordinate.latitude];
+    NSNumber *longitudeNumber = [NSNumber numberWithDouble:self.coordinate.longitude];
+    
+    return latitudeNumber.hash >> 13 ^ longitudeNumber.hash;
 }
 
 @end
