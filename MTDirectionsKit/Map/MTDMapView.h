@@ -22,14 +22,45 @@
 @class MTDDirectionsOverlayView;
 
 
+/**
+ An MTDMapView instance provides functionality to show directions directly on top of the MapView inside your App.
+ MTDMapView is a subclass of MKMapView and therefore uses Google Maps as the data source for the map, which we all
+ know and love.
+ 
+    MTDMapView *mapView = [[MTDMapView alloc] initWithFrame:self.view.bounds];
+    mapView.delegate = self;
+ 
+    [mapView loadDirectionsFrom:CLLocationCoordinate2DMake(51.38713, -1.0316)
+                             to:CLLocationCoordinate2DMake(51.4554, -0.9742)
+                      routeType:MTDDirectionsRouteTypeFastestDriving
+           zoomToShowDirections:YES];
+ 
+ */
 @interface MTDMapView : MKMapView
 
-/** the current active direction overlay */
+/** 
+ The current active direction overlay. Setting the directions overlay automatically removes
+ the previous directionsOverlay (if existing) and adds the new directionsOverlay as an overlay
+ to the underlying MKMapView.
+ */
 @property (nonatomic, strong) MTDDirectionsOverlay *directionsOverlay;
-/** the current active direction overlay view */
-@property (nonatomic, strong) MTDDirectionsOverlayView *directionsOverlayView;
-/** the display type of the current direction */
+
+/** 
+ The current active direction overlay view. This property is only set, if there is a current
+ active directionsOverlay.
+ */
+@property (nonatomic, strong, readonly) MTDDirectionsOverlayView *directionsOverlayView;
+
+/** 
+ The current display type of the directions overlay. Currently the overlay can either be hidden
+ or shown, depending on this property.
+ */
 @property (nonatomic, assign) MTDDirectionsDisplayType directionsDisplayType;
+
+
+/******************************************
+ @name Directions
+ ******************************************/
 
 /**
  Starts a request and loads the directions between the specified coordinates.
@@ -40,6 +71,7 @@
  @param toCoordinate the end point of the direction
  @param routeType the type of the route request, e.g. pedestrian, cycling, fastest driving
  @param zoomToShowDirections flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)
+ @see cancelLoadOfDirections
  */
 - (void)loadDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate
                         to:(CLLocationCoordinate2D)toCoordinate
@@ -47,19 +79,23 @@
       zoomToShowDirections:(BOOL)zoomToShowDirections;
 
 /**
- Cancels a possible ongoing request for loading directions
+ Cancels a possible ongoing request for loading directions.
+ Does nothing if there is no request ongoing.
+ 
+  @see loadDirectionsFrom:to:routeType:zoomToShowDirections:
  */
 - (void)cancelLoadOfDirections;
 
 /**
- Removes the currenty displayed directions overlay view from the MapView
+ Removes the currenty displayed directionsOverlay view from the MapView, if there exists one.
+ Does nothing, if there doesn't exist a directionsOverlay.
  */
 - (void)removeDirectionsOverlay;
 
 /**
- Sets the region of the MapView to show the whole directionOverlay at once.
+ Sets the region of the MapView to show the whole directionsOverlay at once.
  
- @param animated flag whether the region gets set animated
+ @param animated flag whether the region gets set animated or not
  */
 - (void)setRegionToShowDirectionsAnimated:(BOOL)animated;
 
