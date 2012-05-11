@@ -41,4 +41,11 @@
             self.coordinate.longitude == otherWaypoint.coordinate.longitude);
 }
 
+- (NSUInteger)hash {
+    NSNumber *latitudeNumber = [NSNumber numberWithDouble:self.coordinate.latitude];
+    NSNumber *longitudeNumber = [NSNumber numberWithDouble:self.coordinate.longitude];
+    
+    return latitudeNumber.hash >> 13 ^ longitudeNumber.hash;
+}
+
 @end

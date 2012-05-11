@@ -38,6 +38,10 @@
  */
 @interface MTDMapView : MKMapView
 
+/******************************************
+ @name Directions
+ ******************************************/
+
 /** 
  The current active direction overlay. Setting the directions overlay automatically removes
  the previous directionsOverlay (if existing) and adds the new directionsOverlay as an overlay
@@ -57,10 +61,6 @@
  */
 @property (nonatomic, assign) MTDDirectionsDisplayType directionsDisplayType;
 
-
-/******************************************
- @name Directions
- ******************************************/
 
 /**
  Starts a request and loads the directions between the specified coordinates.
@@ -91,6 +91,10 @@
  Does nothing, if there doesn't exist a directionsOverlay.
  */
 - (void)removeDirectionsOverlay;
+
+/******************************************
+ @name Region
+ ******************************************/
 
 /**
  Sets the region of the MapView to show the whole directionsOverlay at once.
