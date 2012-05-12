@@ -3,10 +3,12 @@
 //  MTDirectionsKit
 //
 //  Created by Tretter Matthias on 12.05.12.
-//  Copyright (c) 2012 NOUS Wissensmanagement GmbH. All rights reserved.
+//  Copyright (c) 2012 Matthias Tretter (@myell0w). All rights reserved.
 //
 
+
 #import "MTDDirectionsRouteType.h"
+
 
 /**
  Opens the built in Maps.app and displays the directions from fromCoordinate to toCoordinate

@@ -1,5 +1,6 @@
 #import "MTDDirectionsParser.h"
 
+
 @interface MTDDirectionsParser ()
 
 @property (nonatomic, strong, readwrite) id data;
@@ -7,6 +8,7 @@
 @property (nonatomic, assign, readwrite) CLLocationCoordinate2D toCoordinate;
 
 @end
+
 
 @implementation MTDDirectionsParser
 

@@ -1,19 +1,13 @@
-//
-//  MTDirectionsXIBSampleViewController.m
-//  MTDirectionsKitDemo
-//
-//  Created by Tretter Matthias on 11.05.12.
-//  Copyright (c) 2012 NOUS Wissensmanagement GmbH. All rights reserved.
-//
-
 #import "MTDirectionsXIBSampleViewController.h"
 #import "MTDirectionsKit.h"
+
 
 @interface MTDirectionsXIBSampleViewController ()
 
 @property (nonatomic, strong) IBOutlet MTDMapView *mapView;
 
 @end
+
 
 @implementation MTDirectionsXIBSampleViewController
 

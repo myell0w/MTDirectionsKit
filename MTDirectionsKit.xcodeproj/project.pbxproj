@@ -416,8 +416,9 @@
 		9B6C18B714A7E18200087893 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = MTD;
 				LastUpgradeCheck = 0430;
-				ORGANIZATIONNAME = "NOUS Wissensmanagement GmbH";
+				ORGANIZATIONNAME = "Matthias Tretter (@myell0w)";
 			};
 			buildConfigurationList = 9B6C18BA14A7E18200087893 /* Build configuration list for PBXProject "MTDirectionsKit" */;
 			compatibilityVersion = "Xcode 3.2";
