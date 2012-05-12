@@ -61,6 +61,14 @@
  */
 @property (nonatomic, assign) MTDDirectionsDisplayType directionsDisplayType;
 
+/** the starting coordinate of the directions of the currently displayed overlay */
+@property (nonatomic, readonly) CLLocationCoordinate2D fromCoordinate;
+/** the end coordinate of the directions of the currently displayed overlay */
+@property (nonatomic, readonly) CLLocationCoordinate2D toCoordinate;
+/** the distance of the directions of the currently displayed overlay */
+@property (nonatomic, readonly) CLLocationDistance distance;
+/** the routeType used to compute the directions of the currently displayed overlay */
+@property (nonatomic, readonly) MTDDirectionsRouteType routeType;
 
 /**
  Starts a request and loads the directions between the specified coordinates.
@@ -91,6 +99,15 @@
  Does nothing, if there doesn't exist a directionsOverlay.
  */
 - (void)removeDirectionsOverlay;
+
+/******************************************
+ @name Inter-App
+ ******************************************/
+
+/**
+ Opens the currently displayed directions in the built-in Maps.app of the iDevice.
+ */
+- (void)openDirectionsInMapApp;
 
 /******************************************
  @name Region

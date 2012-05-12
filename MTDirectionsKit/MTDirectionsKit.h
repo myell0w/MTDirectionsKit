@@ -17,6 +17,7 @@
 #import "MTDMapView.h"
 #import "MTDDirectionsRequest.h"
 #import "MTDDirectionsRouteType.h"
+#import "MTDFunctions.h"
 #import "MTDDirectionsDisplayType.h"
 #import "MTDWaypoint.h"
 #import "MTDDirectionsOverlay.h"

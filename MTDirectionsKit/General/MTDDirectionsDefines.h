@@ -16,3 +16,6 @@
 @class MTDDirectionsOverlay;
 
 typedef void (^mtd_direction_block)(MTDDirectionsOverlay *overlay);
+
+
+#define MTDInvalidCLLocationCoordinate2D            CLLocationCoordinate2DMake(-100., -100.)

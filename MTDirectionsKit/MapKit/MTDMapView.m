@@ -3,6 +3,7 @@
 #import "MTDDirectionsRequest.h"
 #import "MTDDirectionsOverlay.h"
 #import "MTDDirectionsOverlayView.h"
+#import "MTDFunctions.h"
 
 
 @interface MTDMapView () <MKMapViewDelegate>
@@ -50,14 +51,6 @@
 }
 
 ////////////////////////////////////////////////////////////////////////
-#pragma mark - Region
-////////////////////////////////////////////////////////////////////////
-
-- (void)setRegionToShowDirectionsAnimated:(BOOL)animated {
-    [self setRegionFromWaypoints:self.directionsOverlay.waypoints edgePadding:UIEdgeInsetsZero animated:animated];
-}
-
-////////////////////////////////////////////////////////////////////////
 #pragma mark - Directions
 ////////////////////////////////////////////////////////////////////////
 
@@ -99,6 +92,14 @@
 }
 
 ////////////////////////////////////////////////////////////////////////
+#pragma mark - Region
+////////////////////////////////////////////////////////////////////////
+
+- (void)setRegionToShowDirectionsAnimated:(BOOL)animated {
+    [self setRegionFromWaypoints:self.directionsOverlay.waypoints edgePadding:UIEdgeInsetsZero animated:animated];
+}
+
+////////////////////////////////////////////////////////////////////////
 #pragma mark - Properties
 ////////////////////////////////////////////////////////////////////////
 
@@ -133,6 +134,40 @@
 
 - (id<MKMapViewDelegate>)delegate {
     return _trueDelegate;
+}
+
+- (CLLocationCoordinate2D)fromCoordinate {
+    if (self.directionsOverlay != nil) {
+        return self.directionsOverlay.fromCoordinate;
+    }
+    
+    return MTDInvalidCLLocationCoordinate2D;
+}
+
+- (CLLocationCoordinate2D)toCoordinate {
+    if (self.directionsOverlay != nil) {
+        return self.directionsOverlay.toCoordinate;
+    }
+    
+    return MTDInvalidCLLocationCoordinate2D;
+}
+
+- (CLLocationDistance)distance {
+    return self.directionsOverlay.distance;
+}
+
+- (MTDDirectionsRouteType)routeType {
+    return self.directionsOverlay.routeType;
+}
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - Inter-App
+////////////////////////////////////////////////////////////////////////
+
+- (void)openDirectionsInMapApp {
+    if (self.directionsOverlay != nil) {
+        MTDDirectionsOpenInMapsApp(self.fromCoordinate, self.toCoordinate, self.directionsOverlay.routeType);
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////
