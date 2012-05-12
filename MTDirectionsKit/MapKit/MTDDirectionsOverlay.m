@@ -1,5 +1,6 @@
 #import "MTDDirectionsOverlay.h"
 #import "MTDWaypoint.h"
+#import "MTDDirectionsDefines.h"
 
 @interface MTDDirectionsOverlay ()
 
@@ -77,6 +78,24 @@
 
 - (NSUInteger)pointCount {
     return self.polyline.pointCount;
+}
+
+- (CLLocationCoordinate2D)fromCoordinate {
+    if (self.waypoints.count > 0) {
+        MTDWaypoint *firstWaypoint = [self.waypoints objectAtIndex:0];
+        return firstWaypoint.coordinate;
+    }
+    
+    return MTDInvalidCLLocationCoordinate2D;
+}
+
+- (CLLocationCoordinate2D)toCoordinate {
+    if (self.waypoints.count > 0) {
+        MTDWaypoint *lastWaypoint = [self.waypoints lastObject];
+        return lastWaypoint.coordinate;
+    }
+    
+    return MTDInvalidCLLocationCoordinate2D;
 }
 
 @end

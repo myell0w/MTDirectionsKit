@@ -90,7 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				9B8F5172155C54CE00A9C10C /* libMTDirectionsKit.a */,
-				9B10AA54155D8624002A3052 /* MTDirectionsKitTest.octest */,
+				9B10AB0A155D8788002A3052 /* MTDirectionsKitTest.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -215,11 +215,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		9B10AA54155D8624002A3052 /* MTDirectionsKitTest.octest */ = {
+		9B10AB0A155D8788002A3052 /* MTDirectionsKitTest.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = MTDirectionsKitTest.octest;
-			remoteRef = 9B10AA53155D8624002A3052 /* PBXContainerItemProxy */;
+			remoteRef = 9B10AB09155D8788002A3052 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		9B8F5172155C54CE00A9C10C /* libMTDirectionsKit.a */ = {
