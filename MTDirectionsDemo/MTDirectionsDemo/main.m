@@ -3,15 +3,15 @@
 //  MTDirectionsDemo
 //
 //  Created by Tretter Matthias on 19.03.12.
-//  Copyright (c) 2012 NOUS Wissensmanagement GmbH. All rights reserved.
+//  Copyright (c) 2012 Matthias Tretter (@myell0w). All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 
+#import <UIKit/UIKit.h>
 #import "AppDelegate.h"
 
-int main(int argc, char *argv[])
-{
+
+int main(int argc, char *argv[]) {
     @autoreleasepool {
         return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
     }
