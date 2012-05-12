@@ -139,6 +139,7 @@
     [self showManeuverStartingFromIndex:activeManeuverIndex];
     
     return YES;
+}
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Region
@@ -206,6 +207,7 @@
     [self bringSubviewToFront:_maneuverInfoView];
     
     return _maneuverInfoView;
+}
 
 - (CLLocationCoordinate2D)fromCoordinate {
     if (self.directionsOverlay != nil) {
