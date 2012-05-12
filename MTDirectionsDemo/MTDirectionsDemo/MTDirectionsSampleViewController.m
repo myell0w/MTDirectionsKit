@@ -1,5 +1,5 @@
 #import "MTDirectionsSampleViewController.h"
-#import "MTDirectionsKit.h"
+#import <MTDirectionsKit/MTDirectionsKit.h>
 
 
 @interface MTDirectionsSampleViewController () <MKMapViewDelegate>
