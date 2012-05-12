@@ -24,7 +24,7 @@
                              MTDDirectionStringForDirectionRouteTypeMapQuest(routeType)];
         
         self.parserClass = [MTDDirectionsParserMapQuest class];
-        self.fetcherAddress = address;
+        self.httpAddress = address;
     }
     
     return self;

@@ -7,8 +7,8 @@
 
 @interface MTDDirectionsRequest ()
 
-@property (nonatomic, strong) MTHTTPFetcher *fetcher;
-@property (nonatomic, copy) NSString *fetcherAddress;
+@property (nonatomic, strong) MTDHTTPRequest *httpRequest;
+@property (nonatomic, copy) NSString *httpAddress;
 @property (nonatomic, assign) Class parserClass;
 
 @end
@@ -20,7 +20,7 @@
 @synthesize toCoordinate = _toCoordinate;
 @synthesize completion = _completion;
 @synthesize routeType = _routeType;
-@synthesize fetcher = _fetcher;
+@synthesize httpRequest = _httpRequest;
 @synthesize parserClass = _parserClass;
 
 ////////////////////////////////////////////////////////////////////////
@@ -81,25 +81,23 @@
 #pragma mark - MTDDirectionRequest
 ////////////////////////////////////////////////////////////////////////
 
-- (void)setFetcherAddress:(NSString *)fetcherAddress {
-    self.fetcher = [[MTHTTPFetcher alloc] initWithURLString:fetcherAddress
-                                                   receiver:self
-                                                     action:@selector(requestFinished:)];
+- (void)setHttpAddress:(NSString *)httpAddress {
+    self.httpRequest = [[MTDHTTPRequest alloc] initWithAddress:httpAddress callbackTarget:self action:@selector(requestFinished:)];
 }
 
-- (NSString *)fetcherAddress {
-    return self.fetcher.urlRequest.URL.absoluteString;
+- (NSString *)httpAddress {
+    return self.httpRequest.urlRequest.URL.absoluteString;
 }
 
 - (void)start {
-    [self.fetcher start];
+    [self.httpRequest start];
 }
 
 - (void)cancel {
-    [self.fetcher cancel];
+    [self.httpRequest cancel];
 }
 
-- (void)requestFinished:(MTHTTPFetcher *)fetcher {
+- (void)requestFinished:(MTDHTTPRequest *)fetcher {
     NSAssert([self.parserClass isSubclassOfClass:[MTDDirectionsParser class]], @"Parser class must be subclass of MTDDirectionsParser.");
     
     MTDDirectionsParser *parser = [[self.parserClass alloc] initWithFromCoordinate:self.fromCoordinate
