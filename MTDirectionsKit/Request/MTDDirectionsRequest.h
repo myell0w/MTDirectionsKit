@@ -9,7 +9,7 @@
 
 #import "MTDDirectionsRouteType.h"
 #import "MTDDirectionsDefines.h"
-#import "MTHTTPFetcher.h"
+#import "MTDHTTPRequest.h"
 
 
 /**

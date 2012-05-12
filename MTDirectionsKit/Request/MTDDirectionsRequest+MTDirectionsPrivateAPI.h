@@ -17,17 +17,17 @@
 @interface MTDDirectionsRequest (MTDPrivateAPI)
 
 /** object used to perform a HTTP request */
-@property (nonatomic, strong) MTHTTPFetcher *fetcher;
+@property (nonatomic, strong) MTDHTTPRequest *httpRequest;
 /** the address of the the request to perform */
-@property (nonatomic, copy) NSString *fetcherAddress;
+@property (nonatomic, copy) NSString *httpAddress;
 /** the class of the parser used to parse the obtained data */
 @property (nonatomic, assign) Class parserClass;
 
 /** 
  This method is called once the request is finished.
  
- @param fetcher the object used to perform the request
+ @param httpRequest the object used to perform the request
  */
-- (void)requestFinished:(MTHTTPFetcher *)fetcher;
+- (void)requestFinished:(MTDHTTPRequest *)httpRequest;
 
 @end
