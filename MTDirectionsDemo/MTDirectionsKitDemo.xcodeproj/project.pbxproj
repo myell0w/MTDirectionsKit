@@ -136,10 +136,10 @@
 				9BB9AD281517602C003FC9F7 /* AppDelegate.m */,
 				9BB9AD4915176124003FC9F7 /* MTDirectionsSampleViewController.h */,
 				9BB9AD4A15176124003FC9F7 /* MTDirectionsSampleViewController.m */,
-				9BB9AD1F1517602C003FC9F7 /* Supporting Files */,
 				9BAC766A155C767B0026034F /* MTDirectionsXIBSampleViewController.h */,
 				9BAC766B155C767B0026034F /* MTDirectionsXIBSampleViewController.m */,
 				9BAC766C155C767B0026034F /* MTDirectionsXIBSampleViewController.xib */,
+				9BB9AD1F1517602C003FC9F7 /* Supporting Files */,
 			);
 			name = MTDirectionsKitDemo;
 			path = MTDirectionsDemo;
@@ -191,8 +191,9 @@
 		9BB9AD0B1517602C003FC9F7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = MTD;
 				LastUpgradeCheck = 0430;
-				ORGANIZATIONNAME = "NOUS Wissensmanagement GmbH";
+				ORGANIZATIONNAME = "Matthias Tretter (@myell0w)";
 			};
 			buildConfigurationList = 9BB9AD0E1517602C003FC9F7 /* Build configuration list for PBXProject "MTDirectionsKitDemo" */;
 			compatibilityVersion = "Xcode 3.2";

@@ -1,19 +1,13 @@
-//
-//  MTDirectionsSampleViewController.m
-//  MTDirectionsDemo
-//
-//  Created by Tretter Matthias on 19.03.12.
-//  Copyright (c) 2012 NOUS Wissensmanagement GmbH. All rights reserved.
-//
-
 #import "MTDirectionsSampleViewController.h"
 #import "MTDirectionsKit.h"
+
 
 @interface MTDirectionsSampleViewController () <MKMapViewDelegate>
 
 @property (nonatomic, strong) MTDMapView *mapView;
 
 @end
+
 
 
 @implementation MTDirectionsSampleViewController

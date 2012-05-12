@@ -1,12 +1,14 @@
 //
 //  AppDelegate.h
-//  MTDirectionsDemo
+//  MTDirectionsKitDemo
 //
 //  Created by Tretter Matthias on 19.03.12.
-//  Copyright (c) 2012 NOUS Wissensmanagement GmbH. All rights reserved.
+//  Copyright (c) 2012 Matthias Tretter (@myell0w). All rights reserved.
 //
 
+
 #import <UIKit/UIKit.h>
+
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
