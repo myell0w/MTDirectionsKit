@@ -1,5 +1,5 @@
 #import "MTDirectionsXIBSampleViewController.h"
-#import "MTDirectionsKit.h"
+#import <MTDirectionsKit/MTDirectionsKit.h>
 
 
 @interface MTDirectionsXIBSampleViewController ()
