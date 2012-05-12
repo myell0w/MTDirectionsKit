@@ -25,7 +25,7 @@
                              MTDDirectionStringForDirectionRouteTypeGoogle(routeType)];
         
         self.parserClass = [MTDDirectionsParserGoogle class];
-        self.fetcherAddress = address;
+        self.httpAddress = address;
     }
     
     return self;
