@@ -24,7 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		9B10AAB3155D86E0002A3052 /* PBXContainerItemProxy */ = {
+		9B10AB09155D8788002A3052 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9B8F516A155C54CD00A9C10C /* MTDirectionsKit.xcodeproj */;
 			proxyType = 2;
@@ -92,7 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				9B8F5172155C54CE00A9C10C /* libMTDirectionsKit.a */,
-				9B10AAB4155D86E0002A3052 /* MTDirectionsKitTest.octest */,
+				9B10AB0A155D8788002A3052 /* MTDirectionsKitTest.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -218,11 +218,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		9B10AAB4155D86E0002A3052 /* MTDirectionsKitTest.octest */ = {
+		9B10AB0A155D8788002A3052 /* MTDirectionsKitTest.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = MTDirectionsKitTest.octest;
-			remoteRef = 9B10AAB3155D86E0002A3052 /* PBXContainerItemProxy */;
+			remoteRef = 9B10AB09155D8788002A3052 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		9B8F5172155C54CE00A9C10C /* libMTDirectionsKit.a */ = {

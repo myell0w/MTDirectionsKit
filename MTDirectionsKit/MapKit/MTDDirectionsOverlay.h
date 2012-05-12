@@ -25,8 +25,12 @@
  @name Directions-Route
  ******************************************/
 
-/** all waypoints of the current active direction */
+/** all waypoints of the current active direction, including fromCoordinate and toCoordinate */
 @property (nonatomic, strong, readonly) NSArray *waypoints;
+/** the starting coordinate of the directions */
+@property (nonatomic, readonly) CLLocationCoordinate2D fromCoordinate;
+/** the end coordinate of the directions */
+@property (nonatomic, readonly) CLLocationCoordinate2D toCoordinate;
 /** the distance of the directions */
 @property (nonatomic, assign, readonly) CLLocationDistance distance;
 /** the routeType used to compute the directions */
