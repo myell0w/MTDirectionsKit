@@ -21,9 +21,7 @@ Independent of which way to integrate MTDirectionsKit you choose, you have to ad
 
     libxml2.dylib
 
-to your target's linked libraries (found under *Build Phases*).
-
---> PICTURE
+to your target's linked libraries (found under *Build Phases*, see pictures below).
 
 ### Integrating Binary Framework
 
@@ -37,11 +35,11 @@ everywhere you want to use it and you are good to go.
 
 ### Integrating MTDirectionsKit.xcodeproj (Dependency)
 
-1. Copy the whole MTDirectionsKit project into your applications root folder
-2. Locate the "MTDirectionsKit.xcodeproj" file inside your applications root folder and drag it onto the root of your Xcode project's *Frameworks*-group
-3. Add MTDirectionsKit as target dependency of your target under the tab *Build Phases*
-4. Drag libMTDirectionsKit.a onto the section 'Link Binary with Libraries' of your target
-5. Finally, you need to tell your project where to find the MTDirectionsKit headers. Open your Project's *Build Settings*, search for "Header Search Paths" and double-click it.  Add the relative path from your project's directory to the MTDirectionsKit directory and check the *recursive* checkbox
+First copy the whole MTDirectionsKit project into your applications root folder and use this project for the following steps:
+
+1. Locate the "MTDirectionsKit.xcodeproj" file inside your applications root folder and drag it onto the root of your Xcode project's *Frameworks*-group
+2. Add MTDirectionsKit as target dependency of your target under the tab *Build Phases*
+3. Drag libMTDirectionsKit.a onto the section 'Link Binary with Libraries' of your target
 
 You are good to go, just 
 
@@ -49,7 +47,7 @@ You are good to go, just
 
 everywhere where you want to use it.
 
---> PICTURE
+![MTDirectionsKit.xcodeproj as Dependency](Images/MTDirectionsKit_Dependency.png "Dependency")
 
 ## Requirements
 
