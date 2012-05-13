@@ -9,7 +9,7 @@
 @interface MTDMapView () <MKMapViewDelegate>
 
 @property (nonatomic, strong, readwrite) MTDDirectionsOverlayView *directionsOverlayView; // re-defined as read/write
-@property (nonatomic, unsafe_unretained) id<MKMapViewDelegate> trueDelegate;
+@property (nonatomic, mtd_weak) id<MKMapViewDelegate> trueDelegate;
 @property (nonatomic, strong) MTDDirectionsRequest *request;
 
 - (void)setup;
@@ -58,24 +58,44 @@
                         to:(CLLocationCoordinate2D)toCoordinate
                  routeType:(MTDDirectionsRouteType)routeType
       zoomToShowDirections:(BOOL)zoomToShowDirections {
-    __block __typeof__(self) blockSelf = self;
+    [self loadDirectionsFrom:fromCoordinate
+                          to:toCoordinate
+                   routeType:routeType
+                  completion:^(MTDMapView *mapView, NSError *error) {
+                      if (zoomToShowDirections) {
+                          [mapView setRegionToShowDirectionsAnimated:YES];
+                      }
+                  }];
+}
+
+- (void)loadDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate
+                        to:(CLLocationCoordinate2D)toCoordinate
+                 routeType:(MTDDirectionsRouteType)routeType
+                completion:(mtd_directions_block)completion {
+    __mtd_weak MTDMapView *weakSelf = self;
     
     [self.request cancel];
     
     if (CLLocationCoordinate2DIsValid(fromCoordinate) && CLLocationCoordinate2DIsValid(toCoordinate)) {
         self.request = [MTDDirectionsRequest requestFrom:fromCoordinate
-                                                     to:toCoordinate
-                                              routeType:routeType
-                                             completion:^(MTDDirectionsOverlay *overlay) {
-                                                 blockSelf.directionsDisplayType = MTDDirectionsDisplayTypeOverview;
-                                                 blockSelf.directionsOverlay = overlay;
-                                                 
-                                                 // If we found at least one waypoint (start and end are always contained)
-                                                 // zoom the mapView to show the whole direction
-                                                 if (zoomToShowDirections && overlay.waypoints.count > 2) {
-                                                     [blockSelf setRegionToShowDirectionsAnimated:YES];
-                                                 }
-                                             }];
+                                                      to:toCoordinate
+                                               routeType:routeType
+                                              completion:^(MTDDirectionsOverlay *overlay, NSError *error) {
+                                                  __strong MTDMapView *strongSelf = weakSelf;
+                                                  
+                                                  if (overlay != nil) {
+                                                      strongSelf.directionsDisplayType = MTDDirectionsDisplayTypeOverview;
+                                                      strongSelf.directionsOverlay = overlay;
+                                                      
+                                                      if (completion != nil) {
+                                                          completion(strongSelf, nil);
+                                                      }
+                                                  } else {
+                                                      if (completion != nil) {
+                                                          completion(nil, error);
+                                                      }
+                                                  }
+                                              }];
         
         [self.request start];
     }

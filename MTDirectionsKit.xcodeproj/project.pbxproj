@@ -140,6 +140,7 @@
 		9B6C18C014A7E18200087893 /* libMTDirectionsKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMTDirectionsKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B6C18C314A7E18200087893 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9B6C18F314A7E40A00087893 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		9B8A2BB7155FE20000BAAE7B /* MTDStatusCodeMapQuest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTDStatusCodeMapQuest.h; sourceTree = "<group>"; };
 		9B8F515E155C516E00A9C10C /* MTDirectionsKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTDirectionsKit.h; path = MTDirectionsKit/MTDirectionsKit.h; sourceTree = SOURCE_ROOT; };
 		9B8F515F155C516E00A9C10C /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Prefix.pch; path = MTDirectionsKit/Prefix.pch; sourceTree = SOURCE_ROOT; };
 		9BAC0BE9155DE0C40067C1A1 /* MTDFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDFunctions.h; sourceTree = "<group>"; };
@@ -213,6 +214,7 @@
 				9B10AA0D155D85B8002A3052 /* MTDDirectionsRequestMapQuest.h */,
 				9B10AA0E155D85B8002A3052 /* MTDDirectionsRequestMapQuest.m */,
 				9B10AA0F155D85B8002A3052 /* MTDDirectionsRouteType+MapQuest.h */,
+				9B8A2BB7155FE20000BAAE7B /* MTDStatusCodeMapQuest.h */,
 			);
 			path = MapQuest;
 			sourceTree = "<group>";

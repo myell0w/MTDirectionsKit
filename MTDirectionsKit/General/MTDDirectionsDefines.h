@@ -8,6 +8,7 @@
 
 
 @class MTDDirectionsOverlay;
+@class MTDMapView;
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -16,9 +17,13 @@
 
 #define MTDInvalidCLLocationCoordinate2D CLLocationCoordinate2DMake(-100., -100.)
 
+#define MTDDirectionsKitErrorDomain      @"MTDDirectionsKitErrorDomain"
+#define MTDDirectionsKitDataKey          @"MTDDirectionsKitDataKey"
+
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Typedefs
 ////////////////////////////////////////////////////////////////////////
 
-typedef void (^mtd_direction_block)(MTDDirectionsOverlay *overlay);
+typedef void (^mtd_parser_block)(MTDDirectionsOverlay *overlay, NSError *error);
+typedef void (^mtd_directions_block)(MTDMapView *mapView, NSError *error);

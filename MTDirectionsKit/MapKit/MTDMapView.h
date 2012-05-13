@@ -9,6 +9,7 @@
 
 #import "MTDDirectionsRouteType.h"
 #import "MTDDirectionsDisplayType.h"
+#import "MTDDirectionsDefines.h"
 
 
 @class MTDDirectionsOverlay;
@@ -72,12 +73,32 @@
  @param toCoordinate the end point of the direction
  @param routeType the type of the route request, e.g. pedestrian, cycling, fastest driving
  @param zoomToShowDirections flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)
+
+ @see loadDirectionsFrom:to:routeType:completion
  @see cancelLoadOfDirections
  */
 - (void)loadDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate
                         to:(CLLocationCoordinate2D)toCoordinate
                  routeType:(MTDDirectionsRouteType)routeType
       zoomToShowDirections:(BOOL)zoomToShowDirections;
+
+/**
+ Starts a request and loads the directions between the specified coordinates.
+ When the request is finished the directionOverlay gets set on the MapView and
+ the completion-block gets executed.
+ 
+ @param fromCoordinate the start point of the direction
+ @param toCoordinate the end point of the direction
+ @param routeType the type of the route request, e.g. pedestrian, cycling, fastest driving
+ @param completion block that gets executed when the request finishes or fails
+
+ @see loadDirectionsFrom:to:routeType:zoomToShowDirections
+ @see cancelLoadOfDirections
+ */
+- (void)loadDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate
+                        to:(CLLocationCoordinate2D)toCoordinate
+                 routeType:(MTDDirectionsRouteType)routeType
+                completion:(mtd_directions_block)completion;
 
 /**
  Cancels a possible ongoing request for loading directions.

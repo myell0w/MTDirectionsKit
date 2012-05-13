@@ -15,7 +15,7 @@
 - (id)initFrom:(CLLocationCoordinate2D)fromCoordinate
             to:(CLLocationCoordinate2D)toCoordinate
      routeType:(MTDDirectionsRouteType)routeType
-    completion:(mtd_direction_block)completion {
+    completion:(mtd_parser_block)completion {
     if ((self = [super initFrom:fromCoordinate to:toCoordinate routeType:routeType completion:completion])) {
         NSString *address = [NSString stringWithFormat:@"%@&from=%f,%f&to=%f,%f&routeType=%@",
                              kMTDDirectionBaseURL, 

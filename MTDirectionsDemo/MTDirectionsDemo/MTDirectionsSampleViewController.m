@@ -16,6 +16,7 @@
 @property (nonatomic, strong) UITextField *toControl;
 
 @property (nonatomic, readonly, getter = isSearchUIVisible) BOOL searchUIVisible;
+@property (nonatomic, readonly) MTDDirectionsRouteType routeType;
 
 - (void)handleSearchItemPress:(id)sender;
 - (void)handleRouteItemPress:(id)sender;
@@ -23,6 +24,9 @@
 
 - (void)hideRouteView;
 - (void)performSearch;
+
+- (void)showLoadingIndicator;
+- (void)hideLoadingIndicator;
 
 @end
 
@@ -87,7 +91,7 @@
                                                       action:@selector(handleCancelItemPress:)];
     
     self.routeBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0.f, -75.f, self.view.bounds.size.width, 75.f)];
-    self.routeBackgroundView.backgroundColor = [UIColor grayColor];
+    self.routeBackgroundView.backgroundColor = [UIColor colorWithRed:119.f/255.f green:141.f/255.f blue:172.f/255.f alpha:1.f];
     self.routeBackgroundView.alpha = 0.f;
     [self.view addSubview:self.routeBackgroundView];
     
@@ -105,6 +109,7 @@
     self.fromControl.returnKeyType = UIReturnKeyNext;
     self.fromControl.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.fromControl.delegate = self;
+    self.fromControl.text = @"47.0616,16.3236";
     [self.routeBackgroundView addSubview:self.fromControl];
     
     label = [[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, 50.f, 30.f)];
@@ -114,13 +119,14 @@
     label.text = @"End:";
     
     self.toControl = [[UITextField alloc] initWithFrame:CGRectMake(5.f, self.fromControl.frame.origin.y + self.fromControl.frame.size.height + 5.f,
-                                                                  self.view.bounds.size.width-10.f, 30.f)];
+                                                                   self.view.bounds.size.width-10.f, 30.f)];
     self.toControl.borderStyle = UITextBorderStyleRoundedRect;
     self.toControl.leftViewMode = UITextFieldViewModeAlways;
     self.toControl.leftView = label;
     self.toControl.returnKeyType = UIReturnKeyRoute;
     self.toControl.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.toControl.delegate = self;
+    self.toControl.text = @"48.209,16.354";
     [self.routeBackgroundView addSubview:self.toControl];
 }
 
@@ -168,7 +174,6 @@
         [self.toControl becomeFirstResponder];
     } else {
         [self performSearch];
-        [self.toControl resignFirstResponder];
     }
     
     return NO;
@@ -180,6 +185,16 @@
 
 - (BOOL)isSearchUIVisible {
     return self.navigationItem.titleView == self.segmentedControl;
+}
+
+- (MTDDirectionsRouteType)routeType {
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
+        return MTDDirectionsRouteTypePedestrian;
+    } else if (self.segmentedControl.selectedSegmentIndex == 1) {
+        return MTDDirectionsRouteTypeBicycle;
+    } else {
+        return MTDDirectionsRouteTypeFastestDriving;
+    }
 }
 
 - (void)handleSearchItemPress:(id)sender {
@@ -219,6 +234,7 @@
     CGRect frame = self.routeBackgroundView.frame;
     frame.origin.y = - frame.size.height;
     
+    [self.view endEditing:YES];
     [UIView animateWithDuration:0.3
                      animations:^{
                          self.routeBackgroundView.frame = frame;
@@ -227,8 +243,45 @@
 }
 
 - (void)performSearch {
-    NSLog(@"Search");
+    NSString *from = self.fromControl.text;
+    NSString *to = self.toControl.text;
+    NSArray *fromComponents = [from componentsSeparatedByString:@","];
+    NSArray *toComponents = [to componentsSeparatedByString:@","];
+    
+    CLLocationCoordinate2D fromCoordinate = CLLocationCoordinate2DMake([[fromComponents objectAtIndex:0] doubleValue], [[fromComponents objectAtIndex:1] doubleValue]);
+    CLLocationCoordinate2D toCoordinate = CLLocationCoordinate2DMake([[toComponents objectAtIndex:0] doubleValue], [[toComponents objectAtIndex:1] doubleValue]);
+    
     [self hideRouteView];
+    [self showLoadingIndicator];
+    
+    [self.mapView loadDirectionsFrom:fromCoordinate
+                                  to:toCoordinate
+                           routeType:self.routeType
+                          completion:^(MTDMapView *mapView, NSError *error) {
+                              [mapView setRegionToShowDirectionsAnimated:YES];
+                              [self hideLoadingIndicator];
+                          }];
+}
+
+- (void)showLoadingIndicator {
+    [self hideLoadingIndicator];
+    
+    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, 24.f, 26.f)];
+    
+    activityView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+    activityView.autoresizingMask = UIViewAutoresizingNone;
+    activityView.frame = CGRectMake(0.f, 2.f, 20.f, 20.f);
+    [backgroundView addSubview:activityView];
+    
+    UIBarButtonItem *activityItem = [[UIBarButtonItem alloc] initWithCustomView:backgroundView];
+    self.navigationItem.rightBarButtonItem = activityItem;
+    
+    [activityView startAnimating];
+}
+
+- (void)hideLoadingIndicator {
+    self.navigationItem.rightBarButtonItem = nil;
 }
 
 @end

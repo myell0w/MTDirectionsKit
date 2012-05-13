@@ -39,7 +39,7 @@
 #pragma mark - MTDirectionsParser
 ////////////////////////////////////////////////////////////////////////
 
-- (void)parseWithCompletion:(mtd_direction_block)completion {
+- (void)parseWithCompletion:(mtd_parser_block)completion {
     [self doesNotRecognizeSelector:_cmd];
 }
 

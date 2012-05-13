@@ -58,6 +58,6 @@
  
  @param completion block that is called, once parsing is finished
  */
-- (void)parseWithCompletion:(mtd_direction_block)completion;
+- (void)parseWithCompletion:(mtd_parser_block)completion;
 
 @end
