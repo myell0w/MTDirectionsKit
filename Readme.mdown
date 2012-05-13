@@ -31,7 +31,7 @@ Just drag MTDirectionsKit.framework onto the *Frameworks*-group of your App, add
 
 everywhere you want to use it and you are good to go.
 
-----> PICTURE
+![MTDirectionsKit.framework](Images/MTDirectionsKit_Framework.png "Binary Framework")
 
 ### Integrating MTDirectionsKit.xcodeproj (Dependency)
 
