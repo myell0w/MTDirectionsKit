@@ -2,8 +2,8 @@
 #import "MTDWaypoint.h"
 #import "MTDDirectionsOverlay.h"
 #import "MTDDirectionsRouteType.h"
-#import "MTXPathResultNode.h"
 #import "MTDManeuver.h"
+#import "MTDXMLElement.h"
 #import "MTDStatusCodeMapQuest.h"
 
 
@@ -20,7 +20,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (void)parseWithCompletion:(mtd_parser_block)completion {
-    NSArray *statusCodeNodes = [MTXPathResultNode nodesForXPathQuery:@"//statusCode" onXML:self.data];
+    NSArray *statusCodeNodes = [MTDXMLElement nodesForXPathQuery:@"//statusCode" onXML:self.data];
     NSUInteger statusCode = MTDStatusCodeMapQuestSuccess;
     MTDDirectionsOverlay *overlay = nil;
     NSError *error = nil;
@@ -44,9 +44,9 @@
             [waypoints addObject:[MTDWaypoint waypointWithCoordinate:self.fromCoordinate]];
             
             // There should only be one element "shapePoints"
-            for (MTXPathResultNode *childNode in waypointNodes) {
-                MTXPathResultNode *latitudeNode = [childNode firstChildNodeWithName:kMTDDirectionsLatitudeNode];
-                MTXPathResultNode *longitudeNode = [childNode firstChildNodeWithName:kMTDDirectionsLongitudeNode];
+            for (MTDXMLElement *childNode in waypointNodes) {
+                MTDXMLElement *latitudeNode = [childNode firstChildNodeWithName:kMTDDirectionsLatitudeNode];
+                MTDXMLElement *longitudeNode = [childNode firstChildNodeWithName:kMTDDirectionsLongitudeNode];
                 
                 if (latitudeNode != nil && longitudeNode != nil) {
                     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([latitudeNode.contentString doubleValue],

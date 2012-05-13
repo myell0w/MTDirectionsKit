@@ -74,7 +74,7 @@
  @param routeType the type of the route request, e.g. pedestrian, cycling, fastest driving
  @param zoomToShowDirections flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)
 
- @see loadDirectionsFrom:to:routeType:completion
+ @see loadDirectionsFrom:to:routeType:completion:
  @see cancelLoadOfDirections
  */
 - (void)loadDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate
@@ -92,7 +92,7 @@
  @param routeType the type of the route request, e.g. pedestrian, cycling, fastest driving
  @param completion block that gets executed when the request finishes or fails
 
- @see loadDirectionsFrom:to:routeType:zoomToShowDirections
+ @see loadDirectionsFrom:to:routeType:zoomToShowDirections:
  @see cancelLoadOfDirections
  */
 - (void)loadDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate
