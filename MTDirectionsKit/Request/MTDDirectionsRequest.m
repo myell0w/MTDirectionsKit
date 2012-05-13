@@ -28,7 +28,7 @@
 
 + (id)requestFrom:(CLLocationCoordinate2D)fromCoordinate
                to:(CLLocationCoordinate2D)toCoordinate
-       completion:(mtd_direction_block)completion {
+       completion:(mtd_parser_block)completion {
     return [self requestFrom:fromCoordinate
                           to:toCoordinate
                    routeType:kMTDDefaultDirectionsRouteType
@@ -38,16 +38,16 @@
 + (id)requestFrom:(CLLocationCoordinate2D)fromCoordinate
                to:(CLLocationCoordinate2D)toCoordinate
         routeType:(MTDDirectionsRouteType)routeType
-       completion:(mtd_direction_block)completion {
+       completion:(mtd_parser_block)completion {
     MTDDirectionsRequest *request = nil;
     
     switch (MTDDirectionsGetActiveAPI()) {
         case MTDDirectionsAPIMapQuest:
         default:
             request = [[MTDDirectionsRequestMapQuest alloc] initFrom:fromCoordinate
-                                                                 to:toCoordinate
-                                                          routeType:routeType
-                                                         completion:completion];
+                                                                  to:toCoordinate
+                                                           routeType:routeType
+                                                          completion:completion];
             break;
             
     }
@@ -58,7 +58,7 @@
 - (id)initFrom:(CLLocationCoordinate2D)fromCoordinate
             to:(CLLocationCoordinate2D)toCoordinate
      routeType:(MTDDirectionsRouteType)routeType
-    completion:(mtd_direction_block)completion {
+    completion:(mtd_parser_block)completion {
     if ((self = [super init])) {
         _fromCoordinate = fromCoordinate;
         _toCoordinate = toCoordinate;
@@ -89,15 +89,23 @@
     [self.httpRequest cancel];
 }
 
-- (void)requestFinished:(MTDHTTPRequest *)fetcher {
-    NSAssert([self.parserClass isSubclassOfClass:[MTDDirectionsParser class]], @"Parser class must be subclass of MTDDirectionsParser.");
-    
-    MTDDirectionsParser *parser = [[self.parserClass alloc] initWithFromCoordinate:self.fromCoordinate
-                                                                     toCoordinate:self.toCoordinate
-                                                                        routeType:self.routeType
-                                                                             data:fetcher.data];
-    
-    [parser parseWithCompletion:self.completion];
+- (void)requestFinished:(MTDHTTPRequest *)httpRequest {
+    if (httpRequest.failureCode == 0) {
+        NSAssert([self.parserClass isSubclassOfClass:[MTDDirectionsParser class]], @"Parser class must be subclass of MTDDirectionsParser.");
+        
+        MTDDirectionsParser *parser = [[self.parserClass alloc] initWithFromCoordinate:self.fromCoordinate
+                                                                          toCoordinate:self.toCoordinate
+                                                                             routeType:self.routeType
+                                                                                  data:httpRequest.data];
+        
+        [parser parseWithCompletion:self.completion];
+    } else {
+        NSError *error = [NSError errorWithDomain:MTDDirectionsKitErrorDomain
+                                             code:httpRequest.failureCode
+                                         userInfo:nil];
+        
+        self.completion(nil, error);
+    }
 }
 
 @end
