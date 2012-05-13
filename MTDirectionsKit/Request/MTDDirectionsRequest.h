@@ -23,13 +23,13 @@
  ******************************************/
 
 /** the start coordinate of the route to request */
-@property (nonatomic, assign) CLLocationCoordinate2D fromCoordinate;
+@property (nonatomic, readonly) CLLocationCoordinate2D fromCoordinate;
 /** the end coordinate of the route to request */
-@property (nonatomic, assign) CLLocationCoordinate2D toCoordinate;
+@property (nonatomic, readonly) CLLocationCoordinate2D toCoordinate;
 /** the block that gets executed once the request is finished */
-@property (nonatomic, copy) mtd_direction_block completion;
+@property (nonatomic, copy) mtd_parser_block completion;
 /** the type of the route to request */
-@property (nonatomic, assign) MTDDirectionsRouteType routeType;
+@property (nonatomic, readonly) MTDDirectionsRouteType routeType;
 
 /******************************************
  @name Lifecycle
@@ -46,7 +46,7 @@
 + (id)requestFrom:(CLLocationCoordinate2D)fromCoordinate
                to:(CLLocationCoordinate2D)toCoordinate
         routeType:(MTDDirectionsRouteType)routeType
-       completion:(mtd_direction_block)completion;
+       completion:(mtd_parser_block)completion;
 
 /**
  This method is used to create a request from a given fromCoordinate to a given toCoordinate.
@@ -59,7 +59,7 @@
  */
 + (id)requestFrom:(CLLocationCoordinate2D)fromCoordinate
                to:(CLLocationCoordinate2D)toCoordinate
-       completion:(mtd_direction_block)completion;
+       completion:(mtd_parser_block)completion;
 
 /**
  The designated initializer used to instantiate an MTDDirectionsRequest.
@@ -72,7 +72,7 @@
 - (id)initFrom:(CLLocationCoordinate2D)fromCoordinate
             to:(CLLocationCoordinate2D)toCoordinate
      routeType:(MTDDirectionsRouteType)routeType
-    completion:(mtd_direction_block)completion;
+    completion:(mtd_parser_block)completion;
 
 /******************************************
  @name Request

@@ -8,3 +8,11 @@
     #import <MapKit/MapKit.h>
 #endif
 
+
+#if __has_feature(objc_arc_weak)
+#define mtd_weak  weak
+#define __mtd_weak __weak
+#else
+#define mtd_weak  unsafe_unretained
+#define __mtd_weak __unsafe_unretained
+#endif

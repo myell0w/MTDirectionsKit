@@ -3,6 +3,7 @@
 #import "MTDDirectionsOverlay.h"
 #import "MTDDirectionsRouteType.h"
 #import "MTXPathResultNode.h"
+#import "MTDStatusCodeMapQuest.h"
 
 #define kMTDDirectionsStartPointNode     @"startPoint"
 #define kMTDDirectionsDistanceNode       @"distance"
@@ -16,52 +17,67 @@
 #pragma mark - MTDDirectionsParser
 ////////////////////////////////////////////////////////////////////////
 
-- (void)parseWithCompletion:(mtd_direction_block)completion {
-    NSArray *waypointNodes = [MTXPathResultNode nodesForXPathQuery:@"//shapePoints/latLng" onXML:self.data];
-    NSArray *distanceNodes = [MTXPathResultNode nodesForXPathQuery:@"//route/distance" onXML:self.data];
+- (void)parseWithCompletion:(mtd_parser_block)completion {
+    NSArray *statusCodeNodes = [MTXPathResultNode nodesForXPathQuery:@"//statusCode" onXML:self.data];
+    NSUInteger statusCode = MTDStatusCodeMapQuestSuccess;
+    MTDDirectionsOverlay *overlay = nil;
+    NSError *error = nil;
     
-    NSMutableArray *waypoints = [NSMutableArray arrayWithCapacity:waypointNodes.count+2];
-    CLLocationDistance distance = -1.;
+    if (statusCodeNodes.count > 0) {
+        statusCode = [[[statusCodeNodes objectAtIndex:0] contentString] integerValue];
+    }
     
-    // Parse Waypoints
-    {
-        // add start coordinate
-        [waypoints addObject:[MTDWaypoint waypointWithCoordinate:self.fromCoordinate]];
+    if (statusCode == MTDStatusCodeMapQuestSuccess) {
+        NSArray *waypointNodes = [MTXPathResultNode nodesForXPathQuery:@"//shapePoints/latLng" onXML:self.data];
+        NSArray *distanceNodes = [MTXPathResultNode nodesForXPathQuery:@"//route/distance" onXML:self.data];
         
-        // There should only be one element "shapePoints"
-        for (MTXPathResultNode *childNode in waypointNodes) {
-            MTXPathResultNode *latitudeNode = [childNode firstChildNodeWithName:kMTDDirectionsLatitudeNode];
-            MTXPathResultNode *longitudeNode = [childNode firstChildNodeWithName:kMTDDirectionsLongitudeNode];
+        NSMutableArray *waypoints = [NSMutableArray arrayWithCapacity:waypointNodes.count+2];
+        CLLocationDistance distance = -1.;
+        
+        // Parse Waypoints
+        {
+            // add start coordinate
+            [waypoints addObject:[MTDWaypoint waypointWithCoordinate:self.fromCoordinate]];
             
-            if (latitudeNode != nil && longitudeNode != nil) {
-                CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([latitudeNode.contentString doubleValue],
-                                                                               [longitudeNode.contentString doubleValue]);;
-                MTDWaypoint *waypoint = [MTDWaypoint waypointWithCoordinate:coordinate];
+            // There should only be one element "shapePoints"
+            for (MTXPathResultNode *childNode in waypointNodes) {
+                MTXPathResultNode *latitudeNode = [childNode firstChildNodeWithName:kMTDDirectionsLatitudeNode];
+                MTXPathResultNode *longitudeNode = [childNode firstChildNodeWithName:kMTDDirectionsLongitudeNode];
                 
-                if (![waypoints containsObject:waypoint]) {
-                    [waypoints addObject:waypoint];
+                if (latitudeNode != nil && longitudeNode != nil) {
+                    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([latitudeNode.contentString doubleValue],
+                                                                                   [longitudeNode.contentString doubleValue]);;
+                    MTDWaypoint *waypoint = [MTDWaypoint waypointWithCoordinate:coordinate];
+                    
+                    if (![waypoints containsObject:waypoint]) {
+                        [waypoints addObject:waypoint];
+                    }
                 }
+            }
+            
+            // add end coordinate
+            [waypoints addObject:[MTDWaypoint waypointWithCoordinate:self.toCoordinate]];
+        }
+        
+        // Parse Additional Info of directions
+        {
+            if (distanceNodes.count > 0) {
+                // distance is delivered in km from API
+                distance = [[[distanceNodes objectAtIndex:0] contentString] doubleValue] * 1000.;
             }
         }
         
-        // add end coordinate
-        [waypoints addObject:[MTDWaypoint waypointWithCoordinate:self.toCoordinate]];
+        overlay = [MTDDirectionsOverlay overlayWithWaypoints:[waypoints copy]
+                                                    distance:distance
+                                                   routeType:self.routeType];
+    } else {
+        error = [NSError errorWithDomain:MTDDirectionsKitErrorDomain
+                                    code:statusCode
+                                userInfo:[NSDictionary dictionaryWithObject:self.data forKey:MTDDirectionsKitDataKey]];
     }
-    
-    // Parse Additional Info of directions
-    {
-        if (distanceNodes.count > 0) {
-            // distance is delivered in km from API
-            distance = [[[distanceNodes objectAtIndex:0] contentString] doubleValue] * 1000.;
-        }
-    }
-    
-    MTDDirectionsOverlay *overlay = [MTDDirectionsOverlay overlayWithWaypoints:[waypoints copy]
-                                                                    distance:distance
-                                                                   routeType:self.routeType];
     
     if (completion != nil) {
-        completion(overlay);
+        completion(overlay, error);
     }
 }
 

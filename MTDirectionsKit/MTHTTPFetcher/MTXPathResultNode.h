@@ -1,5 +1,5 @@
 //
-// MTHTTPFetcher.h
+// MTXPathResultNode.h
 //
 // Created by Matthias Tretter on 21.01.12.
 // Copyright (c) 2009-2012  Matthias Tretter, @myell0w. All rights reserved.
