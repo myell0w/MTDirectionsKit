@@ -2,15 +2,21 @@
 //  MTDDirectionAPI.h
 //  MTDirectionsKit
 //
-//  Created by Matthias Tretter on 21.01.12.
+//  Created by Matthias Tretter
 //  Copyright (c) 2012 Matthias Tretter (@myell0w). All rights reserved.
 //
 
 
 #import "MTDDirectionsRouteType+MapQuest.h"
 
+
 /**
- All supported APIs for Direction Retreival
+ MTDirectionsKit is designed to easily support different APIs as sources for the directions it parses and displays.
+ Once integrated, the used API can be switched at runtime by calling MTDDirectionsSetActiveAPI.
+ 
+ The currently supported APIs are:
+ 
+ - MTDDirectionsAPIMapQuest
  */
 typedef enum {
     MTDDirectionsAPIMapQuest,
@@ -18,8 +24,17 @@ typedef enum {
     MTDDirectionsAPICount
 } MTDDirectionsAPI;
 
-/** Retreive the current use API for directions */
+
+/** 
+ This function returns the current used API for direction retreival.
+ 
+ @return the current active API used for retreiving directions
+ */
 MTDDirectionsAPI MTDDirectionsGetActiveAPI(void);
 
-/** Set the current use API for directions */
+/**
+ This functions sets the current used API for direction retreival.
+ 
+ @param activeAPI the new active API to set
+ */
 void MTDDirectionsSetActiveAPI(MTDDirectionsAPI activeAPI);

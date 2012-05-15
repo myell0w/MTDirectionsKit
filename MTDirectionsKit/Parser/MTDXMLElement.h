@@ -1,7 +1,7 @@
 //
 //  MTDXMLElement.h
 //
-//  Created by Matthias Tretter on 21.01.12.
+//  Updated by Matthias Tretter
 //  Copyright (c) 2012 Matthias Tretter (@myell0w). All rights reserved.
 //
 //  Based on Matt Gallagher's XPathResultNode from cocoawithlove.com, modified for MTDirectionsKit.
@@ -29,19 +29,56 @@
 //
 
 
+/**
+ An instance of MTDXMLElement represents one XML node of a whole XML tree.
+ It is used to parse XML documents and uses libxml under the hood, which allows
+ for convenient use of XPath.
+ */
 @interface MTDXMLElement : NSObject
 
+/** the tag name of the xml node */
 @property (nonatomic, strong, readonly) NSString *name;
-@property (nonatomic, strong, readonly) NSMutableDictionary *attributes;
-@property (nonatomic, strong, readonly) NSMutableArray *content;
+/** all attributes of the node */
+@property (nonatomic, strong, readonly) NSDictionary *attributes;
+/** all content sections of the node */
+@property (nonatomic, strong, readonly) NSArray *content;
 
+/** all child nodes of the current node in the xml-tree */
 @property (nonatomic, readonly) NSArray *childNodes;
+/** the content of this node represented as string */
 @property (nonatomic, readonly) NSString *contentString;
+/** the content of this node and all childnodes (recursive) as concatenated string */
 @property (nonatomic, readonly) NSString *contentStringByUnifyingSubnodes;
 
+/******************************************
+ @name Lifecycle
+ ******************************************/
+
+/**
+ Returns an array of all xml nodes matching the given query on the given html data.
+ 
+ @param query the xpath query
+ @param htmlData data representing a html document
+ @return
+ @see nodesForXPathQuery:onXML:
+ */
 + (NSArray *)nodesForXPathQuery:(NSString *)query onHTML:(NSData *)htmlData;
+
+/**
+ Returns an array of all xml nodes matching the given query on the given xml data.
+ 
+ @param query the xpath query
+ @param htmlData data representing a xml document
+ @see nodesForXPathQuery:onHTML:
+ */
 + (NSArray *)nodesForXPathQuery:(NSString *)query onXML:(NSData *)xmlData;
 
+/**
+ Returns the first child node with the given tagname.
+ 
+ @param name the tag name of the child we want
+ @return an instance of MTDXMLElement representing the first found child node, or nil if there was none found
+ */
 - (MTDXMLElement *)firstChildNodeWithName:(NSString *)name;
 
 @end

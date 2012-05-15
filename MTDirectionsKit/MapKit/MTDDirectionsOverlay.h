@@ -2,7 +2,7 @@
 //  MTDDirectionOverlay.h
 //  MTDirectionsKit
 //
-//  Created by Matthias Tretter on 21.01.12.
+//  Created by Matthias Tretter
 //  Copyright (c) 2012 Matthias Tretter (@myell0w). All rights reserved.
 //
 
@@ -11,30 +11,40 @@
 
 
 /**
- An instance of MTDirectionsOverlay implements MKOverlay and represents an overlay used to store information
- about a route with given waypoints.
+ An instance of MTDirectionsOverlay implements the MKOverlay protocol and represents 
+ an overlay used to store information about already parsed directions with a given
+ fromCoordinate and toCoordinate. It stores all waypoint along the route and the total
+ distance of the route.
  */
 @interface MTDDirectionsOverlay : NSObject <MKOverlay>
 
 /******************************************
- @name Directions-Route
+ @name Directions
  ******************************************/
 
-/** all waypoints of the current active direction, including fromCoordinate and toCoordinate */
+/** all waypoints of the route/directions, including fromCoordinate and toCoordinate */
 @property (nonatomic, strong, readonly) NSArray *waypoints;
 /** the starting coordinate of the directions */
 @property (nonatomic, readonly) CLLocationCoordinate2D fromCoordinate;
 /** the end coordinate of the directions */
 @property (nonatomic, readonly) CLLocationCoordinate2D toCoordinate;
-/** the distance of the directions */
+/** the total distance between fromCoordinate and toCoordinate, when travelled along the given waypoints */
 @property (nonatomic, assign, readonly) CLLocationDistance distance;
-/** the routeType used to compute the directions */
+/** the type of travelling used to compute the directions, e.g. walking, by bike etc. */
 @property (nonatomic, assign, readonly) MTDDirectionsRouteType routeType;
 
-/** all mapPoints of the polyline */
+/******************************************
+ @name MapKit interface
+ ******************************************/
+
+/** all mapPoints of the underlying polyline */
 @property (nonatomic, readonly) MKMapPoint *points;
 /** the number of mapPoints of the polyline */
 @property (nonatomic, readonly) NSUInteger pointCount;
+
+/******************************************
+ @name Lifecycle
+ ******************************************/
 
 /**
  Creates an overlay with the given waypoints, distance and routeType.

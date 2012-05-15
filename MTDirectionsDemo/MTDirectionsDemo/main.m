@@ -2,7 +2,7 @@
 //  main.m
 //  MTDirectionsDemo
 //
-//  Created by Tretter Matthias on 19.03.12.
+//  Created by Matthias Tretter
 //  Copyright (c) 2012 Matthias Tretter (@myell0w). All rights reserved.
 //
 
