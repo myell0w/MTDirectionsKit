@@ -2,6 +2,7 @@
 #import "MTDDirectionsRequest+MTDirectionsPrivateAPI.h"
 #import "MTDDirectionsRouteType+MapQuest.h"
 #import "MTDDirectionsParserMapQuest.h"
+#import "MTDFunctions.h"
 
 
 #define kMTDDirectionBaseURL         @"http://open.mapquestapi.com/directions/v0/route?outFormat=xml&unit=k&narrativeType=none&shapeFormat=raw&generalize=50&ambiguities=ignore"
@@ -38,8 +39,8 @@
     if ((self = [super initFromAddress:fromAddress toAddress:toAddress routeType:routeType completion:completion])) {
         NSString *address = [NSString stringWithFormat:@"%@&from=%@&to=%@&routeType=%@",
                              kMTDDirectionBaseURL, 
-                             fromAddress,
-                             toAddress,
+                             MTDURLEncodedString(fromAddress),
+                             MTDURLEncodedString(toAddress),
                              MTDDirectionStringForDirectionRouteTypeMapQuest(routeType)];
         
         self.parserClass = [MTDDirectionsParserMapQuest class];

@@ -22,3 +22,10 @@
  */
 void MTDDirectionsOpenInMapsApp(CLLocationCoordinate2D fromCoordinate, CLLocationCoordinate2D toCoordinate, MTDDirectionsRouteType routeType);
 
+/**
+ Creates a percent-escaped version of the given string.
+ 
+ @param string a string to escape
+ @return an escaped string that can be passed as part of an URL
+ */
+NSString* MTDURLEncodedString(NSString *string);

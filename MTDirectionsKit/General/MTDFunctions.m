@@ -28,3 +28,11 @@ void MTDDirectionsOpenInMapsApp(CLLocationCoordinate2D fromCoordinate, CLLocatio
 	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:googleMapsURL]];
 }
 
+NSString* MTDURLEncodedString(NSString *string) {
+    NSString *result = (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                                                             (__bridge CFStringRef)string,
+                                                                                             NULL,
+                                                                                             CFSTR("!*'();:@&=+$,/?%#[]"),
+                                                                                             kCFStringEncodingUTF8);
+    return result;
+}
