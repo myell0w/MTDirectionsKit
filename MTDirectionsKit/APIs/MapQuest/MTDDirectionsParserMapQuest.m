@@ -40,7 +40,9 @@
         // Parse Waypoints
         {
             // add start coordinate
-            [waypoints addObject:[MTDWaypoint waypointWithCoordinate:self.fromCoordinate]];
+            if (CLLocationCoordinate2DIsValid(self.fromCoordinate)) {
+                [waypoints addObject:[MTDWaypoint waypointWithCoordinate:self.fromCoordinate]];
+            }
             
             // There should only be one element "shapePoints"
             for (MTDXMLElement *childNode in waypointNodes) {
@@ -59,7 +61,9 @@
             }
             
             // add end coordinate
-            [waypoints addObject:[MTDWaypoint waypointWithCoordinate:self.toCoordinate]];
+            if (CLLocationCoordinate2DIsValid(self.toCoordinate)) {
+                [waypoints addObject:[MTDWaypoint waypointWithCoordinate:self.toCoordinate]];
+            }
         }
         
         // Parse Additional Info of directions

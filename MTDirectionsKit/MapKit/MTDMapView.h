@@ -89,12 +89,31 @@
  @param routeType the type of the route requested, e.g. pedestrian, cycling, fastest driving
  @param zoomToShowDirections flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)
 
+ @see loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:
  @see cancelLoadOfDirections
  */
 - (void)loadDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate
                         to:(CLLocationCoordinate2D)toCoordinate
                  routeType:(MTDDirectionsRouteType)routeType
       zoomToShowDirections:(BOOL)zoomToShowDirections;
+
+/**
+ Starts a request and loads the directions between the specified addresses.
+ When the request is finished the directionsOverlay gets set on the MapView and
+ the region gets zoomed (animated) to show the whole overlay, if the flag zoomToShowDirections is set.
+ 
+ @param fromAddress the address of the starting point of the route
+ @param toAddress the addresss of the end point of the route
+ @param routeType the type of the route requested, e.g. pedestrian, cycling, fastest driving
+ @param zoomToShowDirections flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)
+ 
+  @see loadDirectionsFrom:to:routeType:zoomToShowDirections:
+ @see cancelLoadOfDirections
+ */
+- (void)loadDirectionsFromAddress:(NSString *)fromAddress
+                        toAddress:(NSString *)toAddress
+                        routeType:(MTDDirectionsRouteType)routeType
+             zoomToShowDirections:(BOOL)zoomToShowDirections;
 
 /**
  Cancels a possible ongoing request for loading directions.

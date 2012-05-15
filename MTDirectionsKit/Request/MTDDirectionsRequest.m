@@ -2,6 +2,7 @@
 #import "MTDDirectionsRequestMapQuest.h"
 #import "MTDDirectionsParser.h"
 #import "MTDDirectionsAPI.h"
+#import "MTDDirectionsDefines.h"
 
 
 @interface MTDDirectionsRequest ()
@@ -17,6 +18,8 @@
 
 @synthesize fromCoordinate = _fromCoordinate;
 @synthesize toCoordinate = _toCoordinate;
+@synthesize fromAddress = _fromAddress;
+@synthesize toAddress = _toAddress;
 @synthesize completion = _completion;
 @synthesize routeType = _routeType;
 @synthesize httpRequest = _httpRequest;
@@ -25,15 +28,6 @@
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
 ////////////////////////////////////////////////////////////////////////
-
-+ (id)requestFrom:(CLLocationCoordinate2D)fromCoordinate
-               to:(CLLocationCoordinate2D)toCoordinate
-       completion:(mtd_parser_block)completion {
-    return [self requestFrom:fromCoordinate
-                          to:toCoordinate
-                   routeType:kMTDDefaultDirectionsRouteType
-                  completion:completion];
-}
 
 + (id)requestFrom:(CLLocationCoordinate2D)fromCoordinate
                to:(CLLocationCoordinate2D)toCoordinate
@@ -55,6 +49,26 @@
     return request;
 }
 
++ (id)requestFromAddress:(NSString *)fromAddress
+               toAddress:(NSString *)toAddress
+               routeType:(MTDDirectionsRouteType)routeType
+              completion:(mtd_parser_block)completion {
+    MTDDirectionsRequest *request = nil;
+    
+    switch (MTDDirectionsGetActiveAPI()) {
+        case MTDDirectionsAPIMapQuest:
+        default:
+            request = [[MTDDirectionsRequestMapQuest alloc] initFromAddress:fromAddress
+                                                                  toAddress:toAddress
+                                                                  routeType:routeType
+                                                                 completion:completion];
+            break;
+            
+    }
+    
+    return request;
+}
+
 - (id)initFrom:(CLLocationCoordinate2D)fromCoordinate
             to:(CLLocationCoordinate2D)toCoordinate
      routeType:(MTDDirectionsRouteType)routeType
@@ -62,8 +76,24 @@
     if ((self = [super init])) {
         _fromCoordinate = fromCoordinate;
         _toCoordinate = toCoordinate;
-        _completion = completion;
         _routeType = routeType;
+        _completion = [completion copy];
+    }
+    
+    return self;
+}
+
+- (id)initFromAddress:(NSString *)fromAddress
+            toAddress:(NSString *)toAddress
+            routeType:(MTDDirectionsRouteType)routeType
+           completion:(mtd_parser_block)completion {
+    if ((self = [super init])) {
+        _fromCoordinate = MTDInvalidCLLocationCoordinate2D;
+        _toCoordinate = MTDInvalidCLLocationCoordinate2D;
+        _fromAddress = [fromAddress copy];
+        _toAddress = [toAddress copy];
+        _routeType = routeType;
+        _completion = [completion copy];
     }
     
     return self;

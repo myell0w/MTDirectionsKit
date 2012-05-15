@@ -36,6 +36,19 @@ willStartLoadingDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate
       routeType:(MTDDirectionsRouteType)routeType;
 
 /**
+ Tells the delegate that the mapView will start loading directions
+ 
+ @param mapView the mapView that will start loading the directions
+ @param fromCoordinate the starting point of the directions
+ @param toCoordinate the end point of the directions
+ @param routeType the type of the route requested, e.g. pedestrian, cycling, fastest driving
+ */
+- (void)mapView:(MTDMapView *)mapView
+willStartLoadingDirectionsFromAddress:(NSString *)fromAddress
+      toAddress:(NSString *)toAddress
+      routeType:(MTDDirectionsRouteType)routeType;
+
+/**
  Tells the delegate that the specified directionsOverlay was loaded on the specified mapView.
  This method allows the delegate to intercept MTDirectionsKit and change the directionsOverlay
  by returning a different overlay than the one received as parameter

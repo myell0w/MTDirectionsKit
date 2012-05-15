@@ -193,6 +193,14 @@
           routeType);
 }
 
+- (void)mapView:(MTDMapView *)mapView willStartLoadingDirectionsFromAddress:(NSString *)fromAddress toAddress:(NSString *)toAddress routeType:(MTDDirectionsRouteType)routeType {
+    NSLog(@"MapView %@ willStartLoadingDirectionsFromAddress:%@ toAddress:%@ routeType:%d",
+          mapView,
+          fromAddress,
+          toAddress,
+          routeType);
+}
+
 - (MTDDirectionsOverlay *)mapView:(MTDMapView *)mapView didFinishLoadingDirectionsOverlay:(MTDDirectionsOverlay *)directionsOverlay {
     NSLog(@"MapView %@ didFinishLoadingDirectionsOverlay: %@", mapView, directionsOverlay);
     
@@ -289,20 +297,26 @@
 - (void)performSearch {
     NSString *from = self.fromControl.text;
     NSString *to = self.toControl.text;
-    NSArray *fromComponents = [from componentsSeparatedByString:@","];
-    NSArray *toComponents = [to componentsSeparatedByString:@","];
+    NSArray *fromComponents = [[from stringByReplacingOccurrencesOfString:@" " withString:@""] componentsSeparatedByString:@","];
+    NSArray *toComponents = [[to stringByReplacingOccurrencesOfString:@" " withString:@""] componentsSeparatedByString:@","];
     
-    CLLocationCoordinate2D fromCoordinate = CLLocationCoordinate2DMake([[fromComponents objectAtIndex:0] doubleValue], [[fromComponents objectAtIndex:1] doubleValue]);
-    CLLocationCoordinate2D toCoordinate = CLLocationCoordinate2DMake([[toComponents objectAtIndex:0] doubleValue], [[toComponents objectAtIndex:1] doubleValue]);
+    if (fromComponents.count == 2 && toComponents.count == 2) {
+        CLLocationCoordinate2D fromCoordinate = CLLocationCoordinate2DMake([[fromComponents objectAtIndex:0] doubleValue], [[fromComponents objectAtIndex:1] doubleValue]);
+        CLLocationCoordinate2D toCoordinate = CLLocationCoordinate2DMake([[toComponents objectAtIndex:0] doubleValue], [[toComponents objectAtIndex:1] doubleValue]);
+        
+        [self.mapView loadDirectionsFrom:fromCoordinate
+                                      to:toCoordinate
+                               routeType:self.routeType
+                    zoomToShowDirections:YES];
+    } else {
+        [self.mapView loadDirectionsFromAddress:from
+                                      toAddress:to
+                                      routeType:self.routeType
+                           zoomToShowDirections:YES];
+    }
     
     [self hideRouteView];
     [self showLoadingIndicator];
-    
-    [self.mapView loadDirectionsFrom:fromCoordinate
-                                  to:toCoordinate
-                           routeType:self.routeType
-                zoomToShowDirections:YES];
-    
 }
 
 - (void)showLoadingIndicator {
