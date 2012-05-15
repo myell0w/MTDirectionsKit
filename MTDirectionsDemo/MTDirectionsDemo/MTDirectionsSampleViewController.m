@@ -1,5 +1,4 @@
 #import "MTDirectionsSampleViewController.h"
-#import <MTDirectionsKit/MTDirectionsKit.h>
 
 
 @interface MTDirectionsSampleViewController () <MKMapViewDelegate, UITextFieldDelegate>
@@ -166,6 +165,33 @@
 }
 
 ////////////////////////////////////////////////////////////////////////
+#pragma mark - MTDDirectionsDelegate
+////////////////////////////////////////////////////////////////////////
+
+- (void)mapView:(MTDMapView *)mapView willStartLoadingDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate to:(CLLocationCoordinate2D)toCoordinate routeType:(MTDDirectionsRouteType)routeType {
+    NSLog(@"MapView %@ willStartLoadingDirectionsFrom:(%f,%f) to:(%f,%f) routeType:%d",
+          mapView,
+          fromCoordinate.latitude,
+          fromCoordinate.longitude,
+          toCoordinate.latitude,
+          toCoordinate.longitude,
+          routeType);
+}
+
+- (MTDDirectionsOverlay *)mapView:(MTDMapView *)mapView didFinishLoadingDirectionsOverlay:(MTDDirectionsOverlay *)directionsOverlay {
+    NSLog(@"MapView %@ didFinishLoadingDirectionsOverlay: %@", mapView, directionsOverlay);
+    
+    [self hideLoadingIndicator];
+    return directionsOverlay;
+}
+
+- (void)mapView:(MTDMapView *)mapView didFailLoadingDirectionsOverlayWithError:(NSError *)error {
+    NSLog(@"MapView %@ didFailLoadingDirectionsOverlayWithError: %@", mapView, error);
+    
+    [self hideLoadingIndicator];
+}
+
+////////////////////////////////////////////////////////////////////////
 #pragma mark - UITextFieldDelegate
 ////////////////////////////////////////////////////////////////////////
 
@@ -257,10 +283,8 @@
     [self.mapView loadDirectionsFrom:fromCoordinate
                                   to:toCoordinate
                            routeType:self.routeType
-                          completion:^(MTDMapView *mapView, NSError *error) {
-                              [mapView setRegionToShowDirectionsAnimated:YES];
-                              [self hideLoadingIndicator];
-                          }];
+                zoomToShowDirections:YES];
+    
 }
 
 - (void)showLoadingIndicator {

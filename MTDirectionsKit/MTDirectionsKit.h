@@ -14,6 +14,7 @@
 
 // MapKit
 #import <MTDirectionsKit/MTDMapView.h>
+#import <MTDirectionsKit/MTDDirectionsDelegate.h>
 #import <MTDirectionsKit/MTDDirectionsOverlay.h>
 #import <MTDirectionsKit/MTDDirectionsOverlayView.h>
 

@@ -1,12 +1,20 @@
 #import "MTDMapView.h"
 #import "MTDWaypoint.h"
+#import "MTDDirectionsDelegate.h"
 #import "MTDDirectionsRequest.h"
 #import "MTDDirectionsOverlay.h"
 #import "MTDDirectionsOverlayView.h"
 #import "MTDFunctions.h"
 
 
-@interface MTDMapView () <MKMapViewDelegate>
+@interface MTDMapView () <MKMapViewDelegate> {
+    // flags for methods implemented in the delegate
+    struct {
+        unsigned int willStartLoadingOverlay:1;
+        unsigned int didFinishLoadingOverlay:1;
+        unsigned int didFailLoadingOverlay:1;
+	} _directionsDelegateFlags;
+}
 
 @property (nonatomic, strong, readwrite) MTDDirectionsOverlayView *directionsOverlayView; // re-defined as read/write
 @property (nonatomic, mtd_weak) id<MKMapViewDelegate> trueDelegate;
@@ -24,6 +32,7 @@
 
 @implementation MTDMapView
 
+@synthesize directionsDelegate = _directionsDelegate;
 @synthesize directionsOverlay = _directionsOverlay;
 @synthesize directionsOverlayView = _directionsOverlayView;
 @synthesize directionsDisplayType = _directionsDisplayType;
@@ -82,20 +91,6 @@
                         to:(CLLocationCoordinate2D)toCoordinate
                  routeType:(MTDDirectionsRouteType)routeType
       zoomToShowDirections:(BOOL)zoomToShowDirections {
-    [self loadDirectionsFrom:fromCoordinate
-                          to:toCoordinate
-                   routeType:routeType
-                  completion:^(MTDMapView *mapView, NSError *error) {
-                      if (zoomToShowDirections) {
-                          [mapView setRegionToShowDirectionsAnimated:YES];
-                      }
-                  }];
-}
-
-- (void)loadDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate
-                        to:(CLLocationCoordinate2D)toCoordinate
-                 routeType:(MTDDirectionsRouteType)routeType
-                completion:(mtd_directions_block)completion {
     __mtd_weak MTDMapView *weakSelf = self;
     
     [self.request cancel];
@@ -108,21 +103,30 @@
                                                   __strong MTDMapView *strongSelf = weakSelf;
                                                   
                                                   if (overlay != nil) {
+                                                      if (_directionsDelegateFlags.didFinishLoadingOverlay) {
+                                                          overlay = [self.directionsDelegate mapView:strongSelf didFinishLoadingDirectionsOverlay:overlay];
+                                                      }
+                                                      
                                                       strongSelf.directionsDisplayType = MTDDirectionsDisplayTypeOverview;
                                                       strongSelf.directionsOverlay = overlay;
                                                       
-                                                      if (completion != nil) {
-                                                          completion(strongSelf, nil);
+                                                      if (zoomToShowDirections) {
+                                                          [strongSelf setRegionToShowDirectionsAnimated:YES];
                                                       }
                                                   } else {
-                                                      if (completion != nil) {
-                                                          completion(nil, error);
+                                                      if (_directionsDelegateFlags.didFailLoadingOverlay) {
+                                                          [self.directionsDelegate mapView:strongSelf didFailLoadingDirectionsOverlayWithError:error];
                                                       }
                                                   }
                                               }];
         
+        if (_directionsDelegateFlags.willStartLoadingOverlay) {
+            [self.directionsDelegate mapView:self willStartLoadingDirectionsFrom:fromCoordinate to:toCoordinate routeType:routeType];
+        }
+        
         [self.request start];
     }
+
 }
 
 - (void)cancelLoadOfDirections {
@@ -172,8 +176,27 @@
     }
 }
 
+- (void)setDirectionsDelegate:(id<MTDDirectionsDelegate>)directionsDelegate {
+    if (directionsDelegate != _directionsDelegate) {
+        _directionsDelegate = directionsDelegate;
+        
+        // update delegate flags
+        _directionsDelegateFlags.willStartLoadingOverlay = [_directionsDelegate respondsToSelector:@selector(mapView:willStartLoadingDirectionsFrom:to:routeType:)];
+        _directionsDelegateFlags.didFinishLoadingOverlay = [_directionsDelegate respondsToSelector:@selector(mapView:didFinishLoadingDirectionsOverlay:)];
+        _directionsDelegateFlags.didFailLoadingOverlay = [_directionsDelegate respondsToSelector:@selector(mapView:didFailLoadingDirectionsOverlayWithError:)];
+    }
+}
+
 - (void)setDelegate:(id<MKMapViewDelegate>)delegate {
-    _trueDelegate = delegate;
+    if (delegate != _trueDelegate) {
+        _trueDelegate = delegate;
+        
+        // if we haven't set a directionsDelegate and our delegate conforms to the protocol
+        // MTDDirectionsDelegate, then we automatically set our directionsDelegate
+        if (self.directionsDelegate == nil && [delegate conformsToProtocol:@protocol(MTDDirectionsDelegate)]) {
+            self.directionsDelegate = (id<MTDDirectionsDelegate>)delegate;
+        }
+    }
 }
 
 - (id<MKMapViewDelegate>)delegate {
