@@ -3,7 +3,6 @@
 
 #define kMTDMeasurementSystemMetric     @"Metric"
 #define kMTDMetersToFeet                3.2808399
-#define kMTDMetersToMiles               0.000621371192
 #define kMTDMetersCutoff                1000.
 #define kMTDFeetCutoff                  3281.
 #define kMTDFeetInMiles                 5280.

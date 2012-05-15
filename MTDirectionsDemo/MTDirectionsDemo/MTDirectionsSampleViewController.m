@@ -72,6 +72,7 @@
     self.distanceControl = [[UILabel alloc] initWithFrame:CGRectMake(0.f, self.view.bounds.size.height - 35.f, self.view.bounds.size.width, 35.f)];
     self.distanceControl.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
     self.distanceControl.backgroundColor = [UIColor colorWithWhite:0.2 alpha:0.4];
+    self.distanceControl.font = [UIFont boldSystemFontOfSize:14.f];
     self.distanceControl.textColor = [UIColor whiteColor];
     self.distanceControl.textAlignment = UITextAlignmentCenter;
     [self.view addSubview:self.distanceControl];
@@ -81,6 +82,9 @@
                                                                        [UIImage imageNamed:@"bicycle"],
                                                                        [UIImage imageNamed:@"car"], nil]];
     self.segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        self.segmentedControl.tintColor = [UIColor lightGrayColor];
+    }
     self.segmentedControl.selectedSegmentIndex = 0;
     
     self.searchItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch
@@ -113,6 +117,7 @@
     self.fromControl = [[UITextField alloc] initWithFrame:CGRectMake(5.f, 5.f, self.view.bounds.size.width-10.f, 30.f)];
     self.fromControl.borderStyle = UITextBorderStyleRoundedRect;
     self.fromControl.leftViewMode = UITextFieldViewModeAlways;
+    label.font = self.fromControl.font;
     self.fromControl.leftView = label;
     self.fromControl.returnKeyType = UIReturnKeyNext;
     self.fromControl.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -124,6 +129,7 @@
     label.backgroundColor = [UIColor clearColor];
     label.textColor = [UIColor grayColor];
     label.textAlignment = UITextAlignmentRight;
+    label.font = self.fromControl.font;
     label.text = @"End:";
     
     self.toControl = [[UITextField alloc] initWithFrame:CGRectMake(5.f, self.fromControl.frame.origin.y + self.fromControl.frame.size.height + 5.f,
@@ -192,12 +198,14 @@
     
     self.distanceControl.text = [directionsOverlay.distance description];
     [self hideLoadingIndicator];
+    
     return directionsOverlay;
 }
 
 - (void)mapView:(MTDMapView *)mapView didFailLoadingDirectionsOverlayWithError:(NSError *)error {
     NSLog(@"MapView %@ didFailLoadingDirectionsOverlayWithError: %@", mapView, error);
     
+    self.distanceControl.text = @"Loading failed";
     [self hideLoadingIndicator];
 }
 
