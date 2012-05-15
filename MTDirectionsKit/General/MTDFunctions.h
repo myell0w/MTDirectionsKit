@@ -2,7 +2,7 @@
 //  MTDFunction.h
 //  MTDirectionsKit
 //
-//  Created by Tretter Matthias on 12.05.12.
+//  Created by Matthias Tretter
 //  Copyright (c) 2012 Matthias Tretter (@myell0w). All rights reserved.
 //
 
@@ -11,14 +11,14 @@
 
 
 /**
- Opens the built in Maps.app and displays the directions from fromCoordinate to toCoordinate
- with the chosen routeType. The supported routeTypes are only car, walking and public transport,
- so if the function is called with routeType MTDDirectionsRouteTypeBicycle, MTDDirectionsRouteTypePedestrian
- is chosen instead
+ Opens the built-in Maps.app and displays the directions from fromCoordinate to toCoordinate
+ with the chosen routeType. Since the built-in Maps application only supports travelling per pedes,
+ by public transport or by car, MTDDirectionsRouteTypePedestrian is used in case MTDDirectionsRouteTypeBicycle
+ was specified.
  
  @param fromCoordinate the start coordinate of the route
  @param toCoordinate the end coordinate of the route
- @param routeType the type of the route
+ @param routeType the specified form of travelling, e.g. walking, by bike, by car
  */
 void MTDDirectionsOpenInMapsApp(CLLocationCoordinate2D fromCoordinate, CLLocationCoordinate2D toCoordinate, MTDDirectionsRouteType routeType);
 

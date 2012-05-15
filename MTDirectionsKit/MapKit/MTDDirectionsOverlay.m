@@ -2,11 +2,12 @@
 #import "MTDWaypoint.h"
 #import "MTDDirectionsDefines.h"
 
+
 @interface MTDDirectionsOverlay ()
 
 /** 
- Internally using a MKPolyline to represent the overlay since MKPolyline cannot be subclassed
- and we don't want to reinvent the wheel here
+ Internally we use a MKPolyline to represent the overlay since MKPolyline
+ cannot be subclassed sanely and we don't want to reinvent the wheel
  */
 @property (nonatomic, strong) MKPolyline *polyline;
 

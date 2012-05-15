@@ -5,19 +5,21 @@
 #import <libxml/xpath.h>
 #import <libxml/xpathInternals.h>
 
-@interface MTDXMLElement ()
+@interface MTDXMLElement () {
+    NSMutableDictionary *_attributes;
+    NSMutableArray *_content;
+}
 
+// re-defined as read/write
 @property (nonatomic, strong, readwrite) NSString *name;
-@property (nonatomic, strong, readwrite) NSMutableDictionary *attributes;
-@property (nonatomic, strong, readwrite) NSMutableArray *content;
 
 @end
 
 @implementation MTDXMLElement
 
-@synthesize name;
-@synthesize attributes;
-@synthesize content;
+@synthesize name = _name;
+@synthesize attributes = _attributes;
+@synthesize content = _content;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
@@ -39,9 +41,9 @@
 			}
 			
 			if (!parentNode.content) {
-				parentNode.content = [NSMutableArray arrayWithObject:contentString];
+				parentNode->_content = [NSMutableArray arrayWithObject:contentString];
 			} else {
-				[parentNode.content addObject:contentString];
+				[parentNode->_content addObject:contentString];
 			}
             
 			return nil;
@@ -61,9 +63,9 @@
 				
 				if (attributeName && attributeValue) {
 					if (!node.attributes) {
-						node.attributes = [NSMutableDictionary dictionaryWithObject:attributeValue forKey:attributeName];
+						node->_attributes = [NSMutableDictionary dictionaryWithObject:attributeValue forKey:attributeName];
 					} else {
-						[node.attributes setObject:attributeValue forKey:attributeName];
+						[node->_attributes setObject:attributeValue forKey:attributeName];
 					}
 				}
 			}
@@ -80,9 +82,9 @@
 			
             if (childNode) {
 				if (!node.content) {
-					node.content = [NSMutableArray arrayWithObject:childNode];
+					node->_content = [NSMutableArray arrayWithObject:childNode];
 				} else {
-					[node.content addObject:childNode];
+					[node->_content addObject:childNode];
 				}
 			}
 			
@@ -97,14 +99,12 @@
     xmlXPathContextPtr xpathCtx; 
     xmlXPathObjectPtr xpathObj; 
     
-    /* Create xpath evaluation context */
     xpathCtx = xmlXPathNewContext(doc);
     
     if(xpathCtx == NULL) {
 		return nil;
     }
     
-    /* Evaluate xpath expression */
     xpathObj = xmlXPathEvalExpression((xmlChar *)[query cStringUsingEncoding:NSUTF8StringEncoding], xpathCtx);
     
     if(xpathObj == NULL) {
@@ -127,7 +127,6 @@
 		}
 	}
     
-    /* Cleanup */
     xmlXPathFreeObject(xpathObj);
     xmlXPathFreeContext(xpathCtx); 
     
@@ -137,7 +136,6 @@
 + (NSArray *)nodesForXPathQuery:(NSString *)query onHTML:(NSData *)htmlData {
     xmlDocPtr doc;
     
-    /* Load XML document */
 	doc = htmlReadMemory([htmlData bytes], [htmlData length], "", NULL, HTML_PARSE_NOWARNING | HTML_PARSE_NOERROR);
 	
     if (doc == NULL) {
@@ -153,7 +151,6 @@
 + (NSArray *)nodesForXPathQuery:(NSString *)query onXML:(NSData *)xmlData {
     xmlDocPtr doc;
 	
-    /* Load XML document */
 	doc = xmlReadMemory([xmlData bytes], [xmlData length], "", NULL, XML_PARSE_RECOVER);
 	
     if (doc == NULL) {
@@ -172,21 +169,21 @@
 
 - (NSString *)description {
 	NSMutableString *description = [NSMutableString string];
-	[description appendFormat:@"<%@", name];
+	[description appendFormat:@"<%@", self.name];
 	
-    for (NSString *attributeName in attributes) {
-		NSString *attributeValue = [attributes objectForKey:attributeName];
+    for (NSString *attributeName in self.attributes) {
+		NSString *attributeValue = [self.attributes objectForKey:attributeName];
 		[description appendFormat:@" %@=\"%@\"", attributeName, attributeValue];
 	}
 	
-	if ([content count] > 0) {
+	if (self.content.count > 0) {
 		[description appendString:@">"];
         
-		for (id object in content) {
+		for (id object in self.content) {
 			[description appendString:[object description]];
 		}
         
-		[description appendFormat:@"</%@>", name];
+		[description appendFormat:@"</%@>", self.name];
 	} else {
 		[description appendString:@"/>"];
 	}
@@ -201,7 +198,7 @@
 - (NSArray *)childNodes {
 	NSMutableArray *result = [NSMutableArray array];
 	
-	for (NSObject *object in content) {
+	for (NSObject *object in self.content) {
 		if ([object isKindOfClass:[MTDXMLElement class]]) {
 			[result addObject:object];
 		}
@@ -211,7 +208,7 @@
 }
 
 - (NSString *)contentString {
-	for (NSObject *object in content) {
+	for (NSObject *object in self.content) {
 		if ([object isKindOfClass:[NSString class]]) {
 			return (NSString *)object;
 		}
@@ -223,7 +220,7 @@
 - (NSString *)contentStringByUnifyingSubnodes {
 	NSMutableString *result = nil;
 	
-	for (NSObject *object in content) {
+	for (NSObject *object in self.content) {
 		if ([object isKindOfClass:[NSString class]]) {
 			if (!result) {
 				result = [NSMutableString stringWithString:(NSString *)object];

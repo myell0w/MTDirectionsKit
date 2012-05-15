@@ -2,14 +2,15 @@
 //  MTDDirectionsOverlayView.h
 //  MTDirectionsKit
 //
-//  Created by Matthias Tretter on 21.01.12.
+//  Created by Matthias Tretter
 //  Copyright (c) 2012 Matthias Tretter (@myell0w). All rights reserved.
 //
 
 
 /**
- An instance of MTDDirectionsOverlayView is a subclass of MKOverlayView that is used to
- draw a route on top of MKMapView.
+ An instance of MTDDirectionsOverlayView is a subclass of MKOverlayView and is used
+ to draw the directions/route on top your instance of MTDMapView. It draws a path
+ including all waypoints stored in the underlying instance of MTDDirectionsOverlay.
  */
 @interface MTDDirectionsOverlayView : MKOverlayView
 
