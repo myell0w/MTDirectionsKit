@@ -2,7 +2,7 @@
 //  MTDMapView.h
 //  MTDirectionsKit
 //
-//  Created by Matthias Tretter on 21.01.12.
+//  Created by Matthias Tretter
 //  Copyright (c) 2012 Matthias Tretter (@myell0w). All rights reserved.
 //
 
@@ -18,16 +18,22 @@
 
 /**
  An MTDMapView instance provides functionality to show directions directly on top of the MapView inside your App.
- MTDMapView is a subclass of MKMapView and therefore uses Google Maps as the data source for the map, which we all
- know and love.
+ MTDMapView is a subclass of MKMapView and therefore uses Apple's standard way of displaying map data, which we all
+ know and love. Currently this means that Google Maps is used as a backend, let's see if this is still true once
+ iOS 6 will be released :-)
  
-    MTDMapView *mapView = [[MTDMapView alloc] initWithFrame:self.view.bounds];
-    mapView.delegate = self;
+ Sample usage:
  
-    [mapView loadDirectionsFrom:CLLocationCoordinate2DMake(51.38713, -1.0316)
+    MTDMapView *_mapView = [[MTDMapView alloc] initWithFrame:self.view.bounds];
+ 
+    [_mapView loadDirectionsFrom:CLLocationCoordinate2DMake(51.38713, -1.0316)
                              to:CLLocationCoordinate2DMake(51.4554, -0.9742)
                       routeType:MTDDirectionsRouteTypeFastestDriving
-           zoomToShowDirections:YES];
+                     completion:^(MTDMapView *mapView, NSError *error) {
+                        if (error == nil) {
+                           [mapView setRegionToShowDirectionsAnimated:YES];
+                        }
+                    }];
  
  */
 @interface MTDMapView : MKMapView
@@ -45,13 +51,15 @@
 
 /** 
  The current active direction overlay view. This property is only set, if there is a current
- active directionsOverlay.
+ active directionsOverlay and the mapView already requested an an instance of MKOverlayView
+ for the specified directionsOverlay.
  */
 @property (nonatomic, strong, readonly) MTDDirectionsOverlayView *directionsOverlayView;
 
 /** 
- The current display type of the directions overlay. Currently the overlay can either be hidden
- or shown, depending on this property.
+ The current display type of the directions overlay. You can change the way the directions
+ are shown on top of your instance of MTDMapView by changing the property. A change results
+ in a re-draw of the overlay.
  */
 @property (nonatomic, assign) MTDDirectionsDisplayType directionsDisplayType;
 
@@ -59,15 +67,15 @@
 @property (nonatomic, readonly) CLLocationCoordinate2D fromCoordinate;
 /** the end coordinate of the directions of the currently displayed overlay */
 @property (nonatomic, readonly) CLLocationCoordinate2D toCoordinate;
-/** the distance of the directions of the currently displayed overlay */
+/** the total distance of the directions of the currently displayed overlay, by using all waypoints */
 @property (nonatomic, readonly) CLLocationDistance distance;
-/** the routeType used to compute the directions of the currently displayed overlay */
+/** the type of travelling used to compute the directions of the currently displayed overlay */
 @property (nonatomic, readonly) MTDDirectionsRouteType routeType;
 
 /**
  Starts a request and loads the directions between the specified coordinates.
- When the request is finished the directionOverlay gets set on the MapView and
- the region gets set to show the overlay, if the flag zoomToShowDirections is set.
+ When the request is finished the directionsOverlay gets set on the MapView and
+ the region gets zoomed (animated) to show the whole overlay, if the flag zoomToShowDirections is set.
  
  @param fromCoordinate the start point of the direction
  @param toCoordinate the end point of the direction
@@ -84,8 +92,10 @@
 
 /**
  Starts a request and loads the directions between the specified coordinates.
- When the request is finished the directionOverlay gets set on the MapView and
- the completion-block gets executed.
+ When the request is finished the directionsOverlay gets set on the mapView and
+ the completion-block gets executed. You can optionally zoom to show the whole
+ directions overlay, by calling setRegionToShowDirectionsAnimated: in the completion
+ block.
  
  @param fromCoordinate the start point of the direction
  @param toCoordinate the end point of the direction
@@ -102,15 +112,15 @@
 
 /**
  Cancels a possible ongoing request for loading directions.
- Does nothing if there is no request ongoing.
+ Does nothing if there is no request active.
  
   @see loadDirectionsFrom:to:routeType:zoomToShowDirections:
  */
 - (void)cancelLoadOfDirections;
 
 /**
- Removes the currenty displayed directionsOverlay view from the MapView, if there exists one.
- Does nothing, if there doesn't exist a directionsOverlay.
+ Removes the currenty displayed directionsOverlay view from the MapView,
+ if one exists. Does nothing otherwise.
  */
 - (void)removeDirectionsOverlay;
 
@@ -119,7 +129,9 @@
  ******************************************/
 
 /**
- Opens the currently displayed directions in the built-in Maps.app of the iDevice.
+ If directionsOverlay is currently set, this method opens the same directions
+ that are currently displayed on top of your MTDMapView in the built-in Maps.app
+ of the user's device. Does nothing otherwise.
  */
 - (void)openDirectionsInMapApp;
 
@@ -130,7 +142,7 @@
 /**
  Sets the region of the MapView to show the whole directionsOverlay at once.
  
- @param animated flag whether the region gets set animated or not
+ @param animated flag whether the region gets changed animated, or not
  */
 - (void)setRegionToShowDirectionsAnimated:(BOOL)animated;
 

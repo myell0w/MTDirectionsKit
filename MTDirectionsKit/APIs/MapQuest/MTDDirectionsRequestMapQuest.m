@@ -3,6 +3,7 @@
 #import "MTDDirectionsRouteType+MapQuest.h"
 #import "MTDDirectionsParserMapQuest.h"
 
+
 #define kMTDDirectionBaseURL         @"http://open.mapquestapi.com/directions/v0/route?outFormat=xml&unit=k&narrativeType=none&shapeFormat=raw&generalize=50"
 
 

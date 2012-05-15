@@ -2,13 +2,22 @@
 //  MTDDirectionsRouteType.h
 //  MTDirectionsKit
 //
-//  Created by Matthias Tretter on 21.01.12.
+//  Created by Matthias Tretter
 //  Copyright (c) 2012 Matthias Tretter (@myell0w). All rights reserved.
 //
 
 
-/** 
- The type of route we want to request
+/**
+ When requesting routing information you can tell your instance of MTDMapView in which way
+ the user wants to travel, that means whether he wants to walk, bike or drive.
+ 
+ The following types of travelling are supported currently:
+ 
+ - MTDDirectionsRouteTypeFastestDriving
+ - MTDDirectionsRouteTypeShortestDriving
+ - MTDDirectionsRouteTypePedestrian
+ - MTDDirectionsRouteTypePedestrianIncludingPublicTransport
+ - MTDDirectionsRouteTypeBicycle
  */
 typedef enum {
     MTDDirectionsRouteTypeFastestDriving = 0,
@@ -19,5 +28,5 @@ typedef enum {
 } MTDDirectionsRouteType;
 
 
-/** The default route type used when not specified */
-#define kMTDDefaultDirectionsRouteType        MTDDirectionsRouteTypePedestrian
+// The default route type used when not specified otherwise: fastest driving
+#define kMTDDefaultDirectionsRouteType        MTDDirectionsRouteTypeFastestDriving

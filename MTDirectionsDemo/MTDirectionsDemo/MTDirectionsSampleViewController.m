@@ -86,7 +86,7 @@
                                                      action:@selector(handleRouteItemPress:)];
     
     self.cancelItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" 
-                                                       style:UIBarButtonItemStyleDone
+                                                       style:UIBarButtonItemStyleBordered
                                                       target:self 
                                                       action:@selector(handleCancelItemPress:)];
     

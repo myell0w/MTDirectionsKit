@@ -2,7 +2,7 @@
 //  MTDirectionsKitTest.h
 //  MTDirectionsKitTest
 //
-//  Created by Tretter Matthias on 11.05.12.
+//  Created by Matthias Tretter
 //  Copyright (c) 2012 Matthias Tretter (@myell0w). All rights reserved.
 //
 

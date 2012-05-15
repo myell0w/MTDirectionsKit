@@ -2,7 +2,7 @@
 //  MTDDirectionsParser.h
 //  MTDirectionsKit
 //
-//  Created by Matthias Tretter on 21.01.12.
+//  Created by Matthias Tretter
 //  Copyright (c) 2012 Matthias Tretter (@myell0w). All rights reserved.
 //
 
@@ -12,11 +12,9 @@
 
 
 /**
- An instance of MTDDirectionsParser is used to parse information about a route from a given fromCoordinate to a given
- toCoordinate. MTDDirectionsParser itself doesn't implement any logic but is the base class for each concrete parser
- used in MTDirectionsKit.
+ This protocol provides the interface of all instances that want to act as a directions parser.
  */
-@interface MTDDirectionsParser : NSObject
+@protocol MTDDirectionsParser <NSObject>
 
 /******************************************
  @name Directions
@@ -30,6 +28,28 @@
 @property (nonatomic, assign, readonly) CLLocationCoordinate2D toCoordinate;
 /** The type of the route */
 @property (nonatomic, assign, readonly) MTDDirectionsRouteType routeType;
+
+/******************************************
+ @name Parsing
+ ******************************************/
+
+/**
+ This method is not implemented in MTDDirectionsParser and must be overwritten by each concrete
+ subclass. It parses the data and calls the completion block once finished.
+ 
+ @param completion block that is called, once parsing is finished
+ */
+- (void)parseWithCompletion:(mtd_parser_block)completion;
+
+@end
+
+
+/**
+ An instance of MTDDirectionsParser is used to parse information about a route from a given fromCoordinate to a given
+ toCoordinate. MTDDirectionsParser itself doesn't implement any logic and crashes if you try to parse data with a direct
+ instance of MTDDirectionsParser, but is the base class for each concrete parser used in MTDirectionsKit.
+ */
+@interface MTDDirectionsParser : NSObject <MTDDirectionsParser>
 
 /******************************************
  @name Lifecycle
@@ -48,16 +68,5 @@
                    routeType:(MTDDirectionsRouteType)routeType
                         data:(id)data;
 
-/******************************************
- @name Parsing
- ******************************************/
-
-/**
- This method is not implemented in MTDDirectionsParser and must be overwritten by each concrete
- subclass. It parses the data and calls the completion block once finished.
- 
- @param completion block that is called, once parsing is finished
- */
-- (void)parseWithCompletion:(mtd_parser_block)completion;
 
 @end

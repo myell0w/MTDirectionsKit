@@ -1,6 +1,7 @@
 #import "MTDDirectionsOverlayView.h"
 #import "MTDDirectionsOverlay.h"
 
+
 NS_INLINE BOOL MTDDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMapRect r) {
     double minX = MIN(p0.x, p1.x);
     double minY = MIN(p0.y, p1.y);
@@ -11,16 +12,18 @@ NS_INLINE BOOL MTDDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMa
     return MKMapRectIntersectsRect(r, r2);
 }
 
+
 @interface MTDDirectionsOverlayView ()
 
 @property (nonatomic, readonly) MTDDirectionsOverlay *directionsOverlay;
 
-- (CGPathRef)mt_newPathForPoints:(MKMapPoint *)points
-                      pointCount:(NSUInteger)pointCount
-                        clipRect:(MKMapRect)mapRect
-                       zoomScale:(MKZoomScale)zoomScale CF_RETURNS_RETAINED;
+- (CGPathRef)mtd_newPathForPoints:(MKMapPoint *)points
+                       pointCount:(NSUInteger)pointCount
+                         clipRect:(MKMapRect)mapRect
+                        zoomScale:(MKZoomScale)zoomScale CF_RETURNS_RETAINED;
 
 @end
+
 
 @implementation MTDDirectionsOverlayView
 
@@ -35,10 +38,10 @@ NS_INLINE BOOL MTDDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMa
     // outset the map rect by the line width so that points just outside
     // of the currently drawn rect are included in the generated path.
     MKMapRect clipRect = MKMapRectInset(mapRect, -lineWidth, -lineWidth);
-    CGPathRef path = [self mt_newPathForPoints:self.directionsOverlay.points
-                                    pointCount:self.directionsOverlay.pointCount
-                                      clipRect:clipRect
-                                     zoomScale:zoomScale];
+    CGPathRef path = [self mtd_newPathForPoints:self.directionsOverlay.points
+                                     pointCount:self.directionsOverlay.pointCount
+                                       clipRect:clipRect
+                                      zoomScale:zoomScale];
     
     if (path != NULL) {
         UIColor *fillColor = [UIColor colorWithRed:0.f green:0.25f blue:1.f alpha:0.5f];
@@ -68,10 +71,10 @@ NS_INLINE BOOL MTDDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMa
     return (MTDDirectionsOverlay *)self.overlay;
 }
 
-- (CGPathRef)mt_newPathForPoints:(MKMapPoint *)points
-                      pointCount:(NSUInteger)pointCount
-                        clipRect:(MKMapRect)mapRect
-                       zoomScale:(MKZoomScale)zoomScale {
+- (CGPathRef)mtd_newPathForPoints:(MKMapPoint *)points
+                       pointCount:(NSUInteger)pointCount
+                         clipRect:(MKMapRect)mapRect
+                        zoomScale:(MKZoomScale)zoomScale {
     // The fastest way to draw a path in an MKOverlayView is to simplify the
     // geometry for the screen by eliding points that are too close together
     // and to omit any line segments that do not intersect the clipping rect.  

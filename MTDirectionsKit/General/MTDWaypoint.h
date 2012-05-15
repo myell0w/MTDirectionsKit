@@ -2,7 +2,7 @@
 //  MTDWaypoint.h
 //  MTDirectionsKit
 //
-//  Created by Matthias Tretter on 21.01.12.
+//  Created by Matthias Tretter
 //  Copyright (c) 2012 Matthias Tretter (@myell0w). All rights reserved.
 //
 
@@ -12,7 +12,7 @@
 
 /**
  An instance of MTDWaypoint is a lightweight immutable object wrapper for a CLLocationCoordinate2D coordinate.
- It is used internally in MTDDirectionsKit to save coordinates in collections like NSArray.
+ It is used in MTDDirectionsKit to store coordinates in collections like NSArray.
  */
 @interface MTDWaypoint : NSObject
 

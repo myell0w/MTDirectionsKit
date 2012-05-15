@@ -50,6 +50,30 @@
     return self;
 }
 
+- (void)dealloc {
+    [self cancelLoadOfDirections];
+}
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - UIView
+////////////////////////////////////////////////////////////////////////
+
+- (void)willMoveToSuperview:(UIView *)newSuperview {
+    if (newSuperview == nil) {
+        [self cancelLoadOfDirections];
+    }
+    
+    [super willMoveToSuperview:newSuperview];
+}
+
+- (void)willMoveToWindow:(UIWindow *)newWindow {
+    if (newWindow == nil) {
+        [self cancelLoadOfDirections];
+    }
+    
+    [super willMoveToWindow:newWindow];
+}
+
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Directions
 ////////////////////////////////////////////////////////////////////////
@@ -286,7 +310,7 @@
     }
 }
 
-- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay {
+- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay {
     // first check if the delegate provides a custom annotation
     if ([self.trueDelegate respondsToSelector:@selector(mapView:viewForOverlay:)]) {
         MKOverlayView *delegateResult = [self.trueDelegate mapView:mapView viewForOverlay:overlay];

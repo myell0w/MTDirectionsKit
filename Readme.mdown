@@ -11,14 +11,35 @@ others that don't offer this functionality.
 
 Convinced? Let's get you started.
 
+## How to use?
+
+MTDirectionsKit is very easy to use, here's a sample call:
+
+    MTDMapView *_mapView = [[MTDMapView alloc] initWithFrame:self.view.bounds];
+    
+    // ...
+    // setup _mapView
+    // ...
+    
+    [_mapView loadDirectionsFrom:CLLocationCoordinate2DMake(51.38713, -1.0316)
+                             to:CLLocationCoordinate2DMake(51.4554, -0.9742)
+                      routeType:MTDDirectionsRouteTypeFastestDriving
+                     completion:^(MTDMapView *mapView, NSError *error) {
+                        if (error == nil) {
+                           [mapView setRegionToShowDirectionsAnimated:YES];
+                        }
+                    }];
+
 ## Integration
 
 There are two ways to integrate MTDirectionsKit into your App: The binary framework and adding the MTDirectionsKit.xcodeproj as a dependency.
 
 The easiest way to integrate MTDirectionsKit is to add the binary framework to your App. 
 
-Independent of which way to integrate MTDirectionsKit you choose, you have to add libxml.dylib to your project. MTDirectionsKit uses libxml to parse the routing information retreived. For this to work you have to add 
+Independent of which way to integrate MTDirectionsKit you choose, you have to add some system frameworks and libraries to your project. For MTDirectionsKit  to work you have to add 
 
+    CoreLocation.framework
+    MapKit.framework
     libxml2.dylib
 
 to your target's linked libraries (found under *Build Phases*, see pictures below).
