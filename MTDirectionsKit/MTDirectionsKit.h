@@ -8,9 +8,11 @@
 
 // General
 #import <MTDirectionsKit/MTDWaypoint.h>
-#import <MTDirectionsKit/MTDDirectionsRouteType.h>
-#import <MTDirectionsKit/MTDFunctions.h>
+#import <MTDirectionsKit/MTDDistance.h>
 #import <MTDirectionsKit/MTDDirectionsDisplayType.h>
+#import <MTDirectionsKit/MTDDirectionsRouteType.h>
+#import <MTDirectionsKit/MTDMeasurementSystem.h>
+#import <MTDirectionsKit/MTDFunctions.h>
 
 // MapKit
 #import <MTDirectionsKit/MTDMapView.h>

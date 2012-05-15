@@ -1,5 +1,6 @@
 #import "MTDDirectionsOverlay.h"
 #import "MTDWaypoint.h"
+#import "MTDDistance.h"
 #import "MTDDirectionsDefines.h"
 
 
@@ -13,7 +14,7 @@
 
 // Re-defining properties as readwrite
 @property (nonatomic, strong, readwrite) NSArray *waypoints;
-@property (nonatomic, assign, readwrite) CLLocationDistance distance;
+@property (nonatomic, strong, readwrite) MTDDistance *distance;
 @property (nonatomic, assign, readwrite) MTDDirectionsRouteType routeType;
 
 @end
@@ -31,7 +32,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 + (MTDDirectionsOverlay *)overlayWithWaypoints:(NSArray *)waypoints 
-                                     distance:(CLLocationDistance)distance
+                                     distance:(MTDDistance *)distance
                                     routeType:(MTDDirectionsRouteType)routeType {
     MTDDirectionsOverlay *overlay = [[MTDDirectionsOverlay alloc] init];
     MKMapPoint *points = malloc(sizeof(CLLocationCoordinate2D) * waypoints.count);

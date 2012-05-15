@@ -28,6 +28,8 @@ MTDirectionsKit is very easy to use, here's a sample call:
                               to:CLLocationCoordinate2DMake(51.4554, -0.9742)
                        routeType:MTDDirectionsRouteTypeFastestDriving
             zoomToShowDirections:YES];
+            
+To see a detailed example on how to use MTDirectionsKit have a look at the provided Demo Application.
 
 ## Integration
 

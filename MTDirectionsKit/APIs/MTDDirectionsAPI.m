@@ -5,18 +5,18 @@
 
 
 /** the current active API used */
-static MTDDirectionsAPI mt_activeAPI = kMTDDirectionsDefaultAPI;
+static MTDDirectionsAPI mtd_activeAPI = kMTDDirectionsDefaultAPI;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - MTDDirectionsAPI
 ////////////////////////////////////////////////////////////////////////
 
 MTDDirectionsAPI MTDDirectionsGetActiveAPI(void) {
-    return mt_activeAPI;
+    return mtd_activeAPI;
 }
 
 void MTDDirectionsSetActiveAPI(MTDDirectionsAPI activeAPI) {
     if (activeAPI < MTDDirectionsAPICount) {
-        mt_activeAPI = activeAPI;
+        mtd_activeAPI = activeAPI;
     }
 }

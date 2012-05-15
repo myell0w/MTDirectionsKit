@@ -1,5 +1,6 @@
 #import "MTDMapView.h"
 #import "MTDWaypoint.h"
+#import "MTDDistance.h"
 #import "MTDDirectionsDelegate.h"
 #import "MTDDirectionsRequest.h"
 #import "MTDDirectionsOverlay.h"
@@ -219,8 +220,8 @@
     return MTDInvalidCLLocationCoordinate2D;
 }
 
-- (CLLocationDistance)distance {
-    return self.directionsOverlay.distance;
+- (double)distance {
+    return [self.directionsOverlay.distance distanceInCurrentMeasurementSystem];
 }
 
 - (MTDDirectionsRouteType)routeType {

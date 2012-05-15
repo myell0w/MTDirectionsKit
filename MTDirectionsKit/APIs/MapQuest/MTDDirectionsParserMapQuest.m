@@ -1,5 +1,6 @@
 #import "MTDDirectionsParserMapQuest.h"
 #import "MTDWaypoint.h"
+#import "MTDDistance.h"
 #import "MTDDirectionsOverlay.h"
 #import "MTDDirectionsRouteType.h"
 #import "MTDXMLElement.h"
@@ -34,7 +35,7 @@
         NSArray *distanceNodes = [MTDXMLElement nodesForXPathQuery:@"//route/distance" onXML:self.data];
         
         NSMutableArray *waypoints = [NSMutableArray arrayWithCapacity:waypointNodes.count+2];
-        CLLocationDistance distance = -1.;
+        MTDDistance *distance = nil;
         
         // Parse Waypoints
         {
@@ -65,7 +66,10 @@
         {
             if (distanceNodes.count > 0) {
                 // distance is delivered in km from API
-                distance = [[[distanceNodes objectAtIndex:0] contentString] doubleValue] * 1000.;
+                double distanceInKm = [[[distanceNodes objectAtIndex:0] contentString] doubleValue];
+                
+                distance = [MTDDistance distanceWithValue:distanceInKm
+                                        measurementSystem:MTDMeasurementSystemMetric];
             }
         }
         

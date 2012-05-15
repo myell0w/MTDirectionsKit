@@ -13,6 +13,7 @@
 @property (nonatomic, strong) UIView *routeBackgroundView;
 @property (nonatomic, strong) UITextField *fromControl;
 @property (nonatomic, strong) UITextField *toControl;
+@property (nonatomic, strong) UILabel *distanceControl;
 
 @property (nonatomic, readonly, getter = isSearchUIVisible) BOOL searchUIVisible;
 @property (nonatomic, readonly) MTDDirectionsRouteType routeType;
@@ -40,6 +41,7 @@
 @synthesize routeBackgroundView = _routeBackgroundView;
 @synthesize fromControl = _fromControl;
 @synthesize toControl = _toControl;
+@synthesize distanceControl = _distanceControl;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
@@ -66,6 +68,13 @@
     self.mapView.region = MKCoordinateRegionMake(CLLocationCoordinate2DMake(51.459596, -0.973277),
                                                  MKCoordinateSpanMake(0.026846, 0.032959));
     [self.view addSubview:self.mapView];
+    
+    self.distanceControl = [[UILabel alloc] initWithFrame:CGRectMake(0.f, self.view.bounds.size.height - 35.f, self.view.bounds.size.width, 35.f)];
+    self.distanceControl.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
+    self.distanceControl.backgroundColor = [UIColor colorWithWhite:0.2 alpha:0.4];
+    self.distanceControl.textColor = [UIColor whiteColor];
+    self.distanceControl.textAlignment = UITextAlignmentCenter;
+    [self.view addSubview:self.distanceControl];
     
     self.segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:
                                                                        [UIImage imageNamed:@"pedestrian"],
@@ -181,6 +190,7 @@
 - (MTDDirectionsOverlay *)mapView:(MTDMapView *)mapView didFinishLoadingDirectionsOverlay:(MTDDirectionsOverlay *)directionsOverlay {
     NSLog(@"MapView %@ didFinishLoadingDirectionsOverlay: %@", mapView, directionsOverlay);
     
+    self.distanceControl.text = [directionsOverlay.distance description];
     [self hideLoadingIndicator];
     return directionsOverlay;
 }

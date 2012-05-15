@@ -72,6 +72,10 @@
 		9B8F5160155C516E00A9C10C /* MTDirectionsKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B8F515E155C516E00A9C10C /* MTDirectionsKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B8F5161155C516E00A9C10C /* Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 9B8F515F155C516E00A9C10C /* Prefix.pch */; };
 		9B9945F41562F15D00DE5B1B /* MTDDirectionsDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B9945F21562DF5E00DE5B1B /* MTDDirectionsDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B9945FF1562FCF300DE5B1B /* MTDMeasurementSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B9945FD1562FCF300DE5B1B /* MTDMeasurementSystem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B9946001562FCF300DE5B1B /* MTDMeasurementSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9945FE1562FCF300DE5B1B /* MTDMeasurementSystem.m */; };
+		9B99460F1563027400DE5B1B /* MTDDistance.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B99460D1563027400DE5B1B /* MTDDistance.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B9946101563027400DE5B1B /* MTDDistance.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B99460E1563027400DE5B1B /* MTDDistance.m */; };
 		9BAC0BEB155DE0C40067C1A1 /* MTDFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BAC0BE9155DE0C40067C1A1 /* MTDFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9BAC0BEC155DE0C40067C1A1 /* MTDFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAC0BEA155DE0C40067C1A1 /* MTDFunctions.m */; };
 		9BEE26EB155E92FC008A42F8 /* MTDHTTPRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BEE26E9155E92FC008A42F8 /* MTDHTTPRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -148,6 +152,10 @@
 		9B8F515E155C516E00A9C10C /* MTDirectionsKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTDirectionsKit.h; path = MTDirectionsKit/MTDirectionsKit.h; sourceTree = SOURCE_ROOT; };
 		9B8F515F155C516E00A9C10C /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Prefix.pch; path = MTDirectionsKit/Prefix.pch; sourceTree = SOURCE_ROOT; };
 		9B9945F21562DF5E00DE5B1B /* MTDDirectionsDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTDDirectionsDelegate.h; sourceTree = "<group>"; };
+		9B9945FD1562FCF300DE5B1B /* MTDMeasurementSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDMeasurementSystem.h; sourceTree = "<group>"; };
+		9B9945FE1562FCF300DE5B1B /* MTDMeasurementSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDMeasurementSystem.m; sourceTree = "<group>"; };
+		9B99460D1563027400DE5B1B /* MTDDistance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDDistance.h; sourceTree = "<group>"; };
+		9B99460E1563027400DE5B1B /* MTDDistance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDDistance.m; sourceTree = "<group>"; };
 		9BAC0BE9155DE0C40067C1A1 /* MTDFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDFunctions.h; sourceTree = "<group>"; };
 		9BAC0BEA155DE0C40067C1A1 /* MTDFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDFunctions.m; sourceTree = "<group>"; };
 		9BEE26E9155E92FC008A42F8 /* MTDHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDHTTPRequest.h; sourceTree = "<group>"; };
@@ -230,10 +238,14 @@
 				9B10AA13155D85B8002A3052 /* MTDDirectionsDefines.h */,
 				9B10AA14155D85B8002A3052 /* MTDDirectionsDisplayType.h */,
 				9B10AA15155D85B8002A3052 /* MTDDirectionsRouteType.h */,
+				9B9945FD1562FCF300DE5B1B /* MTDMeasurementSystem.h */,
+				9B9945FE1562FCF300DE5B1B /* MTDMeasurementSystem.m */,
 				9BAC0BE9155DE0C40067C1A1 /* MTDFunctions.h */,
 				9BAC0BEA155DE0C40067C1A1 /* MTDFunctions.m */,
 				9B10AA16155D85B8002A3052 /* MTDWaypoint.h */,
 				9B10AA17155D85B8002A3052 /* MTDWaypoint.m */,
+				9B99460D1563027400DE5B1B /* MTDDistance.h */,
+				9B99460E1563027400DE5B1B /* MTDDistance.m */,
 			);
 			name = General;
 			path = MTDirectionsKit/General;
@@ -364,6 +376,8 @@
 				9BEE26EB155E92FC008A42F8 /* MTDHTTPRequest.h in Headers */,
 				9B8A2C1B1560129F00BAAE7B /* MTDXMLElement.h in Headers */,
 				9B9945F41562F15D00DE5B1B /* MTDDirectionsDelegate.h in Headers */,
+				9B9945FF1562FCF300DE5B1B /* MTDMeasurementSystem.h in Headers */,
+				9B99460F1563027400DE5B1B /* MTDDistance.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,6 +545,8 @@
 				9BAC0BEC155DE0C40067C1A1 /* MTDFunctions.m in Sources */,
 				9BEE26EC155E92FC008A42F8 /* MTDHTTPRequest.m in Sources */,
 				9B8A2C1C1560129F00BAAE7B /* MTDXMLElement.m in Sources */,
+				9B9946001562FCF300DE5B1B /* MTDMeasurementSystem.m in Sources */,
+				9B9946101563027400DE5B1B /* MTDDistance.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
