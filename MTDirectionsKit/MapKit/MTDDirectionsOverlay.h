@@ -33,6 +33,8 @@
 @property (nonatomic, readonly) CLLocationCoordinate2D toCoordinate;
 /** the total distance between fromCoordinate and toCoordinate, when travelled along the given waypoints */
 @property (nonatomic, strong, readonly) MTDDistance *distance;
+/** the total estimated time for this route */
+@property (nonatomic, assign, readonly) NSTimeInterval timeInSeconds;
 /** the type of travelling used to compute the directions, e.g. walking, by bike etc. */
 @property (nonatomic, assign, readonly) MTDDirectionsRouteType routeType;
 
@@ -59,6 +61,7 @@
  */
 + (MTDDirectionsOverlay *)overlayWithWaypoints:(NSArray *)waypoints 
                                       distance:(MTDDistance *)distance
+                                 timeInSeconds:(NSTimeInterval)timeInSeconds
                                      routeType:(MTDDirectionsRouteType)routeType;
 
 @end

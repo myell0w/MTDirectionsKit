@@ -204,7 +204,9 @@
 - (MTDDirectionsOverlay *)mapView:(MTDMapView *)mapView didFinishLoadingDirectionsOverlay:(MTDDirectionsOverlay *)directionsOverlay {
     NSLog(@"MapView %@ didFinishLoadingDirectionsOverlay: %@", mapView, directionsOverlay);
     
-    self.distanceControl.text = [directionsOverlay.distance description];
+    self.distanceControl.text = [NSString stringWithFormat:@"Distance: %@, Time: %@", 
+                                 [directionsOverlay.distance description],
+                                 MTDGetFormattedTime(directionsOverlay.timeInSeconds)];
     [self hideLoadingIndicator];
     
     return directionsOverlay;

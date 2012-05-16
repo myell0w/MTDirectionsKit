@@ -36,3 +36,21 @@ NSString* MTDURLEncodedString(NSString *string) {
                                                                                              kCFStringEncodingUTF8);
     return result;
 }
+
+NSString* MTDGetFormattedTime(NSTimeInterval time) {
+    if (time < 0.) {
+        return @"0:00";
+    }
+    
+    NSInteger seconds = ((NSInteger)time) % 60;
+    NSInteger minutes = time / 60;
+    NSInteger hours = minutes / 60;
+    minutes = ((NSInteger)minutes) % 60;
+    
+    if (hours > 0) {
+        return [NSString stringWithFormat:@"%d:%02d:%02d", hours, minutes, seconds];
+    } else {
+        return [NSString stringWithFormat:@"%d:%02d", minutes, seconds];
+    }
+    
+}

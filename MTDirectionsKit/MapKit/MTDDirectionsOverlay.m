@@ -15,6 +15,7 @@
 // Re-defining properties as readwrite
 @property (nonatomic, strong, readwrite) NSArray *waypoints;
 @property (nonatomic, strong, readwrite) MTDDistance *distance;
+@property (nonatomic, assign, readwrite) NSTimeInterval timeInSeconds;
 @property (nonatomic, assign, readwrite) MTDDirectionsRouteType routeType;
 
 @end
@@ -25,6 +26,7 @@
 @synthesize polyline = _polyline;
 @synthesize waypoints = _waypoints;
 @synthesize distance = _distance;
+@synthesize timeInSeconds = _timeInSeconds;
 @synthesize routeType = _routeType;
 
 ////////////////////////////////////////////////////////////////////////
@@ -32,8 +34,9 @@
 ////////////////////////////////////////////////////////////////////////
 
 + (MTDDirectionsOverlay *)overlayWithWaypoints:(NSArray *)waypoints 
-                                     distance:(MTDDistance *)distance
-                                    routeType:(MTDDirectionsRouteType)routeType {
+                                      distance:(MTDDistance *)distance
+                                 timeInSeconds:(NSTimeInterval)timeInSeconds
+                                     routeType:(MTDDirectionsRouteType)routeType {
     MTDDirectionsOverlay *overlay = [[MTDDirectionsOverlay alloc] init];
     MKMapPoint *points = malloc(sizeof(CLLocationCoordinate2D) * waypoints.count);
     
@@ -47,6 +50,7 @@
     overlay.polyline = [MKPolyline polylineWithPoints:points count:waypoints.count];
     overlay.waypoints = waypoints;
     overlay.distance = distance;
+    overlay.timeInSeconds = timeInSeconds;
     overlay.routeType = routeType;
     
     free(points);

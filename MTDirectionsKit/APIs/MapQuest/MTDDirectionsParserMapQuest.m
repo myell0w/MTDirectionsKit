@@ -33,9 +33,11 @@
     if (statusCode == MTDStatusCodeMapQuestSuccess) {
         NSArray *waypointNodes = [MTDXMLElement nodesForXPathQuery:@"//shapePoints/latLng" onXML:self.data];
         NSArray *distanceNodes = [MTDXMLElement nodesForXPathQuery:@"//route/distance" onXML:self.data];
+        NSArray *timeNodes = [MTDXMLElement nodesForXPathQuery:@"//route/time" onXML:self.data];
         
         NSMutableArray *waypoints = [NSMutableArray arrayWithCapacity:waypointNodes.count+2];
         MTDDistance *distance = nil;
+        NSTimeInterval timeInSeconds = -1.;
         
         // Parse Waypoints
         {
@@ -75,10 +77,15 @@
                 distance = [MTDDistance distanceWithValue:distanceInKm
                                         measurementSystem:MTDMeasurementSystemMetric];
             }
+            
+            if (timeNodes.count > 0) {
+                timeInSeconds = [[[timeNodes objectAtIndex:0] contentString] doubleValue];
+            }
         }
         
         overlay = [MTDDirectionsOverlay overlayWithWaypoints:[waypoints copy]
                                                     distance:distance
+                                               timeInSeconds:timeInSeconds
                                                    routeType:self.routeType];
     } else {
         error = [NSError errorWithDomain:MTDDirectionsKitErrorDomain

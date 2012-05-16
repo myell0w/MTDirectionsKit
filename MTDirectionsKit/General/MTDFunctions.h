@@ -29,3 +29,5 @@ void MTDDirectionsOpenInMapsApp(CLLocationCoordinate2D fromCoordinate, CLLocatio
  @return an escaped string that can be passed as part of an URL
  */
 NSString* MTDURLEncodedString(NSString *string);
+
+NSString* MTDGetFormattedTime(NSTimeInterval time);
