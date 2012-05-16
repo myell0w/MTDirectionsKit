@@ -27,8 +27,18 @@
 
 - (id)initWithDistanceValue:(double)value measurementSystem:(MTDMeasurementSystem)measurementSystem {
     if ((self = [super init])) {
-        _metricDistance = 0.;
-        [self addDistanceWithValue:value measurementSystem:measurementSystem];
+        switch (measurementSystem) {
+            case MTDMeasurementSystemUS: {
+                _metricDistance = value * kMTDKilometerPerMile;
+                break;
+            }
+                
+            case MTDMeasurementSystemMetric: {
+            default:
+                _metricDistance = value;
+                break;
+            }
+        }
     }
     
     return self;
@@ -39,7 +49,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (NSString *)description {
-    return MTDFormattedDistanceInMeasurementSystem(self.metricDistance*1000., MTDDirectionsGetMeasurementSystem());
+    return MTDFormattedDistanceInMeasurementSystem(self.distanceInMeter, MTDDirectionsGetMeasurementSystem());
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -51,18 +61,7 @@
 }
 
 - (void)addDistanceWithValue:(double)value measurementSystem:(MTDMeasurementSystem)measurementSystem {
-    switch (measurementSystem) {
-        case MTDMeasurementSystemUS: {
-            self.metricDistance += value * kMTDKilometerPerMile;
-            break;
-        }
-            
-        case MTDMeasurementSystemMetric: {
-        default:
-            self.metricDistance += value;
-            break;
-        }
-    }
+    [self addDistance:[MTDDistance distanceWithValue:value measurementSystem:measurementSystem]];
 }
 
 - (double)distanceInMeasurementSystem:(MTDMeasurementSystem)measurementSystem {
@@ -78,6 +77,10 @@
 
 - (double)distanceInCurrentMeasurementSystem {
     return [self distanceInMeasurementSystem:MTDDirectionsGetMeasurementSystem()];
+}
+
+- (CLLocationDistance)distanceInMeter {
+    return self.metricDistance * 1000.;
 }
 
 @end

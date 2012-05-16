@@ -39,8 +39,8 @@ willStartLoadingDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate
  Tells the delegate that the mapView will start loading directions
  
  @param mapView the mapView that will start loading the directions
- @param fromCoordinate the starting point of the directions
- @param toCoordinate the end point of the directions
+ @param fromAddress the address of the starting coordinate of the route to request
+ @param toAddress the address of the end coordinate of the route to request
  @param routeType the type of the route requested, e.g. pedestrian, cycling, fastest driving
  */
 - (void)mapView:(MTDMapView *)mapView
