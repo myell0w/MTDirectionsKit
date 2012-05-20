@@ -21,6 +21,16 @@ MTDirectionsKit is very easy to use, here's a sample call:
     // setup _mapView
     // ...
     
+    // configure MTDirectionsKit (optional)
+    // log more messages
+    MTDDirectionsSetLogLevel(MTDLogLevelInfo);
+    // change used API to Google Directions
+    MTDDirectionsSetActiveAPI(MTDDirectionsAPIGoogle);
+    // manually change measurement system 
+    // Warning: MTDirectionsKit automatically sets it to the preferred one of the user's device,
+    // only override if you have a really good reason to
+    MTDDirectionsSetMeasurementSystem(MTDMeasurementSystemMetric);
+    
     MTDMapView *_mapView = [[MTDMapView alloc] initWithFrame:self.view.bounds];
     _mapView.directionsDelegate = self;
     
@@ -79,5 +89,9 @@ MTDirectionsKit works on a deployment target of ≥ iOS 4.0 and can be used in A
 
 ## Disclaimer
 
-MTDirectionsKit currently uses
-[MapQuest Open Directions API](http://open.mapquestapi.com/directions/ "MapQuest Open Directions API") to compute the directions.
+MTDirectionsKit can use the following two APIs for gathering routing information:
+
+1. [MapQuest Open Directions API](http://open.mapquestapi.com/directions/ "MapQuest Open Directions API")
+2. [Google Directions API](https://developers.google.com/maps/documentation/directions/ "Google Directions API")
+
+MTDirectionsKit is not .... bla bla ... keine Verantwortung für API, terms of usage etc.

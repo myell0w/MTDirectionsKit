@@ -27,8 +27,8 @@
  */
 typedef enum {
     MTDStatusCodeGoogleSuccess                  = 0,
-    MTDStatusCodeGoogleNotFound                 = 401,
-    MTDStatusCodeGoogleZeroResults,
+    MTDStatusCodeGoogleNotFound                 = 404,
+    MTDStatusCodeGoogleZeroResults              = 701,
     MTDStatusCodeGoogleMaxWaypointsExceeded,
     MTDStatusCodeGoogleInvalidRequest,
     MTDStatusCodeGoogleOverQueryLimit,
