@@ -1,4 +1,5 @@
 #import "MTDMeasurementSystem.h"
+#import "MTDLogging.h"
 
 
 #define kMTDMeasurementSystemMetric     @"Metric"
@@ -17,10 +18,10 @@ MTDMeasurementSystem MTDDirectionsGetMeasurementSystem(void) {
         NSString *measurementSystem = [[NSLocale systemLocale] objectForKey:NSLocaleMeasurementSystem];
         
         if ([measurementSystem isEqualToString:kMTDMeasurementSystemMetric]) {
-            mtd_measurementSystem = MTDMeasurementSystemMetric;
+            MTDDirectionsSetMeasurementSystem(MTDMeasurementSystemMetric);
         } else {
-            mtd_measurementSystem = MTDMeasurementSystemUS;
-        }
+            MTDDirectionsSetMeasurementSystem(MTDMeasurementSystemUS);
+        }   
     }
     
     return mtd_measurementSystem;
@@ -29,6 +30,9 @@ MTDMeasurementSystem MTDDirectionsGetMeasurementSystem(void) {
 void MTDDirectionsSetMeasurementSystem(MTDMeasurementSystem measurementSystem) {
     if (measurementSystem == MTDMeasurementSystemMetric || measurementSystem == MTDMeasurementSystemUS) {
         mtd_measurementSystem = measurementSystem;
+        
+        MTDLogVerbose(@"Measurement System was set to %@",
+                      (mtd_measurementSystem == MTDMeasurementSystemMetric ? @"Metric" : @"U.S."));
     }
 }
 

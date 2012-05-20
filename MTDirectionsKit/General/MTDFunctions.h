@@ -37,3 +37,10 @@ NSString* MTDURLEncodedString(NSString *string);
  @return formatted time, e.g. 2:04:14 (= 2 h, 4 min, 14 sec)
  */
 NSString* MTDGetFormattedTime(NSTimeInterval time);
+
+/**
+ Returns a string description of a CLLocationCoordinate2D struct.
+ 
+ @return a string description of a coordinate if it is valid, @"Invalid CLLocationCoordinate2D" otherwise
+ */
+NSString* MTDStringFromCLLocationCoordinate2D(CLLocationCoordinate2D coordinate);

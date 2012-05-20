@@ -41,6 +41,6 @@ MTDLogLevel MTDDirectionsGetLogLevel(void) {
 
 void MTDLogWithLevel(MTDLogLevel logLevel, NSString *file, unsigned int line, NSString *logMessage) {
     if (logLevel >= mtd_logLevel) {
-        printf("[%s:%u] %s %s - %s", [file UTF8String], line, [logMessage UTF8String], [MTDLogLevelDescription(logLevel) UTF8String], __TIME__);
+        printf("MTDirectionsKit[%s:%u] %s %s - %s\n", [file UTF8String], line, [logMessage UTF8String], [MTDLogLevelDescription(logLevel) UTF8String], __TIME__);
     }
 }

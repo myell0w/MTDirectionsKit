@@ -59,5 +59,12 @@ NSString* MTDGetFormattedTime(NSTimeInterval time) {
     } else {
         return [NSString stringWithFormat:@"%d:%02d", minutes, seconds];
     }
-    
+}
+
+NSString* MTDStringFromCLLocationCoordinate2D(CLLocationCoordinate2D coordinate) {
+    if (CLLocationCoordinate2DIsValid(coordinate)) {
+        return [NSString stringWithFormat:@"(%f,%f)", coordinate.latitude, coordinate.longitude];
+    } else {
+        return @"Invalid CLLocationCoordinate2D";
+    }
 }

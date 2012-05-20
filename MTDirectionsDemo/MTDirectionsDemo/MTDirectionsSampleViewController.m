@@ -193,12 +193,10 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (void)mapView:(MTDMapView *)mapView willStartLoadingDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate to:(CLLocationCoordinate2D)toCoordinate routeType:(MTDDirectionsRouteType)routeType {
-    NSLog(@"MapView %@ willStartLoadingDirectionsFrom:(%f,%f) to:(%f,%f) routeType:%d",
+    NSLog(@"MapView %@ willStartLoadingDirectionsFrom:%@ to:%@ routeType:%d",
           mapView,
-          fromCoordinate.latitude,
-          fromCoordinate.longitude,
-          toCoordinate.latitude,
-          toCoordinate.longitude,
+          MTDStringFromCLLocationCoordinate2D(fromCoordinate),
+          MTDStringFromCLLocationCoordinate2D(toCoordinate),
           routeType);
 }
 

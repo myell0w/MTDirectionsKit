@@ -1,6 +1,7 @@
 #import "MTDDirectionsParserMapQuest.h"
 #import "MTDWaypoint.h"
 #import "MTDDistance.h"
+#import "MTDFunctions.h"
 #import "MTDDirectionsOverlay.h"
 #import "MTDDirectionsRouteType.h"
 #import "MTDXMLElement.h"
@@ -102,6 +103,12 @@
                                           self.data, MTDDirectionsKitDataKey,
                                           errorMessage, MTDDirectionsKitErrorMessageKey,
                                           nil]];
+        
+        MTDLogError(@"Error occurred during parsing of directions from %@ to %@: %@ \n%@", 
+                    MTDStringFromCLLocationCoordinate2D(self.fromCoordinate),
+                    MTDStringFromCLLocationCoordinate2D(self.toCoordinate),
+                    errorMessage ?: @"No error message",
+                    error);
     }
     
     if (completion != nil) {

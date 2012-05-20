@@ -2,6 +2,8 @@
 #import "MTDDirectionsRequestMapQuest.h"
 #import "MTDDirectionsParser.h"
 #import "MTDDirectionsAPI.h"
+#import "MTDLogging.h"
+#import "MTDFunctions.h"
 #import "MTDDirectionsDefines.h"
 
 
@@ -156,6 +158,11 @@ NS_INLINE dispatch_queue_t parser_queue(void) {
         NSError *error = [NSError errorWithDomain:MTDDirectionsKitErrorDomain
                                              code:httpRequest.failureCode
                                          userInfo:nil];
+        
+        MTDLogError(@"Error occurred requesting directions from %@ to %@: %@", 
+                    MTDStringFromCLLocationCoordinate2D(self.fromCoordinate),
+                    MTDStringFromCLLocationCoordinate2D(self.toCoordinate),
+                    error);
         
         self.completion(nil, error);
     }

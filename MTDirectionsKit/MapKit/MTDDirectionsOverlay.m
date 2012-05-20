@@ -38,24 +38,28 @@
                                       distance:(MTDDistance *)distance
                                  timeInSeconds:(NSTimeInterval)timeInSeconds
                                      routeType:(MTDDirectionsRouteType)routeType {
-    MTDDirectionsOverlay *overlay = [[MTDDirectionsOverlay alloc] init];
-    MKMapPoint *points = malloc(sizeof(CLLocationCoordinate2D) * waypoints.count);
+    MTDDirectionsOverlay *overlay = nil;
     
-    for (NSUInteger i = 0; i < waypoints.count; i++) {
-        MTDWaypoint *waypoint = [waypoints objectAtIndex:i];
-        MKMapPoint point = MKMapPointForCoordinate(waypoint.coordinate);
+    if (waypoints.count > 0) {
+        overlay = [[MTDDirectionsOverlay alloc] init];
+        MKMapPoint *points = malloc(sizeof(CLLocationCoordinate2D) * waypoints.count);
         
-        points[i] = point;
-    }
-    
-    overlay.polyline = [MKPolyline polylineWithPoints:points count:waypoints.count];
-    overlay.waypoints = waypoints;
-    overlay.distance = distance;
-    overlay.timeInSeconds = timeInSeconds;
-    overlay.routeType = routeType;
-    
-    free(points);
-    
+        for (NSUInteger i = 0; i < waypoints.count; i++) {
+            MTDWaypoint *waypoint = [waypoints objectAtIndex:i];
+            MKMapPoint point = MKMapPointForCoordinate(waypoint.coordinate);
+            
+            points[i] = point;
+        }
+        
+        overlay.polyline = [MKPolyline polylineWithPoints:points count:waypoints.count];
+        overlay.waypoints = waypoints;
+        overlay.distance = distance;
+        overlay.timeInSeconds = timeInSeconds;
+        overlay.routeType = routeType;
+        
+        free(points);
+    } 
+
     return overlay;
 }
 
