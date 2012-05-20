@@ -14,8 +14,6 @@
 		9B8A2BB5155EBEA800BAAE7B /* car@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B8A2BAF155EBEA800BAAE7B /* car@2x.png */; };
 		9B8A2BB6155EBEA800BAAE7B /* bicycle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B8A2BB0155EBEA800BAAE7B /* bicycle@2x.png */; };
 		9B8F5175155C54D900A9C10C /* libMTDirectionsKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B8F5172155C54CE00A9C10C /* libMTDirectionsKit.a */; };
-		9BAC766D155C767B0026034F /* MTDirectionsXIBSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAC766B155C767B0026034F /* MTDirectionsXIBSampleViewController.m */; };
-		9BAC766E155C767B0026034F /* MTDirectionsXIBSampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BAC766C155C767B0026034F /* MTDirectionsXIBSampleViewController.xib */; };
 		9BB9AD191517602C003FC9F7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB9AD181517602C003FC9F7 /* UIKit.framework */; };
 		9BB9AD1B1517602C003FC9F7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB9AD1A1517602C003FC9F7 /* Foundation.framework */; };
 		9BB9AD1D1517602C003FC9F7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB9AD1C1517602C003FC9F7 /* CoreGraphics.framework */; };
@@ -60,9 +58,6 @@
 		9B8A2BAF155EBEA800BAAE7B /* car@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "car@2x.png"; path = "Resources/car@2x.png"; sourceTree = "<group>"; };
 		9B8A2BB0155EBEA800BAAE7B /* bicycle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bicycle@2x.png"; path = "Resources/bicycle@2x.png"; sourceTree = "<group>"; };
 		9B8F516A155C54CD00A9C10C /* MTDirectionsKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MTDirectionsKit.xcodeproj; path = ../MTDirectionsKit.xcodeproj; sourceTree = "<group>"; };
-		9BAC766A155C767B0026034F /* MTDirectionsXIBSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDirectionsXIBSampleViewController.h; sourceTree = "<group>"; };
-		9BAC766B155C767B0026034F /* MTDirectionsXIBSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDirectionsXIBSampleViewController.m; sourceTree = "<group>"; };
-		9BAC766C155C767B0026034F /* MTDirectionsXIBSampleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MTDirectionsXIBSampleViewController.xib; sourceTree = "<group>"; };
 		9BB9AD141517602C003FC9F7 /* MTDirectionsKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTDirectionsKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB9AD181517602C003FC9F7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9BB9AD1A1517602C003FC9F7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -146,9 +141,6 @@
 				9BB9AD281517602C003FC9F7 /* AppDelegate.m */,
 				9BB9AD4915176124003FC9F7 /* MTDirectionsSampleViewController.h */,
 				9BB9AD4A15176124003FC9F7 /* MTDirectionsSampleViewController.m */,
-				9BAC766A155C767B0026034F /* MTDirectionsXIBSampleViewController.h */,
-				9BAC766B155C767B0026034F /* MTDirectionsXIBSampleViewController.m */,
-				9BAC766C155C767B0026034F /* MTDirectionsXIBSampleViewController.xib */,
 				9BB9AD1F1517602C003FC9F7 /* Supporting Files */,
 			);
 			name = MTDirectionsKitDemo;
@@ -256,7 +248,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BB9AD231517602C003FC9F7 /* InfoPlist.strings in Resources */,
-				9BAC766E155C767B0026034F /* MTDirectionsXIBSampleViewController.xib in Resources */,
 				9B8A2BB1155EBEA800BAAE7B /* pedestrian.png in Resources */,
 				9B8A2BB2155EBEA800BAAE7B /* car.png in Resources */,
 				9B8A2BB3155EBEA800BAAE7B /* bicycle.png in Resources */,
@@ -276,7 +267,6 @@
 				9BB9AD251517602C003FC9F7 /* main.m in Sources */,
 				9BB9AD291517602C003FC9F7 /* AppDelegate.m in Sources */,
 				9BB9AD4B15176124003FC9F7 /* MTDirectionsSampleViewController.m in Sources */,
-				9BAC766D155C767B0026034F /* MTDirectionsXIBSampleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

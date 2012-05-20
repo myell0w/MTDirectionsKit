@@ -88,9 +88,19 @@
                                                timeInSeconds:timeInSeconds
                                                    routeType:self.routeType];
     } else {
+        NSArray *messageNodes = [MTDXMLElement nodesForXPathQuery:@"//messages/message" onXML:self.data];
+        NSString *errorMessage = nil;
+        
+        if (messageNodes.count > 0) {
+            errorMessage = [[messageNodes objectAtIndex:0] contentString];
+        }
+        
         error = [NSError errorWithDomain:MTDDirectionsKitErrorDomain
                                     code:statusCode
-                                userInfo:[NSDictionary dictionaryWithObject:self.data forKey:MTDDirectionsKitDataKey]];
+                                userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                          self.data, MTDDirectionsKitDataKey,
+                                          errorMessage, MTDDirectionsKitErrorMessageKey,
+                                          nil]];
     }
     
     if (completion != nil) {

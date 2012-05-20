@@ -77,6 +77,7 @@
     self.distanceControl.textAlignment = UITextAlignmentCenter;
     self.distanceControl.shadowColor = [UIColor blackColor];
     self.distanceControl.shadowOffset = CGSizeMake(0.f, 1.f);
+    self.distanceControl.text = @"Try MTDirectionsKit, it's great!";
     [self.view addSubview:self.distanceControl];
     
     self.segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:
@@ -109,7 +110,7 @@
     self.routeBackgroundView.alpha = 0.f;
     [self.view addSubview:self.routeBackgroundView];
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, 50.f, 30.f)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, 50.f, 20.f)];
     
     label.backgroundColor = [UIColor clearColor];
     label.textColor = [UIColor grayColor];
@@ -119,15 +120,16 @@
     self.fromControl = [[UITextField alloc] initWithFrame:CGRectMake(5.f, 5.f, self.view.bounds.size.width-10.f, 30.f)];
     self.fromControl.borderStyle = UITextBorderStyleRoundedRect;
     self.fromControl.leftViewMode = UITextFieldViewModeAlways;
+    self.fromControl.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     label.font = self.fromControl.font;
     self.fromControl.leftView = label;
     self.fromControl.returnKeyType = UIReturnKeyNext;
     self.fromControl.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.fromControl.delegate = self;
-    self.fromControl.text = @"47.0616,16.3236";
+    self.fromControl.text = @"Güssing, Österreich";
     [self.routeBackgroundView addSubview:self.fromControl];
     
-    label = [[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, 50.f, 30.f)];
+    label = [[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, 50.f, 20.f)];
     label.backgroundColor = [UIColor clearColor];
     label.textColor = [UIColor grayColor];
     label.textAlignment = UITextAlignmentRight;
@@ -139,10 +141,11 @@
     self.toControl.borderStyle = UITextBorderStyleRoundedRect;
     self.toControl.leftViewMode = UITextFieldViewModeAlways;
     self.toControl.leftView = label;
+    self.toControl.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     self.toControl.returnKeyType = UIReturnKeyRoute;
     self.toControl.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.toControl.delegate = self;
-    self.toControl.text = @"48.209,16.354";
+    self.toControl.text = @"Wien";
     [self.routeBackgroundView addSubview:self.toControl];
 }
 
@@ -217,7 +220,7 @@
 - (void)mapView:(MTDMapView *)mapView didFailLoadingDirectionsOverlayWithError:(NSError *)error {
     NSLog(@"MapView %@ didFailLoadingDirectionsOverlayWithError: %@", mapView, error);
     
-    self.distanceControl.text = @"Loading failed";
+    self.distanceControl.text = [error.userInfo objectForKey:MTDDirectionsKitErrorMessageKey];
     [self hideLoadingIndicator];
 }
 
@@ -308,19 +311,22 @@
         CLLocationCoordinate2D fromCoordinate = CLLocationCoordinate2DMake([[fromComponents objectAtIndex:0] doubleValue], [[fromComponents objectAtIndex:1] doubleValue]);
         CLLocationCoordinate2D toCoordinate = CLLocationCoordinate2DMake([[toComponents objectAtIndex:0] doubleValue], [[toComponents objectAtIndex:1] doubleValue]);
         
+        [self showLoadingIndicator];
         [self.mapView loadDirectionsFrom:fromCoordinate
                                       to:toCoordinate
                                routeType:self.routeType
                     zoomToShowDirections:YES];
-    } else {
+    } else if (fromComponents.count < 2 && toComponents.count < 2) {
+        [self showLoadingIndicator];
         [self.mapView loadDirectionsFromAddress:from
                                       toAddress:to
                                       routeType:self.routeType
                            zoomToShowDirections:YES];
+    } else {
+        self.distanceControl.text = @"Invalid Input";
     }
     
     [self hideRouteView];
-    [self showLoadingIndicator];
 }
 
 - (void)showLoadingIndicator {

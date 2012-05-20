@@ -21,6 +21,7 @@
 // NSError-related constants
 #define MTDDirectionsKitErrorDomain      @"MTDDirectionsKitErrorDomain"
 #define MTDDirectionsKitDataKey          @"MTDDirectionsKitDataKey"
+#define MTDDirectionsKitErrorMessageKey  @"MTDDirectionsKitErrorMessageKey"
 
 
 ////////////////////////////////////////////////////////////////////////

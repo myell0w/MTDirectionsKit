@@ -29,12 +29,19 @@ void MTDDirectionsOpenInMapsApp(CLLocationCoordinate2D fromCoordinate, CLLocatio
 }
 
 NSString* MTDURLEncodedString(NSString *string) {
-    NSString *result = (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-                                                                                             (__bridge CFStringRef)string,
-                                                                                             NULL,
-                                                                                             CFSTR("!*'();:@&=+$,/?%#[]"),
-                                                                                             kCFStringEncodingUTF8);
-    return result;
+    NSMutableString *umlautlessString = [NSMutableString stringWithString:string];
+    
+    // replace umlauts, because they don't work in the MapQuest API
+    [umlautlessString replaceOccurrencesOfString:@"ü" withString:@"ue" options:NSCaseInsensitiveSearch range:NSMakeRange(0, umlautlessString.length)];
+    [umlautlessString replaceOccurrencesOfString:@"ö" withString:@"oe" options:NSCaseInsensitiveSearch range:NSMakeRange(0, umlautlessString.length)];
+    [umlautlessString replaceOccurrencesOfString:@"ä" withString:@"ae" options:NSCaseInsensitiveSearch range:NSMakeRange(0, umlautlessString.length)];
+    [umlautlessString replaceOccurrencesOfString:@"ß" withString:@"ss" options:NSCaseInsensitiveSearch range:NSMakeRange(0, umlautlessString.length)];
+    
+    return (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                                                 (__bridge CFStringRef)[umlautlessString description],
+                                                                                 NULL,
+                                                                                 CFSTR("!*'();:@&=+$,/?%#[]"),
+                                                                                 kCFStringEncodingUTF8);
 }
 
 NSString* MTDGetFormattedTime(NSTimeInterval time) {
