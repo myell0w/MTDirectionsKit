@@ -1,5 +1,7 @@
 #import "MTDDirectionsOverlay.h"
 #import "MTDWaypoint.h"
+#import "MTDDistance.h"
+#import "MTDFunctions.h"
 #import "MTDDirectionsDefines.h"
 
 
@@ -13,7 +15,8 @@
 
 // Re-defining properties as readwrite
 @property (nonatomic, strong, readwrite) NSArray *waypoints;
-@property (nonatomic, assign, readwrite) CLLocationDistance distance;
+@property (nonatomic, strong, readwrite) MTDDistance *distance;
+@property (nonatomic, assign, readwrite) NSTimeInterval timeInSeconds;
 @property (nonatomic, assign, readwrite) MTDDirectionsRouteType routeType;
 
 @end
@@ -24,6 +27,7 @@
 @synthesize polyline = _polyline;
 @synthesize waypoints = _waypoints;
 @synthesize distance = _distance;
+@synthesize timeInSeconds = _timeInSeconds;
 @synthesize routeType = _routeType;
 
 ////////////////////////////////////////////////////////////////////////
@@ -31,25 +35,31 @@
 ////////////////////////////////////////////////////////////////////////
 
 + (MTDDirectionsOverlay *)overlayWithWaypoints:(NSArray *)waypoints 
-                                     distance:(CLLocationDistance)distance
-                                    routeType:(MTDDirectionsRouteType)routeType {
-    MTDDirectionsOverlay *overlay = [[MTDDirectionsOverlay alloc] init];
-    MKMapPoint *points = malloc(sizeof(CLLocationCoordinate2D) * waypoints.count);
+                                      distance:(MTDDistance *)distance
+                                 timeInSeconds:(NSTimeInterval)timeInSeconds
+                                     routeType:(MTDDirectionsRouteType)routeType {
+    MTDDirectionsOverlay *overlay = nil;
     
-    for (NSUInteger i = 0; i < waypoints.count; i++) {
-        MTDWaypoint *waypoint = [waypoints objectAtIndex:i];
-        MKMapPoint point = MKMapPointForCoordinate(waypoint.coordinate);
+    if (waypoints.count > 0) {
+        overlay = [[MTDDirectionsOverlay alloc] init];
+        MKMapPoint *points = malloc(sizeof(CLLocationCoordinate2D) * waypoints.count);
         
-        points[i] = point;
-    }
-    
-    overlay.polyline = [MKPolyline polylineWithPoints:points count:waypoints.count];
-    overlay.waypoints = waypoints;
-    overlay.distance = distance;
-    overlay.routeType = routeType;
-    
-    free(points);
-    
+        for (NSUInteger i = 0; i < waypoints.count; i++) {
+            MTDWaypoint *waypoint = [waypoints objectAtIndex:i];
+            MKMapPoint point = MKMapPointForCoordinate(waypoint.coordinate);
+            
+            points[i] = point;
+        }
+        
+        overlay.polyline = [MKPolyline polylineWithPoints:points count:waypoints.count];
+        overlay.waypoints = waypoints;
+        overlay.distance = distance;
+        overlay.timeInSeconds = timeInSeconds;
+        overlay.routeType = routeType;
+        
+        free(points);
+    } 
+
     return overlay;
 }
 
@@ -97,6 +107,10 @@
     }
     
     return MTDInvalidCLLocationCoordinate2D;
+}
+
+- (NSString *)formattedTime {
+    return MTDGetFormattedTime(self.timeInSeconds);
 }
 
 @end

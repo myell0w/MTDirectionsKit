@@ -21,14 +21,15 @@ MTDirectionsKit is very easy to use, here's a sample call:
     // setup _mapView
     // ...
     
+    MTDMapView *_mapView = [[MTDMapView alloc] initWithFrame:self.view.bounds];
+    _mapView.directionsDelegate = self;
+    
     [_mapView loadDirectionsFrom:CLLocationCoordinate2DMake(51.38713, -1.0316)
-                             to:CLLocationCoordinate2DMake(51.4554, -0.9742)
-                      routeType:MTDDirectionsRouteTypeFastestDriving
-                     completion:^(MTDMapView *mapView, NSError *error) {
-                        if (error == nil) {
-                           [mapView setRegionToShowDirectionsAnimated:YES];
-                        }
-                    }];
+                              to:CLLocationCoordinate2DMake(51.4554, -0.9742)
+                       routeType:MTDDirectionsRouteTypeFastestDriving
+            zoomToShowDirections:YES];
+            
+To see a detailed example on how to use MTDirectionsKit have a look at the provided Demo Application.
 
 ## Integration
 

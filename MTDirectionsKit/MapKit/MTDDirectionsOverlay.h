@@ -10,6 +10,9 @@
 #import "MTDDirectionsRouteType.h"
 
 
+@class MTDDistance;
+
+
 /**
  An instance of MTDirectionsOverlay implements the MKOverlay protocol and represents 
  an overlay used to store information about already parsed directions with a given
@@ -29,7 +32,11 @@
 /** the end coordinate of the directions */
 @property (nonatomic, readonly) CLLocationCoordinate2D toCoordinate;
 /** the total distance between fromCoordinate and toCoordinate, when travelled along the given waypoints */
-@property (nonatomic, assign, readonly) CLLocationDistance distance;
+@property (nonatomic, strong, readonly) MTDDistance *distance;
+/** the total estimated time for this route */
+@property (nonatomic, assign, readonly) NSTimeInterval timeInSeconds;
+/** the estimated time as formatted string */
+@property (nonatomic, readonly) NSString *formattedTime;
 /** the type of travelling used to compute the directions, e.g. walking, by bike etc. */
 @property (nonatomic, assign, readonly) MTDDirectionsRouteType routeType;
 
@@ -55,7 +62,8 @@
  @return an overlay encapsulating the given route-information
  */
 + (MTDDirectionsOverlay *)overlayWithWaypoints:(NSArray *)waypoints 
-                                     distance:(CLLocationDistance)distance
-                                    routeType:(MTDDirectionsRouteType)routeType;
+                                      distance:(MTDDistance *)distance
+                                 timeInSeconds:(NSTimeInterval)timeInSeconds
+                                     routeType:(MTDDirectionsRouteType)routeType;
 
 @end

@@ -1,5 +1,4 @@
 #import "MTDirectionsSampleViewController.h"
-#import <MTDirectionsKit/MTDirectionsKit.h>
 
 
 @interface MTDirectionsSampleViewController () <MKMapViewDelegate, UITextFieldDelegate>
@@ -14,6 +13,7 @@
 @property (nonatomic, strong) UIView *routeBackgroundView;
 @property (nonatomic, strong) UITextField *fromControl;
 @property (nonatomic, strong) UITextField *toControl;
+@property (nonatomic, strong) UILabel *distanceControl;
 
 @property (nonatomic, readonly, getter = isSearchUIVisible) BOOL searchUIVisible;
 @property (nonatomic, readonly) MTDDirectionsRouteType routeType;
@@ -41,6 +41,7 @@
 @synthesize routeBackgroundView = _routeBackgroundView;
 @synthesize fromControl = _fromControl;
 @synthesize toControl = _toControl;
+@synthesize distanceControl = _distanceControl;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
@@ -49,6 +50,8 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.title = @"MTDirecionsKit";
+        
+        MTDDirectionsSetLogLevel(MTDLogLevelInfo);
     }
     
     return self;
@@ -68,12 +71,26 @@
                                                  MKCoordinateSpanMake(0.026846, 0.032959));
     [self.view addSubview:self.mapView];
     
+    self.distanceControl = [[UILabel alloc] initWithFrame:CGRectMake(0.f, self.view.bounds.size.height - 35.f, self.view.bounds.size.width, 35.f)];
+    self.distanceControl.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
+    self.distanceControl.backgroundColor = [UIColor colorWithWhite:0.2 alpha:0.4];
+    self.distanceControl.font = [UIFont boldSystemFontOfSize:14.f];
+    self.distanceControl.textColor = [UIColor whiteColor];
+    self.distanceControl.textAlignment = UITextAlignmentCenter;
+    self.distanceControl.shadowColor = [UIColor blackColor];
+    self.distanceControl.shadowOffset = CGSizeMake(0.f, 1.f);
+    self.distanceControl.text = @"Try MTDirectionsKit, it's great!";
+    [self.view addSubview:self.distanceControl];
+    
     self.segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:
                                                                        [UIImage imageNamed:@"pedestrian"],
                                                                        [UIImage imageNamed:@"bicycle"],
                                                                        [UIImage imageNamed:@"car"], nil]];
     self.segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
-    self.segmentedControl.selectedSegmentIndex = 0;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        self.segmentedControl.tintColor = [UIColor lightGrayColor];
+    }
+    self.segmentedControl.selectedSegmentIndex = 2;
     
     self.searchItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch
                                                                     target:self
@@ -95,7 +112,7 @@
     self.routeBackgroundView.alpha = 0.f;
     [self.view addSubview:self.routeBackgroundView];
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, 50.f, 30.f)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, 50.f, 20.f)];
     
     label.backgroundColor = [UIColor clearColor];
     label.textColor = [UIColor grayColor];
@@ -105,17 +122,21 @@
     self.fromControl = [[UITextField alloc] initWithFrame:CGRectMake(5.f, 5.f, self.view.bounds.size.width-10.f, 30.f)];
     self.fromControl.borderStyle = UITextBorderStyleRoundedRect;
     self.fromControl.leftViewMode = UITextFieldViewModeAlways;
+    self.fromControl.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    label.font = self.fromControl.font;
     self.fromControl.leftView = label;
     self.fromControl.returnKeyType = UIReturnKeyNext;
     self.fromControl.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.fromControl.delegate = self;
-    self.fromControl.text = @"47.0616,16.3236";
+    self.fromControl.text = @"Güssing, Österreich";
+    self.fromControl.placeholder = @"Address or Lat/Lng";
     [self.routeBackgroundView addSubview:self.fromControl];
     
-    label = [[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, 50.f, 30.f)];
+    label = [[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, 50.f, 20.f)];
     label.backgroundColor = [UIColor clearColor];
     label.textColor = [UIColor grayColor];
     label.textAlignment = UITextAlignmentRight;
+    label.font = self.fromControl.font;
     label.text = @"End:";
     
     self.toControl = [[UITextField alloc] initWithFrame:CGRectMake(5.f, self.fromControl.frame.origin.y + self.fromControl.frame.size.height + 5.f,
@@ -123,17 +144,18 @@
     self.toControl.borderStyle = UITextBorderStyleRoundedRect;
     self.toControl.leftViewMode = UITextFieldViewModeAlways;
     self.toControl.leftView = label;
+    self.toControl.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     self.toControl.returnKeyType = UIReturnKeyRoute;
     self.toControl.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.toControl.delegate = self;
-    self.toControl.text = @"48.209,16.354";
+    self.toControl.text = @"Wien";
+    self.toControl.placeholder = @"Address or Lat/Lng";
     [self.routeBackgroundView addSubview:self.toControl];
 }
 
 - (void)viewDidUnload {
     [super viewDidUnload];
     
-    [self.mapView removeFromSuperview];
     self.mapView.delegate = nil;
     self.mapView = nil;
     
@@ -147,6 +169,7 @@
     self.routeBackgroundView = nil;
     self.fromControl = nil;
     self.toControl = nil;
+    self.distanceControl = nil;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -163,6 +186,44 @@
                                routeType:MTDDirectionsRouteTypeFastestDriving
                     zoomToShowDirections:YES];
     });
+}
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - MTDDirectionsDelegate
+////////////////////////////////////////////////////////////////////////
+
+- (void)mapView:(MTDMapView *)mapView willStartLoadingDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate to:(CLLocationCoordinate2D)toCoordinate routeType:(MTDDirectionsRouteType)routeType {
+    NSLog(@"MapView %@ willStartLoadingDirectionsFrom:%@ to:%@ routeType:%d",
+          mapView,
+          MTDStringFromCLLocationCoordinate2D(fromCoordinate),
+          MTDStringFromCLLocationCoordinate2D(toCoordinate),
+          routeType);
+}
+
+- (void)mapView:(MTDMapView *)mapView willStartLoadingDirectionsFromAddress:(NSString *)fromAddress toAddress:(NSString *)toAddress routeType:(MTDDirectionsRouteType)routeType {
+    NSLog(@"MapView %@ willStartLoadingDirectionsFromAddress:%@ toAddress:%@ routeType:%d",
+          mapView,
+          fromAddress,
+          toAddress,
+          routeType);
+}
+
+- (MTDDirectionsOverlay *)mapView:(MTDMapView *)mapView didFinishLoadingDirectionsOverlay:(MTDDirectionsOverlay *)directionsOverlay {
+    NSLog(@"MapView %@ didFinishLoadingDirectionsOverlay: %@", mapView, directionsOverlay);
+    
+    self.distanceControl.text = [NSString stringWithFormat:@"Distance: %@, Time: %@", 
+                                 [directionsOverlay.distance description],
+                                 MTDGetFormattedTime(directionsOverlay.timeInSeconds)];
+    [self hideLoadingIndicator];
+    
+    return directionsOverlay;
+}
+
+- (void)mapView:(MTDMapView *)mapView didFailLoadingDirectionsOverlayWithError:(NSError *)error {
+    NSLog(@"MapView %@ didFailLoadingDirectionsOverlayWithError: %@", mapView, error);
+    
+    self.distanceControl.text = [error.userInfo objectForKey:MTDDirectionsKitErrorMessageKey];
+    [self hideLoadingIndicator];
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -245,22 +306,29 @@
 - (void)performSearch {
     NSString *from = self.fromControl.text;
     NSString *to = self.toControl.text;
-    NSArray *fromComponents = [from componentsSeparatedByString:@","];
-    NSArray *toComponents = [to componentsSeparatedByString:@","];
+    NSArray *fromComponents = [[from stringByReplacingOccurrencesOfString:@" " withString:@""] componentsSeparatedByString:@"/"];
+    NSArray *toComponents = [[to stringByReplacingOccurrencesOfString:@" " withString:@""] componentsSeparatedByString:@"/"];
     
-    CLLocationCoordinate2D fromCoordinate = CLLocationCoordinate2DMake([[fromComponents objectAtIndex:0] doubleValue], [[fromComponents objectAtIndex:1] doubleValue]);
-    CLLocationCoordinate2D toCoordinate = CLLocationCoordinate2DMake([[toComponents objectAtIndex:0] doubleValue], [[toComponents objectAtIndex:1] doubleValue]);
+    if (fromComponents.count == 2 && toComponents.count == 2) {
+        CLLocationCoordinate2D fromCoordinate = CLLocationCoordinate2DMake([[fromComponents objectAtIndex:0] doubleValue], [[fromComponents objectAtIndex:1] doubleValue]);
+        CLLocationCoordinate2D toCoordinate = CLLocationCoordinate2DMake([[toComponents objectAtIndex:0] doubleValue], [[toComponents objectAtIndex:1] doubleValue]);
+        
+        [self showLoadingIndicator];
+        [self.mapView loadDirectionsFrom:fromCoordinate
+                                      to:toCoordinate
+                               routeType:self.routeType
+                    zoomToShowDirections:YES];
+    } else if (fromComponents.count < 2 && toComponents.count < 2) {
+        [self showLoadingIndicator];
+        [self.mapView loadDirectionsFromAddress:from
+                                      toAddress:to
+                                      routeType:self.routeType
+                           zoomToShowDirections:YES];
+    } else {
+        self.distanceControl.text = @"Invalid Input";
+    }
     
     [self hideRouteView];
-    [self showLoadingIndicator];
-    
-    [self.mapView loadDirectionsFrom:fromCoordinate
-                                  to:toCoordinate
-                           routeType:self.routeType
-                          completion:^(MTDMapView *mapView, NSError *error) {
-                              [mapView setRegionToShowDirectionsAnimated:YES];
-                              [self hideLoadingIndicator];
-                          }];
 }
 
 - (void)showLoadingIndicator {

@@ -14,4 +14,7 @@
  */
 @interface MTDDirectionsOverlayView : MKOverlayView
 
+/** The color used to draw the overlay */
+@property (nonatomic, strong) UIColor *overlayColor;
+
 @end

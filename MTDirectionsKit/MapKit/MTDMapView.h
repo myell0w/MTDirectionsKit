@@ -14,6 +14,7 @@
 
 @class MTDDirectionsOverlay;
 @class MTDDirectionsOverlayView;
+@protocol MTDDirectionsDelegate;
 
 
 /**
@@ -25,18 +26,24 @@
  Sample usage:
  
     MTDMapView *_mapView = [[MTDMapView alloc] initWithFrame:self.view.bounds];
+    _mapView.directionsDelegate = self;
  
     [_mapView loadDirectionsFrom:CLLocationCoordinate2DMake(51.38713, -1.0316)
                              to:CLLocationCoordinate2DMake(51.4554, -0.9742)
                       routeType:MTDDirectionsRouteTypeFastestDriving
-                     completion:^(MTDMapView *mapView, NSError *error) {
-                        if (error == nil) {
-                           [mapView setRegionToShowDirectionsAnimated:YES];
-                        }
-                    }];
+           zoomToShowDirections:YES];
  
  */
 @interface MTDMapView : MKMapView
+
+/******************************************
+ @name Delegate
+ ******************************************/
+
+/**
+ The receiver's directionsDelegate
+ */
+@property (nonatomic, unsafe_unretained) id<MTDDirectionsDelegate> directionsDelegate;
 
 /******************************************
  @name Directions
@@ -68,7 +75,7 @@
 /** the end coordinate of the directions of the currently displayed overlay */
 @property (nonatomic, readonly) CLLocationCoordinate2D toCoordinate;
 /** the total distance of the directions of the currently displayed overlay, by using all waypoints */
-@property (nonatomic, readonly) CLLocationDistance distance;
+@property (nonatomic, readonly) double distance;
 /** the type of travelling used to compute the directions of the currently displayed overlay */
 @property (nonatomic, readonly) MTDDirectionsRouteType routeType;
 
@@ -79,10 +86,10 @@
  
  @param fromCoordinate the start point of the direction
  @param toCoordinate the end point of the direction
- @param routeType the type of the route request, e.g. pedestrian, cycling, fastest driving
+ @param routeType the type of the route requested, e.g. pedestrian, cycling, fastest driving
  @param zoomToShowDirections flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)
 
- @see loadDirectionsFrom:to:routeType:completion:
+ @see loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:
  @see cancelLoadOfDirections
  */
 - (void)loadDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate
@@ -91,24 +98,22 @@
       zoomToShowDirections:(BOOL)zoomToShowDirections;
 
 /**
- Starts a request and loads the directions between the specified coordinates.
- When the request is finished the directionsOverlay gets set on the mapView and
- the completion-block gets executed. You can optionally zoom to show the whole
- directions overlay, by calling setRegionToShowDirectionsAnimated: in the completion
- block.
+ Starts a request and loads the directions between the specified addresses.
+ When the request is finished the directionsOverlay gets set on the MapView and
+ the region gets zoomed (animated) to show the whole overlay, if the flag zoomToShowDirections is set.
  
- @param fromCoordinate the start point of the direction
- @param toCoordinate the end point of the direction
- @param routeType the type of the route request, e.g. pedestrian, cycling, fastest driving
- @param completion block that gets executed when the request finishes or fails
-
- @see loadDirectionsFrom:to:routeType:zoomToShowDirections:
+ @param fromAddress the address of the starting point of the route
+ @param toAddress the addresss of the end point of the route
+ @param routeType the type of the route requested, e.g. pedestrian, cycling, fastest driving
+ @param zoomToShowDirections flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)
+ 
+  @see loadDirectionsFrom:to:routeType:zoomToShowDirections:
  @see cancelLoadOfDirections
  */
-- (void)loadDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate
-                        to:(CLLocationCoordinate2D)toCoordinate
-                 routeType:(MTDDirectionsRouteType)routeType
-                completion:(mtd_directions_block)completion;
+- (void)loadDirectionsFromAddress:(NSString *)fromAddress
+                        toAddress:(NSString *)toAddress
+                        routeType:(MTDDirectionsRouteType)routeType
+             zoomToShowDirections:(BOOL)zoomToShowDirections;
 
 /**
  Cancels a possible ongoing request for loading directions.

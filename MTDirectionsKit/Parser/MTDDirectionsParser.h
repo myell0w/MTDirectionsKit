@@ -12,9 +12,12 @@
 
 
 /**
- This protocol provides the interface of all instances that want to act as a directions parser.
+ The MTDDirectionsParser protocol defines a set of required methods that instances of
+ MTDDirectionsParser need to implement, that want to act as a directions parser.
  */
 @protocol MTDDirectionsParser <NSObject>
+
+@required
 
 /******************************************
  @name Directions
