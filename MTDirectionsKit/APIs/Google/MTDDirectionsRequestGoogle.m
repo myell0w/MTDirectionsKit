@@ -1,14 +1,14 @@
-#import "MTDDirectionsRequestMapQuest.h"
+#import "MTDDirectionsRequestGoogle.h"
 #import "MTDDirectionsRequest+MTDirectionsPrivateAPI.h"
-#import "MTDDirectionsRouteType+MapQuest.h"
-#import "MTDDirectionsParserMapQuest.h"
+#import "MTDDirectionsRouteType+Google.h"
+#import "MTDDirectionsParserGoogle.h"
 #import "MTDFunctions.h"
 
 
-#define kMTDDirectionBaseURL         @"http://open.mapquestapi.com/directions/v0/route?outFormat=xml&unit=k&narrativeType=none&shapeFormat=raw&generalize=50&ambiguities=ignore"
+#define kMTDDirectionBaseURL         @"http://maps.google.com/maps/api/directions/xml?sensor=true"
 
 
-@implementation MTDDirectionsRequestMapQuest
+@implementation MTDDirectionsRequestGoogle
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
@@ -19,13 +19,13 @@
      routeType:(MTDDirectionsRouteType)routeType
     completion:(mtd_parser_block)completion {
     if ((self = [super initFrom:fromCoordinate to:toCoordinate routeType:routeType completion:completion])) {
-        NSString *address = [NSString stringWithFormat:@"%@&from=%f,%f&to=%f,%f&routeType=%@",
+        NSString *address = [NSString stringWithFormat:@"%@&origin=%f,%f&destination=%f,%f&mode=%@",
                              kMTDDirectionBaseURL, 
                              fromCoordinate.latitude, fromCoordinate.longitude,
                              toCoordinate.latitude, toCoordinate.longitude,
-                             MTDDirectionStringForDirectionRouteTypeMapQuest(routeType)];
+                             MTDDirectionStringForDirectionRouteTypeGoogle(routeType)];
         
-        self.parserClass = [MTDDirectionsParserMapQuest class];
+        self.parserClass = [MTDDirectionsParserGoogle class];
         self.httpAddress = address;
     }
     
@@ -37,17 +37,18 @@
             routeType:(MTDDirectionsRouteType)routeType
            completion:(mtd_parser_block)completion {
     if ((self = [super initFromAddress:fromAddress toAddress:toAddress routeType:routeType completion:completion])) {
-        NSString *address = [NSString stringWithFormat:@"%@&from=%@&to=%@&routeType=%@",
+        NSString *address = [NSString stringWithFormat:@"%@&origin=%@&destination=%@&mode=%@",
                              kMTDDirectionBaseURL, 
                              MTDURLEncodedString(fromAddress),
                              MTDURLEncodedString(toAddress),
-                             MTDDirectionStringForDirectionRouteTypeMapQuest(routeType)];
+                             MTDDirectionStringForDirectionRouteTypeGoogle(routeType)];
         
-        self.parserClass = [MTDDirectionsParserMapQuest class];
+        self.parserClass = [MTDDirectionsParserGoogle class];
         self.httpAddress = address;
     }
     
     return self;
 }
+
 
 @end

@@ -1,4 +1,5 @@
 #import "MTDDirectionsParser.h"
+#import "MTDLogging.h"
 
 
 @interface MTDDirectionsParser ()
@@ -40,6 +41,9 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (void)parseWithCompletion:(mtd_parser_block)completion {
+    MTDLogError(@"ParseWithCompletion was called on a parser that doesn't override it (Class: %@)", 
+                NSStringFromClass([self class]));
+    
     [self doesNotRecognizeSelector:_cmd];
 }
 

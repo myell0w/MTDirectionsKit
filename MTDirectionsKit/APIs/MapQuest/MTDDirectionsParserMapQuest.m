@@ -1,11 +1,13 @@
 #import "MTDDirectionsParserMapQuest.h"
 #import "MTDWaypoint.h"
+#import "MTDDistance.h"
+#import "MTDFunctions.h"
 #import "MTDDirectionsOverlay.h"
 #import "MTDDirectionsRouteType.h"
 #import "MTDManeuver.h"
 #import "MTDXMLElement.h"
 #import "MTDStatusCodeMapQuest.h"
-
+#import "MTDLogging.h"
 
 #define kMTDDirectionsStartPointNode     @"startPoint"
 #define kMTDDirectionsDistanceNode       @"distance"
@@ -30,18 +32,22 @@
     }
     
     if (statusCode == MTDStatusCodeMapQuestSuccess) {
-        NSArray *waypointNodes = [MTXPathResultNode nodesForXPathQuery:@"//shapePoints/latLng" onXML:self.data];
-        NSArray *distanceNodes = [MTXPathResultNode nodesForXPathQuery:@"//route/distance" onXML:self.data];
-        NSArray *maneuverNodes = [MTXPathResultNode nodesForXPathQuery:@"//legs/leg[1]/maneuvers/maneuver" onXML:self.data];
+        NSArray *waypointNodes = [MTDXMLElement nodesForXPathQuery:@"//shapePoints/latLng" onXML:self.data];
+        NSArray *distanceNodes = [MTDXMLElement nodesForXPathQuery:@"//route/distance" onXML:self.data];
+        NSArray *maneuverNodes = [MTDXMLElement nodesForXPathQuery:@"//legs/leg[1]/maneuvers/maneuver" onXML:self.data];
+        NSArray *timeNodes = [MTDXMLElement nodesForXPathQuery:@"//route/time" onXML:self.data];
         
         NSMutableArray *waypoints = [NSMutableArray arrayWithCapacity:waypointNodes.count+2];
         NSMutableArray *maneuvers = [NSMutableArray arrayWithCapacity:maneuverNodes.count];
-        CLLocationDistance distance = -1.;
+        MTDDistance *distance = nil;
+        NSTimeInterval timeInSeconds = -1.;
         
         // Parse Waypoints
         {
             // add start coordinate
-            [waypoints addObject:[MTDWaypoint waypointWithCoordinate:self.fromCoordinate]];
+            if (CLLocationCoordinate2DIsValid(self.fromCoordinate)) {
+                [waypoints addObject:[MTDWaypoint waypointWithCoordinate:self.fromCoordinate]];
+            }
             
             // There should only be one element "shapePoints"
             for (MTDXMLElement *childNode in waypointNodes) {
@@ -60,19 +66,21 @@
             }
             
             // add end coordinate
-            [waypoints addObject:[MTDWaypoint waypointWithCoordinate:self.toCoordinate]];
+            if (CLLocationCoordinate2DIsValid(self.toCoordinate)) {
+                [waypoints addObject:[MTDWaypoint waypointWithCoordinate:self.toCoordinate]];
+            }
         }
         
         // Parse Maneuvers
         {
-            for (MTXPathResultNode *maneuverNode in maneuverNodes) {
-                MTXPathResultNode *positionNode = [maneuverNode firstChildNodeWithName:kMTDDirectionsStartPointNode];
-                MTXPathResultNode *latitudeNode = [positionNode firstChildNodeWithName:kMTDDirectionsLatitudeNode];
-                MTXPathResultNode *longitudeNode = [positionNode firstChildNodeWithName:kMTDDirectionsLongitudeNode];
+            for (MTDXMLElement *maneuverNode in maneuverNodes) {
+                MTDXMLElement *positionNode = [maneuverNode firstChildNodeWithName:kMTDDirectionsStartPointNode];
+                MTDXMLElement *latitudeNode = [positionNode firstChildNodeWithName:kMTDDirectionsLatitudeNode];
+                MTDXMLElement *longitudeNode = [positionNode firstChildNodeWithName:kMTDDirectionsLongitudeNode];
                 
                 if (latitudeNode != nil && longitudeNode != nil) {
-                    MTXPathResultNode *distanceNode = [maneuverNode firstChildNodeWithName:kMTDDirectionsDistanceNode];
-                    MTXPathResultNode *timeNode = [maneuverNode firstChildNodeWithName:kMTDDirectionsTimeNode];
+                    MTDXMLElement *distanceNode = [maneuverNode firstChildNodeWithName:kMTDDirectionsDistanceNode];
+                    MTDXMLElement *timeNode = [maneuverNode firstChildNodeWithName:kMTDDirectionsTimeNode];
                     
                     CLLocationCoordinate2D maneuverCoordinate = CLLocationCoordinate2DMake([latitudeNode.contentString doubleValue],
                                                                                            [longitudeNode.contentString doubleValue]);
@@ -90,25 +98,50 @@
         {
             if (distanceNodes.count > 0) {
                 // distance is delivered in km from API
-                distance = [[[distanceNodes objectAtIndex:0] contentString] doubleValue] * 1000.;
+                double distanceInKm = [[[distanceNodes objectAtIndex:0] contentString] doubleValue];
+                
+                distance = [MTDDistance distanceWithValue:distanceInKm
+                                        measurementSystem:MTDMeasurementSystemMetric];
             }
             
-            overlay = [MTDDirectionsOverlay overlayWithWaypoints:[waypoints copy]
-                                                        distance:distance
-                                                       routeType:self.routeType];
-            
-            overlay.maneuvers = [maneuvers copy];
+            if (timeNodes.count > 0) {
+                timeInSeconds = [[[timeNodes objectAtIndex:0] contentString] doubleValue];
+            }
         }
-    } 
-    
-    else {
+        
+        overlay = [MTDDirectionsOverlay overlayWithWaypoints:[waypoints copy]
+                                                    distance:distance
+                                               timeInSeconds:timeInSeconds
+                                                   routeType:self.routeType];
+        
+        overlay.maneuvers = [maneuvers copy];
+
+    } else {
+        NSArray *messageNodes = [MTDXMLElement nodesForXPathQuery:@"//messages/message" onXML:self.data];
+        NSString *errorMessage = nil;
+        
+        if (messageNodes.count > 0) {
+            errorMessage = [[messageNodes objectAtIndex:0] contentString];
+        }
+        
         error = [NSError errorWithDomain:MTDDirectionsKitErrorDomain
                                     code:statusCode
-                                userInfo:[NSDictionary dictionaryWithObject:self.data forKey:MTDDirectionsKitDataKey]];
+                                userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                          self.data, MTDDirectionsKitDataKey,
+                                          errorMessage, MTDDirectionsKitErrorMessageKey,
+                                          nil]];
+        
+        MTDLogError(@"Error occurred during parsing of directions from %@ to %@: %@ \n%@", 
+                    MTDStringFromCLLocationCoordinate2D(self.fromCoordinate),
+                    MTDStringFromCLLocationCoordinate2D(self.toCoordinate),
+                    errorMessage ?: @"No error message",
+                    error);
     }
     
     if (completion != nil) {
-        completion(overlay, error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(overlay, error);
+        });
     }
 }
 

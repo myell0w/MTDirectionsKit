@@ -28,3 +28,43 @@ void MTDDirectionsOpenInMapsApp(CLLocationCoordinate2D fromCoordinate, CLLocatio
 	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:googleMapsURL]];
 }
 
+NSString* MTDURLEncodedString(NSString *string) {
+    NSMutableString *umlautlessString = [NSMutableString stringWithString:string];
+    
+    // replace umlauts, because they don't work in the MapQuest API
+    [umlautlessString replaceOccurrencesOfString:@"ü" withString:@"ue" options:NSCaseInsensitiveSearch range:NSMakeRange(0, umlautlessString.length)];
+    [umlautlessString replaceOccurrencesOfString:@"ö" withString:@"oe" options:NSCaseInsensitiveSearch range:NSMakeRange(0, umlautlessString.length)];
+    [umlautlessString replaceOccurrencesOfString:@"ä" withString:@"ae" options:NSCaseInsensitiveSearch range:NSMakeRange(0, umlautlessString.length)];
+    [umlautlessString replaceOccurrencesOfString:@"ß" withString:@"ss" options:NSCaseInsensitiveSearch range:NSMakeRange(0, umlautlessString.length)];
+    
+    return (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                                                 (__bridge CFStringRef)[umlautlessString description],
+                                                                                 NULL,
+                                                                                 CFSTR("!*'();:@&=+$,/?%#[]"),
+                                                                                 kCFStringEncodingUTF8);
+}
+
+NSString* MTDGetFormattedTime(NSTimeInterval time) {
+    if (time < 0.) {
+        return @"0:00";
+    }
+    
+    NSInteger seconds = ((NSInteger)time) % 60;
+    NSInteger minutes = time / 60;
+    NSInteger hours = minutes / 60;
+    minutes = ((NSInteger)minutes) % 60;
+    
+    if (hours > 0) {
+        return [NSString stringWithFormat:@"%d:%02d:%02d", hours, minutes, seconds];
+    } else {
+        return [NSString stringWithFormat:@"%d:%02d", minutes, seconds];
+    }
+}
+
+NSString* MTDStringFromCLLocationCoordinate2D(CLLocationCoordinate2D coordinate) {
+    if (CLLocationCoordinate2DIsValid(coordinate)) {
+        return [NSString stringWithFormat:@"(%f,%f)", coordinate.latitude, coordinate.longitude];
+    } else {
+        return @"Invalid CLLocationCoordinate2D";
+    }
+}

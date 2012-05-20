@@ -17,4 +17,7 @@
 /** Flag that indicates whether the maneuver points are drawn */
 @property (nonatomic, assign) BOOL drawManeuvers;
 
+/** The color used to draw the overlay */
+@property (nonatomic, strong) UIColor *overlayColor;
+
 @end

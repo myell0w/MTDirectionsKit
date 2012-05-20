@@ -8,8 +8,9 @@
 
 
 #import <UIKit/UIKit.h>
+#import <MTDirectionsKit/MTDirectionsKit.h>
 
 
-@interface MTDirectionsSampleViewController : UIViewController
+@interface MTDirectionsSampleViewController : UIViewController <MTDDirectionsDelegate>
 
 @end

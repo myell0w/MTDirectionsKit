@@ -29,8 +29,24 @@ NS_INLINE BOOL MTDDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMa
 
 
 @implementation MTDDirectionsOverlayView
-
+ 
 @synthesize drawManeuvers = _drawManeuvers;
+@synthesize overlayColor = _overlayColor;
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - MTDDirectionsOverlayView
+////////////////////////////////////////////////////////////////////////
+
+- (UIColor *)overlayColor {
+    return _overlayColor ?: [UIColor colorWithRed:0.f green:0.25f blue:1.f alpha:0.5f];
+}
+
+- (void)setOverlayColor:(UIColor *)overlayColor {
+    if (overlayColor != _overlayColor) {
+        _overlayColor = overlayColor;
+        [self setNeedsDisplay];
+    }
+}
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - MKOverlayView
@@ -49,7 +65,7 @@ NS_INLINE BOOL MTDDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMa
                                       zoomScale:zoomScale];
     
     if (path != NULL) {
-        UIColor *fillColor = [UIColor colorWithRed:0.f green:0.25f blue:1.f alpha:0.5f];
+        UIColor *fillColor = self.overlayColor;
         
         CGContextSaveGState(context);
         
@@ -61,7 +77,6 @@ NS_INLINE BOOL MTDDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMa
             CGContextAddPath(context, path);
             CGContextReplacePathWithStrokedPath(context);
             CGContextFillPath(context);
-            CGPathRelease(path);
         }
         
         if (self.drawManeuvers) {
@@ -71,6 +86,8 @@ NS_INLINE BOOL MTDDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMa
         }
         
         CGContextRestoreGState(context);
+        
+        CGPathRelease(path);
     }
 }
 
@@ -173,6 +190,5 @@ NS_INLINE BOOL MTDDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMa
     
     return path;
 }
-
 
 @end

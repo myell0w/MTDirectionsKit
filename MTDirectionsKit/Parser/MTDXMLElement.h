@@ -68,7 +68,7 @@
  Returns an array of all xml nodes matching the given query on the given xml data.
  
  @param query the xpath query
- @param htmlData data representing a xml document
+ @param xmlData data representing a xml document
  @see nodesForXPathQuery:onHTML:
  */
 + (NSArray *)nodesForXPathQuery:(NSString *)query onXML:(NSData *)xmlData;
