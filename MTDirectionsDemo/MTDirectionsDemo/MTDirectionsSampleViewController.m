@@ -289,7 +289,7 @@ didChangeDragState:(MKAnnotationViewDragState)newState
         [self.mapView loadDirectionsFrom:self.fromAnnotation.coordinate
                                       to:self.toAnnotation.coordinate
                                routeType:self.routeType
-                    zoomToShowDirections:YES];
+                    zoomToShowDirections:NO];
         
         self.fromControl.text = [NSString stringWithFormat:@"%f/%f", 
                                  self.fromAnnotation.coordinate.latitude,

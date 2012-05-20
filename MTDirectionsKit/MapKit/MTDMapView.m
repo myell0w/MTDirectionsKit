@@ -126,6 +126,9 @@
                                                       
                                                       if (zoomToShowDirections) {
                                                           [strongSelf setRegionToShowDirectionsAnimated:YES];
+                                                      } else {
+                                                          [strongSelf setNeedsLayout];
+                                                          // strongSelf.region = strongSelf.region;
                                                       }
                                                   } else {
                                                       if (_directionsDelegateFlags.didFailLoadingOverlay) {
@@ -189,8 +192,10 @@
 }
 
 - (void)removeDirectionsOverlay {
-    self.directionsOverlay = nil;
-    self.directionsOverlayView = nil;
+    [self removeOverlay:_directionsOverlay];
+    
+    _directionsOverlay = nil;
+    _directionsOverlayView = nil;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -247,15 +252,15 @@
     if (directionsOverlay != _directionsOverlay) {    
         // remove old overlay and annotations
         if (_directionsOverlay != nil) {
-            [self removeOverlay:_directionsOverlay];
+            [self removeDirectionsOverlay];
         }
+        
+         _directionsOverlay = directionsOverlay;
         
         // add new overlay
         if (directionsOverlay != nil) {
             [self addOverlay:directionsOverlay];
         }
-        
-        _directionsOverlay = directionsOverlay;
     }
 }
 
