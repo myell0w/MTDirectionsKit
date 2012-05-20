@@ -52,6 +52,7 @@
         self.title = @"MTDirecionsKit";
         
         MTDDirectionsSetLogLevel(MTDLogLevelInfo);
+        // MTDDirectionsSetActiveAPI(MTDDirectionsAPIGoogle);
     }
     
     return self;

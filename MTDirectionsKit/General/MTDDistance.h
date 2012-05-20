@@ -71,6 +71,13 @@
 - (void)addDistanceWithValue:(double)value measurementSystem:(MTDMeasurementSystem)measurementSystem;
 
 /**
+ Adds a distance with the given value of meters to self
+ 
+ @param meters the value specified in meters
+ */
+- (void)addDistanceWithMeters:(double)meters;
+
+/**
  Returns the distance value in the given measurementSystem.
  
   @param measurementSystem the measurement system we want our distance to convert to, either Metric or U.S.

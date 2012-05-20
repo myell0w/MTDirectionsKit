@@ -6,6 +6,9 @@
 //  Copyright (c) 2012 Matthias Tretter (@myell0w). All rights reserved.
 //
 
+// API
+#import <MTDirectionsKit/MTDDirectionsAPI.h>
+
 // General
 #import <MTDirectionsKit/MTDWaypoint.h>
 #import <MTDirectionsKit/MTDDistance.h>

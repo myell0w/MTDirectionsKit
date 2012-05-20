@@ -7,9 +7,6 @@
 //
 
 
-#import "MTDDirectionsRouteType+MapQuest.h"
-
-
 /**
  MTDirectionsKit is designed to easily support different APIs as sources for the directions it parses and displays.
  Once integrated, the used API can be switched at runtime by calling MTDDirectionsSetActiveAPI.

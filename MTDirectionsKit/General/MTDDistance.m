@@ -64,6 +64,10 @@
     [self addDistance:[MTDDistance distanceWithValue:value measurementSystem:measurementSystem]];
 }
 
+- (void)addDistanceWithMeters:(double)meters {
+    [self addDistanceWithValue:meters/1000. measurementSystem:MTDMeasurementSystemMetric];
+}
+
 - (double)distanceInMeasurementSystem:(MTDMeasurementSystem)measurementSystem {
     switch (measurementSystem) {
         case MTDMeasurementSystemUS:
