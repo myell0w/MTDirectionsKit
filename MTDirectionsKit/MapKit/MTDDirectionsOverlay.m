@@ -1,6 +1,7 @@
 #import "MTDDirectionsOverlay.h"
 #import "MTDWaypoint.h"
 #import "MTDDistance.h"
+#import "MTDFunctions.h"
 #import "MTDDirectionsDefines.h"
 
 
@@ -102,6 +103,10 @@
     }
     
     return MTDInvalidCLLocationCoordinate2D;
+}
+
+- (NSString *)formattedTime {
+    return MTDGetFormattedTime(self.timeInSeconds);
 }
 
 @end

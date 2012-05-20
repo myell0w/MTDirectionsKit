@@ -35,6 +35,8 @@
 @property (nonatomic, strong, readonly) MTDDistance *distance;
 /** the total estimated time for this route */
 @property (nonatomic, assign, readonly) NSTimeInterval timeInSeconds;
+/** the estimated time as formatted string */
+@property (nonatomic, readonly) NSString *formattedTime;
 /** the type of travelling used to compute the directions, e.g. walking, by bike etc. */
 @property (nonatomic, assign, readonly) MTDDirectionsRouteType routeType;
 

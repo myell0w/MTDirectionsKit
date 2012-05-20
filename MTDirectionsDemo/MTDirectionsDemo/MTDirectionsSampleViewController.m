@@ -75,6 +75,8 @@
     self.distanceControl.font = [UIFont boldSystemFontOfSize:14.f];
     self.distanceControl.textColor = [UIColor whiteColor];
     self.distanceControl.textAlignment = UITextAlignmentCenter;
+    self.distanceControl.shadowColor = [UIColor blackColor];
+    self.distanceControl.shadowOffset = CGSizeMake(0.f, 1.f);
     [self.view addSubview:self.distanceControl];
     
     self.segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:
@@ -147,7 +149,6 @@
 - (void)viewDidUnload {
     [super viewDidUnload];
     
-    [self.mapView removeFromSuperview];
     self.mapView.delegate = nil;
     self.mapView = nil;
     
@@ -161,6 +162,7 @@
     self.routeBackgroundView = nil;
     self.fromControl = nil;
     self.toControl = nil;
+    self.distanceControl = nil;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
