@@ -4,6 +4,8 @@
 @interface MTDirectionsSampleViewController () <MKMapViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) MTDMapView *mapView;
+@property (nonatomic, strong) MKPointAnnotation *fromAnnotation;
+@property (nonatomic, strong) MKPointAnnotation *toAnnotation;
 @property (nonatomic, strong) UISegmentedControl *segmentedControl;
 
 @property (nonatomic, strong) UIBarButtonItem *searchItem;
@@ -34,6 +36,8 @@
 @implementation MTDirectionsSampleViewController
 
 @synthesize mapView = _mapView;
+@synthesize fromAnnotation = _fromAnnotation;
+@synthesize toAnnotation = _toAnnotation;
 @synthesize segmentedControl = _segmentedControl;
 @synthesize searchItem = _searchItem;
 @synthesize routeItem = _routeItem;
@@ -68,6 +72,7 @@
 	self.mapView = [[MTDMapView alloc] initWithFrame:self.view.bounds];
     self.mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.mapView.delegate = self;
+    self.mapView.showsUserLocation = YES;
     self.mapView.region = MKCoordinateRegionMake(CLLocationCoordinate2DMake(51.459596, -0.973277),
                                                  MKCoordinateSpanMake(0.026846, 0.032959));
     [self.view addSubview:self.mapView];
@@ -157,8 +162,11 @@
 - (void)viewDidUnload {
     [super viewDidUnload];
     
+    self.mapView.showsUserLocation = NO;
     self.mapView.delegate = nil;
     self.mapView = nil;
+    self.fromAnnotation = nil;
+    self.toAnnotation = nil;
     
     self.searchItem = nil;
     self.routeItem = nil;
@@ -217,6 +225,17 @@
                                  MTDGetFormattedTime(directionsOverlay.timeInSeconds)];
     [self hideLoadingIndicator];
     
+    [self.mapView removeAnnotations:self.mapView.annotations];
+    
+    self.fromAnnotation = [[MKPointAnnotation alloc] init];
+    self.fromAnnotation.coordinate = directionsOverlay.fromCoordinate;
+    
+    self.toAnnotation = [[MKPointAnnotation alloc] init];
+    self.toAnnotation.coordinate = directionsOverlay.toCoordinate;
+    
+    [self.mapView addAnnotation:self.fromAnnotation];
+    [self.mapView addAnnotation:self.toAnnotation];
+    
     return directionsOverlay;
 }
 
@@ -224,7 +243,61 @@
     NSLog(@"MapView %@ didFailLoadingDirectionsOverlayWithError: %@", mapView, error);
     
     self.distanceControl.text = [error.userInfo objectForKey:MTDDirectionsKitErrorMessageKey];
+    [self.mapView removeAnnotations:self.mapView.annotations];
+    self.fromAnnotation = nil;
+    self.toAnnotation = nil;
     [self hideLoadingIndicator];
+}
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - MKMapViewDelegate
+////////////////////////////////////////////////////////////////////////
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    if ([annotation isKindOfClass:[MKUserLocation class]]) {
+        return nil;
+    }
+    
+    MKPinAnnotationView *pin = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"MTDirectionsKitAnnotation"];
+    
+    if (pin == nil) {
+        pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"MTDirectionsKitAnnotation"];
+    } else {
+        pin.annotation = annotation;
+    }
+    
+    pin.draggable = YES;
+    pin.animatesDrop = YES;
+    
+    if (annotation == self.fromAnnotation) {
+        pin.pinColor = MKPinAnnotationColorGreen;
+    } else {
+        pin.pinColor = MKPinAnnotationColorPurple;
+    }
+    
+    return pin;
+}
+
+
+- (void)mapView:(MKMapView *)mapView
+ annotationView:(MKAnnotationView *)annotationView
+didChangeDragState:(MKAnnotationViewDragState)newState 
+   fromOldState:(MKAnnotationViewDragState)oldState {
+    
+    if(newState == MKAnnotationViewDragStateEnding) {
+        [self showLoadingIndicator];
+        [self.mapView loadDirectionsFrom:self.fromAnnotation.coordinate
+                                      to:self.toAnnotation.coordinate
+                               routeType:self.routeType
+                    zoomToShowDirections:YES];
+        
+        self.fromControl.text = [NSString stringWithFormat:@"%f/%f", 
+                                 self.fromAnnotation.coordinate.latitude,
+                                 self.fromAnnotation.coordinate.longitude];
+        self.toControl.text = [NSString stringWithFormat:@"%f/%f", 
+                               self.toAnnotation.coordinate.latitude,
+                               self.toAnnotation.coordinate.longitude];
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////

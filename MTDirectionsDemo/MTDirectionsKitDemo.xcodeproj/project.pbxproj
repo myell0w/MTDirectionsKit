@@ -58,7 +58,7 @@
 		9B8A2BAF155EBEA800BAAE7B /* car@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "car@2x.png"; path = "Resources/car@2x.png"; sourceTree = "<group>"; };
 		9B8A2BB0155EBEA800BAAE7B /* bicycle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bicycle@2x.png"; path = "Resources/bicycle@2x.png"; sourceTree = "<group>"; };
 		9B8F516A155C54CD00A9C10C /* MTDirectionsKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MTDirectionsKit.xcodeproj; path = ../MTDirectionsKit.xcodeproj; sourceTree = "<group>"; };
-		9BB9AD141517602C003FC9F7 /* MTDirectionsKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTDirectionsKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BB9AD141517602C003FC9F7 /* MTDirections.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTDirections.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB9AD181517602C003FC9F7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9BB9AD1A1517602C003FC9F7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9BB9AD1C1517602C003FC9F7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -115,7 +115,7 @@
 		9BB9AD151517602C003FC9F7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9BB9AD141517602C003FC9F7 /* MTDirectionsKitDemo.app */,
+				9BB9AD141517602C003FC9F7 /* MTDirections.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -189,7 +189,7 @@
 			);
 			name = MTDirectionsKitDemo;
 			productName = MTDirectionsDemo;
-			productReference = 9BB9AD141517602C003FC9F7 /* MTDirectionsKitDemo.app */;
+			productReference = 9BB9AD141517602C003FC9F7 /* MTDirections.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -347,7 +347,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MTDirectionsDemo/MTDirectionsKitDemo-Prefix.pch";
 				INFOPLIST_FILE = "MTDirectionsDemo/MTDirectionsKitDemo-Info.plist";
-				PRODUCT_NAME = MTDirectionsKitDemo;
+				PRODUCT_NAME = MTDirections;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -358,7 +358,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MTDirectionsDemo/MTDirectionsKitDemo-Prefix.pch";
 				INFOPLIST_FILE = "MTDirectionsDemo/MTDirectionsKitDemo-Info.plist";
-				PRODUCT_NAME = MTDirectionsKitDemo;
+				PRODUCT_NAME = MTDirections;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
