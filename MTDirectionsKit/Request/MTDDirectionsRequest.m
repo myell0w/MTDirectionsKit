@@ -5,6 +5,26 @@
 #import "MTDDirectionsDefines.h"
 
 
+////////////////////////////////////////////////////////////////////////
+#pragma mark - GCD Queue
+////////////////////////////////////////////////////////////////////////
+
+static dispatch_queue_t mtd_parser_queue;
+NS_INLINE dispatch_queue_t parser_queue(void) {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSString *queueIdentifier = @"at.myell0w.MTDirectionsKit.parser";
+        mtd_parser_queue = dispatch_queue_create([queueIdentifier UTF8String], 0);
+    });
+    
+    return mtd_parser_queue;
+}
+
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - MTDDirectionsParser
+////////////////////////////////////////////////////////////////////////
+
 @interface MTDDirectionsRequest ()
 
 @property (nonatomic, strong) MTDHTTPRequest *httpRequest;
@@ -104,7 +124,9 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (void)setHttpAddress:(NSString *)httpAddress {
-    self.httpRequest = [[MTDHTTPRequest alloc] initWithAddress:httpAddress callbackTarget:self action:@selector(requestFinished:)];
+    self.httpRequest = [[MTDHTTPRequest alloc] initWithAddress:httpAddress
+                                                callbackTarget:self
+                                                        action:@selector(requestFinished:)];
 }
 
 - (NSString *)httpAddress {
@@ -127,8 +149,9 @@
                                                                           toCoordinate:self.toCoordinate
                                                                              routeType:self.routeType
                                                                                   data:httpRequest.data];
-        
-        [parser parseWithCompletion:self.completion];
+        dispatch_async(parser_queue(), ^{
+            [parser parseWithCompletion:self.completion];
+        });
     } else {
         NSError *error = [NSError errorWithDomain:MTDDirectionsKitErrorDomain
                                              code:httpRequest.failureCode

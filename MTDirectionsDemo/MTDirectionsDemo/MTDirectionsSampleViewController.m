@@ -127,6 +127,7 @@
     self.fromControl.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.fromControl.delegate = self;
     self.fromControl.text = @"Güssing, Österreich";
+    self.fromControl.placeholder = @"Address or Lat/Lng";
     [self.routeBackgroundView addSubview:self.fromControl];
     
     label = [[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, 50.f, 20.f)];
@@ -146,6 +147,7 @@
     self.toControl.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.toControl.delegate = self;
     self.toControl.text = @"Wien";
+    self.toControl.placeholder = @"Address or Lat/Lng";
     [self.routeBackgroundView addSubview:self.toControl];
 }
 
@@ -304,8 +306,8 @@
 - (void)performSearch {
     NSString *from = self.fromControl.text;
     NSString *to = self.toControl.text;
-    NSArray *fromComponents = [[from stringByReplacingOccurrencesOfString:@" " withString:@""] componentsSeparatedByString:@","];
-    NSArray *toComponents = [[to stringByReplacingOccurrencesOfString:@" " withString:@""] componentsSeparatedByString:@","];
+    NSArray *fromComponents = [[from stringByReplacingOccurrencesOfString:@" " withString:@""] componentsSeparatedByString:@"/"];
+    NSArray *toComponents = [[to stringByReplacingOccurrencesOfString:@" " withString:@""] componentsSeparatedByString:@"/"];
     
     if (fromComponents.count == 2 && toComponents.count == 2) {
         CLLocationCoordinate2D fromCoordinate = CLLocationCoordinate2DMake([[fromComponents objectAtIndex:0] doubleValue], [[fromComponents objectAtIndex:1] doubleValue]);
