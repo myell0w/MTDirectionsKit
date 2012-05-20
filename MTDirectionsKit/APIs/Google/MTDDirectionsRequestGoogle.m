@@ -2,6 +2,7 @@
 #import "MTDDirectionsRequest+MTDirectionsPrivateAPI.h"
 #import "MTDDirectionsRouteType+Google.h"
 #import "MTDDirectionsParserGoogle.h"
+#import "MTDFunctions.h"
 
 
 #define kMTDDirectionBaseURL         @"http://maps.google.com/maps/api/directions/xml?sensor=true"
@@ -22,6 +23,24 @@
                              kMTDDirectionBaseURL, 
                              fromCoordinate.latitude, fromCoordinate.longitude,
                              toCoordinate.latitude, toCoordinate.longitude,
+                             MTDDirectionStringForDirectionRouteTypeGoogle(routeType)];
+        
+        self.parserClass = [MTDDirectionsParserGoogle class];
+        self.httpAddress = address;
+    }
+    
+    return self;
+}
+
+- (id)initFromAddress:(NSString *)fromAddress
+            toAddress:(NSString *)toAddress
+            routeType:(MTDDirectionsRouteType)routeType
+           completion:(mtd_parser_block)completion {
+    if ((self = [super initFromAddress:fromAddress toAddress:toAddress routeType:routeType completion:completion])) {
+        NSString *address = [NSString stringWithFormat:@"%@&origin=%@&destination=%@&mode=%@",
+                             kMTDDirectionBaseURL, 
+                             MTDURLEncodedString(fromAddress),
+                             MTDURLEncodedString(toAddress),
                              MTDDirectionStringForDirectionRouteTypeGoogle(routeType)];
         
         self.parserClass = [MTDDirectionsParserGoogle class];

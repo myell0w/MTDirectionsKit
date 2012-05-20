@@ -44,6 +44,13 @@
 + (MTDDistance *)distanceWithValue:(double)value measurementSystem:(MTDMeasurementSystem)measurementSystem;
 
 /**
+ Returns an instance of MTDDistance with the given number of meters.
+ 
+ @param meters the number of meters
+ */
++ (MTDDistance *)distanceWithMeters:(double)meters;
+
+/**
  The designated initializer of MTDDistance is used to create an instance with the given value and measurementSystem.
  
  @param value the value specified in kilometer (if measurementSystem is MTDMeasurementSystemMetric) or miles

@@ -26,8 +26,8 @@
  [Google Directions API Status Codes](https://developers.google.com/maps/documentation/directions/?hl=en-EN#StatusCodes "Status Codes").
  */
 typedef enum {
-    MTDStatusCodeGoogleSuccess,
-    MTDStatusCodeGoogleNotFound,
+    MTDStatusCodeGoogleSuccess                  = 0,
+    MTDStatusCodeGoogleNotFound                 = 401,
     MTDStatusCodeGoogleZeroResults,
     MTDStatusCodeGoogleMaxWaypointsExceeded,
     MTDStatusCodeGoogleInvalidRequest,

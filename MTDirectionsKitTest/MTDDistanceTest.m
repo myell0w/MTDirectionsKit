@@ -24,8 +24,9 @@
     
     [distance addDistanceWithValue:2. measurementSystem:MTDMeasurementSystemMetric];
     [distance addDistance:distance2];
+    [distance addDistanceWithMeters:500.];
     
-    STAssertEqualsWithAccuracy(distance.distanceInMeter, 4000., kMTDAccuracy, @"Added distances should be roughly 4 km");
+    STAssertEqualsWithAccuracy(distance.distanceInMeter, 4500., kMTDAccuracy, @"Added distances should be roughly 4,5 km");
 }
 
 - (void)testMetricGetter {

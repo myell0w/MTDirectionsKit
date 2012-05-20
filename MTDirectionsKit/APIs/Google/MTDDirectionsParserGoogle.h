@@ -10,7 +10,7 @@
 #import "MTDDirectionsParser.h"
 
 /**
- An instance of MTDDirectionsParserGoogle is a concrete instance used to parse data obtained from Google Maps API.
+ An instance of MTDDirectionsParserGoogle is a concrete instance used to parse data obtained from Google Directions API.
  MTDDirectionsParserGoogle is a subclass of the abstract MTDDirectionsParser.
  */
 @interface MTDDirectionsParserGoogle : MTDDirectionsParser

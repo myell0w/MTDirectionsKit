@@ -86,6 +86,13 @@ NS_INLINE dispatch_queue_t parser_queue(void) {
     MTDDirectionsRequest *request = nil;
     
     switch (MTDDirectionsGetActiveAPI()) {
+        case MTDDirectionsAPIGoogle:
+            request = [[MTDDirectionsRequestGoogle alloc] initFromAddress:fromAddress
+                                                                toAddress:toAddress
+                                                                routeType:routeType
+                                                               completion:completion];
+            break;
+            
         case MTDDirectionsAPIMapQuest:
         default:
             request = [[MTDDirectionsRequestMapQuest alloc] initFromAddress:fromAddress

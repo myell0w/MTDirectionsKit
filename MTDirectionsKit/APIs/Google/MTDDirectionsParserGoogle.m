@@ -32,20 +32,20 @@
     }
     
     if (statusCode == MTDStatusCodeGoogleSuccess) {
-        NSArray *waypointNodes = [MTDXMLElement nodesForXPathQuery:@"//route/leg[1]/step/polyline/points" onXML:self.data];
-        NSArray *distanceNodes = [MTDXMLElement nodesForXPathQuery:@"//route/leg[1]/step/distance/value" onXML:self.data];
-        NSArray *timeNodes = [MTDXMLElement nodesForXPathQuery:@"//route/leg[1]/step/duration/value" onXML:self.data];
+        NSArray *waypointNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg[1]/step/polyline/points" onXML:self.data];
+        NSArray *distanceNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg[1]/distance/value" onXML:self.data];
+        NSArray *timeNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg[1]/duration/value" onXML:self.data];
         
         NSMutableArray *waypoints = [NSMutableArray array];
-        MTDDistance *distance = [MTDDistance distanceWithValue:0. measurementSystem:MTDMeasurementSystemMetric];
-        NSTimeInterval timeInSeconds = 0.;
+        MTDDistance *distance = nil;
+        NSTimeInterval timeInSeconds = -1.;
         
         // Parse Waypoints
         {
             // add start coordinate
-            //if (CLLocationCoordinate2DIsValid(self.fromCoordinate)) {
-            //    [waypoints addObject:[MTDWaypoint waypointWithCoordinate:self.fromCoordinate]];
-            //}
+            if (CLLocationCoordinate2DIsValid(self.fromCoordinate)) {
+                [waypoints addObject:[MTDWaypoint waypointWithCoordinate:self.fromCoordinate]];
+            }
             
             for (MTDXMLElement *waypointNode in waypointNodes) {
                 NSString *encodedPolyline = [waypointNode contentString];
@@ -54,25 +54,20 @@
             }
             
             // add end coordinate
-            //if (CLLocationCoordinate2DIsValid(self.toCoordinate)) {
-            //    [waypoints addObject:[MTDWaypoint waypointWithCoordinate:self.toCoordinate]];
-            //}
+            if (CLLocationCoordinate2DIsValid(self.toCoordinate)) {
+                [waypoints addObject:[MTDWaypoint waypointWithCoordinate:self.toCoordinate]];
+            }
         }
         
         // Parse Additional Info of directions
         {
-            // compute total distance
-            for (MTDXMLElement *distanceNode in distanceNodes) {
-                double distanceInMeters = [[distanceNode contentString] doubleValue];
-                
-                [distance addDistanceWithMeters:distanceInMeters];
+            if (distanceNodes.count > 0) {
+                double distanceInMeters = [[[distanceNodes objectAtIndex:0] contentString] doubleValue];
+                distance = [MTDDistance distanceWithMeters:distanceInMeters];
             }
             
-            // compute total time
-            for (MTDXMLElement *timeNode in timeNodes) {
-                NSTimeInterval timeValue = [[timeNode contentString] doubleValue];
-                
-                timeInSeconds += timeValue;
+            if (timeNodes.count > 0) {
+                timeInSeconds = [[[timeNodes objectAtIndex:0] contentString] doubleValue];
             }
         }
         
@@ -106,48 +101,45 @@
 
 // Algorithm description:
 // http://code.google.com/apis/maps/documentation/utilities/polylinealgorithm.html
-- (NSArray *)waypointsFromEncodedPolyline:(NSString *)encodedPolyline {    
-    encodedPolyline = [encodedPolyline stringByReplacingOccurrencesOfString:@"\\\\"
-                                                                 withString:@"\\"
-                                                                    options:NSLiteralSearch
-                                                                      range:NSMakeRange(0, encodedPolyline.length)];
-    NSInteger index = 0;  
-    NSMutableArray *array = [[NSMutableArray alloc] init];  
-    NSInteger lat=0;  
-    NSInteger lng=0;  
+- (NSArray *)waypointsFromEncodedPolyline:(NSString *)encodedPolyline {
+    const char *bytes = [encodedPolyline UTF8String];
+    NSUInteger length = [encodedPolyline lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+    NSUInteger index = 0;
+    double latitude = 0.;
+    double longitude = 0.;
+    NSMutableArray *waypoints = [NSMutableArray array];
     
-    while (index < encodedPolyline.length) {  
-        NSInteger b;  
-        NSInteger shift = 0;  
-        NSInteger result = 0;  
+    while (index < length) {
+        char byte = 0;
+        int res = 0;
+        char shift = 0;
         
-        do {  
-            b = [encodedPolyline characterAtIndex:index++] - 63;  
-            result |= (b & 0x1f) << shift;  
-            shift += 5;  
-        } while (b >= 0x20);  
+        do {
+            byte = bytes[index++] - 63;
+            res |= (byte & 0x1F) << shift;
+            shift += 5;
+        } while (byte >= 0x20);
         
-        NSInteger dlat = ((result & 1) ? ~(result >> 1) : (result >> 1));  
+        float deltaLat = ((res & 1) ? ~(res >> 1) : (res >> 1));
+        latitude += deltaLat;
         
-        lat += dlat;  
-        shift = 0;  
-        result = 0;  
+        shift = 0;
+        res = 0;
         
-        do {  
-            b = [encodedPolyline characterAtIndex:index++] - 63;  
-            result |= (b & 0x1f) << shift;  
-            shift += 5;  
-        } while (b >= 0x20);  
+        do {
+            byte = bytes[index++] - 0x3F;
+            res |= (byte & 0x1F) << shift;
+            shift += 5;
+        } while (byte >= 0x20);
         
-        NSInteger dlng = ((result & 1) ? ~(result >> 1) : (result >> 1));  
-        lng += dlng;  
+        double deltaLon = ((res & 1) ? ~(res >> 1) : (res >> 1));
+        longitude += deltaLon;
         
-        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(lat*1e-5, lng*1e-5);
-        [array addObject:[MTDWaypoint waypointWithCoordinate:coordinate]];
-    }  
+        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(latitude * 1E-5, longitude * 1E-5);
+        [waypoints addObject:[MTDWaypoint waypointWithCoordinate:coordinate]];
+    }
     
-    return [array copy];  
+    return [waypoints copy];
 }
-
 
 @end

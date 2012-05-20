@@ -12,7 +12,7 @@
 
 /**
  An instance of MTDDirectionsRequestGoogle is a concrete instance to request data of a route
- from Google Maps API. MTDDirectionsRequestGoogle is a subclass of the abstract MTDDireciontsRequest.
+ from Google Directions API. MTDDirectionsRequestGoogle is a subclass of the abstract MTDDireciontsRequest.
  */
 @interface MTDDirectionsRequestGoogle : MTDDirectionsRequest
 

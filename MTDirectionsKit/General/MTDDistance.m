@@ -25,6 +25,10 @@
     return [[MTDDistance alloc] initWithDistanceValue:value measurementSystem:measurementSystem];
 }
 
++ (MTDDistance *)distanceWithMeters:(double)meters {
+    return [[MTDDistance alloc] initWithDistanceValue:meters/1000. measurementSystem:MTDMeasurementSystemMetric];
+}
+
 - (id)initWithDistanceValue:(double)value measurementSystem:(MTDMeasurementSystem)measurementSystem {
     if ((self = [super init])) {
         switch (measurementSystem) {
