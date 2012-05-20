@@ -50,6 +50,8 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.title = @"MTDirecionsKit";
+        
+        MTDDirectionsSetLogLevel(MTDLogLevelInfo);
     }
     
     return self;

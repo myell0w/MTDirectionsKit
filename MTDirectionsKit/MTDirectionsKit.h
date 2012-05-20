@@ -13,6 +13,7 @@
 #import <MTDirectionsKit/MTDDirectionsRouteType.h>
 #import <MTDirectionsKit/MTDMeasurementSystem.h>
 #import <MTDirectionsKit/MTDFunctions.h>
+#import <MTDirectionsKit/MTDLogging.h>
 
 // MapKit
 #import <MTDirectionsKit/MTDMapView.h>
