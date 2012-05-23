@@ -269,7 +269,7 @@
         // we first update the UI to have access to the old display type here
         [self updateUIForDirectionsDisplayType:directionsDisplayType];
         
-        self.directionsOverlayView.drawManeuvers = (self.directionsDisplayType == MTDDirectionsDisplayTypeDetailedManeuvers);
+        self.directionsOverlayView.drawManeuvers = (directionsDisplayType == MTDDirectionsDisplayTypeDetailedManeuvers);
         _directionsDisplayType = directionsDisplayType;
     }
 }
