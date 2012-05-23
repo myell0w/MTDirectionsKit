@@ -1,9 +1,13 @@
 #import "MTDirectionsSampleViewController.h"
+// Color Picker from https://github.com/hayashi311/Color-Picker-for-iOS
+#import "HRColorPickerViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 
-@interface MTDirectionsSampleViewController () <MKMapViewDelegate, UITextFieldDelegate>
+@interface MTDirectionsSampleViewController () <MKMapViewDelegate, UITextFieldDelegate, HRColorPickerViewControllerDelegate>
 
 @property (nonatomic, strong) MTDMapView *mapView;
+@property (nonatomic, strong) UIColor *overlayColor;
 @property (nonatomic, strong) MKPointAnnotation *fromAnnotation;
 @property (nonatomic, strong) MKPointAnnotation *toAnnotation;
 @property (nonatomic, strong) UISegmentedControl *segmentedControl;
@@ -16,6 +20,7 @@
 @property (nonatomic, strong) UITextField *fromControl;
 @property (nonatomic, strong) UITextField *toControl;
 @property (nonatomic, strong) UILabel *distanceControl;
+@property (nonatomic, strong) UIButton *colorChooserControl;
 
 @property (nonatomic, readonly, getter = isSearchUIVisible) BOOL searchUIVisible;
 @property (nonatomic, readonly) MTDDirectionsRouteType routeType;
@@ -23,6 +28,7 @@
 - (void)handleSearchItemPress:(id)sender;
 - (void)handleRouteItemPress:(id)sender;
 - (void)handleCancelItemPress:(id)sender;
+- (void)handleColorChooserPress:(id)sender;
 
 - (void)hideRouteView;
 - (void)performSearch;
@@ -36,6 +42,7 @@
 @implementation MTDirectionsSampleViewController
 
 @synthesize mapView = _mapView;
+@synthesize overlayColor = _overlayColor;
 @synthesize fromAnnotation = _fromAnnotation;
 @synthesize toAnnotation = _toAnnotation;
 @synthesize segmentedControl = _segmentedControl;
@@ -46,6 +53,7 @@
 @synthesize fromControl = _fromControl;
 @synthesize toControl = _toControl;
 @synthesize distanceControl = _distanceControl;
+@synthesize colorChooserControl = _colorChooserControl;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
@@ -53,7 +61,8 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        self.title = @"MTDirecionsKit";
+        self.title = @"MTDirectionsKit";
+        _overlayColor = [UIColor colorWithRed:0.f green:0.25f blue:1.f alpha:1.f];
         
         MTDDirectionsSetLogLevel(MTDLogLevelInfo);
         // MTDDirectionsSetActiveAPI(MTDDirectionsAPIGoogle);
@@ -72,7 +81,6 @@
 	self.mapView = [[MTDMapView alloc] initWithFrame:self.view.bounds];
     self.mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.mapView.delegate = self;
-    self.mapView.showsUserLocation = YES;
     self.mapView.region = MKCoordinateRegionMake(CLLocationCoordinate2DMake(51.459596, -0.973277),
                                                  MKCoordinateSpanMake(0.026846, 0.032959));
     [self.view addSubview:self.mapView];
@@ -125,7 +133,18 @@
     label.textAlignment = UITextAlignmentRight;
     label.text = @"Start:";
     
-    self.fromControl = [[UITextField alloc] initWithFrame:CGRectMake(5.f, 5.f, self.view.bounds.size.width-10.f, 30.f)];
+    self.colorChooserControl = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.colorChooserControl.backgroundColor = [UIColor blueColor];
+    self.colorChooserControl.layer.borderColor = [UIColor colorWithWhite:0.5f alpha:1.f].CGColor;
+    self.colorChooserControl.layer.borderWidth = 2.f;
+    self.colorChooserControl.layer.cornerRadius = 7.f;
+    self.colorChooserControl.frame = CGRectMake(self.routeBackgroundView.frame.size.width - 35.f, 5.f, 
+                                                30.f, self.routeBackgroundView.frame.size.height - 10.f);
+    [self.colorChooserControl addTarget:self action:@selector(handleColorChooserPress:) forControlEvents:UIControlEventTouchUpInside];
+    [self.routeBackgroundView addSubview:self.colorChooserControl];
+    
+    self.fromControl = [[UITextField alloc] initWithFrame:CGRectMake(5.f, 5.f,
+                                                                     self.routeBackgroundView.bounds.size.width-self.colorChooserControl.bounds.size.width - 15.f, 30.f)];
     self.fromControl.borderStyle = UITextBorderStyleRoundedRect;
     self.fromControl.leftViewMode = UITextFieldViewModeAlways;
     self.fromControl.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -146,7 +165,7 @@
     label.text = @"End:";
     
     self.toControl = [[UITextField alloc] initWithFrame:CGRectMake(5.f, self.fromControl.frame.origin.y + self.fromControl.frame.size.height + 5.f,
-                                                                   self.view.bounds.size.width-10.f, 30.f)];
+                                                                   self.routeBackgroundView.bounds.size.width-self.colorChooserControl.bounds.size.width - 15.f, 30.f)];
     self.toControl.borderStyle = UITextBorderStyleRoundedRect;
     self.toControl.leftViewMode = UITextFieldViewModeAlways;
     self.toControl.leftView = label;
@@ -157,12 +176,24 @@
     self.toControl.text = @"Wien";
     self.toControl.placeholder = @"Address or Lat/Lng";
     [self.routeBackgroundView addSubview:self.toControl];
+    
+    CLLocationCoordinate2D from = CLLocationCoordinate2DMake(51.38713, -1.0316);
+    CLLocationCoordinate2D to = CLLocationCoordinate2DMake(51.4554, -0.9742);
+    
+    [self showLoadingIndicator];
+    double delayInSeconds = 1.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
+        [self.mapView loadDirectionsFrom:from
+                                      to:to
+                               routeType:MTDDirectionsRouteTypeFastestDriving
+                    zoomToShowDirections:YES];
+    });
 }
 
 - (void)viewDidUnload {
     [super viewDidUnload];
     
-    self.mapView.showsUserLocation = NO;
     self.mapView.delegate = nil;
     self.mapView = nil;
     self.fromAnnotation = nil;
@@ -179,22 +210,7 @@
     self.fromControl = nil;
     self.toControl = nil;
     self.distanceControl = nil;
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    CLLocationCoordinate2D from = CLLocationCoordinate2DMake(51.38713, -1.0316);
-    CLLocationCoordinate2D to = CLLocationCoordinate2DMake(51.4554, -0.9742);
-    
-    double delayInSeconds = 1.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self.mapView loadDirectionsFrom:from
-                                      to:to
-                               routeType:MTDDirectionsRouteTypeFastestDriving
-                    zoomToShowDirections:YES];
-    });
+    self.colorChooserControl = nil;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -253,6 +269,12 @@
     self.fromAnnotation = nil;
     self.toAnnotation = nil;
     [self hideLoadingIndicator];
+}
+
+- (UIColor *)mapView:(MTDMapView *)mapView colorForDirectionsOverlay:(MTDDirectionsOverlay *)directionsOverlay {
+    NSLog(@"MapView %@ colorForDirectionsOverlay: %@", mapView, directionsOverlay);
+    
+    return self.overlayColor;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -321,6 +343,16 @@ didChangeDragState:(MKAnnotationViewDragState)newState
 }
 
 ////////////////////////////////////////////////////////////////////////
+#pragma mark - HRColorPickerViewControllerDelegate
+////////////////////////////////////////////////////////////////////////
+
+- (void)setSelectedColor:(UIColor *)color {
+    self.overlayColor = color;
+    self.mapView.directionsOverlayView.overlayColor = color;
+    self.colorChooserControl.backgroundColor = color;
+}
+
+////////////////////////////////////////////////////////////////////////
 #pragma mark - Private
 ////////////////////////////////////////////////////////////////////////
 
@@ -365,6 +397,14 @@ didChangeDragState:(MKAnnotationViewDragState)newState
 
 - (void)handleRouteItemPress:(id)sender {
     [self performSearch];
+}
+
+- (void)handleColorChooserPress:(id)sender {
+    HRColorPickerViewController *colorPickerViewController = [HRColorPickerViewController cancelableColorPickerViewControllerWithColor:self.overlayColor];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:colorPickerViewController];
+    
+    colorPickerViewController.delegate = self;
+    [self presentModalViewController:navigationController animated:YES];
 }
 
 - (void)hideRouteView {

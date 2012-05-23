@@ -43,7 +43,7 @@ NS_INLINE BOOL MTDDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMa
 }
 
 - (void)setOverlayColor:(UIColor *)overlayColor {
-    if (overlayColor != _overlayColor) {
+    if (overlayColor != _overlayColor && overlayColor != nil) {
         _overlayColor = overlayColor;
         [self setNeedsDisplay];
     }

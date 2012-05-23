@@ -7,6 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B5FDCA7156D49B4009195F7 /* HRBrightnessCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5FDC9C156D49B4009195F7 /* HRBrightnessCursor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9B5FDCA8156D49B4009195F7 /* HRCgUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5FDC9E156D49B4009195F7 /* HRCgUtil.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9B5FDCA9156D49B4009195F7 /* HRColorCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5FDCA0156D49B4009195F7 /* HRColorCursor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9B5FDCAA156D49B4009195F7 /* HRColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5FDCA2156D49B4009195F7 /* HRColorPickerView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9B5FDCAB156D49B4009195F7 /* HRColorPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5FDCA4156D49B4009195F7 /* HRColorPickerViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9B5FDCAC156D49B4009195F7 /* HRColorUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5FDCA6156D49B4009195F7 /* HRColorUtil.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9B5FDCB4156D5BF9009195F7 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B5FDCAE156D5BF9009195F7 /* Icon-72.png */; };
+		9B5FDCB5156D5BF9009195F7 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B5FDCAF156D5BF9009195F7 /* Icon-Small-50.png */; };
+		9B5FDCB6156D5BF9009195F7 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B5FDCB0156D5BF9009195F7 /* Icon-Small.png */; };
+		9B5FDCB7156D5BF9009195F7 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B5FDCB1156D5BF9009195F7 /* Icon-Small@2x.png */; };
+		9B5FDCB8156D5BF9009195F7 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B5FDCB2156D5BF9009195F7 /* Icon.png */; };
+		9B5FDCB9156D5BF9009195F7 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B5FDCB3156D5BF9009195F7 /* Icon@2x.png */; };
+		9B5FDCBE156D5CCF009195F7 /* Default-Portait.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B5FDCBA156D5CCF009195F7 /* Default-Portait.png */; };
+		9B5FDCBF156D5CCF009195F7 /* Default-Portrait@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B5FDCBB156D5CCF009195F7 /* Default-Portrait@2x.png */; };
+		9B5FDCC0156D5CCF009195F7 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B5FDCBC156D5CCF009195F7 /* Default.png */; };
+		9B5FDCC1156D5CCF009195F7 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B5FDCBD156D5CCF009195F7 /* Default@2x.png */; };
 		9B8A2BB1155EBEA800BAAE7B /* pedestrian.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B8A2BAB155EBEA800BAAE7B /* pedestrian.png */; };
 		9B8A2BB2155EBEA800BAAE7B /* car.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B8A2BAC155EBEA800BAAE7B /* car.png */; };
 		9B8A2BB3155EBEA800BAAE7B /* bicycle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B8A2BAD155EBEA800BAAE7B /* bicycle.png */; };
@@ -52,6 +68,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9B5FDC9B156D49B4009195F7 /* HRBrightnessCursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRBrightnessCursor.h; sourceTree = "<group>"; };
+		9B5FDC9C156D49B4009195F7 /* HRBrightnessCursor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRBrightnessCursor.m; sourceTree = "<group>"; };
+		9B5FDC9D156D49B4009195F7 /* HRCgUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRCgUtil.h; sourceTree = "<group>"; };
+		9B5FDC9E156D49B4009195F7 /* HRCgUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRCgUtil.m; sourceTree = "<group>"; };
+		9B5FDC9F156D49B4009195F7 /* HRColorCursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRColorCursor.h; sourceTree = "<group>"; };
+		9B5FDCA0156D49B4009195F7 /* HRColorCursor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRColorCursor.m; sourceTree = "<group>"; };
+		9B5FDCA1156D49B4009195F7 /* HRColorPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRColorPickerView.h; sourceTree = "<group>"; };
+		9B5FDCA2156D49B4009195F7 /* HRColorPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRColorPickerView.m; sourceTree = "<group>"; };
+		9B5FDCA3156D49B4009195F7 /* HRColorPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRColorPickerViewController.h; sourceTree = "<group>"; };
+		9B5FDCA4156D49B4009195F7 /* HRColorPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRColorPickerViewController.m; sourceTree = "<group>"; };
+		9B5FDCA5156D49B4009195F7 /* HRColorUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRColorUtil.h; sourceTree = "<group>"; };
+		9B5FDCA6156D49B4009195F7 /* HRColorUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRColorUtil.m; sourceTree = "<group>"; };
+		9B5FDCAE156D5BF9009195F7 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		9B5FDCAF156D5BF9009195F7 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
+		9B5FDCB0156D5BF9009195F7 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
+		9B5FDCB1156D5BF9009195F7 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
+		9B5FDCB2156D5BF9009195F7 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		9B5FDCB3156D5BF9009195F7 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		9B5FDCBA156D5CCF009195F7 /* Default-Portait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portait.png"; sourceTree = "<group>"; };
+		9B5FDCBB156D5CCF009195F7 /* Default-Portrait@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x.png"; sourceTree = "<group>"; };
+		9B5FDCBC156D5CCF009195F7 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		9B5FDCBD156D5CCF009195F7 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		9B8A2BAB155EBEA800BAAE7B /* pedestrian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pedestrian.png; path = Resources/pedestrian.png; sourceTree = "<group>"; };
 		9B8A2BAC155EBEA800BAAE7B /* car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = car.png; path = Resources/car.png; sourceTree = "<group>"; };
 		9B8A2BAD155EBEA800BAAE7B /* bicycle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bicycle.png; path = Resources/bicycle.png; sourceTree = "<group>"; };
@@ -95,6 +133,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9B5FDC9A156D49B4009195F7 /* ColorPicker */ = {
+			isa = PBXGroup;
+			children = (
+				9B5FDC9B156D49B4009195F7 /* HRBrightnessCursor.h */,
+				9B5FDC9C156D49B4009195F7 /* HRBrightnessCursor.m */,
+				9B5FDC9D156D49B4009195F7 /* HRCgUtil.h */,
+				9B5FDC9E156D49B4009195F7 /* HRCgUtil.m */,
+				9B5FDC9F156D49B4009195F7 /* HRColorCursor.h */,
+				9B5FDCA0156D49B4009195F7 /* HRColorCursor.m */,
+				9B5FDCA1156D49B4009195F7 /* HRColorPickerView.h */,
+				9B5FDCA2156D49B4009195F7 /* HRColorPickerView.m */,
+				9B5FDCA3156D49B4009195F7 /* HRColorPickerViewController.h */,
+				9B5FDCA4156D49B4009195F7 /* HRColorPickerViewController.m */,
+				9B5FDCA5156D49B4009195F7 /* HRColorUtil.h */,
+				9B5FDCA6156D49B4009195F7 /* HRColorUtil.m */,
+			);
+			path = ColorPicker;
+			sourceTree = "<group>";
+		};
+		9B5FDCAD156D5BEB009195F7 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				9B5FDCBA156D5CCF009195F7 /* Default-Portait.png */,
+				9B5FDCBB156D5CCF009195F7 /* Default-Portrait@2x.png */,
+				9B5FDCBC156D5CCF009195F7 /* Default.png */,
+				9B5FDCBD156D5CCF009195F7 /* Default@2x.png */,
+				9B5FDCAE156D5BF9009195F7 /* Icon-72.png */,
+				9B5FDCAF156D5BF9009195F7 /* Icon-Small-50.png */,
+				9B5FDCB0156D5BF9009195F7 /* Icon-Small.png */,
+				9B5FDCB1156D5BF9009195F7 /* Icon-Small@2x.png */,
+				9B5FDCB2156D5BF9009195F7 /* Icon.png */,
+				9B5FDCB3156D5BF9009195F7 /* Icon@2x.png */,
+			);
+			name = Icons;
+			sourceTree = "<group>";
+		};
 		9B8F516B155C54CD00A9C10C /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -125,13 +199,14 @@
 		9BB9AD171517602C003FC9F7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9B8F516A155C54CD00A9C10C /* MTDirectionsKit.xcodeproj */,
 				9BB9AD4C1517631E003FC9F7 /* libxml2.dylib */,
 				9BB9AD1C1517602C003FC9F7 /* CoreGraphics.framework */,
 				9BB9AD311517604D003FC9F7 /* CoreLocation.framework */,
 				9BB9AD1A1517602C003FC9F7 /* Foundation.framework */,
 				9BB9AD2F15176048003FC9F7 /* MapKit.framework */,
 				9BB9AD181517602C003FC9F7 /* UIKit.framework */,
+				9B8F516A155C54CD00A9C10C /* MTDirectionsKit.xcodeproj */,
+				9B5FDC9A156D49B4009195F7 /* ColorPicker */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -164,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				9B8F5168155C54BD00A9C10C /* MTDirectionsKit.bundle */,
+				9B5FDCAD156D5BEB009195F7 /* Icons */,
 				9B8A2BAB155EBEA800BAAE7B /* pedestrian.png */,
 				9B8A2BAC155EBEA800BAAE7B /* car.png */,
 				9B8A2BAD155EBEA800BAAE7B /* bicycle.png */,
@@ -258,6 +334,16 @@
 				9B8A2BB4155EBEA800BAAE7B /* pedestrian@2x.png in Resources */,
 				9B8A2BB5155EBEA800BAAE7B /* car@2x.png in Resources */,
 				9B8A2BB6155EBEA800BAAE7B /* bicycle@2x.png in Resources */,
+				9B5FDCB4156D5BF9009195F7 /* Icon-72.png in Resources */,
+				9B5FDCB5156D5BF9009195F7 /* Icon-Small-50.png in Resources */,
+				9B5FDCB6156D5BF9009195F7 /* Icon-Small.png in Resources */,
+				9B5FDCB7156D5BF9009195F7 /* Icon-Small@2x.png in Resources */,
+				9B5FDCB8156D5BF9009195F7 /* Icon.png in Resources */,
+				9B5FDCB9156D5BF9009195F7 /* Icon@2x.png in Resources */,
+				9B5FDCBE156D5CCF009195F7 /* Default-Portait.png in Resources */,
+				9B5FDCBF156D5CCF009195F7 /* Default-Portrait@2x.png in Resources */,
+				9B5FDCC0156D5CCF009195F7 /* Default.png in Resources */,
+				9B5FDCC1156D5CCF009195F7 /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +357,12 @@
 				9BB9AD251517602C003FC9F7 /* main.m in Sources */,
 				9BB9AD291517602C003FC9F7 /* AppDelegate.m in Sources */,
 				9BB9AD4B15176124003FC9F7 /* MTDirectionsSampleViewController.m in Sources */,
+				9B5FDCA7156D49B4009195F7 /* HRBrightnessCursor.m in Sources */,
+				9B5FDCA8156D49B4009195F7 /* HRCgUtil.m in Sources */,
+				9B5FDCA9156D49B4009195F7 /* HRColorCursor.m in Sources */,
+				9B5FDCAA156D49B4009195F7 /* HRColorPickerView.m in Sources */,
+				9B5FDCAB156D49B4009195F7 /* HRColorPickerViewController.m in Sources */,
+				9B5FDCAC156D49B4009195F7 /* HRColorUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

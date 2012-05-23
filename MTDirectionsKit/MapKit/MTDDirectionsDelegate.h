@@ -60,6 +60,14 @@ willStartLoadingDirectionsFromAddress:(NSString *)fromAddress
 - (MTDDirectionsOverlay *)mapView:(MTDMapView *)mapView didFinishLoadingDirectionsOverlay:(MTDDirectionsOverlay *)directionsOverlay;
 
 /**
+ Asks the delegate for the color for the corresponding view for the specified directionsOverlay.
+ 
+ @param mapView the mapView that began loading the directions
+ @param directionsOverlay the overlay we want the color of
+ */
+- (UIColor *)mapView:(MTDMapView *)mapView colorForDirectionsOverlay:(MTDDirectionsOverlay *)directionsOverlay;
+
+/**
  Tells the delegate that the mapView specified wasn't able to load the directions requested
  
  @param mapView the mapView that began loading the directions
