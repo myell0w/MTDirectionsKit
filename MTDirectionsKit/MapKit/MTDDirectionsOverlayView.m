@@ -1,6 +1,7 @@
 #import "MTDDirectionsOverlayView.h"
 #import "MTDDirectionsOverlay.h"
 #import "MTDManeuver.h"
+#import "MTDFunctions.h"
 
 
 NS_INLINE BOOL MTDDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMapRect r) {
@@ -38,7 +39,7 @@ NS_INLINE BOOL MTDDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMa
 ////////////////////////////////////////////////////////////////////////
 
 - (UIColor *)overlayColor {
-    return _overlayColor ?: [UIColor colorWithRed:0.f green:0.25f blue:1.f alpha:0.5f];
+    return _overlayColor ?: [UIColor colorWithRed:0.f green:0.25f blue:1.f alpha:1.f]; //[UIColor colorWithRed:0.675 green:0.396 blue:0.702 alpha:1.000];
 }
 
 - (void)setOverlayColor:(UIColor *)overlayColor {
@@ -55,7 +56,9 @@ NS_INLINE BOOL MTDDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMa
 - (void)drawMapRect:(MKMapRect)mapRect
           zoomScale:(MKZoomScale)zoomScale
           inContext:(CGContextRef)context {
-    CGFloat lineWidth = MKRoadWidthAtZoomScale(zoomScale) * 1.8f;
+    CGFloat screenScale = [UIScreen mainScreen].scale;
+    CGFloat lineWidth = MKRoadWidthAtZoomScale(zoomScale) * 1.8f * screenScale;
+    
     // outset the map rect by the line width so that points just outside
     // of the currently drawn rect are included in the generated path.
     MKMapRect clipRect = MKMapRectInset(mapRect, -lineWidth, -lineWidth);
@@ -65,29 +68,60 @@ NS_INLINE BOOL MTDDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMa
                                       zoomScale:zoomScale];
     
     if (path != NULL) {
-        UIColor *fillColor = self.overlayColor;
+        UIColor *darkenedColor = MTDDarkenedColor(self.overlayColor, 0.1f);
         
+        // Setup graphics context
+        CGContextSetLineCap(context, kCGLineCapRound);
+        CGContextSetLineJoin(context, kCGLineJoinRound);
+        
+        // Draw dark path
         CGContextSaveGState(context);
+        CGFloat darkPathLineWidth = lineWidth;
+        CGContextSetLineWidth(context, darkPathLineWidth);
+        CGContextSetFillColorWithColor(context, darkenedColor.CGColor);
+        CGContextSetStrokeColorWithColor(context, darkenedColor.CGColor);
+        CGContextSetShadowWithColor(context, CGSizeMake(0.f, darkPathLineWidth/10.f), darkPathLineWidth/10.f, [UIColor colorWithWhite:0.f alpha:0.4f].CGColor);
+        CGContextAddPath(context, path);
+        CGContextStrokePath(context);
+        CGContextRestoreGState(context);
         
-        {
-            CGContextSetFillColorWithColor(context, fillColor.CGColor);
-            CGContextSetLineJoin(context, kCGLineJoinRound);
-            CGContextSetLineCap(context, kCGLineCapRound);
-            CGContextSetLineWidth(context, lineWidth);
-            CGContextAddPath(context, path);
-            CGContextReplacePathWithStrokedPath(context);
-            CGContextFillPath(context);
-        }
+        // Draw normal path
+        CGContextSaveGState(context);
+        CGContextSetBlendMode(context, kCGBlendModeCopy);
+        CGFloat normalPathLineWidth = roundf(darkPathLineWidth * 0.8);
+        CGContextSetLineWidth(context, normalPathLineWidth);
+        CGContextSetStrokeColorWithColor(context, self.overlayColor.CGColor);
+        CGContextAddPath(context, path);
+        CGContextStrokePath(context);
+        CGContextRestoreGState(context);
+        
+        // Draw inner glow path
+        CGContextSaveGState(context);
+        CGFloat innerGlowPathLineWidth = roundf(darkPathLineWidth * 0.9);
+        CGContextSetLineWidth(context, innerGlowPathLineWidth);
+        CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:1.f alpha:0.1f].CGColor);
+        CGContextAddPath(context, path);
+        CGContextStrokePath(context);
+        CGContextRestoreGState(context);
+        
+        // Draw normal path again
+        CGContextSaveGState(context);
+        CGContextSetBlendMode(context, kCGBlendModeCopy);
+        normalPathLineWidth = roundf(lineWidth * 0.6);
+        CGContextSetLineWidth(context, normalPathLineWidth);
+        CGContextSetStrokeColorWithColor(context, [[self.overlayColor colorWithAlphaComponent:0.7] CGColor]);
+        CGContextAddPath(context, path);
+        CGContextStrokePath(context);
+        CGContextRestoreGState(context);
+        
+        // Cleanup
+        CGPathRelease(path);
         
         if (self.drawManeuvers) {
             for (MTDManeuver *maneuver in self.directionsOverlay.maneuvers) {
                 [self drawManeuver:maneuver zoomScale:zoomScale inContext:context];
             }
         }
-        
-        CGContextRestoreGState(context);
-        
-        CGPathRelease(path);
     }
 }
 
@@ -118,6 +152,28 @@ NS_INLINE BOOL MTDDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMa
     CGContextSetStrokeColorWithColor(context, [UIColor colorWithRed:40.f/255.f green:90.f/255.f blue:200.f/255.f alpha:0.9f].CGColor);
     CGContextAddEllipseInRect(context, circleRect);
     CGContextStrokePath(context);
+    
+    /*
+     More beautiful:
+     CGRect rect = CGRectMake(firstPoint.x - pathWidth, firstPoint.y - pathWidth, 2 * pathWidth, 2 * pathWidth);
+     
+     CGContextSaveGState(context);
+     CGContextSetShadowWithColor(context, CGSizeMake(0, pathWidth / 10), pathWidth / 10, [[UIColor colorWithWhite:0 alpha:0.40] CGColor]);
+     CGContextSetFillColorWithColor(context, [[UIColor colorWithRed:0.97 green:0.97 blue:0.97 alpha:1] CGColor]);
+     CGContextSetStrokeColorWithColor(context, [[UIColor colorWithWhite:0 alpha:0.2] CGColor]);
+     CGRect outerCircleRect = CGRectInset(rect, pathWidth / 10, pathWidth / 10);
+     CGContextSetLineWidth(context, pathWidth / 10);
+     CGContextFillEllipseInRect(context, outerCircleRect);
+     CGContextStrokeEllipseInRect(context, outerCircleRect);
+     CGContextRestoreGState(context);
+     
+     CGContextSaveGState(context);
+     CGContextSetBlendMode(context, kCGBlendModeOverlay);
+     CGRect innerShadowCircleRect = CGRectInset(outerCircleRect, pathWidth / 10, pathWidth / 10);
+     CGContextSetStrokeColorWithColor(context, [[UIColor whiteColor] CGColor]);
+     CGContextStrokeEllipseInRect(context, innerShadowCircleRect);
+     CGContextRestoreGState(context);
+     */
 }
 
 - (CGPathRef)mtd_newPathForPoints:(MKMapPoint *)points

@@ -68,3 +68,23 @@ NSString* MTDStringFromCLLocationCoordinate2D(CLLocationCoordinate2D coordinate)
         return @"Invalid CLLocationCoordinate2D";
     }
 }
+
+UIColor* MTDDarkenedColor(UIColor *color, CGFloat difference) {
+    CGColorSpaceRef colorSpace = CGColorGetColorSpace(color.CGColor);
+    NSUInteger numberOfComponents = CGColorSpaceGetNumberOfComponents(colorSpace);
+    
+    if (numberOfComponents != 3) {
+        return color;
+    }
+    
+    CGFloat alpha = CGColorGetAlpha(color.CGColor);
+    const CGFloat *components = CGColorGetComponents(color.CGColor);
+    const CGFloat r = components[0];
+    const CGFloat g = components[1];
+    const CGFloat b = components[2];
+    
+    return [UIColor colorWithRed:MAX(0, r - difference)
+                           green:MAX(0, g - difference)
+                            blue:MAX(0, b - difference)
+                           alpha:alpha];
+}
