@@ -44,3 +44,10 @@ NSString* MTDGetFormattedTime(NSTimeInterval time);
  @return a string description of a coordinate if it is valid, @"Invalid CLLocationCoordinate2D" otherwise
  */
 NSString* MTDStringFromCLLocationCoordinate2D(CLLocationCoordinate2D coordinate);
+
+/**
+ Returns a darkened color by the given difference.
+ 
+ @return a color with the alpha components of the original color subtracted by difference
+ */
+UIColor* MTDDarkenedColor(UIColor *color, CGFloat difference);
