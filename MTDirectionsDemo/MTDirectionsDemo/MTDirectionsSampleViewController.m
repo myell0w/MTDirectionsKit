@@ -137,11 +137,11 @@
     
     self.colorChooserControl = [UIButton buttonWithType:UIButtonTypeCustom];
     self.colorChooserControl.backgroundColor = [UIColor blueColor];
-    self.colorChooserControl.layer.borderColor = [UIColor colorWithWhite:0.5f alpha:1.f].CGColor;
-    self.colorChooserControl.layer.borderWidth = 2.f;
-    self.colorChooserControl.layer.cornerRadius = 7.f;
-    self.colorChooserControl.frame = CGRectMake(self.routeBackgroundView.frame.size.width - 35.f, 5.f, 
-                                                30.f, self.routeBackgroundView.frame.size.height - 10.f);
+    self.colorChooserControl.layer.borderColor = [UIColor grayColor].CGColor;
+    self.colorChooserControl.layer.borderWidth = 1.f;
+    self.colorChooserControl.layer.cornerRadius = 8.f;
+    self.colorChooserControl.frame = CGRectMake(self.routeBackgroundView.frame.size.width - 45.f, 5.f, 
+                                                40.f, self.routeBackgroundView.frame.size.height - 10.f);
     [self.colorChooserControl addTarget:self action:@selector(handleColorChooserPress:) forControlEvents:UIControlEventTouchUpInside];
     [self.routeBackgroundView addSubview:self.colorChooserControl];
     
