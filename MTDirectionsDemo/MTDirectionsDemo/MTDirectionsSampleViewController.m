@@ -21,6 +21,7 @@
 @property (nonatomic, strong) UITextField *toControl;
 @property (nonatomic, strong) UILabel *distanceControl;
 @property (nonatomic, strong) UIButton *colorChooserControl;
+@property (nonatomic, strong) UIPopoverController *colorPopoverController;
 
 @property (nonatomic, readonly, getter = isSearchUIVisible) BOOL searchUIVisible;
 @property (nonatomic, readonly) MTDDirectionsRouteType routeType;
@@ -54,6 +55,7 @@
 @synthesize toControl = _toControl;
 @synthesize distanceControl = _distanceControl;
 @synthesize colorChooserControl = _colorChooserControl;
+@synthesize colorPopoverController = _colorPopoverController;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
@@ -211,6 +213,7 @@
     self.toControl = nil;
     self.distanceControl = nil;
     self.colorChooserControl = nil;
+    self.colorPopoverController = nil;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -394,11 +397,24 @@ didChangeDragState:(MKAnnotationViewDragState)newState
 }
 
 - (void)handleColorChooserPress:(id)sender {
-    HRColorPickerViewController *colorPickerViewController = [HRColorPickerViewController cancelableColorPickerViewControllerWithColor:self.overlayColor];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:colorPickerViewController];
-    
-    colorPickerViewController.delegate = self;
-    [self presentModalViewController:navigationController animated:YES];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        HRColorPickerViewController *colorPickerViewController = [HRColorPickerViewController cancelableColorPickerViewControllerWithColor:self.overlayColor];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:colorPickerViewController];
+        
+        colorPickerViewController.delegate = self;
+        [self presentModalViewController:navigationController animated:YES];
+    } else {
+        HRColorPickerViewController *colorPickerViewController = [HRColorPickerViewController colorPickerViewControllerWithColor:self.overlayColor];
+        
+        colorPickerViewController.delegate = self;
+        
+        self.colorPopoverController = [[UIPopoverController alloc] initWithContentViewController:colorPickerViewController];
+        self.colorPopoverController.popoverContentSize = CGSizeMake(320.f, 416.f);
+        [self.colorPopoverController presentPopoverFromRect:self.colorChooserControl.frame
+                                                     inView:self.view
+                                   permittedArrowDirections:UIPopoverArrowDirectionUp
+                                                   animated:YES];
+    }
 }
 
 - (void)hideRouteView {

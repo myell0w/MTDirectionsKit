@@ -87,6 +87,7 @@
     }
     
     colorPickerView = [[HRColorPickerView alloc] initWithStyle:style defaultColor:rgbColor];
+    colorPickerView.delegate = self;
     
     [self.view addSubview:colorPickerView];
     
@@ -134,6 +135,12 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+- (void)colorWasChanged:(HRColorPickerView *)color_picker_view {
+    if (self.delegate) {
+        HRRGBColor rgbColor = [colorPickerView RGBColor];
+        [self.delegate setSelectedColor:[UIColor colorWithRed:rgbColor.r green:rgbColor.g blue:rgbColor.b alpha:1.0f]];
+    }
+}
 
 - (void)didReceiveMemoryWarning
 {
