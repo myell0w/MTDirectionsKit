@@ -15,6 +15,7 @@
         unsigned int willStartLoadingOverlayAddresses:1;
         unsigned int didFinishLoadingOverlay:1;
         unsigned int didFailLoadingOverlay:1;
+        unsigned int colorForOverlay:1;
 	} _directionsDelegateFlags;
 }
 
@@ -116,7 +117,6 @@
                                                           [strongSelf setRegionToShowDirectionsAnimated:YES];
                                                       } else {
                                                           [strongSelf setNeedsLayout];
-                                                          // strongSelf.region = strongSelf.region;
                                                       }
                                                   } else {
                                                       if (_directionsDelegateFlags.didFailLoadingOverlay) {
@@ -232,6 +232,7 @@
         _directionsDelegateFlags.willStartLoadingOverlayAddresses = [_directionsDelegate respondsToSelector:@selector(mapView:willStartLoadingDirectionsFromAddress:toAddress:routeType:)];
         _directionsDelegateFlags.didFinishLoadingOverlay = [_directionsDelegate respondsToSelector:@selector(mapView:didFinishLoadingDirectionsOverlay:)];
         _directionsDelegateFlags.didFailLoadingOverlay = [_directionsDelegate respondsToSelector:@selector(mapView:didFailLoadingDirectionsOverlayWithError:)];
+        _directionsDelegateFlags.colorForOverlay = [_directionsDelegate respondsToSelector:@selector(mapView:colorForDirectionsOverlay:)];
     }
 }
 
@@ -481,6 +482,10 @@
     }
     
     self.directionsOverlayView = [[MTDDirectionsOverlayView alloc] initWithOverlay:self.directionsOverlay];
+    
+    if (_directionsDelegateFlags.colorForOverlay) {
+        self.directionsOverlayView.overlayColor = [self.directionsDelegate mapView:self colorForDirectionsOverlay:self.directionsOverlay];
+    }
     
     return self.directionsOverlayView;
 }

@@ -39,7 +39,7 @@ zoomScale:(MKZoomScale)zoomScale CF_RETURNS_RETAINED;
 }
 
 - (void)setOverlayColor:(UIColor *)overlayColor {
-    if (overlayColor != _overlayColor) {
+    if (overlayColor != _overlayColor && overlayColor != nil) {
         _overlayColor = overlayColor;
         [self setNeedsDisplay];
     }
