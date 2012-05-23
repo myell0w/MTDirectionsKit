@@ -1,4 +1,5 @@
 #import "MTDirectionsSampleViewController.h"
+// Color Picker from https://github.com/hayashi311/Color-Picker-for-iOS
 #import "HRColorPickerViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -60,7 +61,7 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        self.title = @"MTDirecionsKit";
+        self.title = @"MTDirectionsKit";
         _overlayColor = [UIColor colorWithRed:0.f green:0.25f blue:1.f alpha:1.f];
         
         MTDDirectionsSetLogLevel(MTDLogLevelInfo);
@@ -80,7 +81,6 @@
 	self.mapView = [[MTDMapView alloc] initWithFrame:self.view.bounds];
     self.mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.mapView.delegate = self;
-    self.mapView.showsUserLocation = YES;
     self.mapView.region = MKCoordinateRegionMake(CLLocationCoordinate2DMake(51.459596, -0.973277),
                                                  MKCoordinateSpanMake(0.026846, 0.032959));
     [self.view addSubview:self.mapView];
@@ -194,7 +194,6 @@
 - (void)viewDidUnload {
     [super viewDidUnload];
     
-    self.mapView.showsUserLocation = NO;
     self.mapView.delegate = nil;
     self.mapView = nil;
     self.fromAnnotation = nil;
