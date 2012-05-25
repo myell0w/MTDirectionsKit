@@ -219,10 +219,9 @@
 
 - (void)setDirectionsDisplayType:(MTDDirectionsDisplayType)directionsDisplayType {
     if (directionsDisplayType != _directionsDisplayType) {
-        // we first update the UI to have access to the old display type here
-        [self updateUIForDirectionsDisplayType:directionsDisplayType];
-        
         _directionsDisplayType = directionsDisplayType;
+        
+        [self updateUIForDirectionsDisplayType:directionsDisplayType];
     }
 }
 
@@ -417,14 +416,14 @@
     // we set ourself as the delegate
     [super setDelegate:self];
     
-    _directionsDisplayType = MTDDirectionsDisplayTypeOverview;
+    _directionsDisplayType = MTDDirectionsDisplayTypeNone;
     
     // Crippled
     [NSTimer scheduledTimerWithTimeInterval:5.0
                                      target:self
                                    selector:@selector(_mtd_cr_:)
                                    userInfo:nil
-                                    repeats:YES];    
+                                    repeats:YES];
 }
 
 - (void)setRegionFromWaypoints:(NSArray *)waypoints edgePadding:(UIEdgeInsets)edgePadding animated:(BOOL)animated {
@@ -457,27 +456,12 @@
     }
 }
 
-- (void)updateUIForDirectionsDisplayType:(MTDDirectionsDisplayType)displayType {
-    MTDDirectionsDisplayType oldDisplayType = self.directionsDisplayType;
-    
-    if (oldDisplayType != displayType) {
-        [self.directionsOverlayView setNeedsDisplayInMapRect:MKMapRectWorld];
+- (void)updateUIForDirectionsDisplayType:(MTDDirectionsDisplayType)displayType {    
+    if (_directionsOverlay != nil) {
+        [self removeOverlay:_directionsOverlay];
+        _directionsOverlayView = nil;
         
-        switch (displayType) {    
-            case MTDDirectionsDisplayTypeOverview: {
-                break;
-            }
-                
-            case MTDDirectionsDisplayTypeNone: 
-            default: {
-                NSArray *overlays = self.overlays;
-                
-                // re-draw overlays
-                [self removeOverlays:overlays];
-                [self addOverlays:overlays];
-                break;
-            }
-        }
+        [self addOverlay:_directionsOverlay];
     }
 }
 
