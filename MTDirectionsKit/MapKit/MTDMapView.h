@@ -29,9 +29,9 @@
     _mapView.directionsDelegate = self;
  
     [_mapView loadDirectionsFrom:CLLocationCoordinate2DMake(51.38713, -1.0316)
-                             to:CLLocationCoordinate2DMake(51.4554, -0.9742)
-                      routeType:MTDDirectionsRouteTypeFastestDriving
-           zoomToShowDirections:YES];
+                              to:CLLocationCoordinate2DMake(51.4554, -0.9742)
+                       routeType:MTDDirectionsRouteTypeFastestDriving
+            zoomToShowDirections:YES];
  
  */
 @interface MTDMapView : MKMapView
@@ -67,6 +67,11 @@
  The current display type of the directions overlay. You can change the way the directions
  are shown on top of your instance of MTDMapView by changing the property. A change results
  in a re-draw of the overlay.
+ 
+ Currently there are the following types supported:
+ 
+  - MTDDirectionsDisplayTypeNone: don't display anything
+  - MTDDirectionsDisplayTypeOverview: displays a polyline with all Waypoints of the route
  */
 @property (nonatomic, assign) MTDDirectionsDisplayType directionsDisplayType;
 
