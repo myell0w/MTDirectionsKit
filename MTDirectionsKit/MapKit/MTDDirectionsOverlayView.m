@@ -66,6 +66,16 @@ zoomScale:(MKZoomScale)zoomScale CF_RETURNS_RETAINED;
     if (path != NULL) {
         UIColor *darkenedColor = MTDDarkenedColor(self.overlayColor, 0.1f);
         
+        // Cripple drawing for Demo
+        {
+            _mtd_cr_ = 1;
+            CGRect boundingBox = CGPathGetBoundingBox(path);
+            CGContextSaveGState(context);
+            CGContextSetFillColorWithColor(context, [[UIColor redColor] colorWithAlphaComponent:0.25f].CGColor);
+            CGContextFillRect(context, boundingBox);
+            CGContextRestoreGState(context);
+        }
+        
         // Setup graphics context
         CGContextSetLineCap(context, kCGLineCapRound);
         CGContextSetLineJoin(context, kCGLineJoinRound);
@@ -109,16 +119,6 @@ zoomScale:(MKZoomScale)zoomScale CF_RETURNS_RETAINED;
         CGContextAddPath(context, path);
         CGContextStrokePath(context);
         CGContextRestoreGState(context);
-        
-        // Cripple drawing for Demo
-        {
-            _mtd_cr_ = 1;
-            CGRect boundingBox = CGPathGetBoundingBox(path);
-            CGContextSaveGState(context);
-            CGContextSetFillColorWithColor(context, [[UIColor redColor] colorWithAlphaComponent:0.25f].CGColor);
-            CGContextFillRect(context, boundingBox);
-            CGContextRestoreGState(context);
-        }
         
         // Cleanup
         CGPathRelease(path);
