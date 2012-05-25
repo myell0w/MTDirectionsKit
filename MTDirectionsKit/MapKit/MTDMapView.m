@@ -271,6 +271,10 @@
     return [self.directionsOverlay.distance distanceInMeter];
 }
 
+- (NSTimeInterval)timeInSeconds {
+    return self.directionsOverlay.timeInSeconds;
+}
+
 - (MTDDirectionsRouteType)routeType {
     return self.directionsOverlay.routeType;
 }

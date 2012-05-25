@@ -80,8 +80,11 @@
 @property (nonatomic, readonly) CLLocationCoordinate2D fromCoordinate;
 /** the end coordinate of the directions of the currently displayed overlay */
 @property (nonatomic, readonly) CLLocationCoordinate2D toCoordinate;
+
 /** the total distance of the directions of the currenty displayed overlay in meters */
 @property (nonatomic, readonly) double distanceInMeter;
+/** the total estimated time of the directions */
+@property (nonatomic, readonly) NSTimeInterval timeInSeconds;
 
 /** 
  the type of travelling used to compute the directions of the currently displayed overlay 
