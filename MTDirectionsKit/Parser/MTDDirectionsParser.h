@@ -32,6 +32,9 @@
 /** The type of the route */
 @property (nonatomic, assign, readonly) MTDDirectionsRouteType routeType;
 
+@property (nonatomic, copy) NSString *fromAddress;
+@property (nonatomic, copy) NSString *toAddress;
+
 /******************************************
  @name Parsing
  ******************************************/

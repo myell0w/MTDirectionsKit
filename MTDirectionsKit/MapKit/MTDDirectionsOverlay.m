@@ -29,6 +29,8 @@
 @synthesize distance = _distance;
 @synthesize timeInSeconds = _timeInSeconds;
 @synthesize routeType = _routeType;
+@synthesize fromAddress = _fromAddress;
+@synthesize toAddress = _toAddress;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle

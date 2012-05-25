@@ -166,6 +166,10 @@ NS_INLINE dispatch_queue_t parser_queue(void) {
                                                                           toCoordinate:self.toCoordinate
                                                                              routeType:self.routeType
                                                                                   data:httpRequest.data];
+        // can be nil
+        parser.fromAddress = self.fromAddress;
+        parser.toAddress = self.toAddress;
+        
         dispatch_async(parser_queue(), ^{
             [parser parseWithCompletion:self.completion];
         });

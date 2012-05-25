@@ -87,6 +87,10 @@
                                                     distance:distance
                                                timeInSeconds:timeInSeconds
                                                    routeType:self.routeType];
+        
+        // set read-only properties via KVO to not pollute API
+        [overlay setValue:self.fromAddress forKey:NSStringFromSelector(@selector(fromAddress))];
+        [overlay setValue:self.toAddress forKey:NSStringFromSelector(@selector(toAddress))];
     } else {
         NSArray *messageNodes = [MTDXMLElement nodesForXPathQuery:@"//messages/message" onXML:self.data];
         NSString *errorMessage = nil;

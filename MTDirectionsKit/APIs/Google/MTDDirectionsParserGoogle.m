@@ -69,12 +69,32 @@
             if (timeNodes.count > 0) {
                 timeInSeconds = [[[timeNodes objectAtIndex:0] contentString] doubleValue];
             }
+            
+            if (self.fromAddress == nil) {
+                NSArray *fromAddressNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg[1]/start_address" onXML:self.data];
+                
+                if (fromAddressNodes.count > 0) {
+                    self.fromAddress = [[fromAddressNodes objectAtIndex:0] contentString];
+                }
+            }
+            
+            if (self.toAddress == nil) {
+                NSArray *toAddressNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg[1]/end_address" onXML:self.data];
+                
+                if (toAddressNodes.count > 0) {
+                    self.toAddress = [[toAddressNodes objectAtIndex:0] contentString];
+                }
+            }
         }
         
         overlay = [MTDDirectionsOverlay overlayWithWaypoints:[waypoints copy]
                                                     distance:distance
                                                timeInSeconds:timeInSeconds
                                                    routeType:self.routeType];
+
+        // set read-only properties via KVO to not pollute API
+        [overlay setValue:self.fromAddress forKey:NSStringFromSelector(@selector(fromAddress))];
+        [overlay setValue:self.toAddress forKey:NSStringFromSelector(@selector(toAddress))];
     } else {
         error = [NSError errorWithDomain:MTDDirectionsKitErrorDomain
                                     code:statusCode
