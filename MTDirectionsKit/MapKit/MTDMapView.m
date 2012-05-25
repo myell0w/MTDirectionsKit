@@ -267,8 +267,8 @@
     return MTDInvalidCLLocationCoordinate2D;
 }
 
-- (double)distance {
-    return [self.directionsOverlay.distance distanceInCurrentMeasurementSystem];
+- (double)distanceInMeter {
+    return [self.directionsOverlay.distance distanceInMeter];
 }
 
 - (MTDDirectionsRouteType)routeType {
