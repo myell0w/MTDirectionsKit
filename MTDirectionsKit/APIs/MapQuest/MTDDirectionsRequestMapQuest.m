@@ -5,7 +5,7 @@
 #import "MTDFunctions.h"
 
 
-#define kMTDDirectionBaseURL         @"http://open.mapquestapi.com/directions/v0/route?outFormat=xml&unit=k&narrativeType=none&shapeFormat=raw&generalize=50&ambiguities=ignore"
+#define kMTDDirectionBaseURL         @"http://open.mapquestapi.com/directions/v0/route?outFormat=xml&doReverseGeocode=false&&unit=k&narrativeType=none&shapeFormat=raw&generalize=0&ambiguities=ignore"
 
 
 @implementation MTDDirectionsRequestMapQuest
