@@ -110,6 +110,16 @@ zoomScale:(MKZoomScale)zoomScale CF_RETURNS_RETAINED;
         CGContextStrokePath(context);
         CGContextRestoreGState(context);
         
+        // Cripple drawing for Demo
+        {
+            _mtd_cr_ = 1;
+            CGRect boundingBox = CGPathGetBoundingBox(path);
+            CGContextSaveGState(context);
+            CGContextSetFillColorWithColor(context, [[UIColor redColor] colorWithAlphaComponent:0.25f].CGColor);
+            CGContextFillRect(context, boundingBox);
+            CGContextRestoreGState(context);
+        }
+        
         // Cleanup
         CGPathRelease(path);
     }

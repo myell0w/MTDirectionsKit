@@ -30,6 +30,9 @@
 
 - (MKOverlayView *)viewForDirectionsOverlay:(id<MKOverlay>)overlay;
 
+// Crippled
+- (void)_mtd_cr_:(NSTimer *)timer;
+
 @end
 
 
@@ -415,6 +418,13 @@
     [super setDelegate:self];
     
     _directionsDisplayType = MTDDirectionsDisplayTypeOverview;
+    
+    // Crippled
+    [NSTimer scheduledTimerWithTimeInterval:5.0
+                                     target:self
+                                   selector:@selector(_mtd_cr_:)
+                                   userInfo:nil
+                                    repeats:YES];    
 }
 
 - (void)setRegionFromWaypoints:(NSArray *)waypoints edgePadding:(UIEdgeInsets)edgePadding animated:(BOOL)animated {
@@ -490,5 +500,14 @@
     return self.directionsOverlayView;
 }
 
+////////////////////////////////////////////////////////////////////////
+#pragma mark - Crippled
+////////////////////////////////////////////////////////////////////////
+
+- (void)_mtd_cr_:(NSTimer *)timer {
+    if (!_mtd_cr_) {
+        [self removeOverlays:self.overlays];
+    }
+}
 
 @end

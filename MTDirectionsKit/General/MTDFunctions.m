@@ -88,3 +88,10 @@ UIColor* MTDDarkenedColor(UIColor *color, CGFloat difference) {
                             blue:MAX(0, b - difference)
                            alpha:alpha];
 }
+
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - Crippled
+////////////////////////////////////////////////////////////////////////
+
+NSInteger _mtd_cr_ = 0;

@@ -51,3 +51,10 @@ NSString* MTDStringFromCLLocationCoordinate2D(CLLocationCoordinate2D coordinate)
  @return a color with the alpha components of the original color subtracted by difference
  */
 UIColor* MTDDarkenedColor(UIColor *color, CGFloat difference);
+
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - Cripppled
+////////////////////////////////////////////////////////////////////////
+
+extern NSInteger _mtd_cr_;
