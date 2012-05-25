@@ -81,7 +81,17 @@
 @property (nonatomic, readonly) CLLocationCoordinate2D toCoordinate;
 /** the total distance of the directions of the currently displayed overlay, by using all waypoints */
 @property (nonatomic, readonly) double distance;
-/** the type of travelling used to compute the directions of the currently displayed overlay */
+/** 
+ the type of travelling used to compute the directions of the currently displayed overlay 
+ 
+ The following types of travelling are supported:
+ 
+ - MTDDirectionsRouteTypeFastestDriving
+ - MTDDirectionsRouteTypeShortestDriving
+ - MTDDirectionsRouteTypePedestrian
+ - MTDDirectionsRouteTypePedestrianIncludingPublicTransport
+ - MTDDirectionsRouteTypeBicycle
+ */
 @property (nonatomic, readonly) MTDDirectionsRouteType routeType;
 
 /**
