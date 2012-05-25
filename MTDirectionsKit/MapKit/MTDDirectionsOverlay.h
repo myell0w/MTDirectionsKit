@@ -61,6 +61,7 @@
  
  @param waypoints the waypoints of the route
  @param distance the total distance from the first to the last waypoint
+ @param timeInSeconds the estimated total duration needed for traversing the waypoints in the given routeType
  @param routeType the type of route computed
  @return an overlay encapsulating the given route-information
  */

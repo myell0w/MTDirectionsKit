@@ -266,11 +266,10 @@
 
 - (void)setDirectionsDisplayType:(MTDDirectionsDisplayType)directionsDisplayType {
     if (directionsDisplayType != _directionsDisplayType) {
-        // we first update the UI to have access to the old display type here
-        [self updateUIForDirectionsDisplayType:directionsDisplayType];
-        
-        self.directionsOverlayView.drawManeuvers = (directionsDisplayType == MTDDirectionsDisplayTypeDetailedManeuvers);
         _directionsDisplayType = directionsDisplayType;
+        self.directionsOverlayView.drawManeuvers = (directionsDisplayType == MTDDirectionsDisplayTypeDetailedManeuvers);
+        
+        [self updateUIForDirectionsDisplayType:directionsDisplayType];
     }
 }
 
@@ -497,7 +496,7 @@
     // we set ourself as the delegate
     [super setDelegate:self];
     
-    _directionsDisplayType = MTDDirectionsDisplayTypeOverview;
+    _directionsDisplayType = MTDDirectionsDisplayTypeNone;
     _activeManeuverIndex = NSNotFound;
 }
 
@@ -531,12 +530,12 @@
     }
 }
 
-- (void)updateUIForDirectionsDisplayType:(MTDDirectionsDisplayType)displayType {
-    MTDDirectionsDisplayType oldDisplayType = self.directionsDisplayType;
-    
-    if (oldDisplayType != displayType) {
-        [self.directionsOverlayView setNeedsDisplayInMapRect:MKMapRectWorld];
+- (void)updateUIForDirectionsDisplayType:(MTDDirectionsDisplayType)displayType {    
+    if (_directionsOverlay != nil) {
+        [self removeOverlay:_directionsOverlay];
+        _directionsOverlayView = nil;
         
+        // TODO: Make it work after Merge
         switch (displayType) {    
             case MTDDirectionsDisplayTypeOverview: {
                 self.activeManeuverIndex = NSNotFound;
@@ -561,6 +560,8 @@
                 break;
             }
         }
+        
+        [self addOverlay:_directionsOverlay];
     }
 }
 
