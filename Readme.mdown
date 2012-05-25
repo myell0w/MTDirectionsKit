@@ -31,8 +31,9 @@ MTDirectionsKit is very easy to use, here's a sample call:
     // only override if you have a really good reason to
     MTDDirectionsSetMeasurementSystem(MTDMeasurementSystemMetric);
     
-    MTDMapView *_mapView = [[MTDMapView alloc] initWithFrame:self.view.bounds];
-    _mapView.directionsDelegate = self;
+    // set the delegate of MKMapView. This automatically sets the directionsDelegate, if self
+    // conforms to the protocol MTDDirectionsDelegate
+    _mapView.delegate = self;
     
     [_mapView loadDirectionsFrom:CLLocationCoordinate2DMake(51.38713, -1.0316)
                               to:CLLocationCoordinate2DMake(51.4554, -0.9742)
@@ -43,7 +44,10 @@ To see a detailed example on how to use MTDirectionsKit have a look at the provi
 
 ## Integration
 
-There are two ways to integrate MTDirectionsKit into your App: The binary framework and adding the MTDirectionsKit.xcodeproj as a dependency.
+There are two ways to integrate MTDirectionsKit into your App: 
+
+ 1. Include the binary framework MTDirectionsKit.framework
+ 2. Add MTDirectionsKit.xcodeproj as a dependency
 
 The easiest way to integrate MTDirectionsKit is to add the binary framework to your App. 
 
