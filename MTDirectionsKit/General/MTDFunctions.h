@@ -51,3 +51,12 @@ NSString* MTDStringFromCLLocationCoordinate2D(CLLocationCoordinate2D coordinate)
  @return a color with the alpha components of the original color subtracted by difference
  */
 UIColor* MTDDarkenedColor(UIColor *color, CGFloat difference);
+
+/**
+ Checks whether the line between the two given points intersects the given mapRect.
+ 
+ @param p0 the starting point of the line
+ @param p1 the end point of the line
+ @param rect the rect to test intersection with
+ */
+BOOL MTDDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMapRect rect);

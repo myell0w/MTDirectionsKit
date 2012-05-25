@@ -31,14 +31,8 @@
 - (MKOverlayView *)viewForDirectionsOverlay:(id<MKOverlay>)overlay;
 
 // delegate encapsulation
-- (void)notifyDelegateWillStartLoadingDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate 
-                                                  to:(CLLocationCoordinate2D)toCoordinate
-                                           routeType:(MTDDirectionsRouteType)routeType;
-
-- (void)notifyDelegateWillStartLoadingDirectionsFromAddress:(NSString *)fromAddress
-                                                  toAddress:(NSString *)toAddress
-                                                  routeType:(MTDDirectionsRouteType)routeType;
-
+- (void)notifyDelegateWillStartLoadingDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate to:(CLLocationCoordinate2D)toCoordinate routeType:(MTDDirectionsRouteType)routeType;
+- (void)notifyDelegateWillStartLoadingDirectionsFromAddress:(NSString *)fromAddress toAddress:(NSString *)toAddress routeType:(MTDDirectionsRouteType)routeType;
 - (MTDDirectionsOverlay *)notifyDelegateDidFinishLoadingOverlay:(MTDDirectionsOverlay *)overlay;
 - (void)notifyDelegateDidFailLoadingOverlayWithError:(NSError *)error;
 - (UIColor *)askDelegateForColorOfOverlay:(MTDDirectionsOverlay *)overlay;
@@ -482,6 +476,17 @@
     if (_directionsDelegateFlags.willStartLoadingOverlayCoordinates) {
         [self.directionsDelegate mapView:self willStartLoadingDirectionsFrom:fromCoordinate to:toCoordinate routeType:routeType];
     }
+    
+    // post corresponding notification
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+                              [MTDWaypoint waypointWithCoordinate:fromCoordinate], MTDDirectionsNotificationKeyFromCoordinate,
+                              [MTDWaypoint waypointWithCoordinate:toCoordinate], MTDDirectionsNotificationKeyToCoordinate,
+                              [NSNumber numberWithInt:routeType], MTDDirectionsNotificationKeyRouteType,
+                              nil];
+    NSNotification *notification = [NSNotification notificationWithName:MTDMapViewWillStartLoadingDirections
+                                                                 object:self
+                                                               userInfo:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
 - (void)notifyDelegateWillStartLoadingDirectionsFromAddress:(NSString *)fromAddress
@@ -490,6 +495,17 @@
     if (_directionsDelegateFlags.willStartLoadingOverlayAddresses) {
         [self.directionsDelegate mapView:self willStartLoadingDirectionsFromAddress:fromAddress toAddress:toAddress routeType:routeType];
     }
+    
+    // post corresponding notification
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+                              fromAddress, MTDDirectionsNotificationKeyFromAddress,
+                              toAddress, MTDDirectionsNotificationKeyToAddress,
+                              [NSNumber numberWithInt:routeType], MTDDirectionsNotificationKeyRouteType,
+                              nil];
+    NSNotification *notification = [NSNotification notificationWithName:MTDMapViewWillStartLoadingDirections
+                                                                 object:self
+                                                               userInfo:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
 - (MTDDirectionsOverlay *)notifyDelegateDidFinishLoadingOverlay:(MTDDirectionsOverlay *)overlay {
@@ -498,6 +514,15 @@
     if (_directionsDelegateFlags.didFinishLoadingOverlay) {
         overlayToReturn = [self.directionsDelegate mapView:self didFinishLoadingDirectionsOverlay:overlay];
     }
+    
+    // post corresponding notification
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+                              overlay, MTDDirectionsNotificationKeyOverlay,
+                              nil];
+    NSNotification *notification = [NSNotification notificationWithName:MTDMapViewDidFinishLoadingDirectionsOverlay
+                                                                 object:self
+                                                               userInfo:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
     
     // sanity check if delegate returned a valid overlay
     if ([overlayToReturn isKindOfClass:[MTDDirectionsOverlay class]]) {
@@ -511,6 +536,15 @@
     if (_directionsDelegateFlags.didFailLoadingOverlay) {
         [self.directionsDelegate mapView:self didFailLoadingDirectionsOverlayWithError:error];
     }
+    
+    // post corresponding notification
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+                              error, MTDDirectionsNotificationKeyError,
+                              nil];
+    NSNotification *notification = [NSNotification notificationWithName:MTDMapViewDidFailLoadingDirectionsOverlay
+                                                                 object:self
+                                                               userInfo:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
 - (UIColor *)askDelegateForColorOfOverlay:(MTDDirectionsOverlay *)overlay {

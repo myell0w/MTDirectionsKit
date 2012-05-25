@@ -88,3 +88,13 @@ UIColor* MTDDarkenedColor(UIColor *color, CGFloat difference) {
                             blue:MAX(0, b - difference)
                            alpha:alpha];
 }
+
+BOOL MTDDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMapRect rect) {
+    double minX = MIN(p0.x, p1.x);
+    double minY = MIN(p0.y, p1.y);
+    double maxX = MAX(p0.x, p1.x);
+    double maxY = MAX(p0.y, p1.y);
+    MKMapRect r2 = MKMapRectMake(minX, minY, maxX - minX, maxY - minY);
+    
+    return MKMapRectIntersectsRect(rect, r2);
+}

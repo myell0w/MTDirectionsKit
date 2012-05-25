@@ -10,6 +10,20 @@
 #import <Foundation/Foundation.h>
 
 
+// Notifications
+#define MTDMapViewWillStartLoadingDirections            @"MTDMapViewWillStartLoadingDirections"
+#define MTDMapViewDidFinishLoadingDirectionsOverlay     @"MTDMapViewDidFinishLoadingDirectionsOverlay"
+#define MTDMapViewDidFailLoadingDirectionsOverlay       @"MTDMapViewDidFailLoadingDirectionsOverlay"
+
+#define MTDDirectionsNotificationKeyFromCoordinate      @"MTDDirectionsNotificationKeyFromCoordinate"
+#define MTDDirectionsNotificationKeyToCoordinate        @"MTDDirectionsNotificationKeyToCoordinate"
+#define MTDDirectionsNotificationKeyFromAddress         @"MTDDirectionsNotificationKeyFromAddress"
+#define MTDDirectionsNotificationKeyToAddress           @"MTDDirectionsNotificationKeyToAddress"   
+#define MTDDirectionsNotificationKeyRouteType           @"MTDDirectionsNotificationKeyRouteType"
+#define MTDDirectionsNotificationKeyOverlay             @"MTDDirectionsNotificationKeyOverlay"
+#define MTDDirectionsNotificationKeyError               @"MTDDirectionsNotificationKeyError"
+
+
 @class MTDMapView;
 @class MTDDirectionsOverlay;
 
