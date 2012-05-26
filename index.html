@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>MTDirectionsKit - Let your iOS App guide you wherever you want!</title>
+	
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	
+	<!-- Stylesheets -->
+	<link rel="stylesheet" type="text/css" href="stylesheets/base.css" />
+
+	<link rel="stylesheet" type="text/css" href="stylesheets/media.queries.css" />
+	<link rel="stylesheet" type="text/css" href="stylesheets/tipsy.css" />
+	<link rel="stylesheet" type="text/css" href="javascripts/fancybox/jquery.fancybox-1.3.4.css" />
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Nothing+You+Could+Do|Quicksand:400,700,300">
+	
+	<!-- Javascripts -->
+	<script type="text/javascript" src="javascripts/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="javascripts/html5shiv.js"></script>
+	<script type="text/javascript" src="javascripts/jquery.tipsy.js"></script>
+	<script type="text/javascript" src="javascripts/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+	<script type="text/javascript" src="javascripts/fancybox/jquery.easing-1.3.pack.js"></script>
+	<script type="text/javascript" src="javascripts/jquery.touchSwipe.js"></script>
+	<script type="text/javascript" src="javascripts/jquery.mobilemenu.js"></script>
+	<script type="text/javascript" src="javascripts/jquery.infieldlabel.js"></script>
+	<script type="text/javascript" src="javascripts/jquery.echoslider.js"></script>
+	<script type="text/javascript" src="javascripts/fluidapp.js"></script>
+	
+	<!-- Favicons -->
+	<link rel="shortcut icon" href="images/favicon.png" />
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+	
+</head>
+<body>
+	<!-- Start Wrapper -->
+	<div id="page_wrapper">
+		
+	<!-- Start Header -->
+	<header>
+		<div class="container">
+			<!-- Start Social Icons -->
+			<aside>
+				<ul class="social">
+					<li class="twitter"><a href="http://twitter.com/myell0w">Twitter</a></li>
+					<li class="email"><a href="mailto:mtdirectionskit@myell0w.com" title="mtdirectionskit@myell0w.com">Email</a></li>
+				</ul>
+			</aside>
+			<!-- End Social Icons -->
+			
+			<!-- Start Navigation -->
+			<nav>
+				<ul>
+					<li><a href="#home">Home</a></li>
+					<li><a href="#features">Features</a></li>
+					<li><a href="#screenshots">Screenshots</a></li>
+					<li><a href="#documentation">Documentation</a></li>
+				</ul>
+				<span class="arrow"></span>
+			</nav>
+			<!-- End Navigation -->
+		</div>
+	</header>
+	<!-- End Header -->
+	
+	<section class="container">
+		
+		<!-- Start App Info -->
+		<div id="app_info">
+			<!-- Start Logo -->
+			<a href="#home" class="logo">
+				<img src="images/light-logo.png" alt="Fluid App" />
+			</a>
+			<!-- End Logo -->
+			<span class="tagline">drop-in solution to show routes directly inside your iOS app</span>
+			<p>
+				Did you ever wonder why Apple didn’t provide a way to show directions directly on top of MKMapView and force you to take your users to their built-in Maps.app just to guide them somewhere? Me too, that’s why I built MTDirectionsKit. MTDirectionsKit is an easy-to-use and easy to integrate framework for iOS that let's you do just that - guiding your users in the easiest and most professional way available. 
+			</p>
+			<p>
+				<a href="https://github.com/myell0w/MTDirectionsKitDemo"><strong>Give it a shot and try the demo!</strong></a>
+			</p>
+			
+			<div class="buttons">
+				<a href="#" class="large_button" id="apple">
+					<span class="icon"></span>
+					<em>MTDirectionsKit</em>
+					Purchase
+				</a>
+			</div>
+			
+			<div class="price right_align"> <!-- Alignments options: right_align, left_align, centered -->
+				<p>Get it now and save > 80 hours of development!</p>
+			</div>
+		</div>
+		<!-- End App Info -->		
+		
+		<!-- Start Pages -->
+		<div id="pages">
+			<div class="top_shadow"></div>
+			
+			<!-- Start Home -->
+			<div id="home" class="page">
+				
+				<div id="slider">
+					
+					<div class="slide" data-effect-out="slide">
+						
+						<div class="background iphone-black">
+							<img src="images/slider/slider_iphone_1.png" alt="" />
+						</div>
+						
+						<div class="foreground iphone-black">
+							<img src="images/slider/slider_iphone_3.png" alt="" />
+						</div>
+						
+					</div>
+					
+					<div class="slide">
+						
+						<div class="background ipad-black">
+							<!--<video width="352" height="468" controls="controls">
+							  <source src="videos/mtdirectionskit_demo.m4v" type="video/mp4" />
+							  Your browser does not support the video tag.
+							</video>-->
+							<iframe src="http://player.vimeo.com/video/42773179?title=0&amp;byline=0&amp;portrait=0"
+							width="352" height="468" frameborder="0"></iframe>
+						</div>
+												
+					</div>
+					
+					<div class="slide" data-effect-in="slide">
+						
+						<div class="background iphone-white">
+							<img src="images/slider/slider_iphone_2.png" alt="" />
+						</div>
+						
+						<div class="foreground iphone-white">
+							<img src="images/slider/slider_iphone_4.png" alt="" />
+						</div>
+						
+					</div>
+
+					<div class="slide">
+						
+						<div class="background ipad-white">
+							<img src="images/slider/slider_ipad_1.png" alt="" />
+						</div>
+												
+					</div>
+					
+				</div>
+			
+			</div>
+			<!-- End Home -->
+				
+			<!-- Start Features -->
+			<div id="features" class="page">
+				
+				<h1>MTDirectionsKit is...</h1>
+				
+				<div class="feature_list content_box">
+					<div class="one_half">
+						<h2 class="icon chart">Smart</h2>
+						<p>MTDirectionsKit makes it as easy as possible for you to get the best result for your customers. It automatically detects the preferred system of measurement of the user and does all computions in kilometer or miles, depending on the preferrence. Of course you can overwrite the used system of measurement too, if you want to.</p>
+					</div>
+					
+					<div class="one_half column_last">
+						<h2 class="icon graph">Versatile</h2>
+						<p>MTDirectionsKit can be used with 2 different APIs: Google Directions API and MapQuest Open Directions API. A lot of parts of MTDirectionsKit are configurable and it even allows for hooks to customize the computed directions right before they get displayed to the user. </p>
+					</div>
+					
+					<div class="one_half">
+						<h2 class="icon briefcase">Easy to use</h2>
+						<p>MTDirectionsKit handles various pitfalls that you encounter during development for you and helps you in every aspect possible. For example it can automatically set it's directionsDelegate when you set the delegate of MKMapView and reports why something went wrong, in case of an error.</p>
+					</div>
+
+					<div class="one_half column_last">
+						<h2 class="icon cart">Beautiful</h2>
+						<p>The directions drawn on top of MKMapView are beautifully handcrafted and look stunning on Retina displays as well as regular ones. It's very easy to change the color of the overlay too.</p>
+					</div>
+
+					<div class="one_half">
+						<h2 class="icon pencil">Fast</h2>
+						<p>MTDirectionsKit embraces the use of GCD for parsing of the data to not slow down your app and to keep it as snappy as always.</p>
+					</div>
+
+					<div class="one_half column_last">
+						<h2 class="icon help">Reliable</h2>
+						<p>MTDirectionsKit is Unit-Tested to ensure it's working as you and your users would expect.</p>
+					</div>
+				</div>
+				
+			</div>
+			<!-- End Features -->		
+			
+			<!-- Start Screenshots -->
+			<div id="screenshots" class="page">
+				
+				<h1>Screenshots</h1>
+				
+				<p>MTDirectionsKit can be easily customized. These are screenshots of the Demo application provided with MTDirectionsKit.</p>
+				
+				<div class="screenshot_grid content_box">
+					
+					<div class="one_third">
+						<a href="images/screenshots/iphone_standing.png" class="fancybox" rel="group" title="My Hometown :-)"><img src="images/screenshots/iphone_standing.png" alt="" /></a>
+					</div>
+
+					<div class="one_third">
+						<a href="images/screenshots/double_iphone.png" class="fancybox" rel="group" title="Different Colors"><img src="images/screenshots/double_iphone.png" alt="" /></a>
+					</div>
+					
+					<div class="one_third column_last">
+						<a href="images/screenshots/code_example.jpg" class="fancybox" rel="group" title="Sample Usage"><img src="images/screenshots/code_example.jpg" alt="" /></a>
+					</div>
+					
+					<div class="one_third">
+						<a href="images/screenshots/ipad_white.png" class="fancybox" rel="group" title="Let's go to NSConference"><img src="images/screenshots/ipad_white.png" alt="" /></a>
+					</div>
+
+					<div class="one_third">
+						<a href="images/screenshots/iphone_perspective.png" class="fancybox" rel="group" title="Let your users be guided wherever they want"><img src="images/screenshots/iphone_perspective.png" alt="" /></a>
+					</div>
+										
+				</div>
+				
+			</div>
+			<!-- End Screenshots -->
+			
+			<!-- Start Documentation -->
+			<div id="documentation" class="page">
+				
+					<h1>Documentation</h1>
+				
+				<div class="full">
+					<h2>Code Documentation</h2>
+					<p>All classes of MTDirectionsKit are fully documented using AppleDoc. </br>See the <a href="#" target="_blank"> MTDirectionsKit Documentation</a> for further information.</p>
+				</div>
+					
+				<div class="full">
+					<h2>Integration</h2>
+					<p> There are basically 2 ways to integrate MTDirectionsKit into your App: </p>
+					
+					<div class="toggle_list">
+						<ul>
+							<li class="opened"> <!-- Use class "opened" to expand a toggle on page load -->
+								<div class="title">
+									<h3><span>1.</span> Include the binary framework MTDirectionsKit.framework</h3>
+									<a href="javascript:;" class="toggle_link" data-open_text="+" data-close_text="-"></a>
+								</div>
+								<div class="content">
+									<p>This is the easiest way to integrate MTDirectionsKit into your App and therefore the recommended one. 
+									   Just drag MTDirectionsKit.framework onto the <i>Frameworks</i>-group of your App, you don't need to
+									   setup a User Header Search Path or a Target Dependency. </p>
+									<p>Next add the import statement </p>
+									<p style ="margin-left:15px;font-weight:bold">#import &lt;MTDirectionsKit/MTDirectionsKit.h&gt; </p>
+									<p> everywhere you want to use MTDirectionsKit and you are good to go. 
+										See the image for visual hints on how to integrate MTDirectionsKit.framework: </p>
+									<p>
+										<a href="images/documentation/MTDirectionsKit_Framework.png" 
+										   rel="documentation" class="fancybox" title="Integrating MTDirectionsKit.framework">
+										<img src="images/documentation/MTDirectionsKit_Framework.png" alt="" /></a>
+								    </p>
+								</div>
+							</li>
+							<li>
+								<div class="title">
+									<h3><span>2.</span> Add MTDirectionsKit.xcodeproj as a dependency</h3>
+									<a href="javascript:;" class="toggle_link" data-open_text="+" data-close_text="-"></a>
+								</div>
+								<div class="content">
+									<p> First copy the whole MTDirectionsKit project into your applications root folder. Then locate
+										the "MTDirectionsKit.xcodeproj" file inside your applications root folder and drag it onto the
+										root of your Xcode project's <i>Frameworks</i>-group. </p>
+									<p> Add MTDirectionsKit as target dependency 
+										of your target under the tab <i>Build Phases</i> and drag libMTDirectionsKit.a onto the section
+										<i>'Link Binary with Libraries'</i> of your target.</p>
+										
+										<p>Next add the import statement </p>
+										<p style ="margin-left:15px;font-weight:bold">#import &lt;MTDirectionsKit/MTDirectionsKit.h&gt; </p>
+										<p> everywhere you want to use MTDirectionsKit and you are good to go.
+											See the image for visual hints on how to integrate MTDirectionsKit.framework: </p>
+										<p>
+											<a href="images/documentation/MTDirectionsKit_Dependency.png" 
+											   rel="documentation" class="fancybox" title="Integrating MTDirectionsKit.xcodeproj">
+											<img src="images/documentation/MTDirectionsKit_Dependency.png" alt="" /></a>
+										</p>
+								</div>
+							</li>
+							
+						</ul>
+					</div>
+						
+					<p> Independent of which way to integrate MTDirectionsKit you choose, you have to add </p>
+						 
+						 <ul style="margin-left:30px;margin-top:15px;margin-bottom:15px">
+							 <li>CoreLocation.framework</li>
+							 <li>MapKit.framework</li>
+							 <li>libxml2.dylib</li>
+						 </ul>
+						 					  
+					<p> to your target's linked libraries found under Build Phases.</p>
+				</div>
+				
+				<div class="full">
+					<h2>Sample Usage</h2>
+					<p>
+					<script src="https://gist.github.com/2fb5af54491c93d7130f.js"> </script>
+					</p>
+				</div>
+				
+				<div class="full">
+					<h2>Requirements</h2>
+					<p>
+						MTDirectionsKit needs <b>Xcode ≥ 4.3, iOS Base SDK ≥ 5.1 and Clang LLVM >= 3.1</b> to compile. It doesn't work with the old LLVM GCC compiler.
+						MTDirectionsKit works on a deployment target of ≥ iOS 4.0 and can be used in <b>ARC or non-ARC</b> applications.
+					</p>
+				</div>
+				
+				<div class="full">
+					<h2>License</h2>
+					<p>
+						<script src="https://gist.github.com/f5ca9ff506675ba0fa0d.js"> </script>
+					</p>
+				</div>
+			</div>
+			
+			<div class="bottom_shadow"></div>
+		</div>
+		<!-- End Pages -->
+		
+		<div class="clear"></div>
+	</section>
+	
+	<!-- Start Footer -->
+	<footer class="container">
+		<p>Matthias Tretter (<a href="http://twitter.com/myell0w">@myell0w</a>) &copy; 2012. All Rights Reserved.</p>
+	</footer>
+	<!-- End Footer -->
+	
+	</div>
+	<!-- End Wrapper -->
+
+</body>
+</html>
