@@ -100,4 +100,12 @@
 /** Cancels a possible ongoing request, does nothing if the request isn't active. */
 - (void)cancel;
 
+/**
+ Let's you set parameter values that get passed to the directions service as get parameter.
+ 
+ @param value the value of the parameter to set
+ @param parameter the name of the parameter
+ */
+- (void)setValue:(NSString *)value forParameter:(NSString *)parameter;
+
 @end

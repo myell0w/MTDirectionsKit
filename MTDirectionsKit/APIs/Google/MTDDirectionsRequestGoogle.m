@@ -5,8 +5,14 @@
 #import "MTDFunctions.h"
 
 
-#define kMTDDirectionBaseURL         @"http://maps.google.com/maps/api/directions/xml?sensor=true"
+#define kMTDGoogleBaseAddress         @"http://maps.google.com/maps/api/directions/xml"
 
+
+@interface MTDDirectionsRequestGoogle ()
+
+- (void)setup;
+
+@end
 
 @implementation MTDDirectionsRequestGoogle
 
@@ -19,14 +25,11 @@
      routeType:(MTDDirectionsRouteType)routeType
     completion:(mtd_parser_block)completion {
     if ((self = [super initFrom:fromCoordinate to:toCoordinate routeType:routeType completion:completion])) {
-        NSString *address = [NSString stringWithFormat:@"%@&origin=%f,%f&destination=%f,%f&mode=%@",
-                             kMTDDirectionBaseURL, 
-                             fromCoordinate.latitude, fromCoordinate.longitude,
-                             toCoordinate.latitude, toCoordinate.longitude,
-                             MTDDirectionStringForDirectionRouteTypeGoogle(routeType)];
+        [self setup];
         
-        self.parserClass = [MTDDirectionsParserGoogle class];
-        self.httpAddress = address;
+        [self setValue:[NSString stringWithFormat:@"%f,%f",fromCoordinate.latitude, fromCoordinate.longitude] forParameter:@"origin"];
+        [self setValue:[NSString stringWithFormat:@"%f,%f",toCoordinate.latitude, toCoordinate.longitude] forParameter:@"destination"];
+        [self setValue:MTDDirectionStringForDirectionRouteTypeGoogle(routeType) forParameter:@"mode"];
     }
     
     return self;
@@ -37,18 +40,25 @@
             routeType:(MTDDirectionsRouteType)routeType
            completion:(mtd_parser_block)completion {
     if ((self = [super initFromAddress:fromAddress toAddress:toAddress routeType:routeType completion:completion])) {
-        NSString *address = [NSString stringWithFormat:@"%@&origin=%@&destination=%@&mode=%@",
-                             kMTDDirectionBaseURL, 
-                             MTDURLEncodedString(fromAddress),
-                             MTDURLEncodedString(toAddress),
-                             MTDDirectionStringForDirectionRouteTypeGoogle(routeType)];
+        [self setup];
         
-        self.parserClass = [MTDDirectionsParserGoogle class];
-        self.httpAddress = address;
+        [self setValue:MTDURLEncodedString(fromAddress) forParameter:@"origin"];
+        [self setValue:MTDURLEncodedString(toAddress) forParameter:@"destination"];
+        [self setValue:MTDDirectionStringForDirectionRouteTypeGoogle(routeType) forParameter:@"mode"];
     }
     
     return self;
 }
 
+////////////////////////////////////////////////////////////////////////
+#pragma mark - Private
+////////////////////////////////////////////////////////////////////////
+
+- (void)setup {
+    self.parserClass = [MTDDirectionsParserGoogle class];
+    self.httpAddress = kMTDGoogleBaseAddress;
+    
+    [self setValue:@"true" forParameter:@"sensor"];
+}
 
 @end
