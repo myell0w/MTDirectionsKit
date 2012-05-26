@@ -1,0 +1,223 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>MTDirectionsKit Reference</title>
+		<link rel="stylesheet" type="text/css" href="css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.0.5 (build 789)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="index.html">MTDirectionsKit </a></h1>
+				<a id="developerHome" href="index.html">@myell0w</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">MTDirectionsKit Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar"></ul>
+		</header>
+		<article>
+			<div id="overview_contents" role="main">
+				<div class="main-navigation navigation-top">
+					<a href="hierarchy.html">Next</a>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">MTDirectionsKit Reference</h1>
+					</div>		
+				</div>
+				<div id="container">
+					
+					<div class="section section-overview index-overview">
+						
+						
+						<h2>Why MTDirectionsKit?</h2>
+
+<p>Did you ever wonder why Apple didn&rsquo;t provide a way to show directions directly on top of MKMapView and force you to switch
+to their built-in Maps.app just to guide your users somewhere? Me too, that&rsquo;s why I built MTDirectionsKit.
+Switching to Maps.app just to show directions results in a context-switch and can confuse your users, thus increasing the
+chance that they won&rsquo;t return to your Application.</p>
+
+<p>MTDirectionsKit is a full-featured and easy to use solution to show directions in your App, directly on top of MKMapView.
+Not only will your users thank you for not throwing them out of your App, it will also distinguish your App from all the
+others that don&rsquo;t offer this functionality.</p>
+
+<p>Convinced? Let&rsquo;s get you started.</p>
+
+<h2>How to use?</h2>
+
+<p>MTDirectionsKit is very easy to use, here&rsquo;s a sample call:</p>
+
+<pre><code>MTDMapView *_mapView = [[MTDMapView alloc] initWithFrame:self.view.bounds];
+
+// ...
+// setup _mapView
+// ...
+
+// configure MTDirectionsKit (optional)
+// log more messages
+MTDDirectionsSetLogLevel(MTDLogLevelInfo);
+// change used API to Google Directions
+MTDDirectionsSetActiveAPI(MTDDirectionsAPIGoogle);
+// manually change measurement system 
+// Warning: MTDirectionsKit automatically sets it to the preferred one of the user's device,
+// only override if you have a really good reason to
+MTDDirectionsSetMeasurementSystem(MTDMeasurementSystemMetric);
+
+// set the delegate of MKMapView. This automatically sets the directionsDelegate, if self
+// conforms to the protocol MTDDirectionsDelegate
+_mapView.delegate = self;
+
+[_mapView loadDirectionsFrom:CLLocationCoordinate2DMake(51.38713, -1.0316)
+                          to:CLLocationCoordinate2DMake(51.4554, -0.9742)
+                   routeType:MTDDirectionsRouteTypeFastestDriving
+        zoomToShowDirections:YES];
+</code></pre>
+
+<p>To see a detailed example on how to use MTDirectionsKit have a look at the provided Demo Application.</p>
+
+<h2>Integration</h2>
+
+<p>There are two ways to integrate MTDirectionsKit into your App:</p>
+
+<ol>
+<li>Include the binary framework MTDirectionsKit.framework</li>
+<li>Add MTDirectionsKit.xcodeproj as a dependency</li>
+</ol>
+
+
+<p>The easiest way to integrate MTDirectionsKit is to add the binary framework to your App.</p>
+
+<p>Independent of which way to integrate MTDirectionsKit you choose, you have to add some system frameworks and libraries to your project. For MTDirectionsKit  to work you have to add</p>
+
+<pre><code>CoreLocation.framework
+MapKit.framework
+libxml2.dylib
+</code></pre>
+
+<p>to your target&rsquo;s linked libraries (found under <em>Build Phases</em>, see pictures below).</p>
+
+<h3>Integrating Binary Framework</h3>
+
+<p>Just drag MTDirectionsKit.framework onto the <em>Frameworks</em>-group of your App, add</p>
+
+<pre><code>#import &lt;MTDirectionsKit/MTDirectionsKit.h&gt;
+</code></pre>
+
+<p>everywhere you want to use it and you are good to go.</p>
+
+<p>!<a href="Images/MTDirectionsKit_Framework.png" title="Binary Framework">MTDirectionsKit.framework</a></p>
+
+<h3>Integrating MTDirectionsKit.xcodeproj (Dependency)</h3>
+
+<p>First copy the whole MTDirectionsKit project into your applications root folder and use this project for the following steps:</p>
+
+<ol>
+<li>Locate the &ldquo;MTDirectionsKit.xcodeproj&rdquo; file inside your applications root folder and drag it onto the root of your Xcode project&rsquo;s <em>Frameworks</em>-group</li>
+<li>Add MTDirectionsKit as target dependency of your target under the tab <em>Build Phases</em></li>
+<li>Drag libMTDirectionsKit.a onto the section &lsquo;Link Binary with Libraries&rsquo; of your target</li>
+</ol>
+
+
+<p>You are good to go, just</p>
+
+<pre><code>#import &lt;MTDirectionsKit/MTDirectionsKit.h&gt;
+</code></pre>
+
+<p>everywhere where you want to use it.</p>
+
+<p>!<a href="Images/MTDirectionsKit_Dependency.png" title="Dependency">MTDirectionsKit.xcodeproj as Dependency</a></p>
+
+<h2>Requirements</h2>
+
+<p>MTDirectionsKit needs Xcode ≥ 4.3, iOS Base SDK ≥ 5.1 and Clang LLVM >= 3.1 to compile. It doesn&rsquo;t work with the old LLVM GCC compiler.</p>
+
+<p>MTDirectionsKit works on a deployment target of ≥ iOS 4.0 and can be used in ARC or non-ARC applications.</p>
+
+<h2>Disclaimer</h2>
+
+<p>MTDirectionsKit can use the following two APIs for gathering routing information:</p>
+
+<ol>
+<li><a href="http://open.mapquestapi.com/directions/" title="MapQuest Open Directions API">MapQuest Open Directions API</a></li>
+<li><a href="https://developers.google.com/maps/documentation/directions/" title="Google Directions API">Google Directions API</a></li>
+</ol>
+
+
+<p>MTDirectionsKit is not &hellip;. bla bla &hellip; keine Verantwortung für API, terms of usage etc.</p>
+						
+						
+					</div>
+					
+					
+					
+					<div class="index-column">
+						<h2 class="index-title">Class References</h2>
+						<ul>
+							
+							<li><a href="Classes/MTDDirectionsOverlay.html">MTDDirectionsOverlay</a></li>
+							
+							<li><a href="Classes/MTDDirectionsOverlayView.html">MTDDirectionsOverlayView</a></li>
+							
+							<li><a href="Classes/MTDDirectionsParser.html">MTDDirectionsParser</a></li>
+							
+							<li><a href="Classes/MTDDirectionsParserGoogle.html">MTDDirectionsParserGoogle</a></li>
+							
+							<li><a href="Classes/MTDDirectionsParserMapQuest.html">MTDDirectionsParserMapQuest</a></li>
+							
+							<li><a href="Classes/MTDDirectionsRequest.html">MTDDirectionsRequest</a></li>
+							
+							<li><a href="Classes/MTDDirectionsRequestGoogle.html">MTDDirectionsRequestGoogle</a></li>
+							
+							<li><a href="Classes/MTDDirectionsRequestMapQuest.html">MTDDirectionsRequestMapQuest</a></li>
+							
+							<li><a href="Classes/MTDDistance.html">MTDDistance</a></li>
+							
+							<li><a href="Classes/MTDHTTPRequest.html">MTDHTTPRequest</a></li>
+							
+							<li><a href="Classes/MTDMapView.html">MTDMapView</a></li>
+							
+							<li><a href="Classes/MTDWaypoint.html">MTDWaypoint</a></li>
+							
+							<li><a href="Classes/MTDXMLElement.html">MTDXMLElement</a></li>
+							
+						</ul>
+					</div>
+					
+					
+						
+					<div class="index-column">
+						
+						<h2 class="index-title">Protocol References</h2>
+						<ul>
+							
+							<li><a href="Protocols/MTDDirectionsDelegate.html">MTDDirectionsDelegate</a></li>
+							
+							<li><a href="Protocols/MTDDirectionsParser.html">MTDDirectionsParser</a></li>
+							
+						</ul>
+						
+						
+					</div>
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<a href="hierarchy.html">Next</a>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-05-26)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
+						
+	
+					</div>
+				</div>
+			</div>
+		</article>		
+	</body>
+</html>

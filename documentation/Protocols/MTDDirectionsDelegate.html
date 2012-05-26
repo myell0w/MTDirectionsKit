@@ -1,0 +1,580 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>MTDDirectionsDelegate Protocol Reference</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<meta name="viewport" content="width=550" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.0.5 (build 789)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">MTDirectionsKit </a></h1>
+				<a id="developerHome" href="../index.html">@myell0w</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">MTDDirectionsDelegate Protocol Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar">
+				<li id="toc_button">
+					<button aria-label="Show Table of Contents" role="checkbox" class="open" id="table_of_contents"><span class="disclosure"></span>Table of Contents</button>
+				</li>
+				<li id="jumpto_button" role="navigation">
+					<select id="jumpTo">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+	
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/mapView:colorForDirectionsOverlay:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:colorForDirectionsOverlay:</option>
+	
+	<option value="//api/name/mapView:didFailLoadingDirectionsOverlayWithError:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:didFailLoadingDirectionsOverlayWithError:</option>
+	
+	<option value="//api/name/mapView:didFinishLoadingDirectionsOverlay:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:didFinishLoadingDirectionsOverlay:</option>
+	
+	<option value="//api/name/mapView:willStartLoadingDirectionsFrom:to:routeType:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:willStartLoadingDirectionsFrom:to:routeType:</option>
+	
+	<option value="//api/name/mapView:willStartLoadingDirectionsFromAddress:toAddress:routeType:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:willStartLoadingDirectionsFromAddress:toAddress:routeType:</option>
+	
+	
+	
+</select>
+				</li>
+			</ul>
+		</header>
+		<nav id="tocContainer" class="isShowingTOC">
+			<ul id="toc" role="tree">
+				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
+
+
+
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+</ul></li>
+
+
+
+
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:colorForDirectionsOverlay:">mapView:colorForDirectionsOverlay:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:didFailLoadingDirectionsOverlayWithError:">mapView:didFailLoadingDirectionsOverlayWithError:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:didFinishLoadingDirectionsOverlay:">mapView:didFinishLoadingDirectionsOverlay:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:willStartLoadingDirectionsFrom:to:routeType:">mapView:willStartLoadingDirectionsFrom:to:routeType:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:willStartLoadingDirectionsFromAddress:toAddress:routeType:">mapView:willStartLoadingDirectionsFromAddress:toAddress:routeType:</a></span></li>
+	
+</ul></li>
+
+
+			</ul>
+		</nav>
+		<article>
+			<div id="contents" class="isShowingTOC" role="main">
+				<a title="MTDDirectionsDelegate Protocol Reference" name="top"></a>
+				<div class="main-navigation navigation-top">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">MTDDirectionsDelegate Protocol Reference</h1>
+					</div>		
+				</div>
+				<div id="container">	
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<td class="specification-title">Conforms to</td>
+	<td class="specification-value">NSObject</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">MTDDirectionsDelegate.h</td>
+</tr>
+						</tbody></table></div>
+					
+					
+					
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <a href="MTDDirectionsDelegate.html">MTDDirectionsDelegate</a> protocol defines a set of optional methods that you can implement to receive
+information updates about MTDirectionsKit-related stuff.</p>
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						
+						
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mapView:willStartLoadingDirectionsFrom:to:routeType:">&ndash;&nbsp;mapView:willStartLoadingDirectionsFrom:to:routeType:</a></code>
+		<span class="tooltip"><p>Tells the delegate that the mapView will start loading directions</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mapView:willStartLoadingDirectionsFromAddress:toAddress:routeType:">&ndash;&nbsp;mapView:willStartLoadingDirectionsFromAddress:toAddress:routeType:</a></code>
+		<span class="tooltip"><p>Tells the delegate that the mapView will start loading directions</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mapView:didFinishLoadingDirectionsOverlay:">&ndash;&nbsp;mapView:didFinishLoadingDirectionsOverlay:</a></code>
+		<span class="tooltip"><p>Tells the delegate that the specified directionsOverlay was loaded on the specified mapView.
+This method allows the delegate to intercept MTDirectionsKit and change the directionsOverlay
+by returning a different overlay than the one received as parameter</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mapView:colorForDirectionsOverlay:">&ndash;&nbsp;mapView:colorForDirectionsOverlay:</a></code>
+		<span class="tooltip"><p>Asks the delegate for the color for the corresponding view for the specified directionsOverlay.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mapView:didFailLoadingDirectionsOverlayWithError:">&ndash;&nbsp;mapView:didFailLoadingDirectionsOverlayWithError:</a></code>
+		<span class="tooltip"><p>Tells the delegate that the mapView specified wasn&rsquo;t able to load the directions requested</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+					</div>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/mapView:colorForDirectionsOverlay:" title="mapView:colorForDirectionsOverlay:"></a>
+	<h3 class="subsubtitle method-title">mapView:colorForDirectionsOverlay:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Asks the delegate for the color for the corresponding view for the specified directionsOverlay.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (UIColor *)mapView:(MTDMapView *)<em>mapView</em> colorForDirectionsOverlay:(MTDDirectionsOverlay *)<em>directionsOverlay</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p>the mapView that began loading the directions</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>directionsOverlay</em></dt>
+			<dd><p>the overlay we want the color of</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDDirectionsDelegate.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mapView:didFailLoadingDirectionsOverlayWithError:" title="mapView:didFailLoadingDirectionsOverlayWithError:"></a>
+	<h3 class="subsubtitle method-title">mapView:didFailLoadingDirectionsOverlayWithError:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Tells the delegate that the mapView specified wasn&rsquo;t able to load the directions requested</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)mapView:(MTDMapView *)<em>mapView</em> didFailLoadingDirectionsOverlayWithError:(NSError *)<em>error</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p>the mapView that began loading the directions</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>error</em></dt>
+			<dd><p>the error that occured</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDDirectionsDelegate.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mapView:didFinishLoadingDirectionsOverlay:" title="mapView:didFinishLoadingDirectionsOverlay:"></a>
+	<h3 class="subsubtitle method-title">mapView:didFinishLoadingDirectionsOverlay:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Tells the delegate that the specified directionsOverlay was loaded on the specified mapView.
+This method allows the delegate to intercept MTDirectionsKit and change the directionsOverlay
+by returning a different overlay than the one received as parameter</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (MTDDirectionsOverlay *)mapView:(MTDMapView *)<em>mapView</em> didFinishLoadingDirectionsOverlay:(MTDDirectionsOverlay *)<em>directionsOverlay</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p>the mapView that began loading the directions</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>directionsOverlay</em></dt>
+			<dd><p>the overlay that was loaded</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>the directionsOverlay that gets displayed on the mapView</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDDirectionsDelegate.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mapView:willStartLoadingDirectionsFrom:to:routeType:" title="mapView:willStartLoadingDirectionsFrom:to:routeType:"></a>
+	<h3 class="subsubtitle method-title">mapView:willStartLoadingDirectionsFrom:to:routeType:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Tells the delegate that the mapView will start loading directions</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)mapView:(MTDMapView *)<em>mapView</em> willStartLoadingDirectionsFrom:(CLLocationCoordinate2D)<em>fromCoordinate</em> to:(CLLocationCoordinate2D)<em>toCoordinate</em> routeType:(MTDDirectionsRouteType)<em>routeType</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p>the mapView that will start loading the directions</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>fromCoordinate</em></dt>
+			<dd><p>the starting point of the directions</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>toCoordinate</em></dt>
+			<dd><p>the end point of the directions</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>routeType</em></dt>
+			<dd><p>the type of the route requested, e.g. pedestrian, cycling, fastest driving</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDDirectionsDelegate.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mapView:willStartLoadingDirectionsFromAddress:toAddress:routeType:" title="mapView:willStartLoadingDirectionsFromAddress:toAddress:routeType:"></a>
+	<h3 class="subsubtitle method-title">mapView:willStartLoadingDirectionsFromAddress:toAddress:routeType:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Tells the delegate that the mapView will start loading directions</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)mapView:(MTDMapView *)<em>mapView</em> willStartLoadingDirectionsFromAddress:(NSString *)<em>fromAddress</em> toAddress:(NSString *)<em>toAddress</em> routeType:(MTDDirectionsRouteType)<em>routeType</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p>the mapView that will start loading the directions</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>fromAddress</em></dt>
+			<dd><p>the address of the starting coordinate of the route to request</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>toAddress</em></dt>
+			<dd><p>the address of the end coordinate of the route to request</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>routeType</em></dt>
+			<dd><p>the type of the route requested, e.g. pedestrian, cycling, fastest driving</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDDirectionsDelegate.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-05-26)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+		<script type="text/javascript">
+			function jumpToChange()
+			{
+				window.location.hash = this.options[this.selectedIndex].value;
+			}
+			
+			function toggleTOC()
+			{
+				var contents = document.getElementById('contents');
+				var tocContainer = document.getElementById('tocContainer');
+				
+				if (this.getAttribute('class') == 'open')
+				{
+					this.setAttribute('class', '');
+					contents.setAttribute('class', '');
+					tocContainer.setAttribute('class', '');
+					
+					window.name = "hideTOC";
+				}
+				else
+				{
+					this.setAttribute('class', 'open');
+					contents.setAttribute('class', 'isShowingTOC');
+					tocContainer.setAttribute('class', 'isShowingTOC');
+					
+					window.name = "";
+				}
+				return false;
+			}
+			
+			function toggleTOCEntryChildren(e)
+			{
+				e.stopPropagation();
+				var currentClass = this.getAttribute('class');
+				if (currentClass == 'children') {
+					this.setAttribute('class', 'children open');
+				}
+				else if (currentClass == 'children open') {
+					this.setAttribute('class', 'children');
+				}
+				return false;
+			}
+			
+			function tocEntryClick(e)
+			{
+				e.stopPropagation();
+				return true;
+			}
+			
+			function init()
+			{
+				var selectElement = document.getElementById('jumpTo');
+				selectElement.addEventListener('change', jumpToChange, false);
+				
+				var tocButton = document.getElementById('table_of_contents');
+				tocButton.addEventListener('click', toggleTOC, false);
+				
+				var taskTreeItem = document.getElementById('task_treeitem');
+				if (taskTreeItem.getElementsByTagName('li').length > 0)
+				{
+					taskTreeItem.setAttribute('class', 'children');
+					taskTreeItem.firstChild.setAttribute('class', 'disclosure');
+				}
+				
+				var tocList = document.getElementById('toc');
+				
+				var tocEntries = tocList.getElementsByTagName('li');
+				for (var i = 0; i < tocEntries.length; i++) {
+					tocEntries[i].addEventListener('click', toggleTOCEntryChildren, false);
+				}
+				
+				var tocLinks = tocList.getElementsByTagName('a');
+				for (var i = 0; i < tocLinks.length; i++) {
+					tocLinks[i].addEventListener('click', tocEntryClick, false);
+				}
+				
+				if (window.name == "hideTOC") {
+					toggleTOC.call(tocButton);
+				}
+			}
+			
+			window.onload = init;
+		</script>
+	</body>
+</html>
