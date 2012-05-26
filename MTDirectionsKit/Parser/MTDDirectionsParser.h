@@ -31,8 +31,9 @@
 @property (nonatomic, assign, readonly) CLLocationCoordinate2D toCoordinate;
 /** The type of the route */
 @property (nonatomic, assign, readonly) MTDDirectionsRouteType routeType;
-
+/** The address of the starting coordinate of the route, can be nil */
 @property (nonatomic, copy) NSString *fromAddress;
+/** The address of the end coordinate of the route, can be nil */
 @property (nonatomic, copy) NSString *toAddress;
 
 /******************************************
