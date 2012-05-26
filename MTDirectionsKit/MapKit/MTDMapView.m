@@ -30,6 +30,13 @@
 
 - (MKOverlayView *)viewForDirectionsOverlay:(id<MKOverlay>)overlay;
 
+// delegate encapsulation
+- (void)notifyDelegateWillStartLoadingDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate to:(CLLocationCoordinate2D)toCoordinate routeType:(MTDDirectionsRouteType)routeType;
+- (void)notifyDelegateWillStartLoadingDirectionsFromAddress:(NSString *)fromAddress toAddress:(NSString *)toAddress routeType:(MTDDirectionsRouteType)routeType;
+- (MTDDirectionsOverlay *)notifyDelegateDidFinishLoadingOverlay:(MTDDirectionsOverlay *)overlay;
+- (void)notifyDelegateDidFailLoadingOverlayWithError:(NSError *)error;
+- (UIColor *)askDelegateForColorOfOverlay:(MTDDirectionsOverlay *)overlay;
+
 // Crippled
 - (void)_mtd_cr_:(NSTimer *)timer;
 
@@ -109,29 +116,20 @@
                                                   __strong MTDMapView *strongSelf = weakSelf;
                                                   
                                                   if (overlay != nil) {
-                                                      if (_directionsDelegateFlags.didFinishLoadingOverlay) {
-                                                          overlay = [self.directionsDelegate mapView:strongSelf didFinishLoadingDirectionsOverlay:overlay];
-                                                      }
+                                                      overlay = [self notifyDelegateDidFinishLoadingOverlay:overlay];
                                                       
                                                       strongSelf.directionsDisplayType = MTDDirectionsDisplayTypeOverview;
                                                       strongSelf.directionsOverlay = overlay;
                                                       
                                                       if (zoomToShowDirections) {
                                                           [strongSelf setRegionToShowDirectionsAnimated:YES];
-                                                      } else {
-                                                          [strongSelf setNeedsLayout];
-                                                      }
+                                                      } 
                                                   } else {
-                                                      if (_directionsDelegateFlags.didFailLoadingOverlay) {
-                                                          [self.directionsDelegate mapView:strongSelf didFailLoadingDirectionsOverlayWithError:error];
-                                                      }
+                                                      [self notifyDelegateDidFailLoadingOverlayWithError:error];
                                                   }
                                               }];
         
-        if (_directionsDelegateFlags.willStartLoadingOverlayCoordinates) {
-            [self.directionsDelegate mapView:self willStartLoadingDirectionsFrom:fromCoordinate to:toCoordinate routeType:routeType];
-        }
-        
+        [self notifyDelegateWillStartLoadingDirectionsFrom:fromCoordinate to:toCoordinate routeType:routeType];
         [self.request start];
     }
 }
@@ -152,9 +150,7 @@
                                                          __strong MTDMapView *strongSelf = weakSelf;
                                                          
                                                          if (overlay != nil) {
-                                                             if (_directionsDelegateFlags.didFinishLoadingOverlay) {
-                                                                 overlay = [self.directionsDelegate mapView:strongSelf didFinishLoadingDirectionsOverlay:overlay];
-                                                             }
+                                                             overlay = [self notifyDelegateDidFinishLoadingOverlay:overlay];
                                                              
                                                              strongSelf.directionsDisplayType = MTDDirectionsDisplayTypeOverview;
                                                              strongSelf.directionsOverlay = overlay;
@@ -163,16 +159,11 @@
                                                                  [strongSelf setRegionToShowDirectionsAnimated:YES];
                                                              }
                                                          } else {
-                                                             if (_directionsDelegateFlags.didFailLoadingOverlay) {
-                                                                 [self.directionsDelegate mapView:strongSelf didFailLoadingDirectionsOverlayWithError:error];
-                                                             }
+                                                             [self notifyDelegateDidFailLoadingOverlayWithError:error];
                                                          }
                                                      }];
         
-        if (_directionsDelegateFlags.willStartLoadingOverlayAddresses) {
-            [self.directionsDelegate mapView:self willStartLoadingDirectionsFromAddress:fromAddress toAddress:toAddress routeType:routeType];
-        }
-        
+        [self notifyDelegateWillStartLoadingDirectionsFromAddress:fromAddress toAddress:toAddress routeType:routeType];
         [self.request start];
     }
 }
@@ -208,7 +199,7 @@
             [self removeDirectionsOverlay];
         }
         
-         _directionsOverlay = directionsOverlay;
+        _directionsOverlay = directionsOverlay;
         
         // add new overlay
         if (directionsOverlay != nil) {
@@ -270,8 +261,12 @@
     return MTDInvalidCLLocationCoordinate2D;
 }
 
-- (double)distance {
-    return [self.directionsOverlay.distance distanceInCurrentMeasurementSystem];
+- (double)distanceInMeter {
+    return [self.directionsOverlay.distance distanceInMeter];
+}
+
+- (NSTimeInterval)timeInSeconds {
+    return self.directionsOverlay.timeInSeconds;
 }
 
 - (MTDDirectionsRouteType)routeType {
@@ -475,13 +470,105 @@
         return nil;
     }
     
-    self.directionsOverlayView = [[MTDDirectionsOverlayView alloc] initWithOverlay:self.directionsOverlay];
-    
-    if (_directionsDelegateFlags.colorForOverlay) {
-        self.directionsOverlayView.overlayColor = [self.directionsDelegate mapView:self colorForDirectionsOverlay:self.directionsOverlay];
-    }
+    self.directionsOverlayView = [[MTDDirectionsOverlayView alloc] initWithOverlay:self.directionsOverlay];    
+    self.directionsOverlayView.overlayColor = [self askDelegateForColorOfOverlay:self.directionsOverlay];
     
     return self.directionsOverlayView;
+}
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - Delegate
+////////////////////////////////////////////////////////////////////////
+
+- (void)notifyDelegateWillStartLoadingDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate 
+                                                  to:(CLLocationCoordinate2D)toCoordinate
+                                           routeType:(MTDDirectionsRouteType)routeType {
+    if (_directionsDelegateFlags.willStartLoadingOverlayCoordinates) {
+        [self.directionsDelegate mapView:self willStartLoadingDirectionsFrom:fromCoordinate to:toCoordinate routeType:routeType];
+    }
+    
+    // post corresponding notification
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+                              [MTDWaypoint waypointWithCoordinate:fromCoordinate], MTDDirectionsNotificationKeyFromCoordinate,
+                              [MTDWaypoint waypointWithCoordinate:toCoordinate], MTDDirectionsNotificationKeyToCoordinate,
+                              [NSNumber numberWithInt:routeType], MTDDirectionsNotificationKeyRouteType,
+                              nil];
+    NSNotification *notification = [NSNotification notificationWithName:MTDMapViewWillStartLoadingDirections
+                                                                 object:self
+                                                               userInfo:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+}
+
+- (void)notifyDelegateWillStartLoadingDirectionsFromAddress:(NSString *)fromAddress
+                                                  toAddress:(NSString *)toAddress
+                                                  routeType:(MTDDirectionsRouteType)routeType {
+    if (_directionsDelegateFlags.willStartLoadingOverlayAddresses) {
+        [self.directionsDelegate mapView:self willStartLoadingDirectionsFromAddress:fromAddress toAddress:toAddress routeType:routeType];
+    }
+    
+    // post corresponding notification
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+                              fromAddress, MTDDirectionsNotificationKeyFromAddress,
+                              toAddress, MTDDirectionsNotificationKeyToAddress,
+                              [NSNumber numberWithInt:routeType], MTDDirectionsNotificationKeyRouteType,
+                              nil];
+    NSNotification *notification = [NSNotification notificationWithName:MTDMapViewWillStartLoadingDirections
+                                                                 object:self
+                                                               userInfo:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+}
+
+- (MTDDirectionsOverlay *)notifyDelegateDidFinishLoadingOverlay:(MTDDirectionsOverlay *)overlay {
+    MTDDirectionsOverlay *overlayToReturn = overlay;
+    
+    if (_directionsDelegateFlags.didFinishLoadingOverlay) {
+        overlayToReturn = [self.directionsDelegate mapView:self didFinishLoadingDirectionsOverlay:overlay];
+    }
+    
+    // post corresponding notification
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+                              overlay, MTDDirectionsNotificationKeyOverlay,
+                              nil];
+    NSNotification *notification = [NSNotification notificationWithName:MTDMapViewDidFinishLoadingDirectionsOverlay
+                                                                 object:self
+                                                               userInfo:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    
+    // sanity check if delegate returned a valid overlay
+    if ([overlayToReturn isKindOfClass:[MTDDirectionsOverlay class]]) {
+        return overlayToReturn;
+    } else {
+        return overlay;
+    }
+}
+
+- (void)notifyDelegateDidFailLoadingOverlayWithError:(NSError *)error {
+    if (_directionsDelegateFlags.didFailLoadingOverlay) {
+        [self.directionsDelegate mapView:self didFailLoadingDirectionsOverlayWithError:error];
+    }
+    
+    // post corresponding notification
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+                              error, MTDDirectionsNotificationKeyError,
+                              nil];
+    NSNotification *notification = [NSNotification notificationWithName:MTDMapViewDidFailLoadingDirectionsOverlay
+                                                                 object:self
+                                                               userInfo:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+}
+
+- (UIColor *)askDelegateForColorOfOverlay:(MTDDirectionsOverlay *)overlay {
+    if (_directionsDelegateFlags.colorForOverlay) {
+        UIColor *color = [self.directionsDelegate mapView:self colorForDirectionsOverlay:overlay];
+        
+        // sanity check if delegate returned valid color
+        if ([color isKindOfClass:[UIColor class]]) {
+            return color;
+        }
+    }
+    
+    // nil doesn't get set as overlay color
+    return nil;
 }
 
 ////////////////////////////////////////////////////////////////////////

@@ -16,6 +16,8 @@
 @synthesize data = _data;
 @synthesize fromCoordinate = _fromCoordinate;
 @synthesize toCoordinate = _toCoordinate;
+@synthesize fromAddress = _fromAddress;
+@synthesize toAddress = _toAddress;
 @synthesize routeType = _routeType;
 
 ////////////////////////////////////////////////////////////////////////

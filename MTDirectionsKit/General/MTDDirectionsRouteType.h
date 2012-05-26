@@ -26,7 +26,3 @@ typedef enum {
     MTDDirectionsRouteTypePedestrianIncludingPublicTransport,
     MTDDirectionsRouteTypeBicycle
 } MTDDirectionsRouteType;
-
-
-// The default route type used when not specified otherwise: fastest driving
-#define kMTDDefaultDirectionsRouteType        MTDDirectionsRouteTypeFastestDriving

@@ -31,6 +31,10 @@
 @property (nonatomic, readonly) CLLocationCoordinate2D fromCoordinate;
 /** the end coordinate of the directions */
 @property (nonatomic, readonly) CLLocationCoordinate2D toCoordinate;
+/** The address of the starting coordinate, can be nil if not provided by API */
+@property (nonatomic, readonly) NSString *fromAddress;
+/** The address of the end coordinate, can be nil if not provided by API */
+@property (nonatomic, readonly) NSString *toAddress;
 /** the total distance between fromCoordinate and toCoordinate, when travelled along the given waypoints */
 @property (nonatomic, strong, readonly) MTDDistance *distance;
 /** the total estimated time for this route */
@@ -39,6 +43,11 @@
 @property (nonatomic, readonly) NSString *formattedTime;
 /** the type of travelling used to compute the directions, e.g. walking, by bike etc. */
 @property (nonatomic, assign, readonly) MTDDirectionsRouteType routeType;
+/** 
+ Dictionary containing additional information retreived, e.g. warnings and copyrights when using the Google Directions API.
+ You have to handle this information on your own and stick to the terms of usage of the API you use
+ */
+@property (nonatomic, readonly) NSDictionary *additionalInfo;
 
 /******************************************
  @name MapKit interface

@@ -35,10 +35,13 @@
         NSArray *waypointNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg[1]/step/polyline/points" onXML:self.data];
         NSArray *distanceNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg[1]/distance/value" onXML:self.data];
         NSArray *timeNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg[1]/duration/value" onXML:self.data];
+        NSArray *copyrightNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/copyrights" onXML:self.data];
+        NSArray *warningNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/warnings" onXML:self.data];
         
         NSMutableArray *waypoints = [NSMutableArray array];
         MTDDistance *distance = nil;
         NSTimeInterval timeInSeconds = -1.;
+        NSMutableDictionary *additionalInfo = [NSMutableDictionary dictionary];
         
         // Parse Waypoints
         {
@@ -69,12 +72,43 @@
             if (timeNodes.count > 0) {
                 timeInSeconds = [[[timeNodes objectAtIndex:0] contentString] doubleValue];
             }
+            
+            if (copyrightNodes.count > 0) {
+                NSString *copyright = [[copyrightNodes objectAtIndex:0] contentString];
+                [additionalInfo setValue:copyright forKey:@"copyrights"];
+            }
+            
+            if (warningNodes.count > 0) {
+                NSArray *warnings = [warningNodes valueForKey:@"contentString"];
+                [additionalInfo setValue:warnings forKey:@"warnings"];
+            }
+            
+            if (self.fromAddress == nil) {
+                NSArray *fromAddressNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg[1]/start_address" onXML:self.data];
+                
+                if (fromAddressNodes.count > 0) {
+                    self.fromAddress = [[fromAddressNodes objectAtIndex:0] contentString];
+                }
+            }
+            
+            if (self.toAddress == nil) {
+                NSArray *toAddressNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg[1]/end_address" onXML:self.data];
+                
+                if (toAddressNodes.count > 0) {
+                    self.toAddress = [[toAddressNodes objectAtIndex:0] contentString];
+                }
+            }
         }
         
         overlay = [MTDDirectionsOverlay overlayWithWaypoints:[waypoints copy]
                                                     distance:distance
                                                timeInSeconds:timeInSeconds
                                                    routeType:self.routeType];
+
+        // set read-only properties via KVO to not pollute API
+        [overlay setValue:self.fromAddress forKey:NSStringFromSelector(@selector(fromAddress))];
+        [overlay setValue:self.toAddress forKey:NSStringFromSelector(@selector(toAddress))];
+        [overlay setValue:additionalInfo forKey:NSStringFromSelector(@selector(additionalInfo))];
     } else {
         error = [NSError errorWithDomain:MTDDirectionsKitErrorDomain
                                     code:statusCode
@@ -92,6 +126,8 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             completion(overlay, error);
         });
+    } else {
+        MTDLogWarning(@"No completion block was set.");
     }
 }
 
