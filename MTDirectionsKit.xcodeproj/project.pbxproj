@@ -72,6 +72,7 @@
 		9B2C42BE155EB85B00C0E4CE /* MTDDirectionsRouteType+Google.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2C42B9155EB85B00C0E4CE /* MTDDirectionsRouteType+Google.h */; };
 		9B6C18C414A7E18200087893 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18C314A7E18200087893 /* Foundation.framework */; };
 		9B6C18F414A7E40A00087893 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18F314A7E40A00087893 /* libxml2.dylib */; };
+		9B76F452157146BA00B54B05 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76F451157146BA00B54B05 /* CoreGraphics.framework */; };
 		9B812606156948F100C9A6C8 /* MTDDistanceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B812605156948F100C9A6C8 /* MTDDistanceTest.m */; };
 		9B81260A1569545F00C9A6C8 /* MTDDirectionsParserMapQuestTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B8126091569545F00C9A6C8 /* MTDDirectionsParserMapQuestTest.m */; };
 		9B8126101569550B00C9A6C8 /* mapquest_guessing_vienna.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B81260F1569550B00C9A6C8 /* mapquest_guessing_vienna.xml */; };
@@ -162,6 +163,7 @@
 		9B6C18C014A7E18200087893 /* libMTDirectionsKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMTDirectionsKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B6C18C314A7E18200087893 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9B6C18F314A7E40A00087893 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		9B76F451157146BA00B54B05 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		9B812604156948F100C9A6C8 /* MTDDistanceTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDDistanceTest.h; sourceTree = "<group>"; };
 		9B812605156948F100C9A6C8 /* MTDDistanceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDDistanceTest.m; sourceTree = "<group>"; };
 		9B8126081569545F00C9A6C8 /* MTDDirectionsParserMapQuestTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDDirectionsParserMapQuestTest.h; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B76F452157146BA00B54B05 /* CoreGraphics.framework in Frameworks */,
 				9B8126121569577E00C9A6C8 /* UIKit.framework in Frameworks */,
 				9B8126111569576700C9A6C8 /* libxml2.dylib in Frameworks */,
 				9B10A9B8155D5A94002A3052 /* libMTDirectionsKit.a in Frameworks */,
@@ -369,11 +372,12 @@
 			isa = PBXGroup;
 			children = (
 				9B6C18F314A7E40A00087893 /* libxml2.dylib */,
+				9B76F451157146BA00B54B05 /* CoreGraphics.framework */,
 				9B10A9B2155D5A17002A3052 /* CoreLocation.framework */,
 				9B6C18C314A7E18200087893 /* Foundation.framework */,
 				9B10A9B4155D5A1B002A3052 /* MapKit.framework */,
-				9B2C4296155EB6A400C0E4CE /* UIKit.framework */,
 				9B10A99E155D5867002A3052 /* SenTestingKit.framework */,
+				9B2C4296155EB6A400C0E4CE /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
