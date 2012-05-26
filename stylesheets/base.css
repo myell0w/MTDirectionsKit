@@ -374,6 +374,10 @@ div.feature_list div {
 	overflow: hidden;
 	margin-bottom: 40px;
 }
+
+div.feature_list p {
+	text-align: justify;
+}
 /*--------------------------------------------
 7. Screenshots
 ---------------------------------------------*/
@@ -624,14 +628,15 @@ h2 {
 	h2.icon {
 		background: url('../images/features_icons.png') no-repeat top left;
 		height: 32px;
-		padding: 10px 0px 0px 60px;
+		padding: 13px 0px 0px 60px;
 		font-size: 17px;
 	}
-	h2.icon.cart 			{ background-position: 0px -42px; }
-	h2.icon.briefcase { background-position: 0px -84px; }
-	h2.icon.help 			{ background-position: 0px -126px; }
-	h2.icon.pencil 		{ background-position: 0px -168px; }
-	h2.icon.graph 		{ background-position: 0px -210px; }
+	h2.icon.smart           { background-position: 0px 0px;}
+	h2.icon.reliable		{ background-position: 0px -48px; }
+	h2.icon.versatile       { background-position: 0px -96px; }
+	h2.icon.easy			{ background-position: 0px -144px; }
+	h2.icon.fast 		    { background-position: 0px -192px; }
+	h2.icon.beautiful       { background-position: 0px -240px; }
 h3 {
 	font-size: 14px;
 	color: #353535;
