@@ -43,6 +43,11 @@
 @property (nonatomic, readonly) NSString *formattedTime;
 /** the type of travelling used to compute the directions, e.g. walking, by bike etc. */
 @property (nonatomic, assign, readonly) MTDDirectionsRouteType routeType;
+/** 
+ Dictionary containing additional information retreived, e.g. warnings and copyrights when using the Google Directions API.
+ You have to handle this information on your own and stick to the terms of usage of the API you use
+ */
+@property (nonatomic, readonly) NSDictionary *additionalInfo;
 
 /******************************************
  @name MapKit interface

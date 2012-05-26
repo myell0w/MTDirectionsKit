@@ -35,10 +35,13 @@
         NSArray *waypointNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg[1]/step/polyline/points" onXML:self.data];
         NSArray *distanceNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg[1]/distance/value" onXML:self.data];
         NSArray *timeNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg[1]/duration/value" onXML:self.data];
+        NSArray *copyrightNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/copyrights" onXML:self.data];
+        NSArray *warningNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/warnings" onXML:self.data];
         
         NSMutableArray *waypoints = [NSMutableArray array];
         MTDDistance *distance = nil;
         NSTimeInterval timeInSeconds = -1.;
+        NSMutableDictionary *additionalInfo = [NSMutableDictionary dictionary];
         
         // Parse Waypoints
         {
@@ -70,6 +73,16 @@
                 timeInSeconds = [[[timeNodes objectAtIndex:0] contentString] doubleValue];
             }
             
+            if (copyrightNodes.count > 0) {
+                NSString *copyright = [[copyrightNodes objectAtIndex:0] contentString];
+                [additionalInfo setValue:copyright forKey:@"copyrights"];
+            }
+            
+            if (warningNodes.count > 0) {
+                NSArray *warnings = [warningNodes valueForKey:@"contentString"];
+                [additionalInfo setValue:warnings forKey:@"warnings"];
+            }
+            
             if (self.fromAddress == nil) {
                 NSArray *fromAddressNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg[1]/start_address" onXML:self.data];
                 
@@ -95,6 +108,7 @@
         // set read-only properties via KVO to not pollute API
         [overlay setValue:self.fromAddress forKey:NSStringFromSelector(@selector(fromAddress))];
         [overlay setValue:self.toAddress forKey:NSStringFromSelector(@selector(toAddress))];
+        [overlay setValue:additionalInfo forKey:NSStringFromSelector(@selector(additionalInfo))];
     } else {
         error = [NSError errorWithDomain:MTDDirectionsKitErrorDomain
                                     code:statusCode
@@ -112,6 +126,8 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             completion(overlay, error);
         });
+    } else {
+        MTDLogWarning(@"No completion block was set.");
     }
 }
 

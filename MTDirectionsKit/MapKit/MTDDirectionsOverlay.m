@@ -31,6 +31,7 @@
 @synthesize routeType = _routeType;
 @synthesize fromAddress = _fromAddress;
 @synthesize toAddress = _toAddress;
+@synthesize additionalInfo = _additionalInfo;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
