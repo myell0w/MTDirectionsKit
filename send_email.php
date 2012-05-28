@@ -1,7 +1,7 @@
 <?
 
 	// Replace this with your own email address
-	$to="you@youremail.com";
+	$to="support@mtdirectionsk.it";
 
 	// Extract form contents
 	$name = $_POST['name'];
@@ -25,7 +25,7 @@
 	// Send email
 	if($errors =='') {
 
-		$headers =  'From: FluidApp <no-reply@fluidapp.com>'. "\r\n" .
+		$headers =  'From: MTDirectionsKit <no-reply@mtdirectionsk.it>'. "\r\n" .
 					'Reply-To: '.$email.'' . "\r\n" .
 					'X-Mailer: PHP/' . phpversion();
 		$email_subject = "Website Contact Form: $email";
