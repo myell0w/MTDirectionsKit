@@ -10,6 +10,9 @@
 #import "MTDDirectionsRouteType.h"
 
 
+extern NSInteger _mtd_wm_;
+
+
 /**
  Opens the built-in Maps.app and displays the directions from fromCoordinate to toCoordinate
  with the chosen routeType. Since the built-in Maps application only supports travelling per pedes,
@@ -60,9 +63,3 @@ UIColor* MTDDarkenedColor(UIColor *color, CGFloat difference);
  @param rect the rect to test intersection with
  */
 BOOL MTDDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMapRect rect);
-
-////////////////////////////////////////////////////////////////////////
-#pragma mark - Cripppled
-////////////////////////////////////////////////////////////////////////
-
-extern NSInteger _mtd_wm_;
