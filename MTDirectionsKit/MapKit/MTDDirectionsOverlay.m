@@ -30,6 +30,9 @@
 @synthesize timeInSeconds = _timeInSeconds;
 @synthesize routeType = _routeType;
 @synthesize maneuvers = _maneuvers;
+@synthesize fromAddress = _fromAddress;
+@synthesize toAddress = _toAddress;
+@synthesize additionalInfo = _additionalInfo;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle

@@ -33,6 +33,9 @@ NS_INLINE dispatch_queue_t parser_queue(void) {
 @property (nonatomic, strong) MTDHTTPRequest *httpRequest;
 @property (nonatomic, copy) NSString *httpAddress;
 @property (nonatomic, assign) Class parserClass;
+@property (nonatomic, strong) NSMutableDictionary *parameters;
+
+@property (nonatomic, readonly) NSString *fullAddress;
 
 @end
 
@@ -46,7 +49,9 @@ NS_INLINE dispatch_queue_t parser_queue(void) {
 @synthesize completion = _completion;
 @synthesize routeType = _routeType;
 @synthesize httpRequest = _httpRequest;
+@synthesize httpAddress = _httpAddress;
 @synthesize parserClass = _parserClass;
+@synthesize parameters = _parameters;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
@@ -115,6 +120,7 @@ NS_INLINE dispatch_queue_t parser_queue(void) {
         _toCoordinate = toCoordinate;
         _routeType = routeType;
         _completion = [completion copy];
+        _parameters = [NSMutableDictionary dictionary];
     }
     
     return self;
@@ -131,6 +137,7 @@ NS_INLINE dispatch_queue_t parser_queue(void) {
         _toAddress = [toAddress copy];
         _routeType = routeType;
         _completion = [completion copy];
+        _parameters = [NSMutableDictionary dictionary];
     }
     
     return self;
@@ -140,17 +147,11 @@ NS_INLINE dispatch_queue_t parser_queue(void) {
 #pragma mark - MTDDirectionRequest
 ////////////////////////////////////////////////////////////////////////
 
-- (void)setHttpAddress:(NSString *)httpAddress {
-    self.httpRequest = [[MTDHTTPRequest alloc] initWithAddress:httpAddress
+- (void)start {
+    self.httpRequest = [[MTDHTTPRequest alloc] initWithAddress:self.fullAddress
                                                 callbackTarget:self
                                                         action:@selector(requestFinished:)];
-}
-
-- (NSString *)httpAddress {
-    return self.httpRequest.urlRequest.URL.absoluteString;
-}
-
-- (void)start {
+    
     [self.httpRequest start];
 }
 
@@ -166,6 +167,10 @@ NS_INLINE dispatch_queue_t parser_queue(void) {
                                                                           toCoordinate:self.toCoordinate
                                                                              routeType:self.routeType
                                                                                   data:httpRequest.data];
+        // can be nil
+        parser.fromAddress = self.fromAddress;
+        parser.toAddress = self.toAddress;
+        
         dispatch_async(parser_queue(), ^{
             [parser parseWithCompletion:self.completion];
         });
@@ -181,6 +186,31 @@ NS_INLINE dispatch_queue_t parser_queue(void) {
         
         self.completion(nil, error);
     }
+}
+
+- (void)setValue:(NSString *)value forParameter:(NSString *)parameter {
+    [self.parameters setValue:value forKey:parameter];
+}
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - Private
+////////////////////////////////////////////////////////////////////////
+
+- (NSString *)fullAddress {
+    NSMutableString *address = [NSMutableString stringWithString:self.httpAddress];
+    
+    if (self.parameters.count > 0) {
+        [address appendString:@"?"];
+        
+        [self.parameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            [address appendFormat:@"%@=%@&", key,obj];
+        }];
+        
+        // remove last "&"
+        [address deleteCharactersInRange:NSMakeRange(address.length-1, 1)];
+    }
+    
+    return [address copy];
 }
 
 @end

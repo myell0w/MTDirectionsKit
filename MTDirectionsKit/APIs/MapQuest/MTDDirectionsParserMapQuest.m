@@ -36,11 +36,13 @@
         NSArray *distanceNodes = [MTDXMLElement nodesForXPathQuery:@"//route/distance" onXML:self.data];
         NSArray *maneuverNodes = [MTDXMLElement nodesForXPathQuery:@"//legs/leg[1]/maneuvers/maneuver" onXML:self.data];
         NSArray *timeNodes = [MTDXMLElement nodesForXPathQuery:@"//route/time" onXML:self.data];
+        NSArray *copyrightNodes = [MTDXMLElement nodesForXPathQuery:@"//copyright/text" onXML:self.data];
         
         NSMutableArray *waypoints = [NSMutableArray arrayWithCapacity:waypointNodes.count+2];
         NSMutableArray *maneuvers = [NSMutableArray arrayWithCapacity:maneuverNodes.count];
         MTDDistance *distance = nil;
         NSTimeInterval timeInSeconds = -1.;
+        NSMutableDictionary *additionalInfo = [NSMutableDictionary dictionary];
         
         // Parse Waypoints
         {
@@ -107,6 +109,11 @@
             if (timeNodes.count > 0) {
                 timeInSeconds = [[[timeNodes objectAtIndex:0] contentString] doubleValue];
             }
+            
+            if (copyrightNodes.count > 0) {
+                NSString *copyright = [[copyrightNodes objectAtIndex:0] contentString];
+                [additionalInfo setValue:copyright forKey:@"copyrights"];
+            }
         }
         
         overlay = [MTDDirectionsOverlay overlayWithWaypoints:[waypoints copy]
@@ -116,6 +123,10 @@
         
         overlay.maneuvers = [maneuvers copy];
 
+        // set read-only properties via KVO to not pollute API
+        [overlay setValue:self.fromAddress forKey:NSStringFromSelector(@selector(fromAddress))];
+        [overlay setValue:self.toAddress forKey:NSStringFromSelector(@selector(toAddress))];
+        [overlay setValue:additionalInfo forKey:NSStringFromSelector(@selector(additionalInfo))];
     } else {
         NSArray *messageNodes = [MTDXMLElement nodesForXPathQuery:@"//messages/message" onXML:self.data];
         NSString *errorMessage = nil;
@@ -142,6 +153,8 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             completion(overlay, error);
         });
+    } else {
+        MTDLogWarning(@"No completion block was set.");
     }
 }
 
