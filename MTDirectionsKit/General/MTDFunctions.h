@@ -65,4 +65,4 @@ BOOL MTDDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMapRect rect
 #pragma mark - Cripppled
 ////////////////////////////////////////////////////////////////////////
 
-extern NSInteger _mtd_cr_;
+extern NSInteger _mtd_wm_;

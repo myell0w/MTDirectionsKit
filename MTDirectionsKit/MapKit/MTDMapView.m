@@ -37,8 +37,8 @@
 - (void)notifyDelegateDidFailLoadingOverlayWithError:(NSError *)error;
 - (UIColor *)askDelegateForColorOfOverlay:(MTDDirectionsOverlay *)overlay;
 
-// Crippled
-- (void)_mtd_cr_:(NSTimer *)timer;
+// Watermark
+- (void)_mtd_wm_:(NSTimer *)timer;
 
 @end
 
@@ -413,10 +413,10 @@
     
     _directionsDisplayType = MTDDirectionsDisplayTypeNone;
     
-    // Crippled
+    // Watermark
     [NSTimer scheduledTimerWithTimeInterval:5.0
                                      target:self
-                                   selector:@selector(_mtd_cr_:)
+                                   selector:@selector(_mtd_wm_:)
                                    userInfo:nil
                                     repeats:YES];
 }
@@ -572,11 +572,11 @@
 }
 
 ////////////////////////////////////////////////////////////////////////
-#pragma mark - Crippled
+#pragma mark - Watermark
 ////////////////////////////////////////////////////////////////////////
 
-- (void)_mtd_cr_:(NSTimer *)timer {
-    if (!_mtd_cr_) {
+- (void)_mtd_wm_:(NSTimer *)timer {
+    if (!_mtd_wm_) {
         [self removeOverlays:self.overlays];
     }
 }

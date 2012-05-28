@@ -24,7 +24,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (UIColor *)overlayColor {
-    return _overlayColor ?: [UIColor colorWithRed:0.f green:0.25f blue:1.f alpha:1.f]; //[UIColor colorWithRed:0.675 green:0.396 blue:0.702 alpha:1.000];
+    return _overlayColor ?: [UIColor colorWithRed:0.f green:0.25f blue:1.f alpha:1.f];
 }
 
 - (void)setOverlayColor:(UIColor *)overlayColor {
@@ -57,10 +57,10 @@
         
         // Cripple drawing for Demo
         {
-            _mtd_cr_ = 1;
+            _mtd_wm_ = 1;
             CGRect boundingBox = CGPathGetBoundingBox(path);
             CGContextSaveGState(context);
-            CGContextSetFillColorWithColor(context, [[UIColor redColor] colorWithAlphaComponent:0.25f].CGColor);
+            CGContextSetFillColorWithColor(context, [[UIColor redColor] colorWithAlphaComponent:0.3f].CGColor);
             CGContextFillRect(context, boundingBox);
             CGContextRestoreGState(context);
         }
