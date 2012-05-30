@@ -775,6 +775,7 @@
 			buildSettings = {
 				ARCHS = (
 					i386,
+					armv6,
 					armv7,
 				);
 				COPY_PHASE_STRIP = NO;
@@ -796,6 +797,7 @@
 			buildSettings = {
 				ARCHS = (
 					i386,
+					armv6,
 					armv7,
 				);
 				COPY_PHASE_STRIP = NO;
@@ -815,6 +817,11 @@
 		9BEE27C2155EB2B8008A42F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					"i386,",
+					"armv6,",
+					armv7,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -822,6 +829,11 @@
 		9BEE27C3155EB2B8008A42F8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					"i386,",
+					"armv6,",
+					armv7,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
