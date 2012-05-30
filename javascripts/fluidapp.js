@@ -106,7 +106,7 @@ $(document).ready(function() {
 	});
 		
 	// Toggle lists
-	$(".toggle_list ul li .title").click(function() {
+	$(".toggle_list ul li .title[active!=false]").click(function() {
 		var content_container = $(this).parent().find(".content");
 		if(content_container.is(":visible")) {
 			var page_height = $(".page.current").height() - content_container.height();

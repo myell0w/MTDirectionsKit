@@ -176,7 +176,7 @@ section { }
 			overflow: hidden;
 		}
 			section #app_info .buttons .large_button {
-				float: left;
+				float: right;
 				margin-left: 15px;
 				margin-bottom: 15px;
 			}
@@ -706,7 +706,7 @@ div.one_fourth  { width: 22%; }
 	color: #fff;
 	display: inline-block;
 	width: 140px;
-	text-align: left;
+	text-align: center;
 	text-shadow: 1px 1px  rgba(0,0,0,0.85);
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -725,6 +725,7 @@ div.one_fourth  { width: 22%; }
 	.large_button em {
 		font-size: 10px;
 		font-weight: bold;
+		text-align: center;
 		display: block;
 		color: #fff;
 		text-shadow: 0px 1px rgba(255,255,255,0.65);
