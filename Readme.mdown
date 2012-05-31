@@ -51,7 +51,8 @@ There are two ways to integrate MTDirectionsKit into your App:
 
 The easiest way to integrate MTDirectionsKit is to add the binary framework to your App. 
 
-Independent of which way to integrate MTDirectionsKit you choose, you have to add some system frameworks and libraries to your project. For MTDirectionsKit  to work you have to add 
+Independent of which way to integrate MTDirectionsKit you choose, you have to add some system frameworks and libraries to your project. 
+For MTDirectionsKit to work you have to add 
 
     CoreLocation.framework
     MapKit.framework
@@ -90,12 +91,3 @@ everywhere where you want to use it.
 MTDirectionsKit needs Xcode ≥ 4.3, iOS Base SDK ≥ 5.1 and Clang LLVM >= 3.1 to compile. It doesn't work with the old LLVM GCC compiler.
 
 MTDirectionsKit works on a deployment target of ≥ iOS 4.0 and can be used in ARC or non-ARC applications.
-
-## Disclaimer
-
-MTDirectionsKit can use the following two APIs for gathering routing information:
-
-1. [MapQuest Open Directions API](http://open.mapquestapi.com/directions/ "MapQuest Open Directions API")
-2. [Google Directions API](https://developers.google.com/maps/documentation/directions/ "Google Directions API")
-
-MTDirectionsKit is not .... bla bla ... keine Verantwortung für API, terms of usage etc.
