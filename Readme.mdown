@@ -1,7 +1,7 @@
 ## Why MTDirectionsKit?
 
 Did you ever wonder why Apple didn't provide a way to show directions directly on top of MKMapView and force you to switch
-to their built-in Maps.app just to guide your users somewhere? Me too, that's why I built MTDirectionsKit.
+to their built-in Maps.app just to guide your users somewhere? We too, that's why we built MTDirectionsKit.
 Switching to Maps.app just to show directions results in a context-switch and can confuse your users, thus increasing the
 chance that they won't return to your Application.
 
@@ -10,6 +10,11 @@ Not only will your users thank you for not throwing them out of your App, it wil
 others that don't offer this functionality.
 
 Convinced? Let's get you started.
+
+MTDirectionsKit can use the following two APIs for gathering routing information:
+
+1. [MapQuest Open Directions API](http://open.mapquestapi.com/directions/)
+2. [Google Directions API](https://developers.google.com/maps/documentation/directions/)
 
 ## How to use?
 
