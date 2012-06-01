@@ -59,7 +59,7 @@
         {
             _mtd_wm_ = 1;
             
-            float components[4] = {1.f, 0.f, 0.f, 0.3f};
+            float components[] = {1.f, 0.f, 0.f, 0.35f};
             CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
             CGColorRef wmColor = CGColorCreate(colorSpace, components);
             
