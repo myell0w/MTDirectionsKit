@@ -58,11 +58,18 @@
         // Cripple drawing for Demo
         {
             _mtd_wm_ = 1;
+            
+            float components[4] = {1.f, 0.f, 0.f, 0.3f};
+            CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+            CGColorRef wmColor = CGColorCreate(colorSpace, components);
+            
             CGRect boundingBox = CGPathGetBoundingBox(path);
             CGContextSaveGState(context);
-            CGContextSetFillColorWithColor(context, [[UIColor redColor] colorWithAlphaComponent:0.3f].CGColor);
+            CGContextSetFillColorWithColor(context, wmColor);
             CGContextFillRect(context, boundingBox);
             CGContextRestoreGState(context);
+            
+            CGColorRelease(wmColor);
         }
         
         // Setup graphics context
