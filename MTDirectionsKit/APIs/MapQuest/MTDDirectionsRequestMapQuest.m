@@ -49,9 +49,12 @@
 
 - (void)setValueForParameterWithIntermediateGoals:(NSArray *)intermediateGoals {
     if (intermediateGoals.count > 0) {
+        // MapQuest wants all goals (intermediate and end goal) set for parameter "to",
+        // we set our destination as the last goal
         NSArray *allDestinations = [intermediateGoals arrayByAddingObject:self.to];
         NSMutableArray *transformedDestinations = [NSMutableArray arrayWithCapacity:allDestinations.count];
         
+        // create new array with string-representation of Waypoints for API
         for (MTDWaypoint *destination in allDestinations) {
             [transformedDestinations addObject:[destination descriptionForAPI:MTDDirectionsAPIMapQuest]];
         }
