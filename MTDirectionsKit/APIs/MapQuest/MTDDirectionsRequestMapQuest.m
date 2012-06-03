@@ -2,10 +2,15 @@
 #import "MTDDirectionsRequest+MTDirectionsPrivateAPI.h"
 #import "MTDDirectionsRouteType+MapQuest.h"
 #import "MTDDirectionsParserMapQuest.h"
+#import "MTDWaypoint.h"
 #import "MTDFunctions.h"
 
 
-#define kMTDMapQuestBaseAddress         @"http://open.mapquestapi.com/directions/v0/route"
+#define kMTDMapQuestHostName        @"http://open.mapquestapi.com"
+#define kMTDMapQuestServiceName     @"directions"
+#define kMTDMapQuestVersionNumber   @"v1"
+#define kMTDMapQuestRoutingMethod   @"route"
+#define kMTDMapQuestBaseAddress     kMTDMapQuestHostName @"/" kMTDMapQuestServiceName @"/" kMTDMapQuestVersionNumber @"/" kMTDMapQuestRoutingMethod
 
 
 @interface MTDDirectionsRequestMapQuest ()
@@ -21,34 +26,44 @@
 #pragma mark - Lifecycle
 ////////////////////////////////////////////////////////////////////////
 
-- (id)initFrom:(CLLocationCoordinate2D)fromCoordinate
-            to:(CLLocationCoordinate2D)toCoordinate
-     routeType:(MTDDirectionsRouteType)routeType
-    completion:(mtd_parser_block)completion {
-    if ((self = [super initFrom:fromCoordinate to:toCoordinate routeType:routeType completion:completion])) {
+- (id)initWithFrom:(MTDWaypoint *)from
+                to:(MTDWaypoint *)to
+ intermediateGoals:(NSArray *)intermediateGoals
+         routeType:(MTDDirectionsRouteType)routeType
+        completion:(mtd_parser_block)completion {
+    if ((self = [super initWithFrom:from to:to intermediateGoals:intermediateGoals routeType:routeType completion:completion])) {
         [self setup];
         
-        [self setValue:[NSString stringWithFormat:@"%f,%f", fromCoordinate.latitude, fromCoordinate.longitude] forParameter:@"from"];
-        [self setValue:[NSString stringWithFormat:@"%f,%f", toCoordinate.latitude, toCoordinate.longitude] forParameter:@"to"];
+        [self setValue:[from descriptionForAPI:MTDDirectionsAPIMapQuest] forParameter:@"from"];
+        // "to" gets set in setValueForParameterWithIntermediateGoals
+        // [self setValue:[to descriptionForAPI:MTDDirectionsAPIMapQuest] forParameter:@"to"];
         [self setValue:MTDDirectionStringForDirectionRouteTypeMapQuest(routeType) forParameter:@"routeType"];
     }
     
     return self;
 }
 
-- (id)initFromAddress:(NSString *)fromAddress
-            toAddress:(NSString *)toAddress
-            routeType:(MTDDirectionsRouteType)routeType
-           completion:(mtd_parser_block)completion {
-    if ((self = [super initFromAddress:fromAddress toAddress:toAddress routeType:routeType completion:completion])) {
-        [self setup];
+////////////////////////////////////////////////////////////////////////
+#pragma mark - MTDDirectionsRequest
+////////////////////////////////////////////////////////////////////////
+
+- (void)setValueForParameterWithIntermediateGoals:(NSArray *)intermediateGoals {
+    if (intermediateGoals.count > 0) {
+        // MapQuest wants all goals (intermediate and end goal) set for parameter "to",
+        // we set our destination as the last goal
+        NSArray *allDestinations = [intermediateGoals arrayByAddingObject:self.to];
+        NSMutableArray *transformedDestinations = [NSMutableArray arrayWithCapacity:allDestinations.count];
         
-        [self setValue:MTDURLEncodedString(fromAddress) forParameter:@"from"];
-        [self setValue:MTDURLEncodedString(toAddress) forParameter:@"to"];
-        [self setValue:MTDDirectionStringForDirectionRouteTypeMapQuest(routeType) forParameter:@"routeType"];
+        // create new array with string-representation of Waypoints for API
+        for (MTDWaypoint *destination in allDestinations) {
+            [transformedDestinations addObject:[destination descriptionForAPI:MTDDirectionsAPIMapQuest]];
+        }
+        
+        [self setArrayValue:transformedDestinations forParameter:@"to"];
+    } else {
+        // No intermediate goals, just one to parameter
+        [self setValue:[self.to descriptionForAPI:MTDDirectionsAPIMapQuest] forParameter:@"to"];
     }
-    
-    return self;
 }
 
 ////////////////////////////////////////////////////////////////////////

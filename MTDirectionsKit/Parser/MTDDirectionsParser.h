@@ -11,6 +11,9 @@
 #import "MTDDirectionsRouteType.h"
 
 
+@class MTDWaypoint;
+
+
 /**
  The MTDDirectionsParser protocol defines a set of required methods that instances of
  MTDDirectionsParser need to implement, that want to act as a directions parser.
@@ -25,16 +28,12 @@
 
 /** The object used to store the information about the route. */
 @property (nonatomic, strong, readonly) id data;
-/** The starting coordinate of the route */
-@property (nonatomic, assign, readonly) CLLocationCoordinate2D fromCoordinate;
-/** The end coordinate of the route */
-@property (nonatomic, assign, readonly) CLLocationCoordinate2D toCoordinate;
+/** The starting waypoint of the route */
+@property (nonatomic, strong, readonly) MTDWaypoint *from;
+/** The end waypoint of the route */
+@property (nonatomic, strong, readonly) MTDWaypoint *to;
 /** The type of the route */
 @property (nonatomic, assign, readonly) MTDDirectionsRouteType routeType;
-/** The address of the starting coordinate of the route, can be nil */
-@property (nonatomic, copy) NSString *fromAddress;
-/** The address of the end coordinate of the route, can be nil */
-@property (nonatomic, copy) NSString *toAddress;
 
 /******************************************
  @name Parsing
@@ -65,15 +64,15 @@
 /**
  This method is used to instantiate a concrete MTDDirctionsParser-subclass.
  
- @param fromCoordinate the start coordinate of the route
- @param toCoordinate the end coordinate of the route
+ @param from the starting waypoint of the route
+ @param to the end waypoint of the route
  @param routeType the type of the route
  @param data the data holding information about the route
  */
-- (id)initWithFromCoordinate:(CLLocationCoordinate2D)fromCoordinate
-                toCoordinate:(CLLocationCoordinate2D)toCoordinate
-                   routeType:(MTDDirectionsRouteType)routeType
-                        data:(id)data;
+- (id)initWithFrom:(MTDWaypoint *)from
+                to:(MTDWaypoint *)to
+         routeType:(MTDDirectionsRouteType)routeType
+              data:(id)data;
 
 
 @end

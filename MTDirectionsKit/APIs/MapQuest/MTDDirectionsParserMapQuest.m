@@ -47,8 +47,8 @@
         // Parse Waypoints
         {
             // add start coordinate
-            if (CLLocationCoordinate2DIsValid(self.fromCoordinate)) {
-                [waypoints addObject:[MTDWaypoint waypointWithCoordinate:self.fromCoordinate]];
+            if (self.from != nil && CLLocationCoordinate2DIsValid(self.from.coordinate)) {
+                [waypoints addObject:self.from];
             }
             
             // There should only be one element "shapePoints"
@@ -68,8 +68,8 @@
             }
             
             // add end coordinate
-            if (CLLocationCoordinate2DIsValid(self.toCoordinate)) {
-                [waypoints addObject:[MTDWaypoint waypointWithCoordinate:self.toCoordinate]];
+            if (self.to != nil && CLLocationCoordinate2DIsValid(self.to.coordinate)) {
+                [waypoints addObject:self.to];
             }
         }
         
@@ -124,8 +124,8 @@
         overlay.maneuvers = [maneuvers copy];
 
         // set read-only properties via KVO to not pollute API
-        [overlay setValue:self.fromAddress forKey:NSStringFromSelector(@selector(fromAddress))];
-        [overlay setValue:self.toAddress forKey:NSStringFromSelector(@selector(toAddress))];
+        [overlay setValue:self.from.address forKey:NSStringFromSelector(@selector(fromAddress))];
+        [overlay setValue:self.to.address forKey:NSStringFromSelector(@selector(toAddress))];
         [overlay setValue:additionalInfo forKey:NSStringFromSelector(@selector(additionalInfo))];
     } else {
         NSArray *messageNodes = [MTDXMLElement nodesForXPathQuery:@"//messages/message" onXML:self.data];
@@ -143,8 +143,8 @@
                                           nil]];
         
         MTDLogError(@"Error occurred during parsing of directions from %@ to %@: %@ \n%@", 
-                    MTDStringFromCLLocationCoordinate2D(self.fromCoordinate),
-                    MTDStringFromCLLocationCoordinate2D(self.toCoordinate),
+                    self.from,
+                    self.to,
                     errorMessage ?: @"No error message",
                     error);
     }

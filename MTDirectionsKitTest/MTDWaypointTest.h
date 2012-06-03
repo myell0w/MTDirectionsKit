@@ -14,6 +14,10 @@
 @interface MTDWaypointTest : SenTestCase {
     MTDWaypoint *waypoint1;
     MTDWaypoint *waypoint2;
+    MTDWaypoint *waypoint3;
+    MTDWaypoint *waypoint4;
+    MTDWaypoint *waypoint5;
+    MTDWaypoint *waypoint6;
 }
 
 @end
