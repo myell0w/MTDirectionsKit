@@ -1,5 +1,6 @@
 #import "MTDWaypoint.h"
 #import "MTDFunctions.h"
+#import "MTDDirectionsDefines.h"
 
 
 @implementation MTDWaypoint
@@ -30,6 +31,7 @@
 - (id)initWithAddress:(NSString *)address {
     if ((self = [super init])) {
         _address = [address stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        _coordinate = MTDInvalidCLLocationCoordinate2D;
     }
     
     return self;
