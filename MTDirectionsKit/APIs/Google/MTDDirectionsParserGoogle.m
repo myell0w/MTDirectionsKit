@@ -32,9 +32,9 @@
     }
     
     if (statusCode == MTDStatusCodeGoogleSuccess) {
-        NSArray *waypointNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg[1]/step/polyline/points" onXML:self.data];
-        NSArray *distanceNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg[1]/distance/value" onXML:self.data];
-        NSArray *timeNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg[1]/duration/value" onXML:self.data];
+        NSArray *waypointNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg/step/polyline/points" onXML:self.data];
+        NSArray *distanceNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg/distance/value" onXML:self.data];
+        NSArray *timeNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg/duration/value" onXML:self.data];
         NSArray *copyrightNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/copyrights" onXML:self.data];
         NSArray *warningNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/warnings" onXML:self.data];
         
@@ -67,12 +67,21 @@
         // Parse Additional Info of directions
         {
             if (distanceNodes.count > 0) {
-                double distanceInMeters = [[[distanceNodes objectAtIndex:0] contentString] doubleValue];
+                double distanceInMeters = 0.;
+                
+                for (MTDXMLElement *distanceNode in distanceNodes) {
+                    distanceInMeters += [[distanceNode contentString] doubleValue];
+                }
+                
                 distance = [MTDDistance distanceWithMeters:distanceInMeters];
             }
             
             if (timeNodes.count > 0) {
-                timeInSeconds = [[[timeNodes objectAtIndex:0] contentString] doubleValue];
+                timeInSeconds = 0.;
+                
+                for (MTDXMLElement *timeNode in timeNodes) {
+                    timeInSeconds += [[timeNode contentString] doubleValue];
+                }
             }
             
             if (copyrightNodes.count > 0) {
