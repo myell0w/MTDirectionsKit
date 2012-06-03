@@ -155,6 +155,12 @@ intermediateGoals:(NSArray *)intermediateGoals
     }
 }
 
+- (void)setArrayValue:(NSArray *)array forParameter:(NSString *)parameter {
+    if (array.count > 0 && parameter != nil) {
+        [self.parameters setObject:array forKey:parameter];
+    }
+}
+
 - (void)setValueForParameterWithIntermediateGoals:(NSArray *)intermediateGoals {
     MTDLogError(@"setValueForParameterWithIntermediateGoals was called on a request that doesn't override it (Class: %@)", 
                 NSStringFromClass([self class]));
@@ -173,7 +179,13 @@ intermediateGoals:(NSArray *)intermediateGoals
         [address appendString:@"?"];
         
         [self.parameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-            [address appendFormat:@"%@=%@&", key, MTDURLEncodedString(obj)];
+            if ([obj isKindOfClass:[NSArray class]]) {
+                for (id value in obj) {
+                    [address appendFormat:@"%@=%@&", key, MTDURLEncodedString([value description])];
+                }
+            } else {
+                [address appendFormat:@"%@=%@&", key, MTDURLEncodedString([obj description])];
+            }
         }];
         
         // remove last "&"

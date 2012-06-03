@@ -45,16 +45,14 @@
 
 - (void)setValueForParameterWithIntermediateGoals:(NSArray *)intermediateGoals {
     if (intermediateGoals.count > 0) {
-        NSMutableString *parameter = [NSMutableString string];
+        NSArray *allDestinations = [intermediateGoals arrayByAddingObject:self.to];
+        NSMutableArray *transformedDestinations = [NSMutableArray arrayWithCapacity:allDestinations.count];
         
-        [intermediateGoals enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            [parameter appendFormat:@"%@&to=",[obj descriptionForAPI:MTDDirectionsAPIMapQuest]];
-        }];
+        for (MTDWaypoint *destination in allDestinations) {
+            [transformedDestinations addObject:[destination descriptionForAPI:MTDDirectionsAPIMapQuest]];
+        }
         
-        // remove last &to=
-        [parameter deleteCharactersInRange:NSMakeRange(parameter.length-4, 4)];
-        
-        [self setValue:parameter forParameter:@"to"];
+        [self setArrayValue:transformedDestinations forParameter:@"to"];
     } else {
         // No intermediate goals, just one to parameter
         [self setValue:[self.to descriptionForAPI:MTDDirectionsAPIMapQuest] forParameter:@"to"];

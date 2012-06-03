@@ -82,12 +82,22 @@ intermediateGoals:(NSArray *)intermediateGoals
 - (void)cancel;
 
 /**
- Let's you set parameter values that get passed to the directions service as get parameter.
+ Let's you set string parameter values that get passed to the directions service as get parameter.
  
  @param value the value of the parameter to set
  @param parameter the name of the parameter
  */
 - (void)setValue:(NSString *)value forParameter:(NSString *)parameter;
+
+/**
+ Let's you set array parameter values that get passed to the directions service as get parameter.
+ When the URL gets created, the parameter key gets repeated with each value, e.g.
+ to=VALUE_1&to=VALUE_2&to=VALUE_3
+ 
+ @param array an array of values for the given parameter key
+ @param parameter the name of the parameter
+ */
+- (void)setArrayValue:(NSArray *)array forParameter:(NSString *)parameter;
 
 /**
  Convenience function to set a parameter based on an array of intermediate goals of the route.
