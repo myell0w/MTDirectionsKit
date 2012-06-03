@@ -11,8 +11,7 @@
 @interface MTDMapView () <MKMapViewDelegate> {
     // flags for methods implemented in the delegate
     struct {
-        unsigned int willStartLoadingOverlayCoordinates:1;
-        unsigned int willStartLoadingOverlayAddresses:1;
+        unsigned int willStartLoadingDirections:1;
         unsigned int didFinishLoadingOverlay:1;
         unsigned int didFailLoadingOverlay:1;
         unsigned int colorForOverlay:1;
@@ -31,8 +30,7 @@
 - (MKOverlayView *)viewForDirectionsOverlay:(id<MKOverlay>)overlay;
 
 // delegate encapsulation
-- (void)notifyDelegateWillStartLoadingDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate to:(CLLocationCoordinate2D)toCoordinate routeType:(MTDDirectionsRouteType)routeType;
-- (void)notifyDelegateWillStartLoadingDirectionsFromAddress:(NSString *)fromAddress toAddress:(NSString *)toAddress routeType:(MTDDirectionsRouteType)routeType;
+- (void)notifyDelegateWillStartLoadingDirectionsFrom:(MTDWaypoint *)from to:(MTDWaypoint *)to routeType:(MTDDirectionsRouteType)routeType;
 - (MTDDirectionsOverlay *)notifyDelegateDidFinishLoadingOverlay:(MTDDirectionsOverlay *)overlay;
 - (void)notifyDelegateDidFailLoadingOverlayWithError:(NSError *)error;
 - (UIColor *)askDelegateForColorOfOverlay:(MTDDirectionsOverlay *)overlay;
@@ -101,13 +99,37 @@
                         to:(CLLocationCoordinate2D)toCoordinate
                  routeType:(MTDDirectionsRouteType)routeType
       zoomToShowDirections:(BOOL)zoomToShowDirections {
+   [self loadDirectionsFrom:[MTDWaypoint waypointWithCoordinate:fromCoordinate]
+                         to:[MTDWaypoint waypointWithCoordinate:toCoordinate]
+          intermediateGoals:nil
+                  routeType:routeType
+       zoomToShowDirections:zoomToShowDirections];
+}
+
+- (void)loadDirectionsFromAddress:(NSString *)fromAddress
+                        toAddress:(NSString *)toAddress
+                        routeType:(MTDDirectionsRouteType)routeType
+             zoomToShowDirections:(BOOL)zoomToShowDirections {
+    [self loadDirectionsFrom:[MTDWaypoint waypointWithAddress:fromAddress]
+                          to:[MTDWaypoint waypointWithAddress:toAddress]
+           intermediateGoals:nil
+                   routeType:routeType
+        zoomToShowDirections:zoomToShowDirections];
+}
+
+- (void)loadDirectionsFrom:(MTDWaypoint *)from
+                        to:(MTDWaypoint *)to
+         intermediateGoals:(NSArray *)intermediateGoals
+                 routeType:(MTDDirectionsRouteType)routeType
+      zoomToShowDirections:(BOOL)zoomToShowDirections {
     __mtd_weak MTDMapView *weakSelf = self;
     
     [self.request cancel];
     
-    if (CLLocationCoordinate2DIsValid(fromCoordinate) && CLLocationCoordinate2DIsValid(toCoordinate)) {
-        self.request = [MTDDirectionsRequest requestFrom:fromCoordinate
-                                                      to:toCoordinate
+    if (from.valid && to.valid) {
+        self.request = [MTDDirectionsRequest requestFrom:from
+                                                      to:to
+                                       intermediateGoals:intermediateGoals
                                                routeType:routeType
                                               completion:^(MTDDirectionsOverlay *overlay, NSError *error) {
                                                   __strong MTDMapView *strongSelf = weakSelf;
@@ -126,41 +148,7 @@
                                                   }
                                               }];
         
-        [self notifyDelegateWillStartLoadingDirectionsFrom:fromCoordinate to:toCoordinate routeType:routeType];
-        [self.request start];
-    }
-}
-
-- (void)loadDirectionsFromAddress:(NSString *)fromAddress
-                        toAddress:(NSString *)toAddress
-                        routeType:(MTDDirectionsRouteType)routeType
-             zoomToShowDirections:(BOOL)zoomToShowDirections {
-    __mtd_weak MTDMapView *weakSelf = self;
-    
-    [self.request cancel];
-    
-    if (fromAddress.length > 0 && toAddress.length > 0) {
-        self.request = [MTDDirectionsRequest requestFromAddress:fromAddress
-                                                      toAddress:toAddress
-                                                      routeType:routeType
-                                                     completion:^(MTDDirectionsOverlay *overlay, NSError *error) {
-                                                         __strong MTDMapView *strongSelf = weakSelf;
-                                                         
-                                                         if (overlay != nil) {
-                                                             overlay = [self notifyDelegateDidFinishLoadingOverlay:overlay];
-                                                             
-                                                             strongSelf.directionsDisplayType = MTDDirectionsDisplayTypeOverview;
-                                                             strongSelf.directionsOverlay = overlay;
-                                                             
-                                                             if (zoomToShowDirections) {
-                                                                 [strongSelf setRegionToShowDirectionsAnimated:YES];
-                                                             }
-                                                         } else {
-                                                             [self notifyDelegateDidFailLoadingOverlayWithError:error];
-                                                         }
-                                                     }];
-        
-        [self notifyDelegateWillStartLoadingDirectionsFromAddress:fromAddress toAddress:toAddress routeType:routeType];
+        [self notifyDelegateWillStartLoadingDirectionsFrom:from to:to routeType:routeType];
         [self.request start];
     }
 }
@@ -218,8 +206,7 @@
         _directionsDelegate = directionsDelegate;
         
         // update delegate flags
-        _directionsDelegateFlags.willStartLoadingOverlayCoordinates = [_directionsDelegate respondsToSelector:@selector(mapView:willStartLoadingDirectionsFrom:to:routeType:)];
-        _directionsDelegateFlags.willStartLoadingOverlayAddresses = [_directionsDelegate respondsToSelector:@selector(mapView:willStartLoadingDirectionsFromAddress:toAddress:routeType:)];
+        _directionsDelegateFlags.willStartLoadingDirections = [_directionsDelegate respondsToSelector:@selector(mapView:willStartLoadingDirectionsFrom:to:routeType:)];
         _directionsDelegateFlags.didFinishLoadingOverlay = [_directionsDelegate respondsToSelector:@selector(mapView:didFinishLoadingDirectionsOverlay:)];
         _directionsDelegateFlags.didFailLoadingOverlay = [_directionsDelegate respondsToSelector:@selector(mapView:didFailLoadingDirectionsOverlayWithError:)];
         _directionsDelegateFlags.colorForOverlay = [_directionsDelegate respondsToSelector:@selector(mapView:colorForDirectionsOverlay:)];
@@ -470,36 +457,17 @@
 #pragma mark - Delegate
 ////////////////////////////////////////////////////////////////////////
 
-- (void)notifyDelegateWillStartLoadingDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate 
-                                                  to:(CLLocationCoordinate2D)toCoordinate
+- (void)notifyDelegateWillStartLoadingDirectionsFrom:(MTDWaypoint *)from 
+                                                  to:(MTDWaypoint *)to
                                            routeType:(MTDDirectionsRouteType)routeType {
-    if (_directionsDelegateFlags.willStartLoadingOverlayCoordinates) {
-        [self.directionsDelegate mapView:self willStartLoadingDirectionsFrom:fromCoordinate to:toCoordinate routeType:routeType];
+    if (_directionsDelegateFlags.willStartLoadingDirections) {
+        [self.directionsDelegate mapView:self willStartLoadingDirectionsFrom:from to:to routeType:routeType];
     }
     
     // post corresponding notification
     NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                              [MTDWaypoint waypointWithCoordinate:fromCoordinate], MTDDirectionsNotificationKeyFromCoordinate,
-                              [MTDWaypoint waypointWithCoordinate:toCoordinate], MTDDirectionsNotificationKeyToCoordinate,
-                              [NSNumber numberWithInt:routeType], MTDDirectionsNotificationKeyRouteType,
-                              nil];
-    NSNotification *notification = [NSNotification notificationWithName:MTDMapViewWillStartLoadingDirections
-                                                                 object:self
-                                                               userInfo:userInfo];
-    [[NSNotificationCenter defaultCenter] postNotification:notification];
-}
-
-- (void)notifyDelegateWillStartLoadingDirectionsFromAddress:(NSString *)fromAddress
-                                                  toAddress:(NSString *)toAddress
-                                                  routeType:(MTDDirectionsRouteType)routeType {
-    if (_directionsDelegateFlags.willStartLoadingOverlayAddresses) {
-        [self.directionsDelegate mapView:self willStartLoadingDirectionsFromAddress:fromAddress toAddress:toAddress routeType:routeType];
-    }
-    
-    // post corresponding notification
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                              fromAddress, MTDDirectionsNotificationKeyFromAddress,
-                              toAddress, MTDDirectionsNotificationKeyToAddress,
+                              from, MTDDirectionsNotificationKeyFromCoordinate,
+                              to, MTDDirectionsNotificationKeyToCoordinate,
                               [NSNumber numberWithInt:routeType], MTDDirectionsNotificationKeyRouteType,
                               nil];
     NSNotification *notification = [NSNotification notificationWithName:MTDMapViewWillStartLoadingDirections

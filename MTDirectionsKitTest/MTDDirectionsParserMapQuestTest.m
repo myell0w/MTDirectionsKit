@@ -1,6 +1,8 @@
 #import "MTDDirectionsParserMapQuestTest.h"
 #import "MTDDirectionsOverlay.h"
 #import "MTDDistance.h"
+#import "MTDWaypoint.h"
+
 
 @implementation MTDDirectionsParserMapQuestTest
 
@@ -12,10 +14,10 @@
     
     __block BOOL testFinished = NO;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        MTDDirectionsParserMapQuest *parser = [[MTDDirectionsParserMapQuest alloc] initWithFromCoordinate:CLLocationCoordinate2DMake(47.0616,16.3236)
-                                                                                             toCoordinate:CLLocationCoordinate2DMake(48.209,16.354)
-                                                                                                routeType:MTDDirectionsRouteTypeShortestDriving 
-                                                                                                     data:data];
+        MTDDirectionsParserMapQuest *parser = [[MTDDirectionsParserMapQuest alloc] initWithFrom:[MTDWaypoint waypointWithCoordinate:CLLocationCoordinate2DMake(47.0616,16.3236)]
+                                                                                             to:[MTDWaypoint waypointWithCoordinate:CLLocationCoordinate2DMake(48.209,16.354)]
+                                                                                      routeType:MTDDirectionsRouteTypeShortestDriving 
+                                                                                           data:data];
         
         
         [parser parseWithCompletion:^(MTDDirectionsOverlay *overlay, NSError *error) {

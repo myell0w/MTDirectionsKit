@@ -2,6 +2,7 @@
 #import "MTDDirectionsRequest+MTDirectionsPrivateAPI.h"
 #import "MTDDirectionsRouteType+MapQuest.h"
 #import "MTDDirectionsParserMapQuest.h"
+#import "MTDWaypoint.h"
 #import "MTDFunctions.h"
 
 
@@ -21,34 +22,43 @@
 #pragma mark - Lifecycle
 ////////////////////////////////////////////////////////////////////////
 
-- (id)initFrom:(CLLocationCoordinate2D)fromCoordinate
-            to:(CLLocationCoordinate2D)toCoordinate
-     routeType:(MTDDirectionsRouteType)routeType
-    completion:(mtd_parser_block)completion {
-    if ((self = [super initFrom:fromCoordinate to:toCoordinate routeType:routeType completion:completion])) {
+- (id)initWithFrom:(MTDWaypoint *)from
+                to:(MTDWaypoint *)to
+ intermediateGoals:(NSArray *)intermediateGoals
+         routeType:(MTDDirectionsRouteType)routeType
+        completion:(mtd_parser_block)completion {
+    if ((self = [super initWithFrom:from to:to intermediateGoals:intermediateGoals routeType:routeType completion:completion])) {
         [self setup];
         
-        [self setValue:[NSString stringWithFormat:@"%f,%f", fromCoordinate.latitude, fromCoordinate.longitude] forParameter:@"from"];
-        [self setValue:[NSString stringWithFormat:@"%f,%f", toCoordinate.latitude, toCoordinate.longitude] forParameter:@"to"];
+        [self setValue:[from descriptionForAPI:MTDDirectionsAPIMapQuest] forParameter:@"from"];
+        // "to" gets set in setValueForParameterWithIntermediateGoals
+        // [self setValue:[to descriptionForAPI:MTDDirectionsAPIMapQuest] forParameter:@"to"];
         [self setValue:MTDDirectionStringForDirectionRouteTypeMapQuest(routeType) forParameter:@"routeType"];
     }
     
     return self;
 }
 
-- (id)initFromAddress:(NSString *)fromAddress
-            toAddress:(NSString *)toAddress
-            routeType:(MTDDirectionsRouteType)routeType
-           completion:(mtd_parser_block)completion {
-    if ((self = [super initFromAddress:fromAddress toAddress:toAddress routeType:routeType completion:completion])) {
-        [self setup];
+////////////////////////////////////////////////////////////////////////
+#pragma mark - MTDDirectionsRequest
+////////////////////////////////////////////////////////////////////////
+
+- (void)setValueForParameterWithIntermediateGoals:(NSArray *)intermediateGoals {
+    if (intermediateGoals.count > 0) {
+        NSMutableString *parameter = [NSMutableString string];
         
-        [self setValue:MTDURLEncodedString(fromAddress) forParameter:@"from"];
-        [self setValue:MTDURLEncodedString(toAddress) forParameter:@"to"];
-        [self setValue:MTDDirectionStringForDirectionRouteTypeMapQuest(routeType) forParameter:@"routeType"];
+        [intermediateGoals enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            [parameter appendFormat:@"%@&to=",[obj descriptionForAPI:MTDDirectionsAPIMapQuest]];
+        }];
+        
+        // remove last &to=
+        [parameter deleteCharactersInRange:NSMakeRange(parameter.length-4, 4)];
+        
+        [self setValue:parameter forParameter:@"to"];
+    } else {
+        // No intermediate goals, just one to parameter
+        [self setValue:[self.to descriptionForAPI:MTDDirectionsAPIMapQuest] forParameter:@"to"];
     }
-    
-    return self;
 }
 
 ////////////////////////////////////////////////////////////////////////

@@ -13,6 +13,7 @@
 
 
 @class MTDDistance;
+@class MTDWaypoint;
 @class MTDDirectionsOverlay;
 @class MTDDirectionsOverlayView;
 @protocol MTDDirectionsDelegate;
@@ -134,6 +135,15 @@
                         toAddress:(NSString *)toAddress
                         routeType:(MTDDirectionsRouteType)routeType
              zoomToShowDirections:(BOOL)zoomToShowDirections;
+
+/**
+ TODO: Add Documentation
+ */
+- (void)loadDirectionsFrom:(MTDWaypoint *)from
+                        to:(MTDWaypoint *)to
+         intermediateGoals:(NSArray *)intermediateGoals
+                 routeType:(MTDDirectionsRouteType)routeType
+      zoomToShowDirections:(BOOL)zoomToShowDirections;
 
 /**
  Cancels a possible ongoing request for loading directions.

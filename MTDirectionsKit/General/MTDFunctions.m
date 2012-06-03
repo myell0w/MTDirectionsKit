@@ -29,18 +29,18 @@ void MTDDirectionsOpenInMapsApp(CLLocationCoordinate2D fromCoordinate, CLLocatio
 }
 
 NSString* MTDURLEncodedString(NSString *string) {
-    NSMutableString *umlautlessString = [NSMutableString stringWithString:string];
+    NSMutableString *preparedString = [NSMutableString stringWithString:string];
     
     // replace umlauts, because they don't work in the MapQuest API
-    [umlautlessString replaceOccurrencesOfString:@"ü" withString:@"ue" options:NSCaseInsensitiveSearch range:NSMakeRange(0, umlautlessString.length)];
-    [umlautlessString replaceOccurrencesOfString:@"ö" withString:@"oe" options:NSCaseInsensitiveSearch range:NSMakeRange(0, umlautlessString.length)];
-    [umlautlessString replaceOccurrencesOfString:@"ä" withString:@"ae" options:NSCaseInsensitiveSearch range:NSMakeRange(0, umlautlessString.length)];
-    [umlautlessString replaceOccurrencesOfString:@"ß" withString:@"ss" options:NSCaseInsensitiveSearch range:NSMakeRange(0, umlautlessString.length)];
+    [preparedString replaceOccurrencesOfString:@"ü" withString:@"ue" options:NSCaseInsensitiveSearch range:NSMakeRange(0, preparedString.length)];
+    [preparedString replaceOccurrencesOfString:@"ö" withString:@"oe" options:NSCaseInsensitiveSearch range:NSMakeRange(0, preparedString.length)];
+    [preparedString replaceOccurrencesOfString:@"ä" withString:@"ae" options:NSCaseInsensitiveSearch range:NSMakeRange(0, preparedString.length)];
+    [preparedString replaceOccurrencesOfString:@"ß" withString:@"ss" options:NSCaseInsensitiveSearch range:NSMakeRange(0, preparedString.length)];
     
     return (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-                                                                                 (__bridge CFStringRef)[umlautlessString description],
+                                                                                 (__bridge CFStringRef)[preparedString description],
                                                                                  NULL,
-                                                                                 CFSTR("!*'();:@&=+$,/?%#[]"),
+                                                                                 CFSTR("!*'();@&=+$,/?%#[]"),
                                                                                  kCFStringEncodingUTF8);
 }
 

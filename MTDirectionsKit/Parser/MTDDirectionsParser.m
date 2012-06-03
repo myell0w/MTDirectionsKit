@@ -1,12 +1,13 @@
 #import "MTDDirectionsParser.h"
 #import "MTDLogging.h"
+#import "MTDWaypoint.h"
 
 
 @interface MTDDirectionsParser ()
 
 @property (nonatomic, strong, readwrite) id data;
-@property (nonatomic, assign, readwrite) CLLocationCoordinate2D fromCoordinate;
-@property (nonatomic, assign, readwrite) CLLocationCoordinate2D toCoordinate;
+@property (nonatomic, strong, readwrite) MTDWaypoint *from;
+@property (nonatomic, strong, readwrite) MTDWaypoint *to;
 
 @end
 
@@ -14,23 +15,21 @@
 @implementation MTDDirectionsParser
 
 @synthesize data = _data;
-@synthesize fromCoordinate = _fromCoordinate;
-@synthesize toCoordinate = _toCoordinate;
-@synthesize fromAddress = _fromAddress;
-@synthesize toAddress = _toAddress;
+@synthesize from = _from;
+@synthesize to = _to;
 @synthesize routeType = _routeType;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
 ////////////////////////////////////////////////////////////////////////
 
-- (id)initWithFromCoordinate:(CLLocationCoordinate2D)fromCoordinate
-                toCoordinate:(CLLocationCoordinate2D)toCoordinate
-                   routeType:(MTDDirectionsRouteType)routeType
-                        data:(id)data {
+- (id)initWithFrom:(MTDWaypoint *)from
+                to:(MTDWaypoint *)to
+         routeType:(MTDDirectionsRouteType)routeType
+              data:(id)data {
     if ((self = [super init])) {
-        _fromCoordinate = fromCoordinate;
-        _toCoordinate = toCoordinate;
+        _from = from;
+        _to = to;
         _data = data;
         _routeType = routeType;
     }
@@ -43,7 +42,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (void)parseWithCompletion:(mtd_parser_block)completion {
-    MTDLogError(@"ParseWithCompletion was called on a parser that doesn't override it (Class: %@)", 
+    MTDLogError(@"parseWithCompletion was called on a parser that doesn't override it (Class: %@)", 
                 NSStringFromClass([self class]));
     
     [self doesNotRecognizeSelector:_cmd];

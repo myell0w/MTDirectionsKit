@@ -2,6 +2,7 @@
 #import "MTDDirectionsRequest+MTDirectionsPrivateAPI.h"
 #import "MTDDirectionsRouteType+Google.h"
 #import "MTDDirectionsParserGoogle.h"
+#import "MTDWaypoint.h"
 #import "MTDFunctions.h"
 
 
@@ -20,34 +21,36 @@
 #pragma mark - Lifecycle
 ////////////////////////////////////////////////////////////////////////
 
-- (id)initFrom:(CLLocationCoordinate2D)fromCoordinate
-            to:(CLLocationCoordinate2D)toCoordinate
-     routeType:(MTDDirectionsRouteType)routeType
-    completion:(mtd_parser_block)completion {
-    if ((self = [super initFrom:fromCoordinate to:toCoordinate routeType:routeType completion:completion])) {
+- (id)initWithFrom:(MTDWaypoint *)from
+                to:(MTDWaypoint *)to
+ intermediateGoals:(NSArray *)intermediateGoals
+         routeType:(MTDDirectionsRouteType)routeType
+        completion:(mtd_parser_block)completion {
+    if ((self = [super initWithFrom:from to:to intermediateGoals:intermediateGoals routeType:routeType completion:completion])) {
         [self setup];
         
-        [self setValue:[NSString stringWithFormat:@"%f,%f",fromCoordinate.latitude, fromCoordinate.longitude] forParameter:@"origin"];
-        [self setValue:[NSString stringWithFormat:@"%f,%f",toCoordinate.latitude, toCoordinate.longitude] forParameter:@"destination"];
+        [self setValue:[from descriptionForAPI:MTDDirectionsAPIGoogle] forParameter:@"origin"];
+        [self setValue:[to descriptionForAPI:MTDDirectionsAPIGoogle] forParameter:@"destination"];
         [self setValue:MTDDirectionStringForDirectionRouteTypeGoogle(routeType) forParameter:@"mode"];
     }
     
     return self;
 }
 
-- (id)initFromAddress:(NSString *)fromAddress
-            toAddress:(NSString *)toAddress
-            routeType:(MTDDirectionsRouteType)routeType
-           completion:(mtd_parser_block)completion {
-    if ((self = [super initFromAddress:fromAddress toAddress:toAddress routeType:routeType completion:completion])) {
-        [self setup];
+////////////////////////////////////////////////////////////////////////
+#pragma mark - MTDDirectionsRequest
+////////////////////////////////////////////////////////////////////////
+
+- (void)setValueForParameterWithIntermediateGoals:(NSArray *)intermediateGoals {
+    if (intermediateGoals.count > 0) {
+        NSMutableString *parameter = [NSMutableString stringWithString:@"optimize:true"];
         
-        [self setValue:MTDURLEncodedString(fromAddress) forParameter:@"origin"];
-        [self setValue:MTDURLEncodedString(toAddress) forParameter:@"destination"];
-        [self setValue:MTDDirectionStringForDirectionRouteTypeGoogle(routeType) forParameter:@"mode"];
+        [intermediateGoals enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            [parameter appendFormat:@"|%@",[obj descriptionForAPI:MTDDirectionsAPIGoogle]];
+        }];
+        
+        [self setValue:parameter forParameter:@"waypoints"];
     }
-    
-    return self;
 }
 
 ////////////////////////////////////////////////////////////////////////

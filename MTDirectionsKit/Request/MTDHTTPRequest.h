@@ -44,5 +44,11 @@
 /** Cancels the request, if he is active, does nothing otherwise. */
 - (void)cancel;
 
+/******************************************
+ @name Setting HTTP specific properties
+ ******************************************/
+
+- (void)setHTTPBody:(NSData *)bodyData;
+
 
 @end

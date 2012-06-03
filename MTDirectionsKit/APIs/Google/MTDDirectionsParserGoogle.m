@@ -42,12 +42,14 @@
         MTDDistance *distance = nil;
         NSTimeInterval timeInSeconds = -1.;
         NSMutableDictionary *additionalInfo = [NSMutableDictionary dictionary];
+        NSString *fromAddress = self.from.address;
+        NSString *toAddress = self.to.address;
         
         // Parse Waypoints
         {
             // add start coordinate
-            if (CLLocationCoordinate2DIsValid(self.fromCoordinate)) {
-                [waypoints addObject:[MTDWaypoint waypointWithCoordinate:self.fromCoordinate]];
+            if (CLLocationCoordinate2DIsValid(self.from.coordinate)) {
+                [waypoints addObject:self.from];
             }
             
             for (MTDXMLElement *waypointNode in waypointNodes) {
@@ -57,8 +59,8 @@
             }
             
             // add end coordinate
-            if (CLLocationCoordinate2DIsValid(self.toCoordinate)) {
-                [waypoints addObject:[MTDWaypoint waypointWithCoordinate:self.toCoordinate]];
+            if (CLLocationCoordinate2DIsValid(self.to.coordinate)) {
+                [waypoints addObject:self.to];
             }
         }
         
@@ -83,20 +85,15 @@
                 [additionalInfo setValue:warnings forKey:@"warnings"];
             }
             
-            if (self.fromAddress == nil) {
-                NSArray *fromAddressNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg[1]/start_address" onXML:self.data];
-                
-                if (fromAddressNodes.count > 0) {
-                    self.fromAddress = [[fromAddressNodes objectAtIndex:0] contentString];
-                }
+            NSArray *fromAddressNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg[1]/start_address" onXML:self.data];
+            NSArray *toAddressNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg[1]/end_address" onXML:self.data];
+            
+            if (fromAddressNodes.count > 0) {
+                fromAddress = [[fromAddressNodes objectAtIndex:0] contentString];
             }
             
-            if (self.toAddress == nil) {
-                NSArray *toAddressNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg[1]/end_address" onXML:self.data];
-                
-                if (toAddressNodes.count > 0) {
-                    self.toAddress = [[toAddressNodes objectAtIndex:0] contentString];
-                }
+            if (toAddressNodes.count > 0) {
+                toAddress = [[toAddressNodes objectAtIndex:0] contentString];
             }
         }
         
@@ -104,10 +101,10 @@
                                                     distance:distance
                                                timeInSeconds:timeInSeconds
                                                    routeType:self.routeType];
-
+        
         // set read-only properties via KVO to not pollute API
-        [overlay setValue:self.fromAddress forKey:NSStringFromSelector(@selector(fromAddress))];
-        [overlay setValue:self.toAddress forKey:NSStringFromSelector(@selector(toAddress))];
+        [overlay setValue:fromAddress forKey:NSStringFromSelector(@selector(fromAddress))];
+        [overlay setValue:toAddress forKey:NSStringFromSelector(@selector(toAddress))];
         [overlay setValue:additionalInfo forKey:NSStringFromSelector(@selector(additionalInfo))];
     } else {
         error = [NSError errorWithDomain:MTDDirectionsKitErrorDomain
@@ -116,10 +113,7 @@
                                           self.data, MTDDirectionsKitDataKey,
                                           nil]];
         
-        MTDLogError(@"Error occurred during parsing of directions from %@ to %@:\n%@", 
-                    MTDStringFromCLLocationCoordinate2D(self.fromCoordinate),
-                    MTDStringFromCLLocationCoordinate2D(self.toCoordinate),
-                    error);
+        MTDLogError(@"Error occurred during parsing of directions from %@ to %@:\n%@", self.from, self.to, error);
     }
     
     if (completion != nil) {
