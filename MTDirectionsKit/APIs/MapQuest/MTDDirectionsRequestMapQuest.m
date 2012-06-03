@@ -6,7 +6,11 @@
 #import "MTDFunctions.h"
 
 
-#define kMTDMapQuestBaseAddress         @"http://open.mapquestapi.com/directions/v0/route"
+#define kMTDMapQuestHostName        @"http://open.mapquestapi.com"
+#define kMTDMapQuestServiceName     @"directions"
+#define kMTDMapQuestVersionNumber   @"v1"
+#define kMTDMapQuestRoutingMethod   @"route"
+#define kMTDMapQuestBaseAddress     kMTDMapQuestHostName @"/" kMTDMapQuestServiceName @"/" kMTDMapQuestVersionNumber @"/" kMTDMapQuestRoutingMethod
 
 
 @interface MTDDirectionsRequestMapQuest ()
