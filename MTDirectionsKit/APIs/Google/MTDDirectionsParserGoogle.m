@@ -95,7 +95,7 @@
             }
             
             NSArray *fromAddressNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg[1]/start_address" onXML:self.data];
-            NSArray *toAddressNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg[1]/end_address" onXML:self.data];
+            NSArray *toAddressNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg[last()]/end_address" onXML:self.data];
             
             if (fromAddressNodes.count > 0) {
                 fromAddress = [[fromAddressNodes objectAtIndex:0] contentString];
