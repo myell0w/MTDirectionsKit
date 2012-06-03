@@ -28,13 +28,14 @@ NS_INLINE dispatch_queue_t parser_queue(void) {
 #pragma mark - MTDDirectionsParser
 ////////////////////////////////////////////////////////////////////////
 
-@interface MTDDirectionsRequest ()
+@interface MTDDirectionsRequest () 
 
 @property (nonatomic, strong) MTDHTTPRequest *httpRequest;
 @property (nonatomic, copy) NSString *httpAddress;
 @property (nonatomic, assign) Class parserClass;
 @property (nonatomic, strong) NSMutableDictionary *parameters;
 
+/** Appends all parameters to httpAddress */
 @property (nonatomic, readonly) NSString *fullAddress;
 
 @end
@@ -42,10 +43,9 @@ NS_INLINE dispatch_queue_t parser_queue(void) {
 
 @implementation MTDDirectionsRequest
 
-@synthesize fromCoordinate = _fromCoordinate;
-@synthesize toCoordinate = _toCoordinate;
-@synthesize fromAddress = _fromAddress;
-@synthesize toAddress = _toAddress;
+@synthesize from = _from;
+@synthesize to = _to;
+@synthesize intermediateGoals = _intermediateGoals;
 @synthesize completion = _completion;
 @synthesize routeType = _routeType;
 @synthesize httpRequest = _httpRequest;
@@ -57,26 +57,29 @@ NS_INLINE dispatch_queue_t parser_queue(void) {
 #pragma mark - Lifecycle
 ////////////////////////////////////////////////////////////////////////
 
-+ (id)requestFrom:(CLLocationCoordinate2D)fromCoordinate
-               to:(CLLocationCoordinate2D)toCoordinate
++ (id)requestFrom:(MTDWaypoint *)from
+               to:(MTDWaypoint *)to
+intermediateGoals:(NSArray *)intermediateGoals
         routeType:(MTDDirectionsRouteType)routeType
        completion:(mtd_parser_block)completion {
     MTDDirectionsRequest *request = nil;
     
     switch (MTDDirectionsGetActiveAPI()) {
         case MTDDirectionsAPIGoogle:
-            request = [[MTDDirectionsRequestGoogle alloc] initFrom:fromCoordinate
-                                                                to:toCoordinate
-                                                         routeType:routeType
-                                                        completion:completion];
+            request = [[MTDDirectionsRequestGoogle alloc] initWithFrom:from
+                                                                    to:to
+                                                     intermediateGoals:intermediateGoals
+                                                             routeType:routeType
+                                                            completion:completion];
             break;
             
         case MTDDirectionsAPIMapQuest:
         default:
-            request = [[MTDDirectionsRequestMapQuest alloc] initFrom:fromCoordinate
-                                                                  to:toCoordinate
-                                                           routeType:routeType
-                                                          completion:completion];
+            request = [[MTDDirectionsRequestMapQuest alloc] initWithFrom:from
+                                                                      to:to
+                                                       intermediateGoals:intermediateGoals
+                                                               routeType:routeType
+                                                              completion:completion];
             break;
             
     }
@@ -84,60 +87,20 @@ NS_INLINE dispatch_queue_t parser_queue(void) {
     return request;
 }
 
-+ (id)requestFromAddress:(NSString *)fromAddress
-               toAddress:(NSString *)toAddress
-               routeType:(MTDDirectionsRouteType)routeType
-              completion:(mtd_parser_block)completion {
-    MTDDirectionsRequest *request = nil;
-    
-    switch (MTDDirectionsGetActiveAPI()) {
-        case MTDDirectionsAPIGoogle:
-            request = [[MTDDirectionsRequestGoogle alloc] initFromAddress:fromAddress
-                                                                toAddress:toAddress
-                                                                routeType:routeType
-                                                               completion:completion];
-            break;
-            
-        case MTDDirectionsAPIMapQuest:
-        default:
-            request = [[MTDDirectionsRequestMapQuest alloc] initFromAddress:fromAddress
-                                                                  toAddress:toAddress
-                                                                  routeType:routeType
-                                                                 completion:completion];
-            break;
-            
-    }
-    
-    return request;
-}
-
-- (id)initFrom:(CLLocationCoordinate2D)fromCoordinate
-            to:(CLLocationCoordinate2D)toCoordinate
-     routeType:(MTDDirectionsRouteType)routeType
-    completion:(mtd_parser_block)completion {
+- (id)initWithFrom:(MTDWaypoint *)from
+                to:(MTDWaypoint *)to
+ intermediateGoals:(NSArray *)intermediateGoals
+         routeType:(MTDDirectionsRouteType)routeType
+        completion:(mtd_parser_block)completion {
     if ((self = [super init])) {
-        _fromCoordinate = fromCoordinate;
-        _toCoordinate = toCoordinate;
+        _from = from;
+        _to = to;
+        _intermediateGoals = [intermediateGoals copy];
         _routeType = routeType;
         _completion = [completion copy];
         _parameters = [NSMutableDictionary dictionary];
-    }
-    
-    return self;
-}
-
-- (id)initFromAddress:(NSString *)fromAddress
-            toAddress:(NSString *)toAddress
-            routeType:(MTDDirectionsRouteType)routeType
-           completion:(mtd_parser_block)completion {
-    if ((self = [super init])) {
-        _fromCoordinate = MTDInvalidCLLocationCoordinate2D;
-        _toCoordinate = MTDInvalidCLLocationCoordinate2D;
-        _fromAddress = [fromAddress copy];
-        _toAddress = [toAddress copy];
-        _routeType = routeType;
-        _completion = [completion copy];
-        _parameters = [NSMutableDictionary dictionary];
+        
+        [self setValueForParameterWithIntermediateGoals:intermediateGoals];
     }
     
     return self;
@@ -148,9 +111,13 @@ NS_INLINE dispatch_queue_t parser_queue(void) {
 ////////////////////////////////////////////////////////////////////////
 
 - (void)start {
-    self.httpRequest = [[MTDHTTPRequest alloc] initWithAddress:self.fullAddress
+    NSString *address = self.fullAddress;
+    
+    self.httpRequest = [[MTDHTTPRequest alloc] initWithAddress:address
                                                 callbackTarget:self
                                                         action:@selector(requestFinished:)];
+    
+    MTDLogVerbose(@"Calling URL: %@", address);
     
     [self.httpRequest start];
 }
@@ -163,13 +130,10 @@ NS_INLINE dispatch_queue_t parser_queue(void) {
     if (httpRequest.failureCode == 0) {
         NSAssert([self.parserClass isSubclassOfClass:[MTDDirectionsParser class]], @"Parser class must be subclass of MTDDirectionsParser.");
         
-        MTDDirectionsParser *parser = [[self.parserClass alloc] initWithFromCoordinate:self.fromCoordinate
-                                                                          toCoordinate:self.toCoordinate
-                                                                             routeType:self.routeType
-                                                                                  data:httpRequest.data];
-        // can be nil
-        parser.fromAddress = self.fromAddress;
-        parser.toAddress = self.toAddress;
+        MTDDirectionsParser *parser = [[self.parserClass alloc] initWithFrom:self.from
+                                                                          to:self.to
+                                                                   routeType:self.routeType
+                                                                        data:httpRequest.data];
         
         dispatch_async(parser_queue(), ^{
             [parser parseWithCompletion:self.completion];
@@ -179,17 +143,29 @@ NS_INLINE dispatch_queue_t parser_queue(void) {
                                              code:httpRequest.failureCode
                                          userInfo:nil];
         
-        MTDLogError(@"Error occurred requesting directions from %@ to %@: %@", 
-                    MTDStringFromCLLocationCoordinate2D(self.fromCoordinate),
-                    MTDStringFromCLLocationCoordinate2D(self.toCoordinate),
-                    error);
+        MTDLogError(@"Error occurred requesting directions from %@ to %@: %@", self.from, self.to, error);
         
         self.completion(nil, error);
     }
 }
 
 - (void)setValue:(NSString *)value forParameter:(NSString *)parameter {
-    [self.parameters setValue:value forKey:parameter];
+    if (value != nil && parameter != nil) {
+        [self.parameters setObject:value forKey:parameter];
+    }
+}
+
+- (void)setArrayValue:(NSArray *)array forParameter:(NSString *)parameter {
+    if (array.count > 0 && parameter != nil) {
+        [self.parameters setObject:array forKey:parameter];
+    }
+}
+
+- (void)setValueForParameterWithIntermediateGoals:(NSArray *)intermediateGoals {
+    MTDLogError(@"setValueForParameterWithIntermediateGoals was called on a request that doesn't override it (Class: %@)", 
+                NSStringFromClass([self class]));
+    
+    [self doesNotRecognizeSelector:_cmd];
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -203,7 +179,13 @@ NS_INLINE dispatch_queue_t parser_queue(void) {
         [address appendString:@"?"];
         
         [self.parameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-            [address appendFormat:@"%@=%@&", key,obj];
+            if ([obj isKindOfClass:[NSArray class]]) {
+                for (id value in obj) {
+                    [address appendFormat:@"%@=%@&", key, MTDURLEncodedString([value description])];
+                }
+            } else {
+                [address appendFormat:@"%@=%@&", key, MTDURLEncodedString([obj description])];
+            }
         }];
         
         // remove last "&"

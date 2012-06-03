@@ -14,11 +14,10 @@
 #define MTDMapViewWillStartLoadingDirections            @"MTDMapViewWillStartLoadingDirections"
 #define MTDMapViewDidFinishLoadingDirectionsOverlay     @"MTDMapViewDidFinishLoadingDirectionsOverlay"
 #define MTDMapViewDidFailLoadingDirectionsOverlay       @"MTDMapViewDidFailLoadingDirectionsOverlay"
+
 // Keys for Notification UserInfo
-#define MTDDirectionsNotificationKeyFromCoordinate      @"MTDDirectionsNotificationKeyFromCoordinate"
-#define MTDDirectionsNotificationKeyToCoordinate        @"MTDDirectionsNotificationKeyToCoordinate"
-#define MTDDirectionsNotificationKeyFromAddress         @"MTDDirectionsNotificationKeyFromAddress"
-#define MTDDirectionsNotificationKeyToAddress           @"MTDDirectionsNotificationKeyToAddress"   
+#define MTDDirectionsNotificationKeyFrom                @"MTDDirectionsNotificationKeyFrom"
+#define MTDDirectionsNotificationKeyTo                  @"MTDDirectionsNotificationKeyTo"
 #define MTDDirectionsNotificationKeyRouteType           @"MTDDirectionsNotificationKeyRouteType"
 #define MTDDirectionsNotificationKeyOverlay             @"MTDDirectionsNotificationKeyOverlay"
 #define MTDDirectionsNotificationKeyError               @"MTDDirectionsNotificationKeyError"
@@ -40,27 +39,11 @@
  Tells the delegate that the mapView will start loading directions
  
  @param mapView the mapView that will start loading the directions
- @param fromCoordinate the starting point of the directions
- @param toCoordinate the end point of the directions
+ @param from the starting waypoint of the directions
+ @param to the end waypoint of the directions
  @param routeType the type of the route requested, e.g. pedestrian, cycling, fastest driving
  */
-- (void)mapView:(MTDMapView *)mapView
-willStartLoadingDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate
-             to:(CLLocationCoordinate2D)toCoordinate
-      routeType:(MTDDirectionsRouteType)routeType;
-
-/**
- Tells the delegate that the mapView will start loading directions
- 
- @param mapView the mapView that will start loading the directions
- @param fromAddress the address of the starting coordinate of the route to request
- @param toAddress the address of the end coordinate of the route to request
- @param routeType the type of the route requested, e.g. pedestrian, cycling, fastest driving
- */
-- (void)mapView:(MTDMapView *)mapView
-willStartLoadingDirectionsFromAddress:(NSString *)fromAddress
-      toAddress:(NSString *)toAddress
-      routeType:(MTDDirectionsRouteType)routeType;
+- (void)mapView:(MTDMapView *)mapView willStartLoadingDirectionsFrom:(MTDWaypoint *)from to:(MTDWaypoint *)to routeType:(MTDDirectionsRouteType)routeType;
 
 /**
  Tells the delegate that the specified directionsOverlay was loaded on the specified mapView.

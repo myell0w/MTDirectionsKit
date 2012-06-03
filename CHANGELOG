@@ -1,0 +1,11 @@
+= 1.1.0 4.6.2012
+ * MTDWaypoint can wrap a CLLocationCoordinate2D or an address string
+ * Several checks for more defensive coding, more logging
+ * Replace CLLocationCoordinate2D/NSString APIs with MTDWaypoint APIs
+ * Removed mapView:willStartLoadingDirectionsFromAddress:toAddress:routeType: delegate call and changed API
+   of mapView:willStartLoadingDirectionsFrom:to:routeType: to use MTDWaypoint
+ * Adjusted NSNotification userInfo dictionary to match new delegate protocol
+ * Support for intermediate goals along a route
+
+= 1.0.0 1.6.2012
+ * Initial Release

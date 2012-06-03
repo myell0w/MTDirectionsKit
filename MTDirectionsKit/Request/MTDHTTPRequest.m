@@ -1,6 +1,7 @@
 #import "MTDHTTPRequest.h"
 
 @interface MTDHTTPRequest () <NSURLConnectionDelegate>  {
+    NSMutableURLRequest *_urlRequest;
     NSMutableData *_data;
 	SEL _action;
 }
@@ -34,13 +35,13 @@
 - (id)initWithAddress:(NSString *)address callbackTarget:(id)callbackTarget action:(SEL)action {
     if ((self = [super init])) {
         NSURL *url = [NSURL URLWithString:address];
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
         
+        _urlRequest = [NSMutableURLRequest requestWithURL:url];
         _action = action;
 		_callbackTarget = callbackTarget;
-		_urlRequest = request;
 		
-		_connection = [[NSURLConnection alloc] initWithRequest:request
+		
+		_connection = [[NSURLConnection alloc] initWithRequest:_urlRequest
                                                      delegate:self
                                              startImmediately:NO];
     }
@@ -79,6 +80,14 @@
     // first set callbackTarget to nil to not call it in case of cancel
 	self.callbackTarget = nil;
 	[self close];
+}
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - HTTP specific parameter
+////////////////////////////////////////////////////////////////////////
+
+- (void)setHTTPBody:(NSData *)bodyData {
+    [_urlRequest setHTTPBody:bodyData];
 }
 
 ////////////////////////////////////////////////////////////////////////
