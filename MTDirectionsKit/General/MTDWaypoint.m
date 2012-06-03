@@ -49,6 +49,7 @@
 // for "Other Linker Flags" which complicates setup, that's why it's here
 - (NSString *)descriptionForAPI:(MTDDirectionsAPI)api {
     switch (api) {
+            // Currently there's no difference between MapQuest and Google APIs here
         case MTDDirectionsAPIMapQuest:
         case MTDDirectionsAPIGoogle: {
             if (CLLocationCoordinate2DIsValid(self.coordinate)) {

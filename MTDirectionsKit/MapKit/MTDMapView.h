@@ -111,6 +111,7 @@
  @param zoomToShowDirections flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)
 
  @see loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:
+ @see loadDirectionsFrom:to:intermediateGoals:routeType:zoomToShowDirections:
  @see cancelLoadOfDirections
  */
 - (void)loadDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate
@@ -128,7 +129,8 @@
  @param routeType the type of the route requested, e.g. pedestrian, cycling, fastest driving
  @param zoomToShowDirections flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)
  
-  @see loadDirectionsFrom:to:routeType:zoomToShowDirections:
+ @see loadDirectionsFrom:to:routeType:zoomToShowDirections:
+ @see loadDirectionsFrom:to:intermediateGoals:routeType:zoomToShowDirections:
  @see cancelLoadOfDirections
  */
 - (void)loadDirectionsFromAddress:(NSString *)fromAddress
@@ -137,7 +139,20 @@
              zoomToShowDirections:(BOOL)zoomToShowDirections;
 
 /**
- TODO: Add Documentation
+ Starts a request and loads the directions between the specified start and end waypoints while 
+ travelling to all intermediate goals along the route. When the request is finished the
+ directionsOverlay gets set on the MapView and the region gets zoomed (animated) to show the
+ whole overlay, if the flag zoomToShowDirections is set.
+ 
+ @param from the starting waypoint of the route
+ @param to the end waypoint of the route
+ @param intermediateGoals an optional array of waypoint we want to travel to along the route
+ @param routeType the type of the route requested, e.g. pedestrian, cycling, fastest driving
+ @param zoomToShowDirections flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)
+ 
+ @see loadDirectionsFrom:to:routeType:zoomToShowDirections:
+ @see loadDirectionsFrom:to:intermediateGoals:routeType:zoomToShowDirections:
+ @see cancelLoadOfDirections
  */
 - (void)loadDirectionsFrom:(MTDWaypoint *)from
                         to:(MTDWaypoint *)to

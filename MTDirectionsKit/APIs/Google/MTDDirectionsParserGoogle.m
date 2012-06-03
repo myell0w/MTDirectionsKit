@@ -48,7 +48,7 @@
         // Parse Waypoints
         {
             // add start coordinate
-            if (CLLocationCoordinate2DIsValid(self.from.coordinate)) {
+            if (self.from != nil && CLLocationCoordinate2DIsValid(self.from.coordinate)) {
                 [waypoints addObject:self.from];
             }
             
@@ -59,7 +59,7 @@
             }
             
             // add end coordinate
-            if (CLLocationCoordinate2DIsValid(self.to.coordinate)) {
+            if (self.to != nil && CLLocationCoordinate2DIsValid(self.to.coordinate)) {
                 [waypoints addObject:self.to];
             }
         }

@@ -466,8 +466,8 @@
     
     // post corresponding notification
     NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                              from, MTDDirectionsNotificationKeyFromCoordinate,
-                              to, MTDDirectionsNotificationKeyToCoordinate,
+                              from, MTDDirectionsNotificationKeyFrom,
+                              to, MTDDirectionsNotificationKeyTo,
                               [NSNumber numberWithInt:routeType], MTDDirectionsNotificationKeyRouteType,
                               nil];
     NSNotification *notification = [NSNotification notificationWithName:MTDMapViewWillStartLoadingDirections

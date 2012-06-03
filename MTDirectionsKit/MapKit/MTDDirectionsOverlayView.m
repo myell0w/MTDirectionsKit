@@ -24,7 +24,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (UIColor *)overlayColor {
-    return _overlayColor ?: [UIColor colorWithRed:0.f green:0.25f blue:1.f alpha:1.f]; //[UIColor colorWithRed:0.675 green:0.396 blue:0.702 alpha:1.000];
+    return _overlayColor ?: [UIColor colorWithRed:0.f green:0.25f blue:1.f alpha:1.f];
 }
 
 - (void)setOverlayColor:(UIColor *)overlayColor {

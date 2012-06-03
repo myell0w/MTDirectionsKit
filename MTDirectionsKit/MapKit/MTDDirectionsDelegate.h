@@ -14,11 +14,10 @@
 #define MTDMapViewWillStartLoadingDirections            @"MTDMapViewWillStartLoadingDirections"
 #define MTDMapViewDidFinishLoadingDirectionsOverlay     @"MTDMapViewDidFinishLoadingDirectionsOverlay"
 #define MTDMapViewDidFailLoadingDirectionsOverlay       @"MTDMapViewDidFailLoadingDirectionsOverlay"
+
 // Keys for Notification UserInfo
-#define MTDDirectionsNotificationKeyFromCoordinate      @"MTDDirectionsNotificationKeyFromCoordinate"
-#define MTDDirectionsNotificationKeyToCoordinate        @"MTDDirectionsNotificationKeyToCoordinate"
-#define MTDDirectionsNotificationKeyFromAddress         @"MTDDirectionsNotificationKeyFromAddress"
-#define MTDDirectionsNotificationKeyToAddress           @"MTDDirectionsNotificationKeyToAddress"   
+#define MTDDirectionsNotificationKeyFrom                @"MTDDirectionsNotificationKeyFrom"
+#define MTDDirectionsNotificationKeyTo                  @"MTDDirectionsNotificationKeyTo"
 #define MTDDirectionsNotificationKeyRouteType           @"MTDDirectionsNotificationKeyRouteType"
 #define MTDDirectionsNotificationKeyOverlay             @"MTDDirectionsNotificationKeyOverlay"
 #define MTDDirectionsNotificationKeyError               @"MTDDirectionsNotificationKeyError"
