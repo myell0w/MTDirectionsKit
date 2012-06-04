@@ -9,7 +9,7 @@
 #define kMTDMapQuestHostName        @"http://open.mapquestapi.com"
 #define kMTDMapQuestServiceName     @"directions"
 #define kMTDMapQuestVersionNumber   @"v1"
-#define kMTDMapQuestRoutingMethod   @"route"
+#define kMTDMapQuestRoutingMethod   @"optimizedroute"
 #define kMTDMapQuestBaseAddress     kMTDMapQuestHostName @"/" kMTDMapQuestServiceName @"/" kMTDMapQuestVersionNumber @"/" kMTDMapQuestRoutingMethod
 
 

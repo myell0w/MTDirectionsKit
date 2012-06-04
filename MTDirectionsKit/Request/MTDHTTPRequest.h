@@ -48,6 +48,11 @@
  @name Setting HTTP specific properties
  ******************************************/
 
+/**
+ Sets the request body of the receiver to the specified data.
+ 
+ @param bodyData The new request body for the receiver. This is sent as the message body of the request, as in an HTTP POST request.
+ */
 - (void)setHTTPBody:(NSData *)bodyData;
 
 
