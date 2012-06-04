@@ -57,6 +57,7 @@
 					<li><a href="#home">Home</a></li>
 					<li><a href="#purchase">Purchase</a></li>
 					<li><a href="#features">Features</a></li>
+					<li><a href="#updates">Updates</a></li>
 					<li><a href="#screenshots">Screenshots</a></li>
 					<li><a href="#documentation">Documentation</a></li>
 				</ul>
@@ -215,6 +216,8 @@
 						</ul>
 					</div>
 				</div>
+				
+				<p style="text-align:center">All minor updates of MTDirectionsKit are included.</p>
 			
 			</div>
 			<!-- End Purchase -->
@@ -234,7 +237,7 @@
 						<h2 class="icon versatile">Versatile</h2>
 						<p>MTDirectionsKit can be used with 2 different APIs: <strong>Google Directions API</strong> and <strong>MapQuest Open Directions API</strong>. 
 						   About every aspect of MTDirectionsKit is configurable and allows you to customize it the way you need to. 
-						   There are even hooks available that allow you to customize the computed directions right before they get displayed to the user.</p>
+						   There are even hooks available that allow you to customize the computed directions right before they get displayed to the user and you can specify intermediate goals along your route.</p>
 					</div>
 					
 					<div class="one_half">
@@ -260,7 +263,46 @@
 				</div>
 				
 			</div>
-			<!-- End Features -->		
+			<!-- End Features -->
+			
+			<!-- Start Updates -->
+			<div id="updates" class="page">
+				<h1>Updates</h1>
+				
+				<div class="releases">
+					<article class="release">
+						<h2>Version 1.1.1</h2>
+						<span class="date">Released on June 4th, 2012</span>
+						<ul>
+							<li class="fix"><span><b>Fix</b></span> 
+								MapQuest API calls now support optimizing the route to allow for reordering of intermediate goals</li>
+						</ul>
+					</article>
+					
+					<article class="release">
+						<h2>Version 1.1.0</h2>
+						<span class="date">Released on June 3rd, 2012</span>
+						<ul>
+							<li class="new"><span><b>New</b></span>Support for <strong>intermediate goals</strong> along a route</li>
+							<li class="new"><span><b>New</b></span>MTDWaypoint can wrap a CLLocationCoordinate2D or an address string</li>
+							<li class="fix"><span><b>Fix</b></span>Several checks for more defensive coding, more logging</li>
+							<li class="fix"><span><b>Fix</b></span>Replace CLLocationCoordinate2D/NSString APIs with MTDWaypoint APIs</li>
+							<li class="fix"><span><b>Fix</b></span>Removed mapView:willStartLoadingDirectionsFromAddress:toAddress:routeType: 
+								delegate call and changed API of other delegate calls to use MTDWaypoint instead </li>
+							<li class="fix"><span><b>Fix</b></span>Adjusted NSNotification userInfo dictionary to match new delegate protocol </li>
+						</ul>
+					</article>
+					
+					<article class="release">
+						<h2>Version 1.0.0</h2>
+						<span class="date">Released on June 1st, 2012</span>
+						<ul>
+							<li class="new"><span><b>New</b></span> Initial release of MTDirectionsKit supporting Google Directions API and MapQuest Open Directions API</li>
+						</ul>
+					</article>
+				</div>		
+			</div>
+			<!-- End Updates -->
 			
 			<!-- Start Screenshots -->
 			<div id="screenshots" class="page">
