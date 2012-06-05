@@ -57,6 +57,14 @@
 - (MTDDirectionsOverlay *)mapView:(MTDMapView *)mapView didFinishLoadingDirectionsOverlay:(MTDDirectionsOverlay *)directionsOverlay;
 
 /**
+ Tells the delegate that the mapView specified wasn't able to load the directions requested
+ 
+ @param mapView the mapView that began loading the directions
+ @param error the error that occured
+ */
+- (void)mapView:(MTDMapView *)mapView didFailLoadingDirectionsOverlayWithError:(NSError *)error;
+
+/**
  Asks the delegate for the color for the corresponding view for the specified directionsOverlay.
  
  @param mapView the mapView that began loading the directions
@@ -65,11 +73,11 @@
 - (UIColor *)mapView:(MTDMapView *)mapView colorForDirectionsOverlay:(MTDDirectionsOverlay *)directionsOverlay;
 
 /**
- Tells the delegate that the mapView specified wasn't able to load the directions requested
+ Asks the delegate for the factor to multiply MKRoadWidthAtZoomScale with to compute the total overlay line width for the specified directionsOverlay.
  
  @param mapView the mapView that began loading the directions
- @param error the error that occured
+ @param directionsOverlay the overlay we want the line width factor of
  */
-- (void)mapView:(MTDMapView *)mapView didFailLoadingDirectionsOverlayWithError:(NSError *)error;
+- (CGFloat)mapView:(MTDMapView *)mapView lineWidthFactorForDirectionsOverlay:(MTDDirectionsOverlay *)directionsOverlay;
 
 @end

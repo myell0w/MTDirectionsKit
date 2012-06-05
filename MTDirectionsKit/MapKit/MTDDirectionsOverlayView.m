@@ -5,6 +5,8 @@
 
 #define kMTDDefaultOverlayColor         [UIColor colorWithRed:0.f green:0.25f blue:1.f alpha:1.f]
 #define kMTDDefaultLineWidthFactor      1.8f
+#define kMTDMinimumLineWidthFactor      0.5f
+#define kMTDMaximumLineWidthFactor      3.0f
 
 
 @interface MTDDirectionsOverlayView ()
@@ -48,6 +50,12 @@
     if (overlayColor != _overlayColor && overlayColor != nil) {
         _overlayColor = overlayColor;
         [self setNeedsDisplay];
+    }
+}
+
+- (void)setOverlayLineWidthFactor:(CGFloat)overlayLineWidthFactor {
+    if (overlayLineWidthFactor >= kMTDMinimumLineWidthFactor && overlayLineWidthFactor <= kMTDMaximumLineWidthFactor) {
+        _overlayLineWidthFactor = overlayLineWidthFactor;
     }
 }
 
