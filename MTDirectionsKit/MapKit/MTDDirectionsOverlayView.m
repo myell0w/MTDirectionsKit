@@ -3,6 +3,10 @@
 #import "MTDFunctions.h"
 
 
+#define kMTDDefaultOverlayColor         [UIColor colorWithRed:0.f green:0.25f blue:1.f alpha:1.f]
+#define kMTDDefaultLineWidthFactor      1.8f
+
+
 @interface MTDDirectionsOverlayView ()
 
 @property (nonatomic, readonly) MTDDirectionsOverlay *directionsOverlay;
@@ -18,13 +22,26 @@
 @implementation MTDDirectionsOverlayView
 
 @synthesize overlayColor = _overlayColor;
+@synthesize overlayLineWidthFactor = _overlayLineWidthFactor;
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - Lifecycle
+////////////////////////////////////////////////////////////////////////
+
+- (id)initWithOverlay:(id<MKOverlay>)overlay {
+    if ((self = [super initWithOverlay:overlay])) {
+        _overlayLineWidthFactor = kMTDDefaultLineWidthFactor;
+    }
+    
+    return self;
+}
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - MTDDirectionsOverlayView
 ////////////////////////////////////////////////////////////////////////
 
 - (UIColor *)overlayColor {
-    return _overlayColor ?: [UIColor colorWithRed:0.f green:0.25f blue:1.f alpha:1.f];
+    return _overlayColor ?: kMTDDefaultOverlayColor;
 }
 
 - (void)setOverlayColor:(UIColor *)overlayColor {
@@ -42,7 +59,7 @@
           zoomScale:(MKZoomScale)zoomScale
           inContext:(CGContextRef)context {
     CGFloat screenScale = [UIScreen mainScreen].scale;
-    CGFloat lineWidth = MKRoadWidthAtZoomScale(zoomScale) * 1.8f * screenScale;
+    CGFloat lineWidth = MKRoadWidthAtZoomScale(zoomScale) * self.overlayLineWidthFactor * screenScale;
     
     // outset the map rect by the line width so that points just outside
     // of the currently drawn rect are included in the generated path.
