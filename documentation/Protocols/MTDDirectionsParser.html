@@ -42,15 +42,11 @@
 	
 	<option value="//api/name/data">&nbsp;&nbsp;&nbsp;&nbsp;data</option>
 	
-	<option value="//api/name/fromAddress">&nbsp;&nbsp;&nbsp;&nbsp;fromAddress</option>
-	
-	<option value="//api/name/fromCoordinate">&nbsp;&nbsp;&nbsp;&nbsp;fromCoordinate</option>
+	<option value="//api/name/from">&nbsp;&nbsp;&nbsp;&nbsp;from</option>
 	
 	<option value="//api/name/routeType">&nbsp;&nbsp;&nbsp;&nbsp;routeType</option>
 	
-	<option value="//api/name/toAddress">&nbsp;&nbsp;&nbsp;&nbsp;toAddress</option>
-	
-	<option value="//api/name/toCoordinate">&nbsp;&nbsp;&nbsp;&nbsp;toCoordinate</option>
+	<option value="//api/name/to">&nbsp;&nbsp;&nbsp;&nbsp;to</option>
 	
 	
 	
@@ -91,15 +87,11 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/data">data</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/fromAddress">fromAddress</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/fromCoordinate">fromCoordinate</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/from">from</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/routeType">routeType</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/toAddress">toAddress</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/toCoordinate">toCoordinate</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/to">to</a></span></li>
 	
 </ul></li>
 
@@ -149,7 +141,7 @@
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
 						<p>The <a href="../Classes/MTDDirectionsParser.html">MTDDirectionsParser</a> protocol defines a set of required methods that instances of
-<a href="../Classes/MTDDirectionsParser.html">MTDDirectionsParser</a> need to implement, that want to act as a directions parser.</p>
+<a href="../Classes/MTDDirectionsParser.html">MTDDirectionsParser</a> need <a href="#//api/name/to">to</a> implement, that want <a href="#//api/name/to">to</a> act as a directions parser.</p>
 					</div>
 					
 					
@@ -168,21 +160,21 @@
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/data">&nbsp;&nbsp;data</a></code>
-		<span class="tooltip"><p>The object used to store the information about the route.</p></span>
+		<span class="tooltip"><p>The object used <a href="#//api/name/to">to</a> store the information about the route.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	<span class="task-item-suffix">required method</span>
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/fromCoordinate">&nbsp;&nbsp;fromCoordinate</a></code>
-		<span class="tooltip"><p>The starting coordinate of the route</p></span>
+		<code><a href="#//api/name/from">&nbsp;&nbsp;from</a></code>
+		<span class="tooltip"><p>The starting waypoint of the route</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	<span class="task-item-suffix">required method</span>
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/toCoordinate">&nbsp;&nbsp;toCoordinate</a></code>
-		<span class="tooltip"><p>The end coordinate of the route</p></span>
+		<code><a href="#//api/name/to">&nbsp;&nbsp;to</a></code>
+		<span class="tooltip"><p>The end waypoint of the route</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	<span class="task-item-suffix">required method</span>
@@ -190,20 +182,6 @@
 	<span class="tooltip">
 		<code><a href="#//api/name/routeType">&nbsp;&nbsp;routeType</a></code>
 		<span class="tooltip"><p>The type of the route</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	<span class="task-item-suffix">required method</span>
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/fromAddress">&nbsp;&nbsp;fromAddress</a></code>
-		<span class="tooltip"><p>The address of the starting coordinate of the route, can be nil</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	<span class="task-item-suffix">required method</span>
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/toAddress">&nbsp;&nbsp;toAddress</a></code>
-		<span class="tooltip"><p>The address of the end coordinate of the route, can be nil</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	<span class="task-item-suffix">required method</span>
@@ -243,7 +221,7 @@ subclass. It parses the <a href="#//api/name/data">data</a> and calls the comple
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The object used to store the information about the route.</p>
+		<p>The object used <a href="#//api/name/to">to</a> store the information about the route.</p>
 	</div>		
 	
 	
@@ -271,51 +249,17 @@ subclass. It parses the <a href="#//api/name/data">data</a> and calls the comple
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/fromAddress" title="fromAddress"></a>
-	<h3 class="subsubtitle method-title">fromAddress</h3>
+	<a name="//api/name/from" title="from"></a>
+	<h3 class="subsubtitle method-title">from</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The address of the starting coordinate of the route, can be nil</p>
+		<p>The starting waypoint of the route</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) NSString *fromAddress</code></div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDDirectionsParser.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/fromCoordinate" title="fromCoordinate"></a>
-	<h3 class="subsubtitle method-title">fromCoordinate</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>The starting coordinate of the route</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign, readonly) CLLocationCoordinate2D fromCoordinate</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong, readonly) MTDWaypoint *from</code></div>
 	
 	
 	
@@ -373,51 +317,17 @@ subclass. It parses the <a href="#//api/name/data">data</a> and calls the comple
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/toAddress" title="toAddress"></a>
-	<h3 class="subsubtitle method-title">toAddress</h3>
+	<a name="//api/name/to" title="to"></a>
+	<h3 class="subsubtitle method-title">to</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The address of the end coordinate of the route, can be nil</p>
+		<p>The end waypoint of the route</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) NSString *toAddress</code></div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDDirectionsParser.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/toCoordinate" title="toCoordinate"></a>
-	<h3 class="subsubtitle method-title">toCoordinate</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>The end coordinate of the route</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign, readonly) CLLocationCoordinate2D toCoordinate</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong, readonly) MTDWaypoint *to</code></div>
 	
 	
 	
@@ -508,7 +418,7 @@ subclass. It parses the <a href="#//api/name/data">data</a> and calls the comple
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-05-31)</span><br />
+						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-06-04)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
 						

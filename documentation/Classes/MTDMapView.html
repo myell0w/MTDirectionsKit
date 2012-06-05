@@ -67,6 +67,8 @@
 	
 	<option value="//api/name/cancelLoadOfDirections">&nbsp;&nbsp;&nbsp;&nbsp;- cancelLoadOfDirections</option>
 	
+	<option value="//api/name/loadDirectionsFrom:to:intermediateGoals:routeType:zoomToShowDirections:">&nbsp;&nbsp;&nbsp;&nbsp;- loadDirectionsFrom:to:intermediateGoals:routeType:zoomToShowDirections:</option>
+	
 	<option value="//api/name/loadDirectionsFrom:to:routeType:zoomToShowDirections:">&nbsp;&nbsp;&nbsp;&nbsp;- loadDirectionsFrom:to:routeType:zoomToShowDirections:</option>
 	
 	<option value="//api/name/loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:">&nbsp;&nbsp;&nbsp;&nbsp;- loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:</option>
@@ -136,6 +138,8 @@
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/cancelLoadOfDirections">cancelLoadOfDirections</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/loadDirectionsFrom:to:intermediateGoals:routeType:zoomToShowDirections:">loadDirectionsFrom:to:intermediateGoals:routeType:zoomToShowDirections:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/loadDirectionsFrom:to:routeType:zoomToShowDirections:">loadDirectionsFrom:to:routeType:zoomToShowDirections:</a></span></li>
 	
@@ -306,6 +310,16 @@ the region gets zoomed (animated) to show the whole overlay, if the flag zoomToS
 		<span class="tooltip"><p>Starts a request and loads the directions between the specified addresses.
 When the request is finished the <a href="#//api/name/directionsOverlay">directionsOverlay</a> gets set on the MapView and
 the region gets zoomed (animated) to show the whole overlay, if the flag zoomToShowDirections is set.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/loadDirectionsFrom:to:intermediateGoals:routeType:zoomToShowDirections:">&ndash;&nbsp;loadDirectionsFrom:to:intermediateGoals:routeType:zoomToShowDirections:</a></code>
+		<span class="tooltip"><p>Starts a request and loads the directions between the specified start and end waypoints while
+travelling to all intermediate goals along the route. When the request is finished the
+<a href="#//api/name/directionsOverlay">directionsOverlay</a> gets set on the MapView and the region gets zoomed (animated) to show the
+whole overlay, if the flag zoomToShowDirections is set.</p></span>
 	</span>
 	
 	
@@ -762,6 +776,86 @@ Does nothing if there is no request active.</p>
 </div>
 						
 						<div class="section-method">
+	<a name="//api/name/loadDirectionsFrom:to:intermediateGoals:routeType:zoomToShowDirections:" title="loadDirectionsFrom:to:intermediateGoals:routeType:zoomToShowDirections:"></a>
+	<h3 class="subsubtitle method-title">loadDirectionsFrom:to:intermediateGoals:routeType:zoomToShowDirections:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Starts a request and loads the directions between the specified start and end waypoints while
+travelling to all intermediate goals along the route. When the request is finished the
+<a href="#//api/name/directionsOverlay">directionsOverlay</a> gets set on the MapView and the region gets zoomed (animated) to show the
+whole overlay, if the flag zoomToShowDirections is set.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)loadDirectionsFrom:(MTDWaypoint *)<em>from</em> to:(MTDWaypoint *)<em>to</em> intermediateGoals:(NSArray *)<em>intermediateGoals</em> routeType:(MTDDirectionsRouteType)<em>routeType</em> zoomToShowDirections:(BOOL)<em>zoomToShowDirections</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>from</em></dt>
+			<dd><p>the starting waypoint of the route</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>to</em></dt>
+			<dd><p>the end waypoint of the route</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>intermediateGoals</em></dt>
+			<dd><p>an optional array of waypoint we want to travel to along the route</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>routeType</em></dt>
+			<dd><p>the type of the route requested, e.g. pedestrian, cycling, fastest driving</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>zoomToShowDirections</em></dt>
+			<dd><p>flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/loadDirectionsFrom:to:routeType:zoomToShowDirections:">&ndash; loadDirectionsFrom:to:routeType:zoomToShowDirections:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/loadDirectionsFrom:to:intermediateGoals:routeType:zoomToShowDirections:">&ndash; loadDirectionsFrom:to:intermediateGoals:routeType:zoomToShowDirections:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/cancelLoadOfDirections">&ndash; cancelLoadOfDirections</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDMapView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/loadDirectionsFrom:to:routeType:zoomToShowDirections:" title="loadDirectionsFrom:to:routeType:zoomToShowDirections:"></a>
 	<h3 class="subsubtitle method-title">loadDirectionsFrom:to:routeType:zoomToShowDirections:</h3>
 	
@@ -817,6 +911,8 @@ the region gets zoomed (animated) to show the whole overlay, if the flag zoomToS
 		<ul>
 			
 			<li><code><p><a href="#//api/name/loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:">&ndash; loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/loadDirectionsFrom:to:intermediateGoals:routeType:zoomToShowDirections:">&ndash; loadDirectionsFrom:to:intermediateGoals:routeType:zoomToShowDirections:</a></p></code></li>
 			
 			<li><code><p><a href="#//api/name/cancelLoadOfDirections">&ndash; cancelLoadOfDirections</a></p></code></li>
 			
@@ -889,6 +985,8 @@ the region gets zoomed (animated) to show the whole overlay, if the flag zoomToS
 		<ul>
 			
 			<li><code><p><a href="#//api/name/loadDirectionsFrom:to:routeType:zoomToShowDirections:">&ndash; loadDirectionsFrom:to:routeType:zoomToShowDirections:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/loadDirectionsFrom:to:intermediateGoals:routeType:zoomToShowDirections:">&ndash; loadDirectionsFrom:to:intermediateGoals:routeType:zoomToShowDirections:</a></p></code></li>
 			
 			<li><code><p><a href="#//api/name/cancelLoadOfDirections">&ndash; cancelLoadOfDirections</a></p></code></li>
 			
@@ -1033,7 +1131,7 @@ if one exists. Does nothing otherwise.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-05-31)</span><br />
+						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-06-04)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
 						

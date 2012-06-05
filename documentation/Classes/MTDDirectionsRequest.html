@@ -42,30 +42,26 @@
 	
 	<option value="//api/name/completion">&nbsp;&nbsp;&nbsp;&nbsp;completion</option>
 	
-	<option value="//api/name/fromAddress">&nbsp;&nbsp;&nbsp;&nbsp;fromAddress</option>
-	
-	<option value="//api/name/fromCoordinate">&nbsp;&nbsp;&nbsp;&nbsp;fromCoordinate</option>
+	<option value="//api/name/from">&nbsp;&nbsp;&nbsp;&nbsp;from</option>
 	
 	<option value="//api/name/httpAddress">&nbsp;&nbsp;&nbsp;&nbsp;httpAddress</option>
 	
 	<option value="//api/name/httpRequest">&nbsp;&nbsp;&nbsp;&nbsp;httpRequest</option>
 	
+	<option value="//api/name/intermediateGoals">&nbsp;&nbsp;&nbsp;&nbsp;intermediateGoals</option>
+	
 	<option value="//api/name/parserClass">&nbsp;&nbsp;&nbsp;&nbsp;parserClass</option>
 	
 	<option value="//api/name/routeType">&nbsp;&nbsp;&nbsp;&nbsp;routeType</option>
 	
-	<option value="//api/name/toAddress">&nbsp;&nbsp;&nbsp;&nbsp;toAddress</option>
-	
-	<option value="//api/name/toCoordinate">&nbsp;&nbsp;&nbsp;&nbsp;toCoordinate</option>
+	<option value="//api/name/to">&nbsp;&nbsp;&nbsp;&nbsp;to</option>
 	
 	
 	
 	
 	<option value="class_methods">Class Methods</option>
 	
-	<option value="//api/name/requestFrom:to:routeType:completion:">&nbsp;&nbsp;&nbsp;&nbsp;+ requestFrom:to:routeType:completion:</option>
-	
-	<option value="//api/name/requestFromAddress:toAddress:routeType:completion:">&nbsp;&nbsp;&nbsp;&nbsp;+ requestFromAddress:toAddress:routeType:completion:</option>
+	<option value="//api/name/requestFrom:to:intermediateGoals:routeType:completion:">&nbsp;&nbsp;&nbsp;&nbsp;+ requestFrom:to:intermediateGoals:routeType:completion:</option>
 	
 	
 	
@@ -74,13 +70,15 @@
 	
 	<option value="//api/name/cancel">&nbsp;&nbsp;&nbsp;&nbsp;- cancel</option>
 	
-	<option value="//api/name/initFrom:to:routeType:completion:">&nbsp;&nbsp;&nbsp;&nbsp;- initFrom:to:routeType:completion:</option>
-	
-	<option value="//api/name/initFromAddress:toAddress:routeType:completion:">&nbsp;&nbsp;&nbsp;&nbsp;- initFromAddress:toAddress:routeType:completion:</option>
+	<option value="//api/name/initWithFrom:to:intermediateGoals:routeType:completion:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithFrom:to:intermediateGoals:routeType:completion:</option>
 	
 	<option value="//api/name/requestFinished:">&nbsp;&nbsp;&nbsp;&nbsp;- requestFinished:</option>
 	
+	<option value="//api/name/setArrayValue:forParameter:">&nbsp;&nbsp;&nbsp;&nbsp;- setArrayValue:forParameter:</option>
+	
 	<option value="//api/name/setValue:forParameter:">&nbsp;&nbsp;&nbsp;&nbsp;- setValue:forParameter:</option>
+	
+	<option value="//api/name/setValueForParameterWithIntermediateGoals:">&nbsp;&nbsp;&nbsp;&nbsp;- setValueForParameterWithIntermediateGoals:</option>
 	
 	<option value="//api/name/start">&nbsp;&nbsp;&nbsp;&nbsp;- start</option>
 	
@@ -118,21 +116,19 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/completion">completion</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/fromAddress">fromAddress</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/fromCoordinate">fromCoordinate</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/from">from</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/httpAddress">httpAddress</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/httpRequest">httpRequest</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/intermediateGoals">intermediateGoals</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/parserClass">parserClass</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/routeType">routeType</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/toAddress">toAddress</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/toCoordinate">toCoordinate</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/to">to</a></span></li>
 	
 </ul></li>
 
@@ -140,9 +136,7 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/requestFrom:to:routeType:completion:">requestFrom:to:routeType:completion:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/requestFromAddress:toAddress:routeType:completion:">requestFromAddress:toAddress:routeType:completion:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/requestFrom:to:intermediateGoals:routeType:completion:">requestFrom:to:intermediateGoals:routeType:completion:</a></span></li>
 	
 </ul></li>
 
@@ -152,13 +146,15 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/cancel">cancel</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initFrom:to:routeType:completion:">initFrom:to:routeType:completion:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initFromAddress:toAddress:routeType:completion:">initFromAddress:toAddress:routeType:completion:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithFrom:to:intermediateGoals:routeType:completion:">initWithFrom:to:intermediateGoals:routeType:completion:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/requestFinished:">requestFinished:</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setArrayValue:forParameter:">setArrayValue:forParameter:</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setValue:forParameter:">setValue:forParameter:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setValueForParameterWithIntermediateGoals:">setValueForParameterWithIntermediateGoals:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/start">start</a></span></li>
 	
@@ -199,10 +195,10 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>An instance of MTDDirectionsRequest is used to retreive information about a route from a given <a href="#//api/name/fromCoordinate">fromCoordinate</a>
-to a given <a href="#//api/name/toCoordinate">toCoordinate</a>. MTDDirectionsRequest itself cannot be instantiated and must be subclassed.</p>
+						<p>An instance of MTDDirectionsRequest is used <a href="#//api/name/to">to</a> retreive information about a route <a href="#//api/name/from">from</a> a given fromCoordinate
+<a href="#//api/name/to">to</a> a given toCoordinate. MTDDirectionsRequest itself cannot be instantiated and must be subclassed.</p>
 
-<p>This category exposes private API used in MTDirectionsKit to other classes to not generate warnings when using them.
+<p>This category exposes private API used in MTDirectionsKit <a href="#//api/name/to">to</a> other classes <a href="#//api/name/to">to</a> not generate warnings when using them.
 You should not use the properties and methods exposed here directly in your code.</p>
 					</div>
 					
@@ -221,29 +217,22 @@ You should not use the properties and methods exposed here directly in your code
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/fromCoordinate">&nbsp;&nbsp;fromCoordinate</a></code>
-		<span class="tooltip"><p>the <a href="#//api/name/start">start</a> coordinate of the route to request, can be invalid if not set in init.</p></span>
+		<code><a href="#//api/name/from">&nbsp;&nbsp;from</a></code>
+		<span class="tooltip"><p>the <a href="#//api/name/start">start</a> waypoint of the route <a href="#//api/name/to">to</a> request.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/toCoordinate">&nbsp;&nbsp;toCoordinate</a></code>
-		<span class="tooltip"><p>the end coordinate of the route to request, can be invalid if not set in init.</p></span>
+		<code><a href="#//api/name/to">&nbsp;&nbsp;to</a></code>
+		<span class="tooltip"><p>the end waypoint of the route to request.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/fromAddress">&nbsp;&nbsp;fromAddress</a></code>
-		<span class="tooltip"><p>the <a href="#//api/name/start">start</a> coordinate of the route to request, can be nil if not set in init.</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/toAddress">&nbsp;&nbsp;toAddress</a></code>
-		<span class="tooltip"><p>the address of the end coordinate of the route to request, can be nil if not set in init.</p></span>
+		<code><a href="#//api/name/intermediateGoals">&nbsp;&nbsp;intermediateGoals</a></code>
+		<span class="tooltip"><p>the intermediate goals along the route, can be nil if none are set.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -257,7 +246,7 @@ You should not use the properties and methods exposed here directly in your code
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/routeType">&nbsp;&nbsp;routeType</a></code>
-		<span class="tooltip"><p>the type of the route to request</p></span>
+		<span class="tooltip"><p>the type of the route <a href="#//api/name/to">to</a> request</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -271,29 +260,16 @@ You should not use the properties and methods exposed here directly in your code
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/requestFrom:to:routeType:completion:">+&nbsp;requestFrom:to:routeType:completion:</a></code>
-		<span class="tooltip"><p>This method is used to create a request from a given <a href="#//api/name/fromCoordinate">fromCoordinate</a> to a given <a href="#//api/name/toCoordinate">toCoordinate</a> with a specified <a href="#//api/name/routeType">routeType</a>.</p></span>
+		<code><a href="#//api/name/requestFrom:to:intermediateGoals:routeType:completion:">+&nbsp;requestFrom:to:intermediateGoals:routeType:completion:</a></code>
+		<span class="tooltip"><p>This method is used <a href="#//api/name/to">to</a> create a request <a href="#//api/name/from">from</a> a given <a href="#//api/name/start">start</a> waypoint <a href="#//api/name/to">to</a> a given end waypoint with a
+specified <a href="#//api/name/routeType">routeType</a> and optional intermediate goals.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/requestFromAddress:toAddress:routeType:completion:">+&nbsp;requestFromAddress:toAddress:routeType:completion:</a></code>
-		<span class="tooltip"><p>This method is used to create a request from a given <a href="#//api/name/fromCoordinate">fromCoordinate</a> to a given <a href="#//api/name/toCoordinate">toCoordinate</a> with a specified <a href="#//api/name/routeType">routeType</a>.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/initFrom:to:routeType:completion:">&ndash;&nbsp;initFrom:to:routeType:completion:</a></code>
-		<span class="tooltip"><p>The designated initializer used to instantiate an MTDDirectionsRequest.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/initFromAddress:toAddress:routeType:completion:">&ndash;&nbsp;initFromAddress:toAddress:routeType:completion:</a></code>
-		<span class="tooltip"><p>The designated initializer used to instantiate an MTDDirectionsRequest.</p></span>
+		<code><a href="#//api/name/initWithFrom:to:intermediateGoals:routeType:completion:">&ndash;&nbsp;initWithFrom:to:intermediateGoals:routeType:completion:</a></code>
+		<span class="tooltip"><p>The designated initializer used <a href="#//api/name/to">to</a> instantiate an MTDDirectionsRequest.</p></span>
 	</span>
 	
 	
@@ -322,7 +298,23 @@ You should not use the properties and methods exposed here directly in your code
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/setValue:forParameter:">&ndash;&nbsp;setValue:forParameter:</a></code>
-		<span class="tooltip"><p>Let&rsquo;s you set parameter values that get passed to the directions service as get parameter.</p></span>
+		<span class="tooltip"><p>Let&rsquo;s you set string parameter values that get passed <a href="#//api/name/to">to</a> the directions service as get parameter.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setArrayValue:forParameter:">&ndash;&nbsp;setArrayValue:forParameter:</a></code>
+		<span class="tooltip"><p>Let&rsquo;s you set array parameter values that get passed <a href="#//api/name/to">to</a> the directions service as get parameter.
+When the URL gets created, the parameter key gets repeated with each value, e.g.
+to=VALUE_1&amp;to=VALUE_2&amp;to=VALUE_3</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setValueForParameterWithIntermediateGoals:">&ndash;&nbsp;setValueForParameterWithIntermediateGoals:</a></code>
+		<span class="tooltip"><p>Convenience function <a href="#//api/name/to">to</a> set a parameter based on an array of intermediate goals of the route.</p></span>
 	</span>
 	
 	
@@ -337,21 +329,21 @@ You should not use the properties and methods exposed here directly in your code
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/httpRequest">&nbsp;&nbsp;httpRequest</a></code>
-		<span class="tooltip"><p>object used to perform a HTTP request</p></span>
+		<span class="tooltip"><p>object used <a href="#//api/name/to">to</a> perform a HTTP request</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/httpAddress">&nbsp;&nbsp;httpAddress</a></code>
-		<span class="tooltip"><p>the address of the the request to perform</p></span>
+		<span class="tooltip"><p>the address of the the request <a href="#//api/name/to">to</a> perform</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/parserClass">&nbsp;&nbsp;parserClass</a></code>
-		<span class="tooltip"><p>the class of the parser used to parse the obtained data</p></span>
+		<span class="tooltip"><p>the class of the parser used <a href="#//api/name/to">to</a> parse the obtained data</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -410,51 +402,17 @@ You should not use the properties and methods exposed here directly in your code
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/fromAddress" title="fromAddress"></a>
-	<h3 class="subsubtitle method-title">fromAddress</h3>
+	<a name="//api/name/from" title="from"></a>
+	<h3 class="subsubtitle method-title">from</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>the <a href="#//api/name/start">start</a> coordinate of the route to request, can be nil if not set in init.</p>
+		<p>the <a href="#//api/name/start">start</a> waypoint of the route <a href="#//api/name/to">to</a> request.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, readonly) NSString *fromAddress</code></div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDDirectionsRequest.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/fromCoordinate" title="fromCoordinate"></a>
-	<h3 class="subsubtitle method-title">fromCoordinate</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>the <a href="#//api/name/start">start</a> coordinate of the route to request, can be invalid if not set in init.</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) CLLocationCoordinate2D fromCoordinate</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) MTDWaypoint *from</code></div>
 	
 	
 	
@@ -484,7 +442,7 @@ You should not use the properties and methods exposed here directly in your code
 	
 	
 	<div class="method-subsection brief-description">
-		<p>the address of the the request to perform</p>
+		<p>the address of the the request <a href="#//api/name/to">to</a> perform</p>
 	</div>		
 	
 	
@@ -518,7 +476,7 @@ You should not use the properties and methods exposed here directly in your code
 	
 	
 	<div class="method-subsection brief-description">
-		<p>object used to perform a HTTP request</p>
+		<p>object used <a href="#//api/name/to">to</a> perform a HTTP request</p>
 	</div>		
 	
 	
@@ -546,13 +504,47 @@ You should not use the properties and methods exposed here directly in your code
 </div>
 						
 						<div class="section-method">
+	<a name="//api/name/intermediateGoals" title="intermediateGoals"></a>
+	<h3 class="subsubtitle method-title">intermediateGoals</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>the intermediate goals along the route, can be nil if none are set.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) NSArray *intermediateGoals</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDDirectionsRequest.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/parserClass" title="parserClass"></a>
 	<h3 class="subsubtitle method-title">parserClass</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>the class of the parser used to parse the obtained data</p>
+		<p>the class of the parser used <a href="#//api/name/to">to</a> parse the obtained data</p>
 	</div>		
 	
 	
@@ -586,7 +578,7 @@ You should not use the properties and methods exposed here directly in your code
 	
 	
 	<div class="method-subsection brief-description">
-		<p>the type of the route to request</p>
+		<p>the type of the route <a href="#//api/name/to">to</a> request</p>
 	</div>		
 	
 	
@@ -614,51 +606,17 @@ You should not use the properties and methods exposed here directly in your code
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/toAddress" title="toAddress"></a>
-	<h3 class="subsubtitle method-title">toAddress</h3>
+	<a name="//api/name/to" title="to"></a>
+	<h3 class="subsubtitle method-title">to</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>the address of the end coordinate of the route to request, can be nil if not set in init.</p>
+		<p>the end waypoint of the route to request.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, readonly) NSString *toAddress</code></div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDDirectionsRequest.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/toCoordinate" title="toCoordinate"></a>
-	<h3 class="subsubtitle method-title">toCoordinate</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>the end coordinate of the route to request, can be invalid if not set in init.</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) CLLocationCoordinate2D toCoordinate</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) MTDWaypoint *to</code></div>
 	
 	
 	
@@ -690,99 +648,46 @@ You should not use the properties and methods exposed here directly in your code
 						<h2 class="subtitle subtitle-methods">Class Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/requestFrom:to:routeType:completion:" title="requestFrom:to:routeType:completion:"></a>
-	<h3 class="subsubtitle method-title">requestFrom:to:routeType:completion:</h3>
+	<a name="//api/name/requestFrom:to:intermediateGoals:routeType:completion:" title="requestFrom:to:intermediateGoals:routeType:completion:"></a>
+	<h3 class="subsubtitle method-title">requestFrom:to:intermediateGoals:routeType:completion:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>This method is used to create a request from a given <a href="#//api/name/fromCoordinate">fromCoordinate</a> to a given <a href="#//api/name/toCoordinate">toCoordinate</a> with a specified <a href="#//api/name/routeType">routeType</a>.</p>
+		<p>This method is used <a href="#//api/name/to">to</a> create a request <a href="#//api/name/from">from</a> a given <a href="#//api/name/start">start</a> waypoint <a href="#//api/name/to">to</a> a given end waypoint with a
+specified <a href="#//api/name/routeType">routeType</a> and optional intermediate goals.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>+ (id)requestFrom:(CLLocationCoordinate2D)<em>fromCoordinate</em> to:(CLLocationCoordinate2D)<em>toCoordinate</em> routeType:(MTDDirectionsRouteType)<em>routeType</em> completion:(mtd_parser_block)<em>completion</em></code></div>
+	<div class="method-subsection method-declaration"><code>+ (id)requestFrom:(MTDWaypoint *)<em>from</em> to:(MTDWaypoint *)<em>to</em> intermediateGoals:(NSArray *)<em>intermediateGoals</em> routeType:(MTDDirectionsRouteType)<em>routeType</em> completion:(mtd_parser_block)<em>completion</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>fromCoordinate</em></dt>
-			<dd><p>the <a href="#//api/name/start">start</a> coordinate of the route to request</p></dd>
+			<dt><em>from</em></dt>
+			<dd><p>the <a href="#//api/name/start">start</a> waypoint of the route <a href="#//api/name/to">to</a> request</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>toCoordinate</em></dt>
-			<dd><p>the end coordinate of the route to request</p></dd>
+			<dt><em>to</em></dt>
+			<dd><p>the end waypoint of the route <a href="#//api/name/to">to</a> request</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>routeType</em></dt>
-			<dd><p>the type of the route to request</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>completion</em></dt>
-			<dd><p>the block to execute when the request is finished</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDDirectionsRequest.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/requestFromAddress:toAddress:routeType:completion:" title="requestFromAddress:toAddress:routeType:completion:"></a>
-	<h3 class="subsubtitle method-title">requestFromAddress:toAddress:routeType:completion:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>This method is used to create a request from a given <a href="#//api/name/fromCoordinate">fromCoordinate</a> to a given <a href="#//api/name/toCoordinate">toCoordinate</a> with a specified <a href="#//api/name/routeType">routeType</a>.</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>+ (id)requestFromAddress:(NSString *)<em>fromAddress</em> toAddress:(NSString *)<em>toAddress</em> routeType:(MTDDirectionsRouteType)<em>routeType</em> completion:(mtd_parser_block)<em>completion</em></code></div>
-	
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>fromAddress</em></dt>
-			<dd><p>the address of the starting coordinate of the route to request</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>toAddress</em></dt>
-			<dd><p>the address of the end coordinate of the route to request</p></dd>
+			<dt><em>intermediateGoals</em></dt>
+			<dd><p>an optional array of waypoint we want <a href="#//api/name/to">to</a> travel <a href="#//api/name/to">to</a> along the route</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>routeType</em></dt>
-			<dd><p>the type of the route to request</p></dd>
+			<dd><p>the type of the route <a href="#//api/name/to">to</a> request</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>completion</em></dt>
-			<dd><p>the block to execute when the request is finished</p></dd>
+			<dd><p>the block <a href="#//api/name/to">to</a> execute when the request is finished</p></dd>
 		</dl>
 		
 	</div>
@@ -850,94 +755,40 @@ You should not use the properties and methods exposed here directly in your code
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/initFrom:to:routeType:completion:" title="initFrom:to:routeType:completion:"></a>
-	<h3 class="subsubtitle method-title">initFrom:to:routeType:completion:</h3>
+	<a name="//api/name/initWithFrom:to:intermediateGoals:routeType:completion:" title="initWithFrom:to:intermediateGoals:routeType:completion:"></a>
+	<h3 class="subsubtitle method-title">initWithFrom:to:intermediateGoals:routeType:completion:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The designated initializer used to instantiate an MTDDirectionsRequest.</p>
+		<p>The designated initializer used <a href="#//api/name/to">to</a> instantiate an MTDDirectionsRequest.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (id)initFrom:(CLLocationCoordinate2D)<em>fromCoordinate</em> to:(CLLocationCoordinate2D)<em>toCoordinate</em> routeType:(MTDDirectionsRouteType)<em>routeType</em> completion:(mtd_parser_block)<em>completion</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (id)initWithFrom:(MTDWaypoint *)<em>from</em> to:(MTDWaypoint *)<em>to</em> intermediateGoals:(NSArray *)<em>intermediateGoals</em> routeType:(MTDDirectionsRouteType)<em>routeType</em> completion:(mtd_parser_block)<em>completion</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>fromCoordinate</em></dt>
-			<dd><p>the starting coordinate of the route to request</p></dd>
+			<dt><em>from</em></dt>
+			<dd><p>the starting waypoint of the route <a href="#//api/name/to">to</a> request</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>toCoordinate</em></dt>
-			<dd><p>the end coordinate of the route to request</p></dd>
+			<dt><em>to</em></dt>
+			<dd><p>the end waypoint of the route <a href="#//api/name/to">to</a> request</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>routeType</em></dt>
-			<dd><p>the type of route to request</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>completion</em></dt>
-			<dd><p>block that is executed when requesting of the route is finished</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDDirectionsRequest.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/initFromAddress:toAddress:routeType:completion:" title="initFromAddress:toAddress:routeType:completion:"></a>
-	<h3 class="subsubtitle method-title">initFromAddress:toAddress:routeType:completion:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>The designated initializer used to instantiate an MTDDirectionsRequest.</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>- (id)initFromAddress:(NSString *)<em>fromAddress</em> toAddress:(NSString *)<em>toAddress</em> routeType:(MTDDirectionsRouteType)<em>routeType</em> completion:(mtd_parser_block)<em>completion</em></code></div>
-	
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>fromAddress</em></dt>
-			<dd><p>the address of the starting coordinate of the route to request</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>toAddress</em></dt>
-			<dd><p>the address of the end coordinate of the route to request</p></dd>
+			<dt><em>intermediateGoals</em></dt>
+			<dd><p>an optional array of waypoint we want <a href="#//api/name/to">to</a> travel <a href="#//api/name/to">to</a> along the route</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>routeType</em></dt>
-			<dd><p>the type of route to request</p></dd>
+			<dd><p>the type of route <a href="#//api/name/to">to</a> request</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
@@ -986,7 +837,7 @@ You should not use the properties and methods exposed here directly in your code
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>httpRequest</em></dt>
-			<dd><p>the object used to perform the request</p></dd>
+			<dd><p>the object used <a href="#//api/name/to">to</a> perform the request</p></dd>
 		</dl>
 		
 	</div>
@@ -1012,13 +863,64 @@ You should not use the properties and methods exposed here directly in your code
 </div>
 						
 						<div class="section-method">
+	<a name="//api/name/setArrayValue:forParameter:" title="setArrayValue:forParameter:"></a>
+	<h3 class="subsubtitle method-title">setArrayValue:forParameter:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Let&rsquo;s you set array parameter values that get passed <a href="#//api/name/to">to</a> the directions service as get parameter.
+When the URL gets created, the parameter key gets repeated with each value, e.g.
+to=VALUE_1&amp;to=VALUE_2&amp;to=VALUE_3</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)setArrayValue:(NSArray *)<em>array</em> forParameter:(NSString *)<em>parameter</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>array</em></dt>
+			<dd><p>an array of values for the given parameter key</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>parameter</em></dt>
+			<dd><p>the name of the parameter</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDDirectionsRequest.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/setValue:forParameter:" title="setValue:forParameter:"></a>
 	<h3 class="subsubtitle method-title">setValue:forParameter:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Let&rsquo;s you set parameter values that get passed to the directions service as get parameter.</p>
+		<p>Let&rsquo;s you set string parameter values that get passed <a href="#//api/name/to">to</a> the directions service as get parameter.</p>
 	</div>		
 	
 	
@@ -1030,12 +932,56 @@ You should not use the properties and methods exposed here directly in your code
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>value</em></dt>
-			<dd><p>the value of the parameter to set</p></dd>
+			<dd><p>the value of the parameter <a href="#//api/name/to">to</a> set</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>parameter</em></dt>
 			<dd><p>the name of the parameter</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDDirectionsRequest.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/setValueForParameterWithIntermediateGoals:" title="setValueForParameterWithIntermediateGoals:"></a>
+	<h3 class="subsubtitle method-title">setValueForParameterWithIntermediateGoals:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Convenience function <a href="#//api/name/to">to</a> set a parameter based on an array of intermediate goals of the route.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)setValueForParameterWithIntermediateGoals:(NSArray *)<em>intermediateGoals</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>intermediateGoals</em></dt>
+			<dd><p>array of waypoints we want <a href="#//api/name/to">to</a> travel <a href="#//api/name/to">to</a> along the route</p></dd>
 		</dl>
 		
 	</div>
@@ -1107,7 +1053,7 @@ You should not use the properties and methods exposed here directly in your code
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-05-31)</span><br />
+						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-06-04)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
 						

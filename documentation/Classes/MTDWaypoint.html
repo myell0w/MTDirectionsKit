@@ -40,12 +40,18 @@
 	
 	<option value="properties">Properties</option>
 	
+	<option value="//api/name/address">&nbsp;&nbsp;&nbsp;&nbsp;address</option>
+	
 	<option value="//api/name/coordinate">&nbsp;&nbsp;&nbsp;&nbsp;coordinate</option>
+	
+	<option value="//api/name/valid">&nbsp;&nbsp;&nbsp;&nbsp;valid</option>
 	
 	
 	
 	
 	<option value="class_methods">Class Methods</option>
+	
+	<option value="//api/name/waypointWithAddress:">&nbsp;&nbsp;&nbsp;&nbsp;+ waypointWithAddress:</option>
 	
 	<option value="//api/name/waypointWithCoordinate:">&nbsp;&nbsp;&nbsp;&nbsp;+ waypointWithCoordinate:</option>
 	
@@ -53,6 +59,10 @@
 	
 	
 	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/descriptionForAPI:">&nbsp;&nbsp;&nbsp;&nbsp;- descriptionForAPI:</option>
+	
+	<option value="//api/name/initWithAddress:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithAddress:</option>
 	
 	<option value="//api/name/initWithCoordinate:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithCoordinate:</option>
 	
@@ -76,6 +86,8 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Lifecycle">Lifecycle</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_API">API</a></span></li>
+	
 </ul></li>
 
 
@@ -84,13 +96,19 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/address">address</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/coordinate">coordinate</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/valid">valid</a></span></li>
 	
 </ul></li>
 
 
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/waypointWithAddress:">waypointWithAddress:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/waypointWithCoordinate:">waypointWithCoordinate:</a></span></li>
 	
@@ -99,6 +117,10 @@
 
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/descriptionForAPI:">descriptionForAPI:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithAddress:">initWithAddress:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithCoordinate:">initWithCoordinate:</a></span></li>
 	
@@ -139,7 +161,8 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>An instance of MTDWaypoint is a lightweight immutable object wrapper for a CLLocationCoordinate2D <a href="#//api/name/coordinate">coordinate</a>.
+						<p>An instance of MTDWaypoint is a lightweight immutable object wrapper for either
+a CLLocationCoordinate2D <a href="#//api/name/coordinate">coordinate</a> or an <a href="#//api/name/address">address</a> string representing a location.
 It is used in MTDDirectionsKit to store coordinates in collections like NSArray.</p>
 					</div>
 					
@@ -159,7 +182,21 @@ It is used in MTDDirectionsKit to store coordinates in collections like NSArray.
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/coordinate">&nbsp;&nbsp;coordinate</a></code>
-		<span class="tooltip"><p>the coordinate wrapped</p></span>
+		<span class="tooltip"><p>the coordinate wrapped, may be in<a href="#//api/name/valid">valid</a></p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/address">&nbsp;&nbsp;address</a></code>
+		<span class="tooltip"><p>the address wrapped, may be nil</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/valid">&nbsp;&nbsp;valid</a></code>
+		<span class="tooltip"><p>is this waypoint valid (valid <a href="#//api/name/coordinate">coordinate</a> or set <a href="#//api/name/address">address</a>)</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -180,9 +217,37 @@ It is used in MTDDirectionsKit to store coordinates in collections like NSArray.
 	
 </li><li>
 	<span class="tooltip">
+		<code><a href="#//api/name/waypointWithAddress:">+&nbsp;waypointWithAddress:</a></code>
+		<span class="tooltip"><p>This method is used to create an instance of MTDWaypoint with a given <a href="#//api/name/address">address</a> string.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/initWithCoordinate:">&ndash;&nbsp;initWithCoordinate:</a></code>
-		<span class="tooltip"><p>The designated initializer of MTDWaypoint, used to create an instance of MTDWaypoint that wraps
-a given <a href="#//api/name/coordinate">coordinate</a>.</p></span>
+		<span class="tooltip"><p>The initializer used to create an instance of MTDWaypoint that wraps a given <a href="#//api/name/coordinate">coordinate</a>.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithAddress:">&ndash;&nbsp;initWithAddress:</a></code>
+		<span class="tooltip"><p>The initializer used to create an instance of MTDWaypoint that wraps a given <a href="#//api/name/address">address</a>.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="API" name="task_API"></a>
+						<h3 class="subsubtitle task-title">API</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/descriptionForAPI:">&ndash;&nbsp;descriptionForAPI:</a></code>
+		<span class="tooltip"><p>Returns a string representation of this waypoint used for the call to the given API.</p></span>
 	</span>
 	
 	
@@ -200,17 +265,85 @@ a given <a href="#//api/name/coordinate">coordinate</a>.</p></span>
 						<h2 class="subtitle subtitle-methods">Properties</h2>
 						
 						<div class="section-method">
+	<a name="//api/name/address" title="address"></a>
+	<h3 class="subsubtitle method-title">address</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>the address wrapped, may be nil</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) NSString *address</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDWaypoint.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/coordinate" title="coordinate"></a>
 	<h3 class="subsubtitle method-title">coordinate</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>the coordinate wrapped</p>
+		<p>the coordinate wrapped, may be in<a href="#//api/name/valid">valid</a></p>
 	</div>		
 	
 	
 	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) CLLocationCoordinate2D coordinate</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDWaypoint.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/valid" title="valid"></a>
+	<h3 class="subsubtitle method-title">valid</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>is this waypoint valid (valid <a href="#//api/name/coordinate">coordinate</a> or set <a href="#//api/name/address">address</a>)</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly, getter=isValid) BOOL valid</code></div>
 	
 	
 	
@@ -240,6 +373,64 @@ a given <a href="#//api/name/coordinate">coordinate</a>.</p></span>
 					<div class="section section-methods">
 						<a title="Class Methods" name="class_methods"></a>
 						<h2 class="subtitle subtitle-methods">Class Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/waypointWithAddress:" title="waypointWithAddress:"></a>
+	<h3 class="subsubtitle method-title">waypointWithAddress:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>This method is used to create an instance of MTDWaypoint with a given <a href="#//api/name/address">address</a> string.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (MTDWaypoint *)waypointWithAddress:(NSString *)<em>address</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>address</em></dt>
+			<dd><p>the <a href="#//api/name/address">address</a> of the waypoint</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>the wrapper object created to store the <a href="#//api/name/address">address</a></p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/initWithAddress:">&ndash; initWithAddress:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDWaypoint.h</code><br />
+	</div>				
+	
+	
+</div>
 						
 						<div class="section-method">
 	<a name="//api/name/waypointWithCoordinate:" title="waypointWithCoordinate:"></a>
@@ -308,14 +499,111 @@ a given <a href="#//api/name/coordinate">coordinate</a>.</p></span>
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
+	<a name="//api/name/descriptionForAPI:" title="descriptionForAPI:"></a>
+	<h3 class="subsubtitle method-title">descriptionForAPI:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns a string representation of this waypoint used for the call to the given API.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (NSString *)descriptionForAPI:(MTDDirectionsAPI)<em>api</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>api</em></dt>
+			<dd><p>the API we use to retreive the directions</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>string representation that can be used as part of the URL to call the API</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDWaypoint.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/initWithAddress:" title="initWithAddress:"></a>
+	<h3 class="subsubtitle method-title">initWithAddress:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The initializer used to create an instance of MTDWaypoint that wraps a given <a href="#//api/name/address">address</a>.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (id)initWithAddress:(NSString *)<em>address</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>address</em></dt>
+			<dd><p>the <a href="#//api/name/address">address</a> to save</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>the wrapper object created to store the <a href="#//api/name/address">address</a></p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDWaypoint.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/initWithCoordinate:" title="initWithCoordinate:"></a>
 	<h3 class="subsubtitle method-title">initWithCoordinate:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The designated initializer of MTDWaypoint, used to create an instance of MTDWaypoint that wraps
-a given <a href="#//api/name/coordinate">coordinate</a>.</p>
+		<p>The initializer used to create an instance of MTDWaypoint that wraps a given <a href="#//api/name/coordinate">coordinate</a>.</p>
 	</div>		
 	
 	
@@ -370,7 +658,7 @@ a given <a href="#//api/name/coordinate">coordinate</a>.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-05-31)</span><br />
+						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-06-04)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
 						

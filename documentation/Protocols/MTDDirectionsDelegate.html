@@ -52,8 +52,6 @@
 	
 	<option value="//api/name/mapView:willStartLoadingDirectionsFrom:to:routeType:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:willStartLoadingDirectionsFrom:to:routeType:</option>
 	
-	<option value="//api/name/mapView:willStartLoadingDirectionsFromAddress:toAddress:routeType:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:willStartLoadingDirectionsFromAddress:toAddress:routeType:</option>
-	
 	
 	
 </select>
@@ -89,8 +87,6 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:didFinishLoadingDirectionsOverlay:">mapView:didFinishLoadingDirectionsOverlay:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:willStartLoadingDirectionsFrom:to:routeType:">mapView:willStartLoadingDirectionsFrom:to:routeType:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:willStartLoadingDirectionsFromAddress:toAddress:routeType:">mapView:willStartLoadingDirectionsFromAddress:toAddress:routeType:</a></span></li>
 	
 </ul></li>
 
@@ -149,13 +145,6 @@ information updates about MTDirectionsKit-related stuff.</p>
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/mapView:willStartLoadingDirectionsFrom:to:routeType:">&ndash;&nbsp;mapView:willStartLoadingDirectionsFrom:to:routeType:</a></code>
-		<span class="tooltip"><p>Tells the delegate that the mapView will start loading directions</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/mapView:willStartLoadingDirectionsFromAddress:toAddress:routeType:">&ndash;&nbsp;mapView:willStartLoadingDirectionsFromAddress:toAddress:routeType:</a></code>
 		<span class="tooltip"><p>Tells the delegate that the mapView will start loading directions</p></span>
 	</span>
 	
@@ -365,7 +354,7 @@ by returning a different overlay than the one received as parameter</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (void)mapView:(MTDMapView *)<em>mapView</em> willStartLoadingDirectionsFrom:(CLLocationCoordinate2D)<em>fromCoordinate</em> to:(CLLocationCoordinate2D)<em>toCoordinate</em> routeType:(MTDDirectionsRouteType)<em>routeType</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)mapView:(MTDMapView *)<em>mapView</em> willStartLoadingDirectionsFrom:(MTDWaypoint *)<em>from</em> to:(MTDWaypoint *)<em>to</em> routeType:(MTDDirectionsRouteType)<em>routeType</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
@@ -377,72 +366,13 @@ by returning a different overlay than the one received as parameter</p>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>fromCoordinate</em></dt>
-			<dd><p>the starting point of the directions</p></dd>
+			<dt><em>from</em></dt>
+			<dd><p>the starting waypoint of the directions</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>toCoordinate</em></dt>
-			<dd><p>the end point of the directions</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>routeType</em></dt>
-			<dd><p>the type of the route requested, e.g. pedestrian, cycling, fastest driving</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDDirectionsDelegate.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/mapView:willStartLoadingDirectionsFromAddress:toAddress:routeType:" title="mapView:willStartLoadingDirectionsFromAddress:toAddress:routeType:"></a>
-	<h3 class="subsubtitle method-title">mapView:willStartLoadingDirectionsFromAddress:toAddress:routeType:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Tells the delegate that the mapView will start loading directions</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>- (void)mapView:(MTDMapView *)<em>mapView</em> willStartLoadingDirectionsFromAddress:(NSString *)<em>fromAddress</em> toAddress:(NSString *)<em>toAddress</em> routeType:(MTDDirectionsRouteType)<em>routeType</em></code></div>
-	
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>mapView</em></dt>
-			<dd><p>the mapView that will start loading the directions</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>fromAddress</em></dt>
-			<dd><p>the address of the starting coordinate of the route to request</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>toAddress</em></dt>
-			<dd><p>the address of the end coordinate of the route to request</p></dd>
+			<dt><em>to</em></dt>
+			<dd><p>the end waypoint of the directions</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
@@ -485,7 +415,7 @@ by returning a different overlay than the one received as parameter</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-05-31)</span><br />
+						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-06-04)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
 						
