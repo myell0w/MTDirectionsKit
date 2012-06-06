@@ -118,7 +118,15 @@
 }
 
 - (NSString *)formattedTime {
-    return MTDGetFormattedTime(self.timeInSeconds);
+    return [self formattedTimeWithFormat:nil];
+}
+
+- (NSString *)formattedTimeWithFormat:(NSString *)format {
+    if (format != nil) {
+        return MTDGetFormattedTimeWithFormat(self.timeInSeconds, format);
+    } else {
+        return MTDGetFormattedTime(self.timeInSeconds);
+    }
 }
 
 @end

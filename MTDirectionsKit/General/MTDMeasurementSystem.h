@@ -41,4 +41,4 @@ void MTDDirectionsSetMeasurementSystem(MTDMeasurementSystem measurementSystem);
  @param measurementSystem the measurementSystem to format for
  @return a formatted distance string
  */
-NSString* MTDFormattedDistanceInMeasurementSystem(CLLocationDistance distance, MTDMeasurementSystem measurementSystem);
+NSString* MTDGetFormattedDistanceInMeasurementSystem(CLLocationDistance distance, MTDMeasurementSystem measurementSystem);

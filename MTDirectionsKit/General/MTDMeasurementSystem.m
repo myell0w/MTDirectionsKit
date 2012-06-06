@@ -36,7 +36,7 @@ void MTDDirectionsSetMeasurementSystem(MTDMeasurementSystem measurementSystem) {
     }
 }
 
-NSString* MTDFormattedDistanceInMeasurementSystem(CLLocationDistance distance, MTDMeasurementSystem measurementSystem) {
+NSString* MTDGetFormattedDistanceInMeasurementSystem(CLLocationDistance distance, MTDMeasurementSystem measurementSystem) {
     NSString *format = nil;
     
     if (measurementSystem == MTDMeasurementSystemMetric) {
