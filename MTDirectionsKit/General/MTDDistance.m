@@ -53,7 +53,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (NSString *)description {
-    return MTDFormattedDistanceInMeasurementSystem(self.distanceInMeter, MTDDirectionsGetMeasurementSystem());
+    return MTDGetFormattedDistanceInMeasurementSystem(self.distanceInMeter, MTDDirectionsGetMeasurementSystem());
 }
 
 ////////////////////////////////////////////////////////////////////////

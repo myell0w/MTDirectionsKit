@@ -1,6 +1,12 @@
 #import "MTDFunctions.h"
 
 
+#define kMTDSecondsPerHour      (60. * 60. * 24.)
+
+
+static NSDateFormatter *mtd_dateFormatter = nil;
+
+
 void MTDDirectionsOpenInMapsApp(CLLocationCoordinate2D fromCoordinate, CLLocationCoordinate2D toCoordinate, MTDDirectionsRouteType routeType) {
 	NSString *googleMapsURL = [NSString stringWithFormat:@"http://maps.google.com/maps?saddr=%f,%f&daddr=%f,%f",
 							   fromCoordinate.latitude,fromCoordinate.longitude, toCoordinate.latitude, toCoordinate.longitude];
@@ -44,21 +50,28 @@ NSString* MTDURLEncodedString(NSString *string) {
                                                                                  kCFStringEncodingUTF8);
 }
 
-NSString* MTDGetFormattedTime(NSTimeInterval time) {
-    if (time < 0.) {
+NSString* MTDGetFormattedTime(NSTimeInterval interval) {
+    if (interval < kMTDSecondsPerHour) {
+        return MTDGetFormattedTimeWithFormat(interval, @"mm:ss");
+    } else {
+        return MTDGetFormattedTimeWithFormat(interval, @"H:mm:ss");
+    }
+}
+
+NSString* MTDGetFormattedTimeWithFormat(NSTimeInterval interval, NSString *format) {
+    if (interval < 0.) {
         return @"0:00";
     }
     
-    NSInteger seconds = ((NSInteger)time) % 60;
-    NSInteger minutes = time / 60;
-    NSInteger hours = minutes / 60;
-    minutes = ((NSInteger)minutes) % 60;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        mtd_dateFormatter = [[NSDateFormatter alloc] init];
+        [mtd_dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    });
     
-    if (hours > 0) {
-        return [NSString stringWithFormat:@"%d:%02d:%02d", hours, minutes, seconds];
-    } else {
-        return [NSString stringWithFormat:@"%d:%02d", minutes, seconds];
-    }
+    [mtd_dateFormatter setDateFormat:format];
+    
+    return [mtd_dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSinceReferenceDate:interval]];
 }
 
 NSString* MTDStringFromCLLocationCoordinate2D(CLLocationCoordinate2D coordinate) {

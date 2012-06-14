@@ -15,6 +15,7 @@
         unsigned int didFinishLoadingOverlay:1;
         unsigned int didFailLoadingOverlay:1;
         unsigned int colorForOverlay:1;
+        unsigned int lineWidthFactorForOverlay:1;
 	} _directionsDelegateFlags;
 }
 
@@ -34,6 +35,7 @@
 - (MTDDirectionsOverlay *)notifyDelegateDidFinishLoadingOverlay:(MTDDirectionsOverlay *)overlay;
 - (void)notifyDelegateDidFailLoadingOverlayWithError:(NSError *)error;
 - (UIColor *)askDelegateForColorOfOverlay:(MTDDirectionsOverlay *)overlay;
+- (CGFloat)askDelegateForLineWidthFactorOfOverlay:(MTDDirectionsOverlay *)overlay;
 
 // Watermark
 - (void)_mtd_wm_:(NSTimer *)timer;
@@ -209,10 +211,11 @@
         _directionsDelegate = directionsDelegate;
         
         // update delegate flags
-        _directionsDelegateFlags.willStartLoadingDirections = [_directionsDelegate respondsToSelector:@selector(mapView:willStartLoadingDirectionsFrom:to:routeType:)];
-        _directionsDelegateFlags.didFinishLoadingOverlay = [_directionsDelegate respondsToSelector:@selector(mapView:didFinishLoadingDirectionsOverlay:)];
-        _directionsDelegateFlags.didFailLoadingOverlay = [_directionsDelegate respondsToSelector:@selector(mapView:didFailLoadingDirectionsOverlayWithError:)];
-        _directionsDelegateFlags.colorForOverlay = [_directionsDelegate respondsToSelector:@selector(mapView:colorForDirectionsOverlay:)];
+        _directionsDelegateFlags.willStartLoadingDirections = (unsigned int)[_directionsDelegate respondsToSelector:@selector(mapView:willStartLoadingDirectionsFrom:to:routeType:)];
+        _directionsDelegateFlags.didFinishLoadingOverlay = (unsigned int)[_directionsDelegate respondsToSelector:@selector(mapView:didFinishLoadingDirectionsOverlay:)];
+        _directionsDelegateFlags.didFailLoadingOverlay = (unsigned int)[_directionsDelegate respondsToSelector:@selector(mapView:didFailLoadingDirectionsOverlayWithError:)];
+        _directionsDelegateFlags.colorForOverlay = (unsigned int)[_directionsDelegate respondsToSelector:@selector(mapView:colorForDirectionsOverlay:)];
+        _directionsDelegateFlags.lineWidthFactorForOverlay = (unsigned int)[_directionsDelegate respondsToSelector:@selector(mapView:lineWidthFactorForDirectionsOverlay:)];
     }
 }
 
@@ -438,7 +441,7 @@
     }
 }
 
-- (void)updateUIForDirectionsDisplayType:(MTDDirectionsDisplayType)displayType {    
+- (void)updateUIForDirectionsDisplayType:(MTDDirectionsDisplayType) __unused displayType {    
     if (_directionsOverlay != nil) {
         [self removeOverlay:_directionsOverlay];
         _directionsOverlayView = nil;
@@ -459,6 +462,7 @@
     
     self.directionsOverlayView = [[MTDDirectionsOverlayView alloc] initWithOverlay:self.directionsOverlay];    
     self.directionsOverlayView.overlayColor = [self askDelegateForColorOfOverlay:self.directionsOverlay];
+    self.directionsOverlayView.overlayLineWidthFactor = [self askDelegateForLineWidthFactorOfOverlay:self.directionsOverlay];
     
     return self.directionsOverlayView;
 }
@@ -539,11 +543,21 @@
     return nil;
 }
 
+- (CGFloat)askDelegateForLineWidthFactorOfOverlay:(MTDDirectionsOverlay *)overlay {
+    if (_directionsDelegateFlags.lineWidthFactorForOverlay) {
+        CGFloat lineWidthFactor = [self.directionsDelegate mapView:self lineWidthFactorForDirectionsOverlay:overlay];
+        return lineWidthFactor;
+    }
+    
+    // doesn't get set as line width
+    return -1.f;
+}
+
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Watermark
 ////////////////////////////////////////////////////////////////////////
 
-- (void)_mtd_wm_:(NSTimer *)timer {
+- (void)_mtd_wm_:(NSTimer *) __unused timer {
     if (!_mtd_wm_) {
         [self removeOverlays:self.overlays];
     }

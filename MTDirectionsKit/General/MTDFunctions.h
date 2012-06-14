@@ -34,12 +34,22 @@ void MTDDirectionsOpenInMapsApp(CLLocationCoordinate2D fromCoordinate, CLLocatio
 NSString* MTDURLEncodedString(NSString *string);
 
 /**
+ Returns a formatted string description of a time-interval in seconds. 
+ When the time interval is below 1 Hour, the format "mm:ss" is used, otherwise "H:mm:ss".
+ 
+ @param interval the number of seconds
+ @return a formatted time string, e.g. 2:04:14 (= 2 h, 4 min, 14 sec)
+ */
+NSString* MTDGetFormattedTime(NSTimeInterval interval);
+
+/**
  Returns a formatted string description of a time-interval in seconds.
  
- @param time the number of seconds
- @return formatted time, e.g. 2:04:14 (= 2 h, 4 min, 14 sec)
+ @param interval the number of seconds
+ @param format the date format used for formatting
+ @return a formatted time string
  */
-NSString* MTDGetFormattedTime(NSTimeInterval time);
+NSString* MTDGetFormattedTimeWithFormat(NSTimeInterval interval, NSString *format);
 
 /**
  Returns a string description of a CLLocationCoordinate2D struct.

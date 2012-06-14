@@ -45,7 +45,7 @@
     if (intermediateGoals.count > 0) {
         NSMutableString *parameter = [NSMutableString stringWithString:@"optimize:true"];
         
-        [intermediateGoals enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [intermediateGoals enumerateObjectsUsingBlock:^(id obj, __unused NSUInteger idx, __unused BOOL *stop) {
             [parameter appendFormat:@"|%@",[obj descriptionForAPI:MTDDirectionsAPIGoogle]];
         }];
         
