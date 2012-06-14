@@ -111,3 +111,14 @@ BOOL MTDDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMapRect rect
     
     return MKMapRectIntersectsRect(rect, r2);
 }
+
+BOOL MTDDirectionsSupportsAppleMaps(void) {
+    static BOOL supportsAppleMaps = NO;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        supportsAppleMaps = NSClassFromString(@"MKDirectionsRequest") != nil;
+    });
+    
+    return supportsAppleMaps;
+}

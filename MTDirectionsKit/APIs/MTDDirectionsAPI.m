@@ -1,4 +1,6 @@
 #import "MTDDirectionsAPI.h"
+#import "MTDFunctions.h"
+#import "MTDLogging.h"
 
 
 #define kMTDDirectionsDefaultAPI              MTDDirectionsAPIMapQuest
@@ -18,5 +20,10 @@ MTDDirectionsAPI MTDDirectionsGetActiveAPI(void) {
 void MTDDirectionsSetActiveAPI(MTDDirectionsAPI activeAPI) {
     if (activeAPI < MTDDirectionsAPICount) {
         mtd_activeAPI = activeAPI;
+        
+        // Google Directions API Terms allow the usage only in combination with Google Maps data
+        if (MTDDirectionsSupportsAppleMaps() && activeAPI == MTDDirectionsAPIGoogle) {
+            MTDLogAlways(@"The Google Directions API Terms forbid using MTDDirectionsAPIGoogle to display directions on top of Apple Maps.");
+        }
     }
 }

@@ -22,8 +22,8 @@
 /**
  An MTDMapView instance provides functionality to show directions directly on top of the MapView inside your App.
  MTDMapView is a subclass of MKMapView and therefore uses Apple's standard way of displaying map data, which we all
- know and love. Currently this means that Google Maps is used as a backend, let's see if this is still true once
- iOS 6 will be released :-)
+ know and love. Up until iOS 5 this means that Google Maps is used as a backend for the map data, starting with iOS 6
+ Apple Maps are used.
  
  Sample usage:
  

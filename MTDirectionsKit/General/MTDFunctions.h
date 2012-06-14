@@ -70,3 +70,11 @@ UIColor* MTDDarkenedColor(UIColor *color, CGFloat difference);
  @param rect the rect to test intersection with
  */
 BOOL MTDDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMapRect rect);
+
+/**
+ This function returns a flag that indicates whether we are running on iOS 6 or up and Apple Maps
+ are used as map source instead of Google Maps.
+ 
+ @return YES, if we are on iOS6 or up, NO otherwise
+ */
+BOOL MTDDirectionsSupportsAppleMaps(void);
