@@ -9,12 +9,12 @@
 #define kMTDFeetInMiles                 5280.
 
 
-static MTDMeasurementSystem mtd_measurementSystem = -1;
+static MTDMeasurementSystem mtd_measurementSystem = (MTDMeasurementSystem)-1;
 static NSNumberFormatter *mtd_numberFormatter = nil;
 
 
 MTDMeasurementSystem MTDDirectionsGetMeasurementSystem(void) {
-    if (mtd_measurementSystem == -1) {
+    if (mtd_measurementSystem == (MTDMeasurementSystem)-1) {
         NSString *measurementSystem = [[NSLocale systemLocale] objectForKey:NSLocaleMeasurementSystem];
         
         if ([measurementSystem isEqualToString:kMTDMeasurementSystemMetric]) {

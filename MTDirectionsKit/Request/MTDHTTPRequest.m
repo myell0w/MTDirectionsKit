@@ -94,7 +94,7 @@
 #pragma mark - NSURLConnectionDelegate
 ////////////////////////////////////////////////////////////////////////
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSHTTPURLResponse *)response {
+- (void)connection:(NSURLConnection *) __unused connection didReceiveResponse:(NSHTTPURLResponse *)response {
 	_responseHeaderFields = [response allHeaderFields];
     
 	if (response.statusCode >= 400) {
@@ -105,17 +105,17 @@
 	NSInteger contentLength = [[_responseHeaderFields objectForKey:@"Content-Length"] integerValue];
     
 	if (contentLength > 0) {
-		_data = [[NSMutableData alloc] initWithCapacity:contentLength];
+		_data = [[NSMutableData alloc] initWithCapacity:(NSUInteger)contentLength];
 	} else {
 		_data = [[NSMutableData alloc] init];
 	}
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+- (void)connection:(NSURLConnection *) __unused connection didReceiveData:(NSData *)data {
 	[_data appendData:data];
 }
 
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+- (void)connection:(NSURLConnection *) __unused connection didFailWithError:(NSError *)error {
 	if ([[error domain] isEqual:NSURLErrorDomain]) {
 		_failureCode = error.code;
 	}
@@ -123,7 +123,7 @@
 	[self close];
 }
 
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+- (void)connectionDidFinishLoading:(NSURLConnection *) __unused connection {
 	[self close];
 }
 

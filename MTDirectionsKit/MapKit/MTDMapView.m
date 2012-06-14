@@ -208,11 +208,11 @@
         _directionsDelegate = directionsDelegate;
         
         // update delegate flags
-        _directionsDelegateFlags.willStartLoadingDirections = [_directionsDelegate respondsToSelector:@selector(mapView:willStartLoadingDirectionsFrom:to:routeType:)];
-        _directionsDelegateFlags.didFinishLoadingOverlay = [_directionsDelegate respondsToSelector:@selector(mapView:didFinishLoadingDirectionsOverlay:)];
-        _directionsDelegateFlags.didFailLoadingOverlay = [_directionsDelegate respondsToSelector:@selector(mapView:didFailLoadingDirectionsOverlayWithError:)];
-        _directionsDelegateFlags.colorForOverlay = [_directionsDelegate respondsToSelector:@selector(mapView:colorForDirectionsOverlay:)];
-        _directionsDelegateFlags.lineWidthFactorForOverlay = [_directionsDelegate respondsToSelector:@selector(mapView:lineWidthFactorForDirectionsOverlay:)];
+        _directionsDelegateFlags.willStartLoadingDirections = (unsigned int)[_directionsDelegate respondsToSelector:@selector(mapView:willStartLoadingDirectionsFrom:to:routeType:)];
+        _directionsDelegateFlags.didFinishLoadingOverlay = (unsigned int)[_directionsDelegate respondsToSelector:@selector(mapView:didFinishLoadingDirectionsOverlay:)];
+        _directionsDelegateFlags.didFailLoadingOverlay = (unsigned int)[_directionsDelegate respondsToSelector:@selector(mapView:didFailLoadingDirectionsOverlayWithError:)];
+        _directionsDelegateFlags.colorForOverlay = (unsigned int)[_directionsDelegate respondsToSelector:@selector(mapView:colorForDirectionsOverlay:)];
+        _directionsDelegateFlags.lineWidthFactorForOverlay = (unsigned int)[_directionsDelegate respondsToSelector:@selector(mapView:lineWidthFactorForDirectionsOverlay:)];
     }
 }
 
@@ -431,7 +431,7 @@
     }
 }
 
-- (void)updateUIForDirectionsDisplayType:(MTDDirectionsDisplayType)displayType {    
+- (void)updateUIForDirectionsDisplayType:(MTDDirectionsDisplayType) __unused displayType {    
     if (_directionsOverlay != nil) {
         [self removeOverlay:_directionsOverlay];
         _directionsOverlayView = nil;

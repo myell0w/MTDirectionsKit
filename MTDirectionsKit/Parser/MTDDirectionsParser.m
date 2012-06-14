@@ -41,7 +41,7 @@
 #pragma mark - MTDirectionsParser
 ////////////////////////////////////////////////////////////////////////
 
-- (void)parseWithCompletion:(mtd_parser_block)completion {
+- (void)parseWithCompletion:(mtd_parser_block) __unused completion {
     MTDLogError(@"parseWithCompletion was called on a parser that doesn't override it (Class: %@)", 
                 NSStringFromClass([self class]));
     
