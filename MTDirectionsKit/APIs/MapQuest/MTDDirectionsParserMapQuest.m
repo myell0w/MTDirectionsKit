@@ -23,7 +23,7 @@
 
 - (void)parseWithCompletion:(mtd_parser_block)completion {
     NSArray *statusCodeNodes = [MTDXMLElement nodesForXPathQuery:@"//statusCode" onXML:self.data];
-    NSUInteger statusCode = MTDStatusCodeMapQuestSuccess;
+    NSInteger statusCode = MTDStatusCodeMapQuestSuccess;
     MTDDirectionsOverlay *overlay = nil;
     NSError *error = nil;
     

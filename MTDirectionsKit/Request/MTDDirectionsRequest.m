@@ -161,7 +161,7 @@ intermediateGoals:(NSArray *)intermediateGoals
     }
 }
 
-- (void)setValueForParameterWithIntermediateGoals:(NSArray *)intermediateGoals {
+- (void)setValueForParameterWithIntermediateGoals:(NSArray *) __unused intermediateGoals {
     MTDLogError(@"setValueForParameterWithIntermediateGoals was called on a request that doesn't override it (Class: %@)", 
                 NSStringFromClass([self class]));
     
@@ -178,7 +178,7 @@ intermediateGoals:(NSArray *)intermediateGoals
     if (self.parameters.count > 0) {
         [address appendString:@"?"];
         
-        [self.parameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        [self.parameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, __unused BOOL *stop) {
             if ([obj isKindOfClass:[NSArray class]]) {
                 for (id value in obj) {
                     [address appendFormat:@"%@=%@&", key, MTDURLEncodedString([value description])];

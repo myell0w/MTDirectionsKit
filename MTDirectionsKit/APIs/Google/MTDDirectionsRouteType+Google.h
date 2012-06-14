@@ -23,6 +23,5 @@ NS_INLINE NSString* MTDDirectionStringForDirectionRouteTypeGoogle(MTDDirectionsR
         case MTDDirectionsRouteTypeFastestDriving:
         default:
             return @"driving";
-            
     }
 }

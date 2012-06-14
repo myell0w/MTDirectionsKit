@@ -79,4 +79,10 @@
                                  timeInSeconds:(NSTimeInterval)timeInSeconds
                                      routeType:(MTDDirectionsRouteType)routeType;
 
+/******************************************
+ @name Directions
+ ******************************************/
+
+- (NSString *)formattedTimeWithFormat:(NSString *)format;
+
 @end

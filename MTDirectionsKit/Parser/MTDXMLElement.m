@@ -136,7 +136,7 @@
 + (NSArray *)nodesForXPathQuery:(NSString *)query onHTML:(NSData *)htmlData {
     xmlDocPtr doc;
     
-	doc = htmlReadMemory([htmlData bytes], [htmlData length], "", NULL, HTML_PARSE_NOWARNING | HTML_PARSE_NOERROR);
+	doc = htmlReadMemory([htmlData bytes], (int)[htmlData length], "", NULL, HTML_PARSE_NOWARNING | HTML_PARSE_NOERROR);
 	
     if (doc == NULL) {
 		return nil;
@@ -151,7 +151,7 @@
 + (NSArray *)nodesForXPathQuery:(NSString *)query onXML:(NSData *)xmlData {
     xmlDocPtr doc;
 	
-	doc = xmlReadMemory([xmlData bytes], [xmlData length], "", NULL, XML_PARSE_RECOVER);
+	doc = xmlReadMemory([xmlData bytes], (int)[xmlData length], "", NULL, XML_PARSE_RECOVER);
 	
     if (doc == NULL) {
 		return nil;
@@ -244,7 +244,7 @@
 }
 
 - (MTDXMLElement *)firstChildNodeWithName:(NSString *)aName {
-    NSArray *foundNodes = [self.childNodes filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+    NSArray *foundNodes = [self.childNodes filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, __unused NSDictionary *bindings) {
         return [[evaluatedObject name] isEqualToString:aName];
     }]];
     

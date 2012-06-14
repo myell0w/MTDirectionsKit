@@ -1,4 +1,7 @@
-= 1.1.0 4.6.2012
+= 1.1.1 4.6.2012
+ * Using optimizedroute call when using MapQuest API to allow for reordering of intermediate goals
+
+= 1.1.0 3.6.2012
  * MTDWaypoint can wrap a CLLocationCoordinate2D or an address string
  * Several checks for more defensive coding, more logging
  * Replace CLLocationCoordinate2D/NSString APIs with MTDWaypoint APIs
