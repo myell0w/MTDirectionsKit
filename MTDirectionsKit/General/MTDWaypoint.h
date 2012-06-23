@@ -27,6 +27,10 @@
 /** the address wrapped, may be nil */
 @property (nonatomic, readonly) NSString *address;
 
+/** has this waypoint a valid coordinate */
+@property (nonatomic, readonly) BOOL hasValidCoordinate;
+/** has this waypoint a valid address */
+@property (nonatomic, readonly) BOOL hasValidAddress;
 /** is this waypoint valid (valid coordinate or set address) */
 @property (nonatomic, readonly, getter = isValid) BOOL valid;
 

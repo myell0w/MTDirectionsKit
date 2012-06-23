@@ -101,11 +101,11 @@
                         to:(CLLocationCoordinate2D)toCoordinate
                  routeType:(MTDDirectionsRouteType)routeType
       zoomToShowDirections:(BOOL)zoomToShowDirections {
-   [self loadDirectionsFrom:[MTDWaypoint waypointWithCoordinate:fromCoordinate]
-                         to:[MTDWaypoint waypointWithCoordinate:toCoordinate]
-          intermediateGoals:nil
-                  routeType:routeType
-       zoomToShowDirections:zoomToShowDirections];
+    [self loadDirectionsFrom:[MTDWaypoint waypointWithCoordinate:fromCoordinate]
+                          to:[MTDWaypoint waypointWithCoordinate:toCoordinate]
+           intermediateGoals:nil
+                   routeType:routeType
+        zoomToShowDirections:zoomToShowDirections];
 }
 
 - (void)loadDirectionsFromAddress:(NSString *)fromAddress
@@ -264,10 +264,16 @@
 #pragma mark - Inter-App
 ////////////////////////////////////////////////////////////////////////
 
-- (void)openDirectionsInMapApp {
+- (BOOL)openDirectionsInMapApp {
     if (self.directionsOverlay != nil) {
-        MTDDirectionsOpenInMapsApp(self.fromCoordinate, self.toCoordinate, self.directionsOverlay.routeType);
+        MTDDirectionsOpenInMapsApp([MTDWaypoint waypointWithCoordinate:self.fromCoordinate],
+                                   [MTDWaypoint waypointWithCoordinate:self.toCoordinate],
+                                   self.directionsOverlay.routeType);
+        
+        return YES;
     }
+    
+    return NO;
 }
 
 ////////////////////////////////////////////////////////////////////////

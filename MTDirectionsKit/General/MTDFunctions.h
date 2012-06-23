@@ -10,17 +10,19 @@
 #import "MTDDirectionsRouteType.h"
 
 
+@class MTDWaypoint;
+
 /**
  Opens the built-in Maps.app and displays the directions from fromCoordinate to toCoordinate
  with the chosen routeType. Since the built-in Maps application only supports travelling per pedes,
  by public transport or by car, MTDDirectionsRouteTypePedestrian is used in case MTDDirectionsRouteTypeBicycle
  was specified.
  
- @param fromCoordinate the start coordinate of the route
- @param toCoordinate the end coordinate of the route
+ @param from the starting waypoint of the route
+ @param to the end waypoint of the route
  @param routeType the specified form of travelling, e.g. walking, by bike, by car
  */
-void MTDDirectionsOpenInMapsApp(CLLocationCoordinate2D fromCoordinate, CLLocationCoordinate2D toCoordinate, MTDDirectionsRouteType routeType);
+void MTDDirectionsOpenInMapsApp(MTDWaypoint *from, MTDWaypoint *to, MTDDirectionsRouteType routeType);
 
 /**
  Creates a percent-escaped version of the given string.

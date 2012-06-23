@@ -182,8 +182,10 @@
  If directionsOverlay is currently set, this method opens the same directions
  that are currently displayed on top of your MTDMapView in the built-in Maps.app
  of the user's device. Does nothing otherwise.
+ 
+ @return YES in case the directionsOverlay is currently set and the Maps App was opened, NO otherwise
  */
-- (void)openDirectionsInMapApp;
+- (BOOL)openDirectionsInMapApp;
 
 /******************************************
  @name Region

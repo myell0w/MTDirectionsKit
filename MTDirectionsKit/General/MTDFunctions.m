@@ -1,4 +1,5 @@
 #import "MTDFunctions.h"
+#import "MTDWaypoint.h"
 
 
 #define kMTDSecondsPerHour      (60. * 60. * 24.)
@@ -7,31 +8,46 @@
 static NSDateFormatter *mtd_dateFormatter = nil;
 
 
-void MTDDirectionsOpenInMapsApp(CLLocationCoordinate2D fromCoordinate, CLLocationCoordinate2D toCoordinate, MTDDirectionsRouteType routeType) {
-	NSString *googleMapsURL = [NSString stringWithFormat:@"http://maps.google.com/maps?saddr=%f,%f&daddr=%f,%f",
-							   fromCoordinate.latitude,fromCoordinate.longitude, toCoordinate.latitude, toCoordinate.longitude];
-    
-    switch(routeType) {
-        case MTDDirectionsRouteTypePedestrian:
-        case MTDDirectionsRouteTypeBicycle: {
-            googleMapsURL = [googleMapsURL stringByAppendingString:@"&dirflg=w"];
-            break;
-        }
+void MTDDirectionsOpenInMapsApp(MTDWaypoint *from, MTDWaypoint *to, MTDDirectionsRouteType routeType) {
+    if (from.hasValidCoordinate && to.hasValidCoordinate) {
+        if (MTDDirectionsSupportsAppleMaps()) {
+            MKPlacemark *fromPlacemark = [[MKPlacemark alloc] initWithCoordinate:from.coordinate addressDictionary:nil];
+            MKPlacemark *toPlacemark = [[MKPlacemark alloc] initWithCoordinate:to.coordinate addressDictionary:nil];
+            MKMapItem *fromMapItem = [[MKMapItem alloc] initWithPlacemark:fromPlacemark];
+            MKMapItem *toMapItem = [[MKMapItem alloc] initWithPlacemark:toPlacemark];
+            NSDictionary *launchOptions = [NSDictionary dictionaryWithObjectsAndKeys:
+                                           MTDMKLaunchOptionFromMTDDirectionsRouteType(routeType), MKLaunchOptionsDirectionsModeKey,
+                                           nil];
             
-        case MTDDirectionsRouteTypePedestrianIncludingPublicTransport: {
-            googleMapsURL = [googleMapsURL stringByAppendingString:@"&dirflg=r"];
-            break;
-        }
+            [MKMapItem openMapsWithItems:[NSArray arrayWithObjects:fromMapItem, toMapItem, nil]
+                           launchOptions:launchOptions];
+        } else {
+            NSString *googleMapsURL = [NSString stringWithFormat:@"http://maps.google.com/maps?saddr=%f,%f&daddr=%f,%f",
+                                       from.coordinate.latitude,from.coordinate.longitude, to.coordinate.latitude, to.coordinate.longitude];
             
-        case MTDDirectionsRouteTypeFastestDriving:
-        case MTDDirectionsRouteTypeShortestDriving:
-        default: {
-            // do nothing
-            break;
+            switch (routeType) {
+                case MTDDirectionsRouteTypePedestrian:
+                case MTDDirectionsRouteTypeBicycle: {
+                    googleMapsURL = [googleMapsURL stringByAppendingString:@"&dirflg=w"];
+                    break;
+                }
+                    
+                case MTDDirectionsRouteTypePedestrianIncludingPublicTransport: {
+                    googleMapsURL = [googleMapsURL stringByAppendingString:@"&dirflg=r"];
+                    break;
+                }
+                    
+                case MTDDirectionsRouteTypeFastestDriving:
+                case MTDDirectionsRouteTypeShortestDriving:
+                default: {
+                    // do nothing
+                    break;
+                }
+            }
+            
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:googleMapsURL]];
         }
     }
-    
-	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:googleMapsURL]];
 }
 
 NSString* MTDURLEncodedString(NSString *string) {
