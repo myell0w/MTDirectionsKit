@@ -101,11 +101,12 @@
                         to:(CLLocationCoordinate2D)toCoordinate
                  routeType:(MTDDirectionsRouteType)routeType
       zoomToShowDirections:(BOOL)zoomToShowDirections {
-   [self loadDirectionsFrom:[MTDWaypoint waypointWithCoordinate:fromCoordinate]
-                         to:[MTDWaypoint waypointWithCoordinate:toCoordinate]
-          intermediateGoals:nil
-                  routeType:routeType
-       zoomToShowDirections:zoomToShowDirections];
+    [self loadDirectionsFrom:[MTDWaypoint waypointWithCoordinate:fromCoordinate]
+                          to:[MTDWaypoint waypointWithCoordinate:toCoordinate]
+           intermediateGoals:nil
+               optimizeRoute:NO
+                   routeType:routeType
+        zoomToShowDirections:zoomToShowDirections];
 }
 
 - (void)loadDirectionsFromAddress:(NSString *)fromAddress
@@ -115,6 +116,7 @@
     [self loadDirectionsFrom:[MTDWaypoint waypointWithAddress:fromAddress]
                           to:[MTDWaypoint waypointWithAddress:toAddress]
            intermediateGoals:nil
+               optimizeRoute:NO
                    routeType:routeType
         zoomToShowDirections:zoomToShowDirections];
 }
@@ -122,6 +124,7 @@
 - (void)loadDirectionsFrom:(MTDWaypoint *)from
                         to:(MTDWaypoint *)to
          intermediateGoals:(NSArray *)intermediateGoals
+             optimizeRoute:(BOOL)optimizeRoute
                  routeType:(MTDDirectionsRouteType)routeType
       zoomToShowDirections:(BOOL)zoomToShowDirections {
     __mtd_weak MTDMapView *weakSelf = self;
@@ -132,6 +135,7 @@
         self.request = [MTDDirectionsRequest requestFrom:from
                                                       to:to
                                        intermediateGoals:intermediateGoals
+                                           optimizeRoute:optimizeRoute
                                                routeType:routeType
                                               completion:^(MTDDirectionsOverlay *overlay, NSError *error) {
                                                   __strong MTDMapView *strongSelf = weakSelf;

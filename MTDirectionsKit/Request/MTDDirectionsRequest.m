@@ -31,8 +31,9 @@ NS_INLINE dispatch_queue_t parser_queue(void) {
 @interface MTDDirectionsRequest () 
 
 @property (nonatomic, strong) MTDHTTPRequest *httpRequest;
-@property (nonatomic, copy) NSString *httpAddress;
-@property (nonatomic, assign) Class parserClass;
+@property (nonatomic, readonly) NSString *httpAddress;
+@property (nonatomic, readonly) Class parserClass;
+@property (nonatomic, readonly) BOOL optimizeRoute;
 @property (nonatomic, strong) NSMutableDictionary *parameters;
 
 /** Appends all parameters to httpAddress */
@@ -49,8 +50,7 @@ NS_INLINE dispatch_queue_t parser_queue(void) {
 @synthesize completion = _completion;
 @synthesize routeType = _routeType;
 @synthesize httpRequest = _httpRequest;
-@synthesize httpAddress = _httpAddress;
-@synthesize parserClass = _parserClass;
+@synthesize optimizeRoute = _optimizeRoute;
 @synthesize parameters = _parameters;
 
 ////////////////////////////////////////////////////////////////////////
@@ -60,6 +60,7 @@ NS_INLINE dispatch_queue_t parser_queue(void) {
 + (id)requestFrom:(MTDWaypoint *)from
                to:(MTDWaypoint *)to
 intermediateGoals:(NSArray *)intermediateGoals
+    optimizeRoute:(BOOL)optimizeRoute
         routeType:(MTDDirectionsRouteType)routeType
        completion:(mtd_parser_block)completion {
     MTDDirectionsRequest *request = nil;
@@ -69,6 +70,7 @@ intermediateGoals:(NSArray *)intermediateGoals
             request = [[MTDDirectionsRequestGoogle alloc] initWithFrom:from
                                                                     to:to
                                                      intermediateGoals:intermediateGoals
+                                                         optimizeRoute:optimizeRoute
                                                              routeType:routeType
                                                             completion:completion];
             break;
@@ -78,6 +80,7 @@ intermediateGoals:(NSArray *)intermediateGoals
             request = [[MTDDirectionsRequestMapQuest alloc] initWithFrom:from
                                                                       to:to
                                                        intermediateGoals:intermediateGoals
+                                                           optimizeRoute:optimizeRoute
                                                                routeType:routeType
                                                               completion:completion];
             break;
@@ -90,12 +93,14 @@ intermediateGoals:(NSArray *)intermediateGoals
 - (id)initWithFrom:(MTDWaypoint *)from
                 to:(MTDWaypoint *)to
  intermediateGoals:(NSArray *)intermediateGoals
+     optimizeRoute:(BOOL)optimizeRoute
          routeType:(MTDDirectionsRouteType)routeType
         completion:(mtd_parser_block)completion {
     if ((self = [super init])) {
         _from = from;
         _to = to;
         _intermediateGoals = [intermediateGoals copy];
+        _optimizeRoute = optimizeRoute;
         _routeType = routeType;
         _completion = [completion copy];
         _parameters = [NSMutableDictionary dictionary];
@@ -116,8 +121,6 @@ intermediateGoals:(NSArray *)intermediateGoals
     self.httpRequest = [[MTDHTTPRequest alloc] initWithAddress:address
                                                 callbackTarget:self
                                                         action:@selector(requestFinished:)];
-    
-    MTDLogVerbose(@"Calling URL: %@", address);
     
     [self.httpRequest start];
 }
@@ -166,6 +169,24 @@ intermediateGoals:(NSArray *)intermediateGoals
                 NSStringFromClass([self class]));
     
     [self doesNotRecognizeSelector:_cmd];
+}
+
+- (NSString *)httpAddress {
+    MTDLogError(@"httpAddress was called on a request that doesn't override it (Class: %@)", 
+                NSStringFromClass([self class]));
+    
+    [self doesNotRecognizeSelector:_cmd];
+    
+    return nil;
+}
+
+- (Class)parserClass {
+    MTDLogError(@"parserClass was called on a request that doesn't override it (Class: %@)", 
+                NSStringFromClass([self class]));
+    
+    [self doesNotRecognizeSelector:_cmd];
+    
+    return nil;
 }
 
 ////////////////////////////////////////////////////////////////////////

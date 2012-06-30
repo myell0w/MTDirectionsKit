@@ -147,6 +147,7 @@
  @param from the starting waypoint of the route
  @param to the end waypoint of the route
  @param intermediateGoals an optional array of waypoint we want to travel to along the route
+ @param optimizeRoute a flag that indicates whether the route shall get optimized, if there are intermediate goals
  @param routeType the type of the route requested, e.g. pedestrian, cycling, fastest driving
  @param zoomToShowDirections flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)
  
@@ -157,6 +158,7 @@
 - (void)loadDirectionsFrom:(MTDWaypoint *)from
                         to:(MTDWaypoint *)to
          intermediateGoals:(NSArray *)intermediateGoals
+             optimizeRoute:(BOOL)optimizeRoute
                  routeType:(MTDDirectionsRouteType)routeType
       zoomToShowDirections:(BOOL)zoomToShowDirections;
 
