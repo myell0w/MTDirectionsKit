@@ -46,7 +46,7 @@
     if (waypoints.count > 0) {
         overlay = [[MTDDirectionsOverlay alloc] init];
         
-        MKMapPoint *points = malloc(sizeof(CLLocationCoordinate2D) * waypoints.count);
+        MKMapPoint *points = malloc(sizeof(MKMapPoint) * waypoints.count);
         NSUInteger pointIndex = 0;
         
         for (NSUInteger i = 0; i < waypoints.count; i++) {
