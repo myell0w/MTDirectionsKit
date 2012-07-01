@@ -500,7 +500,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = MTD;
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "Matthias Tretter (@myell0w)";
 			};
 			buildConfigurationList = 9B6C18BA14A7E18200087893 /* Build configuration list for PBXProject "MTDirectionsKit" */;
@@ -782,15 +782,19 @@
 					armv6,
 					armv7,
 				);
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/MTDirections.dst;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MTDirectionsKit/Prefix.pch;
+				GCC_THUMB_SUPPORT = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SKIP_INSTALL = YES;
 				STRIP_STYLE = "non-global";
 			};
@@ -804,15 +808,19 @@
 					armv6,
 					armv7,
 				);
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/MTDirections.dst;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MTDirectionsKit/Prefix.pch;
+				GCC_THUMB_SUPPORT = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SKIP_INSTALL = YES;
 				STRIP_STYLE = "non-global";
 			};
@@ -826,6 +834,7 @@
 					"armv6,",
 					armv7,
 				);
+				GCC_THUMB_SUPPORT = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -838,6 +847,7 @@
 					"armv6,",
 					armv7,
 				);
+				GCC_THUMB_SUPPORT = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

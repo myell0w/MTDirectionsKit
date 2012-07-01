@@ -19,9 +19,11 @@
 /** object used to perform a HTTP request */
 @property (nonatomic, strong) MTDHTTPRequest *httpRequest;
 /** the address of the the request to perform */
-@property (nonatomic, copy) NSString *httpAddress;
+@property (nonatomic, readonly) NSString *httpAddress;
 /** the class of the parser used to parse the obtained data */
-@property (nonatomic, assign) Class parserClass;
+@property (nonatomic, readonly) Class parserClass;
+/** flag whether the route gets optimized when there are intermediate goals */
+@property (nonatomic, readonly) BOOL optimizeRoute;
 
 /** 
  This method is called once the request is finished.

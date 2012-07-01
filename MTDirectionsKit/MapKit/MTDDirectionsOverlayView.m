@@ -115,7 +115,7 @@
         // Draw normal path
         CGContextSaveGState(context);
         CGContextSetBlendMode(context, kCGBlendModeCopy);
-        CGFloat normalPathLineWidth = roundf(darkPathLineWidth * 0.8);
+        CGFloat normalPathLineWidth = roundf(darkPathLineWidth * 0.8f);
         CGContextSetLineWidth(context, normalPathLineWidth);
         CGContextSetStrokeColorWithColor(context, self.overlayColor.CGColor);
         CGContextAddPath(context, path);
@@ -124,7 +124,7 @@
         
         // Draw inner glow path
         CGContextSaveGState(context);
-        CGFloat innerGlowPathLineWidth = roundf(darkPathLineWidth * 0.9);
+        CGFloat innerGlowPathLineWidth = roundf(darkPathLineWidth * 0.9f);
         CGContextSetLineWidth(context, innerGlowPathLineWidth);
         CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:1.f alpha:0.1f].CGColor);
         CGContextAddPath(context, path);
@@ -134,9 +134,9 @@
         // Draw normal path again
         CGContextSaveGState(context);
         CGContextSetBlendMode(context, kCGBlendModeCopy);
-        normalPathLineWidth = roundf(lineWidth * 0.6);
+        normalPathLineWidth = roundf(lineWidth * 0.6f);
         CGContextSetLineWidth(context, normalPathLineWidth);
-        CGContextSetStrokeColorWithColor(context, [[self.overlayColor colorWithAlphaComponent:0.7] CGColor]);
+        CGContextSetStrokeColorWithColor(context, [[self.overlayColor colorWithAlphaComponent:0.7f] CGColor]);
         CGContextAddPath(context, path);
         CGContextStrokePath(context);
         CGContextRestoreGState(context);
