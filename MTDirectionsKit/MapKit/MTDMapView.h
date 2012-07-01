@@ -147,7 +147,8 @@
  @param from the starting waypoint of the route
  @param to the end waypoint of the route
  @param intermediateGoals an optional array of waypoint we want to travel to along the route
- @param optimizeRoute a flag that indicates whether the route shall get optimized, if there are intermediate goals
+ @param optimizeRoute a flag that indicates whether the route shall get optimized if there are intermediate goals.
+                      if YES, the intermediate goals can get reordered to guarantee a fast route traversal
  @param routeType the type of the route requested, e.g. pedestrian, cycling, fastest driving
  @param zoomToShowDirections flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)
  
