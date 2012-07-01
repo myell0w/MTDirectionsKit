@@ -50,6 +50,8 @@
 	
 	<option value="//api/name/mapView:didFinishLoadingDirectionsOverlay:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:didFinishLoadingDirectionsOverlay:</option>
 	
+	<option value="//api/name/mapView:lineWidthFactorForDirectionsOverlay:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:lineWidthFactorForDirectionsOverlay:</option>
+	
 	<option value="//api/name/mapView:willStartLoadingDirectionsFrom:to:routeType:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:willStartLoadingDirectionsFrom:to:routeType:</option>
 	
 	
@@ -85,6 +87,8 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:didFailLoadingDirectionsOverlayWithError:">mapView:didFailLoadingDirectionsOverlayWithError:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:didFinishLoadingDirectionsOverlay:">mapView:didFinishLoadingDirectionsOverlay:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:lineWidthFactorForDirectionsOverlay:">mapView:lineWidthFactorForDirectionsOverlay:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:willStartLoadingDirectionsFrom:to:routeType:">mapView:willStartLoadingDirectionsFrom:to:routeType:</a></span></li>
 	
@@ -160,6 +164,13 @@ by returning a different overlay than the one received as parameter</p></span>
 	
 </li><li>
 	<span class="tooltip">
+		<code><a href="#//api/name/mapView:didFailLoadingDirectionsOverlayWithError:">&ndash;&nbsp;mapView:didFailLoadingDirectionsOverlayWithError:</a></code>
+		<span class="tooltip"><p>Tells the delegate that the mapView specified wasn&rsquo;t able to load the directions requested</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/mapView:colorForDirectionsOverlay:">&ndash;&nbsp;mapView:colorForDirectionsOverlay:</a></code>
 		<span class="tooltip"><p>Asks the delegate for the color for the corresponding view for the specified directionsOverlay.</p></span>
 	</span>
@@ -167,8 +178,8 @@ by returning a different overlay than the one received as parameter</p></span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/mapView:didFailLoadingDirectionsOverlayWithError:">&ndash;&nbsp;mapView:didFailLoadingDirectionsOverlayWithError:</a></code>
-		<span class="tooltip"><p>Tells the delegate that the mapView specified wasn&rsquo;t able to load the directions requested</p></span>
+		<code><a href="#//api/name/mapView:lineWidthFactorForDirectionsOverlay:">&ndash;&nbsp;mapView:lineWidthFactorForDirectionsOverlay:</a></code>
+		<span class="tooltip"><p>Asks the delegate for the factor to multiply MKRoadWidthAtZoomScale with to compute the total overlay line width for the specified directionsOverlay.</p></span>
 	</span>
 	
 	
@@ -344,6 +355,55 @@ by returning a different overlay than the one received as parameter</p>
 </div>
 						
 						<div class="section-method">
+	<a name="//api/name/mapView:lineWidthFactorForDirectionsOverlay:" title="mapView:lineWidthFactorForDirectionsOverlay:"></a>
+	<h3 class="subsubtitle method-title">mapView:lineWidthFactorForDirectionsOverlay:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Asks the delegate for the factor to multiply MKRoadWidthAtZoomScale with to compute the total overlay line width for the specified directionsOverlay.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (CGFloat)mapView:(MTDMapView *)<em>mapView</em> lineWidthFactorForDirectionsOverlay:(MTDDirectionsOverlay *)<em>directionsOverlay</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p>the mapView that began loading the directions</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>directionsOverlay</em></dt>
+			<dd><p>the overlay we want the line width factor of</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDDirectionsDelegate.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/mapView:willStartLoadingDirectionsFrom:to:routeType:" title="mapView:willStartLoadingDirectionsFrom:to:routeType:"></a>
 	<h3 class="subsubtitle method-title">mapView:willStartLoadingDirectionsFrom:to:routeType:</h3>
 	
@@ -415,7 +475,7 @@ by returning a different overlay than the one received as parameter</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-06-04)</span><br />
+						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-07-01)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
 						

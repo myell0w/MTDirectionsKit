@@ -31,124 +31,6 @@
 				</div>
 				<div id="container">
 					
-					<div class="section section-overview index-overview">
-						
-						
-						<h2>Why MTDirectionsKit?</h2>
-
-<p>Did you ever wonder why Apple didn&rsquo;t provide a way to show directions directly on top of MKMapView and force you to switch
-to their built-in Maps.app just to guide your users somewhere? We too, that&rsquo;s why we built MTDirectionsKit.
-Switching to Maps.app just to show directions results in a context-switch and can confuse your users, thus increasing the
-chance that they won&rsquo;t return to your Application.</p>
-
-<p>MTDirectionsKit is a full-featured and easy to use solution to show directions in your App, directly on top of MKMapView.
-Not only will your users thank you for not throwing them out of your App, it will also distinguish your App from all the
-others that don&rsquo;t offer this functionality.</p>
-
-<p>Convinced? Let&rsquo;s get you started.</p>
-
-<p>MTDirectionsKit can use the following two APIs for gathering routing information:</p>
-
-<ol>
-<li><a href="http://open.mapquestapi.com/directions/">MapQuest Open Directions API</a></li>
-<li><a href="https://developers.google.com/maps/documentation/directions/">Google Directions API</a></li>
-</ol>
-
-
-<h2>How to use?</h2>
-
-<p>MTDirectionsKit is very easy to use, here&rsquo;s a sample call:</p>
-
-<pre><code>MTDMapView *_mapView = [[MTDMapView alloc] initWithFrame:self.view.bounds];
-
-// ...
-// setup _mapView
-// ...
-
-// configure MTDirectionsKit (optional)
-// log more messages
-MTDDirectionsSetLogLevel(MTDLogLevelInfo);
-// change used API to Google Directions
-MTDDirectionsSetActiveAPI(MTDDirectionsAPIGoogle);
-// manually change measurement system 
-// Warning: MTDirectionsKit automatically sets it to the preferred one of the user's device,
-// only override if you have a really good reason to
-MTDDirectionsSetMeasurementSystem(MTDMeasurementSystemMetric);
-
-// set the delegate of MKMapView. This automatically sets the directionsDelegate, if self
-// conforms to the protocol MTDDirectionsDelegate
-_mapView.delegate = self;
-
-[_mapView loadDirectionsFrom:CLLocationCoordinate2DMake(51.38713, -1.0316)
-                          to:CLLocationCoordinate2DMake(51.4554, -0.9742)
-                   routeType:MTDDirectionsRouteTypeFastestDriving
-        zoomToShowDirections:YES];
-</code></pre>
-
-<p>To see a detailed example on how to use MTDirectionsKit have a look at the provided Demo Application.</p>
-
-<h2>Integration</h2>
-
-<p>There are two ways to integrate MTDirectionsKit into your App:</p>
-
-<ol>
-<li>Include the binary framework MTDirectionsKit.framework</li>
-<li>Add MTDirectionsKit.xcodeproj as a dependency</li>
-</ol>
-
-
-<p>The easiest way to integrate MTDirectionsKit is to add the binary framework to your App.</p>
-
-<p>Independent of which way to integrate MTDirectionsKit you choose, you have to add some system frameworks and libraries to your project.
-For MTDirectionsKit to work you have to add</p>
-
-<pre><code>CoreLocation.framework
-MapKit.framework
-libxml2.dylib
-</code></pre>
-
-<p>to your target&rsquo;s linked libraries (found under <em>Build Phases</em>, see pictures below).</p>
-
-<h3>Integrating Binary Framework</h3>
-
-<p>Just drag MTDirectionsKit.framework onto the <em>Frameworks</em>-group of your App, add</p>
-
-<pre><code>#import &lt;MTDirectionsKit/MTDirectionsKit.h&gt;
-</code></pre>
-
-<p>everywhere you want to use it and you are good to go.</p>
-
-<p><img src="http://f.cl.ly/items/3x0F1L400f3r1T142p14/MTDirectionsKit_Framework.png" alt="Binary Framework" /></p>
-
-<h3>Integrating MTDirectionsKit.xcodeproj (Dependency)</h3>
-
-<p>First copy the whole MTDirectionsKit project into your applications root folder and use this project for the following steps:</p>
-
-<ol>
-<li>Locate the &ldquo;MTDirectionsKit.xcodeproj&rdquo; file inside your applications root folder and drag it onto the root of your Xcode project&rsquo;s <em>Frameworks</em>-group</li>
-<li>Add MTDirectionsKit as target dependency of your target under the tab <em>Build Phases</em></li>
-<li>Drag libMTDirectionsKit.a onto the section &lsquo;Link Binary with Libraries&rsquo; of your target</li>
-</ol>
-
-
-<p>You are good to go, just</p>
-
-<pre><code>#import &lt;MTDirectionsKit/MTDirectionsKit.h&gt;
-</code></pre>
-
-<p>everywhere where you want to use it.</p>
-
-<p><img src="http://f.cl.ly/items/3D40042w200D0a3u0h0R/MTDirectionsKit_Dependency.png" alt="MTDirectionsKit.xcodeproj as Dependency" /></p>
-
-<h2>Requirements</h2>
-
-<p>MTDirectionsKit needs Xcode ≥ 4.3, iOS Base SDK ≥ 5.1 and Clang LLVM >= 3.1 to compile. It doesn&rsquo;t work with the old LLVM GCC compiler.</p>
-
-<p>MTDirectionsKit works on a deployment target of ≥ iOS 4.0 and can be used in ARC or non-ARC applications.</p>
-						
-						
-					</div>
-					
 					
 					
 					<div class="index-column">
@@ -207,7 +89,7 @@ libxml2.dylib
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-06-04)</span><br />
+						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-07-01)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
 						

@@ -50,6 +50,8 @@
 	
 	<option value="//api/name/intermediateGoals">&nbsp;&nbsp;&nbsp;&nbsp;intermediateGoals</option>
 	
+	<option value="//api/name/optimizeRoute">&nbsp;&nbsp;&nbsp;&nbsp;optimizeRoute</option>
+	
 	<option value="//api/name/parserClass">&nbsp;&nbsp;&nbsp;&nbsp;parserClass</option>
 	
 	<option value="//api/name/routeType">&nbsp;&nbsp;&nbsp;&nbsp;routeType</option>
@@ -61,7 +63,7 @@
 	
 	<option value="class_methods">Class Methods</option>
 	
-	<option value="//api/name/requestFrom:to:intermediateGoals:routeType:completion:">&nbsp;&nbsp;&nbsp;&nbsp;+ requestFrom:to:intermediateGoals:routeType:completion:</option>
+	<option value="//api/name/requestFrom:to:intermediateGoals:optimizeRoute:routeType:completion:">&nbsp;&nbsp;&nbsp;&nbsp;+ requestFrom:to:intermediateGoals:optimizeRoute:routeType:completion:</option>
 	
 	
 	
@@ -70,7 +72,7 @@
 	
 	<option value="//api/name/cancel">&nbsp;&nbsp;&nbsp;&nbsp;- cancel</option>
 	
-	<option value="//api/name/initWithFrom:to:intermediateGoals:routeType:completion:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithFrom:to:intermediateGoals:routeType:completion:</option>
+	<option value="//api/name/initWithFrom:to:intermediateGoals:optimizeRoute:routeType:completion:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithFrom:to:intermediateGoals:optimizeRoute:routeType:completion:</option>
 	
 	<option value="//api/name/requestFinished:">&nbsp;&nbsp;&nbsp;&nbsp;- requestFinished:</option>
 	
@@ -124,6 +126,8 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/intermediateGoals">intermediateGoals</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/optimizeRoute">optimizeRoute</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/parserClass">parserClass</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/routeType">routeType</a></span></li>
@@ -136,7 +140,7 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/requestFrom:to:intermediateGoals:routeType:completion:">requestFrom:to:intermediateGoals:routeType:completion:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/requestFrom:to:intermediateGoals:optimizeRoute:routeType:completion:">requestFrom:to:intermediateGoals:optimizeRoute:routeType:completion:</a></span></li>
 	
 </ul></li>
 
@@ -146,7 +150,7 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/cancel">cancel</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithFrom:to:intermediateGoals:routeType:completion:">initWithFrom:to:intermediateGoals:routeType:completion:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithFrom:to:intermediateGoals:optimizeRoute:routeType:completion:">initWithFrom:to:intermediateGoals:optimizeRoute:routeType:completion:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/requestFinished:">requestFinished:</a></span></li>
 	
@@ -260,7 +264,7 @@ You should not use the properties and methods exposed here directly in your code
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/requestFrom:to:intermediateGoals:routeType:completion:">+&nbsp;requestFrom:to:intermediateGoals:routeType:completion:</a></code>
+		<code><a href="#//api/name/requestFrom:to:intermediateGoals:optimizeRoute:routeType:completion:">+&nbsp;requestFrom:to:intermediateGoals:optimizeRoute:routeType:completion:</a></code>
 		<span class="tooltip"><p>This method is used <a href="#//api/name/to">to</a> create a request <a href="#//api/name/from">from</a> a given <a href="#//api/name/start">start</a> waypoint <a href="#//api/name/to">to</a> a given end waypoint with a
 specified <a href="#//api/name/routeType">routeType</a> and optional intermediate goals.</p></span>
 	</span>
@@ -268,7 +272,7 @@ specified <a href="#//api/name/routeType">routeType</a> and optional intermediat
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initWithFrom:to:intermediateGoals:routeType:completion:">&ndash;&nbsp;initWithFrom:to:intermediateGoals:routeType:completion:</a></code>
+		<code><a href="#//api/name/initWithFrom:to:intermediateGoals:optimizeRoute:routeType:completion:">&ndash;&nbsp;initWithFrom:to:intermediateGoals:optimizeRoute:routeType:completion:</a></code>
 		<span class="tooltip"><p>The designated initializer used <a href="#//api/name/to">to</a> instantiate an MTDDirectionsRequest.</p></span>
 	</span>
 	
@@ -344,6 +348,13 @@ to=VALUE_1&amp;to=VALUE_2&amp;to=VALUE_3</p></span>
 	<span class="tooltip">
 		<code><a href="#//api/name/parserClass">&nbsp;&nbsp;parserClass</a></code>
 		<span class="tooltip"><p>the class of the parser used <a href="#//api/name/to">to</a> parse the obtained data</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/optimizeRoute">&nbsp;&nbsp;optimizeRoute</a></code>
+		<span class="tooltip"><p>flag whether the route gets optimized when there are intermediate goals</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -446,7 +457,7 @@ to=VALUE_1&amp;to=VALUE_2&amp;to=VALUE_3</p></span>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) NSString *httpAddress</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) NSString *httpAddress</code></div>
 	
 	
 	
@@ -538,6 +549,40 @@ to=VALUE_1&amp;to=VALUE_2&amp;to=VALUE_3</p></span>
 </div>
 						
 						<div class="section-method">
+	<a name="//api/name/optimizeRoute" title="optimizeRoute"></a>
+	<h3 class="subsubtitle method-title">optimizeRoute</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>flag whether the route gets optimized when there are intermediate goals</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) BOOL optimizeRoute</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDDirectionsRequest+MTDirectionsPrivateAPI.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/parserClass" title="parserClass"></a>
 	<h3 class="subsubtitle method-title">parserClass</h3>
 	
@@ -548,7 +593,7 @@ to=VALUE_1&amp;to=VALUE_2&amp;to=VALUE_3</p></span>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) Class parserClass</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) Class parserClass</code></div>
 	
 	
 	
@@ -648,8 +693,8 @@ to=VALUE_1&amp;to=VALUE_2&amp;to=VALUE_3</p></span>
 						<h2 class="subtitle subtitle-methods">Class Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/requestFrom:to:intermediateGoals:routeType:completion:" title="requestFrom:to:intermediateGoals:routeType:completion:"></a>
-	<h3 class="subsubtitle method-title">requestFrom:to:intermediateGoals:routeType:completion:</h3>
+	<a name="//api/name/requestFrom:to:intermediateGoals:optimizeRoute:routeType:completion:" title="requestFrom:to:intermediateGoals:optimizeRoute:routeType:completion:"></a>
+	<h3 class="subsubtitle method-title">requestFrom:to:intermediateGoals:optimizeRoute:routeType:completion:</h3>
 	
 	
 	
@@ -659,7 +704,7 @@ specified <a href="#//api/name/routeType">routeType</a> and optional intermediat
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>+ (id)requestFrom:(MTDWaypoint *)<em>from</em> to:(MTDWaypoint *)<em>to</em> intermediateGoals:(NSArray *)<em>intermediateGoals</em> routeType:(MTDDirectionsRouteType)<em>routeType</em> completion:(mtd_parser_block)<em>completion</em></code></div>
+	<div class="method-subsection method-declaration"><code>+ (id)requestFrom:(MTDWaypoint *)<em>from</em> to:(MTDWaypoint *)<em>to</em> intermediateGoals:(NSArray *)<em>intermediateGoals</em> optimizeRoute:(BOOL)<em>optimizeRoute</em> routeType:(MTDDirectionsRouteType)<em>routeType</em> completion:(mtd_parser_block)<em>completion</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
@@ -678,6 +723,11 @@ specified <a href="#//api/name/routeType">routeType</a> and optional intermediat
 		<dl class="argument-def parameter-def">
 			<dt><em>intermediateGoals</em></dt>
 			<dd><p>an optional array of waypoint we want <a href="#//api/name/to">to</a> travel <a href="#//api/name/to">to</a> along the route</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>optimizeRoute</em></dt>
+			<dd><p>a flag whether intermediate goals should be optimized when requesting the route</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
@@ -755,8 +805,8 @@ specified <a href="#//api/name/routeType">routeType</a> and optional intermediat
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/initWithFrom:to:intermediateGoals:routeType:completion:" title="initWithFrom:to:intermediateGoals:routeType:completion:"></a>
-	<h3 class="subsubtitle method-title">initWithFrom:to:intermediateGoals:routeType:completion:</h3>
+	<a name="//api/name/initWithFrom:to:intermediateGoals:optimizeRoute:routeType:completion:" title="initWithFrom:to:intermediateGoals:optimizeRoute:routeType:completion:"></a>
+	<h3 class="subsubtitle method-title">initWithFrom:to:intermediateGoals:optimizeRoute:routeType:completion:</h3>
 	
 	
 	
@@ -765,7 +815,7 @@ specified <a href="#//api/name/routeType">routeType</a> and optional intermediat
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (id)initWithFrom:(MTDWaypoint *)<em>from</em> to:(MTDWaypoint *)<em>to</em> intermediateGoals:(NSArray *)<em>intermediateGoals</em> routeType:(MTDDirectionsRouteType)<em>routeType</em> completion:(mtd_parser_block)<em>completion</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (id)initWithFrom:(MTDWaypoint *)<em>from</em> to:(MTDWaypoint *)<em>to</em> intermediateGoals:(NSArray *)<em>intermediateGoals</em> optimizeRoute:(BOOL)<em>optimizeRoute</em> routeType:(MTDDirectionsRouteType)<em>routeType</em> completion:(mtd_parser_block)<em>completion</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
@@ -784,6 +834,11 @@ specified <a href="#//api/name/routeType">routeType</a> and optional intermediat
 		<dl class="argument-def parameter-def">
 			<dt><em>intermediateGoals</em></dt>
 			<dd><p>an optional array of waypoint we want <a href="#//api/name/to">to</a> travel <a href="#//api/name/to">to</a> along the route</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>optimizeRoute</em></dt>
+			<dd><p>a flag whether intermediate goals should be optimized when requesting the route</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
@@ -1053,7 +1108,7 @@ to=VALUE_1&amp;to=VALUE_2&amp;to=VALUE_3</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-06-04)</span><br />
+						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-07-01)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
 						
