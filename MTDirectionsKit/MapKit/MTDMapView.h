@@ -111,7 +111,7 @@
  @param zoomToShowDirections flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)
 
  @see loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:
- @see loadDirectionsFrom:to:intermediateGoals:routeType:zoomToShowDirections:
+ @see loadDirectionsFrom:to:intermediateGoals:optimizeRoute:routeType:zoomToShowDirections:
  @see cancelLoadOfDirections
  */
 - (void)loadDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate
@@ -130,7 +130,7 @@
  @param zoomToShowDirections flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)
  
  @see loadDirectionsFrom:to:routeType:zoomToShowDirections:
- @see loadDirectionsFrom:to:intermediateGoals:routeType:zoomToShowDirections:
+ @see loadDirectionsFrom:to:intermediateGoals:optimizeRoute:routeType:zoomToShowDirections:
  @see cancelLoadOfDirections
  */
 - (void)loadDirectionsFromAddress:(NSString *)fromAddress
@@ -153,7 +153,7 @@
  @param zoomToShowDirections flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)
  
  @see loadDirectionsFrom:to:routeType:zoomToShowDirections:
- @see loadDirectionsFrom:to:intermediateGoals:routeType:zoomToShowDirections:
+ @see loadDirectionsFrom:to:intermediateGoals:optimizeRoute:routeType:zoomToShowDirections:
  @see cancelLoadOfDirections
  */
 - (void)loadDirectionsFrom:(MTDWaypoint *)from

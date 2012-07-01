@@ -80,6 +80,12 @@
  @name Directions
  ******************************************/
 
+/**
+ The estimated time as formatted string with a specified time format.
+ 
+ @param format the format of the time, e.g. H:mm:ss
+ @return a string-representation of the estimated time with the given format
+ */
 - (NSString *)formattedTimeWithFormat:(NSString *)format;
 
 @end
