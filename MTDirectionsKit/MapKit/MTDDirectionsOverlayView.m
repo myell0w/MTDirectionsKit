@@ -95,6 +95,7 @@
             CGContextRestoreGState(context);
             
             CGColorRelease(wmColor);
+            CGColorSpaceRelease(colorSpace);
         }
         
         // Setup graphics context
