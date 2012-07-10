@@ -13,8 +13,10 @@
 NS_INLINE NSString* MTDDirectionStringForDirectionRouteTypeGoogle(MTDDirectionsRouteType routeType) {
     switch (routeType) {    
         case MTDDirectionsRouteTypePedestrian:
-        case MTDDirectionsRouteTypePedestrianIncludingPublicTransport:
             return @"walking";
+
+        case MTDDirectionsRouteTypePedestrianIncludingPublicTransport:
+            return @"transit";
             
         case MTDDirectionsRouteTypeBicycle:
             return @"bicycling";
