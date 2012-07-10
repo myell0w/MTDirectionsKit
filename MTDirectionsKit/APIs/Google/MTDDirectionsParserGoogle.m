@@ -21,6 +21,8 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (void)parseWithCompletion:(mtd_parser_block)completion {
+    MTDAssert(completion != nil, @"Completion block must be set");
+
     NSArray *statusCodeNodes = [MTDXMLElement nodesForXPathQuery:@"//DirectionsResponse/status" onXML:self.data];
     MTDStatusCodeGoogle statusCode = MTDStatusCodeGoogleSuccess;
     MTDDirectionsOverlay *overlay = nil;
@@ -111,6 +113,7 @@
                                                    routeType:self.routeType];
         
         // set read-only properties via KVO to not pollute API
+        [overlay setValue:self.intermediateGoals forKey:NSStringFromSelector(@selector(intermediateGoals))];
         [overlay setValue:fromAddress forKey:NSStringFromSelector(@selector(fromAddress))];
         [overlay setValue:toAddress forKey:NSStringFromSelector(@selector(toAddress))];
         [overlay setValue:additionalInfo forKey:NSStringFromSelector(@selector(additionalInfo))];

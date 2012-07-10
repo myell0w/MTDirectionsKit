@@ -35,6 +35,8 @@
 @property (nonatomic, readonly) NSString *fromAddress;
 /** The address of the end coordinate, can be nil if not provided by API */
 @property (nonatomic, readonly) NSString *toAddress;
+/** The intermediate goals along the route */
+@property (nonatomic, readonly) NSArray *intermediateGoals;
 /** the total distance between fromCoordinate and toCoordinate, when travelled along the given waypoints */
 @property (nonatomic, strong, readonly) MTDDistance *distance;
 /** the total estimated time for this route */

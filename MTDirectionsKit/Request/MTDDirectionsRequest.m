@@ -134,6 +134,7 @@ intermediateGoals:(NSArray *)intermediateGoals
         
         MTDDirectionsParser *parser = [[self.parserClass alloc] initWithFrom:self.from
                                                                           to:self.to
+                                                           intermediateGoals:self.intermediateGoals
                                                                    routeType:self.routeType
                                                                         data:httpRequest.data];
         
