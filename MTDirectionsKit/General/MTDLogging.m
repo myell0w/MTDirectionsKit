@@ -30,7 +30,7 @@ NS_INLINE NSString* MTDLogLevelDescription(MTDLogLevel logLevel) {
 }
 
 void MTDDirectionsSetLogLevel(MTDLogLevel logLevel) {
-    if (logLevel >= MTDLogLevelVerbose && logLevel <= MTDLogLevelNone) {
+    if (logLevel >= MTDLogLevelAll && logLevel <= MTDLogLevelNone) {
         mtd_logLevel = logLevel;
     }
 }

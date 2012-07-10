@@ -6,7 +6,7 @@
 #import "MTDDirectionsRouteType.h"
 #import "MTDXMLElement.h"
 #import "MTDStatusCodeMapQuest.h"
-#import "MTDLogging.h"
+
 
 #define kMTDDirectionsStartPointNode     @"startPoint"
 #define kMTDDirectionsDistanceNode       @"distance"

@@ -3,7 +3,6 @@
 #import "MTDDirectionsRequestGoogle.h"
 #import "MTDDirectionsParser.h"
 #import "MTDDirectionsAPI.h"
-#import "MTDLogging.h"
 #import "MTDFunctions.h"
 #import "MTDDirectionsDefines.h"
 
@@ -131,7 +130,7 @@ intermediateGoals:(NSArray *)intermediateGoals
 
 - (void)requestFinished:(MTDHTTPRequest *)httpRequest {
     if (httpRequest.failureCode == 0) {
-        NSAssert([self.parserClass isSubclassOfClass:[MTDDirectionsParser class]], @"Parser class must be subclass of MTDDirectionsParser.");
+        MTDAssert([self.parserClass isSubclassOfClass:[MTDDirectionsParser class]], @"Parser class must be subclass of MTDDirectionsParser.");
         
         MTDDirectionsParser *parser = [[self.parserClass alloc] initWithFrom:self.from
                                                                           to:self.to
@@ -153,12 +152,16 @@ intermediateGoals:(NSArray *)intermediateGoals
 }
 
 - (void)setValue:(NSString *)value forParameter:(NSString *)parameter {
+    MTDAssert(value != nil && parameter != nil, @"Value and Parameter must be different from nil");
+
     if (value != nil && parameter != nil) {
         [self.parameters setObject:value forKey:parameter];
     }
 }
 
 - (void)setArrayValue:(NSArray *)array forParameter:(NSString *)parameter {
+    MTDAssert(array.count > 0 && parameter != nil, @"Array and Parameter must be different from nil");
+
     if (array.count > 0 && parameter != nil) {
         [self.parameters setObject:array forKey:parameter];
     }
@@ -194,6 +197,8 @@ intermediateGoals:(NSArray *)intermediateGoals
 ////////////////////////////////////////////////////////////////////////
 
 - (NSString *)fullAddress {
+    MTDAssert(self.httpAddress.length > 0, @"HTTP Address must be set.");
+
     NSMutableString *address = [NSMutableString stringWithString:self.httpAddress];
     
     if (self.parameters.count > 0) {

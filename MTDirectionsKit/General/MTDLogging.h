@@ -17,7 +17,8 @@
  - MTDLogLevelNone: Don't print any log messages
  */
 typedef enum {
-    MTDLogLevelVerbose = 0,
+    MTDLogLevelAll = 0,
+    MTDLogLevelVerbose,
     MTDLogLevelInfo,
     MTDLogLevelWarning,
     MTDLogLevelError,
@@ -53,6 +54,7 @@ void MTDLogWithLevel(MTDLogLevel logLevel, NSString *file, unsigned int line, NS
 
 
 // Shortcuts for logging with the given log levels
+#define MTDLogAlways(...)        MTDLogWithLevel(MTDLogLevelAll, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:__VA_ARGS__])
 #define MTDLogVerbose(...)       MTDLogWithLevel(MTDLogLevelVerbose, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:__VA_ARGS__])
 #define MTDLogInfo(...)          MTDLogWithLevel(MTDLogLevelInfo, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:__VA_ARGS__])
 #define MTDLogWarning(...)       MTDLogWithLevel(MTDLogLevelWarning, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:__VA_ARGS__])

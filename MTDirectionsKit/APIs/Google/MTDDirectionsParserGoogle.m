@@ -4,7 +4,6 @@
 #import "MTDDistance.h"
 #import "MTDFunctions.h"
 #import "MTDWaypoint.h"
-#import "MTDLogging.h"
 #import "MTDStatusCodeGoogle.h"
 
 
