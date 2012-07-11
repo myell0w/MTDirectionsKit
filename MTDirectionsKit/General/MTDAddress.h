@@ -12,9 +12,9 @@
  */
 typedef enum {
     MTDAddressFieldCountry          = 1,
-    MTDAddressFieldCounty           = 1 << 1,
-    MTDAddressFieldPostalCode       = 1 << 2,
-    MTDAddressFieldState            = 1 << 3,
+    MTDAddressFieldState            = 1 << 1,
+    MTDAddressFieldCounty           = 1 << 2,
+    MTDAddressFieldPostalCode       = 1 << 3,
     MTDAddressFieldCity             = 1 << 4,
     MTDAddressFieldStreet           = 1 << 5
 } MTDAddressField;
@@ -73,18 +73,18 @@ typedef enum {
  Initializes an address object with normalized data, the resulting address object is normalised.
  
  @param country the country of the address
+ @param state the state of the address
  @param county the county of the address
  @param postalCode the postal code of the address
- @param state the state of the address
  @param city the city of the address
  @param street the street of the address
  @return a normalised address object
  @see initWithAddressString:
  */
 - (id)initWithCountry:(NSString *)country
+                state:(NSString *)state
                county:(NSString *)county
            postalCode:(NSString *)postalCode
-                state:(NSString *)state
                  city:(NSString *)city
                street:(NSString *)street;
 
@@ -98,12 +98,12 @@ typedef enum {
  address only including the specified address fields (via bitmask). Valid address fields are specified
  in the enum MTDAddressField:
 
- - MTDAddressFieldCountry
- - MTDAddressFieldCounty
- - MTDAddressFieldPostalCode
- - MTDAddressFieldState
- - MTDAddressFieldCity
- - MTDAddressFieldStreet
+   - MTDAddressFieldCountry
+   - MTDAddressFieldState
+   - MTDAddressFieldCounty
+   - MTDAddressFieldPostalCode
+   - MTDAddressFieldCity
+   - MTDAddressFieldStreet
  
  On non-normalized string objects this method just returns the fullAddress string.
  

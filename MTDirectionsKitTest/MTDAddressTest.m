@@ -2,13 +2,14 @@
 
 @implementation MTDAddressTest
 
+
 - (void)setUp {
     [super setUp];
     
     normalisedAddress = [[MTDAddress alloc] initWithCountry:@"United Kingdom"
+                                                      state:@"England"
                                                      county:@"Reading"
                                                  postalCode:@"RG1 1TT"
-                                                      state:@"England"
                                                        city:@"Reading"
                                                      street:nil];
 
@@ -34,17 +35,20 @@
     STAssertEqualObjects(nonNormalisedAddress.fullAddress, @"Wood Ln, Reading, Berkshire RG7, Vereinigtes Königreich", @"Full address not equal");
 }
 
-- (void)testNormalisedDescription {
-    NSString *fullDescription = @"TODO";
 
+- (void)testNormalisedDescription {
+    NSString *fullDescription = @"RG1 1TT Reading, Reading, England, United Kingdom";
+
+    STAssertEqualObjects([normalisedAddress description], fullDescription, @"Description not equal");
     STAssertEqualObjects(normalisedAddress.fullAddress, fullDescription, @"Full address not equal");
-    STAssertEqualObjects(normalisedAddress.description, fullDescription, @"Description not equal");
-}
+    STAssertEqualObjects([normalisedAddress descriptionWithAddressFields:MTDAddressFieldCity | MTDAddressFieldStreet | MTDAddressFieldCountry],
+                         @"Reading, United Kingdom", @"descriptionWithFields not equal");
+} 
 
 - (void)testNonNormalisedDescription {
     STAssertEqualObjects(nonNormalisedAddress.fullAddress, @"Wood Ln, Reading, Berkshire RG7, Vereinigtes Königreich", @"Full address not equal");
     STAssertEqualObjects(nonNormalisedAddress.description, @"Wood Ln, Reading, Berkshire RG7, Vereinigtes Königreich", @"Description not equal");
     STAssertEqualObjects([nonNormalisedAddress descriptionWithAddressFields:MTDAddressFieldCity | MTDAddressFieldCounty], @"Wood Ln, Reading, Berkshire RG7, Vereinigtes Königreich", @"Description with fields not equal");
-}
+} 
 
 @end

@@ -216,7 +216,8 @@ intermediateGoals:(NSArray *)intermediateGoals
         }];
         
         // remove last "&"
-        [address deleteCharactersInRange:NSMakeRange(address.length-1, 1)];
+        NSRange lastCharacterRange = NSMakeRange(address.length-1, 1);
+        [address deleteCharactersInRange:lastCharacterRange];
     }
     
     return [address copy];
