@@ -116,7 +116,7 @@ intermediateGoals:(NSArray *)intermediateGoals
 
 - (void)start {
     NSString *address = self.fullAddress;
-    
+
     self.httpRequest = [[MTDHTTPRequest alloc] initWithAddress:address
                                                 callbackTarget:self
                                                         action:@selector(requestFinished:)];
