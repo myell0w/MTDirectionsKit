@@ -4,6 +4,7 @@
 #import "MTDDistance.h"
 #import "MTDFunctions.h"
 #import "MTDWaypoint.h"
+#import "MTDAddress.h"
 #import "MTDStatusCodeGoogle.h"
 
 
@@ -43,8 +44,6 @@
         MTDDistance *distance = nil;
         NSTimeInterval timeInSeconds = -1.;
         NSMutableDictionary *additionalInfo = [NSMutableDictionary dictionary];
-        NSString *fromAddress = self.from.address;
-        NSString *toAddress = self.to.address;
         
         // Parse Waypoints
         {
@@ -99,11 +98,13 @@
             NSArray *toAddressNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg[last()]/end_address" onXML:self.data];
             
             if (fromAddressNodes.count > 0) {
-                fromAddress = [[fromAddressNodes objectAtIndex:0] contentString];
+                NSString *fromAddress = [[fromAddressNodes objectAtIndex:0] contentString];
+                self.from.address = [[MTDAddress alloc] initWithAddressString:fromAddress];
             }
             
             if (toAddressNodes.count > 0) {
-                toAddress = [[toAddressNodes objectAtIndex:0] contentString];
+                NSString *toAddress = [[toAddressNodes objectAtIndex:0] contentString];
+                self.to.address = [[MTDAddress alloc] initWithAddressString:toAddress];
             }
         }
         
@@ -114,8 +115,6 @@
         
         // set read-only properties via KVO to not pollute API
         [overlay setValue:self.intermediateGoals forKey:NSStringFromSelector(@selector(intermediateGoals))];
-        [overlay setValue:fromAddress forKey:NSStringFromSelector(@selector(fromAddress))];
-        [overlay setValue:toAddress forKey:NSStringFromSelector(@selector(toAddress))];
         [overlay setValue:additionalInfo forKey:NSStringFromSelector(@selector(additionalInfo))];
     } else {
         error = [NSError errorWithDomain:MTDDirectionsKitErrorDomain

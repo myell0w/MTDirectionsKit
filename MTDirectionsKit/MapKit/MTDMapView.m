@@ -1,4 +1,5 @@
 #import "MTDMapView.h"
+#import "MTDAddress.h"
 #import "MTDWaypoint.h"
 #import "MTDDistance.h"
 #import "MTDDirectionsDelegate.h"
@@ -113,8 +114,8 @@
                         toAddress:(NSString *)toAddress
                         routeType:(MTDDirectionsRouteType)routeType
              zoomToShowDirections:(BOOL)zoomToShowDirections {
-    [self loadDirectionsFrom:[MTDWaypoint waypointWithAddress:fromAddress]
-                          to:[MTDWaypoint waypointWithAddress:toAddress]
+    [self loadDirectionsFrom:[MTDWaypoint waypointWithAddress:[[MTDAddress alloc] initWithAddressString:fromAddress]]
+                          to:[MTDWaypoint waypointWithAddress:[[MTDAddress alloc] initWithAddressString:toAddress]]
            intermediateGoals:nil
                optimizeRoute:NO
                    routeType:routeType

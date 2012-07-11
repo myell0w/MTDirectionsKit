@@ -16,7 +16,7 @@
 
 - (id)initWithAddressString:(NSString *)addressString {
     if ((self = [super init])) {
-        _fullAddress = [addressString copy];
+        _fullAddress = [addressString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     }
     
     return self;
@@ -46,6 +46,18 @@
 
 - (NSString *)description {
     return self.fullAddress;
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([object isKindOfClass:[MTDAddress class]]) {
+        return [[self description] isEqualToString:[object description]];
+    }
+
+    return NO;
+}
+
+- (NSUInteger)hash {
+    return self.description.hash;
 }
 
 ////////////////////////////////////////////////////////////////////////

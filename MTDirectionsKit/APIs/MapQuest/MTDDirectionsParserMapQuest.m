@@ -99,8 +99,6 @@
         
         // set read-only properties via KVO to not pollute API
         [overlay setValue:self.intermediateGoals forKey:NSStringFromSelector(@selector(intermediateGoals))];
-        [overlay setValue:self.from.address forKey:NSStringFromSelector(@selector(fromAddress))];
-        [overlay setValue:self.to.address forKey:NSStringFromSelector(@selector(toAddress))];
         [overlay setValue:additionalInfo forKey:NSStringFromSelector(@selector(additionalInfo))];
     } else {
         NSArray *messageNodes = [MTDXMLElement nodesForXPathQuery:@"//messages/message" onXML:self.data];
