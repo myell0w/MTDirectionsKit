@@ -88,7 +88,7 @@
 - (void)setup {
     [self setValue:@"xml" forParameter:@"outFormat"];
     [self setValue:@"ignore" forParameter:@"ambiguities"];
-    [self setValue:@"false" forParameter:@"doReverseGeocode"];
+    [self setValue:@"true" forParameter:@"doReverseGeocode"];
     [self setValue:@"k" forParameter:@"unit"];
     [self setValue:@"none" forParameter:@"narrativeType"];
     [self setValue:@"raw" forParameter:@"shapeFormat"];

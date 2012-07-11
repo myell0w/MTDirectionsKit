@@ -1,5 +1,6 @@
 #import "MTDDirectionsParserMapQuest.h"
 #import "MTDWaypoint.h"
+#import "MTDAddress.h"
 #import "MTDDistance.h"
 #import "MTDFunctions.h"
 #import "MTDDirectionsOverlay.h"
@@ -37,6 +38,8 @@
         NSArray *distanceNodes = [MTDXMLElement nodesForXPathQuery:@"//route/distance" onXML:self.data];
         NSArray *timeNodes = [MTDXMLElement nodesForXPathQuery:@"//route/time" onXML:self.data];
         NSArray *copyrightNodes = [MTDXMLElement nodesForXPathQuery:@"//copyright/text" onXML:self.data];
+        NSArray *fromLocationAddressNodes = [MTDXMLElement nodesForXPathQuery:@"//route/locations/location[1]" onXML:self.data];
+        NSArray *toLocationAddressNodes = [MTDXMLElement nodesForXPathQuery:@"//route/locations/location[last()]" onXML:self.data];
         
         NSMutableArray *waypoints = [NSMutableArray arrayWithCapacity:waypointNodes.count+2];
         MTDDistance *distance = nil;
@@ -89,6 +92,42 @@
             if (copyrightNodes.count > 0) {
                 NSString *copyright = [[copyrightNodes objectAtIndex:0] contentString];
                 [additionalInfo setValue:copyright forKey:@"copyrights"];
+            }
+            
+            if (fromLocationAddressNodes.count > 0) {
+                MTDXMLElement *fromLocationAddressNode = [fromLocationAddressNodes objectAtIndex:0];
+                MTDXMLElement *streetNode = [fromLocationAddressNode firstChildNodeWithName:@"street"];
+                MTDXMLElement *cityNode = [fromLocationAddressNode firstChildNodeWithName:@"adminArea5"];
+                MTDXMLElement *stateNode = [fromLocationAddressNode firstChildNodeWithName:@"adminArea3"];
+                MTDXMLElement *countyNode = [fromLocationAddressNode firstChildNodeWithName:@"adminArea4"];
+                MTDXMLElement *postalCodeNode = [fromLocationAddressNode firstChildNodeWithName:@"postalCode"];
+                MTDXMLElement *countryNode = [fromLocationAddressNode firstChildNodeWithName:@"adminArea1"];
+                
+                MTDAddress *fromAddress = [[MTDAddress alloc] initWithCountry:[countryNode contentString]
+                                                                        state:[stateNode contentString]
+                                                                       county:[countyNode contentString]
+                                                                   postalCode:[postalCodeNode contentString]
+                                                                         city:[cityNode contentString]
+                                                                       street:[streetNode contentString]];
+                self.from.address = fromAddress;
+            }
+            
+            if (toLocationAddressNodes.count > 0) {
+                MTDXMLElement *toLocationAddressNode = [toLocationAddressNodes objectAtIndex:0];
+                MTDXMLElement *streetNode = [toLocationAddressNode firstChildNodeWithName:@"street"];
+                MTDXMLElement *cityNode = [toLocationAddressNode firstChildNodeWithName:@"adminArea5"];
+                MTDXMLElement *stateNode = [toLocationAddressNode firstChildNodeWithName:@"adminArea3"];
+                MTDXMLElement *countyNode = [toLocationAddressNode firstChildNodeWithName:@"adminArea4"];
+                MTDXMLElement *postalCodeNode = [toLocationAddressNode firstChildNodeWithName:@"postalCode"];
+                MTDXMLElement *countryNode = [toLocationAddressNode firstChildNodeWithName:@"adminArea1"];
+                
+                MTDAddress *toAddress = [[MTDAddress alloc] initWithCountry:[countryNode contentString]
+                                                                      state:[stateNode contentString]
+                                                                     county:[countyNode contentString]
+                                                                 postalCode:[postalCodeNode contentString]
+                                                                       city:[cityNode contentString]
+                                                                     street:[streetNode contentString]];
+                self.to.address = toAddress;
             }
         }
         
