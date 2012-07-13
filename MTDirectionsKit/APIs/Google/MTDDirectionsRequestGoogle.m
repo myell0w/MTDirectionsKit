@@ -6,7 +6,7 @@
 #import "MTDFunctions.h"
 
 
-#define kMTDGoogleBaseAddress         @"http://maps.google.com/maps/api/directions/xml"
+#define kMTDGoogleBaseAddress         @"http://maps.googleapis.com/maps/api/directions/xml"
 
 
 @interface MTDDirectionsRequestGoogle ()
@@ -24,9 +24,10 @@
 - (id)initWithFrom:(MTDWaypoint *)from
                 to:(MTDWaypoint *)to
  intermediateGoals:(NSArray *)intermediateGoals
+     optimizeRoute:(BOOL)optimizeRoute
          routeType:(MTDDirectionsRouteType)routeType
         completion:(mtd_parser_block)completion {
-    if ((self = [super initWithFrom:from to:to intermediateGoals:intermediateGoals routeType:routeType completion:completion])) {
+    if ((self = [super initWithFrom:from to:to intermediateGoals:intermediateGoals optimizeRoute:optimizeRoute routeType:routeType completion:completion])) {
         [self setup];
         
         [self setValue:[from descriptionForAPI:MTDDirectionsAPIGoogle] forParameter:@"origin"];
@@ -42,8 +43,8 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (void)setValueForParameterWithIntermediateGoals:(NSArray *)intermediateGoals {
-    if (intermediateGoals.count > 0) {
-        NSMutableString *parameter = [NSMutableString stringWithString:@"optimize:true"];
+    if (intermediateGoals.count > 0 && self.routeType != MTDDirectionsRouteTypePedestrianIncludingPublicTransport) {
+        NSMutableString *parameter = [NSMutableString stringWithString:(self.optimizeRoute ? @"optimize:true" : @"optimize:false")];
         
         [intermediateGoals enumerateObjectsUsingBlock:^(id obj, __unused NSUInteger idx, __unused BOOL *stop) {
             [parameter appendFormat:@"|%@",[obj descriptionForAPI:MTDDirectionsAPIGoogle]];
@@ -53,14 +54,19 @@
     }
 }
 
+- (NSString *)httpAddress {
+    return kMTDGoogleBaseAddress;
+}
+
+- (Class)parserClass {
+    return [MTDDirectionsParserGoogle class];
+}
+
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Private
 ////////////////////////////////////////////////////////////////////////
 
 - (void)setup {
-    self.parserClass = [MTDDirectionsParserGoogle class];
-    self.httpAddress = kMTDGoogleBaseAddress;
-    
     [self setValue:@"true" forParameter:@"sensor"];
 }
 

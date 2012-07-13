@@ -13,9 +13,9 @@
     waypoint1 = [MTDWaypoint waypointWithCoordinate:CLLocationCoordinate2DMake(51.459596, -0.973277)];
     waypoint2 = [MTDWaypoint waypointWithCoordinate:CLLocationCoordinate2DMake(51.459596, -0.973277)];
     waypoint3 = [MTDWaypoint waypointWithCoordinate:CLLocationCoordinate2DMake(51.45959, -0.973277)];
-    waypoint4 = [MTDWaypoint waypointWithAddress:@"Güssing"];
-    waypoint5 = [MTDWaypoint waypointWithAddress:@"Güssing"];
-    waypoint6 = [MTDWaypoint waypointWithAddress:@"Wien"];
+    waypoint4 = [MTDWaypoint waypointWithAddress:[[MTDAddress alloc] initWithAddressString:@"Güssing"]];
+    waypoint5 = [MTDWaypoint waypointWithAddress:[[MTDAddress alloc] initWithAddressString:@"Güssing"]];
+    waypoint6 = [MTDWaypoint waypointWithAddress:[[MTDAddress alloc] initWithAddressString:@"Wien"]];
 }
 
 - (void)tearDown {

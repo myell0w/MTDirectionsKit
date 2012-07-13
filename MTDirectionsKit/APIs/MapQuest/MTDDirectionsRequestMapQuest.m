@@ -6,11 +6,11 @@
 #import "MTDFunctions.h"
 
 
-#define kMTDMapQuestHostName        @"http://open.mapquestapi.com"
-#define kMTDMapQuestServiceName     @"directions"
-#define kMTDMapQuestVersionNumber   @"v1"
-#define kMTDMapQuestRoutingMethod   @"optimizedroute"
-#define kMTDMapQuestBaseAddress     kMTDMapQuestHostName @"/" kMTDMapQuestServiceName @"/" kMTDMapQuestVersionNumber @"/" kMTDMapQuestRoutingMethod
+#define kMTDMapQuestHostName                    @"http://open.mapquestapi.com"
+#define kMTDMapQuestServiceName                 @"directions"
+#define kMTDMapQuestVersionNumber               @"v1"
+#define kMTDMapQuestRoutingMethodNonOptimized   @"route"
+#define kMTDMapQuestRoutingMethodOptimized      @"optimizedroute"
 
 
 @interface MTDDirectionsRequestMapQuest ()
@@ -29,9 +29,10 @@
 - (id)initWithFrom:(MTDWaypoint *)from
                 to:(MTDWaypoint *)to
  intermediateGoals:(NSArray *)intermediateGoals
+     optimizeRoute:(BOOL)optimizeRoute
          routeType:(MTDDirectionsRouteType)routeType
         completion:(mtd_parser_block)completion {
-    if ((self = [super initWithFrom:from to:to intermediateGoals:intermediateGoals routeType:routeType completion:completion])) {
+    if ((self = [super initWithFrom:from to:to intermediateGoals:intermediateGoals optimizeRoute:optimizeRoute routeType:routeType completion:completion])) {
         [self setup];
         
         [self setValue:[from descriptionForAPI:MTDDirectionsAPIMapQuest] forParameter:@"from"];
@@ -66,17 +67,28 @@
     }
 }
 
+- (NSString *)httpAddress {
+    NSString *routingMethod = self.optimizeRoute ? kMTDMapQuestRoutingMethodOptimized : kMTDMapQuestRoutingMethodNonOptimized;
+    
+    return [NSString stringWithFormat:@"%@/%@/%@/%@",
+            kMTDMapQuestHostName,
+            kMTDMapQuestServiceName,
+            kMTDMapQuestVersionNumber,
+            routingMethod];
+}
+
+- (Class)parserClass {
+    return [MTDDirectionsParserMapQuest class];
+}
+
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Private
 ////////////////////////////////////////////////////////////////////////
 
 - (void)setup {
-    self.httpAddress = kMTDMapQuestBaseAddress;
-    self.parserClass = [MTDDirectionsParserMapQuest class];
-    
     [self setValue:@"xml" forParameter:@"outFormat"];
     [self setValue:@"ignore" forParameter:@"ambiguities"];
-    [self setValue:@"false" forParameter:@"doReverseGeocode"];
+    [self setValue:@"true" forParameter:@"doReverseGeocode"];
     [self setValue:@"k" forParameter:@"unit"];
     [self setValue:@"none" forParameter:@"narrativeType"];
     [self setValue:@"raw" forParameter:@"shapeFormat"];

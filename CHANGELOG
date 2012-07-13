@@ -1,3 +1,9 @@
+= 1.2.0 1.7.2012
+ * Possibility to specify the thickness of the route overlay
+ * Turned on a lot of warnings in the compiler and make sure none of them exists in MTDirectionsKit
+ * Optimizing the route when providing intermediate goals is now optional
+ * More AppleDoc Documentation
+
 = 1.1.1 4.6.2012
  * Using optimizedroute call when using MapQuest API to allow for reordering of intermediate goals
 

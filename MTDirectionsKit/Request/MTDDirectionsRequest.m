@@ -3,7 +3,6 @@
 #import "MTDDirectionsRequestGoogle.h"
 #import "MTDDirectionsParser.h"
 #import "MTDDirectionsAPI.h"
-#import "MTDLogging.h"
 #import "MTDFunctions.h"
 #import "MTDDirectionsDefines.h"
 
@@ -31,8 +30,9 @@ NS_INLINE dispatch_queue_t parser_queue(void) {
 @interface MTDDirectionsRequest () 
 
 @property (nonatomic, strong) MTDHTTPRequest *httpRequest;
-@property (nonatomic, copy) NSString *httpAddress;
-@property (nonatomic, assign) Class parserClass;
+@property (nonatomic, readonly) NSString *httpAddress;
+@property (nonatomic, readonly) Class parserClass;
+@property (nonatomic, readonly) BOOL optimizeRoute;
 @property (nonatomic, strong) NSMutableDictionary *parameters;
 
 /** Appends all parameters to httpAddress */
@@ -49,8 +49,7 @@ NS_INLINE dispatch_queue_t parser_queue(void) {
 @synthesize completion = _completion;
 @synthesize routeType = _routeType;
 @synthesize httpRequest = _httpRequest;
-@synthesize httpAddress = _httpAddress;
-@synthesize parserClass = _parserClass;
+@synthesize optimizeRoute = _optimizeRoute;
 @synthesize parameters = _parameters;
 
 ////////////////////////////////////////////////////////////////////////
@@ -60,6 +59,7 @@ NS_INLINE dispatch_queue_t parser_queue(void) {
 + (id)requestFrom:(MTDWaypoint *)from
                to:(MTDWaypoint *)to
 intermediateGoals:(NSArray *)intermediateGoals
+    optimizeRoute:(BOOL)optimizeRoute
         routeType:(MTDDirectionsRouteType)routeType
        completion:(mtd_parser_block)completion {
     MTDDirectionsRequest *request = nil;
@@ -69,6 +69,7 @@ intermediateGoals:(NSArray *)intermediateGoals
             request = [[MTDDirectionsRequestGoogle alloc] initWithFrom:from
                                                                     to:to
                                                      intermediateGoals:intermediateGoals
+                                                         optimizeRoute:optimizeRoute
                                                              routeType:routeType
                                                             completion:completion];
             break;
@@ -78,6 +79,7 @@ intermediateGoals:(NSArray *)intermediateGoals
             request = [[MTDDirectionsRequestMapQuest alloc] initWithFrom:from
                                                                       to:to
                                                        intermediateGoals:intermediateGoals
+                                                           optimizeRoute:optimizeRoute
                                                                routeType:routeType
                                                               completion:completion];
             break;
@@ -90,12 +92,14 @@ intermediateGoals:(NSArray *)intermediateGoals
 - (id)initWithFrom:(MTDWaypoint *)from
                 to:(MTDWaypoint *)to
  intermediateGoals:(NSArray *)intermediateGoals
+     optimizeRoute:(BOOL)optimizeRoute
          routeType:(MTDDirectionsRouteType)routeType
         completion:(mtd_parser_block)completion {
     if ((self = [super init])) {
         _from = from;
         _to = to;
         _intermediateGoals = [intermediateGoals copy];
+        _optimizeRoute = optimizeRoute;
         _routeType = routeType;
         _completion = [completion copy];
         _parameters = [NSMutableDictionary dictionary];
@@ -112,12 +116,10 @@ intermediateGoals:(NSArray *)intermediateGoals
 
 - (void)start {
     NSString *address = self.fullAddress;
-    
+
     self.httpRequest = [[MTDHTTPRequest alloc] initWithAddress:address
                                                 callbackTarget:self
                                                         action:@selector(requestFinished:)];
-    
-    MTDLogVerbose(@"Calling URL: %@", address);
     
     [self.httpRequest start];
 }
@@ -128,10 +130,11 @@ intermediateGoals:(NSArray *)intermediateGoals
 
 - (void)requestFinished:(MTDHTTPRequest *)httpRequest {
     if (httpRequest.failureCode == 0) {
-        NSAssert([self.parserClass isSubclassOfClass:[MTDDirectionsParser class]], @"Parser class must be subclass of MTDDirectionsParser.");
+        MTDAssert([self.parserClass isSubclassOfClass:[MTDDirectionsParser class]], @"Parser class must be subclass of MTDDirectionsParser.");
         
         MTDDirectionsParser *parser = [[self.parserClass alloc] initWithFrom:self.from
                                                                           to:self.to
+                                                           intermediateGoals:self.intermediateGoals
                                                                    routeType:self.routeType
                                                                         data:httpRequest.data];
         
@@ -150,12 +153,16 @@ intermediateGoals:(NSArray *)intermediateGoals
 }
 
 - (void)setValue:(NSString *)value forParameter:(NSString *)parameter {
+    MTDAssert(value != nil && parameter != nil, @"Value and Parameter must be different from nil");
+
     if (value != nil && parameter != nil) {
         [self.parameters setObject:value forKey:parameter];
     }
 }
 
 - (void)setArrayValue:(NSArray *)array forParameter:(NSString *)parameter {
+    MTDAssert(array.count > 0 && parameter != nil, @"Array and Parameter must be different from nil");
+
     if (array.count > 0 && parameter != nil) {
         [self.parameters setObject:array forKey:parameter];
     }
@@ -168,11 +175,31 @@ intermediateGoals:(NSArray *)intermediateGoals
     [self doesNotRecognizeSelector:_cmd];
 }
 
+- (NSString *)httpAddress {
+    MTDLogError(@"httpAddress was called on a request that doesn't override it (Class: %@)", 
+                NSStringFromClass([self class]));
+    
+    [self doesNotRecognizeSelector:_cmd];
+    
+    return nil;
+}
+
+- (Class)parserClass {
+    MTDLogError(@"parserClass was called on a request that doesn't override it (Class: %@)", 
+                NSStringFromClass([self class]));
+    
+    [self doesNotRecognizeSelector:_cmd];
+    
+    return nil;
+}
+
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Private
 ////////////////////////////////////////////////////////////////////////
 
 - (NSString *)fullAddress {
+    MTDAssert(self.httpAddress.length > 0, @"HTTP Address must be set.");
+
     NSMutableString *address = [NSMutableString stringWithString:self.httpAddress];
     
     if (self.parameters.count > 0) {
@@ -189,7 +216,8 @@ intermediateGoals:(NSArray *)intermediateGoals
         }];
         
         // remove last "&"
-        [address deleteCharactersInRange:NSMakeRange(address.length-1, 1)];
+        NSRange lastCharacterRange = NSMakeRange(address.length-1, 1);
+        [address deleteCharactersInRange:lastCharacterRange];
     }
     
     return [address copy];

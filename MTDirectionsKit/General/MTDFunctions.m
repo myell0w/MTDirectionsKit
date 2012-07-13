@@ -2,7 +2,7 @@
 #import "MTDWaypoint.h"
 
 
-#define kMTDSecondsPerHour      (60. * 60. * 24.)
+#define kMTDSecondsPerHour      (60. * 60.)
 
 
 static NSDateFormatter *mtd_dateFormatter = nil;

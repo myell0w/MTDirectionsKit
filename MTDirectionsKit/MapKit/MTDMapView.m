@@ -1,4 +1,5 @@
 #import "MTDMapView.h"
+#import "MTDAddress.h"
 #import "MTDWaypoint.h"
 #import "MTDDistance.h"
 #import "MTDDirectionsDelegate.h"
@@ -104,6 +105,7 @@
     [self loadDirectionsFrom:[MTDWaypoint waypointWithCoordinate:fromCoordinate]
                           to:[MTDWaypoint waypointWithCoordinate:toCoordinate]
            intermediateGoals:nil
+               optimizeRoute:NO
                    routeType:routeType
         zoomToShowDirections:zoomToShowDirections];
 }
@@ -112,9 +114,10 @@
                         toAddress:(NSString *)toAddress
                         routeType:(MTDDirectionsRouteType)routeType
              zoomToShowDirections:(BOOL)zoomToShowDirections {
-    [self loadDirectionsFrom:[MTDWaypoint waypointWithAddress:fromAddress]
-                          to:[MTDWaypoint waypointWithAddress:toAddress]
+    [self loadDirectionsFrom:[MTDWaypoint waypointWithAddress:[[MTDAddress alloc] initWithAddressString:fromAddress]]
+                          to:[MTDWaypoint waypointWithAddress:[[MTDAddress alloc] initWithAddressString:toAddress]]
            intermediateGoals:nil
+               optimizeRoute:NO
                    routeType:routeType
         zoomToShowDirections:zoomToShowDirections];
 }
@@ -122,6 +125,7 @@
 - (void)loadDirectionsFrom:(MTDWaypoint *)from
                         to:(MTDWaypoint *)to
          intermediateGoals:(NSArray *)intermediateGoals
+             optimizeRoute:(BOOL)optimizeRoute
                  routeType:(MTDDirectionsRouteType)routeType
       zoomToShowDirections:(BOOL)zoomToShowDirections {
     __mtd_weak MTDMapView *weakSelf = self;
@@ -132,6 +136,7 @@
         self.request = [MTDDirectionsRequest requestFrom:from
                                                       to:to
                                        intermediateGoals:intermediateGoals
+                                           optimizeRoute:optimizeRoute
                                                routeType:routeType
                                               completion:^(MTDDirectionsOverlay *overlay, NSError *error) {
                                                   __strong MTDMapView *strongSelf = weakSelf;
@@ -548,6 +553,5 @@
     // doesn't get set as line width
     return -1.f;
 }
-
 
 @end

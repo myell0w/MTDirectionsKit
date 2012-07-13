@@ -29,9 +29,8 @@
 @synthesize distance = _distance;
 @synthesize timeInSeconds = _timeInSeconds;
 @synthesize routeType = _routeType;
-@synthesize fromAddress = _fromAddress;         // This property gets set via KVO to not pollute the public API
-@synthesize toAddress = _toAddress;             // This property gets set via KVO to not pollute the public API
-@synthesize additionalInfo = _additionalInfo;   // This property gets set via KVO to not pollute the public API
+@synthesize intermediateGoals = _intermediateGoals;     // This property gets set via KVO to not pollute the public API
+@synthesize additionalInfo = _additionalInfo;           // This property gets set via KVO to not pollute the public API
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
@@ -46,7 +45,7 @@
     if (waypoints.count > 0) {
         overlay = [[MTDDirectionsOverlay alloc] init];
         
-        MKMapPoint *points = malloc(sizeof(CLLocationCoordinate2D) * waypoints.count);
+        MKMapPoint *points = malloc(sizeof(MKMapPoint) * waypoints.count);
         NSUInteger pointIndex = 0;
         
         for (NSUInteger i = 0; i < waypoints.count; i++) {
@@ -115,6 +114,21 @@
     }
     
     return MTDInvalidCLLocationCoordinate2D;
+}
+
+- (MTDAddress *)fromAddress {
+    if (self.waypoints.count > 0) {
+        MTDWaypoint *firstWaypoint = [self.waypoints objectAtIndex:0];
+        return firstWaypoint.address;
+    }
+
+    return nil;
+}
+
+- (MTDAddress *)toAddress {
+    MTDWaypoint *lastWaypoint = [self.waypoints lastObject];
+
+    return lastWaypoint.address;
 }
 
 - (NSString *)formattedTime {

@@ -1,4 +1,5 @@
 #import "MTDWaypoint.h"
+#import "MTDAddress.h"
 #import "MTDFunctions.h"
 #import "MTDDirectionsDefines.h"
 
@@ -16,7 +17,7 @@
     return [[[self class] alloc] initWithCoordinate:coordinate];
 }
 
-+ (MTDWaypoint *)waypointWithAddress:(NSString *)address {
++ (MTDWaypoint *)waypointWithAddress:(MTDAddress *)address {
     return [[[self class] alloc] initWithAddress:address];
 }
 
@@ -28,9 +29,9 @@
     return self;
 }
 
-- (id)initWithAddress:(NSString *)address {
+- (id)initWithAddress:(MTDAddress *)address {
     if ((self = [super init])) {
-        _address = [address stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        _address = address;
         _coordinate = MTDInvalidCLLocationCoordinate2D;
     }
     
@@ -46,7 +47,7 @@
 }
 
 - (BOOL)hasValidAddress {
-    return self.address.length > 0;
+    return self.address.description.length > 0;
 }
 
 - (BOOL)isValid {
@@ -63,7 +64,7 @@
             if (CLLocationCoordinate2DIsValid(self.coordinate)) {
                 return [NSString stringWithFormat:@"%f,%f",self.coordinate.latitude, self.coordinate.longitude];
             } else {
-                return self.address;
+                return self.address.description;
             }
         }
             
@@ -100,7 +101,7 @@
         return (fabs(self.coordinate.latitude - otherWaypoint.coordinate.latitude) < epsilon &&
                 fabs(self.coordinate.longitude - otherWaypoint.coordinate.longitude) < epsilon);
     } else {
-        return [self.address isEqualToString:otherWaypoint.address];
+        return [self.address isEqual:otherWaypoint.address];
     }
 }
 
