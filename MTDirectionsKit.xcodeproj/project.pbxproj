@@ -96,6 +96,8 @@
 		9B9946101563027400DE5B1B /* MTDDistance.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B99460E1563027400DE5B1B /* MTDDistance.m */; };
 		9BAC0BEB155DE0C40067C1A1 /* MTDFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BAC0BE9155DE0C40067C1A1 /* MTDFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9BAC0BEC155DE0C40067C1A1 /* MTDFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAC0BEA155DE0C40067C1A1 /* MTDFunctions.m */; };
+		9BDE013A15B08A9E001A8132 /* MTDRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BDE013815B08A9E001A8132 /* MTDRoute.h */; };
+		9BDE013B15B08A9E001A8132 /* MTDRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDE013915B08A9E001A8132 /* MTDRoute.m */; };
 		9BEE26EB155E92FC008A42F8 /* MTDHTTPRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BEE26E9155E92FC008A42F8 /* MTDHTTPRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9BEE26EC155E92FC008A42F8 /* MTDHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEE26EA155E92FC008A42F8 /* MTDHTTPRequest.m */; };
 /* End PBXBuildFile section */
@@ -197,6 +199,8 @@
 		9B99460E1563027400DE5B1B /* MTDDistance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDDistance.m; sourceTree = "<group>"; };
 		9BAC0BE9155DE0C40067C1A1 /* MTDFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDFunctions.h; sourceTree = "<group>"; };
 		9BAC0BEA155DE0C40067C1A1 /* MTDFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDFunctions.m; sourceTree = "<group>"; };
+		9BDE013815B08A9E001A8132 /* MTDRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDRoute.h; sourceTree = "<group>"; };
+		9BDE013915B08A9E001A8132 /* MTDRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDRoute.m; sourceTree = "<group>"; };
 		9BEE26E9155E92FC008A42F8 /* MTDHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDHTTPRequest.h; sourceTree = "<group>"; };
 		9BEE26EA155E92FC008A42F8 /* MTDHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDHTTPRequest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -287,21 +291,23 @@
 		9B10AA12155D85B8002A3052 /* General */ = {
 			isa = PBXGroup;
 			children = (
+				9B4E98D915AD702A002F0302 /* MTDAddress.h */,
+				9B4E98DA15AD702A002F0302 /* MTDAddress.m */,
 				9B10AA13155D85B8002A3052 /* MTDDirectionsDefines.h */,
 				9B10AA14155D85B8002A3052 /* MTDDirectionsDisplayType.h */,
 				9B10AA15155D85B8002A3052 /* MTDDirectionsRouteType.h */,
-				9B9945FD1562FCF300DE5B1B /* MTDMeasurementSystem.h */,
-				9B9945FE1562FCF300DE5B1B /* MTDMeasurementSystem.m */,
-				9BAC0BE9155DE0C40067C1A1 /* MTDFunctions.h */,
-				9BAC0BEA155DE0C40067C1A1 /* MTDFunctions.m */,
-				9B10AA16155D85B8002A3052 /* MTDWaypoint.h */,
-				9B10AA17155D85B8002A3052 /* MTDWaypoint.m */,
 				9B99460D1563027400DE5B1B /* MTDDistance.h */,
 				9B99460E1563027400DE5B1B /* MTDDistance.m */,
+				9BAC0BE9155DE0C40067C1A1 /* MTDFunctions.h */,
+				9BAC0BEA155DE0C40067C1A1 /* MTDFunctions.m */,
 				9B81262E1569620800C9A6C8 /* MTDLogging.h */,
 				9B81262F1569620800C9A6C8 /* MTDLogging.m */,
-				9B4E98D915AD702A002F0302 /* MTDAddress.h */,
-				9B4E98DA15AD702A002F0302 /* MTDAddress.m */,
+				9B9945FD1562FCF300DE5B1B /* MTDMeasurementSystem.h */,
+				9B9945FE1562FCF300DE5B1B /* MTDMeasurementSystem.m */,
+				9BDE013815B08A9E001A8132 /* MTDRoute.h */,
+				9BDE013915B08A9E001A8132 /* MTDRoute.m */,
+				9B10AA16155D85B8002A3052 /* MTDWaypoint.h */,
+				9B10AA17155D85B8002A3052 /* MTDWaypoint.m */,
 			);
 			name = General;
 			path = MTDirectionsKit/General;
@@ -462,6 +468,7 @@
 				9B99460F1563027400DE5B1B /* MTDDistance.h in Headers */,
 				9B812633156963A600C9A6C8 /* MTDLogging.h in Headers */,
 				9B4E98DB15AD702A002F0302 /* MTDAddress.h in Headers */,
+				9BDE013A15B08A9E001A8132 /* MTDRoute.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -641,6 +648,7 @@
 				9B9946101563027400DE5B1B /* MTDDistance.m in Sources */,
 				9B8126311569631500C9A6C8 /* MTDLogging.m in Sources */,
 				9B4E98DC15AD702A002F0302 /* MTDAddress.m in Sources */,
+				9BDE013B15B08A9E001A8132 /* MTDRoute.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
