@@ -23,7 +23,8 @@ void MTDDirectionsSetActiveAPI(MTDDirectionsAPI activeAPI) {
         
         // Google Directions API Terms allow the usage only in combination with Google Maps data
         if (MTDDirectionsSupportsAppleMaps() && activeAPI == MTDDirectionsAPIGoogle) {
-            MTDLogAlways(@"The Google Directions API Terms forbid using MTDDirectionsAPIGoogle to display directions on top of Apple Maps.");
+            MTDLogAlways(@"The Google Directions API Terms forbid using MTDDirectionsAPIGoogle to display directions"
+                         @"on top of Apple Maps. You should switch the active API by calling MTDDirectionsSetActiveAPI().");
         }
     }
 }
