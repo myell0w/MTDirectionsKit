@@ -7,7 +7,7 @@
 static NSDateFormatter *mtd_dateFormatter = nil;
 
 
-void MTDDirectionsOpenInMapsApp(CLLocationCoordinate2D fromCoordinate, CLLocationCoordinate2D toCoordinate, MTDDirectionsRouteType routeType) {
+BOOL MTDDirectionsOpenInMapsApp(CLLocationCoordinate2D fromCoordinate, CLLocationCoordinate2D toCoordinate, MTDDirectionsRouteType routeType) {
 	NSString *googleMapsURL = [NSString stringWithFormat:@"http://maps.google.com/maps?saddr=%f,%f&daddr=%f,%f",
 							   fromCoordinate.latitude,fromCoordinate.longitude, toCoordinate.latitude, toCoordinate.longitude];
     
@@ -31,7 +31,7 @@ void MTDDirectionsOpenInMapsApp(CLLocationCoordinate2D fromCoordinate, CLLocatio
         }
     }
     
-	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:googleMapsURL]];
+	return [[UIApplication sharedApplication] openURL:[NSURL URLWithString:googleMapsURL]];
 }
 
 NSString* MTDURLEncodedString(NSString *string) {

@@ -269,10 +269,12 @@
 #pragma mark - Inter-App
 ////////////////////////////////////////////////////////////////////////
 
-- (void)openDirectionsInMapApp {
+- (BOOL)openDirectionsInMapApp {
     if (self.directionsOverlay != nil) {
-        MTDDirectionsOpenInMapsApp(self.fromCoordinate, self.toCoordinate, self.directionsOverlay.routeType);
+        return MTDDirectionsOpenInMapsApp(self.fromCoordinate, self.toCoordinate, self.directionsOverlay.routeType);
     }
+
+    return NO;
 }
 
 ////////////////////////////////////////////////////////////////////////
