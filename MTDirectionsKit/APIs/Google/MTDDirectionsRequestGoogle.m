@@ -6,7 +6,7 @@
 #import "MTDFunctions.h"
 
 
-#define kMTDGoogleBaseAddress         @"http://maps.google.com/maps/api/directions/xml"
+#define kMTDGoogleBaseAddress         @"http://maps.googleapis.com/maps/api/directions/xml"
 
 
 @interface MTDDirectionsRequestGoogle ()
