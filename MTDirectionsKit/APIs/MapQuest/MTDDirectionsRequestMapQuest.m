@@ -9,8 +9,9 @@
 #define kMTDMapQuestHostName                    @"http://open.mapquestapi.com"
 #define kMTDMapQuestServiceName                 @"directions"
 #define kMTDMapQuestVersionNumber               @"v1"
-#define kMTDMapQuestRoutingMethodNonOptimized   @"route"
+#define kMTDMapQuestRoutingMethodDefault        @"route"
 #define kMTDMapQuestRoutingMethodOptimized      @"optimizedroute"
+#define kMTDMapQuestRoutingMethodAlternatives   @"alternateroutes"
 
 
 @interface MTDDirectionsRequestMapQuest ()
@@ -68,7 +69,7 @@
 }
 
 - (NSString *)httpAddress {
-    NSString *routingMethod = self.optimizeRoute ? kMTDMapQuestRoutingMethodOptimized : kMTDMapQuestRoutingMethodNonOptimized;
+    NSString *routingMethod = self.optimizeRoute ? kMTDMapQuestRoutingMethodOptimized : kMTDMapQuestRoutingMethodDefault;
     
     return [NSString stringWithFormat:@"%@/%@/%@/%@",
             kMTDMapQuestHostName,
@@ -93,6 +94,7 @@
     [self setValue:@"none" forParameter:@"narrativeType"];
     [self setValue:@"raw" forParameter:@"shapeFormat"];
     [self setValue:@"0" forParameter:@"generalize"];
+    [self setValue:@"3" forKey:@"maxRoutes"];
 }
 
 @end

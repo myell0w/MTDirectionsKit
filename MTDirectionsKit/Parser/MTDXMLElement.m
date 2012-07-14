@@ -10,6 +10,9 @@
     NSMutableArray *_content;
 }
 
++ (MTDXMLElement *)nodeFromLibXMLNode:(xmlNodePtr)libXMLNode parentNode:(MTDXMLElement *)parentNode;
++ (NSArray *)nodesForXPathQuery:(NSString *)query onLibXMLDoc:(xmlDocPtr)doc;
+
 // re-defined as read/write
 @property (nonatomic, strong, readwrite) NSString *name;
 
@@ -24,114 +27,6 @@
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
 ////////////////////////////////////////////////////////////////////////
-
-+ (MTDXMLElement *)nodefromLibXMLNode:(xmlNodePtr)libXMLNode parentNode:(MTDXMLElement *)parentNode {
-	MTDXMLElement *node = [[MTDXMLElement alloc] init];
-	
-	if (libXMLNode->name) {
-		node.name = [NSString stringWithCString:(const char *)libXMLNode->name encoding:NSUTF8StringEncoding];
-	}
-	
-	if (libXMLNode->content && libXMLNode->type != XML_DOCUMENT_TYPE_NODE) {
-		NSString *contentString = [NSString stringWithCString:(const char *)libXMLNode->content encoding:NSUTF8StringEncoding];
-		
-		if (parentNode && (libXMLNode->type == XML_CDATA_SECTION_NODE || libXMLNode->type == XML_TEXT_NODE)) {
-			if (libXMLNode->type == XML_TEXT_NODE) {
-				contentString = [contentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-			}
-			
-			if (!parentNode.content) {
-				parentNode->_content = [NSMutableArray arrayWithObject:contentString];
-			} else {
-				[parentNode->_content addObject:contentString];
-			}
-            
-			return nil;
-		}
-	}
-	
-	xmlAttr *attribute = libXMLNode->properties;
-	
-    if (attribute) {
-		while (attribute) {
-			NSString *attributeName = nil;
-			NSString *attributeValue = nil;
-			
-			if (attribute->name && attribute->children && attribute->children->type == XML_TEXT_NODE && attribute->children->content) {
-				attributeName = [NSString stringWithCString:(const char *)attribute->name encoding:NSUTF8StringEncoding];
-				attributeValue = [NSString stringWithCString:(const char *)attribute->children->content encoding:NSUTF8StringEncoding];
-				
-				if (attributeName && attributeValue) {
-					if (!node.attributes) {
-						node->_attributes = [NSMutableDictionary dictionaryWithObject:attributeValue forKey:attributeName];
-					} else {
-						[node->_attributes setObject:attributeValue forKey:attributeName];
-					}
-				}
-			}
-			
-			attribute = attribute->next;
-		}
-	}
-    
-	xmlNodePtr childLibXMLNode = libXMLNode->children;
-	
-    if (childLibXMLNode) {
-		while (childLibXMLNode) {
-			MTDXMLElement *childNode = [MTDXMLElement nodefromLibXMLNode:childLibXMLNode parentNode:node];
-			
-            if (childNode) {
-				if (!node.content) {
-					node->_content = [NSMutableArray arrayWithObject:childNode];
-				} else {
-					[node->_content addObject:childNode];
-				}
-			}
-			
-			childLibXMLNode = childLibXMLNode->next;
-		}
-	}
-	
-	return node;
-}
-
-+ (NSArray *)nodesForXPathQuery:(NSString *)query onLibXMLDoc:(xmlDocPtr)doc {
-    xmlXPathContextPtr xpathCtx; 
-    xmlXPathObjectPtr xpathObj; 
-    
-    xpathCtx = xmlXPathNewContext(doc);
-    
-    if(xpathCtx == NULL) {
-		return nil;
-    }
-    
-    xpathObj = xmlXPathEvalExpression((xmlChar *)[query cStringUsingEncoding:NSUTF8StringEncoding], xpathCtx);
-    
-    if(xpathObj == NULL) {
-		return nil;
-    }
-	
-	xmlNodeSetPtr nodes = xpathObj->nodesetval;
-	
-    if (!nodes) {
-		return nil;
-	}
-	
-	NSMutableArray *resultNodes = [NSMutableArray array];
-	
-    for (NSInteger i = 0; i < nodes->nodeNr; i++) {
-		MTDXMLElement *node = [MTDXMLElement nodefromLibXMLNode:nodes->nodeTab[i] parentNode:nil];
-		
-        if (node) {
-			[resultNodes addObject:node];
-		}
-	}
-    
-    xmlXPathFreeObject(xpathObj);
-    xmlXPathFreeContext(xpathCtx); 
-    
-    return resultNodes;
-}
 
 + (NSArray *)nodesForXPathQuery:(NSString *)query onHTML:(NSData *)htmlData {
     xmlDocPtr doc;
@@ -253,7 +148,118 @@
     }
     
     return nil;
+}
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - Private
+////////////////////////////////////////////////////////////////////////
+
++ (MTDXMLElement *)nodeFromLibXMLNode:(xmlNodePtr)libXMLNode parentNode:(MTDXMLElement *)parentNode {
+	MTDXMLElement *node = [[MTDXMLElement alloc] init];
+	
+	if (libXMLNode->name) {
+		node.name = [NSString stringWithCString:(const char *)libXMLNode->name encoding:NSUTF8StringEncoding];
+	}
+	
+	if (libXMLNode->content && libXMLNode->type != XML_DOCUMENT_TYPE_NODE) {
+		NSString *contentString = [NSString stringWithCString:(const char *)libXMLNode->content encoding:NSUTF8StringEncoding];
+		
+		if (parentNode && (libXMLNode->type == XML_CDATA_SECTION_NODE || libXMLNode->type == XML_TEXT_NODE)) {
+			if (libXMLNode->type == XML_TEXT_NODE) {
+				contentString = [contentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+			}
+			
+			if (!parentNode.content) {
+				parentNode->_content = [NSMutableArray arrayWithObject:contentString];
+			} else {
+				[parentNode->_content addObject:contentString];
+			}
+            
+			return nil;
+		}
+	}
+	
+	xmlAttr *attribute = libXMLNode->properties;
+	
+    if (attribute) {
+		while (attribute) {
+			NSString *attributeName = nil;
+			NSString *attributeValue = nil;
+			
+			if (attribute->name && attribute->children && attribute->children->type == XML_TEXT_NODE && attribute->children->content) {
+				attributeName = [NSString stringWithCString:(const char *)attribute->name encoding:NSUTF8StringEncoding];
+				attributeValue = [NSString stringWithCString:(const char *)attribute->children->content encoding:NSUTF8StringEncoding];
+				
+				if (attributeName && attributeValue) {
+					if (!node.attributes) {
+						node->_attributes = [NSMutableDictionary dictionaryWithObject:attributeValue forKey:attributeName];
+					} else {
+						[node->_attributes setObject:attributeValue forKey:attributeName];
+					}
+				}
+			}
+			
+			attribute = attribute->next;
+		}
+	}
     
+	xmlNodePtr childLibXMLNode = libXMLNode->children;
+	
+    if (childLibXMLNode) {
+		while (childLibXMLNode) {
+			MTDXMLElement *childNode = [MTDXMLElement nodeFromLibXMLNode:childLibXMLNode parentNode:node];
+			
+            if (childNode) {
+				if (!node.content) {
+					node->_content = [NSMutableArray arrayWithObject:childNode];
+				} else {
+					[node->_content addObject:childNode];
+				}
+			}
+			
+			childLibXMLNode = childLibXMLNode->next;
+		}
+	}
+	
+	return node;
+}
+
++ (NSArray *)nodesForXPathQuery:(NSString *)query onLibXMLDoc:(xmlDocPtr)doc {
+    xmlXPathContextPtr xpathCtx; 
+    xmlXPathObjectPtr xpathObj; 
+    
+    xpathCtx = xmlXPathNewContext(doc);
+    
+    if(xpathCtx == NULL) {
+		return nil;
+    }
+    
+    xpathObj = xmlXPathEvalExpression((xmlChar *)[query cStringUsingEncoding:NSUTF8StringEncoding], xpathCtx);
+    
+    if(xpathObj == NULL) {
+		return nil;
+    }
+	
+	xmlNodeSetPtr nodes = xpathObj->nodesetval;
+	
+    if (!nodes) {
+		return nil;
+	}
+	
+	NSMutableArray *resultNodes = [NSMutableArray array];
+	
+    for (NSInteger i = 0; i < nodes->nodeNr; i++) {
+		MTDXMLElement *node = [MTDXMLElement nodeFromLibXMLNode:nodes->nodeTab[i] parentNode:nil];
+		
+        if (node) {
+			[resultNodes addObject:node];
+		}
+	}
+    
+    xmlXPathFreeObject(xpathObj);
+    xmlXPathFreeContext(xpathCtx); 
+    
+    return resultNodes;
 }
 
 @end
