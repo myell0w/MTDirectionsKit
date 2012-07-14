@@ -10,6 +10,13 @@
 #import "MTDStatusCodeMapQuest.h"
 
 
+@interface MTDDirectionsParserMapQuest ()
+
+- (NSArray *)waypointsFromWaypointNodes:(NSArray *)waypointNodes;
+
+@end
+
+
 @implementation MTDDirectionsParserMapQuest
 
 ////////////////////////////////////////////////////////////////////////
@@ -36,40 +43,12 @@
         MTDXMLElement *fromLocationAddressNode = [MTDXMLElement nodeForXPathQuery:@"//route/locations/location[1]" onXML:self.data];
         MTDXMLElement *toLocationAddressNode = [MTDXMLElement nodeForXPathQuery:@"//route/locations/location[last()]" onXML:self.data];
         
-        NSMutableArray *waypoints = [NSMutableArray arrayWithCapacity:waypointNodes.count+2];
+        NSArray *waypoints = [self waypointsFromWaypointNodes:waypointNodes];
         MTDDistance *distance = nil;
         NSTimeInterval timeInSeconds = -1.;
         NSMutableDictionary *additionalInfo = [NSMutableDictionary dictionary];
         
-        // Parse Waypoints
-        {
-            // add start coordinate
-            if (self.from != nil && CLLocationCoordinate2DIsValid(self.from.coordinate)) {
-                [waypoints addObject:self.from];
-            }
-            
-            // There should only be one element "shapePoints"
-            for (MTDXMLElement *childNode in waypointNodes) {
-                MTDXMLElement *latitudeNode = [childNode firstChildNodeWithName:@"lat"];
-                MTDXMLElement *longitudeNode = [childNode firstChildNodeWithName:@"lng"];
-                
-                if (latitudeNode != nil && longitudeNode != nil) {
-                    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([latitudeNode.contentString doubleValue],
-                                                                                   [longitudeNode.contentString doubleValue]);;
-                    MTDWaypoint *waypoint = [MTDWaypoint waypointWithCoordinate:coordinate];
-                    
-                    if (![waypoints containsObject:waypoint]) {
-                        [waypoints addObject:waypoint];
-                    }
-                }
-            }
-            
-            // add end coordinate
-            if (self.to != nil && CLLocationCoordinate2DIsValid(self.to.coordinate)) {
-                [waypoints addObject:self.to];
-            }
-        }
-        
+               
         // Parse Additional Info of directions
         {
             if (distanceNode != nil) {
@@ -158,6 +137,42 @@
             completion(overlay, error);
         });
     }
+}
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - Private
+////////////////////////////////////////////////////////////////////////
+
+- (NSArray *)waypointsFromWaypointNodes:(NSArray *)waypointNodes {
+    NSMutableArray *waypoints = [NSMutableArray arrayWithCapacity:waypointNodes.count+2];
+
+    // add start coordinate
+    if (self.from != nil && CLLocationCoordinate2DIsValid(self.from.coordinate)) {
+        [waypoints addObject:self.from];
+    }
+    
+    // There should only be one element "shapePoints"
+    for (MTDXMLElement *childNode in waypointNodes) {
+        MTDXMLElement *latitudeNode = [childNode firstChildNodeWithName:@"lat"];
+        MTDXMLElement *longitudeNode = [childNode firstChildNodeWithName:@"lng"];
+        
+        if (latitudeNode != nil && longitudeNode != nil) {
+            CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([latitudeNode.contentString doubleValue],
+                                                                           [longitudeNode.contentString doubleValue]);;
+            MTDWaypoint *waypoint = [MTDWaypoint waypointWithCoordinate:coordinate];
+            
+            if (![waypoints containsObject:waypoint]) {
+                [waypoints addObject:waypoint];
+            }
+        }
+    }
+    
+    // add end coordinate
+    if (self.to != nil && CLLocationCoordinate2DIsValid(self.to.coordinate)) {
+        [waypoints addObject:self.to];
+    }
+
+    return waypoints;
 }
 
 @end

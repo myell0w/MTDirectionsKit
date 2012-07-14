@@ -13,6 +13,8 @@
 
 - (NSArray *)waypointsFromEncodedPolyline:(NSString *)encodedPolyline;
 
+- (NSArray *)waypointsFromWaypointNodes:(NSArray *)waypointNodes;
+
 @end
 
 
@@ -24,7 +26,7 @@
 
 - (void)parseWithCompletion:(mtd_parser_block)completion {
     MTDAssert(completion != nil, @"Completion block must be set");
-
+    
     MTDXMLElement *statusCodeNode = [MTDXMLElement nodeForXPathQuery:@"//DirectionsResponse/status" onXML:self.data];
     MTDStatusCodeGoogle statusCode = MTDStatusCodeGoogleSuccess;
     MTDDirectionsOverlay *overlay = nil;
@@ -43,29 +45,11 @@
         MTDXMLElement *fromAddressNode = [MTDXMLElement nodeForXPathQuery:@"//route[1]/leg[1]/start_address" onXML:self.data];
         MTDXMLElement *toAddressNode = [MTDXMLElement nodeForXPathQuery:@"//route[1]/leg[last()]/end_address" onXML:self.data];
         
-        NSMutableArray *waypoints = [NSMutableArray array];
+        NSArray *waypoints = [self waypointsFromWaypointNodes:waypointNodes];
         MTDDistance *distance = nil;
         NSTimeInterval timeInSeconds = -1.;
         NSMutableDictionary *additionalInfo = [NSMutableDictionary dictionary];
         
-        // Parse Waypoints
-        {
-            // add start coordinate
-            if (self.from != nil && CLLocationCoordinate2DIsValid(self.from.coordinate)) {
-                [waypoints addObject:self.from];
-            }
-            
-            for (MTDXMLElement *waypointNode in waypointNodes) {
-                NSString *encodedPolyline = [waypointNode contentString];
-                
-                [waypoints addObjectsFromArray:[self waypointsFromEncodedPolyline:encodedPolyline]];
-            }
-            
-            // add end coordinate
-            if (self.to != nil && CLLocationCoordinate2DIsValid(self.to.coordinate)) {
-                [waypoints addObject:self.to];
-            }
-        }
         
         // Parse Additional Info of directions
         {
@@ -104,12 +88,12 @@
                 self.to.address = [[MTDAddress alloc] initWithAddressString:toAddressNode.contentString];
             }
         }
-
+        
         MTDRoute *route = [[MTDRoute alloc] initWithWaypoints:waypoints
                                                      distance:distance
                                                 timeInSeconds:timeInSeconds
                                                additionalInfo:additionalInfo];
-
+        
         overlay = [[MTDDirectionsOverlay alloc] initWithRoutes:[NSArray arrayWithObject:route]
                                              intermediateGoals:self.intermediateGoals
                                                      routeType:self.routeType];
@@ -178,7 +162,29 @@
         [waypoints addObject:[MTDWaypoint waypointWithCoordinate:coordinate]];
     }
     
-    return [waypoints copy];
+    return waypoints;
+}
+
+- (NSArray *)waypointsFromWaypointNodes:(NSArray *)waypointNodes {
+    NSMutableArray *waypoints = [NSMutableArray array];
+    
+    // add start coordinate
+    if (self.from != nil && CLLocationCoordinate2DIsValid(self.from.coordinate)) {
+        [waypoints addObject:self.from];
+    }
+    
+    for (MTDXMLElement *waypointNode in waypointNodes) {
+        NSString *encodedPolyline = [waypointNode contentString];
+        
+        [waypoints addObjectsFromArray:[self waypointsFromEncodedPolyline:encodedPolyline]];
+    }
+    
+    // add end coordinate
+    if (self.to != nil && CLLocationCoordinate2DIsValid(self.to.coordinate)) {
+        [waypoints addObject:self.to];
+    }
+
+    return waypoints;
 }
 
 @end
