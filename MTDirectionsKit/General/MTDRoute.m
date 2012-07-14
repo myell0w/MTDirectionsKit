@@ -22,6 +22,7 @@
 
 @implementation MTDRoute
 
+@synthesize name = _name;
 @synthesize polyline = _polyline;
 @synthesize waypoints = _waypoints;
 @synthesize distance = _distance;

@@ -91,15 +91,9 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (NSArray *)childNodes {
-	NSMutableArray *result = [NSMutableArray array];
-	
-	for (NSObject *object in self.content) {
-		if ([object isKindOfClass:[MTDXMLElement class]]) {
-			[result addObject:object];
-		}
-	}
-	
-	return result;
+    return [self.content filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, __unused NSDictionary *bindings) {
+        return [evaluatedObject isKindOfClass:[MTDXMLElement class]];
+    }]];
 }
 
 - (NSString *)contentString {
@@ -138,16 +132,23 @@
 	return result;
 }
 
-- (MTDXMLElement *)firstChildNodeWithName:(NSString *)aName {
-    NSArray *foundNodes = [self.childNodes filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, __unused NSDictionary *bindings) {
-        return [[evaluatedObject name] isEqualToString:aName];
+- (MTDXMLElement *)firstChildNodeWithName:(NSString *)name {
+    __block MTDXMLElement *foundNode = nil;
+    
+    [self.content enumerateObjectsUsingBlock:^(id obj, __unused NSUInteger idx, BOOL *stop) {
+        if ([obj isKindOfClass:[MTDXMLElement class]] && [[obj name] isEqualToString:name]) {
+            foundNode = (MTDXMLElement *)obj;
+            *stop = YES;
+        }
+    }];
+
+    return foundNode;
+}
+
+- (NSArray *)childNodesWithName:(NSString *)name {
+    return [self.content filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, __unused NSDictionary *bindings) {
+        return [evaluatedObject isKindOfClass:[MTDXMLElement class]] && [[evaluatedObject name] isEqualToString:name];
     }]];
-    
-    if (foundNodes.count > 0) {
-        return [foundNodes objectAtIndex:0];
-    }
-    
-    return nil;
 }
 
 ////////////////////////////////////////////////////////////////////////

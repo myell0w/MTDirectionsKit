@@ -36,6 +36,10 @@
  */
 @interface MTDXMLElement : NSObject
 
+/******************************************
+ @name XML Element
+ ******************************************/
+
 /** the tag name of the xml node */
 @property (nonatomic, strong, readonly) NSString *name;
 /** all attributes of the node */
@@ -73,6 +77,10 @@
  */
 + (NSArray *)nodesForXPathQuery:(NSString *)query onXML:(NSData *)xmlData;
 
+/******************************************
+ @name Queries
+ ******************************************/
+
 /**
  Returns the first child node with the given tagname.
  
@@ -80,5 +88,13 @@
  @return an instance of MTDXMLElement representing the first found child node, or nil if there was none found
  */
 - (MTDXMLElement *)firstChildNodeWithName:(NSString *)name;
+
+/**
+ Returns an array of child nodes with the given tagname.
+ 
+ @param name the tag name of the children we want
+ @return an array of MTDXMLElements
+ */
+- (NSArray *)childNodesWithName:(NSString *)name;
 
 @end

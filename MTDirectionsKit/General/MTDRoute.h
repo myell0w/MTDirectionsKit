@@ -22,6 +22,8 @@
  @name Route
  ******************************************/
 
+/** a unique name of the route */
+@property (nonatomic, copy) NSString *name;
 /** all waypoints of the route/directions, including from and to */
 @property (nonatomic, copy, readonly) NSArray *waypoints;
 /** the starting point of the directions */
