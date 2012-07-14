@@ -25,21 +25,23 @@
 - (void)parseWithCompletion:(mtd_parser_block)completion {
     MTDAssert(completion != nil, @"Completion block must be set");
 
-    NSArray *statusCodeNodes = [MTDXMLElement nodesForXPathQuery:@"//DirectionsResponse/status" onXML:self.data];
+    MTDXMLElement *statusCodeNode = [MTDXMLElement nodeForXPathQuery:@"//DirectionsResponse/status" onXML:self.data];
     MTDStatusCodeGoogle statusCode = MTDStatusCodeGoogleSuccess;
     MTDDirectionsOverlay *overlay = nil;
     NSError *error = nil;
     
-    if (statusCodeNodes.count > 0) {
-        statusCode = MTDStatusCodeGoogleFromDescription([[statusCodeNodes objectAtIndex:0] contentString]);
+    if (statusCodeNode != nil) {
+        statusCode = MTDStatusCodeGoogleFromDescription(statusCodeNode.contentString);
     }
     
     if (statusCode == MTDStatusCodeGoogleSuccess) {
         NSArray *waypointNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg/step/polyline/points" onXML:self.data];
         NSArray *distanceNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg/distance/value" onXML:self.data];
         NSArray *timeNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg/duration/value" onXML:self.data];
-        NSArray *copyrightNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/copyrights" onXML:self.data];
+        MTDXMLElement *copyrightNode = [MTDXMLElement nodeForXPathQuery:@"//route[1]/copyrights" onXML:self.data];
         NSArray *warningNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/warnings" onXML:self.data];
+        MTDXMLElement *fromAddressNode = [MTDXMLElement nodeForXPathQuery:@"//route[1]/leg[1]/start_address" onXML:self.data];
+        MTDXMLElement *toAddressNode = [MTDXMLElement nodeForXPathQuery:@"//route[1]/leg[last()]/end_address" onXML:self.data];
         
         NSMutableArray *waypoints = [NSMutableArray array];
         MTDDistance *distance = nil;
@@ -85,9 +87,8 @@
                 }
             }
             
-            if (copyrightNodes.count > 0) {
-                NSString *copyright = [[copyrightNodes objectAtIndex:0] contentString];
-                [additionalInfo setValue:copyright forKey:@"copyrights"];
+            if (copyrightNode != nil) {
+                [additionalInfo setValue:copyrightNode.contentString forKey:@"copyrights"];
             }
             
             if (warningNodes.count > 0) {
@@ -95,17 +96,12 @@
                 [additionalInfo setValue:warnings forKey:@"warnings"];
             }
             
-            NSArray *fromAddressNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg[1]/start_address" onXML:self.data];
-            NSArray *toAddressNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg[last()]/end_address" onXML:self.data];
-            
-            if (fromAddressNodes.count > 0) {
-                NSString *fromAddress = [[fromAddressNodes objectAtIndex:0] contentString];
-                self.from.address = [[MTDAddress alloc] initWithAddressString:fromAddress];
+            if (fromAddressNode != nil) {
+                self.from.address = [[MTDAddress alloc] initWithAddressString:fromAddressNode.contentString];
             }
             
-            if (toAddressNodes.count > 0) {
-                NSString *toAddress = [[toAddressNodes objectAtIndex:0] contentString];
-                self.to.address = [[MTDAddress alloc] initWithAddressString:toAddress];
+            if (toAddressNode != nil) {
+                self.to.address = [[MTDAddress alloc] initWithAddressString:toAddressNode.contentString];
             }
         }
 

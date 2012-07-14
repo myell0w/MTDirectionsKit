@@ -25,22 +25,22 @@
 - (void)parseWithCompletion:(mtd_parser_block)completion {
     MTDAssert(completion != nil, @"Completion block must be set");
     
-    NSArray *statusCodeNodes = [MTDXMLElement nodesForXPathQuery:@"//statusCode" onXML:self.data];
+    MTDXMLElement *statusCodeNode = [MTDXMLElement nodeForXPathQuery:@"//statusCode" onXML:self.data];
     NSInteger statusCode = MTDStatusCodeMapQuestSuccess;
     MTDDirectionsOverlay *overlay = nil;
     NSError *error = nil;
     
-    if (statusCodeNodes.count > 0) {
-        statusCode = [[[statusCodeNodes objectAtIndex:0] contentString] integerValue];
+    if (statusCodeNode != nil) {
+        statusCode = [statusCodeNode.contentString integerValue];
     }
     
     if (statusCode == MTDStatusCodeMapQuestSuccess) {
         NSArray *waypointNodes = [MTDXMLElement nodesForXPathQuery:@"//shapePoints/latLng" onXML:self.data];
-        NSArray *distanceNodes = [MTDXMLElement nodesForXPathQuery:@"//route/distance" onXML:self.data];
-        NSArray *timeNodes = [MTDXMLElement nodesForXPathQuery:@"//route/time" onXML:self.data];
-        NSArray *copyrightNodes = [MTDXMLElement nodesForXPathQuery:@"//copyright/text" onXML:self.data];
-        NSArray *fromLocationAddressNodes = [MTDXMLElement nodesForXPathQuery:@"//route/locations/location[1]" onXML:self.data];
-        NSArray *toLocationAddressNodes = [MTDXMLElement nodesForXPathQuery:@"//route/locations/location[last()]" onXML:self.data];
+        MTDXMLElement *distanceNode = [MTDXMLElement nodeForXPathQuery:@"//route/distance" onXML:self.data];
+        MTDXMLElement *timeNode = [MTDXMLElement nodeForXPathQuery:@"//route/time" onXML:self.data];
+        MTDXMLElement *copyrightNode = [MTDXMLElement nodeForXPathQuery:@"//copyright/text" onXML:self.data];
+        MTDXMLElement *fromLocationAddressNode = [MTDXMLElement nodeForXPathQuery:@"//route/locations/location[1]" onXML:self.data];
+        MTDXMLElement *toLocationAddressNode = [MTDXMLElement nodeForXPathQuery:@"//route/locations/location[last()]" onXML:self.data];
         
         NSMutableArray *waypoints = [NSMutableArray arrayWithCapacity:waypointNodes.count+2];
         MTDDistance *distance = nil;
@@ -78,25 +78,23 @@
         
         // Parse Additional Info of directions
         {
-            if (distanceNodes.count > 0) {
+            if (distanceNode != nil) {
                 // distance is delivered in km from API
-                double distanceInKm = [[[distanceNodes objectAtIndex:0] contentString] doubleValue];
+                double distanceInKm = [distanceNode.contentString doubleValue];
                 
                 distance = [MTDDistance distanceWithValue:distanceInKm
                                         measurementSystem:MTDMeasurementSystemMetric];
             }
             
-            if (timeNodes.count > 0) {
-                timeInSeconds = [[[timeNodes objectAtIndex:0] contentString] doubleValue];
+            if (timeNode != nil) {
+                timeInSeconds = [timeNode.contentString doubleValue];
             }
             
-            if (copyrightNodes.count > 0) {
-                NSString *copyright = [[copyrightNodes objectAtIndex:0] contentString];
-                [additionalInfo setValue:copyright forKey:@"copyrights"];
+            if (copyrightNode != nil) {
+                [additionalInfo setValue:copyrightNode.contentString forKey:@"copyrights"];
             }
             
-            if (fromLocationAddressNodes.count > 0) {
-                MTDXMLElement *fromLocationAddressNode = [fromLocationAddressNodes objectAtIndex:0];
+            if (fromLocationAddressNode != nil) {
                 MTDXMLElement *streetNode = [fromLocationAddressNode firstChildNodeWithName:@"street"];
                 MTDXMLElement *cityNode = [fromLocationAddressNode firstChildNodeWithName:@"adminArea5"];
                 MTDXMLElement *stateNode = [fromLocationAddressNode firstChildNodeWithName:@"adminArea3"];
@@ -113,8 +111,7 @@
                 self.from.address = fromAddress;
             }
             
-            if (toLocationAddressNodes.count > 0) {
-                MTDXMLElement *toLocationAddressNode = [toLocationAddressNodes objectAtIndex:0];
+            if (toLocationAddressNode != nil) {
                 MTDXMLElement *streetNode = [toLocationAddressNode firstChildNodeWithName:@"street"];
                 MTDXMLElement *cityNode = [toLocationAddressNode firstChildNodeWithName:@"adminArea5"];
                 MTDXMLElement *stateNode = [toLocationAddressNode firstChildNodeWithName:@"adminArea3"];
