@@ -58,6 +58,26 @@
 	return result;
 }
 
++ (MTDXMLElement *)nodeForXPathQuery:(NSString *)query onXML:(NSData *)xmlData {
+    NSArray *nodes = [self nodesForXPathQuery:query onXML:xmlData];
+
+    if (nodes.count > 0) {
+        return [nodes objectAtIndex:0];
+    }
+
+    return nil;
+}
+
++ (MTDXMLElement *)nodeForXPathQuery:(NSString *)query onHTML:(NSData *)htmlData {
+    NSArray *nodes = [self nodesForXPathQuery:query onHTML:htmlData];
+    
+    if (nodes.count > 0) {
+        return [nodes objectAtIndex:0];
+    }
+    
+    return nil;
+}
+
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - NSObject
 ////////////////////////////////////////////////////////////////////////
