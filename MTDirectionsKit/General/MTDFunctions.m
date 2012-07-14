@@ -35,6 +35,8 @@ BOOL MTDDirectionsOpenInMapsApp(CLLocationCoordinate2D fromCoordinate, CLLocatio
 }
 
 NSString* MTDURLEncodedString(NSString *string) {
+    MTDAssert(string != nil, @"String must be set");
+    
     NSMutableString *preparedString = [NSMutableString stringWithString:string];
     
     // replace umlauts, because they don't work in the MapQuest API

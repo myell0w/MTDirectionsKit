@@ -37,6 +37,8 @@
                distance:(MTDDistance *)distance
           timeInSeconds:(NSTimeInterval)timeInSeconds
          additionalInfo:(NSDictionary *)additionalInfo {
+    MTDAssert(waypoints.count > 0, @"There must be waypoints on a route");
+
     if (waypoints.count == 0) {
         return nil;
     }

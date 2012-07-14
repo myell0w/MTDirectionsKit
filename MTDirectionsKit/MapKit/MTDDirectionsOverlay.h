@@ -63,11 +63,6 @@
  */
 @property (nonatomic, readonly) NSDictionary *additionalInfo;
 
-/** all mapPoints of the underlying polyline */
-@property (nonatomic, readonly) MKMapPoint *points;
-/** the number of mapPoints of the polyline */
-@property (nonatomic, readonly) NSUInteger pointCount;
-
 /******************************************
  @name Lifecycle
  ******************************************/

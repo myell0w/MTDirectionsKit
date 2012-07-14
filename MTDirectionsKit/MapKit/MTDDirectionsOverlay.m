@@ -83,14 +83,6 @@
     return self.activeRoute.to.address;
 }
 
-- (MKMapPoint *)points {
-    return self.activeRoute.points;
-}
-
-- (NSUInteger)pointCount {
-    return self.activeRoute.pointCount;
-}
-
 - (MTDDistance *)distance {
     return self.activeRoute.distance;
 }

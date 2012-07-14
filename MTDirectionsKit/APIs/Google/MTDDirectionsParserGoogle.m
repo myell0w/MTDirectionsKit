@@ -19,7 +19,7 @@
 @implementation MTDDirectionsParserGoogle
 
 ////////////////////////////////////////////////////////////////////////
-#pragma mark - MTDirectionsParser
+#pragma mark - MTDDirectionsParser
 ////////////////////////////////////////////////////////////////////////
 
 - (void)parseWithCompletion:(mtd_parser_block)completion {
@@ -127,8 +127,6 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             completion(overlay, error);
         });
-    } else {
-        MTDLogWarning(@"No completion block was set.");
     }
 }
 
@@ -139,6 +137,10 @@
 // Algorithm description:
 // http://code.google.com/apis/maps/documentation/utilities/polylinealgorithm.html
 - (NSArray *)waypointsFromEncodedPolyline:(NSString *)encodedPolyline {
+    if (encodedPolyline.length == 0) {
+        return nil;
+    }
+    
     const char *bytes = [encodedPolyline UTF8String];
     NSUInteger length = [encodedPolyline lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
     NSUInteger index = 0;

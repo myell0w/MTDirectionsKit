@@ -10,12 +10,6 @@
 #import "MTDStatusCodeMapQuest.h"
 
 
-#define kMTDDirectionsStartPointNode     @"startPoint"
-#define kMTDDirectionsDistanceNode       @"distance"
-#define kMTDDirectionsTimeNode           @"time"
-#define kMTDDirectionsLatitudeNode       @"lat"
-#define kMTDDirectionsLongitudeNode      @"lng"
-
 @implementation MTDDirectionsParserMapQuest
 
 ////////////////////////////////////////////////////////////////////////
@@ -56,8 +50,8 @@
             
             // There should only be one element "shapePoints"
             for (MTDXMLElement *childNode in waypointNodes) {
-                MTDXMLElement *latitudeNode = [childNode firstChildNodeWithName:kMTDDirectionsLatitudeNode];
-                MTDXMLElement *longitudeNode = [childNode firstChildNodeWithName:kMTDDirectionsLongitudeNode];
+                MTDXMLElement *latitudeNode = [childNode firstChildNodeWithName:@"lat"];
+                MTDXMLElement *longitudeNode = [childNode firstChildNodeWithName:@"lng"];
                 
                 if (latitudeNode != nil && longitudeNode != nil) {
                     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([latitudeNode.contentString doubleValue],
@@ -163,8 +157,6 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             completion(overlay, error);
         });
-    } else {
-        MTDLogWarning(@"No completion block was set.");
     }
 }
 
