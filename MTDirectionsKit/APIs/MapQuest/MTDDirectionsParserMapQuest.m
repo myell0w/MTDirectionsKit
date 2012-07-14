@@ -3,6 +3,7 @@
 #import "MTDAddress.h"
 #import "MTDDistance.h"
 #import "MTDFunctions.h"
+#import "MTDRoute.h"
 #import "MTDDirectionsOverlay.h"
 #import "MTDDirectionsRouteType.h"
 #import "MTDXMLElement.h"
@@ -131,14 +132,14 @@
             }
         }
         
-        overlay = [MTDDirectionsOverlay overlayWithWaypoints:[waypoints copy]
-                                                    distance:distance
-                                               timeInSeconds:timeInSeconds
-                                                   routeType:self.routeType];
+        MTDRoute *route = [[MTDRoute alloc] initWithWaypoints:waypoints
+                                                     distance:distance
+                                                timeInSeconds:timeInSeconds
+                                               additionalInfo:additionalInfo];
         
-        // set read-only properties via KVO to not pollute API
-        [overlay setValue:self.intermediateGoals forKey:NSStringFromSelector(@selector(intermediateGoals))];
-        [overlay setValue:additionalInfo forKey:NSStringFromSelector(@selector(additionalInfo))];
+        overlay = [[MTDDirectionsOverlay alloc] initWithRoutes:[NSArray arrayWithObject:route]
+                                             intermediateGoals:self.intermediateGoals
+                                                     routeType:self.routeType];
     } else {
         NSArray *messageNodes = [MTDXMLElement nodesForXPathQuery:@"//messages/message" onXML:self.data];
         NSString *errorMessage = nil;

@@ -23,7 +23,7 @@
  ******************************************/
 
 /** all waypoints of the route/directions, including from and to */
-@property (nonatomic, strong, readonly) NSArray *waypoints;
+@property (nonatomic, copy, readonly) NSArray *waypoints;
 /** the starting point of the directions */
 @property (nonatomic, readonly) MTDWaypoint *from;
 /** the end point of the directions */
@@ -65,10 +65,10 @@
  @param additionalInfo dictionary with additional information provided by the API, e.g. copyrights
  @return a route object encapsulating the given route-information
  */
-+ (MTDRoute *)routeWithWaypoints:(NSArray *)waypoints
-                        distance:(MTDDistance *)distance
-                   timeInSeconds:(NSTimeInterval)timeInSeconds
-                  additionalInfo:(NSDictionary *)additionalInfo;
+- (id)initWithWaypoints:(NSArray *)waypoints
+               distance:(MTDDistance *)distance
+          timeInSeconds:(NSTimeInterval)timeInSeconds
+         additionalInfo:(NSDictionary *)additionalInfo;
 
 
 /******************************************

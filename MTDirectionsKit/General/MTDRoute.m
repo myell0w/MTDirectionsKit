@@ -12,7 +12,7 @@
 @property (nonatomic, strong) MKPolyline *polyline;
 
 // Re-defining properties as readwrite
-@property (nonatomic, strong, readwrite) NSArray *waypoints;
+@property (nonatomic, copy, readwrite) NSArray *waypoints;
 @property (nonatomic, strong, readwrite) MTDDistance *distance;
 @property (nonatomic, assign, readwrite) NSTimeInterval timeInSeconds;
 @property (nonatomic, copy, readwrite) NSDictionary *additionalInfo;
@@ -32,15 +32,15 @@
 #pragma mark - Lifecycle
 ////////////////////////////////////////////////////////////////////////
 
-+ (MTDRoute *)routeWithWaypoints:(NSArray *)waypoints
-                        distance:(MTDDistance *)distance
-                   timeInSeconds:(NSTimeInterval)timeInSeconds
-                  additionalInfo:(NSDictionary *)additionalInfo {
-    MTDRoute *route = nil;
+- (id)initWithWaypoints:(NSArray *)waypoints
+               distance:(MTDDistance *)distance
+          timeInSeconds:(NSTimeInterval)timeInSeconds
+         additionalInfo:(NSDictionary *)additionalInfo {
+    if (waypoints.count == 0) {
+        return nil;
+    }
     
-    if (waypoints.count > 0) {
-        route = [[MTDRoute alloc] init];
-        
+    if ((self = [super init])) {         
         MKMapPoint *points = malloc(sizeof(MKMapPoint) * waypoints.count);
         NSUInteger pointIndex = 0;
         
@@ -54,16 +54,16 @@
             } 
         }
         
-        route.polyline = [MKPolyline polylineWithPoints:points count:pointIndex];
-        route.waypoints = waypoints;
-        route.distance = distance;
-        route.timeInSeconds = timeInSeconds;
-        route.additionalInfo = additionalInfo;
+        self.polyline = [MKPolyline polylineWithPoints:points count:pointIndex];
+        self.waypoints = waypoints;
+        self.distance = distance;
+        self.timeInSeconds = timeInSeconds;
+        self.additionalInfo = additionalInfo;
         
         free(points);
-    } 
+    }
     
-    return route;
+    return self;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -78,9 +78,9 @@
     if (![object isKindOfClass:[MTDRoute class]]) {
         return NO;
     }
-
+    
     MTDRoute *route = (MTDRoute *)object;
-
+    
     return [self.waypoints isEqualToArray:route.waypoints];
 }
 
@@ -92,7 +92,7 @@
     if (self.waypoints.count > 0) {
         return [self.waypoints objectAtIndex:0];
     }
-
+    
     return nil;
 }
 

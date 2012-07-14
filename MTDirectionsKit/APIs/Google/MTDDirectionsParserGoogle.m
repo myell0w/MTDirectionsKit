@@ -4,6 +4,7 @@
 #import "MTDDistance.h"
 #import "MTDFunctions.h"
 #import "MTDWaypoint.h"
+#import "MTDRoute.h"
 #import "MTDAddress.h"
 #import "MTDStatusCodeGoogle.h"
 
@@ -107,15 +108,15 @@
                 self.to.address = [[MTDAddress alloc] initWithAddressString:toAddress];
             }
         }
-        
-        overlay = [MTDDirectionsOverlay overlayWithWaypoints:[waypoints copy]
-                                                    distance:distance
-                                               timeInSeconds:timeInSeconds
-                                                   routeType:self.routeType];
-        
-        // set read-only properties via KVO to not pollute API
-        [overlay setValue:self.intermediateGoals forKey:NSStringFromSelector(@selector(intermediateGoals))];
-        [overlay setValue:additionalInfo forKey:NSStringFromSelector(@selector(additionalInfo))];
+
+        MTDRoute *route = [[MTDRoute alloc] initWithWaypoints:waypoints
+                                                     distance:distance
+                                                timeInSeconds:timeInSeconds
+                                               additionalInfo:additionalInfo];
+
+        overlay = [[MTDDirectionsOverlay alloc] initWithRoutes:[NSArray arrayWithObject:route]
+                                             intermediateGoals:self.intermediateGoals
+                                                     routeType:self.routeType];
     } else {
         error = [NSError errorWithDomain:MTDDirectionsKitErrorDomain
                                     code:statusCode
