@@ -41,7 +41,7 @@
  using the Google Directions API. You have to handle this information on your own and stick
  to the terms of usage of the API you use.
  */
-@property (nonatomic, readonly) NSDictionary *additionalInfo;
+@property (nonatomic, copy, readonly) NSDictionary *additionalInfo;
 
 /******************************************
  @name MapKit interface
