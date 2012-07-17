@@ -1,5 +1,4 @@
 #import "MTDMeasurementSystem.h"
-#import "MTDLogging.h"
 
 
 #define kMTDMeasurementSystemMetric     @"Metric"

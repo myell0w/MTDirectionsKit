@@ -22,8 +22,9 @@ extern NSInteger _mtd_wm_;
  @param fromCoordinate the start coordinate of the route
  @param toCoordinate the end coordinate of the route
  @param routeType the specified form of travelling, e.g. walking, by bike, by car
+ @return YES, if the Maps App was opened successfully, NO otherwise
  */
-void MTDDirectionsOpenInMapsApp(CLLocationCoordinate2D fromCoordinate, CLLocationCoordinate2D toCoordinate, MTDDirectionsRouteType routeType);
+BOOL MTDDirectionsOpenInMapsApp(CLLocationCoordinate2D fromCoordinate, CLLocationCoordinate2D toCoordinate, MTDDirectionsRouteType routeType);
 
 /**
  Creates a percent-escaped version of the given string.

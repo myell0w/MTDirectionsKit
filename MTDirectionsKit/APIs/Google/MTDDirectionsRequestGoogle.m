@@ -6,7 +6,7 @@
 #import "MTDFunctions.h"
 
 
-#define kMTDGoogleBaseAddress         @"http://maps.google.com/maps/api/directions/xml"
+#define kMTDGoogleBaseAddress         @"http://maps.googleapis.com/maps/api/directions/xml"
 
 
 @interface MTDDirectionsRequestGoogle ()
@@ -43,7 +43,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (void)setValueForParameterWithIntermediateGoals:(NSArray *)intermediateGoals {
-    if (intermediateGoals.count > 0) {
+    if (intermediateGoals.count > 0 && self.routeType != MTDDirectionsRouteTypePedestrianIncludingPublicTransport) {
         NSMutableString *parameter = [NSMutableString stringWithString:(self.optimizeRoute ? @"optimize:true" : @"optimize:false")];
         
         [intermediateGoals enumerateObjectsUsingBlock:^(id obj, __unused NSUInteger idx, __unused BOOL *stop) {

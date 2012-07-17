@@ -11,9 +11,12 @@
 #import "MTDDirectionsAPI.h"
 
 
+@class MTDAddress;
+
+
 /**
  An instance of MTDWaypoint is a lightweight immutable object wrapper for either 
- a CLLocationCoordinate2D coordinate or an address string representing a location.
+ a CLLocationCoordinate2D coordinate or an address string representing a location (or both).
  It is used in MTDDirectionsKit to store coordinates in collections like NSArray.
  */
 @interface MTDWaypoint : NSObject
@@ -25,7 +28,7 @@
 /** the coordinate wrapped, may be invalid */
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
 /** the address wrapped, may be nil */
-@property (nonatomic, readonly) NSString *address;
+@property (nonatomic, retain) MTDAddress *address;
 
 /** is this waypoint valid (valid coordinate or set address) */
 @property (nonatomic, readonly, getter = isValid) BOOL valid;
@@ -52,7 +55,7 @@
  
  @see initWithAddress:
  */
-+ (MTDWaypoint *)waypointWithAddress:(NSString *)address;
++ (MTDWaypoint *)waypointWithAddress:(MTDAddress *)address;
 
 /**
  The initializer used to create an instance of MTDWaypoint that wraps a given coordinate.
@@ -68,7 +71,7 @@
  @param address the address to save
  @return the wrapper object created to store the address
  */
-- (id)initWithAddress:(NSString *)address;
+- (id)initWithAddress:(MTDAddress *)address;
 
 
 /******************************************

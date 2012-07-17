@@ -1,10 +1,10 @@
 #import "MTDDirectionsParser.h"
-#import "MTDLogging.h"
 #import "MTDWaypoint.h"
 
 
 @interface MTDDirectionsParser ()
 
+// overwrite as read-write
 @property (nonatomic, strong, readwrite) id data;
 @property (nonatomic, strong, readwrite) MTDWaypoint *from;
 @property (nonatomic, strong, readwrite) MTDWaypoint *to;
@@ -17,6 +17,7 @@
 @synthesize data = _data;
 @synthesize from = _from;
 @synthesize to = _to;
+@synthesize intermediateGoals = _intermediateGoals;
 @synthesize routeType = _routeType;
 
 ////////////////////////////////////////////////////////////////////////
@@ -25,11 +26,13 @@
 
 - (id)initWithFrom:(MTDWaypoint *)from
                 to:(MTDWaypoint *)to
+ intermediateGoals:(NSArray *)intermediateGoals
          routeType:(MTDDirectionsRouteType)routeType
               data:(id)data {
     if ((self = [super init])) {
         _from = from;
         _to = to;
+        _intermediateGoals = [intermediateGoals copy];
         _data = data;
         _routeType = routeType;
     }

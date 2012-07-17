@@ -1,3 +1,9 @@
+= 1.2.1 17.7.2012
+ * Google Directions now supports Transit Directions
+ * New Google API URL
+ * MTDDirectionsOverlay now has information about intermediate goals
+ * Better Address Parsing of the start- and end-location of a route
+ 
 = 1.2.0 1.7.2012
  * Possibility to specify the thickness of the route overlay
  * Turned on a lot of warnings in the compiler and make sure none of them exists in MTDirectionsKit

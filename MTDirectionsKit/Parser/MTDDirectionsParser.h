@@ -32,6 +32,8 @@
 @property (nonatomic, strong, readonly) MTDWaypoint *from;
 /** The end waypoint of the route */
 @property (nonatomic, strong, readonly) MTDWaypoint *to;
+/** The intermediate goals along the route */
+@property (nonatomic, copy, readonly) NSArray *intermediateGoals;
 /** The type of the route */
 @property (nonatomic, assign, readonly) MTDDirectionsRouteType routeType;
 
@@ -66,11 +68,13 @@
  
  @param from the starting waypoint of the route
  @param to the end waypoint of the route
+ @param intermediateGoals the intermediate goals along the route
  @param routeType the type of the route
  @param data the data holding information about the route
  */
 - (id)initWithFrom:(MTDWaypoint *)from
                 to:(MTDWaypoint *)to
+ intermediateGoals:(NSArray *)intermediateGoals
          routeType:(MTDDirectionsRouteType)routeType
               data:(id)data;
 
