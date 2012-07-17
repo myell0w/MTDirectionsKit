@@ -12,7 +12,12 @@
 
 @interface MTDDirectionsParserMapQuest ()
 
+// This method parses the waypointNodes and returns an array of MTDWaypoints
 - (NSArray *)waypointsFromWaypointNodes:(NSArray *)waypointNodes;
+// This method parses all addresses and orders the intermediate goals as optimised by the API
+- (NSArray *)orderedIntermediateGoalsWithSequenceNode:(MTDXMLElement *)sequenceNode addressNodes:(NSArray *)addressNodes;
+// This method parses an address and returns an instance of MTDAddress
+- (MTDAddress *)addressFromAddressNode:(MTDXMLElement *)addressNode;
 
 @end
 
@@ -40,15 +45,19 @@
         MTDXMLElement *distanceNode = [MTDXMLElement nodeForXPathQuery:@"//route/distance" onXML:self.data];
         MTDXMLElement *timeNode = [MTDXMLElement nodeForXPathQuery:@"//route/time" onXML:self.data];
         MTDXMLElement *copyrightNode = [MTDXMLElement nodeForXPathQuery:@"//copyright/text" onXML:self.data];
-        MTDXMLElement *fromLocationAddressNode = [MTDXMLElement nodeForXPathQuery:@"//route/locations/location[1]" onXML:self.data];
-        MTDXMLElement *toLocationAddressNode = [MTDXMLElement nodeForXPathQuery:@"//route/locations/location[last()]" onXML:self.data];
+        NSArray *locationAddressNodes = [MTDXMLElement nodesForXPathQuery:@"//route/locations/location" onXML:self.data];
+        MTDXMLElement *locationSequenceNode = [MTDXMLElement nodeForXPathQuery:@"//route/locationSequence" onXML:self.data];
         
         NSArray *waypoints = [self waypointsFromWaypointNodes:waypointNodes];
         MTDDistance *distance = nil;
         NSTimeInterval timeInSeconds = -1.;
         NSMutableDictionary *additionalInfo = [NSMutableDictionary dictionary];
         
-               
+        // Order the intermediate goals in the order returned by the API (optimized)
+        // and parse the address information and save the address for each goal (from, to, intermediateGoals)
+        NSArray *orderedIntermediateGoals = [self orderedIntermediateGoalsWithSequenceNode:locationSequenceNode
+                                                                              addressNodes:locationAddressNodes];
+        
         // Parse Additional Info of directions
         {
             if (distanceNode != nil) {
@@ -66,40 +75,6 @@
             if (copyrightNode != nil) {
                 [additionalInfo setValue:copyrightNode.contentString forKey:@"copyrights"];
             }
-            
-            if (fromLocationAddressNode != nil) {
-                MTDXMLElement *streetNode = [fromLocationAddressNode firstChildNodeWithName:@"street"];
-                MTDXMLElement *cityNode = [fromLocationAddressNode firstChildNodeWithName:@"adminArea5"];
-                MTDXMLElement *stateNode = [fromLocationAddressNode firstChildNodeWithName:@"adminArea3"];
-                MTDXMLElement *countyNode = [fromLocationAddressNode firstChildNodeWithName:@"adminArea4"];
-                MTDXMLElement *postalCodeNode = [fromLocationAddressNode firstChildNodeWithName:@"postalCode"];
-                MTDXMLElement *countryNode = [fromLocationAddressNode firstChildNodeWithName:@"adminArea1"];
-                
-                MTDAddress *fromAddress = [[MTDAddress alloc] initWithCountry:[countryNode contentString]
-                                                                        state:[stateNode contentString]
-                                                                       county:[countyNode contentString]
-                                                                   postalCode:[postalCodeNode contentString]
-                                                                         city:[cityNode contentString]
-                                                                       street:[streetNode contentString]];
-                self.from.address = fromAddress;
-            }
-            
-            if (toLocationAddressNode != nil) {
-                MTDXMLElement *streetNode = [toLocationAddressNode firstChildNodeWithName:@"street"];
-                MTDXMLElement *cityNode = [toLocationAddressNode firstChildNodeWithName:@"adminArea5"];
-                MTDXMLElement *stateNode = [toLocationAddressNode firstChildNodeWithName:@"adminArea3"];
-                MTDXMLElement *countyNode = [toLocationAddressNode firstChildNodeWithName:@"adminArea4"];
-                MTDXMLElement *postalCodeNode = [toLocationAddressNode firstChildNodeWithName:@"postalCode"];
-                MTDXMLElement *countryNode = [toLocationAddressNode firstChildNodeWithName:@"adminArea1"];
-                
-                MTDAddress *toAddress = [[MTDAddress alloc] initWithCountry:[countryNode contentString]
-                                                                      state:[stateNode contentString]
-                                                                     county:[countyNode contentString]
-                                                                 postalCode:[postalCodeNode contentString]
-                                                                       city:[cityNode contentString]
-                                                                     street:[streetNode contentString]];
-                self.to.address = toAddress;
-            }
         }
         
         MTDRoute *route = [[MTDRoute alloc] initWithWaypoints:waypoints
@@ -108,7 +83,7 @@
                                                additionalInfo:additionalInfo];
         
         overlay = [[MTDDirectionsOverlay alloc] initWithRoutes:[NSArray arrayWithObject:route]
-                                             intermediateGoals:self.intermediateGoals
+                                             intermediateGoals:orderedIntermediateGoals
                                                      routeType:self.routeType];
     } else {
         MTDXMLElement *messageNode = [MTDXMLElement nodeForXPathQuery:@"//messages/message" onXML:self.data];
@@ -145,7 +120,7 @@
 
 - (NSArray *)waypointsFromWaypointNodes:(NSArray *)waypointNodes {
     NSMutableArray *waypoints = [NSMutableArray arrayWithCapacity:waypointNodes.count+2];
-
+    
     // add start coordinate
     if (self.from != nil && CLLocationCoordinate2DIsValid(self.from.coordinate)) {
         [waypoints addObject:self.from];
@@ -158,7 +133,7 @@
         
         if (latitudeNode != nil && longitudeNode != nil) {
             CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([latitudeNode.contentString doubleValue],
-                                                                           [longitudeNode.contentString doubleValue]);;
+                                                                           [longitudeNode.contentString doubleValue]);
             MTDWaypoint *waypoint = [MTDWaypoint waypointWithCoordinate:coordinate];
             
             if (![waypoints containsObject:waypoint]) {
@@ -171,8 +146,57 @@
     if (self.to != nil && CLLocationCoordinate2DIsValid(self.to.coordinate)) {
         [waypoints addObject:self.to];
     }
-
+    
     return waypoints;
+}
+
+- (NSArray *)orderedIntermediateGoalsWithSequenceNode:(MTDXMLElement *)sequenceNode addressNodes:(NSArray *)addressNodes {
+    NSArray *sequence = [sequenceNode.contentString componentsSeparatedByString:@","];
+    // Sort the intermediate goals to be in the order of the numbers contained in sequence
+    NSArray *orderedIntermediateGoals = [self.intermediateGoals sortedArrayUsingComparator:^NSComparisonResult(MTDWaypoint *waypoint1, MTDWaypoint *waypoint2) {
+        NSUInteger indexOfObj1 = [self.intermediateGoals indexOfObject:waypoint1];
+        NSUInteger indexOfObj2 = [self.intermediateGoals indexOfObject:waypoint2];
+        
+        MTDAssert(indexOfObj1 < sequence.count && indexOfObj2 < sequence.count, @"Index of object not within bounds of sequence");
+        
+        return [[sequence objectAtIndex:indexOfObj1] integerValue] < [[sequence objectAtIndex:indexOfObj2] integerValue];
+    }];
+    // all goals, including from and to
+    NSMutableArray *allGoals = [NSMutableArray arrayWithArray:orderedIntermediateGoals];
+    // insert from and to at the right places
+    [allGoals insertObject:self.from atIndex:0];
+    [allGoals addObject:self.to];
+    
+    MTDAssert(addressNodes.count == allGoals.count, @"Number of addresses doesn't match number of goals");
+    
+    // Parse Addresses of goals
+    [addressNodes enumerateObjectsUsingBlock:^(MTDXMLElement *addressNode, NSUInteger idx, __unused BOOL *stop) {
+        MTDAddress *address = [self addressFromAddressNode:addressNode];
+        MTDWaypoint *waypoint = [allGoals objectAtIndex:idx];
+
+        // update address of corresponding waypoint
+        waypoint.address = address;
+    }];
+
+    return orderedIntermediateGoals;
+}
+
+- (MTDAddress *)addressFromAddressNode:(MTDXMLElement *)addressNode {
+    MTDXMLElement *streetNode = [addressNode firstChildNodeWithName:@"street"];
+    MTDXMLElement *cityNode = [addressNode firstChildNodeWithName:@"adminArea5"];
+    MTDXMLElement *stateNode = [addressNode firstChildNodeWithName:@"adminArea3"];
+    MTDXMLElement *countyNode = [addressNode firstChildNodeWithName:@"adminArea4"];
+    MTDXMLElement *postalCodeNode = [addressNode firstChildNodeWithName:@"postalCode"];
+    MTDXMLElement *countryNode = [addressNode firstChildNodeWithName:@"adminArea1"];
+    
+    MTDAddress *address = [[MTDAddress alloc] initWithCountry:[countryNode contentString]
+                                                        state:[stateNode contentString]
+                                                       county:[countyNode contentString]
+                                                   postalCode:[postalCodeNode contentString]
+                                                         city:[cityNode contentString]
+                                                       street:[streetNode contentString]];
+
+    return address;
 }
 
 @end
