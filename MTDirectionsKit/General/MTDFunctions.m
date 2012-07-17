@@ -113,3 +113,26 @@ BOOL MTDDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMapRect rect
     
     return MKMapRectIntersectsRect(rect, r2);
 }
+
+NSArray *MTDOrderedArrayWithSequence(NSArray *array, NSArray *sequence) {
+    MTDAssert(array.count == sequence.count, @"Number of elements in array and sequence don't match.");
+
+    if (array.count != sequence.count) {
+        return array;
+    }
+
+    return [array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSUInteger indexOfObj1 = [array indexOfObject:obj1];
+        NSUInteger indexOfObj2 = [array indexOfObject:obj2];
+
+        id sequenceIndex1 = [sequence objectAtIndex:indexOfObj1];
+        id sequenceIndex2 = [sequence objectAtIndex:indexOfObj2];
+
+        if ([sequenceIndex1 integerValue] < [sequenceIndex2 integerValue]) {
+            return NSOrderedAscending;
+        } else {
+            return NSOrderedDescending;
+        }
+    }];
+}
+

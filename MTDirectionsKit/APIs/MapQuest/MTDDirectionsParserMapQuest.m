@@ -152,33 +152,27 @@
 
 - (NSArray *)orderedIntermediateGoalsWithSequenceNode:(MTDXMLElement *)sequenceNode addressNodes:(NSArray *)addressNodes {
     NSArray *sequence = [sequenceNode.contentString componentsSeparatedByString:@","];
-    // Sort the intermediate goals to be in the order of the numbers contained in sequence
-    NSArray *orderedIntermediateGoals = [self.intermediateGoals sortedArrayUsingComparator:^NSComparisonResult(MTDWaypoint *waypoint1, MTDWaypoint *waypoint2) {
-        NSUInteger indexOfObj1 = [self.intermediateGoals indexOfObject:waypoint1];
-        NSUInteger indexOfObj2 = [self.intermediateGoals indexOfObject:waypoint2];
-        
-        MTDAssert(indexOfObj1 < sequence.count && indexOfObj2 < sequence.count, @"Index of object not within bounds of sequence");
-        
-        return [[sequence objectAtIndex:indexOfObj1] integerValue] < [[sequence objectAtIndex:indexOfObj2] integerValue];
-    }];
     // all goals, including from and to
-    NSMutableArray *allGoals = [NSMutableArray arrayWithArray:orderedIntermediateGoals];
+    NSMutableArray *allGoals = [NSMutableArray arrayWithArray:self.intermediateGoals];
     // insert from and to at the right places
     [allGoals insertObject:self.from atIndex:0];
     [allGoals addObject:self.to];
+    
+    // Sort the intermediate goals to be in the order of the numbers contained in sequence
+    NSArray *orderedIntermediateGoals = MTDOrderedArrayWithSequence(allGoals,sequence);
     
     MTDAssert(addressNodes.count == allGoals.count, @"Number of addresses doesn't match number of goals");
     
     // Parse Addresses of goals
     [addressNodes enumerateObjectsUsingBlock:^(MTDXMLElement *addressNode, NSUInteger idx, __unused BOOL *stop) {
         MTDAddress *address = [self addressFromAddressNode:addressNode];
-        MTDWaypoint *waypoint = [allGoals objectAtIndex:idx];
+        MTDWaypoint *waypoint = [orderedIntermediateGoals objectAtIndex:idx];
 
         // update address of corresponding waypoint
         waypoint.address = address;
     }];
 
-    return orderedIntermediateGoals;
+    return [orderedIntermediateGoals subarrayWithRange:NSMakeRange(1, orderedIntermediateGoals.count-2)];
 }
 
 - (MTDAddress *)addressFromAddressNode:(MTDXMLElement *)addressNode {

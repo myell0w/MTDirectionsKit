@@ -73,6 +73,7 @@
 		9B4E98DB15AD702A002F0302 /* MTDAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B4E98D915AD702A002F0302 /* MTDAddress.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B4E98DC15AD702A002F0302 /* MTDAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4E98DA15AD702A002F0302 /* MTDAddress.m */; };
 		9B4E98E015AD77E5002F0302 /* MTDAddressTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4E98DF15AD77E5002F0302 /* MTDAddressTest.m */; };
+		9B58087E15B5F0E200D04EB5 /* MTDFunctionsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B58087D15B5F0E200D04EB5 /* MTDFunctionsTest.m */; };
 		9B6C18C414A7E18200087893 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18C314A7E18200087893 /* Foundation.framework */; };
 		9B6C18F414A7E40A00087893 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18F314A7E40A00087893 /* libxml2.dylib */; };
 		9B76F452157146BA00B54B05 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76F451157146BA00B54B05 /* CoreGraphics.framework */; };
@@ -171,6 +172,8 @@
 		9B4E98DA15AD702A002F0302 /* MTDAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDAddress.m; sourceTree = "<group>"; };
 		9B4E98DE15AD77E5002F0302 /* MTDAddressTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDAddressTest.h; sourceTree = "<group>"; };
 		9B4E98DF15AD77E5002F0302 /* MTDAddressTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDAddressTest.m; sourceTree = "<group>"; };
+		9B58087C15B5F0E200D04EB5 /* MTDFunctionsTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDFunctionsTest.h; sourceTree = "<group>"; };
+		9B58087D15B5F0E200D04EB5 /* MTDFunctionsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDFunctionsTest.m; sourceTree = "<group>"; };
 		9B6C18C014A7E18200087893 /* libMTDirectionsKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMTDirectionsKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B6C18C314A7E18200087893 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9B6C18F314A7E40A00087893 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
@@ -246,6 +249,8 @@
 				9B4E98DF15AD77E5002F0302 /* MTDAddressTest.m */,
 				9B812604156948F100C9A6C8 /* MTDDistanceTest.h */,
 				9B812605156948F100C9A6C8 /* MTDDistanceTest.m */,
+				9B58087C15B5F0E200D04EB5 /* MTDFunctionsTest.h */,
+				9B58087D15B5F0E200D04EB5 /* MTDFunctionsTest.m */,
 				9B10A9A9155D5867002A3052 /* MTDWaypointTest.h */,
 				9B10A9AA155D5867002A3052 /* MTDWaypointTest.m */,
 				9B8126081569545F00C9A6C8 /* MTDDirectionsParserMapQuestTest.h */,
@@ -633,6 +638,7 @@
 				9B81265315698A8900C9A6C8 /* MTDDirectionsParserGoogleTest.m in Sources */,
 				9B4E98E015AD77E5002F0302 /* MTDAddressTest.m in Sources */,
 				9BDE015015B203D1001A8132 /* MTDXMLElementTest.m in Sources */,
+				9B58087E15B5F0E200D04EB5 /* MTDFunctionsTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -76,6 +76,16 @@ UIColor* MTDDarkenedColor(UIColor *color, CGFloat difference);
 BOOL MTDDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMapRect rect);
 
 /**
+ Orders an array according to the indexes contained in sequence. E.g. if array = [A,B,C] and sequence=[3,2,1]
+ the resulting array will be [C,B,A]. The number of elements in array and sequence must match.
+ 
+ @param array the array to order
+ @param sequence the array with the new index order
+ @return a newly ordered array 
+ */
+NSArray *MTDOrderedArrayWithSequence(NSArray *array, NSArray *sequence);
+
+/**
  If there exists an element in the array with the given index, this function returns it.
  If not, the function returns nil.
  
