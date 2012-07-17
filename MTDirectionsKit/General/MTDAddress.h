@@ -65,7 +65,7 @@ typedef enum {
  
  @param addressString a single string-representation of the address
  @return a non-normalized address object
- @see initWithCountry:county:postalCode:state:city:street:
+ @see initWithCountry:state:county:postalCode:city:street:
  */
 - (id)initWithAddressString:(NSString *)addressString;
 
