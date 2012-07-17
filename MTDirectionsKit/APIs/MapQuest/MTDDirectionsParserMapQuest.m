@@ -111,11 +111,11 @@
                                              intermediateGoals:self.intermediateGoals
                                                      routeType:self.routeType];
     } else {
-        NSArray *messageNodes = [MTDXMLElement nodesForXPathQuery:@"//messages/message" onXML:self.data];
+        MTDXMLElement *messageNode = [MTDXMLElement nodeForXPathQuery:@"//messages/message" onXML:self.data];
         NSString *errorMessage = nil;
         
-        if (messageNodes.count > 0) {
-            errorMessage = [[messageNodes objectAtIndex:0] contentString];
+        if (messageNode != nil) {
+            errorMessage = messageNode.contentString;
         }
         
         error = [NSError errorWithDomain:MTDDirectionsKitErrorDomain

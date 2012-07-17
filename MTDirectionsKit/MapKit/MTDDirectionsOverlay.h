@@ -31,6 +31,10 @@
 @property (nonatomic, copy, readonly) NSArray *routes;
 /** the currently active route if there are more alternatives or the only route object, if there is only one */
 @property (nonatomic, readonly) MTDRoute *activeRoute;
+/** the fastest route of the alternatives */
+@property (nonatomic, readonly) MTDRoute *fastestRoute;
+/** the shortest route of the alternatives  */
+@property (nonatomic, readonly) MTDRoute *shortestRoute;
 /** The intermediate goals along the route */
 @property (nonatomic, copy, readonly) NSArray *intermediateGoals;
 /** the type of travelling used to compute the directions, e.g. walking, by bike etc. */
@@ -56,12 +60,6 @@
 @property (nonatomic, assign, readonly) NSTimeInterval timeInSeconds;
 /** the estimated time as formatted string */
 @property (nonatomic, readonly) NSString *formattedTime;
-
-/**
- Dictionary containing additional information retreived, e.g. warnings and copyrights when using the Google Directions API.
- You have to handle this information on your own and stick to the terms of usage of the API you use
- */
-@property (nonatomic, readonly) NSDictionary *additionalInfo;
 
 /******************************************
  @name Lifecycle

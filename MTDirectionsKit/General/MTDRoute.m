@@ -92,11 +92,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (MTDWaypoint *)from {
-    if (self.waypoints.count > 0) {
-        return [self.waypoints objectAtIndex:0];
-    }
-    
-    return nil;
+    return MTDFirstObjectOfArray(self.waypoints);
 }
 
 - (MTDWaypoint *)to {

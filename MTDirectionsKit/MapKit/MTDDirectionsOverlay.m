@@ -1,6 +1,7 @@
 #import "MTDDirectionsOverlay.h"
 #import "MTDWaypoint.h"
 #import "MTDDistance.h"
+#import "MTDFunctions.h"
 #import "MTDRoute.h"
 #import "MTDRoute+MTDirectionsPrivateAPI.h"
 #import "MTDDirectionsDefines.h"
@@ -60,7 +61,25 @@
 
 - (MTDRoute *)activeRoute {
     // TODO: Return selected route instead of hardcoded route
-    return [self.routes objectAtIndex:0];
+    return MTDFirstObjectOfArray(self.routes);
+}
+
+- (MTDRoute *)fastestRoute {
+    NSNumber *minTime = [self.routes valueForKeyPath:[NSString stringWithFormat:@"@min.%@", MTDKey(timeInSeconds)]];
+    NSUInteger index = [self.routes indexOfObjectPassingTest:^BOOL(MTDRoute *route, __unused NSUInteger idx, __unused BOOL *stop) {
+        return route.timeInSeconds == [minTime doubleValue];
+    }];
+    
+    return MTDObjectAtIndexOfArray(self.routes, index);
+}
+ 
+- (MTDRoute *)shortestRoute {
+    NSNumber *minDistance = [self.routes valueForKeyPath:[NSString stringWithFormat:@"@min.%@.%@", MTDKey(distance), MTDKey(distanceInMeter)]];
+    NSUInteger index = [self.routes indexOfObjectPassingTest:^BOOL(MTDRoute *route, __unused NSUInteger idx, __unused BOOL *stop) {
+        return route.distance.distanceInMeter == [minDistance doubleValue];
+    }];
+    
+    return MTDObjectAtIndexOfArray(self.routes, index);
 }
 
 - (NSArray *)waypoints {

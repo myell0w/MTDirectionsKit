@@ -1,4 +1,5 @@
 #import "MTDXMLElement.h"
+#import "MTDFunctions.h"
 #import <libxml/tree.h>
 #import <libxml/parser.h>
 #import <libxml/HTMLparser.h>
@@ -61,21 +62,13 @@
 + (MTDXMLElement *)nodeForXPathQuery:(NSString *)query onXML:(NSData *)xmlData {
     NSArray *nodes = [self nodesForXPathQuery:query onXML:xmlData];
 
-    if (nodes.count > 0) {
-        return [nodes objectAtIndex:0];
-    }
-
-    return nil;
+    return MTDFirstObjectOfArray(nodes);
 }
 
 + (MTDXMLElement *)nodeForXPathQuery:(NSString *)query onHTML:(NSData *)htmlData {
     NSArray *nodes = [self nodesForXPathQuery:query onHTML:htmlData];
     
-    if (nodes.count > 0) {
-        return [nodes objectAtIndex:0];
-    }
-    
-    return nil;
+    return MTDFirstObjectOfArray(nodes);
 }
 
 ////////////////////////////////////////////////////////////////////////
