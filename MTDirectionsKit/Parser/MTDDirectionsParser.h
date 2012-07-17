@@ -68,6 +68,7 @@
  
  @param from the starting waypoint of the route
  @param to the end waypoint of the route
+ @param intermediateGoals the intermediate goals along the route
  @param routeType the type of the route
  @param data the data holding information about the route
  */
