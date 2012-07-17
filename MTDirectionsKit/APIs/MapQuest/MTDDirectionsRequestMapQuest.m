@@ -12,6 +12,7 @@
 #define kMTDMapQuestRoutingMethodDefault        @"route"
 #define kMTDMapQuestRoutingMethodOptimized      @"optimizedroute"
 #define kMTDMapQuestRoutingMethodAlternatives   @"alternateroutes"
+// http://open.mapquestapi.com/directions/v1/alternateroutes?from=Reading,%20PA&to=Washington,%20DC&maxRoutes=3&ambiguities=ignore
 
 
 @interface MTDDirectionsRequestMapQuest ()
@@ -94,7 +95,7 @@
     [self setValue:@"none" forParameter:@"narrativeType"];
     [self setValue:@"raw" forParameter:@"shapeFormat"];
     [self setValue:@"0" forParameter:@"generalize"];
-    [self setValue:@"3" forParameter:@"maxRoutes"];
+    // [self setValue:@"3" forParameter:@"maxRoutes"];
 }
 
 @end
