@@ -169,14 +169,15 @@
 
 
 /**
- Starts a request and loads maximumNumberOfAlternativeRoutes different routes between the
+ Starts a request and loads maximumNumberOfAlternatives different routes between the
  specified start and end waypoints. When the request is finished the directionsOverlay gets set
  on the MapView and the region gets zoomed (animated) to show the whole overlay, if the flag 
  zoomToShowDirections is set.
  
  @param from the starting waypoint of the route
  @param to the end waypoint of the route
- @param maximumNumberOfAlternativeRoutes the number of alternative routes to be requested at a max
+ @param maximumNumberOfAlternatives the number of alternative routes to be requested at a max,
+        whereby 1 means that there will only be the original route requested and not alteranative routes
  @param routeType the type of the route requested, e.g. pedestrian, cycling, fastest driving
  @param zoomToShowDirections flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)
  
@@ -185,18 +186,18 @@
  @see loadDirectionsFrom:to:intermediateGoals:optimizeRoute:routeType:zoomToShowDirections:
  @see cancelLoadOfDirections
  */
-- (void)loadAlternateDirectionsFrom:(MTDWaypoint *)from
-                                 to:(MTDWaypoint *)to
-   maximumNumberOfAlternativeRoutes:(NSUInteger)maximumNumberOfAlternativeRoutes
-                          routeType:(MTDDirectionsRouteType)routeType
-               zoomToShowDirections:(BOOL)zoomToShowDirections;
+- (void)loadAlternativeDirectionsFrom:(MTDWaypoint *)from
+                                   to:(MTDWaypoint *)to
+          maximumNumberOfAlternatives:(NSUInteger)maximumNumberOfAlternatives
+                            routeType:(MTDDirectionsRouteType)routeType
+                 zoomToShowDirections:(BOOL)zoomToShowDirections;
 
 /**
-Cancels a possible ongoing request for loading directions.
-Does nothing if there is no request active.
-
-@see loadDirectionsFrom:to:routeType:zoomToShowDirections:
-*/
+ Cancels a possible ongoing request for loading directions.
+ Does nothing if there is no request active.
+ 
+ @see loadDirectionsFrom:to:routeType:zoomToShowDirections:
+ */
 - (void)cancelLoadOfDirections;
 
 /**

@@ -21,17 +21,49 @@
 }
 
 @property (nonatomic, strong, readwrite) MTDDirectionsOverlayView *directionsOverlayView; // re-defined as read/write
+/** The delegate that was set by the user, we forward all delegate calls */
 @property (nonatomic, mtd_weak) id<MKMapViewDelegate> trueDelegate;
+/** The request object for retreiving directions from the specified API */
 @property (nonatomic, strong) MTDDirectionsRequest *request;
 
+/** Common initialize method for initializing from code or from a NIB */
 - (void)setup;
 
 - (void)updateUIForDirectionsDisplayType:(MTDDirectionsDisplayType)displayType;
+
+/**
+ Sets the region that is displayed on the map to show all the given waypoints within a rect with 
+ the specified edgePadding.
+ 
+ @param waypoints array of MTDWaypoint objects
+ @param edgePadding the padding used to outset/inset the computed rect to show all waypoints at once
+ @param animated flag whether the region gets updated in an animated fashion or not
+ */
 - (void)setRegionFromWaypoints:(NSArray *)waypoints edgePadding:(UIEdgeInsets)edgePadding animated:(BOOL)animated;
 
+/**
+ Returns an instance of MTDDirectionsOverlayView used to display the given overlay
+ 
+ @param overlay an instance of MTDDirectionsOverlay
+ @return an instance of MTDDirectionsOverlayView if overlay is an instance of MTDDirectionsOverlay, nil otherwise
+ */
 - (MKOverlayView *)viewForDirectionsOverlay:(id<MKOverlay>)overlay;
 
-// delegate encapsulation
+/**
+ Internal helper method that performs the work needed to load directions, depending on the set parameter.
+ 
+ @param alternativeDirections this flag determines whether alternative directions are used or not
+ */
+- (void)mtd_loadAlternativeDirections:(BOOL)alternativeDirections
+                                 from:(MTDWaypoint *)from
+                                   to:(MTDWaypoint *)to
+                            routeType:(MTDDirectionsRouteType)routeType
+                 zoomToShowDirections:(BOOL)zoomToShowDirections
+                    intermediateGoals:(NSArray *)intermediateGoals
+                        optimizeRoute:(BOOL)optimizeRoute
+          maximumNumberOfAlternatives:(NSUInteger)maximumNumberOfAlternatives;
+
+// delegate encapsulation methods
 - (void)notifyDelegateWillStartLoadingDirectionsFrom:(MTDWaypoint *)from to:(MTDWaypoint *)to routeType:(MTDDirectionsRouteType)routeType;
 - (MTDDirectionsOverlay *)notifyDelegateDidFinishLoadingOverlay:(MTDDirectionsOverlay *)overlay;
 - (void)notifyDelegateDidFailLoadingOverlayWithError:(NSError *)error;
@@ -128,44 +160,31 @@
              optimizeRoute:(BOOL)optimizeRoute
                  routeType:(MTDDirectionsRouteType)routeType
       zoomToShowDirections:(BOOL)zoomToShowDirections {
-    __mtd_weak MTDMapView *weakSelf = self;
     
-    [self.request cancel];
-    
-    if (from.valid && to.valid) {
-        self.request = [MTDDirectionsRequest requestFrom:from
-                                                      to:to
-                                       intermediateGoals:intermediateGoals
-                                           optimizeRoute:optimizeRoute
-                                               routeType:routeType
-                                              completion:^(MTDDirectionsOverlay *overlay, NSError *error) {
-                                                  __strong MTDMapView *strongSelf = weakSelf;
-                                                  
-                                                  if (overlay != nil) {
-                                                      overlay = [self notifyDelegateDidFinishLoadingOverlay:overlay];
-                                                      
-                                                      strongSelf.directionsDisplayType = MTDDirectionsDisplayTypeOverview;
-                                                      strongSelf.directionsOverlay = overlay;
-                                                      
-                                                      if (zoomToShowDirections) {
-                                                          [strongSelf setRegionToShowDirectionsAnimated:YES];
-                                                      } 
-                                                  } else {
-                                                      [self notifyDelegateDidFailLoadingOverlayWithError:error];
-                                                  }
-                                              }];
-        
-        [self notifyDelegateWillStartLoadingDirectionsFrom:from to:to routeType:routeType];
-        [self.request start];
-    }
+   [self mtd_loadAlternativeDirections:NO
+                                  from:from
+                                    to:to
+                             routeType:routeType
+                  zoomToShowDirections:zoomToShowDirections
+                     intermediateGoals:intermediateGoals
+                         optimizeRoute:optimizeRoute
+           maximumNumberOfAlternatives:1];
 }
 
-- (void)loadAlternateDirectionsFrom:(MTDWaypoint *)from
-                                 to:(MTDWaypoint *)to
-   maximumNumberOfAlternativeRoutes:(NSUInteger)maximumNumberOfAlternativeRoutes
-                          routeType:(MTDDirectionsRouteType)routeType
-               zoomToShowDirections:(BOOL)zoomToShowDirections {
-    // TODO: Implement this method
+- (void)loadAlternativeDirectionsFrom:(MTDWaypoint *)from
+                                   to:(MTDWaypoint *)to
+          maximumNumberOfAlternatives:(NSUInteger)maximumNumberOfAlternatives
+                            routeType:(MTDDirectionsRouteType)routeType
+                 zoomToShowDirections:(BOOL)zoomToShowDirections {
+    
+    [self mtd_loadAlternativeDirections:YES
+                                   from:from
+                                     to:to
+                              routeType:routeType
+                   zoomToShowDirections:zoomToShowDirections
+                      intermediateGoals:nil
+                          optimizeRoute:NO
+            maximumNumberOfAlternatives:maximumNumberOfAlternatives];
 }
 
 - (void)cancelLoadOfDirections {
@@ -281,7 +300,7 @@
     if (self.directionsOverlay != nil) {
         return MTDDirectionsOpenInMapsApp(self.fromCoordinate, self.toCoordinate, self.directionsOverlay.routeType);
     }
-
+    
     return NO;
 }
 
@@ -472,8 +491,61 @@
     return self.directionsOverlayView;
 }
 
+- (void)mtd_loadAlternativeDirections:(BOOL)alternativeDirections
+                                 from:(MTDWaypoint *)from
+                                   to:(MTDWaypoint *)to
+                            routeType:(MTDDirectionsRouteType)routeType
+                 zoomToShowDirections:(BOOL)zoomToShowDirections
+                    intermediateGoals:(NSArray *)intermediateGoals
+                        optimizeRoute:(BOOL)optimizeRoute
+          maximumNumberOfAlternatives:(NSUInteger)maximumNumberOfAlternatives {
+
+    if (alternativeDirections) {
+        MTDAssert(intermediateGoals.count == 0, @"Intermediate goals mustn't be specified when requesting alternative routes.");
+    } else {
+        MTDAssert(maximumNumberOfAlternatives == 1, @"There can only be one route requested, when we don't search for alterantives.");
+    }
+
+    __mtd_weak MTDMapView *weakSelf = self;
+    
+    [self.request cancel];
+    
+    if (from.valid && to.valid) {
+        mtd_parser_block parserCompletion = ^(MTDDirectionsOverlay *overlay, NSError *error) {
+            __strong MTDMapView *strongSelf = weakSelf;
+            
+            if (overlay != nil) {
+                overlay = [self notifyDelegateDidFinishLoadingOverlay:overlay];
+                
+                strongSelf.directionsDisplayType = MTDDirectionsDisplayTypeOverview;
+                strongSelf.directionsOverlay = overlay;
+                
+                if (zoomToShowDirections) {
+                    [strongSelf setRegionToShowDirectionsAnimated:YES];
+                } 
+            } else {
+                [self notifyDelegateDidFailLoadingOverlayWithError:error];
+            }
+        };
+
+        self.request = [MTDDirectionsRequest requestFrom:from
+                                                      to:to
+                                       intermediateGoals:intermediateGoals
+                                           optimizeRoute:optimizeRoute
+                                               routeType:routeType
+                                              completion:parserCompletion];
+
+        if (alternativeDirections) {
+            // TODO: Implement some fancy stuff here to make this work
+        }
+        
+        [self notifyDelegateWillStartLoadingDirectionsFrom:from to:to routeType:routeType];
+        [self.request start];
+    }
+}
+
 ////////////////////////////////////////////////////////////////////////
-#pragma mark - Delegate
+#pragma mark - Private Delegate Helper
 ////////////////////////////////////////////////////////////////////////
 
 - (void)notifyDelegateWillStartLoadingDirectionsFrom:(MTDWaypoint *)from 
