@@ -54,7 +54,7 @@
     }
 }
 
-- (NSString *)mtd_httpAddress {
+- (NSString *)mtd_HTTPAddress {
     return kMTDGoogleBaseAddress;
 }
 

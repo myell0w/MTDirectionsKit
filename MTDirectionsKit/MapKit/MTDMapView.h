@@ -113,7 +113,7 @@
  
  @see loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:
  @see loadDirectionsFrom:to:intermediateGoals:optimizeRoute:routeType:zoomToShowDirections:
- @see loadAlternateDirectionsFrom:to:maxRoutes:routeType:zoomToShowDirections:
+ @see loadAlternativeDirectionsFrom:to:maximumNumberOfAlternatives:routeType:zoomToShowDirections:
  @see cancelLoadOfDirections
  */
 - (void)loadDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate
@@ -133,7 +133,7 @@
  
  @see loadDirectionsFrom:to:routeType:zoomToShowDirections:
  @see loadDirectionsFrom:to:intermediateGoals:optimizeRoute:routeType:zoomToShowDirections:
- @see loadAlternateDirectionsFrom:to:maxRoutes:routeType:zoomToShowDirections:
+ @see loadAlternativeDirectionsFrom:to:maximumNumberOfAlternatives:routeType:zoomToShowDirections:
  @see cancelLoadOfDirections
  */
 - (void)loadDirectionsFromAddress:(NSString *)fromAddress
@@ -157,7 +157,7 @@
  
  @see loadDirectionsFrom:to:routeType:zoomToShowDirections:
  @see loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:
- @see loadAlternateDirectionsFrom:to:maxRoutes:routeType:zoomToShowDirections:
+ @see loadAlternativeDirectionsFrom:to:maximumNumberOfAlternatives:routeType:zoomToShowDirections:
  @see cancelLoadOfDirections
  */
 - (void)loadDirectionsFrom:(MTDWaypoint *)from

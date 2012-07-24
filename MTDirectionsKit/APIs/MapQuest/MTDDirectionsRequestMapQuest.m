@@ -69,7 +69,7 @@
     }
 }
 
-- (NSString *)mtd_httpAddress {
+- (NSString *)mtd_HTTPAddress {
     NSString *routingMethod = self.mtd_optimizeRoute ? kMTDMapQuestRoutingMethodOptimized : kMTDMapQuestRoutingMethodDefault;
     
     return [NSString stringWithFormat:@"%@/%@/%@/%@",

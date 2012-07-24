@@ -19,8 +19,8 @@
 @property (nonatomic, readonly) NSString *mtd_fullAddress;
 
 // Private API from MTDDirectionsRequest+MTDDirectionsPrivateAPI.h
-@property (nonatomic, strong, setter = mtd_setHttpRequest:) MTDHTTPRequest *mtd_httpRequest;
-@property (nonatomic, readonly) NSString *mtd_httpAddress;
+@property (nonatomic, strong, setter = mtd_setHTTPRequest:) MTDHTTPRequest *mtd_HTTPRequest;
+@property (nonatomic, readonly) NSString *mtd_HTTPAddress;
 @property (nonatomic, readonly) Class mtd_parserClass;
 @property (nonatomic, readonly) BOOL mtd_optimizeRoute;
 
@@ -34,7 +34,7 @@
 @synthesize intermediateGoals = _intermediateGoals;
 @synthesize completion = _completion;
 @synthesize routeType = _routeType;
-@synthesize mtd_httpRequest = _mtd_httpRequest;
+@synthesize mtd_HTTPRequest = _mtd_HTTPRequest;
 @synthesize mtd_optimizeRoute = _mtd_optimizeRoute;
 @synthesize mtd_parameters = _mtd_parameters;
 
@@ -103,15 +103,15 @@ intermediateGoals:(NSArray *)intermediateGoals
 - (void)start {
     NSString *address = self.mtd_fullAddress;
 
-    self.mtd_httpRequest = [[MTDHTTPRequest alloc] initWithAddress:address
+    self.mtd_HTTPRequest = [[MTDHTTPRequest alloc] initWithAddress:address
                                                 callbackTarget:self
                                                         action:@selector(requestFinished:)];
     
-    [self.mtd_httpRequest start];
+    [self.mtd_HTTPRequest start];
 }
 
 - (void)cancel {
-    [self.mtd_httpRequest cancel];
+    [self.mtd_HTTPRequest cancel];
 }
 
 - (void)requestFinished:(MTDHTTPRequest *)httpRequest {
@@ -162,8 +162,8 @@ intermediateGoals:(NSArray *)intermediateGoals
     [self doesNotRecognizeSelector:_cmd];
 }
 
-- (NSString *)httpAddress {
-    MTDLogError(@"httpAddress was called on a request that doesn't override it (Class: %@)", 
+- (NSString *)mtd_HTTPAddress {
+    MTDLogError(@"mtd_HTTPAddress was called on a request that doesn't override it (Class: %@)", 
                 NSStringFromClass([self class]));
     
     [self doesNotRecognizeSelector:_cmd];
@@ -171,8 +171,8 @@ intermediateGoals:(NSArray *)intermediateGoals
     return nil;
 }
 
-- (Class)parserClass {
-    MTDLogError(@"parserClass was called on a request that doesn't override it (Class: %@)", 
+- (Class)mtd_parserClass {
+    MTDLogError(@"mtd_parserClass was called on a request that doesn't override it (Class: %@)", 
                 NSStringFromClass([self class]));
     
     [self doesNotRecognizeSelector:_cmd];
@@ -184,10 +184,10 @@ intermediateGoals:(NSArray *)intermediateGoals
 #pragma mark - Private
 ////////////////////////////////////////////////////////////////////////
 
-- (NSString *)fullAddress {
-    MTDAssert(self.mtd_httpAddress.length > 0, @"HTTP Address must be set.");
+- (NSString *)mtd_fullAddress {
+    MTDAssert(self.mtd_HTTPAddress.length > 0, @"HTTP Address must be set.");
 
-    NSMutableString *address = [NSMutableString stringWithString:self.mtd_httpAddress];
+    NSMutableString *address = [NSMutableString stringWithString:self.mtd_HTTPAddress];
     
     if (self.mtd_parameters.count > 0) {
         [address appendString:@"?"];
