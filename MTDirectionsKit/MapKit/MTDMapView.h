@@ -28,13 +28,13 @@
  
  Sample usage:
  
-    MTDMapView *_mapView = [[MTDMapView alloc] initWithFrame:self.view.bounds];
-    _mapView.directionsDelegate = self;
+ MTDMapView *_mapView = [[MTDMapView alloc] initWithFrame:self.view.bounds];
+ _mapView.directionsDelegate = self;
  
-    [_mapView loadDirectionsFrom:CLLocationCoordinate2DMake(51.38713, -1.0316)
-                              to:CLLocationCoordinate2DMake(51.4554, -0.9742)
-                       routeType:MTDDirectionsRouteTypeFastestDriving
-            zoomToShowDirections:YES];
+ [_mapView loadDirectionsFrom:CLLocationCoordinate2DMake(51.38713, -1.0316)
+ to:CLLocationCoordinate2DMake(51.4554, -0.9742)
+ routeType:MTDDirectionsRouteTypeFastestDriving
+ zoomToShowDirections:YES];
  
  */
 @interface MTDMapView : MKMapView
@@ -73,8 +73,8 @@
  
  Currently there are the following types supported:
  
-  - MTDDirectionsDisplayTypeNone: don't display anything
-  - MTDDirectionsDisplayTypeOverview: displays a polyline with all Waypoints of the route
+ - MTDDirectionsDisplayTypeNone: don't display anything
+ - MTDDirectionsDisplayTypeOverview: displays a polyline with all Waypoints of the route
  */
 @property (nonatomic, assign) MTDDirectionsDisplayType directionsDisplayType;
 
@@ -110,9 +110,10 @@
  @param toCoordinate the end point of the direction
  @param routeType the type of the route requested, e.g. pedestrian, cycling, fastest driving
  @param zoomToShowDirections flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)
-
+ 
  @see loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:
  @see loadDirectionsFrom:to:intermediateGoals:optimizeRoute:routeType:zoomToShowDirections:
+ @see loadAlternateDirectionsFrom:to:maxRoutes:routeType:zoomToShowDirections:
  @see cancelLoadOfDirections
  */
 - (void)loadDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate
@@ -132,6 +133,7 @@
  
  @see loadDirectionsFrom:to:routeType:zoomToShowDirections:
  @see loadDirectionsFrom:to:intermediateGoals:optimizeRoute:routeType:zoomToShowDirections:
+ @see loadAlternateDirectionsFrom:to:maxRoutes:routeType:zoomToShowDirections:
  @see cancelLoadOfDirections
  */
 - (void)loadDirectionsFromAddress:(NSString *)fromAddress
@@ -149,12 +151,13 @@
  @param to the end waypoint of the route
  @param intermediateGoals an optional array of waypoint we want to travel to along the route
  @param optimizeRoute a flag that indicates whether the route shall get optimized if there are intermediate goals.
-                      if YES, the intermediate goals can get reordered to guarantee a fast route traversal
+ if YES, the intermediate goals can get reordered to guarantee a fast route traversal
  @param routeType the type of the route requested, e.g. pedestrian, cycling, fastest driving
  @param zoomToShowDirections flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)
  
  @see loadDirectionsFrom:to:routeType:zoomToShowDirections:
- @see loadDirectionsFrom:to:intermediateGoals:optimizeRoute:routeType:zoomToShowDirections:
+ @see loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:
+ @see loadAlternateDirectionsFrom:to:maxRoutes:routeType:zoomToShowDirections:
  @see cancelLoadOfDirections
  */
 - (void)loadDirectionsFrom:(MTDWaypoint *)from
@@ -164,12 +167,36 @@
                  routeType:(MTDDirectionsRouteType)routeType
       zoomToShowDirections:(BOOL)zoomToShowDirections;
 
+
 /**
- Cancels a possible ongoing request for loading directions.
- Does nothing if there is no request active.
+ Starts a request and loads maximumNumberOfAlternativeRoutes different routes between the
+ specified start and end waypoints. When the request is finished the directionsOverlay gets set
+ on the MapView and the region gets zoomed (animated) to show the whole overlay, if the flag 
+ zoomToShowDirections is set.
  
-  @see loadDirectionsFrom:to:routeType:zoomToShowDirections:
+ @param from the starting waypoint of the route
+ @param to the end waypoint of the route
+ @param maximumNumberOfAlternativeRoutes the number of alternative routes to be requested at a max
+ @param routeType the type of the route requested, e.g. pedestrian, cycling, fastest driving
+ @param zoomToShowDirections flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)
+ 
+ @see loadDirectionsFrom:to:routeType:zoomToShowDirections:
+ @see loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:
+ @see loadDirectionsFrom:to:intermediateGoals:optimizeRoute:routeType:zoomToShowDirections:
+ @see cancelLoadOfDirections
  */
+- (void)loadAlternateDirectionsFrom:(MTDWaypoint *)from
+                                 to:(MTDWaypoint *)to
+   maximumNumberOfAlternativeRoutes:(NSUInteger)maximumNumberOfAlternativeRoutes
+                          routeType:(MTDDirectionsRouteType)routeType
+               zoomToShowDirections:(BOOL)zoomToShowDirections;
+
+/**
+Cancels a possible ongoing request for loading directions.
+Does nothing if there is no request active.
+
+@see loadDirectionsFrom:to:routeType:zoomToShowDirections:
+*/
 - (void)cancelLoadOfDirections;
 
 /**
@@ -187,7 +214,7 @@
  that are currently displayed on top of your MTDMapView in the built-in Maps.app
  of the user's device. Does nothing otherwise.
  
-  @return YES, if the Maps App was opened successfully, NO otherwise
+ @return YES, if the Maps App was opened successfully, NO otherwise
  */
 - (BOOL)openDirectionsInMapApp;
 

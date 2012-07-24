@@ -160,6 +160,14 @@
     }
 }
 
+- (void)loadAlternateDirectionsFrom:(MTDWaypoint *)from
+                                 to:(MTDWaypoint *)to
+   maximumNumberOfAlternativeRoutes:(NSUInteger)maximumNumberOfAlternativeRoutes
+                          routeType:(MTDDirectionsRouteType)routeType
+               zoomToShowDirections:(BOOL)zoomToShowDirections {
+    // TODO: Implement this method
+}
+
 - (void)cancelLoadOfDirections {
     [self.request cancel];
     self.request = nil;
