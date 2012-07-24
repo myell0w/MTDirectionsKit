@@ -162,6 +162,8 @@
 		9B10AA28155D85B8002A3052 /* MTDDirectionsRequest+MTDirectionsPrivateAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTDDirectionsRequest+MTDirectionsPrivateAPI.h"; sourceTree = "<group>"; };
 		9B10AA29155D85B8002A3052 /* MTDDirectionsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDDirectionsRequest.h; sourceTree = "<group>"; };
 		9B10AA2A155D85B8002A3052 /* MTDDirectionsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDDirectionsRequest.m; sourceTree = "<group>"; };
+		9B23F65715BEFAB40069EAD1 /* MTDAssert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MTDAssert.h; path = "MTDirectionsKit/Supporting Files/MTDAssert.h"; sourceTree = SOURCE_ROOT; };
+		9B23F65915BEFAC00069EAD1 /* MTDWeak.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MTDWeak.h; path = "MTDirectionsKit/Supporting Files/MTDWeak.h"; sourceTree = SOURCE_ROOT; };
 		9B2C4296155EB6A400C0E4CE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9B2C42B5155EB85B00C0E4CE /* MTDDirectionsParserGoogle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDDirectionsParserGoogle.h; sourceTree = "<group>"; };
 		9B2C42B6155EB85B00C0E4CE /* MTDDirectionsParserGoogle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDDirectionsParserGoogle.m; sourceTree = "<group>"; };
@@ -432,7 +434,9 @@
 		9B6C18C614A7E18200087893 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9B23F65715BEFAB40069EAD1 /* MTDAssert.h */,
 				9B8F515E155C516E00A9C10C /* MTDirectionsKit.h */,
+				9B23F65915BEFAC00069EAD1 /* MTDWeak.h */,
 				9B8F515F155C516E00A9C10C /* Prefix.pch */,
 			);
 			name = "Supporting Files";
