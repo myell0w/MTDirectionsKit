@@ -64,6 +64,7 @@
 		9B10AA43155D85B8002A3052 /* MTDDirectionsRequest+MTDirectionsPrivateAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B10AA28155D85B8002A3052 /* MTDDirectionsRequest+MTDirectionsPrivateAPI.h */; };
 		9B10AA44155D85B8002A3052 /* MTDDirectionsRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B10AA29155D85B8002A3052 /* MTDDirectionsRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B10AA45155D85B8002A3052 /* MTDDirectionsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B10AA2A155D85B8002A3052 /* MTDDirectionsRequest.m */; };
+		9B23F65A15BEFE7C0069EAD1 /* MTDWeak.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B23F65915BEFAC00069EAD1 /* MTDWeak.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B2C4297155EB6A400C0E4CE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B2C4296155EB6A400C0E4CE /* UIKit.framework */; };
 		9B2C42BA155EB85B00C0E4CE /* MTDDirectionsParserGoogle.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2C42B5155EB85B00C0E4CE /* MTDDirectionsParserGoogle.h */; };
 		9B2C42BB155EB85B00C0E4CE /* MTDDirectionsParserGoogle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C42B6155EB85B00C0E4CE /* MTDDirectionsParserGoogle.m */; };
@@ -487,6 +488,7 @@
 				9B4E98DB15AD702A002F0302 /* MTDAddress.h in Headers */,
 				9BDE013A15B08A9E001A8132 /* MTDRoute.h in Headers */,
 				9BDE014515B1E04E001A8132 /* MTDRoute+MTDirectionsPrivateAPI.h in Headers */,
+				9B23F65A15BEFE7C0069EAD1 /* MTDWeak.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,7 @@
 #import "MTDDirectionsRouteType.h"
 #import "MTDDirectionsDisplayType.h"
 #import "MTDDirectionsDefines.h"
+#import "MTDWeak.h"
 
 
 @class MTDDistance;
@@ -45,7 +46,7 @@
 /**
  The receiver's directionsDelegate
  */
-@property (nonatomic, unsafe_unretained) id<MTDDirectionsDelegate> directionsDelegate;
+@property (nonatomic, mtd_weak) id<MTDDirectionsDelegate> directionsDelegate;
 
 /******************************************
  @name Directions
