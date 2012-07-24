@@ -8,22 +8,6 @@
 
 
 ////////////////////////////////////////////////////////////////////////
-#pragma mark - GCD Queue
-////////////////////////////////////////////////////////////////////////
-
-static dispatch_queue_t mtd_parser_queue;
-NS_INLINE dispatch_queue_t parser_queue(void) {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        NSString *queueIdentifier = @"at.myell0w.MTDirectionsKit.parser";
-        mtd_parser_queue = dispatch_queue_create([queueIdentifier UTF8String], 0);
-    });
-    
-    return mtd_parser_queue;
-}
-
-
-////////////////////////////////////////////////////////////////////////
 #pragma mark - MTDDirectionsParser
 ////////////////////////////////////////////////////////////////////////
 
@@ -139,8 +123,9 @@ intermediateGoals:(NSArray *)intermediateGoals
                                                            intermediateGoals:self.intermediateGoals
                                                                    routeType:self.routeType
                                                                         data:httpRequest.data];
-        
-        dispatch_async(parser_queue(), ^{
+
+        dispatch_queue_t parserQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0L);
+        dispatch_async(parserQueue, ^{
             [parser parseWithCompletion:self.completion];
         });
     } else {
