@@ -14,7 +14,8 @@
 
 // This method parses the waypointNodes and returns an array of MTDWaypoints
 - (NSArray *)waypointsFromWaypointNodes:(NSArray *)waypointNodes;
-// This method parses all addresses and orders the intermediate goals as optimised by the API
+// This method parses all addresses and orders the intermediate goals in the same order as optimised by the API.
+// That is, if optimization is enabled the MapQuest can reorder the intermediate goals to provide the fastest route possible.
 - (NSArray *)orderedIntermediateGoalsWithSequenceNode:(MTDXMLElement *)sequenceNode addressNodes:(NSArray *)addressNodes;
 // This method parses an address and returns an instance of MTDAddress
 - (MTDAddress *)addressFromAddressNode:(MTDXMLElement *)addressNode;
