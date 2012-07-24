@@ -2,6 +2,7 @@
 #import "MTDDirectionsOverlay.h"
 #import "MTDDistance.h"
 #import "MTDWaypoint.h"
+#import "MTDAddress.h"
 
 
 @implementation MTDDirectionsParserMapQuestTest
@@ -23,7 +24,15 @@
         
         [parser parseWithCompletion:^(MTDDirectionsOverlay *overlay, NSError *error) {
             STAssertNil(error,@"There was an error parsing mapquest_guessing_vienna.xml");
-            
+
+            MTDAddress *fromAddress = overlay.fromAddress;
+            MTDAddress *toAddress = overlay.toAddress;
+
+            STAssertEqualObjects(fromAddress.state, @"Burgenland", @"fromAddress: error parsing state");
+            STAssertEqualObjects(fromAddress.country, @"Austria", @"fromAddress: error parsing country");
+            STAssertEqualObjects(toAddress.state, @"Vienna", @"toAddress: error parsing state");
+            STAssertEqualObjects(toAddress.country, @"Austria", @"toAddress: error parsing country");
+
             STAssertEquals(overlay.timeInSeconds, 7915., @"Error parsing time");
             STAssertEqualObjects(overlay.formattedTime, @"2:11:55", @"Error formatting time");
             STAssertTrue(overlay.waypoints.count == 248, @"Error parsing waypoints");
