@@ -11,8 +11,8 @@
     NSMutableArray *_content;
 }
 
-+ (MTDXMLElement *)nodeFromLibXMLNode:(xmlNodePtr)libXMLNode parentNode:(MTDXMLElement *)parentNode;
-+ (NSArray *)nodesForXPathQuery:(NSString *)query onLibXMLDoc:(xmlDocPtr)doc;
++ (MTDXMLElement *)mtd_nodeFromLibXMLNode:(xmlNodePtr)libXMLNode parentNode:(MTDXMLElement *)parentNode;
++ (NSArray *)mtd_nodesForXPathQuery:(NSString *)query onLibXMLDoc:(xmlDocPtr)doc;
 
 // re-defined as read/write
 @property (nonatomic, strong, readwrite) NSString *name;
@@ -38,7 +38,7 @@
 		return nil;
     }
 	
-	NSArray *result = [MTDXMLElement nodesForXPathQuery:query onLibXMLDoc:doc];
+	NSArray *result = [MTDXMLElement mtd_nodesForXPathQuery:query onLibXMLDoc:doc];
     xmlFreeDoc(doc); 
 	
 	return result;
@@ -53,7 +53,7 @@
 		return nil;
     }
 	
-	NSArray *result = [MTDXMLElement nodesForXPathQuery:query onLibXMLDoc:doc];
+	NSArray *result = [MTDXMLElement mtd_nodesForXPathQuery:query onLibXMLDoc:doc];
     xmlFreeDoc(doc); 
 	
 	return result;
@@ -168,7 +168,7 @@
 #pragma mark - Private
 ////////////////////////////////////////////////////////////////////////
 
-+ (MTDXMLElement *)nodeFromLibXMLNode:(xmlNodePtr)libXMLNode parentNode:(MTDXMLElement *)parentNode {
++ (MTDXMLElement *)mtd_nodeFromLibXMLNode:(xmlNodePtr)libXMLNode parentNode:(MTDXMLElement *)parentNode {
 	MTDXMLElement *node = [[MTDXMLElement alloc] init];
 	
 	if (libXMLNode->name) {
@@ -221,7 +221,7 @@
 	
     if (childLibXMLNode) {
 		while (childLibXMLNode) {
-			MTDXMLElement *childNode = [MTDXMLElement nodeFromLibXMLNode:childLibXMLNode parentNode:node];
+			MTDXMLElement *childNode = [MTDXMLElement mtd_nodeFromLibXMLNode:childLibXMLNode parentNode:node];
 			
             if (childNode) {
 				if (!node.content) {
@@ -238,7 +238,7 @@
 	return node;
 }
 
-+ (NSArray *)nodesForXPathQuery:(NSString *)query onLibXMLDoc:(xmlDocPtr)doc {
++ (NSArray *)mtd_nodesForXPathQuery:(NSString *)query onLibXMLDoc:(xmlDocPtr)doc {
     xmlXPathContextPtr xpathCtx; 
     xmlXPathObjectPtr xpathObj; 
     
@@ -263,7 +263,7 @@
 	NSMutableArray *resultNodes = [NSMutableArray array];
 	
     for (NSInteger i = 0; i < nodes->nodeNr; i++) {
-		MTDXMLElement *node = [MTDXMLElement nodeFromLibXMLNode:nodes->nodeTab[i] parentNode:nil];
+		MTDXMLElement *node = [MTDXMLElement mtd_nodeFromLibXMLNode:nodes->nodeTab[i] parentNode:nil];
 		
         if (node) {
 			[resultNodes addObject:node];
