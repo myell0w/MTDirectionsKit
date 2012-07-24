@@ -61,7 +61,9 @@ NSString* MTDGetFormattedTime(NSTimeInterval interval) {
 }
 
 NSString* MTDGetFormattedTimeWithFormat(NSTimeInterval interval, NSString *format) {
-    if (interval < 0.) {
+    MTDAssert(format.length > 0, @"Format must be set.");
+    
+    if (interval <= 0. || format.length == 0) {
         return @"0:00";
     }
     
@@ -78,7 +80,7 @@ NSString* MTDGetFormattedTimeWithFormat(NSTimeInterval interval, NSString *forma
 
 NSString* MTDStringFromCLLocationCoordinate2D(CLLocationCoordinate2D coordinate) {
     if (CLLocationCoordinate2DIsValid(coordinate)) {
-        return [NSString stringWithFormat:@"(%f,%f)", coordinate.latitude, coordinate.longitude];
+        return [NSString stringWithFormat:@"(%6f,%6f)", coordinate.latitude, coordinate.longitude];
     } else {
         return @"Invalid CLLocationCoordinate2D";
     }

@@ -32,7 +32,7 @@
 - (id)initWithAddress:(MTDAddress *)address {
     if ((self = [super init])) {
         _address = address;
-        _coordinate = MTDInvalidCLLocationCoordinate2D;
+        _coordinate = kCLLocationCoordinate2DInvalid;
     }
     
     return self;

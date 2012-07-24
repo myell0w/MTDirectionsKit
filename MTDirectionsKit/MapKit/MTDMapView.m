@@ -270,7 +270,7 @@
         return self.directionsOverlay.fromCoordinate;
     }
     
-    return MTDInvalidCLLocationCoordinate2D;
+    return kCLLocationCoordinate2DInvalid;
 }
 
 - (CLLocationCoordinate2D)toCoordinate {
@@ -278,7 +278,7 @@
         return self.directionsOverlay.toCoordinate;
     }
     
-    return MTDInvalidCLLocationCoordinate2D;
+    return kCLLocationCoordinate2DInvalid;
 }
 
 - (double)distanceInMeter {

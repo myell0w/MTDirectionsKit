@@ -20,6 +20,3 @@
 #define MTDAssert(condition, ...) do { if ((condition) == NO) { MTDLogAlways(__VA_ARGS__); }} while(0)
 
 #endif
-
-
-#define MTDParameterAssert(condition) MTDAssert((condition), @"Invalid parameter not satisfying: %s", #condition)
