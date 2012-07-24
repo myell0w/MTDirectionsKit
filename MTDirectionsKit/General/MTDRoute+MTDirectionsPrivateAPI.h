@@ -18,6 +18,6 @@
 @interface MTDRoute (MTDirectionsPrivateAPI)
 
 /** Internally we use a MKPolyline in MTDRoute to represent the overlay. */
-@property (nonatomic, readonly) MKPolyline *polyline;
+@property (nonatomic, readonly) MKPolyline *mtd_polyline;
 
 @end

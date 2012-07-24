@@ -44,15 +44,15 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (CLLocationCoordinate2D)coordinate {
-    return self.activeRoute.polyline.coordinate;
+    return self.activeRoute.mtd_polyline.coordinate;
 }
 
 - (MKMapRect)boundingMapRect {
-    return self.activeRoute.polyline.boundingMapRect;
+    return self.activeRoute.mtd_polyline.boundingMapRect;
 }
 
 - (BOOL)intersectsMapRect:(MKMapRect)mapRect {
-    return [self.activeRoute.polyline intersectsMapRect:mapRect];
+    return [self.activeRoute.mtd_polyline intersectsMapRect:mapRect];
 }
 
 ////////////////////////////////////////////////////////////////////////
