@@ -11,7 +11,7 @@
 
 @interface MTDDirectionsRequestGoogle ()
 
-- (void)setup;
+- (void)mtd_setup;
 
 @end
 
@@ -28,7 +28,7 @@
          routeType:(MTDDirectionsRouteType)routeType
         completion:(mtd_parser_block)completion {
     if ((self = [super initWithFrom:from to:to intermediateGoals:intermediateGoals optimizeRoute:optimizeRoute routeType:routeType completion:completion])) {
-        [self setup];
+        [self mtd_setup];
         
         [self setValue:[from descriptionForAPI:MTDDirectionsAPIGoogle] forParameter:@"origin"];
         [self setValue:[to descriptionForAPI:MTDDirectionsAPIGoogle] forParameter:@"destination"];
@@ -44,7 +44,7 @@
 
 - (void)setValueForParameterWithIntermediateGoals:(NSArray *)intermediateGoals {
     if (intermediateGoals.count > 0 && self.routeType != MTDDirectionsRouteTypePedestrianIncludingPublicTransport) {
-        NSMutableString *parameter = [NSMutableString stringWithString:(self.optimizeRoute ? @"optimize:true" : @"optimize:false")];
+        NSMutableString *parameter = [NSMutableString stringWithString:(self.mtd_optimizeRoute ? @"optimize:true" : @"optimize:false")];
         
         [intermediateGoals enumerateObjectsUsingBlock:^(id obj, __unused NSUInteger idx, __unused BOOL *stop) {
             [parameter appendFormat:@"|%@",[obj descriptionForAPI:MTDDirectionsAPIGoogle]];
@@ -54,11 +54,11 @@
     }
 }
 
-- (NSString *)httpAddress {
+- (NSString *)mtd_httpAddress {
     return kMTDGoogleBaseAddress;
 }
 
-- (Class)parserClass {
+- (Class)mtd_parserClass {
     return [MTDDirectionsParserGoogle class];
 }
 
@@ -66,7 +66,7 @@
 #pragma mark - Private
 ////////////////////////////////////////////////////////////////////////
 
-- (void)setup {
+- (void)mtd_setup {
     [self setValue:@"true" forParameter:@"sensor"];
 }
 

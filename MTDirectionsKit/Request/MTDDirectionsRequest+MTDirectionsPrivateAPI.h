@@ -17,19 +17,19 @@
 @interface MTDDirectionsRequest (MTDPrivateAPI)
 
 /** object used to perform a HTTP request */
-@property (nonatomic, strong) MTDHTTPRequest *httpRequest;
+@property (nonatomic, strong, setter = mtd_setHttpRequest:) MTDHTTPRequest *mtd_httpRequest;
 /** the address of the the request to perform */
-@property (nonatomic, readonly) NSString *httpAddress;
+@property (nonatomic, readonly) NSString *mtd_httpAddress;
 /** the class of the parser used to parse the obtained data */
-@property (nonatomic, readonly) Class parserClass;
+@property (nonatomic, readonly) Class mtd_parserClass;
 /** flag whether the route gets optimized when there are intermediate goals */
-@property (nonatomic, readonly) BOOL optimizeRoute;
+@property (nonatomic, readonly) BOOL mtd_optimizeRoute;
 
 /** 
  This method is called once the request is finished.
  
  @param httpRequest the object used to perform the request
  */
-- (void)requestFinished:(MTDHTTPRequest *)httpRequest;
+- (void)mtd_requestFinished:(MTDHTTPRequest *)httpRequest;
 
 @end

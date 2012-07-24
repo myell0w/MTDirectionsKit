@@ -13,12 +13,12 @@
 @interface MTDDirectionsParserMapQuest ()
 
 // This method parses the waypointNodes and returns an array of MTDWaypoints
-- (NSArray *)waypointsFromWaypointNodes:(NSArray *)waypointNodes;
+- (NSArray *)mtd_waypointsFromWaypointNodes:(NSArray *)waypointNodes;
 // This method parses all addresses and orders the intermediate goals in the same order as optimised by the API.
 // That is, if optimization is enabled the MapQuest can reorder the intermediate goals to provide the fastest route possible.
-- (NSArray *)orderedIntermediateGoalsWithSequenceNode:(MTDXMLElement *)sequenceNode addressNodes:(NSArray *)addressNodes;
+- (NSArray *)mtd_orderedIntermediateGoalsWithSequenceNode:(MTDXMLElement *)sequenceNode addressNodes:(NSArray *)addressNodes;
 // This method parses an address and returns an instance of MTDAddress
-- (MTDAddress *)addressFromAddressNode:(MTDXMLElement *)addressNode;
+- (MTDAddress *)mtd_addressFromAddressNode:(MTDXMLElement *)addressNode;
 
 @end
 
@@ -49,14 +49,14 @@
         NSArray *locationAddressNodes = [MTDXMLElement nodesForXPathQuery:@"//route/locations/location" onXML:self.data];
         MTDXMLElement *locationSequenceNode = [MTDXMLElement nodeForXPathQuery:@"//route/locationSequence" onXML:self.data];
         
-        NSArray *waypoints = [self waypointsFromWaypointNodes:waypointNodes];
+        NSArray *waypoints = [self mtd_waypointsFromWaypointNodes:waypointNodes];
         MTDDistance *distance = nil;
         NSTimeInterval timeInSeconds = -1.;
         NSMutableDictionary *additionalInfo = [NSMutableDictionary dictionary];
         
         // Order the intermediate goals in the order returned by the API (optimized)
         // and parse the address information and save the address for each goal (from, to, intermediateGoals)
-        NSArray *orderedIntermediateGoals = [self orderedIntermediateGoalsWithSequenceNode:locationSequenceNode
+        NSArray *orderedIntermediateGoals = [self mtd_orderedIntermediateGoalsWithSequenceNode:locationSequenceNode
                                                                               addressNodes:locationAddressNodes];
         
         // Parse Additional Info of directions
@@ -119,7 +119,7 @@
 #pragma mark - Private
 ////////////////////////////////////////////////////////////////////////
 
-- (NSArray *)waypointsFromWaypointNodes:(NSArray *)waypointNodes {
+- (NSArray *)mtd_waypointsFromWaypointNodes:(NSArray *)waypointNodes {
     NSMutableArray *waypoints = [NSMutableArray arrayWithCapacity:waypointNodes.count+2];
     
     // add start coordinate
@@ -151,7 +151,7 @@
     return waypoints;
 }
 
-- (NSArray *)orderedIntermediateGoalsWithSequenceNode:(MTDXMLElement *)sequenceNode addressNodes:(NSArray *)addressNodes {
+- (NSArray *)mtd_orderedIntermediateGoalsWithSequenceNode:(MTDXMLElement *)sequenceNode addressNodes:(NSArray *)addressNodes {
     NSArray *sequence = [sequenceNode.contentString componentsSeparatedByString:@","];
     // all goals, including from and to
     NSMutableArray *allGoals = [NSMutableArray arrayWithArray:self.intermediateGoals];
@@ -166,7 +166,7 @@
     
     // Parse Addresses of goals
     [addressNodes enumerateObjectsUsingBlock:^(MTDXMLElement *addressNode, NSUInteger idx, __unused BOOL *stop) {
-        MTDAddress *address = [self addressFromAddressNode:addressNode];
+        MTDAddress *address = [self mtd_addressFromAddressNode:addressNode];
         MTDWaypoint *waypoint = [orderedIntermediateGoals objectAtIndex:idx];
 
         // update address of corresponding waypoint
@@ -176,7 +176,7 @@
     return [orderedIntermediateGoals subarrayWithRange:NSMakeRange(1, orderedIntermediateGoals.count-2)];
 }
 
-- (MTDAddress *)addressFromAddressNode:(MTDXMLElement *)addressNode {
+- (MTDAddress *)mtd_addressFromAddressNode:(MTDXMLElement *)addressNode {
     MTDXMLElement *streetNode = [addressNode firstChildNodeWithName:@"street"];
     MTDXMLElement *cityNode = [addressNode firstChildNodeWithName:@"adminArea5"];
     MTDXMLElement *stateNode = [addressNode firstChildNodeWithName:@"adminArea3"];

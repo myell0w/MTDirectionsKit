@@ -9,7 +9,7 @@
  Internally we use a MKPolyline to represent the overlay since MKPolyline
  cannot be subclassed sanely and we don't want to reinvent the wheel.
  */
-@property (nonatomic, strong) MKPolyline *polyline;
+@property (nonatomic, strong, setter = mtd_setPolyline:) MKPolyline *mtd_polyline;
 
 // Re-defining properties as readwrite
 @property (nonatomic, copy, readwrite) NSArray *waypoints;
@@ -23,11 +23,11 @@
 @implementation MTDRoute
 
 @synthesize name = _name;
-@synthesize polyline = _polyline;
 @synthesize waypoints = _waypoints;
 @synthesize distance = _distance;
 @synthesize timeInSeconds = _timeInSeconds;
 @synthesize additionalInfo = _additionalInfo;
+@synthesize mtd_polyline = _mtd_polyline;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
@@ -57,7 +57,7 @@
             } 
         }
         
-        self.polyline = [MKPolyline polylineWithPoints:points count:pointIndex];
+        self.mtd_polyline = [MKPolyline polylineWithPoints:points count:pointIndex];
         self.waypoints = waypoints;
         self.distance = distance;
         self.timeInSeconds = timeInSeconds;
@@ -100,11 +100,11 @@
 }
 
 - (MKMapPoint *)points {
-    return self.polyline.points;
+    return self.mtd_polyline.points;
 }
 
 - (NSUInteger)pointCount {
-    return self.polyline.pointCount;
+    return self.mtd_polyline.pointCount;
 }
 
 - (NSString *)formattedTime {

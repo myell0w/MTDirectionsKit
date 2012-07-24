@@ -12,15 +12,15 @@
 @interface MTDDirectionsParserGoogle ()
 
 // This method decodes a polyline and returns an array of MTDWaypoints
-- (NSArray *)waypointsFromEncodedPolyline:(NSString *)encodedPolyline;
+- (NSArray *)mtd_waypointsFromEncodedPolyline:(NSString *)encodedPolyline;
 
 // This method parses the waypointNodes and returns an array of MTDWaypoints
-- (NSArray *)waypointsFromWaypointNodes:(NSArray *)waypointNodes;
+- (NSArray *)mtd_waypointsFromWaypointNodes:(NSArray *)waypointNodes;
 // This method parses all addresses and orders the intermediate goals in the same order as optimised by the API.
 // That is, if optimization is enabled the Google can reorder the intermediate goals to provide the fastest route possible.
-- (NSArray *)orderedIntermediateGoalsWithSequenceNodes:(NSArray *)sequenceNodes addressNodes:(NSArray *)addressNodes;
+- (NSArray *)mtd_orderedIntermediateGoalsWithSequenceNodes:(NSArray *)sequenceNodes addressNodes:(NSArray *)addressNodes;
 // This method parses an address and returns an instance of MTDAddress
-- (MTDAddress *)addressFromAddressNode:(MTDXMLElement *)addressNode;
+- (MTDAddress *)mtd_addressFromAddressNode:(MTDXMLElement *)addressNode;
 
 @end
 
@@ -53,14 +53,14 @@
         MTDXMLElement *toAddressNode = [MTDXMLElement nodeForXPathQuery:@"//route[1]/leg[last()]/end_address" onXML:self.data];
         NSArray *locationSequenceNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/waypoint_index" onXML:self.data];
 
-        NSArray *waypoints = [self waypointsFromWaypointNodes:waypointNodes];
+        NSArray *waypoints = [self mtd_waypointsFromWaypointNodes:waypointNodes];
         MTDDistance *distance = nil;
         NSTimeInterval timeInSeconds = -1.;
         NSMutableDictionary *additionalInfo = [NSMutableDictionary dictionary];
 
         // Order the intermediate goals in the order returned by the API (optimized)
         // and parse the address information and save the address for each goal (from, to, intermediateGoals)
-        NSArray *orderedIntermediateGoals = [self orderedIntermediateGoalsWithSequenceNodes:locationSequenceNodes
+        NSArray *orderedIntermediateGoals = [self mtd_orderedIntermediateGoalsWithSequenceNodes:locationSequenceNodes
                                                                                addressNodes:[addressNodesExceptTo arrayByAddingObject:toAddressNode]];
 
         // Parse Additional Info of directions
@@ -124,7 +124,7 @@
 
 // Algorithm description:
 // http://code.google.com/apis/maps/documentation/utilities/polylinealgorithm.html
-- (NSArray *)waypointsFromEncodedPolyline:(NSString *)encodedPolyline {
+- (NSArray *)mtd_waypointsFromEncodedPolyline:(NSString *)encodedPolyline {
     if (encodedPolyline.length == 0) {
         return nil;
     }
@@ -169,7 +169,7 @@
     return waypoints;
 }
 
-- (NSArray *)waypointsFromWaypointNodes:(NSArray *)waypointNodes {
+- (NSArray *)mtd_waypointsFromWaypointNodes:(NSArray *)waypointNodes {
     NSMutableArray *waypoints = [NSMutableArray array];
     
     // add start coordinate
@@ -180,7 +180,7 @@
     for (MTDXMLElement *waypointNode in waypointNodes) {
         NSString *encodedPolyline = [waypointNode contentString];
         
-        [waypoints addObjectsFromArray:[self waypointsFromEncodedPolyline:encodedPolyline]];
+        [waypoints addObjectsFromArray:[self mtd_waypointsFromEncodedPolyline:encodedPolyline]];
     }
     
     // add end coordinate
@@ -191,7 +191,7 @@
     return waypoints;
 }
 
-- (NSArray *)orderedIntermediateGoalsWithSequenceNodes:(NSArray *)sequenceNodes addressNodes:(NSArray *)addressNodes {
+- (NSArray *)mtd_orderedIntermediateGoalsWithSequenceNodes:(NSArray *)sequenceNodes addressNodes:(NSArray *)addressNodes {
     NSArray *sequence = [sequenceNodes valueForKey:MTDKey(contentString)];
     // Sort the intermediate goals to be in the order of the numbers contained in sequence
     NSArray *orderedIntermediateGoals = MTDOrderedArrayWithSequence(self.intermediateGoals,sequence);
@@ -206,7 +206,7 @@
     
     // Parse Addresses of goals
     [addressNodes enumerateObjectsUsingBlock:^(MTDXMLElement *addressNode, NSUInteger idx, __unused BOOL *stop) {
-        MTDAddress *address = [self addressFromAddressNode:addressNode];
+        MTDAddress *address = [self mtd_addressFromAddressNode:addressNode];
         MTDWaypoint *waypoint = [allGoals objectAtIndex:idx];
         
         // update address of corresponding waypoint
@@ -217,7 +217,7 @@
 }
 
 
-- (MTDAddress *)addressFromAddressNode:(MTDXMLElement *)addressNode {
+- (MTDAddress *)mtd_addressFromAddressNode:(MTDXMLElement *)addressNode {
     return [[MTDAddress alloc] initWithAddressString:addressNode.contentString];
 }
 

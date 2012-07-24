@@ -27,16 +27,18 @@ NS_INLINE dispatch_queue_t parser_queue(void) {
 #pragma mark - MTDDirectionsParser
 ////////////////////////////////////////////////////////////////////////
 
-@interface MTDDirectionsRequest () 
+@interface MTDDirectionsRequest ()
 
-@property (nonatomic, strong) MTDHTTPRequest *httpRequest;
-@property (nonatomic, readonly) NSString *httpAddress;
-@property (nonatomic, readonly) Class parserClass;
-@property (nonatomic, readonly) BOOL optimizeRoute;
-@property (nonatomic, strong) NSMutableDictionary *parameters;
-
+/** Dictionary containing all parameter key-value pairs of the request */
+@property (nonatomic, strong, setter = mtd_setParameters:) NSMutableDictionary *mtd_parameters;
 /** Appends all parameters to httpAddress */
-@property (nonatomic, readonly) NSString *fullAddress;
+@property (nonatomic, readonly) NSString *mtd_fullAddress;
+
+// Private API from MTDDirectionsRequest+MTDDirectionsPrivateAPI.h
+@property (nonatomic, strong, setter = mtd_setHttpRequest:) MTDHTTPRequest *mtd_httpRequest;
+@property (nonatomic, readonly) NSString *mtd_httpAddress;
+@property (nonatomic, readonly) Class mtd_parserClass;
+@property (nonatomic, readonly) BOOL mtd_optimizeRoute;
 
 @end
 
@@ -48,9 +50,9 @@ NS_INLINE dispatch_queue_t parser_queue(void) {
 @synthesize intermediateGoals = _intermediateGoals;
 @synthesize completion = _completion;
 @synthesize routeType = _routeType;
-@synthesize httpRequest = _httpRequest;
-@synthesize optimizeRoute = _optimizeRoute;
-@synthesize parameters = _parameters;
+@synthesize mtd_httpRequest = _mtd_httpRequest;
+@synthesize mtd_optimizeRoute = _mtd_optimizeRoute;
+@synthesize mtd_parameters = _mtd_parameters;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
@@ -99,10 +101,10 @@ intermediateGoals:(NSArray *)intermediateGoals
         _from = from;
         _to = to;
         _intermediateGoals = [intermediateGoals copy];
-        _optimizeRoute = optimizeRoute;
+        _mtd_optimizeRoute = optimizeRoute;
         _routeType = routeType;
         _completion = [completion copy];
-        _parameters = [NSMutableDictionary dictionary];
+        _mtd_parameters = [NSMutableDictionary dictionary];
         
         [self setValueForParameterWithIntermediateGoals:intermediateGoals];
     }
@@ -115,24 +117,24 @@ intermediateGoals:(NSArray *)intermediateGoals
 ////////////////////////////////////////////////////////////////////////
 
 - (void)start {
-    NSString *address = self.fullAddress;
+    NSString *address = self.mtd_fullAddress;
 
-    self.httpRequest = [[MTDHTTPRequest alloc] initWithAddress:address
+    self.mtd_httpRequest = [[MTDHTTPRequest alloc] initWithAddress:address
                                                 callbackTarget:self
                                                         action:@selector(requestFinished:)];
     
-    [self.httpRequest start];
+    [self.mtd_httpRequest start];
 }
 
 - (void)cancel {
-    [self.httpRequest cancel];
+    [self.mtd_httpRequest cancel];
 }
 
 - (void)requestFinished:(MTDHTTPRequest *)httpRequest {
     if (httpRequest.failureCode == 0) {
-        MTDAssert([self.parserClass isSubclassOfClass:[MTDDirectionsParser class]], @"Parser class must be subclass of MTDDirectionsParser.");
+        MTDAssert([self.mtd_parserClass isSubclassOfClass:[MTDDirectionsParser class]], @"Parser class must be subclass of MTDDirectionsParser.");
         
-        MTDDirectionsParser *parser = [[self.parserClass alloc] initWithFrom:self.from
+        MTDDirectionsParser *parser = [[self.mtd_parserClass alloc] initWithFrom:self.from
                                                                           to:self.to
                                                            intermediateGoals:self.intermediateGoals
                                                                    routeType:self.routeType
@@ -156,7 +158,7 @@ intermediateGoals:(NSArray *)intermediateGoals
     MTDAssert(value != nil && parameter != nil, @"Value and Parameter must be different from nil");
 
     if (value != nil && parameter != nil) {
-        [self.parameters setObject:value forKey:parameter];
+        [self.mtd_parameters setObject:value forKey:parameter];
     }
 }
 
@@ -164,7 +166,7 @@ intermediateGoals:(NSArray *)intermediateGoals
     MTDAssert(array.count > 0 && parameter != nil, @"Array and Parameter must be different from nil");
 
     if (array.count > 0 && parameter != nil) {
-        [self.parameters setObject:array forKey:parameter];
+        [self.mtd_parameters setObject:array forKey:parameter];
     }
 }
 
@@ -198,14 +200,14 @@ intermediateGoals:(NSArray *)intermediateGoals
 ////////////////////////////////////////////////////////////////////////
 
 - (NSString *)fullAddress {
-    MTDAssert(self.httpAddress.length > 0, @"HTTP Address must be set.");
+    MTDAssert(self.mtd_httpAddress.length > 0, @"HTTP Address must be set.");
 
-    NSMutableString *address = [NSMutableString stringWithString:self.httpAddress];
+    NSMutableString *address = [NSMutableString stringWithString:self.mtd_httpAddress];
     
-    if (self.parameters.count > 0) {
+    if (self.mtd_parameters.count > 0) {
         [address appendString:@"?"];
         
-        [self.parameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, __unused BOOL *stop) {
+        [self.mtd_parameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, __unused BOOL *stop) {
             if ([obj isKindOfClass:[NSArray class]]) {
                 for (id value in obj) {
                     [address appendFormat:@"%@=%@&", key, MTDURLEncodedString([value description])];

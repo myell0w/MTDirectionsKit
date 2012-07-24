@@ -17,7 +17,7 @@
 
 @interface MTDDirectionsRequestMapQuest ()
 
-- (void)setup;
+- (void)mtd_setup;
 
 @end
 
@@ -35,7 +35,7 @@
          routeType:(MTDDirectionsRouteType)routeType
         completion:(mtd_parser_block)completion {
     if ((self = [super initWithFrom:from to:to intermediateGoals:intermediateGoals optimizeRoute:optimizeRoute routeType:routeType completion:completion])) {
-        [self setup];
+        [self mtd_setup];
         
         [self setValue:[from descriptionForAPI:MTDDirectionsAPIMapQuest] forParameter:@"from"];
         // "to" gets set in setValueForParameterWithIntermediateGoals
@@ -69,8 +69,8 @@
     }
 }
 
-- (NSString *)httpAddress {
-    NSString *routingMethod = self.optimizeRoute ? kMTDMapQuestRoutingMethodOptimized : kMTDMapQuestRoutingMethodDefault;
+- (NSString *)mtd_httpAddress {
+    NSString *routingMethod = self.mtd_optimizeRoute ? kMTDMapQuestRoutingMethodOptimized : kMTDMapQuestRoutingMethodDefault;
     
     return [NSString stringWithFormat:@"%@/%@/%@/%@",
             kMTDMapQuestHostName,
@@ -79,7 +79,7 @@
             routingMethod];
 }
 
-- (Class)parserClass {
+- (Class)mtd_parserClass {
     return [MTDDirectionsParserMapQuest class];
 }
 
@@ -87,7 +87,7 @@
 #pragma mark - Private
 ////////////////////////////////////////////////////////////////////////
 
-- (void)setup {
+- (void)mtd_setup {
     [self setValue:@"xml" forParameter:@"outFormat"];
     [self setValue:@"ignore" forParameter:@"ambiguities"];
     [self setValue:@"true" forParameter:@"doReverseGeocode"];

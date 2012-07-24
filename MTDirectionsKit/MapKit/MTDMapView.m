@@ -21,15 +21,16 @@
 }
 
 @property (nonatomic, strong, readwrite) MTDDirectionsOverlayView *directionsOverlayView; // re-defined as read/write
+
 /** The delegate that was set by the user, we forward all delegate calls */
-@property (nonatomic, mtd_weak) id<MKMapViewDelegate> trueDelegate;
+@property (nonatomic, mtd_weak, setter = mtd_setTrueDelegate:) id<MKMapViewDelegate> mtd_trueDelegate;
 /** The request object for retreiving directions from the specified API */
-@property (nonatomic, strong) MTDDirectionsRequest *request;
+@property (nonatomic, strong, setter = mtd_setRequest:) MTDDirectionsRequest *mtd_request;
 
 /** Common initialize method for initializing from code or from a NIB */
-- (void)setup;
+- (void)mtd_setup;
 
-- (void)updateUIForDirectionsDisplayType:(MTDDirectionsDisplayType)displayType;
+- (void)mtd_updateUIForDirectionsDisplayType:(MTDDirectionsDisplayType)displayType;
 
 /**
  Sets the region that is displayed on the map to show all the given waypoints within a rect with 
@@ -39,7 +40,7 @@
  @param edgePadding the padding used to outset/inset the computed rect to show all waypoints at once
  @param animated flag whether the region gets updated in an animated fashion or not
  */
-- (void)setRegionFromWaypoints:(NSArray *)waypoints edgePadding:(UIEdgeInsets)edgePadding animated:(BOOL)animated;
+- (void)mtd_setRegionFromWaypoints:(NSArray *)waypoints edgePadding:(UIEdgeInsets)edgePadding animated:(BOOL)animated;
 
 /**
  Returns an instance of MTDDirectionsOverlayView used to display the given overlay
@@ -47,7 +48,7 @@
  @param overlay an instance of MTDDirectionsOverlay
  @return an instance of MTDDirectionsOverlayView if overlay is an instance of MTDDirectionsOverlay, nil otherwise
  */
-- (MKOverlayView *)viewForDirectionsOverlay:(id<MKOverlay>)overlay;
+- (MKOverlayView *)mtd_viewForDirectionsOverlay:(id<MKOverlay>)overlay;
 
 /**
  Internal helper method that performs the work needed to load directions, depending on the set parameter.
@@ -64,11 +65,11 @@
           maximumNumberOfAlternatives:(NSUInteger)maximumNumberOfAlternatives;
 
 // delegate encapsulation methods
-- (void)notifyDelegateWillStartLoadingDirectionsFrom:(MTDWaypoint *)from to:(MTDWaypoint *)to routeType:(MTDDirectionsRouteType)routeType;
-- (MTDDirectionsOverlay *)notifyDelegateDidFinishLoadingOverlay:(MTDDirectionsOverlay *)overlay;
-- (void)notifyDelegateDidFailLoadingOverlayWithError:(NSError *)error;
-- (UIColor *)askDelegateForColorOfOverlay:(MTDDirectionsOverlay *)overlay;
-- (CGFloat)askDelegateForLineWidthFactorOfOverlay:(MTDDirectionsOverlay *)overlay;
+- (void)mtd_notifyDelegateWillStartLoadingDirectionsFrom:(MTDWaypoint *)from to:(MTDWaypoint *)to routeType:(MTDDirectionsRouteType)routeType;
+- (MTDDirectionsOverlay *)mtd_notifyDelegateDidFinishLoadingOverlay:(MTDDirectionsOverlay *)overlay;
+- (void)mtd_notifyDelegateDidFailLoadingOverlayWithError:(NSError *)error;
+- (UIColor *)mtd_askDelegateForColorOfOverlay:(MTDDirectionsOverlay *)overlay;
+- (CGFloat)mtd_askDelegateForLineWidthFactorOfOverlay:(MTDDirectionsOverlay *)overlay;
 
 @end
 
@@ -79,8 +80,8 @@
 @synthesize directionsOverlay = _directionsOverlay;
 @synthesize directionsOverlayView = _directionsOverlayView;
 @synthesize directionsDisplayType = _directionsDisplayType;
-@synthesize trueDelegate = _trueDelegate;
-@synthesize request = _request;
+@synthesize mtd_trueDelegate = _mtd_trueDelegate;
+@synthesize mtd_request = _mtd_request;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
@@ -88,7 +89,7 @@
 
 - (id)initWithFrame:(CGRect)frame {
     if ((self = [super initWithFrame:frame])) {
-        [self setup];
+        [self mtd_setup];
     }
     
     return self;
@@ -96,7 +97,7 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if ((self = [super initWithCoder:aDecoder])) {
-        [self setup];
+        [self mtd_setup];
     }
     
     return self;
@@ -188,8 +189,8 @@
 }
 
 - (void)cancelLoadOfDirections {
-    [self.request cancel];
-    self.request = nil;
+    [self.mtd_request cancel];
+    self.mtd_request = nil;
 }
 
 - (void)removeDirectionsOverlay {
@@ -204,7 +205,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (void)setRegionToShowDirectionsAnimated:(BOOL)animated {
-    [self setRegionFromWaypoints:self.directionsOverlay.waypoints edgePadding:UIEdgeInsetsZero animated:animated];
+    [self mtd_setRegionFromWaypoints:self.directionsOverlay.waypoints edgePadding:UIEdgeInsetsZero animated:animated];
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -231,7 +232,7 @@
     if (directionsDisplayType != _directionsDisplayType) {
         _directionsDisplayType = directionsDisplayType;
         
-        [self updateUIForDirectionsDisplayType:directionsDisplayType];
+        [self mtd_updateUIForDirectionsDisplayType:directionsDisplayType];
     }
 }
 
@@ -249,8 +250,8 @@
 }
 
 - (void)setDelegate:(id<MKMapViewDelegate>)delegate {
-    if (delegate != _trueDelegate) {
-        _trueDelegate = delegate;
+    if (delegate != _mtd_trueDelegate) {
+        _mtd_trueDelegate = delegate;
         
         // if we haven't set a directionsDelegate and our delegate conforms to the protocol
         // MTDDirectionsDelegate, then we automatically set our directionsDelegate
@@ -261,7 +262,7 @@
 }
 
 - (id<MKMapViewDelegate>)delegate {
-    return _trueDelegate;
+    return _mtd_trueDelegate;
 }
 
 - (CLLocationCoordinate2D)fromCoordinate {
@@ -309,101 +310,101 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
-    if ([self.trueDelegate respondsToSelector:@selector(mapView:regionWillChangeAnimated:)]) {
-        [self.trueDelegate mapView:mapView regionWillChangeAnimated:animated];
+    if ([self.mtd_trueDelegate respondsToSelector:@selector(mapView:regionWillChangeAnimated:)]) {
+        [self.mtd_trueDelegate mapView:mapView regionWillChangeAnimated:animated];
     }
 }
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
-    if ([self.trueDelegate respondsToSelector:@selector(mapView:regionDidChangeAnimated:)]) {
-        [self.trueDelegate mapView:mapView regionDidChangeAnimated:animated];
+    if ([self.mtd_trueDelegate respondsToSelector:@selector(mapView:regionDidChangeAnimated:)]) {
+        [self.mtd_trueDelegate mapView:mapView regionDidChangeAnimated:animated];
     }
 }
 
 - (void)mapViewWillStartLoadingMap:(MKMapView *)mapView {
-    if ([self.trueDelegate respondsToSelector:@selector(mapViewWillStartLoadingMap:)]) {
-        [self.trueDelegate mapViewWillStartLoadingMap:mapView];
+    if ([self.mtd_trueDelegate respondsToSelector:@selector(mapViewWillStartLoadingMap:)]) {
+        [self.mtd_trueDelegate mapViewWillStartLoadingMap:mapView];
     }
 }
 
 - (void)mapViewDidFinishLoadingMap:(MKMapView *)mapView {
-    if ([self.trueDelegate respondsToSelector:@selector(mapViewDidFinishLoadingMap:)]) {
-        [self.trueDelegate mapViewDidFinishLoadingMap:mapView];
+    if ([self.mtd_trueDelegate respondsToSelector:@selector(mapViewDidFinishLoadingMap:)]) {
+        [self.mtd_trueDelegate mapViewDidFinishLoadingMap:mapView];
     }
 }
 
 - (void)mapViewDidFailLoadingMap:(MKMapView *)mapView withError:(NSError *)error {
-    if ([self.trueDelegate respondsToSelector:@selector(mapViewDidFailLoadingMap:withError:)]) {
-        [self.trueDelegate mapViewDidFailLoadingMap:mapView withError:error];
+    if ([self.mtd_trueDelegate respondsToSelector:@selector(mapViewDidFailLoadingMap:withError:)]) {
+        [self.mtd_trueDelegate mapViewDidFailLoadingMap:mapView withError:error];
     }
 }
 
 - (void)mapViewWillStartLocatingUser:(MKMapView *)mapView {
-    if ([self.trueDelegate respondsToSelector:@selector(mapViewWillStartLocatingUser:)]) {
-        [self.trueDelegate mapViewWillStartLocatingUser:mapView];
+    if ([self.mtd_trueDelegate respondsToSelector:@selector(mapViewWillStartLocatingUser:)]) {
+        [self.mtd_trueDelegate mapViewWillStartLocatingUser:mapView];
     }
 }
 
 - (void)mapViewDidStopLocatingUser:(MKMapView *)mapView {
-    if ([self.trueDelegate respondsToSelector:@selector(mapViewDidStopLocatingUser:)]) {
-        [self.trueDelegate mapViewDidStopLocatingUser:mapView];
+    if ([self.mtd_trueDelegate respondsToSelector:@selector(mapViewDidStopLocatingUser:)]) {
+        [self.mtd_trueDelegate mapViewDidStopLocatingUser:mapView];
     }
 }
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
-    if ([self.trueDelegate respondsToSelector:@selector(mapView:didUpdateUserLocation:)]) {
-        [self.trueDelegate mapView:mapView didUpdateUserLocation:userLocation];
+    if ([self.mtd_trueDelegate respondsToSelector:@selector(mapView:didUpdateUserLocation:)]) {
+        [self.mtd_trueDelegate mapView:mapView didUpdateUserLocation:userLocation];
     }
 }
 
 - (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error {
-    if ([self.trueDelegate respondsToSelector:@selector(mapView:didFailToLocateUserWithError:)]) {
-        [self.trueDelegate mapView:mapView didFailToLocateUserWithError:error];
+    if ([self.mtd_trueDelegate respondsToSelector:@selector(mapView:didFailToLocateUserWithError:)]) {
+        [self.mtd_trueDelegate mapView:mapView didFailToLocateUserWithError:error];
     }
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
-    if ([self.trueDelegate respondsToSelector:@selector(mapView:viewForAnnotation:)]) {
-        return [self.trueDelegate mapView:mapView viewForAnnotation:annotation];
+    if ([self.mtd_trueDelegate respondsToSelector:@selector(mapView:viewForAnnotation:)]) {
+        return [self.mtd_trueDelegate mapView:mapView viewForAnnotation:annotation];
     }
     
     return nil;
 }
 
 - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
-    if ([self.trueDelegate respondsToSelector:@selector(mapView:didAddAnnotationViews:)]) {
-        [self.trueDelegate mapView:mapView didAddAnnotationViews:views];
+    if ([self.mtd_trueDelegate respondsToSelector:@selector(mapView:didAddAnnotationViews:)]) {
+        [self.mtd_trueDelegate mapView:mapView didAddAnnotationViews:views];
     }
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-    if ([self.trueDelegate respondsToSelector:@selector(mapView:annotationView:calloutAccessoryControlTapped:)]) {
-        [self.trueDelegate mapView:mapView annotationView:view calloutAccessoryControlTapped:control];
+    if ([self.mtd_trueDelegate respondsToSelector:@selector(mapView:annotationView:calloutAccessoryControlTapped:)]) {
+        [self.mtd_trueDelegate mapView:mapView annotationView:view calloutAccessoryControlTapped:control];
     }
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)annotationView didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState {
-    if ([self.trueDelegate respondsToSelector:@selector(mapView:annotationView:didChangeDragState:fromOldState:)]) {
-        [self.trueDelegate mapView:mapView annotationView:annotationView didChangeDragState:newState fromOldState:oldState];
+    if ([self.mtd_trueDelegate respondsToSelector:@selector(mapView:annotationView:didChangeDragState:fromOldState:)]) {
+        [self.mtd_trueDelegate mapView:mapView annotationView:annotationView didChangeDragState:newState fromOldState:oldState];
     }
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
-    if ([self.trueDelegate respondsToSelector:@selector(mapView:didSelectAnnotationView:)]) {
-        [self.trueDelegate mapView:mapView didSelectAnnotationView:view];
+    if ([self.mtd_trueDelegate respondsToSelector:@selector(mapView:didSelectAnnotationView:)]) {
+        [self.mtd_trueDelegate mapView:mapView didSelectAnnotationView:view];
     }
 }
 
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
-    if ([self.trueDelegate respondsToSelector:@selector(mapView:didDeselectAnnotationView:)]) {
-        [self.trueDelegate mapView:mapView didDeselectAnnotationView:view];
+    if ([self.mtd_trueDelegate respondsToSelector:@selector(mapView:didDeselectAnnotationView:)]) {
+        [self.mtd_trueDelegate mapView:mapView didDeselectAnnotationView:view];
     }
 }
 
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay {
     // first check if the delegate provides a custom annotation
-    if ([self.trueDelegate respondsToSelector:@selector(mapView:viewForOverlay:)]) {
-        MKOverlayView *delegateResult = [self.trueDelegate mapView:mapView viewForOverlay:overlay];
+    if ([self.mtd_trueDelegate respondsToSelector:@selector(mapView:viewForOverlay:)]) {
+        MKOverlayView *delegateResult = [self.mtd_trueDelegate mapView:mapView viewForOverlay:overlay];
         
         if (delegateResult != nil) {
             return delegateResult;
@@ -412,15 +413,15 @@
     
     // otherwise provide a default overlay for directions
     if ([overlay isKindOfClass:[MTDDirectionsOverlay class]]) {
-        return [self viewForDirectionsOverlay:overlay];
+        return [self mtd_viewForDirectionsOverlay:overlay];
     }
     
     return nil;
 }
 
 - (void)mapView:(MKMapView *)mapView didAddOverlayViews:(NSArray *)overlayViews {
-    if ([self.trueDelegate respondsToSelector:@selector(mapView:didAddOverlayViews:)]) {
-        [self.trueDelegate mapView:mapView didAddOverlayViews:overlayViews];
+    if ([self.mtd_trueDelegate respondsToSelector:@selector(mapView:didAddOverlayViews:)]) {
+        [self.mtd_trueDelegate mapView:mapView didAddOverlayViews:overlayViews];
     }
 }
 
@@ -428,14 +429,14 @@
 #pragma mark - Private
 ////////////////////////////////////////////////////////////////////////
 
-- (void)setup {
+- (void)mtd_setup {
     // we set ourself as the delegate
     [super setDelegate:self];
     
     _directionsDisplayType = MTDDirectionsDisplayTypeNone;
 }
 
-- (void)setRegionFromWaypoints:(NSArray *)waypoints edgePadding:(UIEdgeInsets)edgePadding animated:(BOOL)animated {
+- (void)mtd_setRegionFromWaypoints:(NSArray *)waypoints edgePadding:(UIEdgeInsets)edgePadding animated:(BOOL)animated {
     if (waypoints != nil) {
         CLLocationDegrees maxX = -DBL_MAX;
         CLLocationDegrees maxY = -DBL_MAX;
@@ -465,7 +466,7 @@
     }
 }
 
-- (void)updateUIForDirectionsDisplayType:(MTDDirectionsDisplayType) __unused displayType {    
+- (void)mtd_updateUIForDirectionsDisplayType:(MTDDirectionsDisplayType) __unused displayType {    
     if (_directionsOverlay != nil) {
         [self removeOverlay:_directionsOverlay];
         _directionsOverlayView = nil;
@@ -474,7 +475,7 @@
     }
 }
 
-- (MKOverlayView *)viewForDirectionsOverlay:(id<MKOverlay>)overlay {
+- (MKOverlayView *)mtd_viewForDirectionsOverlay:(id<MKOverlay>)overlay {
     // don't display anything if display type is set to none
     if (self.directionsDisplayType == MTDDirectionsDisplayTypeNone) {
         return nil;
@@ -485,8 +486,8 @@
     }
     
     self.directionsOverlayView = [[MTDDirectionsOverlayView alloc] initWithOverlay:self.directionsOverlay];    
-    self.directionsOverlayView.overlayColor = [self askDelegateForColorOfOverlay:self.directionsOverlay];
-    self.directionsOverlayView.overlayLineWidthFactor = [self askDelegateForLineWidthFactorOfOverlay:self.directionsOverlay];
+    self.directionsOverlayView.overlayColor = [self mtd_askDelegateForColorOfOverlay:self.directionsOverlay];
+    self.directionsOverlayView.overlayLineWidthFactor = [self mtd_askDelegateForLineWidthFactorOfOverlay:self.directionsOverlay];
     
     return self.directionsOverlayView;
 }
@@ -508,14 +509,14 @@
 
     __mtd_weak MTDMapView *weakSelf = self;
     
-    [self.request cancel];
+    [self.mtd_request cancel];
     
     if (from.valid && to.valid) {
         mtd_parser_block parserCompletion = ^(MTDDirectionsOverlay *overlay, NSError *error) {
             __strong MTDMapView *strongSelf = weakSelf;
             
             if (overlay != nil) {
-                overlay = [self notifyDelegateDidFinishLoadingOverlay:overlay];
+                overlay = [self mtd_notifyDelegateDidFinishLoadingOverlay:overlay];
                 
                 strongSelf.directionsDisplayType = MTDDirectionsDisplayTypeOverview;
                 strongSelf.directionsOverlay = overlay;
@@ -524,11 +525,11 @@
                     [strongSelf setRegionToShowDirectionsAnimated:YES];
                 } 
             } else {
-                [self notifyDelegateDidFailLoadingOverlayWithError:error];
+                [self mtd_notifyDelegateDidFailLoadingOverlayWithError:error];
             }
         };
 
-        self.request = [MTDDirectionsRequest requestFrom:from
+        self.mtd_request = [MTDDirectionsRequest requestFrom:from
                                                       to:to
                                        intermediateGoals:intermediateGoals
                                            optimizeRoute:optimizeRoute
@@ -539,8 +540,8 @@
             // TODO: Implement some fancy stuff here to make this work
         }
         
-        [self notifyDelegateWillStartLoadingDirectionsFrom:from to:to routeType:routeType];
-        [self.request start];
+        [self mtd_notifyDelegateWillStartLoadingDirectionsFrom:from to:to routeType:routeType];
+        [self.mtd_request start];
     }
 }
 
@@ -548,7 +549,7 @@
 #pragma mark - Private Delegate Helper
 ////////////////////////////////////////////////////////////////////////
 
-- (void)notifyDelegateWillStartLoadingDirectionsFrom:(MTDWaypoint *)from 
+- (void)mtd_notifyDelegateWillStartLoadingDirectionsFrom:(MTDWaypoint *)from 
                                                   to:(MTDWaypoint *)to
                                            routeType:(MTDDirectionsRouteType)routeType {
     if (_directionsDelegateFlags.willStartLoadingDirections) {
@@ -567,7 +568,7 @@
     [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
-- (MTDDirectionsOverlay *)notifyDelegateDidFinishLoadingOverlay:(MTDDirectionsOverlay *)overlay {
+- (MTDDirectionsOverlay *)mtd_notifyDelegateDidFinishLoadingOverlay:(MTDDirectionsOverlay *)overlay {
     MTDDirectionsOverlay *overlayToReturn = overlay;
     
     if (_directionsDelegateFlags.didFinishLoadingOverlay) {
@@ -591,7 +592,7 @@
     }
 }
 
-- (void)notifyDelegateDidFailLoadingOverlayWithError:(NSError *)error {
+- (void)mtd_notifyDelegateDidFailLoadingOverlayWithError:(NSError *)error {
     if (_directionsDelegateFlags.didFailLoadingOverlay) {
         [self.directionsDelegate mapView:self didFailLoadingDirectionsOverlayWithError:error];
     }
@@ -606,7 +607,7 @@
     [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
-- (UIColor *)askDelegateForColorOfOverlay:(MTDDirectionsOverlay *)overlay {
+- (UIColor *)mtd_askDelegateForColorOfOverlay:(MTDDirectionsOverlay *)overlay {
     if (_directionsDelegateFlags.colorForOverlay) {
         UIColor *color = [self.directionsDelegate mapView:self colorForDirectionsOverlay:overlay];
         
@@ -620,7 +621,7 @@
     return nil;
 }
 
-- (CGFloat)askDelegateForLineWidthFactorOfOverlay:(MTDDirectionsOverlay *)overlay {
+- (CGFloat)mtd_askDelegateForLineWidthFactorOfOverlay:(MTDDirectionsOverlay *)overlay {
     if (_directionsDelegateFlags.lineWidthFactorForOverlay) {
         CGFloat lineWidthFactor = [self.directionsDelegate mapView:self lineWidthFactorForDirectionsOverlay:overlay];
         return lineWidthFactor;

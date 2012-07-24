@@ -15,9 +15,9 @@
 @property (nonatomic, readonly) MTDDirectionsOverlay *directionsOverlay;
 
 - (CGPathRef)mtd_newPathForPoints:(MKMapPoint *)points
-pointCount:(NSUInteger)pointCount
-clipRect:(MKMapRect)mapRect
-zoomScale:(MKZoomScale)zoomScale CF_RETURNS_RETAINED;
+                       pointCount:(NSUInteger)pointCount
+                         clipRect:(MKMapRect)mapRect
+                        zoomScale:(MKZoomScale)zoomScale CF_RETURNS_RETAINED;
 
 @end
 
@@ -82,11 +82,11 @@ zoomScale:(MKZoomScale)zoomScale CF_RETURNS_RETAINED;
         
         if (path != NULL) {
             UIColor *baseColor = self.overlayColor;
-
+            
             if (route != self.directionsOverlay.activeRoute) {
                 baseColor = [baseColor colorWithAlphaComponent:0.4f];
             }
-
+            
             UIColor *darkenedColor = MTDDarkenedColor(baseColor, 0.1f);
             
             // Setup graphics context
