@@ -2,6 +2,7 @@
 #import "MTDDirectionsOverlay.h"
 #import "MTDDistance.h"
 #import "MTDWaypoint.h"
+#import "MTDAddress.h"
 
 
 @implementation MTDDirectionsParserGoogleTest
@@ -23,6 +24,9 @@
         
         [parser parseWithCompletion:^(MTDDirectionsOverlay *overlay, NSError *error) {
             STAssertNil(error,@"There was an error parsing google_guessing_vienna.xml");
+
+            STAssertEqualObjects(overlay.fromAddress.fullAddress, @"Güssing, Austria", @"Error parsing fromAddress");
+            STAssertEqualObjects(overlay.toAddress.fullAddress, @"Vienna, Austria", @"Error parsing toAddress");
             
             STAssertEquals(overlay.timeInSeconds, 7079., @"Error parsing time");
             STAssertEqualObjects(overlay.formattedTime, @"1:57:59", @"Error formatting time");
