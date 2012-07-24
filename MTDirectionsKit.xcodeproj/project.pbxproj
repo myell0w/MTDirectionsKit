@@ -71,6 +71,9 @@
 		9B2C42BC155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2C42B7155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.h */; };
 		9B2C42BD155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C42B8155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.m */; };
 		9B2C42BE155EB85B00C0E4CE /* MTDDirectionsRouteType+Google.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2C42B9155EB85B00C0E4CE /* MTDDirectionsRouteType+Google.h */; };
+		9B3F802815BF4479003C70EE /* google_guessing_vienna.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B3F802515BF4479003C70EE /* google_guessing_vienna.xml */; };
+		9B3F802915BF4479003C70EE /* mapquest_guessing_vienna.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B3F802615BF4479003C70EE /* mapquest_guessing_vienna.xml */; };
+		9B3F802A15BF4479003C70EE /* mapquest_intermediate_optimized.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B3F802715BF4479003C70EE /* mapquest_intermediate_optimized.xml */; };
 		9B4E98DB15AD702A002F0302 /* MTDAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B4E98D915AD702A002F0302 /* MTDAddress.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B4E98DC15AD702A002F0302 /* MTDAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4E98DA15AD702A002F0302 /* MTDAddress.m */; };
 		9B4E98E015AD77E5002F0302 /* MTDAddressTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4E98DF15AD77E5002F0302 /* MTDAddressTest.m */; };
@@ -80,13 +83,11 @@
 		9B76F452157146BA00B54B05 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76F451157146BA00B54B05 /* CoreGraphics.framework */; };
 		9B812606156948F100C9A6C8 /* MTDDistanceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B812605156948F100C9A6C8 /* MTDDistanceTest.m */; };
 		9B81260A1569545F00C9A6C8 /* MTDDirectionsParserMapQuestTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B8126091569545F00C9A6C8 /* MTDDirectionsParserMapQuestTest.m */; };
-		9B8126101569550B00C9A6C8 /* mapquest_guessing_vienna.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B81260F1569550B00C9A6C8 /* mapquest_guessing_vienna.xml */; };
 		9B8126111569576700C9A6C8 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18F314A7E40A00087893 /* libxml2.dylib */; };
 		9B8126121569577E00C9A6C8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B2C4296155EB6A400C0E4CE /* UIKit.framework */; };
 		9B8126311569631500C9A6C8 /* MTDLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B81262F1569620800C9A6C8 /* MTDLogging.m */; };
 		9B812633156963A600C9A6C8 /* MTDLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B81262E1569620800C9A6C8 /* MTDLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B81265315698A8900C9A6C8 /* MTDDirectionsParserGoogleTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B81265215698A8900C9A6C8 /* MTDDirectionsParserGoogleTest.m */; };
-		9B81265515698A9D00C9A6C8 /* google_guessing_vienna.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B81265415698A9D00C9A6C8 /* google_guessing_vienna.xml */; };
 		9B8A2C1B1560129F00BAAE7B /* MTDXMLElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B8A2C191560129F00BAAE7B /* MTDXMLElement.h */; };
 		9B8A2C1C1560129F00BAAE7B /* MTDXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B8A2C1A1560129F00BAAE7B /* MTDXMLElement.m */; };
 		9B8F5160155C516E00A9C10C /* MTDirectionsKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B8F515E155C516E00A9C10C /* MTDirectionsKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -171,6 +172,9 @@
 		9B2C42B7155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDDirectionsRequestGoogle.h; sourceTree = "<group>"; };
 		9B2C42B8155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDDirectionsRequestGoogle.m; sourceTree = "<group>"; };
 		9B2C42B9155EB85B00C0E4CE /* MTDDirectionsRouteType+Google.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTDDirectionsRouteType+Google.h"; sourceTree = "<group>"; };
+		9B3F802515BF4479003C70EE /* google_guessing_vienna.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = google_guessing_vienna.xml; sourceTree = "<group>"; };
+		9B3F802615BF4479003C70EE /* mapquest_guessing_vienna.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mapquest_guessing_vienna.xml; sourceTree = "<group>"; };
+		9B3F802715BF4479003C70EE /* mapquest_intermediate_optimized.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mapquest_intermediate_optimized.xml; sourceTree = "<group>"; };
 		9B4E98D915AD702A002F0302 /* MTDAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDAddress.h; sourceTree = "<group>"; };
 		9B4E98DA15AD702A002F0302 /* MTDAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDAddress.m; sourceTree = "<group>"; };
 		9B4E98DE15AD77E5002F0302 /* MTDAddressTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDAddressTest.h; sourceTree = "<group>"; };
@@ -185,13 +189,11 @@
 		9B812605156948F100C9A6C8 /* MTDDistanceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDDistanceTest.m; sourceTree = "<group>"; };
 		9B8126081569545F00C9A6C8 /* MTDDirectionsParserMapQuestTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDDirectionsParserMapQuestTest.h; sourceTree = "<group>"; };
 		9B8126091569545F00C9A6C8 /* MTDDirectionsParserMapQuestTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDDirectionsParserMapQuestTest.m; sourceTree = "<group>"; };
-		9B81260F1569550B00C9A6C8 /* mapquest_guessing_vienna.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mapquest_guessing_vienna.xml; sourceTree = "<group>"; };
 		9B81262E1569620800C9A6C8 /* MTDLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDLogging.h; sourceTree = "<group>"; };
 		9B81262F1569620800C9A6C8 /* MTDLogging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDLogging.m; sourceTree = "<group>"; };
 		9B81265015697B0800C9A6C8 /* MTDStatusCodeGoogle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTDStatusCodeGoogle.h; sourceTree = "<group>"; };
 		9B81265115698A8900C9A6C8 /* MTDDirectionsParserGoogleTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDDirectionsParserGoogleTest.h; sourceTree = "<group>"; };
 		9B81265215698A8900C9A6C8 /* MTDDirectionsParserGoogleTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDDirectionsParserGoogleTest.m; sourceTree = "<group>"; };
-		9B81265415698A9D00C9A6C8 /* google_guessing_vienna.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = google_guessing_vienna.xml; sourceTree = "<group>"; };
 		9B8A2BB7155FE20000BAAE7B /* MTDStatusCodeMapQuest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTDStatusCodeMapQuest.h; sourceTree = "<group>"; };
 		9B8A2BFD156005F100BAAE7B /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
 		9B8A2BFE1560079100BAAE7B /* CHANGELOG */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG; sourceTree = SOURCE_ROOT; };
@@ -262,7 +264,7 @@
 				9B81265215698A8900C9A6C8 /* MTDDirectionsParserGoogleTest.m */,
 				9BDE014E15B203D1001A8132 /* MTDXMLElementTest.h */,
 				9BDE014F15B203D1001A8132 /* MTDXMLElementTest.m */,
-				9B81260E156954FD00C9A6C8 /* Resources */,
+				9B3F802415BF4479003C70EE /* Resources */,
 				9B10A9A4155D5867002A3052 /* Supporting Files */,
 			);
 			path = MTDirectionsKitTest;
@@ -382,6 +384,16 @@
 			path = Google;
 			sourceTree = "<group>";
 		};
+		9B3F802415BF4479003C70EE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9B3F802515BF4479003C70EE /* google_guessing_vienna.xml */,
+				9B3F802615BF4479003C70EE /* mapquest_guessing_vienna.xml */,
+				9B3F802715BF4479003C70EE /* mapquest_intermediate_optimized.xml */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		9B6C18B514A7E18200087893 = {
 			isa = PBXGroup;
 			children = (
@@ -441,15 +453,6 @@
 				9B8F515F155C516E00A9C10C /* Prefix.pch */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		9B81260E156954FD00C9A6C8 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				9B81260F1569550B00C9A6C8 /* mapquest_guessing_vienna.xml */,
-				9B81265415698A9D00C9A6C8 /* google_guessing_vienna.xml */,
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -568,8 +571,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B10A9A8155D5867002A3052 /* InfoPlist.strings in Resources */,
-				9B8126101569550B00C9A6C8 /* mapquest_guessing_vienna.xml in Resources */,
-				9B81265515698A9D00C9A6C8 /* google_guessing_vienna.xml in Resources */,
+				9B3F802815BF4479003C70EE /* google_guessing_vienna.xml in Resources */,
+				9B3F802915BF4479003C70EE /* mapquest_guessing_vienna.xml in Resources */,
+				9B3F802A15BF4479003C70EE /* mapquest_intermediate_optimized.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

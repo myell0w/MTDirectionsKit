@@ -57,7 +57,7 @@
         // Order the intermediate goals in the order returned by the API (optimized)
         // and parse the address information and save the address for each goal (from, to, intermediateGoals)
         NSArray *orderedIntermediateGoals = [self mtd_orderedIntermediateGoalsWithSequenceNode:locationSequenceNode
-                                                                              addressNodes:locationAddressNodes];
+                                                                                  addressNodes:locationAddressNodes];
         
         // Parse Additional Info of directions
         {
@@ -168,11 +168,11 @@
     [addressNodes enumerateObjectsUsingBlock:^(MTDXMLElement *addressNode, NSUInteger idx, __unused BOOL *stop) {
         MTDAddress *address = [self mtd_addressFromAddressNode:addressNode];
         MTDWaypoint *waypoint = [orderedIntermediateGoals objectAtIndex:idx];
-
+        
         // update address of corresponding waypoint
         waypoint.address = address;
     }];
-
+    
     return [orderedIntermediateGoals subarrayWithRange:NSMakeRange(1, orderedIntermediateGoals.count-2)];
 }
 
@@ -190,7 +190,7 @@
                                                    postalCode:[postalCodeNode contentString]
                                                          city:[cityNode contentString]
                                                        street:[streetNode contentString]];
-
+    
     return address;
 }
 
