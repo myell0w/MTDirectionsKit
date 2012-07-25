@@ -9,22 +9,6 @@
 #import "MTDStatusCodeGoogle.h"
 
 
-@interface MTDDirectionsParserGoogle ()
-
-// This method decodes a polyline and returns an array of MTDWaypoints
-- (NSArray *)mtd_waypointsFromEncodedPolyline:(NSString *)encodedPolyline;
-
-// This method parses the waypointNodes and returns an array of MTDWaypoints
-- (NSArray *)mtd_waypointsFromWaypointNodes:(NSArray *)waypointNodes;
-// This method parses all addresses and orders the intermediate goals in the same order as optimised by the API.
-// That is, if optimization is enabled the Google can reorder the intermediate goals to provide the fastest route possible.
-- (NSArray *)mtd_orderedIntermediateGoalsWithSequenceNodes:(NSArray *)sequenceNodes addressNodes:(NSArray *)addressNodes;
-// This method parses an address and returns an instance of MTDAddress
-- (MTDAddress *)mtd_addressFromAddressNode:(MTDXMLElement *)addressNode;
-
-@end
-
-
 @implementation MTDDirectionsParserGoogle
 
 ////////////////////////////////////////////////////////////////////////
@@ -98,15 +82,13 @@
                                                 timeInSeconds:timeInSeconds
                                                additionalInfo:additionalInfo];
         
-        overlay = [[MTDDirectionsOverlay alloc] initWithRoutes:[NSArray arrayWithObject:route]
+        overlay = [[MTDDirectionsOverlay alloc] initWithRoutes:@[route]
                                              intermediateGoals:orderedIntermediateGoals
                                                      routeType:self.routeType];
     } else {
         error = [NSError errorWithDomain:MTDDirectionsKitErrorDomain
                                     code:statusCode
-                                userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-                                          self.data, MTDDirectionsKitDataKey,
-                                          nil]];
+                                userInfo:@{MTDDirectionsKitDataKey: self.data}];
         
         MTDLogError(@"Error occurred during parsing of directions from %@ to %@:\n%@", self.from, self.to, error);
     }
@@ -122,6 +104,7 @@
 #pragma mark - Private
 ////////////////////////////////////////////////////////////////////////
 
+// This method decodes a polyline and returns an array of MTDWaypoints
 // Algorithm description:
 // http://code.google.com/apis/maps/documentation/utilities/polylinealgorithm.html
 - (NSArray *)mtd_waypointsFromEncodedPolyline:(NSString *)encodedPolyline {
@@ -169,6 +152,7 @@
     return waypoints;
 }
 
+// This method parses the waypointNodes and returns an array of MTDWaypoints
 - (NSArray *)mtd_waypointsFromWaypointNodes:(NSArray *)waypointNodes {
     NSMutableArray *waypoints = [NSMutableArray array];
     
@@ -191,6 +175,8 @@
     return waypoints;
 }
 
+// This method parses all addresses and orders the intermediate goals in the same order as optimised by the API.
+// That is, if optimization is enabled the Google can reorder the intermediate goals to provide the fastest route possible.
 - (NSArray *)mtd_orderedIntermediateGoalsWithSequenceNodes:(NSArray *)sequenceNodes addressNodes:(NSArray *)addressNodes {
     NSArray *sequence = [sequenceNodes valueForKey:MTDKey(contentString)];
     // Sort the intermediate goals to be in the order of the numbers contained in sequence
@@ -207,7 +193,7 @@
     // Parse Addresses of goals
     [addressNodes enumerateObjectsUsingBlock:^(MTDXMLElement *addressNode, NSUInteger idx, __unused BOOL *stop) {
         MTDAddress *address = [self mtd_addressFromAddressNode:addressNode];
-        MTDWaypoint *waypoint = [allGoals objectAtIndex:idx];
+        MTDWaypoint *waypoint = allGoals[idx];
         
         // update address of corresponding waypoint
         waypoint.address = address;
@@ -216,7 +202,7 @@
     return orderedIntermediateGoals;
 }
 
-
+// This method parses an address and returns an instance of MTDAddress
 - (MTDAddress *)mtd_addressFromAddressNode:(MTDXMLElement *)addressNode {
     return [[MTDAddress alloc] initWithAddressString:addressNode.contentString];
 }

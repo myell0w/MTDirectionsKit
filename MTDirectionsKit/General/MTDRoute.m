@@ -22,13 +22,6 @@
 
 @implementation MTDRoute
 
-@synthesize name = _name;
-@synthesize waypoints = _waypoints;
-@synthesize distance = _distance;
-@synthesize timeInSeconds = _timeInSeconds;
-@synthesize additionalInfo = _additionalInfo;
-@synthesize mtd_polyline = _mtd_polyline;
-
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
 ////////////////////////////////////////////////////////////////////////
@@ -48,7 +41,7 @@
         NSUInteger pointIndex = 0;
         
         for (NSUInteger i = 0; i < waypoints.count; i++) {
-            MTDWaypoint *waypoint = [waypoints objectAtIndex:i];
+            MTDWaypoint *waypoint = waypoints[i];
             
             if (CLLocationCoordinate2DIsValid(waypoint.coordinate)) {
                 MKMapPoint point = MKMapPointForCoordinate(waypoint.coordinate);

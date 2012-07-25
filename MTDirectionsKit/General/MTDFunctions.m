@@ -127,8 +127,8 @@ NSArray *MTDOrderedArrayWithSequence(NSArray *array, NSArray *sequence) {
         NSUInteger indexOfObj1 = [array indexOfObject:obj1];
         NSUInteger indexOfObj2 = [array indexOfObject:obj2];
 
-        id sequenceIndex1 = [sequence objectAtIndex:indexOfObj1];
-        id sequenceIndex2 = [sequence objectAtIndex:indexOfObj2];
+        id sequenceIndex1 = sequence[indexOfObj1];
+        id sequenceIndex2 = sequence[indexOfObj2];
 
         if ([sequenceIndex1 integerValue] < [sequenceIndex2 integerValue]) {
             return NSOrderedAscending;

@@ -27,61 +27,10 @@
 /** The request object for retreiving directions from the specified API */
 @property (nonatomic, strong, setter = mtd_setRequest:) MTDDirectionsRequest *mtd_request;
 
-/** Common initialize method for initializing from code or from a NIB */
-- (void)mtd_setup;
-
-- (void)mtd_updateUIForDirectionsDisplayType:(MTDDirectionsDisplayType)displayType;
-
-/**
- Sets the region that is displayed on the map to show all the given waypoints within a rect with 
- the specified edgePadding.
- 
- @param waypoints array of MTDWaypoint objects
- @param edgePadding the padding used to outset/inset the computed rect to show all waypoints at once
- @param animated flag whether the region gets updated in an animated fashion or not
- */
-- (void)mtd_setRegionFromWaypoints:(NSArray *)waypoints edgePadding:(UIEdgeInsets)edgePadding animated:(BOOL)animated;
-
-/**
- Returns an instance of MTDDirectionsOverlayView used to display the given overlay
- 
- @param overlay an instance of MTDDirectionsOverlay
- @return an instance of MTDDirectionsOverlayView if overlay is an instance of MTDDirectionsOverlay, nil otherwise
- */
-- (MKOverlayView *)mtd_viewForDirectionsOverlay:(id<MKOverlay>)overlay;
-
-/**
- Internal helper method that performs the work needed to load directions, depending on the set parameter.
- 
- @param alternativeDirections this flag determines whether alternative directions are used or not
- */
-- (void)mtd_loadAlternativeDirections:(BOOL)alternativeDirections
-                                 from:(MTDWaypoint *)from
-                                   to:(MTDWaypoint *)to
-                            routeType:(MTDDirectionsRouteType)routeType
-                 zoomToShowDirections:(BOOL)zoomToShowDirections
-                    intermediateGoals:(NSArray *)intermediateGoals
-                        optimizeRoute:(BOOL)optimizeRoute
-          maximumNumberOfAlternatives:(NSUInteger)maximumNumberOfAlternatives;
-
-// delegate encapsulation methods
-- (void)mtd_notifyDelegateWillStartLoadingDirectionsFrom:(MTDWaypoint *)from to:(MTDWaypoint *)to routeType:(MTDDirectionsRouteType)routeType;
-- (MTDDirectionsOverlay *)mtd_notifyDelegateDidFinishLoadingOverlay:(MTDDirectionsOverlay *)overlay;
-- (void)mtd_notifyDelegateDidFailLoadingOverlayWithError:(NSError *)error;
-- (UIColor *)mtd_askDelegateForColorOfOverlay:(MTDDirectionsOverlay *)overlay;
-- (CGFloat)mtd_askDelegateForLineWidthFactorOfOverlay:(MTDDirectionsOverlay *)overlay;
-
 @end
 
 
 @implementation MTDMapView
-
-@synthesize directionsDelegate = _directionsDelegate;
-@synthesize directionsOverlay = _directionsOverlay;
-@synthesize directionsOverlayView = _directionsOverlayView;
-@synthesize directionsDisplayType = _directionsDisplayType;
-@synthesize mtd_trueDelegate = _mtd_trueDelegate;
-@synthesize mtd_request = _mtd_request;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
@@ -444,7 +393,7 @@
         CLLocationDegrees minY = DBL_MAX;
         
         for (NSUInteger i=0; i<waypoints.count; i++) {
-            MTDWaypoint *currentLocation = [waypoints objectAtIndex:i];
+            MTDWaypoint *currentLocation = waypoints[i];
             MKMapPoint mapPoint = MKMapPointForCoordinate(currentLocation.coordinate);
             
             if (mapPoint.x > maxX) {
@@ -492,6 +441,11 @@
     return self.directionsOverlayView;
 }
 
+/**
+ Internal helper method that performs the work needed to load directions, depending on the set parameter.
+ 
+ @param alternativeDirections this flag determines whether alternative directions are used or not
+ */
 - (void)mtd_loadAlternativeDirections:(BOOL)alternativeDirections
                                  from:(MTDWaypoint *)from
                                    to:(MTDWaypoint *)to
@@ -557,11 +511,9 @@
     }
     
     // post corresponding notification
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                              from, MTDDirectionsNotificationKeyFrom,
-                              to, MTDDirectionsNotificationKeyTo,
-                              [NSNumber numberWithInt:routeType], MTDDirectionsNotificationKeyRouteType,
-                              nil];
+    NSDictionary *userInfo = @{MTDDirectionsNotificationKeyFrom: from,
+                              MTDDirectionsNotificationKeyTo: to,
+                              MTDDirectionsNotificationKeyRouteType: [NSNumber numberWithInt:routeType]};
     NSNotification *notification = [NSNotification notificationWithName:MTDMapViewWillStartLoadingDirections
                                                                  object:self
                                                                userInfo:userInfo];
@@ -576,9 +528,7 @@
     }
     
     // post corresponding notification
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                              overlay, MTDDirectionsNotificationKeyOverlay,
-                              nil];
+    NSDictionary *userInfo = @{MTDDirectionsNotificationKeyOverlay: overlay};
     NSNotification *notification = [NSNotification notificationWithName:MTDMapViewDidFinishLoadingDirectionsOverlay
                                                                  object:self
                                                                userInfo:userInfo];
@@ -598,9 +548,7 @@
     }
     
     // post corresponding notification
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                              error, MTDDirectionsNotificationKeyError,
-                              nil];
+    NSDictionary *userInfo = @{MTDDirectionsNotificationKeyError: error};
     NSNotification *notification = [NSNotification notificationWithName:MTDMapViewDidFailLoadingDirectionsOverlay
                                                                  object:self
                                                                userInfo:userInfo];

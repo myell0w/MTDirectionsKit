@@ -15,13 +15,6 @@
 // http://open.mapquestapi.com/directions/v1/alternateroutes?from=Reading,%20PA&to=Washington,%20DC&maxRoutes=3&ambiguities=ignore
 
 
-@interface MTDDirectionsRequestMapQuest ()
-
-- (void)mtd_setup;
-
-@end
-
-
 @implementation MTDDirectionsRequestMapQuest
 
 ////////////////////////////////////////////////////////////////////////

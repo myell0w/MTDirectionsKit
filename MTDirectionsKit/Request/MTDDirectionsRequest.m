@@ -7,10 +7,6 @@
 #import "MTDDirectionsDefines.h"
 
 
-////////////////////////////////////////////////////////////////////////
-#pragma mark - MTDDirectionsParser
-////////////////////////////////////////////////////////////////////////
-
 @interface MTDDirectionsRequest ()
 
 /** Dictionary containing all parameter key-value pairs of the request */
@@ -28,15 +24,6 @@
 
 
 @implementation MTDDirectionsRequest
-
-@synthesize from = _from;
-@synthesize to = _to;
-@synthesize intermediateGoals = _intermediateGoals;
-@synthesize completion = _completion;
-@synthesize routeType = _routeType;
-@synthesize mtd_HTTPRequest = _mtd_HTTPRequest;
-@synthesize mtd_optimizeRoute = _mtd_optimizeRoute;
-@synthesize mtd_parameters = _mtd_parameters;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
@@ -143,7 +130,7 @@ intermediateGoals:(NSArray *)intermediateGoals
     MTDAssert(value != nil && parameter != nil, @"Value and Parameter must be different from nil");
 
     if (value != nil && parameter != nil) {
-        [self.mtd_parameters setObject:value forKey:parameter];
+        self.mtd_parameters[parameter] = value;
     }
 }
 
@@ -151,7 +138,7 @@ intermediateGoals:(NSArray *)intermediateGoals
     MTDAssert(array.count > 0 && parameter != nil, @"Array and Parameter must be different from nil");
 
     if (array.count > 0 && parameter != nil) {
-        [self.mtd_parameters setObject:array forKey:parameter];
+        self.mtd_parameters[parameter] = array;
     }
 }
 

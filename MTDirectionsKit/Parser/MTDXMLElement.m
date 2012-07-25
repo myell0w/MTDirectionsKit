@@ -11,19 +11,11 @@
     NSMutableArray *_content;
 }
 
-+ (MTDXMLElement *)mtd_nodeFromLibXMLNode:(xmlNodePtr)libXMLNode parentNode:(MTDXMLElement *)parentNode;
-+ (NSArray *)mtd_nodesForXPathQuery:(NSString *)query onLibXMLDoc:(xmlDocPtr)doc;
-
-// re-defined as read/write
-@property (nonatomic, strong, readwrite) NSString *name;
+@property (nonatomic, strong, readwrite) NSString *name;        // re-defined as read/write
 
 @end
 
 @implementation MTDXMLElement
-
-@synthesize name = _name;
-@synthesize attributes = _attributes;
-@synthesize content = _content;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
@@ -80,7 +72,7 @@
 	[description appendFormat:@"<%@", self.name];
 	
     for (NSString *attributeName in self.attributes) {
-		NSString *attributeValue = [self.attributes objectForKey:attributeName];
+		NSString *attributeValue = self.attributes[attributeName];
 		[description appendFormat:@" %@=\"%@\"", attributeName, attributeValue];
 	}
 	
@@ -172,11 +164,11 @@
 	MTDXMLElement *node = [[MTDXMLElement alloc] init];
 	
 	if (libXMLNode->name) {
-		node.name = [NSString stringWithCString:(const char *)libXMLNode->name encoding:NSUTF8StringEncoding];
+		node.name = @((const char *)libXMLNode->name);
 	}
 	
 	if (libXMLNode->content && libXMLNode->type != XML_DOCUMENT_TYPE_NODE) {
-		NSString *contentString = [NSString stringWithCString:(const char *)libXMLNode->content encoding:NSUTF8StringEncoding];
+		NSString *contentString = @((const char *)libXMLNode->content);
 		
 		if (parentNode && (libXMLNode->type == XML_CDATA_SECTION_NODE || libXMLNode->type == XML_TEXT_NODE)) {
 			if (libXMLNode->type == XML_TEXT_NODE) {
@@ -201,14 +193,14 @@
 			NSString *attributeValue = nil;
 			
 			if (attribute->name && attribute->children && attribute->children->type == XML_TEXT_NODE && attribute->children->content) {
-				attributeName = [NSString stringWithCString:(const char *)attribute->name encoding:NSUTF8StringEncoding];
-				attributeValue = [NSString stringWithCString:(const char *)attribute->children->content encoding:NSUTF8StringEncoding];
+				attributeName = @((const char *)attribute->name);
+				attributeValue = @((const char *)attribute->children->content);
 				
 				if (attributeName && attributeValue) {
 					if (!node.attributes) {
 						node->_attributes = [NSMutableDictionary dictionaryWithObject:attributeValue forKey:attributeName];
 					} else {
-						[node->_attributes setObject:attributeValue forKey:attributeName];
+						node->_attributes[attributeName] = attributeValue;
 					}
 				}
 			}

@@ -10,19 +10,6 @@
 #import "MTDStatusCodeMapQuest.h"
 
 
-@interface MTDDirectionsParserMapQuest ()
-
-// This method parses the waypointNodes and returns an array of MTDWaypoints
-- (NSArray *)mtd_waypointsFromWaypointNodes:(NSArray *)waypointNodes;
-// This method parses all addresses and orders the intermediate goals in the same order as optimised by the API.
-// That is, if optimization is enabled the MapQuest can reorder the intermediate goals to provide the fastest route possible.
-- (NSArray *)mtd_orderedIntermediateGoalsWithSequenceNode:(MTDXMLElement *)sequenceNode addressNodes:(NSArray *)addressNodes;
-// This method parses an address and returns an instance of MTDAddress
-- (MTDAddress *)mtd_addressFromAddressNode:(MTDXMLElement *)addressNode;
-
-@end
-
-
 @implementation MTDDirectionsParserMapQuest
 
 ////////////////////////////////////////////////////////////////////////
@@ -83,7 +70,7 @@
                                                 timeInSeconds:timeInSeconds
                                                additionalInfo:additionalInfo];
         
-        overlay = [[MTDDirectionsOverlay alloc] initWithRoutes:[NSArray arrayWithObject:route]
+        overlay = [[MTDDirectionsOverlay alloc] initWithRoutes:@[route]
                                              intermediateGoals:orderedIntermediateGoals
                                                      routeType:self.routeType];
     } else {
@@ -96,10 +83,8 @@
         
         error = [NSError errorWithDomain:MTDDirectionsKitErrorDomain
                                     code:statusCode
-                                userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-                                          self.data, MTDDirectionsKitDataKey,
-                                          errorMessage, MTDDirectionsKitErrorMessageKey,
-                                          nil]];
+                                userInfo:@{MTDDirectionsKitDataKey: self.data,
+                                          MTDDirectionsKitErrorMessageKey: errorMessage}];
         
         MTDLogError(@"Error occurred during parsing of directions from %@ to %@: %@ \n%@", 
                     self.from,
@@ -119,6 +104,7 @@
 #pragma mark - Private
 ////////////////////////////////////////////////////////////////////////
 
+// This method parses the waypointNodes and returns an array of MTDWaypoints
 - (NSArray *)mtd_waypointsFromWaypointNodes:(NSArray *)waypointNodes {
     NSMutableArray *waypoints = [NSMutableArray arrayWithCapacity:waypointNodes.count+2];
     
@@ -151,6 +137,8 @@
     return waypoints;
 }
 
+// This method parses all addresses and orders the intermediate goals in the same order as optimised by the API.
+// That is, if optimization is enabled the MapQuest can reorder the intermediate goals to provide the fastest route possible.
 - (NSArray *)mtd_orderedIntermediateGoalsWithSequenceNode:(MTDXMLElement *)sequenceNode addressNodes:(NSArray *)addressNodes {
     NSArray *sequence = [sequenceNode.contentString componentsSeparatedByString:@","];
     // all goals, including from and to
@@ -167,7 +155,7 @@
     // Parse Addresses of goals
     [addressNodes enumerateObjectsUsingBlock:^(MTDXMLElement *addressNode, NSUInteger idx, __unused BOOL *stop) {
         MTDAddress *address = [self mtd_addressFromAddressNode:addressNode];
-        MTDWaypoint *waypoint = [orderedIntermediateGoals objectAtIndex:idx];
+        MTDWaypoint *waypoint = orderedIntermediateGoals[idx];
         
         // update address of corresponding waypoint
         waypoint.address = address;
@@ -176,6 +164,7 @@
     return [orderedIntermediateGoals subarrayWithRange:NSMakeRange(1, orderedIntermediateGoals.count-2)];
 }
 
+// This method parses an address and returns an instance of MTDAddress
 - (MTDAddress *)mtd_addressFromAddressNode:(MTDXMLElement *)addressNode {
     MTDXMLElement *streetNode = [addressNode firstChildNodeWithName:@"street"];
     MTDXMLElement *cityNode = [addressNode firstChildNodeWithName:@"adminArea5"];

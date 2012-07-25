@@ -2,12 +2,6 @@
 
 @implementation MTDAddress
 
-@synthesize country = _country;
-@synthesize county = _county;
-@synthesize postalCode = _postalCode;
-@synthesize state = _state;
-@synthesize city = _city;
-@synthesize street = _street;
 @synthesize fullAddress = _fullAddress;
 
 ////////////////////////////////////////////////////////////////////////

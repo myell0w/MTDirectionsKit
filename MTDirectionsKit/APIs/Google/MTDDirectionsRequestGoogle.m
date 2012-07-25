@@ -9,12 +9,6 @@
 #define kMTDGoogleBaseAddress         @"http://maps.googleapis.com/maps/api/directions/xml"
 
 
-@interface MTDDirectionsRequestGoogle ()
-
-- (void)mtd_setup;
-
-@end
-
 @implementation MTDDirectionsRequestGoogle
 
 ////////////////////////////////////////////////////////////////////////

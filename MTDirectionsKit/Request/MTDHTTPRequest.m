@@ -12,23 +12,10 @@
 @property (nonatomic, strong, setter = mtd_setCallbackTarget:) id mtd_callbackTarget;
 @property (nonatomic, strong, setter = mtd_setConnection:) NSURLConnection *mtd_connection;
 
-/** Callbacks the callbackTarget and closes the connection afterwards */
-- (void)mtd_close;
-
-// Isn't in NSURLConnectionDelegate protocol, so we provide the method header to suppress warnings
-- (void)connectionDidFinishLoading:(NSURLConnection *)aConnection;
-
 @end
 
 
 @implementation MTDHTTPRequest
-
-@synthesize data = _data;
-@synthesize urlRequest = _urlRequest;
-@synthesize failureCode = _failureCode;
-@synthesize responseHeaderFields = _responseHeaderFields;
-@synthesize mtd_callbackTarget = _mtd_callbackTarget;
-@synthesize mtd_connection = _mtd_connection;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
@@ -65,19 +52,6 @@
 	[self.mtd_connection start];
 }
 
-- (void)mtd_close {
-	[self.mtd_connection cancel];
-	self.mtd_connection = nil;
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-	[self.mtd_callbackTarget performSelector:_action withObject:self];
-#pragma clang diagnostic pop
-
-	self.mtd_callbackTarget = nil;
-    _data = nil;
-}
-
 - (void)cancel {
     // first set callbackTarget to nil to not call it in case of cancel
 	self.mtd_callbackTarget = nil;
@@ -104,7 +78,7 @@
 		return;
 	}
 	
-	NSInteger contentLength = [[_responseHeaderFields objectForKey:@"Content-Length"] integerValue];
+	NSInteger contentLength = [_responseHeaderFields[@"Content-Length"] integerValue];
     
 	if (contentLength > 0) {
 		_data = [[NSMutableData alloc] initWithCapacity:(NSUInteger)contentLength];
@@ -127,6 +101,23 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *) __unused connection {
 	[self mtd_close];
+}
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - Private
+////////////////////////////////////////////////////////////////////////
+
+- (void)mtd_close {
+	[self.mtd_connection cancel];
+	self.mtd_connection = nil;
+    
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+	[self.mtd_callbackTarget performSelector:_action withObject:self];
+#pragma clang diagnostic pop
+    
+	self.mtd_callbackTarget = nil;
+    _data = nil;
 }
 
 @end

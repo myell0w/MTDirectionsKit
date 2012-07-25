@@ -14,18 +14,12 @@
 
 @property (nonatomic, readonly) MTDDirectionsOverlay *directionsOverlay;
 
-- (CGPathRef)mtd_newPathForPoints:(MKMapPoint *)points
-                       pointCount:(NSUInteger)pointCount
-                         clipRect:(MKMapRect)mapRect
-                        zoomScale:(MKZoomScale)zoomScale CF_RETURNS_RETAINED;
-
 @end
 
 
 @implementation MTDDirectionsOverlayView
 
 @synthesize overlayColor = _overlayColor;
-@synthesize overlayLineWidthFactor = _overlayLineWidthFactor;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
@@ -150,7 +144,7 @@
 - (CGPathRef)mtd_newPathForPoints:(MKMapPoint *)points
                        pointCount:(NSUInteger)pointCount
                          clipRect:(MKMapRect)mapRect
-                        zoomScale:(MKZoomScale)zoomScale {
+                        zoomScale:(MKZoomScale)zoomScale CF_RETURNS_RETAINED {
     // The fastest way to draw a path in an MKOverlayView is to simplify the
     // geometry for the screen by eliding points that are too close together
     // and to omit any line segments that do not intersect the clipping rect.  
