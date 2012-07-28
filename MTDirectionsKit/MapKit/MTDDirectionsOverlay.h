@@ -43,24 +43,24 @@
 @property (nonatomic, assign, readonly) MTDDirectionsRouteType routeType;
 
 /******************************************
- @name Routes
+ @name Forwarding to Active Route
  ******************************************/
 
-/** all waypoints of the route/directions, including fromCoordinate and toCoordinate */
+/** all waypoints of the active route, including fromCoordinate and toCoordinate */
 @property (nonatomic, strong, readonly) NSArray *waypoints;
-/** the starting coordinate of the directions */
+/** the starting coordinate of the active route */
 @property (nonatomic, readonly) CLLocationCoordinate2D fromCoordinate;
-/** the end coordinate of the directions */
+/** the end coordinate of the active route */
 @property (nonatomic, readonly) CLLocationCoordinate2D toCoordinate;
-/** The address of the starting coordinate, can be nil if not provided by API */
+/** The address of the starting coordinat of the active route */
 @property (nonatomic, readonly) MTDAddress *fromAddress;
-/** The address of the end coordinate, can be nil if not provided by API */
+/** The address of the end coordinate of the active route */
 @property (nonatomic, readonly) MTDAddress *toAddress;
-/** the total distance between fromCoordinate and toCoordinate, when travelled along the given waypoints */
+/** the total distance between fromCoordinate and toCoordinate of the active route, when travelled along the given waypoints */
 @property (nonatomic, strong, readonly) MTDDistance *distance;
-/** the total estimated time for this route */
+/** the total estimated time for the active route */
 @property (nonatomic, assign, readonly) NSTimeInterval timeInSeconds;
-/** the estimated time as formatted string */
+/** the estimated time of the active route as formatted string */
 @property (nonatomic, readonly) NSString *formattedTime;
 
 /******************************************
@@ -85,7 +85,7 @@
  ******************************************/
 
 /**
- The estimated time as formatted string with a specified time format.
+ The estimated time of the active route as formatted string with a specified time format.
  
  @param format the format of the time, e.g. H:mm:ss
  @return a string-representation of the estimated time with the given format

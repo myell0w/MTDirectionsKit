@@ -7,7 +7,10 @@
 #import "MTDDirectionsDefines.h"
 
 
-@interface MTDDirectionsOverlay ()
+@interface MTDDirectionsOverlay () {
+    MTDRoute *_shortestRoute;
+    MTDRoute *_fastestRoute;
+}
 
 // Re-defining properties as read/write
 @property (nonatomic, copy, readwrite) NSArray *routes;
@@ -31,7 +34,7 @@
         _intermediateGoals = [intermediateGoals copy];
         _routeType = routeType;
     }
-    
+
     return self;
 }
 
@@ -65,21 +68,29 @@
 }
 
 - (MTDRoute *)fastestRoute {
-    NSNumber *minTime = [self.routes valueForKeyPath:[NSString stringWithFormat:@"@min.%@", MTDKey(timeInSeconds)]];
-    NSUInteger index = [self.routes indexOfObjectPassingTest:^BOOL(MTDRoute *route, __unused NSUInteger idx, __unused BOOL *stop) {
-        return route.timeInSeconds == [minTime doubleValue];
-    }];
-    
-    return MTDObjectAtIndexOfArray(self.routes, index);
+    if (_fastestRoute == nil) {
+        NSNumber *minTime = [self.routes valueForKeyPath:[NSString stringWithFormat:@"@min.%@", MTDKey(timeInSeconds)]];
+        NSUInteger index = [self.routes indexOfObjectPassingTest:^BOOL(MTDRoute *route, __unused NSUInteger idx, __unused BOOL *stop) {
+            return route.timeInSeconds == [minTime doubleValue];
+        }];
+
+        _fastestRoute = MTDObjectAtIndexOfArray(self.routes, index);
+    }
+
+    return _fastestRoute;
 }
- 
+
 - (MTDRoute *)shortestRoute {
-    NSNumber *minDistance = [self.routes valueForKeyPath:[NSString stringWithFormat:@"@min.%@.%@", MTDKey(distance), MTDKey(distanceInMeter)]];
-    NSUInteger index = [self.routes indexOfObjectPassingTest:^BOOL(MTDRoute *route, __unused NSUInteger idx, __unused BOOL *stop) {
-        return route.distance.distanceInMeter == [minDistance doubleValue];
-    }];
-    
-    return MTDObjectAtIndexOfArray(self.routes, index);
+    if (_shortestRoute == nil) {
+        NSNumber *minDistance = [self.routes valueForKeyPath:[NSString stringWithFormat:@"@min.%@.%@", MTDKey(distance), MTDKey(distanceInMeter)]];
+        NSUInteger index = [self.routes indexOfObjectPassingTest:^BOOL(MTDRoute *route, __unused NSUInteger idx, __unused BOOL *stop) {
+            return route.distance.distanceInMeter == [minDistance doubleValue];
+        }];
+
+        _shortestRoute = MTDObjectAtIndexOfArray(self.routes, index);
+    }
+
+    return _shortestRoute;
 }
 
 - (NSArray *)waypoints {
