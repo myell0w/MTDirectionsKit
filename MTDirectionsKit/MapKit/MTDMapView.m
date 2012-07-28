@@ -6,6 +6,7 @@
 #import "MTDDirectionsRequest.h"
 #import "MTDDirectionsOverlay.h"
 #import "MTDDirectionsOverlayView.h"
+#import "MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h"
 #import "MTDFunctions.h"
 
 
@@ -383,6 +384,41 @@
     [super setDelegate:self];
     
     _directionsDisplayType = MTDDirectionsDisplayTypeNone;
+
+    // we need this GestureRecognizer to be able to select alternative routes
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mtd_handleMapTap:)];
+
+    // we require all gesture recognizer except other single-tap gesture recognizers to fail
+    for (UIGestureRecognizer *gesture in self.gestureRecognizers) {
+        if ([gesture isKindOfClass:[UITapGestureRecognizer class]]) {
+            UITapGestureRecognizer *systemTap = (UITapGestureRecognizer *)gesture;
+
+            if (systemTap.numberOfTapsRequired > 1) {
+                [tap requireGestureRecognizerToFail:systemTap];
+            }
+        } else {
+            [tap requireGestureRecognizerToFail:gesture];
+        }
+    }
+
+    [self addGestureRecognizer:tap];
+}
+
+- (void)mtd_handleMapTap:(UITapGestureRecognizer *)tap {
+    if ((tap.state & UIGestureRecognizerStateRecognized) == UIGestureRecognizerStateRecognized) {
+        // Check if the directionsOverlay got tapped
+        if (self.directionsOverlayView) {
+            // Get view frame rect in the mapView's coordinate system
+            CGRect viewFrameInMapView = [self.directionsOverlayView.superview convertRect:self.directionsOverlayView.frame toView:self];
+            // Get touch point in the mapView's coordinate system
+            CGPoint point = [tap locationInView:self];
+
+            // Check if the touch is within the view bounds
+            if (CGRectContainsPoint(viewFrameInMapView, point)) {
+                [self.directionsOverlayView mtd_handleTapAtPoint:[tap locationInView:self.directionsOverlayView]];
+            }
+        }
+    }
 }
 
 - (void)mtd_setRegionFromWaypoints:(NSArray *)waypoints edgePadding:(UIEdgeInsets)edgePadding animated:(BOOL)animated {

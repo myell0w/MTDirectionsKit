@@ -8,6 +8,7 @@
 
 
 @interface MTDDirectionsOverlay () {
+    MTDRoute *_activeRoute;
     MTDRoute *_shortestRoute;
     MTDRoute *_fastestRoute;
 }
@@ -31,6 +32,7 @@
            routeType:(MTDDirectionsRouteType)routeType {
     if ((self = [super init])) {
         _routes = [routes copy];
+        _activeRoute = MTDFirstObjectOfArray(_routes);
         _intermediateGoals = [intermediateGoals copy];
         _routeType = routeType;
     }
@@ -57,11 +59,6 @@
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - MTDDirectionsOverlay
 ////////////////////////////////////////////////////////////////////////
-
-- (MTDRoute *)activeRoute {
-    // TODO: Return selected route instead of hardcoded route
-    return MTDFirstObjectOfArray(self.routes);
-}
 
 - (MTDRoute *)bestRoute {
     return MTDFirstObjectOfArray(self.routes);
@@ -127,6 +124,14 @@
 
 - (NSString *)formattedTimeWithFormat:(NSString *)format {
     return [self.activeRoute formattedTimeWithFormat:format];
+}
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - Private
+////////////////////////////////////////////////////////////////////////
+
+- (void)mtd_activateRoute:(MTDRoute *)route {
+    _activeRoute = route;
 }
 
 @end

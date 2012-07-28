@@ -24,12 +24,12 @@
 @interface MTDDirectionsOverlay : NSObject <MKOverlay>
 
 /******************************************
- @name Directions Overlay
+ @name Directions/Routes
  ******************************************/
 
 /** an array of alternative routes for the given start- and endpoint */
 @property (nonatomic, copy, readonly) NSArray *routes;
-/** the currently active route if there are more alternatives or the only route object, if there is only one */
+/** the currently active route if there are more alternatives or the only route object if there is only one */
 @property (nonatomic, readonly) MTDRoute *activeRoute;
 /** the best route of the alternatives according to the API used */
 @property (nonatomic, readonly) MTDRoute *bestRoute;
@@ -81,7 +81,7 @@
            routeType:(MTDDirectionsRouteType)routeType;
 
 /******************************************
- @name Directions
+ @name Forwarding to Active Route
  ******************************************/
 
 /**

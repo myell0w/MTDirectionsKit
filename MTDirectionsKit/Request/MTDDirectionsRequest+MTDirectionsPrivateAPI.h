@@ -14,7 +14,7 @@
  This category exposes private API used in MTDirectionsKit to other classes to not generate warnings when using them. 
  You should not use the properties and methods exposed here directly in your code.
  */
-@interface MTDDirectionsRequest (MTDPrivateAPI)
+@interface MTDDirectionsRequest (MTDirectionsPrivateAPI)
 
 /** object used to perform a HTTP request */
 @property (nonatomic, strong, setter = mtd_setHttpRequest:) MTDHTTPRequest *mtd_HTTPRequest;

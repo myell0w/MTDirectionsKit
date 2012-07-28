@@ -1,18 +1,21 @@
 #import "MTDDirectionsOverlayView.h"
 #import "MTDDirectionsOverlay.h"
+#import "MTDDirectionsOverlay+MTDirectionsPrivateAPI.h"
 #import "MTDRoute.h"
 #import "MTDFunctions.h"
+#import "MTDWaypoint.h"
+#import <CoreLocation/CoreLocation.h>
 
 
 #define kMTDDefaultOverlayColor         [UIColor colorWithRed:0.f green:0.25f blue:1.f alpha:1.f]
 #define kMTDDefaultLineWidthFactor      1.8f
-#define kMTDMinimumLineWidthFactor      0.5f
+#define kMTDMinimumLineWidthFactor      0.7f
 #define kMTDMaximumLineWidthFactor      3.0f
 
 
 @interface MTDDirectionsOverlayView ()
 
-@property (nonatomic, readonly) MTDDirectionsOverlay *directionsOverlay;
+@property (nonatomic, readonly) MTDDirectionsOverlay *mtd_directionsOverlay;
 
 @end
 
@@ -31,6 +34,17 @@
     }
     
     return self;
+}
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - UIView
+////////////////////////////////////////////////////////////////////////
+
+- (void)mtd_handleTapAtPoint:(CGPoint)point {
+    MTDRoute *selectedRoute = [self routeTouchedByPoint:point];
+
+    [self.mtd_directionsOverlay mtd_activateRoute:selectedRoute];
+    [self setNeedsDisplayInMapRect:MKMapRectWorld];
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -68,7 +82,7 @@
     // of the currently drawn rect are included in the generated path.
     MKMapRect clipRect = MKMapRectInset(mapRect, -lineWidth, -lineWidth);
     
-    for (MTDRoute *route in self.directionsOverlay.routes) {
+    for (MTDRoute *route in self.mtd_directionsOverlay.routes) {
         CGPathRef path = [self mtd_newPathForPoints:route.points
                                          pointCount:route.pointCount
                                            clipRect:clipRect
@@ -76,9 +90,10 @@
         
         if (path != NULL) {
             UIColor *baseColor = self.overlayColor;
-            
-            if (route != self.directionsOverlay.activeRoute) {
-                baseColor = [baseColor colorWithAlphaComponent:0.4f];
+
+            if (route != self.mtd_directionsOverlay.activeRoute) {
+                baseColor = [baseColor colorWithAlphaComponent:0.75f];
+                lineWidth = MKRoadWidthAtZoomScale(zoomScale) * kMTDMinimumLineWidthFactor * screenScale;
             }
             
             UIColor *darkenedColor = MTDDarkenedColor(baseColor, 0.1f);
@@ -107,7 +122,7 @@
             CGContextAddPath(context, path);
             CGContextStrokePath(context);
             CGContextRestoreGState(context);
-            
+
             // Draw inner glow path
             CGContextSaveGState(context);
             CGFloat innerGlowPathLineWidth = roundf(darkPathLineWidth * 0.9f);
@@ -137,7 +152,7 @@
 #pragma mark - Private
 ////////////////////////////////////////////////////////////////////////
 
-- (MTDDirectionsOverlay *)directionsOverlay {
+- (MTDDirectionsOverlay *)mtd_directionsOverlay {
     return (MTDDirectionsOverlay *)self.overlay;
 }
 
@@ -210,6 +225,36 @@
     }
     
     return path;
+}
+
+// check whether a touch at the given point tried to select the given route
+- (BOOL)touchAtPoint:(CGPoint)point insideRoute:(MTDRoute *)route {
+    MKMapPoint mapPoint = [self mapPointForPoint:point];
+
+    // TODO: How to optimize/improve this check?
+    for (MTDWaypoint *waypoint in route.waypoints) {
+        MKMapPoint waypointMapPoint = MKMapPointForCoordinate(waypoint.coordinate);
+        CLLocationDistance distance = MKMetersBetweenMapPoints(mapPoint, waypointMapPoint);
+
+        MTDLogVerbose(@"Distance: %f", distance);
+
+        if (distance < 100.) {
+            return YES;
+        }
+    }
+
+    return NO;
+}
+
+// returns the first route that get's hit by the touch at the given point
+- (MTDRoute *)routeTouchedByPoint:(CGPoint)point {
+    for (MTDRoute *route in self.mtd_directionsOverlay.routes) {
+        if ([self touchAtPoint:point insideRoute:route]) {
+            return route;
+        }
+    }
+
+    return nil;
 }
 
 @end

@@ -104,6 +104,8 @@
 		9BDE013B15B08A9E001A8132 /* MTDRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDE013915B08A9E001A8132 /* MTDRoute.m */; };
 		9BDE014515B1E04E001A8132 /* MTDRoute+MTDirectionsPrivateAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BDE014315B1E04E001A8132 /* MTDRoute+MTDirectionsPrivateAPI.h */; };
 		9BDE015015B203D1001A8132 /* MTDXMLElementTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDE014F15B203D1001A8132 /* MTDXMLElementTest.m */; };
+		9BE9094815C39980003E5462 /* MTDDirectionsOverlay+MTDirectionsPrivateAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BE9094615C39980003E5462 /* MTDDirectionsOverlay+MTDirectionsPrivateAPI.h */; };
+		9BE9094C15C3A22B003E5462 /* MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BE9094A15C3A22B003E5462 /* MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h */; };
 		9BEA8C8615C3746D00469D85 /* mapquest_alternatives.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9BEA8C8515C3746D00469D85 /* mapquest_alternatives.xml */; };
 		9BEE26EB155E92FC008A42F8 /* MTDHTTPRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BEE26E9155E92FC008A42F8 /* MTDHTTPRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9BEE26EC155E92FC008A42F8 /* MTDHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEE26EA155E92FC008A42F8 /* MTDHTTPRequest.m */; };
@@ -218,6 +220,8 @@
 		9BDE014E15B203D1001A8132 /* MTDXMLElementTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDXMLElementTest.h; sourceTree = "<group>"; };
 		9BDE014F15B203D1001A8132 /* MTDXMLElementTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDXMLElementTest.m; sourceTree = "<group>"; };
 		9BE9094415C38CB9003E5462 /* MTDInternalConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MTDInternalConstants.h; path = "MTDirectionsKit/Supporting Files/MTDInternalConstants.h"; sourceTree = SOURCE_ROOT; };
+		9BE9094615C39980003E5462 /* MTDDirectionsOverlay+MTDirectionsPrivateAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTDDirectionsOverlay+MTDirectionsPrivateAPI.h"; sourceTree = "<group>"; };
+		9BE9094A15C3A22B003E5462 /* MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h"; sourceTree = "<group>"; };
 		9BEA8C8515C3746D00469D85 /* mapquest_alternatives.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mapquest_alternatives.xml; sourceTree = "<group>"; };
 		9BEE26E9155E92FC008A42F8 /* MTDHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDHTTPRequest.h; sourceTree = "<group>"; };
 		9BEE26EA155E92FC008A42F8 /* MTDHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDHTTPRequest.m; sourceTree = "<group>"; };
@@ -341,8 +345,10 @@
 			children = (
 				9B10AA19155D85B8002A3052 /* MTDDirectionsOverlay.h */,
 				9B10AA1A155D85B8002A3052 /* MTDDirectionsOverlay.m */,
+				9BE9094615C39980003E5462 /* MTDDirectionsOverlay+MTDirectionsPrivateAPI.h */,
 				9B10AA1B155D85B8002A3052 /* MTDDirectionsOverlayView.h */,
 				9B10AA1C155D85B8002A3052 /* MTDDirectionsOverlayView.m */,
+				9BE9094A15C3A22B003E5462 /* MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h */,
 				9B10AA1D155D85B8002A3052 /* MTDMapView.h */,
 				9B10AA1E155D85B8002A3052 /* MTDMapView.m */,
 				9B9945F21562DF5E00DE5B1B /* MTDDirectionsDelegate.h */,
@@ -501,6 +507,8 @@
 				9BDE014515B1E04E001A8132 /* MTDRoute+MTDirectionsPrivateAPI.h in Headers */,
 				9B23F65A15BEFE7C0069EAD1 /* MTDWeak.h in Headers */,
 				9B06FD1815C0A57900100A7C /* NSObject+MTDXcodeSubscriptingCompatibility.h in Headers */,
+				9BE9094815C39980003E5462 /* MTDDirectionsOverlay+MTDirectionsPrivateAPI.h in Headers */,
+				9BE9094C15C3A22B003E5462 /* MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
