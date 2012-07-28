@@ -37,17 +37,6 @@
 }
 
 ////////////////////////////////////////////////////////////////////////
-#pragma mark - UIView
-////////////////////////////////////////////////////////////////////////
-
-- (void)mtd_handleTapAtPoint:(CGPoint)point {
-    MTDRoute *selectedRoute = [self routeTouchedByPoint:point];
-
-    [self.mtd_directionsOverlay mtd_activateRoute:selectedRoute];
-    [self setNeedsDisplayInMapRect:MKMapRectWorld];
-}
-
-////////////////////////////////////////////////////////////////////////
 #pragma mark - MTDDirectionsOverlayView
 ////////////////////////////////////////////////////////////////////////
 
@@ -227,16 +216,24 @@
     return path;
 }
 
+// gets called from the UIGestureRecognizer on the MTDMapView
+- (void)mtd_handleTapAtPoint:(CGPoint)point {
+    MTDRoute *selectedRoute = [self mtd_routeTouchedByPoint:point];
+
+    if (selectedRoute != nil && selectedRoute != self.mtd_directionsOverlay.activeRoute) {
+        [self.mtd_directionsOverlay mtd_activateRoute:selectedRoute];
+        [self setNeedsDisplayInMapRect:MKMapRectWorld];
+    }
+}
+
 // check whether a touch at the given point tried to select the given route
-- (BOOL)touchAtPoint:(CGPoint)point insideRoute:(MTDRoute *)route {
+- (BOOL)mtd_touchAtPoint:(CGPoint)point insideRoute:(MTDRoute *)route {
     MKMapPoint mapPoint = [self mapPointForPoint:point];
 
-    // TODO: How to optimize/improve this check?
+    // TODO: How to optimize/improve/fix this check?
     for (MTDWaypoint *waypoint in route.waypoints) {
         MKMapPoint waypointMapPoint = MKMapPointForCoordinate(waypoint.coordinate);
         CLLocationDistance distance = MKMetersBetweenMapPoints(mapPoint, waypointMapPoint);
-
-        MTDLogVerbose(@"Distance: %f", distance);
 
         if (distance < 100.) {
             return YES;
@@ -247,9 +244,9 @@
 }
 
 // returns the first route that get's hit by the touch at the given point
-- (MTDRoute *)routeTouchedByPoint:(CGPoint)point {
+- (MTDRoute *)mtd_routeTouchedByPoint:(CGPoint)point {
     for (MTDRoute *route in self.mtd_directionsOverlay.routes) {
-        if ([self touchAtPoint:point insideRoute:route]) {
+        if ([self mtd_touchAtPoint:point insideRoute:route]) {
             return route;
         }
     }

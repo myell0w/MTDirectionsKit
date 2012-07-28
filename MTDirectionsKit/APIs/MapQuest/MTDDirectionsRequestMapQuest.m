@@ -103,6 +103,7 @@
     [self setValue:@"none" forParameter:@"narrativeType"];
     [self setValue:@"raw" forParameter:@"shapeFormat"];
     [self setValue:@"0" forParameter:@"generalize"];
+    [self setValue:@"25" forParameter:@"timeOverage"];
 }
 
 @end

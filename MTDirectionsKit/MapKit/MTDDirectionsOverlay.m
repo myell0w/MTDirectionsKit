@@ -131,7 +131,9 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (void)mtd_activateRoute:(MTDRoute *)route {
-    _activeRoute = route;
+    if (route != nil) {
+        _activeRoute = route;
+    }
 }
 
 @end
