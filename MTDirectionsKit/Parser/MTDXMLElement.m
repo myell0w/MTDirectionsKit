@@ -9,6 +9,7 @@
 @interface MTDXMLElement () {
     NSMutableDictionary *_attributes;
     NSMutableArray *_content;
+    NSArray *_childNodes;
 }
 
 @property (nonatomic, strong, readwrite) NSString *name;        // re-defined as read/write
@@ -96,9 +97,13 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (NSArray *)childNodes {
-    return [self.content filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, __unused NSDictionary *bindings) {
-        return [evaluatedObject isKindOfClass:[MTDXMLElement class]];
-    }]];
+    if (_childNodes == nil) {
+        _childNodes = [self.content filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, __unused NSDictionary *bindings) {
+            return [evaluatedObject isKindOfClass:[MTDXMLElement class]];
+        }]];
+    }
+
+    return _childNodes;
 }
 
 - (NSString *)contentString {
@@ -140,9 +145,9 @@
 - (MTDXMLElement *)firstChildNodeWithName:(NSString *)name {
     __block MTDXMLElement *foundNode = nil;
     
-    [self.content enumerateObjectsUsingBlock:^(id obj, __unused NSUInteger idx, BOOL *stop) {
-        if ([obj isKindOfClass:[MTDXMLElement class]] && [[obj name] isEqualToString:name]) {
-            foundNode = (MTDXMLElement *)obj;
+    [self.childNodes enumerateObjectsUsingBlock:^(MTDXMLElement *element, __unused NSUInteger idx, BOOL *stop) {
+        if ([element.name isEqualToString:name]) {
+            foundNode = element;
             *stop = YES;
         }
     }];
@@ -151,9 +156,29 @@
 }
 
 - (NSArray *)childNodesWithName:(NSString *)name {
-    return [self.content filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, __unused NSDictionary *bindings) {
-        return [evaluatedObject isKindOfClass:[MTDXMLElement class]] && [[evaluatedObject name] isEqualToString:name];
+    return [self.childNodes filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(MTDXMLElement *element, __unused NSDictionary *bindings) {
+        return [element.name isEqualToString:name];
     }]];
+}
+
+- (NSArray *)childNodesWithPath:(NSString *)path {
+    NSArray *parts = [path componentsSeparatedByString:@"."];
+    __block MTDXMLElement *element = self;
+    __block NSArray *childNodes = nil;
+
+    [parts enumerateObjectsUsingBlock:^(NSString *part, NSUInteger idx, __unused BOOL *stop) {
+        // intermediate path component
+        if (idx < parts.count - 1) {
+            element = [element firstChildNodeWithName:part];
+        }
+
+        // last path component
+        else {
+            childNodes = [element childNodesWithName:part];
+        }
+    }];
+
+    return childNodes;
 }
 
 ////////////////////////////////////////////////////////////////////////

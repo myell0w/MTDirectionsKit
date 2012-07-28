@@ -121,4 +121,13 @@
  */
 - (NSArray *)childNodesWithName:(NSString *)name;
 
+/**
+ Returns an array of child nodes with the given dot-separated path, e.g. shape.shapePoints.latLng
+ For all path components except the last one only the first child is traversed, if there are several.
+ 
+ @param path a dot-separated path of tag names
+ @return an array of MTDXMLElements
+ */
+- (NSArray *)childNodesWithPath:(NSString *)path;
+
 @end
