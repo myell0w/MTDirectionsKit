@@ -68,12 +68,12 @@
             }
             
             if (copyrightNode != nil) {
-                [additionalInfo setValue:copyrightNode.contentString forKey:@"copyrights"];
+                [additionalInfo setValue:copyrightNode.contentString forKey:MTDAdditionalInfoCopyrightsKey];
             }
             
             if (warningNodes.count > 0) {
                 NSArray *warnings = [warningNodes valueForKey:MTDKey(contentString)];
-                [additionalInfo setValue:warnings forKey:@"warnings"];
+                [additionalInfo setValue:warnings forKey:MTDAdditionalInfoWarningsKey];
             }
         }
         

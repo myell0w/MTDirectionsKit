@@ -150,8 +150,8 @@
             STAssertTrue(overlay.waypoints.count == 99, @"Error parsing waypoints %d", overlay.waypoints.count);
             STAssertEqualsWithAccuracy([overlay.distance distanceInMeasurementSystem:MTDMeasurementSystemMetric], 137.845, 0.001, @"Error parsing distance");
 
-            // Check Addresses
             for (MTDRoute *route in overlay.routes) {
+                // Check Addresses
                 MTDAddress *fromAddress = route.from.address;
                 MTDAddress *toAddress = route.to.address;
 
@@ -164,6 +164,10 @@
                 STAssertEqualObjects(toAddress.state, @"District of Columbia", @"toAddress: error parsing state");
                 STAssertEqualObjects(toAddress.county, @"Montgomery", @"toAddress: error parsing county");
                 STAssertEqualObjects(toAddress.country, @"United States of America", @"toAddress: error parsing country");
+
+                // Check copyright
+                NSString *copyright = [route.additionalInfo objectForKey:MTDAdditionalInfoCopyrightsKey];
+                STAssertEqualObjects(copyright, @"© 2012 MapQuest, Inc.", @"Error parsing copyright");
             }
             
             testFinished = YES;

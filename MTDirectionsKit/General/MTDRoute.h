@@ -11,6 +11,11 @@
 @class MTDDistance;
 
 
+// Keys used in the additionalInfo dictionary
+#define MTDAdditionalInfoCopyrightsKey      @"copyrights"
+#define MTDAdditionalInfoWarningsKey        @"warnings"
+
+
 /**
  An instance of MTDRoute represents one way of travelling from a starting point to an end point.
  When requesting directions alternative routes can be provided, each of whom is represented by

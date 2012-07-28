@@ -101,7 +101,7 @@
 // This method parses a route and returns an instance of MTDRoute
 - (MTDRoute *)mtd_routeFromRouteNode:(MTDXMLElement *)routeNode {
     NSArray *waypointNodes = [routeNode childNodesWithPath:@"shape.shapePoints.latLng"];
-    MTDXMLElement *copyrightNode = [MTDXMLElement nodeForXPathQuery:@"//copyright/text" onXML:self.data];
+    MTDXMLElement *copyrightNode = [MTDXMLElement nodeForXPathQuery:@"/response/info/copyright/text" onXML:self.data];
     MTDXMLElement *distanceNode = [routeNode firstChildNodeWithName:@"distance"];
     MTDXMLElement *timeNode = [routeNode firstChildNodeWithName:@"time"];
 
@@ -127,7 +127,7 @@
         }
 
         if (copyrightNode != nil) {
-            [additionalInfo setValue:copyrightNode.contentString forKey:@"copyrights"];
+            [additionalInfo setValue:copyrightNode.contentString forKey:MTDAdditionalInfoCopyrightsKey];
         }
     }
 
