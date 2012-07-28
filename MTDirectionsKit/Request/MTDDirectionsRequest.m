@@ -76,6 +76,7 @@ intermediateGoals:(NSArray *)intermediateGoals
         _routeType = routeType;
         _completion = [completion copy];
         _mtd_parameters = [NSMutableDictionary dictionary];
+        _maximumNumberOfAlternatives = kMTDDefaultNumberOfAlternatives;
         
         [self setValueForParameterWithIntermediateGoals:intermediateGoals];
     }
@@ -99,6 +100,16 @@ intermediateGoals:(NSArray *)intermediateGoals
 
 - (void)cancel {
     [self.mtd_HTTPRequest cancel];
+}
+
+- (void)setMaximumNumberOfAlternatives:(NSUInteger)maximumNumberOfAlternatives {
+    if (maximumNumberOfAlternatives != _maximumNumberOfAlternatives) {
+        if (maximumNumberOfAlternatives > kMTDDefaultNumberOfAlternatives) {
+            MTDAssert(self.intermediateGoals.count == 0, @"There can't be intermediate goals and alternative routes");
+        }
+
+        _maximumNumberOfAlternatives = maximumNumberOfAlternatives;
+    }
 }
 
 - (void)requestFinished:(MTDHTTPRequest *)httpRequest {

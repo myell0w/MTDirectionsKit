@@ -36,6 +36,12 @@
 /** the type of the route to request */
 @property (nonatomic, readonly) MTDDirectionsRouteType routeType;
 
+/** 
+ The number of alternative routes to request (including the original route), defaults to 1. 
+ If this property is greater than 1, alternative directions are requested and there mustn't be any intermediate goals.
+ */
+@property (nonatomic, assign) NSUInteger maximumNumberOfAlternatives;
+
 /******************************************
  @name Lifecycle
  ******************************************/

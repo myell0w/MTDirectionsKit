@@ -491,7 +491,7 @@
                                               completion:parserCompletion];
 
         if (alternativeDirections) {
-            // TODO: Implement some fancy stuff here to make this work
+            self.mtd_request.maximumNumberOfAlternatives = maximumNumberOfAlternatives;
         }
         
         [self mtd_notifyDelegateWillStartLoadingDirectionsFrom:from to:to routeType:routeType];

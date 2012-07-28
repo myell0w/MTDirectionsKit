@@ -31,6 +31,8 @@
 @property (nonatomic, copy, readonly) NSArray *routes;
 /** the currently active route if there are more alternatives or the only route object, if there is only one */
 @property (nonatomic, readonly) MTDRoute *activeRoute;
+/** the best route of the alternatives according to the API used */
+@property (nonatomic, readonly) MTDRoute *bestRoute;
 /** the fastest route of the alternatives */
 @property (nonatomic, readonly) MTDRoute *fastestRoute;
 /** the shortest route of the alternatives  */

@@ -60,6 +60,10 @@
     return MTDFirstObjectOfArray(self.routes);
 }
 
+- (MTDRoute *)bestRoute {
+    return MTDFirstObjectOfArray(self.routes);
+}
+
 - (MTDRoute *)fastestRoute {
     NSNumber *minTime = [self.routes valueForKeyPath:[NSString stringWithFormat:@"@min.%@", MTDKey(timeInSeconds)]];
     NSUInteger index = [self.routes indexOfObjectPassingTest:^BOOL(MTDRoute *route, __unused NSUInteger idx, __unused BOOL *stop) {

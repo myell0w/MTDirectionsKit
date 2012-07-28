@@ -43,6 +43,15 @@
 #pragma mark - MTDDirectionsRequest
 ////////////////////////////////////////////////////////////////////////
 
+- (void)setMaximumNumberOfAlternatives:(NSUInteger)maximumNumberOfAlternatives {
+    [super setMaximumNumberOfAlternatives:maximumNumberOfAlternatives];
+
+    // set parameter for alternative routes
+    if (maximumNumberOfAlternatives > kMTDDefaultNumberOfAlternatives) {
+        [self setValue:[NSString stringWithFormat:@"%d", maximumNumberOfAlternatives + 1] forParameter:@"maxRoutes"];
+    }
+}
+
 - (void)setValueForParameterWithIntermediateGoals:(NSArray *)intermediateGoals {
     if (intermediateGoals.count > 0) {
         // MapQuest wants all goals (intermediate and end goal) set for parameter "to",
@@ -63,7 +72,13 @@
 }
 
 - (NSString *)mtd_HTTPAddress {
-    NSString *routingMethod = self.mtd_optimizeRoute ? kMTDMapQuestRoutingMethodOptimized : kMTDMapQuestRoutingMethodDefault;
+    NSString *routingMethod = kMTDMapQuestRoutingMethodDefault;
+
+    if (self.mtd_optimizeRoute) {
+        routingMethod = kMTDMapQuestRoutingMethodOptimized;
+    } else if (self.maximumNumberOfAlternatives > kMTDDefaultNumberOfAlternatives) {
+        routingMethod = kMTDMapQuestRoutingMethodAlternatives;
+    }
     
     return [NSString stringWithFormat:@"%@/%@/%@/%@",
             kMTDMapQuestHostName,
@@ -88,7 +103,6 @@
     [self setValue:@"none" forParameter:@"narrativeType"];
     [self setValue:@"raw" forParameter:@"shapeFormat"];
     [self setValue:@"0" forParameter:@"generalize"];
-    // [self setValue:@"3" forParameter:@"maxRoutes"];
 }
 
 @end

@@ -67,7 +67,11 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"<MTDRoute from=%@ to=%@>", self.from, self.to];
+    return [NSString stringWithFormat:@"<MTDRoute from=%@ to=%@, # of waypoints: %d, distance: %@>",
+            self.from,
+            self.to,
+            self.waypoints.count,
+            self.distance];
 }
 
 - (BOOL)isEqual:(id)object {

@@ -16,4 +16,5 @@
     #import "MTDWeak.h"
     #import "MTDAssert.h"
     #import "NSObject+MTDXcodeSubscriptingCompatibility.h"
+    #import "MTDInternalConstants.h"
 #endif
