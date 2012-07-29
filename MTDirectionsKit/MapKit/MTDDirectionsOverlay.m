@@ -8,6 +8,8 @@
 
 
 @interface MTDDirectionsOverlay () {
+    NSMutableArray *_routes;
+    MTDRoute *_bestRoute;
     MTDRoute *_activeRoute;
     MTDRoute *_shortestRoute;
     MTDRoute *_fastestRoute;
@@ -31,10 +33,12 @@
    intermediateGoals:(NSArray *)intermediateGoals
            routeType:(MTDDirectionsRouteType)routeType {
     if ((self = [super init])) {
-        _routes = [routes copy];
-        _activeRoute = MTDFirstObjectOfArray(_routes);
+        _routes = [routes mutableCopy];
+        _bestRoute = _activeRoute = MTDFirstObjectOfArray(_routes);
         _intermediateGoals = [intermediateGoals copy];
         _routeType = routeType;
+
+        [self mtd_sortRoutes];
     }
 
     return self;
@@ -59,10 +63,6 @@
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - MTDDirectionsOverlay
 ////////////////////////////////////////////////////////////////////////
-
-- (MTDRoute *)bestRoute {
-    return MTDFirstObjectOfArray(self.routes);
-}
 
 - (MTDRoute *)fastestRoute {
     if (_fastestRoute == nil) {
@@ -130,10 +130,25 @@
 #pragma mark - Private
 ////////////////////////////////////////////////////////////////////////
 
+// This method sets a new active route (is called when user taps a route on the mapView)
 - (void)mtd_activateRoute:(MTDRoute *)route {
     if (route != nil) {
         _activeRoute = route;
+        [self mtd_sortRoutes];
     }
+}
+
+// This method re-orders the routes s.t. the active route is last in the array (to get drawn on top of the others)
+- (void)mtd_sortRoutes {
+    [_routes sortUsingComparator:^NSComparisonResult(MTDRoute *route1, MTDRoute *route2) {
+        if (route1 == self.activeRoute) {
+            return NSOrderedDescending;
+        } else if (route2 == self.activeRoute) {
+            return NSOrderedAscending;
+        } else {
+            return NSOrderedSame;
+        }
+    }];
 }
 
 @end
