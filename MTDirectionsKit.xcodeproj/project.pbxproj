@@ -219,12 +219,13 @@
 		9BDE014315B1E04E001A8132 /* MTDRoute+MTDirectionsPrivateAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTDRoute+MTDirectionsPrivateAPI.h"; sourceTree = "<group>"; };
 		9BDE014E15B203D1001A8132 /* MTDXMLElementTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDXMLElementTest.h; sourceTree = "<group>"; };
 		9BDE014F15B203D1001A8132 /* MTDXMLElementTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDXMLElementTest.m; sourceTree = "<group>"; };
-		9BE9094415C38CB9003E5462 /* MTDInternalConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MTDInternalConstants.h; path = "MTDirectionsKit/Supporting Files/MTDInternalConstants.h"; sourceTree = SOURCE_ROOT; };
+		9BE7A0FE15C52DA60025164A /* MTDDirectionsRequestOption.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTDDirectionsRequestOption.h; sourceTree = "<group>"; };
 		9BE9094615C39980003E5462 /* MTDDirectionsOverlay+MTDirectionsPrivateAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTDDirectionsOverlay+MTDirectionsPrivateAPI.h"; sourceTree = "<group>"; };
 		9BE9094A15C3A22B003E5462 /* MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h"; sourceTree = "<group>"; };
 		9BEA8C8515C3746D00469D85 /* mapquest_alternatives.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mapquest_alternatives.xml; sourceTree = "<group>"; };
 		9BEE26E9155E92FC008A42F8 /* MTDHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDHTTPRequest.h; sourceTree = "<group>"; };
 		9BEE26EA155E92FC008A42F8 /* MTDHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDHTTPRequest.m; sourceTree = "<group>"; };
+		9BFC194715C531B700C2CEF6 /* MTDDirectionsAPI+MTDirectionsPrivateAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MTDDirectionsAPI+MTDirectionsPrivateAPI.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -296,6 +297,7 @@
 				9B2C42B4155EB85B00C0E4CE /* Google */,
 				9B10AA10155D85B8002A3052 /* MTDDirectionsAPI.h */,
 				9B10AA11155D85B8002A3052 /* MTDDirectionsAPI.m */,
+				9BFC194715C531B700C2CEF6 /* MTDDirectionsAPI+MTDirectionsPrivateAPI.h */,
 			);
 			name = APIs;
 			path = MTDirectionsKit/APIs;
@@ -372,9 +374,10 @@
 		9B10AA27155D85B8002A3052 /* Request */ = {
 			isa = PBXGroup;
 			children = (
-				9B10AA28155D85B8002A3052 /* MTDDirectionsRequest+MTDirectionsPrivateAPI.h */,
 				9B10AA29155D85B8002A3052 /* MTDDirectionsRequest.h */,
 				9B10AA2A155D85B8002A3052 /* MTDDirectionsRequest.m */,
+				9B10AA28155D85B8002A3052 /* MTDDirectionsRequest+MTDirectionsPrivateAPI.h */,
+				9BE7A0FE15C52DA60025164A /* MTDDirectionsRequestOption.h */,
 				9BEE26E9155E92FC008A42F8 /* MTDHTTPRequest.h */,
 				9BEE26EA155E92FC008A42F8 /* MTDHTTPRequest.m */,
 			);
@@ -398,8 +401,8 @@
 		9B3F802415BF4479003C70EE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				9BEA8C8515C3746D00469D85 /* mapquest_alternatives.xml */,
 				9B3F802515BF4479003C70EE /* google_guessing_vienna.xml */,
+				9BEA8C8515C3746D00469D85 /* mapquest_alternatives.xml */,
 				9B3F802615BF4479003C70EE /* mapquest_guessing_vienna.xml */,
 				9B3F802715BF4479003C70EE /* mapquest_intermediate_optimized.xml */,
 			);
@@ -464,7 +467,6 @@
 				9B23F65915BEFAC00069EAD1 /* MTDWeak.h */,
 				9B8F515F155C516E00A9C10C /* Prefix.pch */,
 				9B06FD1615C0A57900100A7C /* NSObject+MTDXcodeSubscriptingCompatibility.h */,
-				9BE9094415C38CB9003E5462 /* MTDInternalConstants.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -805,7 +807,10 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "$(SDK_ROOT)/usr/include/libxml2/**";
+				HEADER_SEARCH_PATHS = (
+					"$(SDKROOT)/usr/include/libxml2/**",
+					"$(SDK_ROOT)/usr/include/libxml2/**",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				SDKROOT = iphoneos;
 				TEST_AFTER_BUILD = YES;
@@ -834,7 +839,10 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "$(SDK_ROOT)/usr/include/libxml2/**";
+				HEADER_SEARCH_PATHS = (
+					"$(SDKROOT)/usr/include/libxml2/**",
+					"$(SDK_ROOT)/usr/include/libxml2/**",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				SDKROOT = iphoneos;
 				TEST_AFTER_BUILD = YES;

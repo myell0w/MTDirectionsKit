@@ -113,7 +113,7 @@
  
  @see loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:
  @see loadDirectionsFrom:to:intermediateGoals:optimizeRoute:routeType:zoomToShowDirections:
- @see loadAlternativeDirectionsFrom:to:maximumNumberOfAlternatives:routeType:zoomToShowDirections:
+ @see loadAlternativeDirectionsFrom:to:routeType:zoomToShowDirections:
  @see cancelLoadOfDirections
  */
 - (void)loadDirectionsFrom:(CLLocationCoordinate2D)fromCoordinate
@@ -133,7 +133,7 @@
  
  @see loadDirectionsFrom:to:routeType:zoomToShowDirections:
  @see loadDirectionsFrom:to:intermediateGoals:optimizeRoute:routeType:zoomToShowDirections:
- @see loadAlternativeDirectionsFrom:to:maximumNumberOfAlternatives:routeType:zoomToShowDirections:
+ @see loadAlternativeDirectionsFrom:to:routeType:zoomToShowDirections:
  @see cancelLoadOfDirections
  */
 - (void)loadDirectionsFromAddress:(NSString *)fromAddress
@@ -157,7 +157,7 @@
  
  @see loadDirectionsFrom:to:routeType:zoomToShowDirections:
  @see loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:
- @see loadAlternativeDirectionsFrom:to:maximumNumberOfAlternatives:routeType:zoomToShowDirections:
+ @see loadAlternativeDirectionsFrom:to:routeType:zoomToShowDirections:
  @see cancelLoadOfDirections
  */
 - (void)loadDirectionsFrom:(MTDWaypoint *)from
@@ -167,7 +167,6 @@
                  routeType:(MTDDirectionsRouteType)routeType
       zoomToShowDirections:(BOOL)zoomToShowDirections;
 
-
 /**
  Starts a request and loads maximumNumberOfAlternatives different routes between the
  specified start and end waypoints. When the request is finished the directionsOverlay gets set
@@ -176,8 +175,6 @@
  
  @param from the starting waypoint of the route
  @param to the end waypoint of the route
- @param maximumNumberOfAlternatives the number of alternative routes to be requested at a max,
-        whereby 1 means that there will only be the original route requested and not alteranative routes
  @param routeType the type of the route requested, e.g. pedestrian, cycling, fastest driving
  @param zoomToShowDirections flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)
  
@@ -188,7 +185,6 @@
  */
 - (void)loadAlternativeDirectionsFrom:(MTDWaypoint *)from
                                    to:(MTDWaypoint *)to
-          maximumNumberOfAlternatives:(NSUInteger)maximumNumberOfAlternatives
                             routeType:(MTDDirectionsRouteType)routeType
                  zoomToShowDirections:(BOOL)zoomToShowDirections;
 

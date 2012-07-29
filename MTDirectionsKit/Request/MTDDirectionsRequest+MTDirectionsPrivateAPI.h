@@ -20,10 +20,8 @@
 @property (nonatomic, strong, setter = mtd_setHttpRequest:) MTDHTTPRequest *mtd_HTTPRequest;
 /** the address of the the request to perform */
 @property (nonatomic, readonly) NSString *mtd_HTTPAddress;
-/** the class of the directions-parser used to parse the obtained data */
-@property (nonatomic, readonly) Class mtd_parserClass;
-/** flag whether the route gets optimized when there are intermediate goals */
-@property (nonatomic, readonly) BOOL mtd_optimizeRoute;
+/** bitmask of MTDDirectionsRequestOption flags */
+@property (nonatomic, readonly) NSUInteger mtd_options;
 
 /** 
  This method is called once the request is finished.

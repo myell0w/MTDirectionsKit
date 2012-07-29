@@ -1,7 +1,7 @@
 #import "MTDDirectionsRequestMapQuest.h"
 #import "MTDDirectionsRequest+MTDirectionsPrivateAPI.h"
+#import "MTDDirectionsRequestOption.h"
 #import "MTDDirectionsRouteType+MapQuest.h"
-#import "MTDDirectionsParserMapQuest.h"
 #import "MTDWaypoint.h"
 #import "MTDFunctions.h"
 
@@ -12,7 +12,8 @@
 #define kMTDMapQuestRoutingMethodDefault        @"route"
 #define kMTDMapQuestRoutingMethodOptimized      @"optimizedroute"
 #define kMTDMapQuestRoutingMethodAlternatives   @"alternateroutes"
-// http://open.mapquestapi.com/directions/v1/alternateroutes?from=Reading,%20PA&to=Washington,%20DC&maxRoutes=3&ambiguities=ignore
+
+#define kMTDMapQuestMaxRoutes                   @"3"
 
 
 @implementation MTDDirectionsRequestMapQuest
@@ -24,16 +25,22 @@
 - (id)initWithFrom:(MTDWaypoint *)from
                 to:(MTDWaypoint *)to
  intermediateGoals:(NSArray *)intermediateGoals
-     optimizeRoute:(BOOL)optimizeRoute
          routeType:(MTDDirectionsRouteType)routeType
+           options:(NSUInteger)options
         completion:(mtd_parser_block)completion {
-    if ((self = [super initWithFrom:from to:to intermediateGoals:intermediateGoals optimizeRoute:optimizeRoute routeType:routeType completion:completion])) {
+    if ((self = [super initWithFrom:from to:to intermediateGoals:intermediateGoals routeType:routeType options:options completion:completion])) {
         [self mtd_setup];
-        
+
         [self setValue:[from descriptionForAPI:MTDDirectionsAPIMapQuest] forParameter:@"from"];
         // "to" gets set in setValueForParameterWithIntermediateGoals
         // [self setValue:[to descriptionForAPI:MTDDirectionsAPIMapQuest] forParameter:@"to"];
         [self setValue:MTDDirectionStringForDirectionRouteTypeMapQuest(routeType) forParameter:@"routeType"];
+
+        // set parameter for alternative routes?
+        BOOL alternativeRoutes = (self.mtd_options & MTDDirectionsRequestOptionAlternativeRoutes) == MTDDirectionsRequestOptionAlternativeRoutes;
+        if (alternativeRoutes) {
+            [self setValue:kMTDMapQuestMaxRoutes forParameter:@"maxRoutes"];
+        }
     }
     
     return self;
@@ -43,13 +50,8 @@
 #pragma mark - MTDDirectionsRequest
 ////////////////////////////////////////////////////////////////////////
 
-- (void)setMaximumNumberOfAlternatives:(NSUInteger)maximumNumberOfAlternatives {
-    [super setMaximumNumberOfAlternatives:maximumNumberOfAlternatives];
-
-    // set parameter for alternative routes
-    if (maximumNumberOfAlternatives > kMTDDefaultNumberOfAlternatives) {
-        [self setValue:[NSString stringWithFormat:@"%d", maximumNumberOfAlternatives + 1] forParameter:@"maxRoutes"];
-    }
+- (MTDDirectionsAPI)API {
+    return MTDDirectionsAPIMapQuest;
 }
 
 - (void)setValueForParameterWithIntermediateGoals:(NSArray *)intermediateGoals {
@@ -73,10 +75,12 @@
 
 - (NSString *)mtd_HTTPAddress {
     NSString *routingMethod = kMTDMapQuestRoutingMethodDefault;
+    BOOL optimizeRoute = (self.mtd_options & MTDDirectionsRequestOptionOptimize) == MTDDirectionsRequestOptionOptimize;
+    BOOL alternativeRoutes = (self.mtd_options & MTDDirectionsRequestOptionAlternativeRoutes) == MTDDirectionsRequestOptionAlternativeRoutes;
 
-    if (self.mtd_optimizeRoute) {
+    if (optimizeRoute) {
         routingMethod = kMTDMapQuestRoutingMethodOptimized;
-    } else if (self.maximumNumberOfAlternatives > kMTDDefaultNumberOfAlternatives) {
+    } else if (alternativeRoutes) {
         routingMethod = kMTDMapQuestRoutingMethodAlternatives;
     }
     
@@ -85,10 +89,6 @@
             kMTDMapQuestServiceName,
             kMTDMapQuestVersionNumber,
             routingMethod];
-}
-
-- (Class)mtd_parserClass {
-    return [MTDDirectionsParserMapQuest class];
 }
 
 ////////////////////////////////////////////////////////////////////////
