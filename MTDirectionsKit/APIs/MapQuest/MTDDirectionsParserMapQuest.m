@@ -104,6 +104,7 @@
     MTDXMLElement *distanceNode = [routeNode firstChildNodeWithName:@"distance"];
     MTDXMLElement *timeNode = [routeNode firstChildNodeWithName:@"time"];
     MTDXMLElement *copyrightNode = [MTDXMLElement nodeForXPathQuery:@"/response/info/copyright/text" onXML:self.data];
+    MTDXMLElement *nameNode = [routeNode firstChildNodeWithName:@"name"];
 
     MTDDistance *distance = nil;
     NSTimeInterval timeInSeconds = -1.;
@@ -131,10 +132,14 @@
         }
     }
 
-    return [[MTDRoute alloc] initWithWaypoints:waypoints
+    MTDRoute *route = [[MTDRoute alloc] initWithWaypoints:waypoints
                                       distance:distance
                                  timeInSeconds:timeInSeconds
                                 additionalInfo:additionalInfo];
+
+    route.name = nameNode.contentString;
+
+    return route;
 }
 
 
