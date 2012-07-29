@@ -109,6 +109,8 @@
 		9BEA8C8615C3746D00469D85 /* mapquest_alternatives.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9BEA8C8515C3746D00469D85 /* mapquest_alternatives.xml */; };
 		9BEE26EB155E92FC008A42F8 /* MTDHTTPRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BEE26E9155E92FC008A42F8 /* MTDHTTPRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9BEE26EC155E92FC008A42F8 /* MTDHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEE26EA155E92FC008A42F8 /* MTDHTTPRequest.m */; };
+		9BFC194B15C53EF900C2CEF6 /* google_alternatives.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9BFC194915C53EF900C2CEF6 /* google_alternatives.xml */; };
+		9BFC194C15C53EF900C2CEF6 /* google_intermediate_optimized.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9BFC194A15C53EF900C2CEF6 /* google_intermediate_optimized.xml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -226,6 +228,8 @@
 		9BEE26E9155E92FC008A42F8 /* MTDHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDHTTPRequest.h; sourceTree = "<group>"; };
 		9BEE26EA155E92FC008A42F8 /* MTDHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDHTTPRequest.m; sourceTree = "<group>"; };
 		9BFC194715C531B700C2CEF6 /* MTDDirectionsAPI+MTDirectionsPrivateAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MTDDirectionsAPI+MTDirectionsPrivateAPI.h"; sourceTree = "<group>"; };
+		9BFC194915C53EF900C2CEF6 /* google_alternatives.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = google_alternatives.xml; sourceTree = "<group>"; };
+		9BFC194A15C53EF900C2CEF6 /* google_intermediate_optimized.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = google_intermediate_optimized.xml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -401,7 +405,9 @@
 		9B3F802415BF4479003C70EE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9BFC194915C53EF900C2CEF6 /* google_alternatives.xml */,
 				9B3F802515BF4479003C70EE /* google_guessing_vienna.xml */,
+				9BFC194A15C53EF900C2CEF6 /* google_intermediate_optimized.xml */,
 				9BEA8C8515C3746D00469D85 /* mapquest_alternatives.xml */,
 				9B3F802615BF4479003C70EE /* mapquest_guessing_vienna.xml */,
 				9B3F802715BF4479003C70EE /* mapquest_intermediate_optimized.xml */,
@@ -594,6 +600,8 @@
 				9B3F802915BF4479003C70EE /* mapquest_guessing_vienna.xml in Resources */,
 				9B3F802A15BF4479003C70EE /* mapquest_intermediate_optimized.xml in Resources */,
 				9BEA8C8615C3746D00469D85 /* mapquest_alternatives.xml in Resources */,
+				9BFC194B15C53EF900C2CEF6 /* google_alternatives.xml in Resources */,
+				9BFC194C15C53EF900C2CEF6 /* google_intermediate_optimized.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

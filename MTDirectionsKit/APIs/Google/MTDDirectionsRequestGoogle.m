@@ -28,6 +28,13 @@
         [self setValue:[from descriptionForAPI:MTDDirectionsAPIGoogle] forParameter:@"origin"];
         [self setValue:[to descriptionForAPI:MTDDirectionsAPIGoogle] forParameter:@"destination"];
         [self setValue:MTDDirectionStringForDirectionRouteTypeGoogle(routeType) forParameter:@"mode"];
+
+
+        // set parameter for alternative routes?
+        BOOL alternativeRoutes = (self.mtd_options & MTDDirectionsRequestOptionAlternativeRoutes) == MTDDirectionsRequestOptionAlternativeRoutes;
+        if (alternativeRoutes) {
+            [self setValue:@"true" forParameter:@"alternatives"];
+        }
     }
     
     return self;
