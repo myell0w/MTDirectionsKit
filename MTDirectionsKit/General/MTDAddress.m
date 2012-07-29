@@ -65,6 +65,7 @@
 }
 
 - (NSString *)fullAddress {
+    // if not normalized this returns _fullAddress
     return [self descriptionWithAddressFields:
             MTDAddressFieldCountry |
             MTDAddressFieldState |
@@ -76,6 +77,7 @@
 
 - (NSString *)descriptionWithAddressFields:(NSUInteger)addressFieldMask {
     if (!self.normalised) {
+        // using direct iVar here on purpose to not get an infinite loop
         return _fullAddress;
     }
 

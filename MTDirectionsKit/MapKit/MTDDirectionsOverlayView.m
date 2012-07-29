@@ -22,8 +22,6 @@
 
 @implementation MTDDirectionsOverlayView
 
-@synthesize overlayColor = _overlayColor;
-
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
 ////////////////////////////////////////////////////////////////////////
@@ -31,6 +29,7 @@
 - (id)initWithOverlay:(id<MKOverlay>)overlay {
     if ((self = [super initWithOverlay:overlay])) {
         _overlayLineWidthFactor = kMTDDefaultLineWidthFactor;
+        _overlayColor = kMTDDefaultOverlayColor;
     }
     
     return self;
@@ -39,10 +38,6 @@
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - MTDDirectionsOverlayView
 ////////////////////////////////////////////////////////////////////////
-
-- (UIColor *)overlayColor {
-    return _overlayColor ?: kMTDDefaultOverlayColor;
-}
 
 - (void)setOverlayColor:(UIColor *)overlayColor {
     if (overlayColor != _overlayColor && overlayColor != nil) {
