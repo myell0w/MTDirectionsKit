@@ -7,6 +7,11 @@
 //
 
 
+/**
+ These options can be specified as a bitmask when starting a MTDDirectionsRequest.
+ Be careful to not specify MTDDirectionsRequestOptionOptimize and MTDDirectionsRequestOptionAlternativeRoutes
+ at the same time since this is not supported.
+ */
 typedef enum {
     MTDDirectionsRequestOptionNone                  = 0,
     MTDDirectionsRequestOptionOptimize              = 1,
