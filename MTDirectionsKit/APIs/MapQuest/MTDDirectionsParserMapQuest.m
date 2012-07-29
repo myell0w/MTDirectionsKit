@@ -59,7 +59,7 @@
         // Parse Addresses
         {
             // We need to use the already ordered intermediate goals here because the addresses come in the in this order
-            NSArray *allWaypoints = [self waypointsIncludingFromAndToWithIntermediateGoals:orderedIntermediateGoals];
+            NSArray *allWaypoints = [self mtd_waypointsIncludingFromAndToWithIntermediateGoals:orderedIntermediateGoals];
 
             [self mtd_addAddressesFromAddressNodes:locationAddressNodes toWaypoints:allWaypoints];
         }
@@ -100,10 +100,10 @@
 
 // This method parses a route and returns an instance of MTDRoute
 - (MTDRoute *)mtd_routeFromRouteNode:(MTDXMLElement *)routeNode {
-    NSArray *waypointNodes = [routeNode childNodesWithPath:@"shape.shapePoints.latLng"];
-    MTDXMLElement *copyrightNode = [MTDXMLElement nodeForXPathQuery:@"/response/info/copyright/text" onXML:self.data];
+    NSArray *waypointNodes = [routeNode childNodesTraversingFirstChildWithPath:@"shape.shapePoints.latLng"];
     MTDXMLElement *distanceNode = [routeNode firstChildNodeWithName:@"distance"];
     MTDXMLElement *timeNode = [routeNode firstChildNodeWithName:@"time"];
+    MTDXMLElement *copyrightNode = [MTDXMLElement nodeForXPathQuery:@"/response/info/copyright/text" onXML:self.data];
 
     MTDDistance *distance = nil;
     NSTimeInterval timeInSeconds = -1.;
@@ -176,7 +176,7 @@
 - (NSArray *)mtd_orderedIntermediateGoalsWithSequenceNode:(MTDXMLElement *)sequenceNode {
     NSArray *sequence = [sequenceNode.contentString componentsSeparatedByString:@","];
     // all goals, including from and to, because the sequenceNode contains them too
-    NSArray *allGoals = [self waypointsIncludingFromAndToWithIntermediateGoals:self.intermediateGoals];
+    NSArray *allGoals = [self mtd_waypointsIncludingFromAndToWithIntermediateGoals:self.intermediateGoals];
     // Sort the intermediate goals to be in the order of the numbers contained in sequence
     NSArray *allOrderedNodes = MTDOrderedArrayWithSequence(allGoals,sequence);
 
@@ -217,7 +217,8 @@
     return address;
 }
 
-- (NSArray *)waypointsIncludingFromAndToWithIntermediateGoals:(NSArray *)intermediateGoals {
+// This method returns an array of all waypoints including from, to and intermediateGoals if specified
+- (NSArray *)mtd_waypointsIncludingFromAndToWithIntermediateGoals:(NSArray *)intermediateGoals {
     NSMutableArray *allGoals = intermediateGoals != nil ? [NSMutableArray arrayWithArray:intermediateGoals] : [NSMutableArray array];
 
     // insert from and to at the right places

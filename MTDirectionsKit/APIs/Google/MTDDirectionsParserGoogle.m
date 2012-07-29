@@ -28,61 +28,46 @@
     }
     
     if (statusCode == MTDStatusCodeGoogleSuccess) {
-        NSArray *waypointNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg/step/polyline/points" onXML:self.data];
-        NSArray *distanceNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg/distance/value" onXML:self.data];
-        NSArray *timeNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg/duration/value" onXML:self.data];
-        MTDXMLElement *copyrightNode = [MTDXMLElement nodeForXPathQuery:@"//route[1]/copyrights" onXML:self.data];
-        NSArray *warningNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/warnings" onXML:self.data];
+        // All returned routes (can be several if using alternative routes)
+        NSArray *routeNodes = [MTDXMLElement nodesForXPathQuery:@"//route" onXML:self.data];
+        NSMutableArray *routes = [NSMutableArray arrayWithCapacity:routeNodes.count];
+        NSArray *orderedIntermediateGoals = nil;
+
+        // there is either only one route (possibly optimized with intermediate goals) or several without intermediate goals,
+        // so in the second case the locations are always from and to and the locationSequence returns nil (gets checked in mtd_orderedIntermediateGoals)
         NSArray *addressNodesExceptTo = [MTDXMLElement nodesForXPathQuery:@"//route[1]/leg/start_address" onXML:self.data];
         MTDXMLElement *toAddressNode = [MTDXMLElement nodeForXPathQuery:@"//route[1]/leg[last()]/end_address" onXML:self.data];
+        NSArray *locationAddressNodes = [addressNodesExceptTo arrayByAddingObject:toAddressNode];
         NSArray *locationSequenceNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/waypoint_index" onXML:self.data];
 
-        NSArray *waypoints = [self mtd_waypointsFromWaypointNodes:waypointNodes];
-        MTDDistance *distance = nil;
-        NSTimeInterval timeInSeconds = -1.;
-        NSMutableDictionary *additionalInfo = [NSMutableDictionary dictionary];
 
-        // Order the intermediate goals in the order returned by the API (optimized)
-        // and parse the address information and save the address for each goal (from, to, intermediateGoals)
-        NSArray *orderedIntermediateGoals = [self mtd_orderedIntermediateGoalsWithSequenceNodes:locationSequenceNodes
-                                                                               addressNodes:[addressNodesExceptTo arrayByAddingObject:toAddressNode]];
-
-        // Parse Additional Info of directions
+        // Parse Routes
         {
-            if (distanceNodes.count > 0) {
-                double distanceInMeters = 0.;
-                
-                for (MTDXMLElement *distanceNode in distanceNodes) {
-                    distanceInMeters += [[distanceNode contentString] doubleValue];
+            for (MTDXMLElement *routeNode in routeNodes) {
+                MTDRoute *route = [self mtd_routeFromRouteNode:routeNode];
+
+                if (route != nil) {
+                    [routes addObject:route];
                 }
-                
-                distance = [MTDDistance distanceWithMeters:distanceInMeters];
-            }
-            
-            if (timeNodes.count > 0) {
-                timeInSeconds = 0.;
-                
-                for (MTDXMLElement *timeNode in timeNodes) {
-                    timeInSeconds += [[timeNode contentString] doubleValue];
-                }
-            }
-            
-            if (copyrightNode != nil) {
-                [additionalInfo setValue:copyrightNode.contentString forKey:MTDAdditionalInfoCopyrightsKey];
-            }
-            
-            if (warningNodes.count > 0) {
-                NSArray *warnings = [warningNodes valueForKey:MTDKey(contentString)];
-                [additionalInfo setValue:warnings forKey:MTDAdditionalInfoWarningsKey];
             }
         }
+
+        // Route optimization can reorder the intermediate goals, we want to know the final order
+        if (self.intermediateGoals.count > 0) {
+            // Order the intermediate goals in the order returned by the API (optimized)
+            // and parse the address information and save the address for each goal (from, to, intermediateGoals)
+            orderedIntermediateGoals = [self mtd_orderedIntermediateGoalsWithSequenceNodes:locationSequenceNodes];
+        }
+
+        // Parse Addresses
+        {
+            // We need to use the already ordered intermediate goals here because the addresses come in the in this order
+            NSArray *allWaypoints = [self mtd_waypointsIncludingFromAndToWithIntermediateGoals:orderedIntermediateGoals];
+
+            [self mtd_addAddressesFromAddressNodes:locationAddressNodes toWaypoints:allWaypoints];
+        }
         
-        MTDRoute *route = [[MTDRoute alloc] initWithWaypoints:waypoints
-                                                     distance:distance
-                                                timeInSeconds:timeInSeconds
-                                               additionalInfo:additionalInfo];
-        
-        overlay = [[MTDDirectionsOverlay alloc] initWithRoutes:@[route]
+        overlay = [[MTDDirectionsOverlay alloc] initWithRoutes:routes
                                              intermediateGoals:orderedIntermediateGoals
                                                      routeType:self.routeType];
     } else {
@@ -103,6 +88,79 @@
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Private
 ////////////////////////////////////////////////////////////////////////
+
+- (MTDRoute *)mtd_routeFromRouteNode:(MTDXMLElement *)routeNode {
+    NSArray *waypointNodes = [routeNode childNodesTraversingAllChildrenWithPath:@"leg.step.polyline.points"];
+    NSArray *distanceNodes = [routeNode childNodesTraversingAllChildrenWithPath:@"leg.distance.value"];
+    NSArray *timeNodes = [routeNode childNodesTraversingAllChildrenWithPath:@"leg.duration.value"];
+    MTDXMLElement *copyrightNode = [routeNode firstChildNodeWithName:@"copyrights"];
+    NSArray *warningNodes = [routeNode childNodesWithName:@"warnings"];
+
+    MTDDistance *distance = nil;
+    NSTimeInterval timeInSeconds = -1.;
+    NSMutableDictionary *additionalInfo = [NSMutableDictionary dictionary];
+
+    // Parse waypoints
+    NSArray *waypoints = [self mtd_waypointsFromWaypointNodes:waypointNodes];
+
+    // Parse Additional Info of directions
+    {
+        if (distanceNodes.count > 0) {
+            double distanceInMeters = 0.;
+
+            for (MTDXMLElement *distanceNode in distanceNodes) {
+                distanceInMeters += [[distanceNode contentString] doubleValue];
+            }
+
+            distance = [MTDDistance distanceWithMeters:distanceInMeters];
+        }
+
+        if (timeNodes.count > 0) {
+            timeInSeconds = 0.;
+
+            for (MTDXMLElement *timeNode in timeNodes) {
+                timeInSeconds += [[timeNode contentString] doubleValue];
+            }
+        }
+
+        if (copyrightNode != nil) {
+            [additionalInfo setValue:copyrightNode.contentString forKey:MTDAdditionalInfoCopyrightsKey];
+        }
+
+        if (warningNodes.count > 0) {
+            NSArray *warnings = [warningNodes valueForKey:MTDKey(contentString)];
+            [additionalInfo setValue:warnings forKey:MTDAdditionalInfoWarningsKey];
+        }
+    }
+
+    return [[MTDRoute alloc] initWithWaypoints:waypoints
+                                      distance:distance
+                                 timeInSeconds:timeInSeconds
+                                additionalInfo:additionalInfo];
+}
+
+// This method parses the waypointNodes and returns an array of MTDWaypoints
+- (NSArray *)mtd_waypointsFromWaypointNodes:(NSArray *)waypointNodes {
+    NSMutableArray *waypoints = [NSMutableArray array];
+
+    // add start coordinate
+    if (self.from != nil && CLLocationCoordinate2DIsValid(self.from.coordinate)) {
+        [waypoints addObject:self.from];
+    }
+
+    for (MTDXMLElement *waypointNode in waypointNodes) {
+        NSString *encodedPolyline = [waypointNode contentString];
+
+        [waypoints addObjectsFromArray:[self mtd_waypointsFromEncodedPolyline:encodedPolyline]];
+    }
+
+    // add end coordinate
+    if (self.to != nil && CLLocationCoordinate2DIsValid(self.to.coordinate)) {
+        [waypoints addObject:self.to];
+    }
+
+    return waypoints;
+}
 
 // This method decodes a polyline and returns an array of MTDWaypoints
 // Algorithm description:
@@ -152,59 +210,47 @@
     return waypoints;
 }
 
-// This method parses the waypointNodes and returns an array of MTDWaypoints
-- (NSArray *)mtd_waypointsFromWaypointNodes:(NSArray *)waypointNodes {
-    NSMutableArray *waypoints = [NSMutableArray array];
-    
-    // add start coordinate
-    if (self.from != nil && CLLocationCoordinate2DIsValid(self.from.coordinate)) {
-        [waypoints addObject:self.from];
-    }
-    
-    for (MTDXMLElement *waypointNode in waypointNodes) {
-        NSString *encodedPolyline = [waypointNode contentString];
-        
-        [waypoints addObjectsFromArray:[self mtd_waypointsFromEncodedPolyline:encodedPolyline]];
-    }
-    
-    // add end coordinate
-    if (self.to != nil && CLLocationCoordinate2DIsValid(self.to.coordinate)) {
-        [waypoints addObject:self.to];
-    }
-
-    return waypoints;
-}
 
 // This method parses all addresses and orders the intermediate goals in the same order as optimised by the API.
 // That is, if optimization is enabled the Google can reorder the intermediate goals to provide the fastest route possible.
-- (NSArray *)mtd_orderedIntermediateGoalsWithSequenceNodes:(NSArray *)sequenceNodes addressNodes:(NSArray *)addressNodes {
+- (NSArray *)mtd_orderedIntermediateGoalsWithSequenceNodes:(NSArray *)sequenceNodes {
+    if (sequenceNodes.count == 0) {
+        return self.intermediateGoals;
+    }
+
     NSArray *sequence = [sequenceNodes valueForKey:MTDKey(contentString)];
     // Sort the intermediate goals to be in the order of the numbers contained in sequence
-    NSArray *orderedIntermediateGoals = MTDOrderedArrayWithSequence(self.intermediateGoals,sequence);
-    
-    // all goals, including from and to
-    NSMutableArray *allGoals = [NSMutableArray arrayWithArray:orderedIntermediateGoals];
-    // insert from and to at the right places
-    [allGoals insertObject:self.from atIndex:0];
-    [allGoals addObject:self.to];
-    
-    MTDAssert(addressNodes.count == allGoals.count, @"Number of addresses doesn't match number of goals");
-    
+    return MTDOrderedArrayWithSequence(self.intermediateGoals,sequence);
+}
+
+// This method updates the addresses of all given waypoints
+- (void)mtd_addAddressesFromAddressNodes:(NSArray *)addressNodes toWaypoints:(NSArray *)waypoints {
+    MTDAssert(addressNodes.count == waypoints.count, @"Number of addresses doesn't match number of waypoints");
+
     // Parse Addresses of goals
     [addressNodes enumerateObjectsUsingBlock:^(MTDXMLElement *addressNode, NSUInteger idx, __unused BOOL *stop) {
         MTDAddress *address = [self mtd_addressFromAddressNode:addressNode];
-        MTDWaypoint *waypoint = allGoals[idx];
-        
+        MTDWaypoint *waypoint = waypoints[idx];
+
         // update address of corresponding waypoint
         waypoint.address = address;
     }];
-    
-    return orderedIntermediateGoals;
 }
 
 // This method parses an address and returns an instance of MTDAddress
 - (MTDAddress *)mtd_addressFromAddressNode:(MTDXMLElement *)addressNode {
     return [[MTDAddress alloc] initWithAddressString:addressNode.contentString];
+}
+
+// This method returns an array of all waypoints including from, to and intermediateGoals if specified
+- (NSArray *)mtd_waypointsIncludingFromAndToWithIntermediateGoals:(NSArray *)intermediateGoals {
+    NSMutableArray *allGoals = intermediateGoals != nil ? [NSMutableArray arrayWithArray:intermediateGoals] : [NSMutableArray array];
+
+    // insert from and to at the right places
+    [allGoals insertObject:self.from atIndex:0];
+    [allGoals addObject:self.to];
+
+    return allGoals;
 }
 
 @end

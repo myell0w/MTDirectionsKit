@@ -161,7 +161,7 @@
     }]];
 }
 
-- (NSArray *)childNodesWithPath:(NSString *)path {
+- (NSArray *)childNodesTraversingFirstChildWithPath:(NSString *)path {
     NSArray *parts = [path componentsSeparatedByString:@"."];
     __block MTDXMLElement *element = self;
     __block NSArray *childNodes = nil;
@@ -175,6 +175,32 @@
         // last path component
         else {
             childNodes = [element childNodesWithName:part];
+        }
+    }];
+
+    return childNodes;
+}
+
+- (NSArray *)childNodesTraversingAllChildrenWithPath:(NSString *)path {
+    NSArray *parts = [path componentsSeparatedByString:@"."];
+    __block NSArray *childrenToTraverse = [NSArray arrayWithObject:self];
+    __block NSArray *childNodes = nil;
+
+    [parts enumerateObjectsUsingBlock:^(NSString *part, NSUInteger idx, __unused BOOL *stop) {
+        NSMutableArray *childrenOfThisStep = [NSMutableArray array];
+
+        for (MTDXMLElement *element in childrenToTraverse) {
+            [childrenOfThisStep addObjectsFromArray:[element childNodesWithName:part]];
+        }
+
+        // intermediate path component
+        if (idx < parts.count - 1) {
+            childrenToTraverse = childrenOfThisStep;
+        }
+
+        // last path component
+        else {
+            childNodes = childrenOfThisStep;
         }
     }];
 

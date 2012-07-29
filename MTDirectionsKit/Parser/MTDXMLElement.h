@@ -128,6 +128,15 @@
  @param path a dot-separated path of tag names
  @return an array of MTDXMLElements
  */
-- (NSArray *)childNodesWithPath:(NSString *)path;
+- (NSArray *)childNodesTraversingFirstChildWithPath:(NSString *)path;
+
+/**
+ Returns an array of child nodes with the given dot-separated path, e.g. shape.shapePoints.latLng
+ For all path components all children are traversed.
+
+ @param path a dot-separated path of tag names
+ @return an array of MTDXMLElements
+ */
+- (NSArray *)childNodesTraversingAllChildrenWithPath:(NSString *)path;
 
 @end

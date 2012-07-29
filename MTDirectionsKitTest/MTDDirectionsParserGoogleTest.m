@@ -128,22 +128,22 @@
             STAssertTrue(overlay.routes.count == 3, @"Error parsing alternative routes");
 
             // Check fastest and shortest route
-            STAssertTrue(overlay.fastestRoute.timeInSeconds == 9466., @"Fastest route not working");
-            STAssertEqualsWithAccuracy([overlay.shortestRoute.distance distanceInMeasurementSystem:MTDMeasurementSystemMetric], 137.845, 0.001, @"Shortest route not working");
+            STAssertTrue(overlay.fastestRoute.timeInSeconds == 10042., @"Fastest route not working");
+            STAssertEqualsWithAccuracy([overlay.shortestRoute.distance distanceInMeasurementSystem:MTDMeasurementSystemMetric], 224.181, 0.001, @"Shortest route not working");
 
-            // Check shortest route
-            STAssertEquals(overlay.timeInSeconds, 9557., @"Error parsing time");
-            STAssertEqualObjects(overlay.formattedTime, @"2:39:17", @"Error formatting time");
-            STAssertTrue(overlay.waypoints.count == 99, @"Error parsing waypoints %d", overlay.waypoints.count);
-            STAssertEqualsWithAccuracy([overlay.distance distanceInMeasurementSystem:MTDMeasurementSystemMetric], 137.845, 0.001, @"Error parsing distance");
+            // Check best route
+            STAssertEquals(overlay.timeInSeconds, 10042., @"Error parsing time");
+            STAssertEqualObjects(overlay.formattedTime, @"2:47:22", @"Error formatting time");
+            STAssertTrue(overlay.waypoints.count == 3481, @"Error parsing waypoints");
+            STAssertEqualsWithAccuracy([overlay.distance distanceInMeasurementSystem:MTDMeasurementSystemMetric], 233.687, 0.001, @"Error parsing distance");
 
             for (MTDRoute *route in overlay.routes) {
                 // Check Addresses
                 MTDAddress *fromAddress = route.from.address;
                 MTDAddress *toAddress = route.to.address;
 
-                STAssertEqualObjects(fromAddress.fullAddress, @"Reading", @"fromAddress: error parsing city");                STAssertEqualObjects(toAddress.city, @"Washington", @"toAddress: error parsing city");
-                STAssertEqualObjects(toAddress.fullAddress, @"District of Columbia", @"toAddress: error parsing state");
+                STAssertEqualObjects(fromAddress.fullAddress, @"275-299 Church St, Reading, Pennsylvania 19601, Vereinigte Staaten", @"error parsing fromAddress");
+                STAssertEqualObjects(toAddress.fullAddress, @"Ellipse Rd NW, Washington, District of Columbia 20502, Vereinigte Staaten", @"error parsing toAddress");
 
                 // Check copyright
                 NSString *copyright = [route.additionalInfo objectForKey:MTDAdditionalInfoCopyrightsKey];
@@ -158,6 +158,5 @@
         [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
     }
 }
-
 
 @end
