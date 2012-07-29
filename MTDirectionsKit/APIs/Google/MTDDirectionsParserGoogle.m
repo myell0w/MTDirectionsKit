@@ -17,16 +17,16 @@
 
 - (void)parseWithCompletion:(mtd_parser_block)completion {
     MTDAssert(completion != nil, @"Completion block must be set");
-    
+
     MTDXMLElement *statusCodeNode = [MTDXMLElement nodeForXPathQuery:@"//DirectionsResponse/status" onXML:self.data];
     MTDStatusCodeGoogle statusCode = MTDStatusCodeGoogleSuccess;
     MTDDirectionsOverlay *overlay = nil;
     NSError *error = nil;
-    
+
     if (statusCodeNode != nil) {
         statusCode = MTDStatusCodeGoogleFromDescription(statusCodeNode.contentString);
     }
-    
+
     if (statusCode == MTDStatusCodeGoogleSuccess) {
         // All returned routes (can be several if using alternative routes)
         NSArray *routeNodes = [MTDXMLElement nodesForXPathQuery:@"//route" onXML:self.data];
@@ -66,7 +66,7 @@
 
             [self mtd_addAddressesFromAddressNodes:locationAddressNodes toWaypoints:allWaypoints];
         }
-        
+
         overlay = [[MTDDirectionsOverlay alloc] initWithRoutes:routes
                                              intermediateGoals:orderedIntermediateGoals
                                                      routeType:self.routeType];
@@ -74,10 +74,10 @@
         error = [NSError errorWithDomain:MTDDirectionsKitErrorDomain
                                     code:statusCode
                                 userInfo:@{MTDDirectionsKitDataKey: self.data}];
-        
+
         MTDLogError(@"Error occurred during parsing of directions from %@ to %@:\n%@", self.from, self.to, error);
     }
-    
+
     if (completion != nil) {
         dispatch_async(dispatch_get_main_queue(), ^{
             completion(overlay, error);
@@ -93,8 +93,9 @@
     NSArray *waypointNodes = [routeNode childNodesTraversingAllChildrenWithPath:@"leg.step.polyline.points"];
     NSArray *distanceNodes = [routeNode childNodesTraversingAllChildrenWithPath:@"leg.distance.value"];
     NSArray *timeNodes = [routeNode childNodesTraversingAllChildrenWithPath:@"leg.duration.value"];
-    MTDXMLElement *copyrightNode = [routeNode firstChildNodeWithName:@"copyrights"];
     NSArray *warningNodes = [routeNode childNodesWithName:@"warnings"];
+    MTDXMLElement *copyrightNode = [routeNode firstChildNodeWithName:@"copyrights"];
+    MTDXMLElement *summaryNode = [routeNode firstChildNodeWithName:@"summary"];
 
     MTDDistance *distance = nil;
     NSTimeInterval timeInSeconds = -1.;
@@ -133,10 +134,14 @@
         }
     }
 
-    return [[MTDRoute alloc] initWithWaypoints:waypoints
-                                      distance:distance
-                                 timeInSeconds:timeInSeconds
-                                additionalInfo:additionalInfo];
+    MTDRoute *route = [[MTDRoute alloc] initWithWaypoints:waypoints
+                                                 distance:distance
+                                            timeInSeconds:timeInSeconds
+                                           additionalInfo:additionalInfo];
+
+    route.name = summaryNode.contentString;
+
+    return route;
 }
 
 // This method parses the waypointNodes and returns an array of MTDWaypoints
@@ -169,44 +174,44 @@
     if (encodedPolyline.length == 0) {
         return nil;
     }
-    
+
     const char *bytes = [encodedPolyline UTF8String];
     NSUInteger length = [encodedPolyline lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
     NSUInteger index = 0;
     double latitude = 0.;
     double longitude = 0.;
     NSMutableArray *waypoints = [NSMutableArray array];
-    
+
     while (index < length) {
         char byte = 0;
         int res = 0;
         char shift = 0;
-        
+
         do {
             byte = bytes[index++] - 63;
             res |= (byte & 0x1F) << shift;
             shift += 5;
         } while (byte >= 0x20);
-        
+
         float deltaLat = ((res & 1) ? ~(res >> 1) : (res >> 1));
         latitude += deltaLat;
-        
+
         shift = 0;
         res = 0;
-        
+
         do {
             byte = bytes[index++] - 0x3F;
             res |= (byte & 0x1F) << shift;
             shift += 5;
         } while (byte >= 0x20);
-        
+
         double deltaLon = ((res & 1) ? ~(res >> 1) : (res >> 1));
         longitude += deltaLon;
-        
+
         CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(latitude * 1E-5, longitude * 1E-5);
         [waypoints addObject:[MTDWaypoint waypointWithCoordinate:coordinate]];
     }
-    
+
     return waypoints;
 }
 
@@ -245,11 +250,11 @@
 // This method returns an array of all waypoints including from, to and intermediateGoals if specified
 - (NSArray *)mtd_waypointsIncludingFromAndToWithIntermediateGoals:(NSArray *)intermediateGoals {
     NSMutableArray *allGoals = intermediateGoals != nil ? [NSMutableArray arrayWithArray:intermediateGoals] : [NSMutableArray array];
-
+    
     // insert from and to at the right places
     [allGoals insertObject:self.from atIndex:0];
     [allGoals addObject:self.to];
-
+    
     return allGoals;
 }
 
