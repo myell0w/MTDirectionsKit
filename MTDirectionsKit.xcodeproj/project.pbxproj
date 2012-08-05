@@ -72,9 +72,12 @@
 		9B2C42BC155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2C42B7155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.h */; };
 		9B2C42BD155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C42B8155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.m */; };
 		9B2C42BE155EB85B00C0E4CE /* MTDDirectionsRouteType+Google.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2C42B9155EB85B00C0E4CE /* MTDDirectionsRouteType+Google.h */; };
-		9B3F802815BF4479003C70EE /* google_guessing_vienna.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B3F802515BF4479003C70EE /* google_guessing_vienna.xml */; };
-		9B3F802915BF4479003C70EE /* mapquest_guessing_vienna.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B3F802615BF4479003C70EE /* mapquest_guessing_vienna.xml */; };
-		9B3F802A15BF4479003C70EE /* mapquest_intermediate_optimized.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B3F802715BF4479003C70EE /* mapquest_intermediate_optimized.xml */; };
+		9B4BCD1015CE3C22006B4DB9 /* google_alternatives.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B4BCD0A15CE3C22006B4DB9 /* google_alternatives.xml */; };
+		9B4BCD1115CE3C22006B4DB9 /* google_guessing_vienna.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B4BCD0B15CE3C22006B4DB9 /* google_guessing_vienna.xml */; };
+		9B4BCD1215CE3C22006B4DB9 /* google_intermediate_optimized.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B4BCD0C15CE3C22006B4DB9 /* google_intermediate_optimized.xml */; };
+		9B4BCD1315CE3C22006B4DB9 /* mapquest_alternatives.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B4BCD0D15CE3C22006B4DB9 /* mapquest_alternatives.xml */; };
+		9B4BCD1415CE3C22006B4DB9 /* mapquest_guessing_vienna.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B4BCD0E15CE3C22006B4DB9 /* mapquest_guessing_vienna.xml */; };
+		9B4BCD1515CE3C22006B4DB9 /* mapquest_intermediate_optimized.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B4BCD0F15CE3C22006B4DB9 /* mapquest_intermediate_optimized.xml */; };
 		9B4E98DB15AD702A002F0302 /* MTDAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B4E98D915AD702A002F0302 /* MTDAddress.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B4E98DC15AD702A002F0302 /* MTDAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4E98DA15AD702A002F0302 /* MTDAddress.m */; };
 		9B4E98E015AD77E5002F0302 /* MTDAddressTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4E98DF15AD77E5002F0302 /* MTDAddressTest.m */; };
@@ -106,11 +109,8 @@
 		9BDE015015B203D1001A8132 /* MTDXMLElementTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDE014F15B203D1001A8132 /* MTDXMLElementTest.m */; };
 		9BE9094815C39980003E5462 /* MTDDirectionsOverlay+MTDirectionsPrivateAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BE9094615C39980003E5462 /* MTDDirectionsOverlay+MTDirectionsPrivateAPI.h */; };
 		9BE9094C15C3A22B003E5462 /* MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BE9094A15C3A22B003E5462 /* MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h */; };
-		9BEA8C8615C3746D00469D85 /* mapquest_alternatives.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9BEA8C8515C3746D00469D85 /* mapquest_alternatives.xml */; };
 		9BEE26EB155E92FC008A42F8 /* MTDHTTPRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BEE26E9155E92FC008A42F8 /* MTDHTTPRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9BEE26EC155E92FC008A42F8 /* MTDHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEE26EA155E92FC008A42F8 /* MTDHTTPRequest.m */; };
-		9BFC194B15C53EF900C2CEF6 /* google_alternatives.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9BFC194915C53EF900C2CEF6 /* google_alternatives.xml */; };
-		9BFC194C15C53EF900C2CEF6 /* google_intermediate_optimized.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9BFC194A15C53EF900C2CEF6 /* google_intermediate_optimized.xml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -179,9 +179,12 @@
 		9B2C42B7155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDDirectionsRequestGoogle.h; sourceTree = "<group>"; };
 		9B2C42B8155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDDirectionsRequestGoogle.m; sourceTree = "<group>"; };
 		9B2C42B9155EB85B00C0E4CE /* MTDDirectionsRouteType+Google.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTDDirectionsRouteType+Google.h"; sourceTree = "<group>"; };
-		9B3F802515BF4479003C70EE /* google_guessing_vienna.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = google_guessing_vienna.xml; sourceTree = "<group>"; };
-		9B3F802615BF4479003C70EE /* mapquest_guessing_vienna.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mapquest_guessing_vienna.xml; sourceTree = "<group>"; };
-		9B3F802715BF4479003C70EE /* mapquest_intermediate_optimized.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mapquest_intermediate_optimized.xml; sourceTree = "<group>"; };
+		9B4BCD0A15CE3C22006B4DB9 /* google_alternatives.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = google_alternatives.xml; sourceTree = "<group>"; };
+		9B4BCD0B15CE3C22006B4DB9 /* google_guessing_vienna.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = google_guessing_vienna.xml; sourceTree = "<group>"; };
+		9B4BCD0C15CE3C22006B4DB9 /* google_intermediate_optimized.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = google_intermediate_optimized.xml; sourceTree = "<group>"; };
+		9B4BCD0D15CE3C22006B4DB9 /* mapquest_alternatives.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mapquest_alternatives.xml; sourceTree = "<group>"; };
+		9B4BCD0E15CE3C22006B4DB9 /* mapquest_guessing_vienna.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mapquest_guessing_vienna.xml; sourceTree = "<group>"; };
+		9B4BCD0F15CE3C22006B4DB9 /* mapquest_intermediate_optimized.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mapquest_intermediate_optimized.xml; sourceTree = "<group>"; };
 		9B4E98D915AD702A002F0302 /* MTDAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDAddress.h; sourceTree = "<group>"; };
 		9B4E98DA15AD702A002F0302 /* MTDAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDAddress.m; sourceTree = "<group>"; };
 		9B4E98DE15AD77E5002F0302 /* MTDAddressTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDAddressTest.h; sourceTree = "<group>"; };
@@ -224,12 +227,9 @@
 		9BE7A0FE15C52DA60025164A /* MTDDirectionsRequestOption.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTDDirectionsRequestOption.h; sourceTree = "<group>"; };
 		9BE9094615C39980003E5462 /* MTDDirectionsOverlay+MTDirectionsPrivateAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTDDirectionsOverlay+MTDirectionsPrivateAPI.h"; sourceTree = "<group>"; };
 		9BE9094A15C3A22B003E5462 /* MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h"; sourceTree = "<group>"; };
-		9BEA8C8515C3746D00469D85 /* mapquest_alternatives.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mapquest_alternatives.xml; sourceTree = "<group>"; };
 		9BEE26E9155E92FC008A42F8 /* MTDHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDHTTPRequest.h; sourceTree = "<group>"; };
 		9BEE26EA155E92FC008A42F8 /* MTDHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDHTTPRequest.m; sourceTree = "<group>"; };
 		9BFC194715C531B700C2CEF6 /* MTDDirectionsAPI+MTDirectionsPrivateAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MTDDirectionsAPI+MTDirectionsPrivateAPI.h"; sourceTree = "<group>"; };
-		9BFC194915C53EF900C2CEF6 /* google_alternatives.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = google_alternatives.xml; sourceTree = "<group>"; };
-		9BFC194A15C53EF900C2CEF6 /* google_intermediate_optimized.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = google_intermediate_optimized.xml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -405,12 +405,12 @@
 		9B3F802415BF4479003C70EE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				9BFC194915C53EF900C2CEF6 /* google_alternatives.xml */,
-				9B3F802515BF4479003C70EE /* google_guessing_vienna.xml */,
-				9BFC194A15C53EF900C2CEF6 /* google_intermediate_optimized.xml */,
-				9BEA8C8515C3746D00469D85 /* mapquest_alternatives.xml */,
-				9B3F802615BF4479003C70EE /* mapquest_guessing_vienna.xml */,
-				9B3F802715BF4479003C70EE /* mapquest_intermediate_optimized.xml */,
+				9B4BCD0A15CE3C22006B4DB9 /* google_alternatives.xml */,
+				9B4BCD0B15CE3C22006B4DB9 /* google_guessing_vienna.xml */,
+				9B4BCD0C15CE3C22006B4DB9 /* google_intermediate_optimized.xml */,
+				9B4BCD0D15CE3C22006B4DB9 /* mapquest_alternatives.xml */,
+				9B4BCD0E15CE3C22006B4DB9 /* mapquest_guessing_vienna.xml */,
+				9B4BCD0F15CE3C22006B4DB9 /* mapquest_intermediate_optimized.xml */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -596,12 +596,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B10A9A8155D5867002A3052 /* InfoPlist.strings in Resources */,
-				9B3F802815BF4479003C70EE /* google_guessing_vienna.xml in Resources */,
-				9B3F802915BF4479003C70EE /* mapquest_guessing_vienna.xml in Resources */,
-				9B3F802A15BF4479003C70EE /* mapquest_intermediate_optimized.xml in Resources */,
-				9BEA8C8615C3746D00469D85 /* mapquest_alternatives.xml in Resources */,
-				9BFC194B15C53EF900C2CEF6 /* google_alternatives.xml in Resources */,
-				9BFC194C15C53EF900C2CEF6 /* google_intermediate_optimized.xml in Resources */,
+				9B4BCD1015CE3C22006B4DB9 /* google_alternatives.xml in Resources */,
+				9B4BCD1115CE3C22006B4DB9 /* google_guessing_vienna.xml in Resources */,
+				9B4BCD1215CE3C22006B4DB9 /* google_intermediate_optimized.xml in Resources */,
+				9B4BCD1315CE3C22006B4DB9 /* mapquest_alternatives.xml in Resources */,
+				9B4BCD1415CE3C22006B4DB9 /* mapquest_guessing_vienna.xml in Resources */,
+				9B4BCD1515CE3C22006B4DB9 /* mapquest_intermediate_optimized.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

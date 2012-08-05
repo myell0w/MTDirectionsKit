@@ -73,24 +73,6 @@
                                           zoomScale:zoomScale];
 
         if (path != NULL) {
-            // Cripple drawing for Demo
-            {
-                _mtd_wm_ = 1;
-
-                float components[] = {1.f, 0.f, 0.f, 0.35f};
-                CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-                CGColorRef wmColor = CGColorCreate(colorSpace, components);
-
-                CGRect boundingBox = CGPathGetBoundingBox(path);
-                CGContextSaveGState(context);
-                CGContextSetFillColorWithColor(context, wmColor);
-                CGContextFillRect(context, boundingBox);
-                CGContextRestoreGState(context);
-
-                CGColorRelease(wmColor);
-                CGColorSpaceRelease(colorSpace);
-            }
-
             UIColor *baseColor = self.overlayColor;
             BOOL isActiveRoute = (route == self.mtd_directionsOverlay.activeRoute);
             CGFloat shadowAlpha = 0.4f;
@@ -103,6 +85,24 @@
                 lineWidth = fullLineWidth * 0.7f;
                 shadowAlpha = 0.1f;
                 secondNormalPathAlpha = 0.45f;
+            } else {
+                // Cripple drawing for Demo
+                {
+                    _mtd_wm_ = 1;
+
+                    float components[] = {1.f, 0.f, 0.f, 0.35f};
+                    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+                    CGColorRef wmColor = CGColorCreate(colorSpace, components);
+
+                    CGRect boundingBox = CGPathGetBoundingBox(path);
+                    CGContextSaveGState(context);
+                    CGContextSetFillColorWithColor(context, wmColor);
+                    CGContextFillRect(context, boundingBox);
+                    CGContextRestoreGState(context);
+
+                    CGColorRelease(wmColor);
+                    CGColorSpaceRelease(colorSpace);
+                }
             }
 
             UIColor *darkenedColor = MTDDarkenedColor(baseColor, 0.1f);
