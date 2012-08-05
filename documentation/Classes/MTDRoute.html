@@ -1,0 +1,945 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>MTDRoute Class Reference</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<meta name="viewport" content="width=550" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.0.5 (build 789)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">MTDirectionsKit </a></h1>
+				<a id="developerHome" href="../index.html">@myell0w</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">MTDRoute Class Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar">
+				<li id="toc_button">
+					<button aria-label="Show Table of Contents" role="checkbox" class="open" id="table_of_contents"><span class="disclosure"></span>Table of Contents</button>
+				</li>
+				<li id="jumpto_button" role="navigation">
+					<select id="jumpTo">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+	
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+	
+	
+	
+	<option value="properties">Properties</option>
+	
+	<option value="//api/name/additionalInfo">&nbsp;&nbsp;&nbsp;&nbsp;additionalInfo</option>
+	
+	<option value="//api/name/distance">&nbsp;&nbsp;&nbsp;&nbsp;distance</option>
+	
+	<option value="//api/name/formattedTime">&nbsp;&nbsp;&nbsp;&nbsp;formattedTime</option>
+	
+	<option value="//api/name/from">&nbsp;&nbsp;&nbsp;&nbsp;from</option>
+	
+	<option value="//api/name/mtd_polyline">&nbsp;&nbsp;&nbsp;&nbsp;mtd_polyline</option>
+	
+	<option value="//api/name/name">&nbsp;&nbsp;&nbsp;&nbsp;name</option>
+	
+	<option value="//api/name/pointCount">&nbsp;&nbsp;&nbsp;&nbsp;pointCount</option>
+	
+	<option value="//api/name/points">&nbsp;&nbsp;&nbsp;&nbsp;points</option>
+	
+	<option value="//api/name/timeInSeconds">&nbsp;&nbsp;&nbsp;&nbsp;timeInSeconds</option>
+	
+	<option value="//api/name/to">&nbsp;&nbsp;&nbsp;&nbsp;to</option>
+	
+	<option value="//api/name/waypoints">&nbsp;&nbsp;&nbsp;&nbsp;waypoints</option>
+	
+	
+	
+	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/formattedTimeWithFormat:">&nbsp;&nbsp;&nbsp;&nbsp;- formattedTimeWithFormat:</option>
+	
+	<option value="//api/name/initWithWaypoints:distance:timeInSeconds:additionalInfo:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithWaypoints:distance:timeInSeconds:additionalInfo:</option>
+	
+	
+	
+</select>
+				</li>
+			</ul>
+		</header>
+		<nav id="tocContainer" class="isShowingTOC">
+			<ul id="toc" role="tree">
+				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
+
+
+
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Route">Route</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_MapKit interface">MapKit interface</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Lifecycle">Lifecycle</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Route">Route</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_MTDirectionsPrivateAPI Methods">MTDirectionsPrivateAPI Methods</a></span></li>
+	
+</ul></li>
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/additionalInfo">additionalInfo</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/distance">distance</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/formattedTime">formattedTime</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/from">from</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mtd_polyline">mtd_polyline</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/name">name</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/pointCount">pointCount</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/points">points</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/timeInSeconds">timeInSeconds</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/to">to</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/waypoints">waypoints</a></span></li>
+	
+</ul></li>
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/formattedTimeWithFormat:">formattedTimeWithFormat:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithWaypoints:distance:timeInSeconds:additionalInfo:">initWithWaypoints:distance:timeInSeconds:additionalInfo:</a></span></li>
+	
+</ul></li>
+
+
+			</ul>
+		</nav>
+		<article>
+			<div id="contents" class="isShowingTOC" role="main">
+				<a title="MTDRoute Class Reference" name="top"></a>
+				<div class="main-navigation navigation-top">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">MTDRoute Class Reference</h1>
+					</div>		
+				</div>
+				<div id="container">	
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value">NSObject</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">MTDRoute.h</td>
+</tr>
+						</tbody></table></div>
+					
+					
+					
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>An instance of MTDRoute represents one way of travelling <a href="#//api/name/from">from</a> a starting point <a href="#//api/name/to">to</a> an end point.
+When requesting directions alternative routes can be provided, each of whom is represented by
+an instance of MTDRoute.</p>
+
+<p>This category exposes private API used in MTDirectionsKit <a href="#//api/name/to">to</a> other classes <a href="#//api/name/to">to</a> not
+generate warnings when using them. You should not use the properties and methods
+exposed here directly in your code.</p>
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						<a title="Route" name="task_Route"></a>
+						<h3 class="subsubtitle task-title">Route</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/name">&nbsp;&nbsp;name</a></code>
+		<span class="tooltip"><p>a unique name of the route</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/waypoints">&nbsp;&nbsp;waypoints</a></code>
+		<span class="tooltip"><p>all way<a href="#//api/name/points">points</a> of the route/directions, including <a href="#//api/name/from">from</a> and <a href="#//api/name/to">to</a></p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/from">&nbsp;&nbsp;from</a></code>
+		<span class="tooltip"><p>the starting point of the directions</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/to">&nbsp;&nbsp;to</a></code>
+		<span class="tooltip"><p>the end point of the directions</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/distance">&nbsp;&nbsp;distance</a></code>
+		<span class="tooltip"><p>the total distance between fromCoordinate and toCoordinate, when travelled along the given <a href="#//api/name/waypoints">waypoints</a></p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/timeInSeconds">&nbsp;&nbsp;timeInSeconds</a></code>
+		<span class="tooltip"><p>the total estimated time for this route</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/formattedTime">&nbsp;&nbsp;formattedTime</a></code>
+		<span class="tooltip"><p>the estimated time as formatted string</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/additionalInfo">&nbsp;&nbsp;additionalInfo</a></code>
+		<span class="tooltip"><p>Dictionary containing additional information retreived, e.g. warnings and copyrights when
+using the Google Directions API. You have <a href="#//api/name/to">to</a> handle this information on your own and stick
+<a href="#//api/name/to">to</a> the terms of usage of the API you use.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li>
+						</ul>
+						
+						
+						<a title="MapKit interface" name="task_MapKit interface"></a>
+						<h3 class="subsubtitle task-title">MapKit interface</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/points">&nbsp;&nbsp;points</a></code>
+		<span class="tooltip"><p>all mapPoints of the underlying polyline</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/pointCount">&nbsp;&nbsp;pointCount</a></code>
+		<span class="tooltip"><p>the number of mapPoints of the polyline</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li>
+						</ul>
+						
+						
+						<a title="Lifecycle" name="task_Lifecycle"></a>
+						<h3 class="subsubtitle task-title">Lifecycle</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithWaypoints:distance:timeInSeconds:additionalInfo:">&ndash;&nbsp;initWithWaypoints:distance:timeInSeconds:additionalInfo:</a></code>
+		<span class="tooltip"><p>Creates a route with the given <a href="#//api/name/waypoints">waypoints</a>, <a href="#//api/name/distance">distance</a>, duration and additional information.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Route" name="task_Route"></a>
+						<h3 class="subsubtitle task-title">Route</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/formattedTimeWithFormat:">&ndash;&nbsp;formattedTimeWithFormat:</a></code>
+		<span class="tooltip"><p>The estimated time as formatted string with a specified time format.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="MTDirectionsPrivateAPI Methods" name="task_MTDirectionsPrivateAPI Methods"></a>
+						<h3 class="subsubtitle task-title">MTDirectionsPrivateAPI Methods</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mtd_polyline">&nbsp;&nbsp;mtd_polyline</a></code>
+		<span class="tooltip"><p>Internally we use a MKPolyline in MTDRoute <a href="#//api/name/to">to</a> represent the overlay.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li>
+						</ul>
+						
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Properties" name="properties"></a>
+						<h2 class="subtitle subtitle-methods">Properties</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/additionalInfo" title="additionalInfo"></a>
+	<h3 class="subsubtitle method-title">additionalInfo</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Dictionary containing additional information retreived, e.g. warnings and copyrights when
+using the Google Directions API. You have <a href="#//api/name/to">to</a> handle this information on your own and stick
+<a href="#//api/name/to">to</a> the terms of usage of the API you use.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, readonly) NSDictionary *additionalInfo</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDRoute.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/distance" title="distance"></a>
+	<h3 class="subsubtitle method-title">distance</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>the total distance between fromCoordinate and toCoordinate, when travelled along the given <a href="#//api/name/waypoints">waypoints</a></p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong, readonly) MTDDistance *distance</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDRoute.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/formattedTime" title="formattedTime"></a>
+	<h3 class="subsubtitle method-title">formattedTime</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>the estimated time as formatted string</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) NSString *formattedTime</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDRoute.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/from" title="from"></a>
+	<h3 class="subsubtitle method-title">from</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>the starting point of the directions</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) MTDWaypoint *from</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDRoute.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mtd_polyline" title="mtd_polyline"></a>
+	<h3 class="subsubtitle method-title">mtd_polyline</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Internally we use a MKPolyline in MTDRoute <a href="#//api/name/to">to</a> represent the overlay.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) MKPolyline *mtd_polyline</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDRoute+MTDirectionsPrivateAPI.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/name" title="name"></a>
+	<h3 class="subsubtitle method-title">name</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>a unique name of the route</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) NSString *name</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDRoute.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/pointCount" title="pointCount"></a>
+	<h3 class="subsubtitle method-title">pointCount</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>the number of mapPoints of the polyline</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) NSUInteger pointCount</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDRoute.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/points" title="points"></a>
+	<h3 class="subsubtitle method-title">points</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>all mapPoints of the underlying polyline</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) MKMapPoint *points</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDRoute.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/timeInSeconds" title="timeInSeconds"></a>
+	<h3 class="subsubtitle method-title">timeInSeconds</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>the total estimated time for this route</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign, readonly) NSTimeInterval timeInSeconds</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDRoute.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/to" title="to"></a>
+	<h3 class="subsubtitle method-title">to</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>the end point of the directions</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) MTDWaypoint *to</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDRoute.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/waypoints" title="waypoints"></a>
+	<h3 class="subsubtitle method-title">waypoints</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>all way<a href="#//api/name/points">points</a> of the route/directions, including <a href="#//api/name/from">from</a> and <a href="#//api/name/to">to</a></p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, readonly) NSArray *waypoints</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDRoute.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/formattedTimeWithFormat:" title="formattedTimeWithFormat:"></a>
+	<h3 class="subsubtitle method-title">formattedTimeWithFormat:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The estimated time as formatted string with a specified time format.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (NSString *)formattedTimeWithFormat:(NSString *)<em>format</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>format</em></dt>
+			<dd><p>the format of the time, e.g. H:mm:ss</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>a string-representation of the estimated time with the given format</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDRoute.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/initWithWaypoints:distance:timeInSeconds:additionalInfo:" title="initWithWaypoints:distance:timeInSeconds:additionalInfo:"></a>
+	<h3 class="subsubtitle method-title">initWithWaypoints:distance:timeInSeconds:additionalInfo:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Creates a route with the given <a href="#//api/name/waypoints">waypoints</a>, <a href="#//api/name/distance">distance</a>, duration and additional information.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (id)initWithWaypoints:(NSArray *)<em>waypoints</em> distance:(MTDDistance *)<em>distance</em> timeInSeconds:(NSTimeInterval)<em>timeInSeconds</em> additionalInfo:(NSDictionary *)<em>additionalInfo</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>waypoints</em></dt>
+			<dd><p>the <a href="#//api/name/waypoints">waypoints</a> of the route</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>distance</em></dt>
+			<dd><p>the total <a href="#//api/name/distance">distance</a> <a href="#//api/name/from">from</a> the first <a href="#//api/name/to">to</a> the last waypoint</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>timeInSeconds</em></dt>
+			<dd><p>the estimated total duration needed for traversing the <a href="#//api/name/waypoints">waypoints</a> in the given routeType</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>additionalInfo</em></dt>
+			<dd><p>dictionary with additional information provided by the API, e.g. copyrights</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>a route object encapsulating the given route-information</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDRoute.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-08-05)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+		<script type="text/javascript">
+			function jumpToChange()
+			{
+				window.location.hash = this.options[this.selectedIndex].value;
+			}
+			
+			function toggleTOC()
+			{
+				var contents = document.getElementById('contents');
+				var tocContainer = document.getElementById('tocContainer');
+				
+				if (this.getAttribute('class') == 'open')
+				{
+					this.setAttribute('class', '');
+					contents.setAttribute('class', '');
+					tocContainer.setAttribute('class', '');
+					
+					window.name = "hideTOC";
+				}
+				else
+				{
+					this.setAttribute('class', 'open');
+					contents.setAttribute('class', 'isShowingTOC');
+					tocContainer.setAttribute('class', 'isShowingTOC');
+					
+					window.name = "";
+				}
+				return false;
+			}
+			
+			function toggleTOCEntryChildren(e)
+			{
+				e.stopPropagation();
+				var currentClass = this.getAttribute('class');
+				if (currentClass == 'children') {
+					this.setAttribute('class', 'children open');
+				}
+				else if (currentClass == 'children open') {
+					this.setAttribute('class', 'children');
+				}
+				return false;
+			}
+			
+			function tocEntryClick(e)
+			{
+				e.stopPropagation();
+				return true;
+			}
+			
+			function init()
+			{
+				var selectElement = document.getElementById('jumpTo');
+				selectElement.addEventListener('change', jumpToChange, false);
+				
+				var tocButton = document.getElementById('table_of_contents');
+				tocButton.addEventListener('click', toggleTOC, false);
+				
+				var taskTreeItem = document.getElementById('task_treeitem');
+				if (taskTreeItem.getElementsByTagName('li').length > 0)
+				{
+					taskTreeItem.setAttribute('class', 'children');
+					taskTreeItem.firstChild.setAttribute('class', 'disclosure');
+				}
+				
+				var tocList = document.getElementById('toc');
+				
+				var tocEntries = tocList.getElementsByTagName('li');
+				for (var i = 0; i < tocEntries.length; i++) {
+					tocEntries[i].addEventListener('click', toggleTOCEntryChildren, false);
+				}
+				
+				var tocLinks = tocList.getElementsByTagName('a');
+				for (var i = 0; i < tocLinks.length; i++) {
+					tocLinks[i].addEventListener('click', tocEntryClick, false);
+				}
+				
+				if (window.name == "hideTOC") {
+					toggleTOC.call(tocButton);
+				}
+			}
+			
+			window.onload = init;
+		</script>
+	</body>
+</html>

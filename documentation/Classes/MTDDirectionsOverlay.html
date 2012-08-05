@@ -40,9 +40,13 @@
 	
 	<option value="properties">Properties</option>
 	
-	<option value="//api/name/additionalInfo">&nbsp;&nbsp;&nbsp;&nbsp;additionalInfo</option>
+	<option value="//api/name/activeRoute">&nbsp;&nbsp;&nbsp;&nbsp;activeRoute</option>
+	
+	<option value="//api/name/bestRoute">&nbsp;&nbsp;&nbsp;&nbsp;bestRoute</option>
 	
 	<option value="//api/name/distance">&nbsp;&nbsp;&nbsp;&nbsp;distance</option>
+	
+	<option value="//api/name/fastestRoute">&nbsp;&nbsp;&nbsp;&nbsp;fastestRoute</option>
 	
 	<option value="//api/name/formattedTime">&nbsp;&nbsp;&nbsp;&nbsp;formattedTime</option>
 	
@@ -52,11 +56,11 @@
 	
 	<option value="//api/name/intermediateGoals">&nbsp;&nbsp;&nbsp;&nbsp;intermediateGoals</option>
 	
-	<option value="//api/name/pointCount">&nbsp;&nbsp;&nbsp;&nbsp;pointCount</option>
-	
-	<option value="//api/name/points">&nbsp;&nbsp;&nbsp;&nbsp;points</option>
-	
 	<option value="//api/name/routeType">&nbsp;&nbsp;&nbsp;&nbsp;routeType</option>
+	
+	<option value="//api/name/routes">&nbsp;&nbsp;&nbsp;&nbsp;routes</option>
+	
+	<option value="//api/name/shortestRoute">&nbsp;&nbsp;&nbsp;&nbsp;shortestRoute</option>
 	
 	<option value="//api/name/timeInSeconds">&nbsp;&nbsp;&nbsp;&nbsp;timeInSeconds</option>
 	
@@ -69,16 +73,15 @@
 	
 	
 	
-	<option value="class_methods">Class Methods</option>
-	
-	<option value="//api/name/overlayWithWaypoints:distance:timeInSeconds:routeType:">&nbsp;&nbsp;&nbsp;&nbsp;+ overlayWithWaypoints:distance:timeInSeconds:routeType:</option>
-	
-	
 	
 	
 	<option value="instance_methods">Instance Methods</option>
 	
 	<option value="//api/name/formattedTimeWithFormat:">&nbsp;&nbsp;&nbsp;&nbsp;- formattedTimeWithFormat:</option>
+	
+	<option value="//api/name/initWithRoutes:intermediateGoals:routeType:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithRoutes:intermediateGoals:routeType:</option>
+	
+	<option value="//api/name/mtd_activateRoute:">&nbsp;&nbsp;&nbsp;&nbsp;- mtd_activateRoute:</option>
 	
 	
 	
@@ -96,13 +99,15 @@
 
 <li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Directions">Directions</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Directions/Routes">Directions/Routes</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_MapKit interface">MapKit interface</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Forwarding to Active Route">Forwarding to Active Route</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Lifecycle">Lifecycle</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Directions">Directions</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Forwarding to Active Route">Forwarding to Active Route</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_MTDirectionsPrivateAPI Methods">MTDirectionsPrivateAPI Methods</a></span></li>
 	
 </ul></li>
 
@@ -112,9 +117,13 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/additionalInfo">additionalInfo</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/activeRoute">activeRoute</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/bestRoute">bestRoute</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/distance">distance</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/fastestRoute">fastestRoute</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/formattedTime">formattedTime</a></span></li>
 	
@@ -124,11 +133,11 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/intermediateGoals">intermediateGoals</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/pointCount">pointCount</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/points">points</a></span></li>
-	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/routeType">routeType</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/routes">routes</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/shortestRoute">shortestRoute</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/timeInSeconds">timeInSeconds</a></span></li>
 	
@@ -142,17 +151,15 @@
 
 
 
-<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/overlayWithWaypoints:distance:timeInSeconds:routeType:">overlayWithWaypoints:distance:timeInSeconds:routeType:</a></span></li>
-	
-</ul></li>
-
 
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/formattedTimeWithFormat:">formattedTimeWithFormat:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithRoutes:intermediateGoals:routeType:">initWithRoutes:intermediateGoals:routeType:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mtd_activateRoute:">mtd_activateRoute:</a></span></li>
 	
 </ul></li>
 
@@ -198,6 +205,9 @@
 an overlay used to store information about already parsed directions with a given
 <a href="#//api/name/fromCoordinate">fromCoordinate</a> and <a href="#//api/name/toCoordinate">toCoordinate</a>. It stores all waypoint along the route and the total
 <a href="#//api/name/distance">distance</a> of the route.</p>
+
+<p>This category exposes private API used in MTDirectionsKit to other classes to not generate warnings when using them.
+You should not use the properties and methods exposed here directly in your code.</p>
 					</div>
 					
 					
@@ -209,42 +219,42 @@ an overlay used to store information about already parsed directions with a give
 						<h2 class="subtitle subtitle-tasks">Tasks</h2>
 						
 						
-						<a title="Directions" name="task_Directions"></a>
-						<h3 class="subsubtitle task-title">Directions</h3>
+						<a title="Directions/Routes" name="task_Directions/Routes"></a>
+						<h3 class="subsubtitle task-title">Directions/Routes</h3>
 
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/waypoints">&nbsp;&nbsp;waypoints</a></code>
-		<span class="tooltip"><p>all way<a href="#//api/name/points">points</a> of the route/directions, including <a href="#//api/name/fromCoordinate">fromCoordinate</a> and <a href="#//api/name/toCoordinate">toCoordinate</a></p></span>
+		<code><a href="#//api/name/routes">&nbsp;&nbsp;routes</a></code>
+		<span class="tooltip"><p>an array of alternative routes for the given start- and endpoint</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/fromCoordinate">&nbsp;&nbsp;fromCoordinate</a></code>
-		<span class="tooltip"><p>the starting coordinate of the directions</p></span>
+		<code><a href="#//api/name/activeRoute">&nbsp;&nbsp;activeRoute</a></code>
+		<span class="tooltip"><p>the currently active route if there are more alternatives or the only route object if there is only one</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/toCoordinate">&nbsp;&nbsp;toCoordinate</a></code>
-		<span class="tooltip"><p>the end coordinate of the directions</p></span>
+		<code><a href="#//api/name/bestRoute">&nbsp;&nbsp;bestRoute</a></code>
+		<span class="tooltip"><p>the best route of the alternatives according to the API used</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/fromAddress">&nbsp;&nbsp;fromAddress</a></code>
-		<span class="tooltip"><p>The address of the starting coordinate, can be nil if not provided by API</p></span>
+		<code><a href="#//api/name/fastestRoute">&nbsp;&nbsp;fastestRoute</a></code>
+		<span class="tooltip"><p>the fastest route of the alternatives</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/toAddress">&nbsp;&nbsp;toAddress</a></code>
-		<span class="tooltip"><p>The address of the end coordinate, can be nil if not provided by API</p></span>
+		<code><a href="#//api/name/shortestRoute">&nbsp;&nbsp;shortestRoute</a></code>
+		<span class="tooltip"><p>the shortest route of the alternatives</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -257,37 +267,8 @@ an overlay used to store information about already parsed directions with a give
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/distance">&nbsp;&nbsp;distance</a></code>
-		<span class="tooltip"><p>the total distance between <a href="#//api/name/fromCoordinate">fromCoordinate</a> and <a href="#//api/name/toCoordinate">toCoordinate</a>, when travelled along the given <a href="#//api/name/waypoints">waypoints</a></p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/timeInSeconds">&nbsp;&nbsp;timeInSeconds</a></code>
-		<span class="tooltip"><p>the total estimated time for this route</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/formattedTime">&nbsp;&nbsp;formattedTime</a></code>
-		<span class="tooltip"><p>the estimated time as formatted string</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
 		<code><a href="#//api/name/routeType">&nbsp;&nbsp;routeType</a></code>
 		<span class="tooltip"><p>the type of travelling used to compute the directions, e.g. walking, by bike etc.</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/additionalInfo">&nbsp;&nbsp;additionalInfo</a></code>
-		<span class="tooltip"><p>Dictionary containing additional information retreived, e.g. warnings and copyrights when using the Google Directions API.
-You have to handle this information on your own and stick to the terms of usage of the API you use</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -295,21 +276,63 @@ You have to handle this information on your own and stick to the terms of usage 
 						</ul>
 						
 						
-						<a title="MapKit interface" name="task_MapKit interface"></a>
-						<h3 class="subsubtitle task-title">MapKit interface</h3>
+						<a title="Forwarding to Active Route" name="task_Forwarding to Active Route"></a>
+						<h3 class="subsubtitle task-title">Forwarding to Active Route</h3>
 
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/points">&nbsp;&nbsp;points</a></code>
-		<span class="tooltip"><p>all mapPoints of the underlying polyline</p></span>
+		<code><a href="#//api/name/waypoints">&nbsp;&nbsp;waypoints</a></code>
+		<span class="tooltip"><p>all waypoints of the active route, including <a href="#//api/name/fromCoordinate">fromCoordinate</a> and <a href="#//api/name/toCoordinate">toCoordinate</a></p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/pointCount">&nbsp;&nbsp;pointCount</a></code>
-		<span class="tooltip"><p>the number of mapPoints of the polyline</p></span>
+		<code><a href="#//api/name/fromCoordinate">&nbsp;&nbsp;fromCoordinate</a></code>
+		<span class="tooltip"><p>the starting coordinate of the active route</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/toCoordinate">&nbsp;&nbsp;toCoordinate</a></code>
+		<span class="tooltip"><p>the end coordinate of the active route</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/fromAddress">&nbsp;&nbsp;fromAddress</a></code>
+		<span class="tooltip"><p>The address of the starting coordinat of the active route</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/toAddress">&nbsp;&nbsp;toAddress</a></code>
+		<span class="tooltip"><p>The address of the end coordinate of the active route</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/distance">&nbsp;&nbsp;distance</a></code>
+		<span class="tooltip"><p>the total distance between <a href="#//api/name/fromCoordinate">fromCoordinate</a> and <a href="#//api/name/toCoordinate">toCoordinate</a> of the active route, when travelled along the given <a href="#//api/name/waypoints">waypoints</a></p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/timeInSeconds">&nbsp;&nbsp;timeInSeconds</a></code>
+		<span class="tooltip"><p>the total estimated time for the active route</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/formattedTime">&nbsp;&nbsp;formattedTime</a></code>
+		<span class="tooltip"><p>the estimated time of the active route as formatted string</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -323,8 +346,8 @@ You have to handle this information on your own and stick to the terms of usage 
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/overlayWithWaypoints:distance:timeInSeconds:routeType:">+&nbsp;overlayWithWaypoints:distance:timeInSeconds:routeType:</a></code>
-		<span class="tooltip"><p>Creates an overlay with the given <a href="#//api/name/waypoints">waypoints</a>, <a href="#//api/name/distance">distance</a> and <a href="#//api/name/routeType">routeType</a>.</p></span>
+		<code><a href="#//api/name/initWithRoutes:intermediateGoals:routeType:">&ndash;&nbsp;initWithRoutes:intermediateGoals:routeType:</a></code>
+		<span class="tooltip"><p>Creates an overlay with the given <a href="#//api/name/routes">routes</a>, <a href="#//api/name/distance">distance</a> and <a href="#//api/name/routeType">routeType</a>.</p></span>
 	</span>
 	
 	
@@ -332,14 +355,29 @@ You have to handle this information on your own and stick to the terms of usage 
 						</ul>
 						
 						
-						<a title="Directions" name="task_Directions"></a>
-						<h3 class="subsubtitle task-title">Directions</h3>
+						<a title="Forwarding to Active Route" name="task_Forwarding to Active Route"></a>
+						<h3 class="subsubtitle task-title">Forwarding to Active Route</h3>
 
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/formattedTimeWithFormat:">&ndash;&nbsp;formattedTimeWithFormat:</a></code>
-		<span class="tooltip"><p>The estimated time as formatted string with a specified time format.</p></span>
+		<span class="tooltip"><p>The estimated time of the active route as formatted string with a specified time format.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="MTDirectionsPrivateAPI Methods" name="task_MTDirectionsPrivateAPI Methods"></a>
+						<h3 class="subsubtitle task-title">MTDirectionsPrivateAPI Methods</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mtd_activateRoute:">&ndash;&nbsp;mtd_activateRoute:</a></code>
+		<span class="tooltip"><p>This method sets the <a href="#//api/name/activeRoute">activeRoute</a> property of MTDDiretionsOverlay.</p></span>
 	</span>
 	
 	
@@ -357,18 +395,51 @@ You have to handle this information on your own and stick to the terms of usage 
 						<h2 class="subtitle subtitle-methods">Properties</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/additionalInfo" title="additionalInfo"></a>
-	<h3 class="subsubtitle method-title">additionalInfo</h3>
+	<a name="//api/name/activeRoute" title="activeRoute"></a>
+	<h3 class="subsubtitle method-title">activeRoute</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Dictionary containing additional information retreived, e.g. warnings and copyrights when using the Google Directions API.
-You have to handle this information on your own and stick to the terms of usage of the API you use</p>
+		<p>the currently active route if there are more alternatives or the only route object if there is only one</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) NSDictionary *additionalInfo</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) MTDRoute *activeRoute</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDDirectionsOverlay.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/bestRoute" title="bestRoute"></a>
+	<h3 class="subsubtitle method-title">bestRoute</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>the best route of the alternatives according to the API used</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) MTDRoute *bestRoute</code></div>
 	
 	
 	
@@ -398,11 +469,45 @@ You have to handle this information on your own and stick to the terms of usage 
 	
 	
 	<div class="method-subsection brief-description">
-		<p>the total distance between <a href="#//api/name/fromCoordinate">fromCoordinate</a> and <a href="#//api/name/toCoordinate">toCoordinate</a>, when travelled along the given <a href="#//api/name/waypoints">waypoints</a></p>
+		<p>the total distance between <a href="#//api/name/fromCoordinate">fromCoordinate</a> and <a href="#//api/name/toCoordinate">toCoordinate</a> of the active route, when travelled along the given <a href="#//api/name/waypoints">waypoints</a></p>
 	</div>		
 	
 	
 	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong, readonly) MTDDistance *distance</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDDirectionsOverlay.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/fastestRoute" title="fastestRoute"></a>
+	<h3 class="subsubtitle method-title">fastestRoute</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>the fastest route of the alternatives</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) MTDRoute *fastestRoute</code></div>
 	
 	
 	
@@ -432,7 +537,7 @@ You have to handle this information on your own and stick to the terms of usage 
 	
 	
 	<div class="method-subsection brief-description">
-		<p>the estimated time as formatted string</p>
+		<p>the estimated time of the active route as formatted string</p>
 	</div>		
 	
 	
@@ -466,7 +571,7 @@ You have to handle this information on your own and stick to the terms of usage 
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The address of the starting coordinate, can be nil if not provided by API</p>
+		<p>The address of the starting coordinat of the active route</p>
 	</div>		
 	
 	
@@ -500,7 +605,7 @@ You have to handle this information on your own and stick to the terms of usage 
 	
 	
 	<div class="method-subsection brief-description">
-		<p>the starting coordinate of the directions</p>
+		<p>the starting coordinate of the active route</p>
 	</div>		
 	
 	
@@ -538,75 +643,7 @@ You have to handle this information on your own and stick to the terms of usage 
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) NSArray *intermediateGoals</code></div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDDirectionsOverlay.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/pointCount" title="pointCount"></a>
-	<h3 class="subsubtitle method-title">pointCount</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>the number of mapPoints of the polyline</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) NSUInteger pointCount</code></div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDDirectionsOverlay.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/points" title="points"></a>
-	<h3 class="subsubtitle method-title">points</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>all mapPoints of the underlying polyline</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) MKMapPoint *points</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, readonly) NSArray *intermediateGoals</code></div>
 	
 	
 	
@@ -664,13 +701,81 @@ You have to handle this information on your own and stick to the terms of usage 
 </div>
 						
 						<div class="section-method">
+	<a name="//api/name/routes" title="routes"></a>
+	<h3 class="subsubtitle method-title">routes</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>an array of alternative routes for the given start- and endpoint</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, readonly) NSArray *routes</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDDirectionsOverlay.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/shortestRoute" title="shortestRoute"></a>
+	<h3 class="subsubtitle method-title">shortestRoute</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>the shortest route of the alternatives</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) MTDRoute *shortestRoute</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDDirectionsOverlay.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/timeInSeconds" title="timeInSeconds"></a>
 	<h3 class="subsubtitle method-title">timeInSeconds</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>the total estimated time for this route</p>
+		<p>the total estimated time for the active route</p>
 	</div>		
 	
 	
@@ -704,7 +809,7 @@ You have to handle this information on your own and stick to the terms of usage 
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The address of the end coordinate, can be nil if not provided by API</p>
+		<p>The address of the end coordinate of the active route</p>
 	</div>		
 	
 	
@@ -738,7 +843,7 @@ You have to handle this information on your own and stick to the terms of usage 
 	
 	
 	<div class="method-subsection brief-description">
-		<p>the end coordinate of the directions</p>
+		<p>the end coordinate of the active route</p>
 	</div>		
 	
 	
@@ -772,7 +877,7 @@ You have to handle this information on your own and stick to the terms of usage 
 	
 	
 	<div class="method-subsection brief-description">
-		<p>all way<a href="#//api/name/points">points</a> of the route/directions, including <a href="#//api/name/fromCoordinate">fromCoordinate</a> and <a href="#//api/name/toCoordinate">toCoordinate</a></p>
+		<p>all waypoints of the active route, including <a href="#//api/name/fromCoordinate">fromCoordinate</a> and <a href="#//api/name/toCoordinate">toCoordinate</a></p>
 	</div>		
 	
 	
@@ -803,76 +908,6 @@ You have to handle this information on your own and stick to the terms of usage 
 					
 					
 					
-					<div class="section section-methods">
-						<a title="Class Methods" name="class_methods"></a>
-						<h2 class="subtitle subtitle-methods">Class Methods</h2>
-						
-						<div class="section-method">
-	<a name="//api/name/overlayWithWaypoints:distance:timeInSeconds:routeType:" title="overlayWithWaypoints:distance:timeInSeconds:routeType:"></a>
-	<h3 class="subsubtitle method-title">overlayWithWaypoints:distance:timeInSeconds:routeType:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Creates an overlay with the given <a href="#//api/name/waypoints">waypoints</a>, <a href="#//api/name/distance">distance</a> and <a href="#//api/name/routeType">routeType</a>.</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>+ (MTDDirectionsOverlay *)overlayWithWaypoints:(NSArray *)<em>waypoints</em> distance:(MTDDistance *)<em>distance</em> timeInSeconds:(NSTimeInterval)<em>timeInSeconds</em> routeType:(MTDDirectionsRouteType)<em>routeType</em></code></div>
-	
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>waypoints</em></dt>
-			<dd><p>the <a href="#//api/name/waypoints">waypoints</a> of the route</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>distance</em></dt>
-			<dd><p>the total <a href="#//api/name/distance">distance</a> from the first to the last waypoint</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>timeInSeconds</em></dt>
-			<dd><p>the estimated total duration needed for traversing the <a href="#//api/name/waypoints">waypoints</a> in the given <a href="#//api/name/routeType">routeType</a></p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>routeType</em></dt>
-			<dd><p>the type of route computed</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	<div class="method-subsection return">
-		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>an overlay encapsulating the given route-information</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDDirectionsOverlay.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-					</div>
-					
 					
 					
 					<div class="section section-methods">
@@ -886,7 +921,7 @@ You have to handle this information on your own and stick to the terms of usage 
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The estimated time as formatted string with a specified time format.</p>
+		<p>The estimated time of the active route as formatted string with a specified time format.</p>
 	</div>		
 	
 	
@@ -928,6 +963,109 @@ You have to handle this information on your own and stick to the terms of usage 
 	
 </div>
 						
+						<div class="section-method">
+	<a name="//api/name/initWithRoutes:intermediateGoals:routeType:" title="initWithRoutes:intermediateGoals:routeType:"></a>
+	<h3 class="subsubtitle method-title">initWithRoutes:intermediateGoals:routeType:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Creates an overlay with the given <a href="#//api/name/routes">routes</a>, <a href="#//api/name/distance">distance</a> and <a href="#//api/name/routeType">routeType</a>.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (id)initWithRoutes:(NSArray *)<em>routes</em> intermediateGoals:(NSArray *)<em>intermediateGoals</em> routeType:(MTDDirectionsRouteType)<em>routeType</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>routes</em></dt>
+			<dd><p>the <a href="#//api/name/waypoints">waypoints</a> of the route</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>intermediateGoals</em></dt>
+			<dd><p>the intermediate goals along the route, can be nil</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>routeType</em></dt>
+			<dd><p>the type of route computed</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>an overlay encapsulating the given route-information</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDDirectionsOverlay.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mtd_activateRoute:" title="mtd_activateRoute:"></a>
+	<h3 class="subsubtitle method-title">mtd_activateRoute:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>This method sets the <a href="#//api/name/activeRoute">activeRoute</a> property of MTDDiretionsOverlay.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)mtd_activateRoute:(MTDRoute *)<em>route</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>route</em></dt>
+			<dd><p>the new active route</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDDirectionsOverlay+MTDirectionsPrivateAPI.h</code><br />
+	</div>				
+	
+	
+</div>
+						
 					</div>
 					
 					
@@ -941,7 +1079,7 @@ You have to handle this information on your own and stick to the terms of usage 
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-07-17)</span><br />
+						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-08-05)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
 						

@@ -59,6 +59,13 @@
 	
 	
 	
+	<option value="class_methods">Class Methods</option>
+	
+	<option value="//api/name/addressWithAddressString:">&nbsp;&nbsp;&nbsp;&nbsp;+ addressWithAddressString:</option>
+	
+	<option value="//api/name/addressWithCountry:state:county:postalCode:city:street:">&nbsp;&nbsp;&nbsp;&nbsp;+ addressWithCountry:state:county:postalCode:city:street:</option>
+	
+	
 	
 	
 	<option value="instance_methods">Instance Methods</option>
@@ -118,6 +125,14 @@
 </ul></li>
 
 
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/addressWithAddressString:">addressWithAddressString:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/addressWithCountry:state:county:postalCode:city:street:">addressWithCountry:state:county:postalCode:city:street:</a></span></li>
+	
+</ul></li>
 
 
 
@@ -252,6 +267,22 @@ separate properties for <a href="#//api/name/country">country</a>, <a href="#//a
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
+		<code><a href="#//api/name/addressWithAddressString:">+&nbsp;addressWithAddressString:</a></code>
+		<span class="tooltip"><p>This class method is used to create an address from a single string description.
+The resulting address object is not normalized.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/addressWithCountry:state:county:postalCode:city:street:">+&nbsp;addressWithCountry:state:county:postalCode:city:street:</a></code>
+		<span class="tooltip"><p>This class method is used to create an address object with normalized data.
+The resulting address object is <a href="#//api/name/normalised">normalised</a> as well.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/initWithAddressString:">&ndash;&nbsp;initWithAddressString:</a></code>
 		<span class="tooltip"><p>Initializes an address object with a single string. The resulting address object
 is not normalized.</p></span>
@@ -261,7 +292,8 @@ is not normalized.</p></span>
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/initWithCountry:state:county:postalCode:city:street:">&ndash;&nbsp;initWithCountry:state:county:postalCode:city:street:</a></code>
-		<span class="tooltip"><p>Initializes an address object with normalized data, the resulting address object is <a href="#//api/name/normalised">normalised</a>.</p></span>
+		<span class="tooltip"><p>Initializes an address object with normalized data.
+The resulting address object is <a href="#//api/name/normalised">normalised</a> as well.</p></span>
 	</span>
 	
 	
@@ -572,6 +604,137 @@ separate properties for <a href="#//api/name/country">country</a>, <a href="#//a
 					
 					
 					
+					<div class="section section-methods">
+						<a title="Class Methods" name="class_methods"></a>
+						<h2 class="subtitle subtitle-methods">Class Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/addressWithAddressString:" title="addressWithAddressString:"></a>
+	<h3 class="subsubtitle method-title">addressWithAddressString:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>This class method is used to create an address from a single string description.
+The resulting address object is not normalized.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (MTDAddress *)addressWithAddressString:(NSString *)<em>addressString</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>addressString</em></dt>
+			<dd><p>a single string-representation of the address</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>a non-normalized address object</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDAddress.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/addressWithCountry:state:county:postalCode:city:street:" title="addressWithCountry:state:county:postalCode:city:street:"></a>
+	<h3 class="subsubtitle method-title">addressWithCountry:state:county:postalCode:city:street:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>This class method is used to create an address object with normalized data.
+The resulting address object is <a href="#//api/name/normalised">normalised</a> as well.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (MTDAddress *)addressWithCountry:(NSString *)<em>country</em> state:(NSString *)<em>state</em> county:(NSString *)<em>county</em> postalCode:(NSString *)<em>postalCode</em> city:(NSString *)<em>city</em> street:(NSString *)<em>street</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>country</em></dt>
+			<dd><p>the <a href="#//api/name/country">country</a> of the address</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>state</em></dt>
+			<dd><p>the <a href="#//api/name/state">state</a> of the address</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>county</em></dt>
+			<dd><p>the <a href="#//api/name/county">county</a> of the address</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>postalCode</em></dt>
+			<dd><p>the postal code of the address</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>city</em></dt>
+			<dd><p>the <a href="#//api/name/city">city</a> of the address</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>street</em></dt>
+			<dd><p>the <a href="#//api/name/street">street</a> of the address</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>a <a href="#//api/name/normalised">normalised</a> address object</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDAddress.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
 					
 					
 					<div class="section section-methods">
@@ -599,10 +762,8 @@ in the enum MTDAddressField:</p>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>addressFieldMask</em></dt>
-			<dd><p>a bitmaks including the address fields to include in the description,</p>
-
-<pre><code>    e.g. MTDAddressFieldCountry | MTDAddressFieldCity
-</code></pre></dd>
+			<dd><p>a bitmaks including the address fields to include in the description,
+e.g. MTDAddressFieldCountry | MTDAddressFieldCity</p></dd>
 		</dl>
 		
 	</div>
@@ -621,12 +782,12 @@ in the enum MTDAddressField:</p>
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<ul>
-<li> MTDAddressFieldCountry</li>
-<li> MTDAddressFieldState</li>
-<li> MTDAddressFieldCounty</li>
-<li> MTDAddressFieldPostalCode</li>
-<li> MTDAddressFieldCity</li>
-<li> MTDAddressFieldStreet</li>
+<li>MTDAddressFieldCountry</li>
+<li>MTDAddressFieldState</li>
+<li>MTDAddressFieldCounty</li>
+<li>MTDAddressFieldPostalCode</li>
+<li>MTDAddressFieldCity</li>
+<li>MTDAddressFieldStreet</li>
 </ul>
 
 
@@ -713,7 +874,8 @@ is not normalized.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Initializes an address object with normalized data, the resulting address object is <a href="#//api/name/normalised">normalised</a>.</p>
+		<p>Initializes an address object with normalized data.
+The resulting address object is <a href="#//api/name/normalised">normalised</a> as well.</p>
 	</div>		
 	
 	
@@ -802,7 +964,7 @@ is not normalized.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-07-17)</span><br />
+						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-08-05)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
 						

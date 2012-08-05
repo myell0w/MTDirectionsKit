@@ -57,6 +57,10 @@
 	
 	<option value="class_methods">Class Methods</option>
 	
+	<option value="//api/name/nodeForXPathQuery:onHTML:">&nbsp;&nbsp;&nbsp;&nbsp;+ nodeForXPathQuery:onHTML:</option>
+	
+	<option value="//api/name/nodeForXPathQuery:onXML:">&nbsp;&nbsp;&nbsp;&nbsp;+ nodeForXPathQuery:onXML:</option>
+	
 	<option value="//api/name/nodesForXPathQuery:onHTML:">&nbsp;&nbsp;&nbsp;&nbsp;+ nodesForXPathQuery:onHTML:</option>
 	
 	<option value="//api/name/nodesForXPathQuery:onXML:">&nbsp;&nbsp;&nbsp;&nbsp;+ nodesForXPathQuery:onXML:</option>
@@ -65,6 +69,12 @@
 	
 	
 	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/childNodesTraversingAllChildrenWithPath:">&nbsp;&nbsp;&nbsp;&nbsp;- childNodesTraversingAllChildrenWithPath:</option>
+	
+	<option value="//api/name/childNodesTraversingFirstChildWithPath:">&nbsp;&nbsp;&nbsp;&nbsp;- childNodesTraversingFirstChildWithPath:</option>
+	
+	<option value="//api/name/childNodesWithName:">&nbsp;&nbsp;&nbsp;&nbsp;- childNodesWithName:</option>
 	
 	<option value="//api/name/firstChildNodeWithName:">&nbsp;&nbsp;&nbsp;&nbsp;- firstChildNodeWithName:</option>
 	
@@ -84,7 +94,11 @@
 
 <li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_XML Element">XML Element</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Lifecycle">Lifecycle</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Queries">Queries</a></span></li>
 	
 </ul></li>
 
@@ -112,6 +126,10 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/nodeForXPathQuery:onHTML:">nodeForXPathQuery:onHTML:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/nodeForXPathQuery:onXML:">nodeForXPathQuery:onXML:</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/nodesForXPathQuery:onHTML:">nodesForXPathQuery:onHTML:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/nodesForXPathQuery:onXML:">nodesForXPathQuery:onXML:</a></span></li>
@@ -121,6 +139,12 @@
 
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/childNodesTraversingAllChildrenWithPath:">childNodesTraversingAllChildrenWithPath:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/childNodesTraversingFirstChildWithPath:">childNodesTraversingFirstChildWithPath:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/childNodesWithName:">childNodesWithName:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/firstChildNodeWithName:">firstChildNodeWithName:</a></span></li>
 	
@@ -175,8 +199,8 @@ for convenient use of XPath.</p>
 						<h2 class="subtitle subtitle-tasks">Tasks</h2>
 						
 						
-						
-						<h3 class="subsubtitle task-title">Other Methods</h3>
+						<a title="XML Element" name="task_XML Element"></a>
+						<h3 class="subsubtitle task-title">XML Element</h3>
 
 						<ul class="task-list">
 							<li>
@@ -231,13 +255,6 @@ for convenient use of XPath.</p>
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/nodesForXPathQuery:onHTML:">+&nbsp;nodesForXPathQuery:onHTML:</a></code>
-		<span class="tooltip"><p>Returns an array of all xml nodes matching the given query on the given html data.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
 		<code><a href="#//api/name/nodesForXPathQuery:onXML:">+&nbsp;nodesForXPathQuery:onXML:</a></code>
 		<span class="tooltip"><p>Returns an array of all xml nodes matching the given query on the given xml data.</p></span>
 	</span>
@@ -245,8 +262,60 @@ for convenient use of XPath.</p>
 	
 </li><li>
 	<span class="tooltip">
+		<code><a href="#//api/name/nodesForXPathQuery:onHTML:">+&nbsp;nodesForXPathQuery:onHTML:</a></code>
+		<span class="tooltip"><p>Returns an array of all xml nodes matching the given query on the given html data.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/nodeForXPathQuery:onXML:">+&nbsp;nodeForXPathQuery:onXML:</a></code>
+		<span class="tooltip"><p>Returns the first xml node matching the given query on the given xml data.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/nodeForXPathQuery:onHTML:">+&nbsp;nodeForXPathQuery:onHTML:</a></code>
+		<span class="tooltip"><p>Returns an array of all xml nodes matching the given query on the given html data.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Queries" name="task_Queries"></a>
+						<h3 class="subsubtitle task-title">Queries</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
 		<code><a href="#//api/name/firstChildNodeWithName:">&ndash;&nbsp;firstChildNodeWithName:</a></code>
 		<span class="tooltip"><p>Returns the first child node with the given tag<a href="#//api/name/name">name</a>.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/childNodesWithName:">&ndash;&nbsp;childNodesWithName:</a></code>
+		<span class="tooltip"><p>Returns an array of child nodes with the given tag<a href="#//api/name/name">name</a>.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/childNodesTraversingFirstChildWithPath:">&ndash;&nbsp;childNodesTraversingFirstChildWithPath:</a></code>
+		<span class="tooltip"><p>Returns an array of child nodes with the given dot-separated path, e.g. shape.shapePoints.latLng
+For all path components except the last one only the first child is traversed, if there are several.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/childNodesTraversingAllChildrenWithPath:">&ndash;&nbsp;childNodesTraversingAllChildrenWithPath:</a></code>
+		<span class="tooltip"><p>Returns an array of child nodes with the given dot-separated path, e.g. shape.shapePoints.latLng
+For all path components all children are traversed.</p></span>
 	</span>
 	
 	
@@ -476,6 +545,132 @@ for convenient use of XPath.</p>
 						<h2 class="subtitle subtitle-methods">Class Methods</h2>
 						
 						<div class="section-method">
+	<a name="//api/name/nodeForXPathQuery:onHTML:" title="nodeForXPathQuery:onHTML:"></a>
+	<h3 class="subsubtitle method-title">nodeForXPathQuery:onHTML:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns an array of all xml nodes matching the given query on the given html data.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (MTDXMLElement *)nodeForXPathQuery:(NSString *)<em>query</em> onHTML:(NSData *)<em>htmlData</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>query</em></dt>
+			<dd><p>the xpath query</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>htmlData</em></dt>
+			<dd><p>data representing a html document</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>MTDXMLElement representing the first node matching</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/nodesForXPathQuery:onXML:">+ nodesForXPathQuery:onXML:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDXMLElement.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/nodeForXPathQuery:onXML:" title="nodeForXPathQuery:onXML:"></a>
+	<h3 class="subsubtitle method-title">nodeForXPathQuery:onXML:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns the first xml node matching the given query on the given xml data.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (MTDXMLElement *)nodeForXPathQuery:(NSString *)<em>query</em> onXML:(NSData *)<em>xmlData</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>query</em></dt>
+			<dd><p>the xpath query</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>xmlData</em></dt>
+			<dd><p>data representing a xml document</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>MTDXMLElement representing the first node matching</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/nodesForXPathQuery:onHTML:">+ nodesForXPathQuery:onHTML:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDXMLElement.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/nodesForXPathQuery:onHTML:" title="nodesForXPathQuery:onHTML:"></a>
 	<h3 class="subsubtitle method-title">nodesForXPathQuery:onHTML:</h3>
 	
@@ -499,13 +694,17 @@ for convenient use of XPath.</p>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>htmlData</em></dt>
-			<dd><p>data representing a html document
-@return</p></dd>
+			<dd><p>data representing a html document</p></dd>
 		</dl>
 		
 	</div>
 	
 	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>array of MTDXMLElements</p>
+	</div>
 	
 	
 	
@@ -520,6 +719,8 @@ for convenient use of XPath.</p>
 		<ul>
 			
 			<li><code><p><a href="#//api/name/nodesForXPathQuery:onXML:">+ nodesForXPathQuery:onXML:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/nodeForXPathQuery:onHTML:">+ nodeForXPathQuery:onHTML:</a></p></code></li>
 			
 		</ul>
 	</div>
@@ -565,6 +766,11 @@ for convenient use of XPath.</p>
 	
 	
 	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>array of MTDXMLElements</p>
+	</div>
+	
 	
 	
 	
@@ -578,6 +784,8 @@ for convenient use of XPath.</p>
 		<ul>
 			
 			<li><code><p><a href="#//api/name/nodesForXPathQuery:onHTML:">+ nodesForXPathQuery:onHTML:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/nodeForXPathQuery:onXML:">+ nodeForXPathQuery:onXML:</a></p></code></li>
 			
 		</ul>
 	</div>
@@ -599,6 +807,155 @@ for convenient use of XPath.</p>
 					<div class="section section-methods">
 						<a title="Instance Methods" name="instance_methods"></a>
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/childNodesTraversingAllChildrenWithPath:" title="childNodesTraversingAllChildrenWithPath:"></a>
+	<h3 class="subsubtitle method-title">childNodesTraversingAllChildrenWithPath:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns an array of child nodes with the given dot-separated path, e.g. shape.shapePoints.latLng
+For all path components all children are traversed.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (NSArray *)childNodesTraversingAllChildrenWithPath:(NSString *)<em>path</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>path</em></dt>
+			<dd><p>a dot-separated path of tag names</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>an array of MTDXMLElements</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDXMLElement.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/childNodesTraversingFirstChildWithPath:" title="childNodesTraversingFirstChildWithPath:"></a>
+	<h3 class="subsubtitle method-title">childNodesTraversingFirstChildWithPath:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns an array of child nodes with the given dot-separated path, e.g. shape.shapePoints.latLng
+For all path components except the last one only the first child is traversed, if there are several.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (NSArray *)childNodesTraversingFirstChildWithPath:(NSString *)<em>path</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>path</em></dt>
+			<dd><p>a dot-separated path of tag names</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>an array of MTDXMLElements</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDXMLElement.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/childNodesWithName:" title="childNodesWithName:"></a>
+	<h3 class="subsubtitle method-title">childNodesWithName:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns an array of child nodes with the given tag<a href="#//api/name/name">name</a>.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (NSArray *)childNodesWithName:(NSString *)<em>name</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>name</em></dt>
+			<dd><p>the tag <a href="#//api/name/name">name</a> of the children we want</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>an array of MTDXMLElements</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDXMLElement.h</code><br />
+	</div>				
+	
+	
+</div>
 						
 						<div class="section-method">
 	<a name="//api/name/firstChildNodeWithName:" title="firstChildNodeWithName:"></a>
@@ -662,7 +1019,7 @@ for convenient use of XPath.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-07-17)</span><br />
+						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-08-05)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
 						
