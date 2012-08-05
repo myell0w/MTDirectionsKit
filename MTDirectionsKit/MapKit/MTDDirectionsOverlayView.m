@@ -81,10 +81,10 @@
 
             // draw non-active routes less intense
             if (!isActiveRoute) {
-                baseColor = [baseColor colorWithAlphaComponent:0.7f];
+                baseColor = [baseColor colorWithAlphaComponent:0.6f];
                 lineWidth = fullLineWidth * 0.7f;
                 shadowAlpha = 0.1f;
-                secondNormalPathAlpha = 0.45f;
+                secondNormalPathAlpha = 0.4f;
             }
 
             UIColor *darkenedColor = MTDDarkenedColor(baseColor, 0.1f);
