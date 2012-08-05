@@ -98,8 +98,8 @@
                         toAddress:(NSString *)toAddress
                         routeType:(MTDDirectionsRouteType)routeType
              zoomToShowDirections:(BOOL)zoomToShowDirections {
-    [self loadDirectionsFrom:[MTDWaypoint waypointWithAddress:[[MTDAddress alloc] initWithAddressString:fromAddress]]
-                          to:[MTDWaypoint waypointWithAddress:[[MTDAddress alloc] initWithAddressString:toAddress]]
+    [self loadDirectionsFrom:[MTDWaypoint waypointWithAddress:[MTDAddress addressWithAddressString:fromAddress]]
+                          to:[MTDWaypoint waypointWithAddress:[MTDAddress addressWithAddressString:toAddress]]
            intermediateGoals:nil
                optimizeRoute:NO
                    routeType:routeType
