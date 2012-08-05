@@ -14,9 +14,6 @@
 
 @implementation MTDDirectionsParser
 
-@synthesize data = _data;
-@synthesize from = _from;
-@synthesize to = _to;
 @synthesize intermediateGoals = _intermediateGoals;
 @synthesize routeType = _routeType;
 

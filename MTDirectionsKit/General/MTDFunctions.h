@@ -12,6 +12,9 @@
 
 extern NSInteger _mtd_wm_;
 
+// Safer method for KVO
+#define MTDKey(_SEL)               (NSStringFromSelector(@selector(_SEL)))
+
 
 /**
  Opens the built-in Maps.app and displays the directions from fromCoordinate to toCoordinate
@@ -74,3 +77,39 @@ UIColor* MTDDarkenedColor(UIColor *color, CGFloat difference);
  @param rect the rect to test intersection with
  */
 BOOL MTDDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMapRect rect);
+
+/**
+ Orders an array according to the indexes contained in sequence. E.g. if array = [A,B,C] and sequence=[3,2,1]
+ the resulting array will be [C,B,A]. The number of elements in array and sequence must match.
+ 
+ @param array the array to order
+ @param sequence the array with the new index order
+ @return a newly ordered array 
+ */
+NSArray *MTDOrderedArrayWithSequence(NSArray *array, NSArray *sequence);
+
+/**
+ If there exists an element in the array with the given index, this function returns it.
+ If not, the function returns nil.
+ 
+ @param array the array to search
+ @param index the index of the object to search form
+ @return the element at the given index or nil
+ */
+NS_INLINE id MTDObjectAtIndexOfArray(NSArray *array, NSUInteger index) {
+    if (index < array.count) {
+        return [array objectAtIndex:index];
+    }
+    
+    return nil;
+}
+
+/**
+ If there are elements in the array this function returns the first element, otherwise nil.
+ 
+ @param array an array that can contain elements or not
+ @return the first element of the array if there are some, nil otherwise
+ */
+NS_INLINE id MTDFirstObjectOfArray(NSArray *array) {
+    return MTDObjectAtIndexOfArray(array, 0);
+}

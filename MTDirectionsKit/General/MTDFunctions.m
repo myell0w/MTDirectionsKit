@@ -35,6 +35,8 @@ BOOL MTDDirectionsOpenInMapsApp(CLLocationCoordinate2D fromCoordinate, CLLocatio
 }
 
 NSString* MTDURLEncodedString(NSString *string) {
+    MTDAssert(string != nil, @"String must be set");
+    
     NSMutableString *preparedString = [NSMutableString stringWithString:string];
     
     // replace umlauts, because they don't work in the MapQuest API
@@ -59,7 +61,9 @@ NSString* MTDGetFormattedTime(NSTimeInterval interval) {
 }
 
 NSString* MTDGetFormattedTimeWithFormat(NSTimeInterval interval, NSString *format) {
-    if (interval < 0.) {
+    MTDAssert(format.length > 0, @"Format must be set.");
+    
+    if (interval <= 0. || format.length == 0) {
         return @"0:00";
     }
     
@@ -76,7 +80,7 @@ NSString* MTDGetFormattedTimeWithFormat(NSTimeInterval interval, NSString *forma
 
 NSString* MTDStringFromCLLocationCoordinate2D(CLLocationCoordinate2D coordinate) {
     if (CLLocationCoordinate2DIsValid(coordinate)) {
-        return [NSString stringWithFormat:@"(%f,%f)", coordinate.latitude, coordinate.longitude];
+        return [NSString stringWithFormat:@"(%6f,%6f)", coordinate.latitude, coordinate.longitude];
     } else {
         return @"Invalid CLLocationCoordinate2D";
     }
@@ -112,9 +116,30 @@ BOOL MTDDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMapRect rect
     return MKMapRectIntersectsRect(rect, r2);
 }
 
+NSArray *MTDOrderedArrayWithSequence(NSArray *array, NSArray *sequence) {
+    MTDAssert(array.count == sequence.count, @"Number of elements in array and sequence don't match.");
+
+    if (array.count != sequence.count) {
+        return array;
+    }
+
+    return [array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSUInteger indexOfObj1 = [array indexOfObject:obj1];
+        NSUInteger indexOfObj2 = [array indexOfObject:obj2];
+
+        id sequenceIndex1 = sequence[indexOfObj1];
+        id sequenceIndex2 = sequence[indexOfObj2];
+
+        if ([sequenceIndex1 integerValue] < [sequenceIndex2 integerValue]) {
+            return NSOrderedAscending;
+        } else {
+            return NSOrderedDescending;
+        }
+    }];
+}
+
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Watermark
 ////////////////////////////////////////////////////////////////////////
 
 NSInteger _mtd_wm_ = 0;
-

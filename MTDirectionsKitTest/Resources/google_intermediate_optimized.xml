@@ -1,0 +1,750 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DirectionsResponse>
+ <status>OK</status>
+ <route>
+  <summary>Wood Ln und Cross Ln</summary>
+  <leg>
+   <step>
+    <travel_mode>DRIVING</travel_mode>
+    <start_location>
+     <lat>51.4550800</lat>
+     <lng>-0.9750300</lng>
+    </start_location>
+    <end_location>
+     <lat>51.4565700</lat>
+     <lng>-0.9762600</lng>
+    </end_location>
+    <polyline>
+     <points>gy`yH|l}DEDQLSN[Tm@b@cAv@a@^OLEDw@j@</points>
+    </polyline>
+    <duration>
+     <value>16</value>
+     <text>1 Minute</text>
+    </duration>
+    <html_instructions>Auf &lt;b&gt;St. Mary's Butts&lt;/b&gt; nach &lt;b&gt;Nordwesten&lt;/b&gt; Richtung &lt;b&gt;Oxford Rd&lt;/b&gt; starten</html_instructions>
+    <distance>
+     <value>187</value>
+     <text>0,2 km</text>
+    </distance>
+   </step>
+   <step>
+    <travel_mode>DRIVING</travel_mode>
+    <start_location>
+     <lat>51.4565700</lat>
+     <lng>-0.9762600</lng>
+    </start_location>
+    <end_location>
+     <lat>51.4564000</lat>
+     <lng>-0.9774600</lng>
+    </end_location>
+    <polyline>
+     <points>qbayHrt}D?Z@f@Bp@Hz@@DDVH^</points>
+    </polyline>
+    <duration>
+     <value>23</value>
+     <text>1 Minute</text>
+    </duration>
+    <html_instructions>&lt;b&gt;Links&lt;/b&gt; abbiegen auf &lt;b&gt;Friar St&lt;/b&gt;</html_instructions>
+    <distance>
+     <value>86</value>
+     <text>86 m</text>
+    </distance>
+   </step>
+   <step>
+    <travel_mode>DRIVING</travel_mode>
+    <start_location>
+     <lat>51.4564000</lat>
+     <lng>-0.9774600</lng>
+    </start_location>
+    <end_location>
+     <lat>51.4548600</lat>
+     <lng>-0.9788200</lng>
+    </end_location>
+    <polyline>
+     <points>oaayHb|}DDBN\P`@J^PLJHVZ\\l@\XJ@@n@LJ@ZDHV</points>
+    </polyline>
+    <duration>
+     <value>40</value>
+     <text>1 Minute</text>
+    </duration>
+    <html_instructions>Im Kreisverkehr die &lt;b&gt;erste&lt;/b&gt; Ausfahrt auf die &lt;b&gt;A329&lt;/b&gt; nehmen</html_instructions>
+    <distance>
+     <value>204</value>
+     <text>0,2 km</text>
+    </distance>
+   </step>
+   <step>
+    <travel_mode>DRIVING</travel_mode>
+    <start_location>
+     <lat>51.4548600</lat>
+     <lng>-0.9788200</lng>
+    </start_location>
+    <end_location>
+     <lat>51.4508900</lat>
+     <lng>-0.9763800</lng>
+    </end_location>
+    <polyline>
+     <points>{w`yHrd~D\AP?^ENA`@G\Gp@SVGl@[vAcAdAy@XQ~@o@VQj@_@dAy@z@m@^Yb@a@</points>
+    </polyline>
+    <duration>
+     <value>24</value>
+     <text>1 Minute</text>
+    </duration>
+    <html_instructions>&lt;b&gt;Links&lt;/b&gt; halten auf &lt;b&gt;A329&lt;/b&gt;</html_instructions>
+    <distance>
+     <value>477</value>
+     <text>0,5 km</text>
+    </distance>
+   </step>
+   <step>
+    <travel_mode>DRIVING</travel_mode>
+    <start_location>
+     <lat>51.4508900</lat>
+     <lng>-0.9763800</lng>
+    </start_location>
+    <end_location>
+     <lat>51.4364100</lat>
+     <lng>-0.9777400</lng>
+    </end_location>
+    <polyline>
+     <points>a_`yHju}Dl@a@z@i@v@_@b@SPKVIZOLGdAe@pDsAl@SvAg@j@K`AObBKzA@pAVbA`@FDb@TPJhAfAdAzAh@hAV`@T\NP\Rb@Hp@BT@R?vAHfBNbDPdAHtEZbHf@pBPv@N~@Vx@VhAFL?</points>
+    </polyline>
+    <duration>
+     <value>116</value>
+     <text>2 Minuten</text>
+    </duration>
+    <html_instructions>Weiter auf &lt;b&gt;A33&lt;/b&gt;</html_instructions>
+    <distance>
+     <value>1683</value>
+     <text>1,7 km</text>
+    </distance>
+   </step>
+   <step>
+    <travel_mode>DRIVING</travel_mode>
+    <start_location>
+     <lat>51.4364100</lat>
+     <lng>-0.9777400</lng>
+    </start_location>
+    <end_location>
+     <lat>51.4355600</lat>
+     <lng>-0.9682900</lng>
+    </end_location>
+    <polyline>
+     <points>qd}xHz}}DWaCAKE]A_@AW?M@M@a@Hm@@C^kC@M`@mDPgAHY?OFg@AAACAC?AAA@O@G?UBq@D]D}@HyAHo@BMH_@Vw@GI?EAQBYFGDIIeA@cD@oABe@Bi@DyC</points>
+    </polyline>
+    <duration>
+     <value>105</value>
+     <text>2 Minuten</text>
+    </duration>
+    <html_instructions>&lt;b&gt;Links&lt;/b&gt; abbiegen auf &lt;b&gt;Rose Kiln Ln&lt;/b&gt;&lt;div style=&quot;font-size:0.9em&quot;&gt;2 Kreisverkehre passieren&lt;/div&gt;</html_instructions>
+    <distance>
+     <value>687</value>
+     <text>0,7 km</text>
+    </distance>
+   </step>
+   <step>
+    <travel_mode>DRIVING</travel_mode>
+    <start_location>
+     <lat>51.4355600</lat>
+     <lng>-0.9682900</lng>
+    </start_location>
+    <end_location>
+     <lat>51.4443000</lat>
+     <lng>-0.9651100</lng>
+    </end_location>
+    <polyline>
+     <points>g_}xHxb|DaDi@aAQaAM[EuCUWC{@Iq@IWEi@GEAkASKEYIKEQISMKIKMGGIKYe@U]S]KSGKMWMYS[Ua@OSOQOMSOYOq@UKE[KYI[G]EIA_@Ak@@]@S@Y@}@BMBG?K?_@?I?K?OEu@CSJc@G</points>
+    </polyline>
+    <duration>
+     <value>94</value>
+     <text>2 Minuten</text>
+    </duration>
+    <html_instructions>&lt;b&gt;Links&lt;/b&gt; abbiegen auf &lt;b&gt;Basingstoke Rd/B3031&lt;/b&gt;</html_instructions>
+    <distance>
+     <value>1029</value>
+     <text>1,0 km</text>
+    </distance>
+   </step>
+   <step>
+    <travel_mode>DRIVING</travel_mode>
+    <start_location>
+     <lat>51.4443000</lat>
+     <lng>-0.9651100</lng>
+    </start_location>
+    <end_location>
+     <lat>51.4391000</lat>
+     <lng>-0.9507900</lng>
+    </end_location>
+    <polyline>
+     <points>{u~xH|n{D?@A??@A??@A?A@A?A?A?A?A?A??AA?AAA??AAAAA?AAA?A?AAA?A?A?A?AAA?A?A?A@A?A?A?A?A?A@??A?A?A@??A?A@??A@??A@A@A@?@A@?J}@?SAc@?M?c@Ay@?_@?_@?Y@a@@]@c@PoBF}@Fm@Dc@L}AN}AFi@Fi@Fe@Fa@B_@@EPaBNeAN{ADe@Fa@D_@Hk@Ho@@S`@cD@MTsAJeALu@Ha@BMDMH[Jg@BILY`@k@Za@PSX[VYLMh@e@VUVS\YVU^[XYXYZ]T]PUNUXa@b@o@PUNSNOXYTSTQTOLIDAPK</points>
+    </polyline>
+    <duration>
+     <value>128</value>
+     <text>2 Minuten</text>
+    </duration>
+    <html_instructions>Im Kreisverkehr &lt;b&gt;zweite&lt;/b&gt; Ausfahrt (&lt;b&gt;Christchurch Rd/A327&lt;/b&gt;) nehmen&lt;div style=&quot;font-size:0.9em&quot;&gt;Weiter auf A327&lt;/div&gt;</html_instructions>
+    <distance>
+     <value>1264</value>
+     <text>1,3 km</text>
+    </distance>
+   </step>
+   <step>
+    <travel_mode>DRIVING</travel_mode>
+    <start_location>
+     <lat>51.4391000</lat>
+     <lng>-0.9507900</lng>
+    </start_location>
+    <end_location>
+     <lat>51.4372900</lat>
+     <lng>-0.9458700</lng>
+    </end_location>
+    <polyline>
+     <points>ku}xHluxDAm@OcGAq@?c@@W@Y@MFWDWJYDQFOFKDMFKHKNQJMNSNORSNQb@a@LQTY^i@HOJM^g@^k@P]</points>
+    </polyline>
+    <duration>
+     <value>44</value>
+     <text>1 Minute</text>
+    </duration>
+    <html_instructions>&lt;b&gt;Links&lt;/b&gt; abbiegen auf &lt;b&gt;Pepper Ln&lt;/b&gt;</html_instructions>
+    <distance>
+     <value>440</value>
+     <text>0,4 km</text>
+    </distance>
+   </step>
+   <step>
+    <travel_mode>DRIVING</travel_mode>
+    <start_location>
+     <lat>51.4372900</lat>
+     <lng>-0.9458700</lng>
+    </start_location>
+    <end_location>
+     <lat>51.4377300</lat>
+     <lng>-0.9453300</lng>
+    </end_location>
+    <polyline>
+     <points>aj}xHtvwDQe@QWYYYS</points>
+    </polyline>
+    <duration>
+     <value>10</value>
+     <text>1 Minute</text>
+    </duration>
+    <html_instructions>&lt;b&gt;Links&lt;/b&gt; abbiegen</html_instructions>
+    <distance>
+     <value>63</value>
+     <text>63 m</text>
+    </distance>
+   </step>
+   <step>
+    <travel_mode>DRIVING</travel_mode>
+    <start_location>
+     <lat>51.4377300</lat>
+     <lng>-0.9453300</lng>
+    </start_location>
+    <end_location>
+     <lat>51.4379800</lat>
+     <lng>-0.9419900</lng>
+    </end_location>
+    <polyline>
+     <points>yl}xHhswDA??@A@A??@A?A??AA?A??AAA?AAA?A?A?A?A?A?A?A?A@??A?A@??A@??A@?BUDc@\eCXmB@S?O?I?I?CAGCKAGGOGKIKGGECw@_@GGCGCKCUAQBYLgA</points>
+    </polyline>
+    <duration>
+     <value>42</value>
+     <text>1 Minute</text>
+    </duration>
+    <html_instructions>Im Kreisverkehr &lt;b&gt;zweite&lt;/b&gt; Ausfahrt nehmen</html_instructions>
+    <distance>
+     <value>289</value>
+     <text>0,3 km</text>
+    </distance>
+   </step>
+   <step>
+    <travel_mode>DRIVING</travel_mode>
+    <start_location>
+     <lat>51.4379800</lat>
+     <lng>-0.9419900</lng>
+    </start_location>
+    <end_location>
+     <lat>51.4389200</lat>
+     <lng>-0.9414700</lng>
+    </end_location>
+    <polyline>
+     <points>kn}xHl~vDgD{ASK</points>
+    </polyline>
+    <duration>
+     <value>18</value>
+     <text>1 Minute</text>
+    </duration>
+    <html_instructions>&lt;b&gt;Links&lt;/b&gt; abbiegen</html_instructions>
+    <distance>
+     <value>111</value>
+     <text>0,1 km</text>
+    </distance>
+   </step>
+   <step>
+    <travel_mode>DRIVING</travel_mode>
+    <start_location>
+     <lat>51.4389200</lat>
+     <lng>-0.9414700</lng>
+    </start_location>
+    <end_location>
+     <lat>51.4388000</lat>
+     <lng>-0.9409000</lng>
+    </end_location>
+    <polyline>
+     <points>gt}xHd{vDVqB</points>
+    </polyline>
+    <duration>
+     <value>16</value>
+     <text>1 Minute</text>
+    </duration>
+    <html_instructions>&lt;b&gt;Rechts&lt;/b&gt; abbiegen</html_instructions>
+    <distance>
+     <value>42</value>
+     <text>42 m</text>
+    </distance>
+   </step>
+   <duration>
+    <value>676</value>
+    <text>11 Minuten</text>
+   </duration>
+   <distance>
+    <value>6562</value>
+    <text>6,6 km</text>
+   </distance>
+   <start_location>
+    <lat>51.4550800</lat>
+    <lng>-0.9750300</lng>
+   </start_location>
+   <end_location>
+    <lat>51.4388000</lat>
+    <lng>-0.9409000</lng>
+   </end_location>
+   <start_address>57 St Mary's Butts, Reading RG1, Vereinigtes Königreich</start_address>
+   <end_address>Reading, Wokingham RG6 6PU, Vereinigtes Königreich</end_address>
+  </leg>
+  <leg>
+   <step>
+    <travel_mode>DRIVING</travel_mode>
+    <start_location>
+     <lat>51.4388000</lat>
+     <lng>-0.9409000</lng>
+    </start_location>
+    <end_location>
+     <lat>51.4389200</lat>
+     <lng>-0.9414700</lng>
+    </end_location>
+    <polyline>
+     <points>os}xHrwvDWpB</points>
+    </polyline>
+    <duration>
+     <value>4</value>
+     <text>1 Minute</text>
+    </duration>
+    <html_instructions>Richtung &lt;b&gt;Westen&lt;/b&gt;</html_instructions>
+    <distance>
+     <value>42</value>
+     <text>42 m</text>
+    </distance>
+   </step>
+   <step>
+    <travel_mode>DRIVING</travel_mode>
+    <start_location>
+     <lat>51.4389200</lat>
+     <lng>-0.9414700</lng>
+    </start_location>
+    <end_location>
+     <lat>51.4379800</lat>
+     <lng>-0.9419900</lng>
+    </end_location>
+    <polyline>
+     <points>gt}xHd{vDRJfDzA</points>
+    </polyline>
+    <duration>
+     <value>23</value>
+     <text>1 Minute</text>
+    </duration>
+    <html_instructions>&lt;b&gt;Links&lt;/b&gt; Richtung &lt;b&gt;Pepper Ln&lt;/b&gt; abbiegen</html_instructions>
+    <distance>
+     <value>111</value>
+     <text>0,1 km</text>
+    </distance>
+   </step>
+   <step>
+    <travel_mode>DRIVING</travel_mode>
+    <start_location>
+     <lat>51.4379800</lat>
+     <lng>-0.9419900</lng>
+    </start_location>
+    <end_location>
+     <lat>51.4377800</lat>
+     <lng>-0.9451900</lng>
+    </end_location>
+    <polyline>
+     <points>kn}xHl~vDMfACX@PBTBJBFFFv@^DBFFHJFJFN@FBJ@F?B?H?H?NARYlB]dCEb@CT</points>
+    </polyline>
+    <duration>
+     <value>34</value>
+     <text>1 Minute</text>
+    </duration>
+    <html_instructions>&lt;b&gt;Rechts&lt;/b&gt; Richtung &lt;b&gt;Pepper Ln&lt;/b&gt; abbiegen</html_instructions>
+    <distance>
+     <value>268</value>
+     <text>0,3 km</text>
+    </distance>
+   </step>
+   <step>
+    <travel_mode>DRIVING</travel_mode>
+    <start_location>
+     <lat>51.4377800</lat>
+     <lng>-0.9451900</lng>
+    </start_location>
+    <end_location>
+     <lat>51.4372300</lat>
+     <lng>-0.9457900</lng>
+    </end_location>
+    <polyline>
+     <points>cm}xHlrwD@?@?@??@@??@@??@?@@?TRd@h@d@p@</points>
+    </polyline>
+    <duration>
+     <value>21</value>
+     <text>1 Minute</text>
+    </duration>
+    <html_instructions>Im Kreisverkehr &lt;b&gt;erste&lt;/b&gt; Ausfahrt nehmen</html_instructions>
+    <distance>
+     <value>74</value>
+     <text>74 m</text>
+    </distance>
+   </step>
+   <step>
+    <travel_mode>DRIVING</travel_mode>
+    <start_location>
+     <lat>51.4372300</lat>
+     <lng>-0.9457900</lng>
+    </start_location>
+    <end_location>
+     <lat>51.4391000</lat>
+     <lng>-0.9507900</lng>
+    </end_location>
+    <polyline>
+     <points>ui}xHdvwDKNQ\_@j@_@f@KLIN_@h@UXMPc@`@OPSRONORKLOPIJGJELGJGNEPKXEVGVALAXAV?b@@p@NbG@l@</points>
+    </polyline>
+    <duration>
+     <value>52</value>
+     <text>1 Minute</text>
+    </duration>
+    <html_instructions>&lt;b&gt;Rechts&lt;/b&gt; abbiegen auf &lt;b&gt;Pepper Ln&lt;/b&gt;</html_instructions>
+    <distance>
+     <value>448</value>
+     <text>0,4 km</text>
+    </distance>
+   </step>
+   <step>
+    <travel_mode>DRIVING</travel_mode>
+    <start_location>
+     <lat>51.4391000</lat>
+     <lng>-0.9507900</lng>
+    </start_location>
+    <end_location>
+     <lat>51.4116600</lat>
+     <lng>-0.9501500</lng>
+    </end_location>
+    <polyline>
+     <points>ku}xHluxDPIFARGPEVEb@Ir@QbVcJ~CeALCTKPI^Ul@g@^c@\c@\_@TW`@_@^YXSVMNGRIlAa@hBk@^Ib@IHAl@ITETCh@?zCGPAP??MBEDE@?@?D?BDFLt@BXFlDlA|@ZXFd@J?C@A@CB?BAB?@@BB@B@Dj@C\AZAXCZGPCPE`@MXIjBg@|@INAVC\?N?RBRB\FtA`@p@NbB`@\H~@TjCr@pBh@lFxAzBl@jAZZLVB`@JbAZz@R|@Zr@Tz@ENAJCz@c@BODOHMHIPGJAF@NBVPBNBN?H@^LBHJLb@T\LNNLNJNPZBLBL@XBTB@?VBLBJ@nAJ~AP@?bAJTB|@LpBf@hAN</points>
+    </polyline>
+    <duration>
+     <value>290</value>
+     <text>5 Minuten</text>
+    </duration>
+    <html_instructions>&lt;b&gt;Links&lt;/b&gt; abbiegen auf &lt;b&gt;Shinfield Rd/A327&lt;/b&gt;&lt;div style=&quot;font-size:0.9em&quot;&gt;Weiter auf A327&lt;/div&gt;&lt;div style=&quot;font-size:0.9em&quot;&gt;3 Kreisverkehre passieren&lt;/div&gt;</html_instructions>
+    <distance>
+     <value>3207</value>
+     <text>3,2 km</text>
+    </distance>
+   </step>
+   <step>
+    <travel_mode>DRIVING</travel_mode>
+    <start_location>
+     <lat>51.4116600</lat>
+     <lng>-0.9501500</lng>
+    </start_location>
+    <end_location>
+     <lat>51.4109700</lat>
+     <lng>-0.9571900</lng>
+    </end_location>
+    <polyline>
+     <points>{ixxHlqxDCzAEh@@zA?B@l@Bn@P`AFp@@BFh@JnA?b@AjAIbAK~@Qx@YtAa@rBOn@WrACT@JFZZ\XXf@h@TNLFZF^?P@RJ</points>
+    </polyline>
+    <duration>
+     <value>61</value>
+     <text>1 Minute</text>
+    </duration>
+    <html_instructions>&lt;b&gt;Rechts&lt;/b&gt; abbiegen auf &lt;b&gt;Brooker's Hill&lt;/b&gt;</html_instructions>
+    <distance>
+     <value>600</value>
+     <text>0,6 km</text>
+    </distance>
+   </step>
+   <step>
+    <travel_mode>DRIVING</travel_mode>
+    <start_location>
+     <lat>51.4109700</lat>
+     <lng>-0.9571900</lng>
+    </start_location>
+    <end_location>
+     <lat>51.4047600</lat>
+     <lng>-0.9733000</lng>
+    </end_location>
+    <polyline>
+     <points>qexxHl}yDRVPb@`AbCr@bBPd@Ld@BJH\Hd@PvAFn@Bh@Dj@D^F`@FZFVL^Rf@nA`Cr@pAx@|Az@bB\p@`@|@@B\z@Pb@^fATx@~@vDrCrLHZNj@VfALj@Nn@Nj@Jj@Jl@PzAFb@DXP|@FXPl@~@hEZxAFTBT</points>
+    </polyline>
+    <duration>
+     <value>90</value>
+     <text>2 Minuten</text>
+    </duration>
+    <html_instructions>&lt;b&gt;Rechts&lt;/b&gt; halten auf &lt;b&gt;Church Ln&lt;/b&gt;</html_instructions>
+    <distance>
+     <value>1330</value>
+     <text>1,3 km</text>
+    </distance>
+   </step>
+   <step>
+    <travel_mode>DRIVING</travel_mode>
+    <start_location>
+     <lat>51.4047600</lat>
+     <lng>-0.9733000</lng>
+    </start_location>
+    <end_location>
+     <lat>51.3907400</lat>
+     <lng>-0.9745800</lng>
+    </end_location>
+    <polyline>
+     <points>w~vxHbb}D@?B@@?BB@B?D?BF?`@?fCGpBOr@KlAOHA|FwAn@Ib@GtAMl@Ix@Gx@GNAj@Fj@Nl@P`@VhB^nAPjI|APBJBtAN~@N~ATB@pALr@LbBR`BPv@LzARn@Hd@HJ@`@HB?|ATJ@`@DJ@T?</points>
+    </polyline>
+    <duration>
+     <value>123</value>
+     <text>2 Minuten</text>
+    </duration>
+    <html_instructions>Im Kreisverkehr &lt;b&gt;erste&lt;/b&gt; Ausfahrt (&lt;b&gt;Basingstoke Rd&lt;/b&gt;) nehmen</html_instructions>
+    <distance>
+     <value>1581</value>
+     <text>1,6 km</text>
+    </distance>
+   </step>
+   <step>
+    <travel_mode>DRIVING</travel_mode>
+    <start_location>
+     <lat>51.3907400</lat>
+     <lng>-0.9745800</lng>
+    </start_location>
+    <end_location>
+     <lat>51.3739400</lat>
+     <lng>-0.9985900</lng>
+    </end_location>
+    <polyline>
+     <points>cgtxHbj}DjA~DL^`@fAZp@X\PTVVfCpCfDxD~BfCXXxBdCzCjDjBzBLPHJTj@JV^pAz@jD^|ARbANr@Fb@RtAf@hED\DZh@tFR|BHt@Dh@Fh@Fj@XhCLx@R~@\dAL\N`@Zn@P\dAdBv@hA@@x@v@tBfB|BzARLbFpCfBlAhBpAhAp@lAl@nAd@dCt@HBlAn@b@RlAn@~@|@l@t@X`@Tj@`@nAVr@Rb@l@|@</points>
+    </polyline>
+    <duration>
+     <value>200</value>
+     <text>3 Minuten</text>
+    </duration>
+    <html_instructions>&lt;b&gt;Rechts&lt;/b&gt; abbiegen auf &lt;b&gt;Beech Hill Rd&lt;/b&gt;</html_instructions>
+    <distance>
+     <value>2638</value>
+     <text>2,6 km</text>
+    </distance>
+   </step>
+   <step>
+    <travel_mode>DRIVING</travel_mode>
+    <start_location>
+     <lat>51.3739400</lat>
+     <lng>-0.9985900</lng>
+    </start_location>
+    <end_location>
+     <lat>51.3764500</lat>
+     <lng>-1.0028300</lng>
+    </end_location>
+    <polyline>
+     <points>c~pxHd`bEQdA]`BOz@UrA[rAY|@Ut@I`@MbAMtAKr@Of@Un@KVSNQDk@@qAAk@O_@U</points>
+    </polyline>
+    <duration>
+     <value>65</value>
+     <text>1 Minute</text>
+    </duration>
+    <html_instructions>&lt;b&gt;Rechts&lt;/b&gt; abbiegen auf &lt;b&gt;Wood Ln&lt;/b&gt;&lt;div style=&quot;font-size:0.9em&quot;&gt;Das Ziel befindet sich links&lt;/div&gt;</html_instructions>
+    <distance>
+     <value>473</value>
+     <text>0,5 km</text>
+    </distance>
+   </step>
+   <duration>
+    <value>963</value>
+    <text>16 Minuten</text>
+   </duration>
+   <distance>
+    <value>10772</value>
+    <text>10,8 km</text>
+   </distance>
+   <start_location>
+    <lat>51.4388000</lat>
+    <lng>-0.9409000</lng>
+   </start_location>
+   <end_location>
+    <lat>51.3764500</lat>
+    <lng>-1.0028300</lng>
+   </end_location>
+   <start_address>Reading, Wokingham RG6 6PU, Vereinigtes Königreich</start_address>
+   <end_address>Wood Ln, Reading, Berkshire RG7, Vereinigtes Königreich</end_address>
+  </leg>
+  <leg>
+   <step>
+    <travel_mode>DRIVING</travel_mode>
+    <start_location>
+     <lat>51.3764500</lat>
+     <lng>-1.0028300</lng>
+    </start_location>
+    <end_location>
+     <lat>51.3816100</lat>
+     <lng>-1.0021000</lng>
+    </end_location>
+    <polyline>
+     <points>ymqxHtzbEGEg@YsAg@UIa@QgAS}BW}AI}BA{EHeC@gAA</points>
+    </polyline>
+    <duration>
+     <value>49</value>
+     <text>1 Minute</text>
+    </duration>
+    <html_instructions>Auf &lt;b&gt;Wood Ln&lt;/b&gt; nach &lt;b&gt;Norden&lt;/b&gt; Richtung &lt;b&gt;Cross Ln&lt;/b&gt; starten</html_instructions>
+    <distance>
+     <value>581</value>
+     <text>0,6 km</text>
+    </distance>
+   </step>
+   <step>
+    <travel_mode>DRIVING</travel_mode>
+    <start_location>
+     <lat>51.3816100</lat>
+     <lng>-1.0021000</lng>
+    </start_location>
+    <end_location>
+     <lat>51.3861000</lat>
+     <lng>-1.0136000</lng>
+    </end_location>
+    <polyline>
+     <points>anrxHbvbEBZ?R@v@@VAJAHCHCDOPg@XYNOPA?y@pAgAhBaAxAo@lAa@~@KTGNIb@In@OdAQtASnA{@dEe@hCi@fDETc@rCUjAg@vBe@|A}@tCaAnCADCDEF</points>
+    </polyline>
+    <duration>
+     <value>93</value>
+     <text>2 Minuten</text>
+    </duration>
+    <html_instructions>&lt;b&gt;Links&lt;/b&gt; abbiegen auf &lt;b&gt;Cross Ln&lt;/b&gt;</html_instructions>
+    <distance>
+     <value>974</value>
+     <text>1,0 km</text>
+    </distance>
+   </step>
+   <step>
+    <travel_mode>DRIVING</travel_mode>
+    <start_location>
+     <lat>51.3861000</lat>
+     <lng>-1.0136000</lng>
+    </start_location>
+    <end_location>
+     <lat>51.3860000</lat>
+     <lng>-1.0202400</lng>
+    </end_location>
+    <polyline>
+     <points>cjsxH~}dE@L?^AL?JAl@IlKIbDItB?FQjDAV?Z?Z@`@@N@PBZF^DZH^JXJZLZ</points>
+    </polyline>
+    <duration>
+     <value>62</value>
+     <text>1 Minute</text>
+    </duration>
+    <html_instructions>Nach &lt;b&gt;links&lt;/b&gt; abbiegen, um auf &lt;b&gt;Cross Ln&lt;/b&gt; zu bleiben</html_instructions>
+    <distance>
+     <value>472</value>
+     <text>0,5 km</text>
+    </distance>
+   </step>
+   <step>
+    <travel_mode>DRIVING</travel_mode>
+    <start_location>
+     <lat>51.3860000</lat>
+     <lng>-1.0202400</lng>
+    </start_location>
+    <end_location>
+     <lat>51.3863700</lat>
+     <lng>-1.0205500</lng>
+    </end_location>
+    <polyline>
+     <points>oisxHngfESNUR_@X</points>
+    </polyline>
+    <duration>
+     <value>30</value>
+     <text>1 Minute</text>
+    </duration>
+    <html_instructions>&lt;b&gt;Rechts&lt;/b&gt; abbiegen auf &lt;b&gt;Goodboy's Ln&lt;/b&gt;</html_instructions>
+    <distance>
+     <value>46</value>
+     <text>46 m</text>
+    </distance>
+   </step>
+   <step>
+    <travel_mode>DRIVING</travel_mode>
+    <start_location>
+     <lat>51.3863700</lat>
+     <lng>-1.0205500</lng>
+    </start_location>
+    <end_location>
+     <lat>51.3868600</lat>
+     <lng>-1.0314800</lng>
+    </end_location>
+    <polyline>
+     <points>yksxHlifEFPDN@HBT@F?FAJGvACTEv@ANENAHCHEHGLWb@U\GLGLCLCNCVUvCQxBKdBAd@Ab@@`@Bd@d@hHJhADrAA`@A|@EnAUzFAn@?BF|@JhBF|@@L</points>
+    </polyline>
+    <duration>
+     <value>73</value>
+     <text>1 Minute</text>
+    </duration>
+    <html_instructions>&lt;b&gt;Links&lt;/b&gt; abbiegen&lt;div style=&quot;font-size:0.9em&quot;&gt;Teilweise für den öffentlichen Durchgang gesperrte Straße&lt;/div&gt;&lt;div style=&quot;font-size:0.9em&quot;&gt;Das Ziel befindet sich rechts&lt;/div&gt;</html_instructions>
+    <distance>
+     <value>793</value>
+     <text>0,8 km</text>
+    </distance>
+   </step>
+   <duration>
+    <value>307</value>
+    <text>5 Minuten</text>
+   </duration>
+   <distance>
+    <value>2866</value>
+    <text>2,9 km</text>
+   </distance>
+   <start_location>
+    <lat>51.3764500</lat>
+    <lng>-1.0028300</lng>
+   </start_location>
+   <end_location>
+    <lat>51.3868600</lat>
+    <lng>-1.0314800</lng>
+   </end_location>
+   <start_address>Wood Ln, Reading, Berkshire RG7, Vereinigtes Königreich</start_address>
+   <end_address>New Rd, Reading, Berkshire RG7, Vereinigtes Königreich</end_address>
+  </leg>
+  <copyrights>Kartendaten ©2012 Google</copyrights>
+  <overview_polyline>
+   <points>gy`yH|l}DgAx@cDhC}@p@@bALlBF\Nb@`@~@J^PLb@d@\\l@\ZLz@NZDHVn@An@G~@OhA[dC_B~AkAhE{CzAgApAcArBiAt@_@fCgA~EgBvAg@j@K`AObBKzA@pAVjAf@t@`@hAfAdAzA`AjBd@n@\Rb@HfADjBHfPfAtKx@vBf@x@VhAFL?WaCGi@Cw@@[JoA`@oCb@{DZaBFw@EK@o@XgFL}@`@wAGO@k@LQIeA@cDDuBHcEaIoA{Gm@sCc@cA_@s@m@mAmBo@qAiAcBc@]kAe@}Ac@g@GkA?iCHaABU?eAISJc@GA@CBG@KEGO?O@MDIFEL}@Aw@AkCByBb@_Gj@iGnA{KlAiK`@yCVwA^_BPc@|@mApAwAvBiBjBeBrAgB~A{BtAoAz@g@SgKBq@He@^sA^q@z@cAtAyAjAaB~@sAP]Qe@k@q@[SCDEACEAODIh@_EZaC?YEa@IWQWMK_Ag@M{@PaB{DgBVqBWpBzDfBQ`BDf@FR~@f@^b@Nj@?f@_AjHATB?BBVVjAzA]l@uApBu@bAq@r@cAhAm@v@[z@Qp@Id@AfCPpHXK`B]r@QbVcJlDiAf@UlA}@pB_C`Ay@p@a@zE_BzB_@j@IdEGb@ABSNEJRnAJjFhB~@R@EDCFADDBHhAEt@El@KxDeAlAKt@Cb@Bp@JhG|AjPlEfEhAr@P~EvAr@Tz@EZEz@c@BON]ZQR?NBVPF^@h@LBHJLb@T\\\^\h@F~@H`CTzD`@|@LpBf@hANCzAEh@@zA@p@Bn@P`AHt@RxBAnBUbCk@nCq@bD[hBHf@t@v@|@x@h@Np@@RJRVrAfDdAhCd@tBXfCHtA\tB`@fAbCrEtDpHpAjDrF`UdAnEZvA\hCf@tCtBfJDTD@DPh@?fCGpBO`C[fGyAvEi@rBOz@DxA`@`@VhB^zKnB\FxFv@dCZdEd@hFt@nC`@nAHxA~E|@xBjE|EzL`N~GdI`@bAzA|Fr@`DVvAfAxIlArMv@xGp@dC\~@l@lA|BnDz@x@tBfB|BzAvF~CpE~CvC~AtEzAhEvBlBrBX`@Tj@x@bC`A`BuAvHuAhF[xC[zAa@fAe@T}B?k@O_@Uo@_@iBq@a@QgAS}BW}AI}BA{EHmE?F~BKd@OPg@Xi@`@eEtGeBrDu@nFoAtGoApHi@hD}@bEcBrFcAtCIL@l@MtMSxGQrD?pBN|ANz@Vt@LZSNu@l@R`AGrBIlAG^Sj@}@|Aa@lE]~EChADfAp@rJBtBGlCWjHF`ATtD</points>
+  </overview_polyline>
+  <waypoint_index>1</waypoint_index>
+  <waypoint_index>0</waypoint_index>
+  <bounds>
+   <southwest>
+    <lat>51.3739400</lat>
+    <lng>-1.0314800</lng>
+   </southwest>
+   <northeast>
+    <lat>51.4565700</lat>
+    <lng>-0.9409000</lng>
+   </northeast>
+  </bounds>
+ </route>
+</DirectionsResponse>

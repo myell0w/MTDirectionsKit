@@ -12,6 +12,7 @@
 
 @class MTDDistance;
 @class MTDAddress;
+@class MTDRoute;
 
 
 /**
@@ -23,68 +24,68 @@
 @interface MTDDirectionsOverlay : NSObject <MKOverlay>
 
 /******************************************
- @name Directions
+ @name Directions/Routes
  ******************************************/
 
-/** all waypoints of the route/directions, including fromCoordinate and toCoordinate */
-@property (nonatomic, strong, readonly) NSArray *waypoints;
-/** the starting coordinate of the directions */
-@property (nonatomic, readonly) CLLocationCoordinate2D fromCoordinate;
-/** the end coordinate of the directions */
-@property (nonatomic, readonly) CLLocationCoordinate2D toCoordinate;
-/** The address of the starting coordinate, can be nil if not provided by API */
-@property (nonatomic, readonly) MTDAddress *fromAddress;
-/** The address of the end coordinate, can be nil if not provided by API */
-@property (nonatomic, readonly) MTDAddress *toAddress;
+/** an array of alternative routes for the given start- and endpoint */
+@property (nonatomic, copy, readonly) NSArray *routes;
+/** the currently active route if there are more alternatives or the only route object if there is only one */
+@property (nonatomic, readonly) MTDRoute *activeRoute;
+/** the best route of the alternatives according to the API used */
+@property (nonatomic, readonly) MTDRoute *bestRoute;
+/** the fastest route of the alternatives */
+@property (nonatomic, readonly) MTDRoute *fastestRoute;
+/** the shortest route of the alternatives  */
+@property (nonatomic, readonly) MTDRoute *shortestRoute;
 /** The intermediate goals along the route */
-@property (nonatomic, readonly) NSArray *intermediateGoals;
-/** the total distance between fromCoordinate and toCoordinate, when travelled along the given waypoints */
-@property (nonatomic, strong, readonly) MTDDistance *distance;
-/** the total estimated time for this route */
-@property (nonatomic, assign, readonly) NSTimeInterval timeInSeconds;
-/** the estimated time as formatted string */
-@property (nonatomic, readonly) NSString *formattedTime;
+@property (nonatomic, copy, readonly) NSArray *intermediateGoals;
 /** the type of travelling used to compute the directions, e.g. walking, by bike etc. */
 @property (nonatomic, assign, readonly) MTDDirectionsRouteType routeType;
-/** 
- Dictionary containing additional information retreived, e.g. warnings and copyrights when using the Google Directions API.
- You have to handle this information on your own and stick to the terms of usage of the API you use
- */
-@property (nonatomic, readonly) NSDictionary *additionalInfo;
 
 /******************************************
- @name MapKit interface
+ @name Forwarding to Active Route
  ******************************************/
 
-/** all mapPoints of the underlying polyline */
-@property (nonatomic, readonly) MKMapPoint *points;
-/** the number of mapPoints of the polyline */
-@property (nonatomic, readonly) NSUInteger pointCount;
+/** all waypoints of the active route, including fromCoordinate and toCoordinate */
+@property (nonatomic, strong, readonly) NSArray *waypoints;
+/** the starting coordinate of the active route */
+@property (nonatomic, readonly) CLLocationCoordinate2D fromCoordinate;
+/** the end coordinate of the active route */
+@property (nonatomic, readonly) CLLocationCoordinate2D toCoordinate;
+/** The address of the starting coordinat of the active route */
+@property (nonatomic, readonly) MTDAddress *fromAddress;
+/** The address of the end coordinate of the active route */
+@property (nonatomic, readonly) MTDAddress *toAddress;
+/** the total distance between fromCoordinate and toCoordinate of the active route, when travelled along the given waypoints */
+@property (nonatomic, strong, readonly) MTDDistance *distance;
+/** the total estimated time for the active route */
+@property (nonatomic, assign, readonly) NSTimeInterval timeInSeconds;
+/** the estimated time of the active route as formatted string */
+@property (nonatomic, readonly) NSString *formattedTime;
 
 /******************************************
  @name Lifecycle
  ******************************************/
 
 /**
- Creates an overlay with the given waypoints, distance and routeType.
+ Creates an overlay with the given routes, distance and routeType.
  
- @param waypoints the waypoints of the route
- @param distance the total distance from the first to the last waypoint
- @param timeInSeconds the estimated total duration needed for traversing the waypoints in the given routeType
+ @param routes the waypoints of the route
+ @param intermediateGoals the intermediate goals along the route, can be nil
  @param routeType the type of route computed
+ 
  @return an overlay encapsulating the given route-information
  */
-+ (MTDDirectionsOverlay *)overlayWithWaypoints:(NSArray *)waypoints 
-                                      distance:(MTDDistance *)distance
-                                 timeInSeconds:(NSTimeInterval)timeInSeconds
-                                     routeType:(MTDDirectionsRouteType)routeType;
+- (id)initWithRoutes:(NSArray *)routes
+   intermediateGoals:(NSArray *)intermediateGoals
+           routeType:(MTDDirectionsRouteType)routeType;
 
 /******************************************
- @name Directions
+ @name Forwarding to Active Route
  ******************************************/
 
 /**
- The estimated time as formatted string with a specified time format.
+ The estimated time of the active route as formatted string with a specified time format.
  
  @param format the format of the time, e.g. H:mm:ss
  @return a string-representation of the estimated time with the given format

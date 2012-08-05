@@ -2,72 +2,46 @@
 #import "MTDWaypoint.h"
 #import "MTDDistance.h"
 #import "MTDFunctions.h"
+#import "MTDRoute.h"
+#import "MTDRoute+MTDirectionsPrivateAPI.h"
 #import "MTDDirectionsDefines.h"
 
 
-@interface MTDDirectionsOverlay ()
+@interface MTDDirectionsOverlay () {
+    NSMutableArray *_routes;
+    MTDRoute *_bestRoute;
+    MTDRoute *_activeRoute;
+    MTDRoute *_shortestRoute;
+    MTDRoute *_fastestRoute;
+}
 
-/** 
- Internally we use a MKPolyline to represent the overlay since MKPolyline
- cannot be subclassed sanely and we don't want to reinvent the wheel
- */
-@property (nonatomic, strong) MKPolyline *polyline;
-
-// Re-defining properties as readwrite
-@property (nonatomic, strong, readwrite) NSArray *waypoints;
-@property (nonatomic, strong, readwrite) MTDDistance *distance;
-@property (nonatomic, assign, readwrite) NSTimeInterval timeInSeconds;
+// Re-defining properties as read/write
+@property (nonatomic, copy, readwrite) NSArray *routes;
 @property (nonatomic, assign, readwrite) MTDDirectionsRouteType routeType;
+@property (nonatomic, copy, readwrite) NSArray *intermediateGoals;
 
 @end
 
 
 @implementation MTDDirectionsOverlay
 
-@synthesize polyline = _polyline;
-@synthesize waypoints = _waypoints;
-@synthesize distance = _distance;
-@synthesize timeInSeconds = _timeInSeconds;
-@synthesize routeType = _routeType;
-@synthesize intermediateGoals = _intermediateGoals;     // This property gets set via KVO to not pollute the public API
-@synthesize additionalInfo = _additionalInfo;           // This property gets set via KVO to not pollute the public API
-
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
 ////////////////////////////////////////////////////////////////////////
 
-+ (MTDDirectionsOverlay *)overlayWithWaypoints:(NSArray *)waypoints 
-                                      distance:(MTDDistance *)distance
-                                 timeInSeconds:(NSTimeInterval)timeInSeconds
-                                     routeType:(MTDDirectionsRouteType)routeType {
-    MTDDirectionsOverlay *overlay = nil;
-    
-    if (waypoints.count > 0) {
-        overlay = [[MTDDirectionsOverlay alloc] init];
-        
-        MKMapPoint *points = malloc(sizeof(MKMapPoint) * waypoints.count);
-        NSUInteger pointIndex = 0;
-        
-        for (NSUInteger i = 0; i < waypoints.count; i++) {
-            MTDWaypoint *waypoint = [waypoints objectAtIndex:i];
-            
-            if (CLLocationCoordinate2DIsValid(waypoint.coordinate)) {
-                MKMapPoint point = MKMapPointForCoordinate(waypoint.coordinate);
-            
-                points[pointIndex++] = point;
-            } 
-        }
-        
-        overlay.polyline = [MKPolyline polylineWithPoints:points count:pointIndex];
-        overlay.waypoints = waypoints;
-        overlay.distance = distance;
-        overlay.timeInSeconds = timeInSeconds;
-        overlay.routeType = routeType;
-        
-        free(points);
-    } 
+- (id)initWithRoutes:(NSArray *)routes
+   intermediateGoals:(NSArray *)intermediateGoals
+           routeType:(MTDDirectionsRouteType)routeType {
+    if ((self = [super init])) {
+        _routes = [routes mutableCopy];
+        _bestRoute = _activeRoute = MTDFirstObjectOfArray(_routes);
+        _intermediateGoals = [intermediateGoals copy];
+        _routeType = routeType;
 
-    return overlay;
+        [self mtd_sortRoutes];
+    }
+
+    return self;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -75,71 +49,107 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (CLLocationCoordinate2D)coordinate {
-    return self.polyline.coordinate;
+    return self.activeRoute.mtd_polyline.coordinate;
 }
 
 - (MKMapRect)boundingMapRect {
-    return self.polyline.boundingMapRect;
+    return self.activeRoute.mtd_polyline.boundingMapRect;
 }
 
 - (BOOL)intersectsMapRect:(MKMapRect)mapRect {
-    return [self.polyline intersectsMapRect:mapRect];
+    return [self.activeRoute.mtd_polyline intersectsMapRect:mapRect];
 }
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - MTDDirectionsOverlay
 ////////////////////////////////////////////////////////////////////////
 
-- (MKMapPoint *)points {
-    return self.polyline.points;
+- (MTDRoute *)fastestRoute {
+    if (_fastestRoute == nil) {
+        NSNumber *minTime = [self.routes valueForKeyPath:[NSString stringWithFormat:@"@min.%@", MTDKey(timeInSeconds)]];
+        NSUInteger index = [self.routes indexOfObjectPassingTest:^BOOL(MTDRoute *route, __unused NSUInteger idx, __unused BOOL *stop) {
+            return route.timeInSeconds == [minTime doubleValue];
+        }];
+
+        _fastestRoute = MTDObjectAtIndexOfArray(self.routes, index);
+    }
+
+    return _fastestRoute;
 }
 
-- (NSUInteger)pointCount {
-    return self.polyline.pointCount;
+- (MTDRoute *)shortestRoute {
+    if (_shortestRoute == nil) {
+        NSNumber *minDistance = [self.routes valueForKeyPath:[NSString stringWithFormat:@"@min.%@.%@", MTDKey(distance), MTDKey(distanceInMeter)]];
+        NSUInteger index = [self.routes indexOfObjectPassingTest:^BOOL(MTDRoute *route, __unused NSUInteger idx, __unused BOOL *stop) {
+            return route.distance.distanceInMeter == [minDistance doubleValue];
+        }];
+
+        _shortestRoute = MTDObjectAtIndexOfArray(self.routes, index);
+    }
+
+    return _shortestRoute;
+}
+
+- (NSArray *)waypoints {
+    return self.activeRoute.waypoints;
 }
 
 - (CLLocationCoordinate2D)fromCoordinate {
-    if (self.waypoints.count > 0) {
-        MTDWaypoint *firstWaypoint = [self.waypoints objectAtIndex:0];
-        return firstWaypoint.coordinate;
-    }
-    
-    return MTDInvalidCLLocationCoordinate2D;
+    return self.activeRoute.from.coordinate;
 }
 
 - (CLLocationCoordinate2D)toCoordinate {
-    if (self.waypoints.count > 0) {
-        MTDWaypoint *lastWaypoint = [self.waypoints lastObject];
-        return lastWaypoint.coordinate;
-    }
-    
-    return MTDInvalidCLLocationCoordinate2D;
+    return self.activeRoute.to.coordinate;
 }
 
 - (MTDAddress *)fromAddress {
-    if (self.waypoints.count > 0) {
-        MTDWaypoint *firstWaypoint = [self.waypoints objectAtIndex:0];
-        return firstWaypoint.address;
-    }
-
-    return nil;
+    return self.activeRoute.from.address;
 }
 
 - (MTDAddress *)toAddress {
-    MTDWaypoint *lastWaypoint = [self.waypoints lastObject];
+    return self.activeRoute.to.address;
+}
 
-    return lastWaypoint.address;
+- (MTDDistance *)distance {
+    return self.activeRoute.distance;
+}
+
+- (NSTimeInterval)timeInSeconds {
+    return self.activeRoute.timeInSeconds;
 }
 
 - (NSString *)formattedTime {
-    return [self formattedTimeWithFormat:nil];
+    return self.activeRoute.formattedTime;
 }
 
 - (NSString *)formattedTimeWithFormat:(NSString *)format {
-    if (format != nil) {
-        return MTDGetFormattedTimeWithFormat(self.timeInSeconds, format);
-    } else {
-        return MTDGetFormattedTime(self.timeInSeconds);
+    return [self.activeRoute formattedTimeWithFormat:format];
+}
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - Private
+////////////////////////////////////////////////////////////////////////
+
+// This method sets a new active route (is called when user taps a route on the mapView)
+- (void)mtd_activateRoute:(MTDRoute *)route {
+    if (route != nil) {
+        _activeRoute = route;
+        [self mtd_sortRoutes];
+    }
+}
+
+// This method re-orders the routes s.t. the active route is last in the array (to get drawn on top of the others)
+- (void)mtd_sortRoutes {
+    @synchronized(_routes) {
+        [_routes sortUsingComparator:^NSComparisonResult(MTDRoute *route1, MTDRoute *route2) {
+            if (route1 == self.activeRoute) {
+                return NSOrderedDescending;
+            } else if (route2 == self.activeRoute) {
+                return NSOrderedAscending;
+            } else {
+                return NSOrderedSame;
+            }
+        }];
     }
 }
 
