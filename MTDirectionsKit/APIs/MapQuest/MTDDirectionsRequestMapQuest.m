@@ -1,7 +1,7 @@
 #import "MTDDirectionsRequestMapQuest.h"
 #import "MTDDirectionsRequest+MTDirectionsPrivateAPI.h"
+#import "MTDDirectionsRequestOption.h"
 #import "MTDDirectionsRouteType+MapQuest.h"
-#import "MTDDirectionsParserMapQuest.h"
 #import "MTDWaypoint.h"
 #import "MTDFunctions.h"
 
@@ -9,15 +9,11 @@
 #define kMTDMapQuestHostName                    @"http://open.mapquestapi.com"
 #define kMTDMapQuestServiceName                 @"directions"
 #define kMTDMapQuestVersionNumber               @"v1"
-#define kMTDMapQuestRoutingMethodNonOptimized   @"route"
+#define kMTDMapQuestRoutingMethodDefault        @"route"
 #define kMTDMapQuestRoutingMethodOptimized      @"optimizedroute"
+#define kMTDMapQuestRoutingMethodAlternatives   @"alternateroutes"
 
-
-@interface MTDDirectionsRequestMapQuest ()
-
-- (void)setup;
-
-@end
+#define kMTDMapQuestMaxRoutes                   @"3"
 
 
 @implementation MTDDirectionsRequestMapQuest
@@ -29,16 +25,22 @@
 - (id)initWithFrom:(MTDWaypoint *)from
                 to:(MTDWaypoint *)to
  intermediateGoals:(NSArray *)intermediateGoals
-     optimizeRoute:(BOOL)optimizeRoute
          routeType:(MTDDirectionsRouteType)routeType
+           options:(NSUInteger)options
         completion:(mtd_parser_block)completion {
-    if ((self = [super initWithFrom:from to:to intermediateGoals:intermediateGoals optimizeRoute:optimizeRoute routeType:routeType completion:completion])) {
-        [self setup];
-        
+    if ((self = [super initWithFrom:from to:to intermediateGoals:intermediateGoals routeType:routeType options:options completion:completion])) {
+        [self mtd_setup];
+
         [self setValue:[from descriptionForAPI:MTDDirectionsAPIMapQuest] forParameter:@"from"];
         // "to" gets set in setValueForParameterWithIntermediateGoals
         // [self setValue:[to descriptionForAPI:MTDDirectionsAPIMapQuest] forParameter:@"to"];
         [self setValue:MTDDirectionStringForDirectionRouteTypeMapQuest(routeType) forParameter:@"routeType"];
+
+        // set parameter for alternative routes?
+        BOOL alternativeRoutes = (self.mtd_options & MTDDirectionsRequestOptionAlternativeRoutes) == MTDDirectionsRequestOptionAlternativeRoutes;
+        if (alternativeRoutes) {
+            [self setValue:kMTDMapQuestMaxRoutes forParameter:@"maxRoutes"];
+        }
     }
     
     return self;
@@ -47,6 +49,10 @@
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - MTDDirectionsRequest
 ////////////////////////////////////////////////////////////////////////
+
+- (MTDDirectionsAPI)API {
+    return MTDDirectionsAPIMapQuest;
+}
 
 - (void)setValueForParameterWithIntermediateGoals:(NSArray *)intermediateGoals {
     if (intermediateGoals.count > 0) {
@@ -67,8 +73,16 @@
     }
 }
 
-- (NSString *)httpAddress {
-    NSString *routingMethod = self.optimizeRoute ? kMTDMapQuestRoutingMethodOptimized : kMTDMapQuestRoutingMethodNonOptimized;
+- (NSString *)mtd_HTTPAddress {
+    NSString *routingMethod = kMTDMapQuestRoutingMethodDefault;
+    BOOL optimizeRoute = (self.mtd_options & MTDDirectionsRequestOptionOptimize) == MTDDirectionsRequestOptionOptimize;
+    BOOL alternativeRoutes = (self.mtd_options & MTDDirectionsRequestOptionAlternativeRoutes) == MTDDirectionsRequestOptionAlternativeRoutes;
+
+    if (optimizeRoute) {
+        routingMethod = kMTDMapQuestRoutingMethodOptimized;
+    } else if (alternativeRoutes) {
+        routingMethod = kMTDMapQuestRoutingMethodAlternatives;
+    }
     
     return [NSString stringWithFormat:@"%@/%@/%@/%@",
             kMTDMapQuestHostName,
@@ -77,15 +91,11 @@
             routingMethod];
 }
 
-- (Class)parserClass {
-    return [MTDDirectionsParserMapQuest class];
-}
-
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Private
 ////////////////////////////////////////////////////////////////////////
 
-- (void)setup {
+- (void)mtd_setup {
     [self setValue:@"xml" forParameter:@"outFormat"];
     [self setValue:@"ignore" forParameter:@"ambiguities"];
     [self setValue:@"true" forParameter:@"doReverseGeocode"];
@@ -93,6 +103,7 @@
     [self setValue:@"none" forParameter:@"narrativeType"];
     [self setValue:@"raw" forParameter:@"shapeFormat"];
     [self setValue:@"0" forParameter:@"generalize"];
+    [self setValue:@"25" forParameter:@"timeOverage"];
 }
 
 @end

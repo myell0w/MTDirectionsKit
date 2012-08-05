@@ -2,12 +2,6 @@
 
 @implementation MTDAddress
 
-@synthesize country = _country;
-@synthesize county = _county;
-@synthesize postalCode = _postalCode;
-@synthesize state = _state;
-@synthesize city = _city;
-@synthesize street = _street;
 @synthesize fullAddress = _fullAddress;
 
 ////////////////////////////////////////////////////////////////////////
@@ -29,12 +23,12 @@
                  city:(NSString *)city
                street:(NSString *)street {
     if ((self = [super init])) {
-        _country = [country copy];
-        _state = [state copy];
-        _county = [county copy];
-        _postalCode = [postalCode copy];
-        _city = [city copy];
-        _street = [street copy];
+        _country = [country stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        _state = [state stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        _county = [county stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        _postalCode = [postalCode stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        _city = [city stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        _street = [street stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     }
     
     return self;
@@ -71,6 +65,7 @@
 }
 
 - (NSString *)fullAddress {
+    // if not normalized this returns _fullAddress
     return [self descriptionWithAddressFields:
             MTDAddressFieldCountry |
             MTDAddressFieldState |
@@ -82,6 +77,7 @@
 
 - (NSString *)descriptionWithAddressFields:(NSUInteger)addressFieldMask {
     if (!self.normalised) {
+        // using direct iVar here on purpose to not get an infinite loop
         return _fullAddress;
     }
 

@@ -8,14 +8,12 @@
 @interface MTDDistance ()
 
 /** internally the distance is stored in metric measurement system (in km) */
-@property (nonatomic, assign) double metricDistance;
+@property (nonatomic, assign, setter = mtd_setMetricDistance:) double mtd_metricDistance;
 
 @end
 
 
 @implementation MTDDistance
-
-@synthesize metricDistance = _metricDistance;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
@@ -33,13 +31,13 @@
     if ((self = [super init])) {
         switch (measurementSystem) {
             case MTDMeasurementSystemUS: {
-                _metricDistance = value * kMTDKilometerPerMile;
+                _mtd_metricDistance = value * kMTDKilometerPerMile;
                 break;
             }
                 
             case MTDMeasurementSystemMetric: {
             default:
-                _metricDistance = value;
+                _mtd_metricDistance = value;
                 break;
             }
         }
@@ -61,7 +59,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (void)addDistance:(MTDDistance *)distance {
-    self.metricDistance += distance.metricDistance;
+    self.mtd_metricDistance += distance.mtd_metricDistance;
 }
 
 - (void)addDistanceWithValue:(double)value measurementSystem:(MTDMeasurementSystem)measurementSystem {
@@ -75,11 +73,11 @@
 - (double)distanceInMeasurementSystem:(MTDMeasurementSystem)measurementSystem {
     switch (measurementSystem) {
         case MTDMeasurementSystemUS:
-            return self.metricDistance / kMTDKilometerPerMile;
+            return self.mtd_metricDistance / kMTDKilometerPerMile;
             
         case MTDMeasurementSystemMetric:
         default:
-            return self.metricDistance;
+            return self.mtd_metricDistance;
     }
 }
 
@@ -88,7 +86,7 @@
 }
 
 - (CLLocationDistance)distanceInMeter {
-    return self.metricDistance * 1000.;
+    return self.mtd_metricDistance * 1000.;
 }
 
 @end

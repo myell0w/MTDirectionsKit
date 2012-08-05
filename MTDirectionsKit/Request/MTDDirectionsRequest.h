@@ -10,6 +10,7 @@
 #import "MTDDirectionsRouteType.h"
 #import "MTDDirectionsDefines.h"
 #import "MTDHTTPRequest.h"
+#import "MTDDirectionsAPI.h"
 
 
 @class MTDWaypoint;
@@ -37,26 +38,36 @@
 @property (nonatomic, readonly) MTDDirectionsRouteType routeType;
 
 /******************************************
+ @name API
+ ******************************************/
+
+/** the used API of this request */
+@property (nonatomic, readonly) MTDDirectionsAPI API;
+
+/******************************************
  @name Lifecycle
  ******************************************/
 
 /**
- This method is used to create a request from a given start waypoint to a given end waypoint with a 
- specified routeType and optional intermediate goals.
+ This method is used to create a request of a specific API from a given start- to a given end waypoint
+ with a specified routeType, options and optional intermediate goals.
  
+ @param API the API used to request the data (MTDDirectionsAPI)
  @param from the start waypoint of the route to request
  @param to the end waypoint of the route to request
  @param intermediateGoals an optional array of waypoint we want to travel to along the route
- @param optimizeRoute a flag whether intermediate goals should be optimized when requesting the route
  @param routeType the type of the route to request
+ @param options a bitmask of MTDDirectionsRequestOption
+        (MTDDirectionsRequestOptionAlternativeRoutes and MTDDirectionsRequestOptionOptimize can't be specified  at once)
  @param completion the block to execute when the request is finished
  */
-+ (id)requestFrom:(MTDWaypoint *)from
-               to:(MTDWaypoint *)to
-intermediateGoals:(NSArray *)intermediateGoals
-    optimizeRoute:(BOOL)optimizeRoute
-        routeType:(MTDDirectionsRouteType)routeType
-       completion:(mtd_parser_block)completion;
++ (id)requestDirectionsAPI:(MTDDirectionsAPI)API
+                      from:(MTDWaypoint *)from
+                        to:(MTDWaypoint *)to
+         intermediateGoals:(NSArray *)intermediateGoals
+                 routeType:(MTDDirectionsRouteType)routeType
+                   options:(NSUInteger)options
+                completion:(mtd_parser_block)completion;
 
 /**
  The designated initializer used to instantiate an MTDDirectionsRequest.
@@ -64,15 +75,16 @@ intermediateGoals:(NSArray *)intermediateGoals
  @param from the starting waypoint of the route to request
  @param to the end waypoint of the route to request
  @param intermediateGoals an optional array of waypoint we want to travel to along the route
- @param optimizeRoute a flag whether intermediate goals should be optimized when requesting the route
  @param routeType the type of route to request
+ @param options a bitmask of MTDDirectionsRequestOption 
+        (MTDDirectionsRequestOptionAlternativeRoutes and MTDDirectionsRequestOptionOptimize can't be specified  at once)
  @param completion block that is executed when requesting of the route is finished
  */
 - (id)initWithFrom:(MTDWaypoint *)from
                 to:(MTDWaypoint *)to
  intermediateGoals:(NSArray *)intermediateGoals
-     optimizeRoute:(BOOL)optimizeRoute
          routeType:(MTDDirectionsRouteType)routeType
+           options:(NSUInteger)options
         completion:(mtd_parser_block)completion;
 
 /******************************************
