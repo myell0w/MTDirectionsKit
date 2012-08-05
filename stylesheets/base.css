@@ -167,6 +167,15 @@ section { }
 			display: block;
 			margin-bottom: 30px;
 		}
+		section #app_info span.current_info {
+			font-family: 'Quicksand', sans-serif;
+			font-weight:bold;
+			font-size: 15px;
+			letter-spacing: -0.05em;
+			color: #1e1e1e;
+			display: block;
+			margin-bottom: 20px;
+		}
 		section #app_info p {
 			color: #898989;
 			margin-bottom: 30px;
