@@ -14,22 +14,20 @@
  This category exposes private API used in MTDirectionsKit to other classes to not generate warnings when using them. 
  You should not use the properties and methods exposed here directly in your code.
  */
-@interface MTDDirectionsRequest (MTDPrivateAPI)
+@interface MTDDirectionsRequest (MTDirectionsPrivateAPI)
 
 /** object used to perform a HTTP request */
-@property (nonatomic, strong) MTDHTTPRequest *httpRequest;
+@property (nonatomic, strong, setter = mtd_setHttpRequest:) MTDHTTPRequest *mtd_HTTPRequest;
 /** the address of the the request to perform */
-@property (nonatomic, readonly) NSString *httpAddress;
-/** the class of the parser used to parse the obtained data */
-@property (nonatomic, readonly) Class parserClass;
-/** flag whether the route gets optimized when there are intermediate goals */
-@property (nonatomic, readonly) BOOL optimizeRoute;
+@property (nonatomic, readonly) NSString *mtd_HTTPAddress;
+/** bitmask of MTDDirectionsRequestOption flags */
+@property (nonatomic, readonly) NSUInteger mtd_options;
 
 /** 
  This method is called once the request is finished.
  
  @param httpRequest the object used to perform the request
  */
-- (void)requestFinished:(MTDHTTPRequest *)httpRequest;
+- (void)mtd_requestFinished:(MTDHTTPRequest *)httpRequest;
 
 @end

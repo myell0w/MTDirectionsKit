@@ -64,5 +64,5 @@ NSString* MTDGetFormattedDistanceInMeasurementSystem(CLLocationDistance distance
         [mtd_numberFormatter setMaximumFractionDigits:1];
     });
     
-    return [NSString stringWithFormat:format, [mtd_numberFormatter stringFromNumber:[NSNumber numberWithDouble:distance]]];
+    return [NSString stringWithFormat:format, [mtd_numberFormatter stringFromNumber:@(distance)]];
 }

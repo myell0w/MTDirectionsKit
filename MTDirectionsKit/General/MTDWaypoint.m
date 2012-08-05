@@ -6,9 +6,6 @@
 
 @implementation MTDWaypoint
 
-@synthesize coordinate = _coordinate;
-@synthesize address = _address;
-
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
 ////////////////////////////////////////////////////////////////////////
@@ -32,7 +29,7 @@
 - (id)initWithAddress:(MTDAddress *)address {
     if ((self = [super init])) {
         _address = address;
-        _coordinate = MTDInvalidCLLocationCoordinate2D;
+        _coordinate = kCLLocationCoordinate2DInvalid;
     }
     
     return self;
@@ -107,8 +104,8 @@
 
 - (NSUInteger)hash {
     if (CLLocationCoordinate2DIsValid(self.coordinate)) {
-        NSNumber *latitudeNumber = [NSNumber numberWithDouble:self.coordinate.latitude];
-        NSNumber *longitudeNumber = [NSNumber numberWithDouble:self.coordinate.longitude];
+        NSNumber *latitudeNumber = @(self.coordinate.latitude);
+        NSNumber *longitudeNumber = @(self.coordinate.longitude);
         
         return latitudeNumber.hash >> 13 ^ longitudeNumber.hash;
     } else {

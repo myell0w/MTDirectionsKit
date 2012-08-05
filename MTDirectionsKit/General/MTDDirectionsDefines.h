@@ -15,9 +15,6 @@
 #pragma mark - Defines
 ////////////////////////////////////////////////////////////////////////
 
-// An invalid coordinate
-#define MTDInvalidCLLocationCoordinate2D CLLocationCoordinate2DMake(-100., -100.)
-
 // NSError-related constants
 #define MTDDirectionsKitErrorDomain      @"MTDDirectionsKitErrorDomain"
 #define MTDDirectionsKitDataKey          @"MTDDirectionsKitDataKey"
