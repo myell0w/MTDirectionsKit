@@ -81,10 +81,10 @@
 
             // draw non-active routes less intense
             if (!isActiveRoute) {
-                baseColor = [baseColor colorWithAlphaComponent:0.7f];
+                baseColor = [baseColor colorWithAlphaComponent:0.6f];
                 lineWidth = fullLineWidth * 0.7f;
                 shadowAlpha = 0.1f;
-                secondNormalPathAlpha = 0.45f;
+                secondNormalPathAlpha = 0.4f;
             } else {
                 // Cripple drawing for Demo
                 {
@@ -103,6 +103,7 @@
                     CGColorRelease(wmColor);
                     CGColorSpaceRelease(colorSpace);
                 }
+
             }
 
             UIColor *darkenedColor = MTDDarkenedColor(baseColor, 0.1f);
@@ -248,7 +249,7 @@
 
 // check whether a touch at the given point tried to select the given route
 - (CLLocationDistance)mtd_distanceOfTouchAtPoint:(CGPoint)point toRoute:(MTDRoute *)route {
-    static CLLocationDistance maxDistanceToSelect = 5000.;
+    static CLLocationDistance maxDistanceToSelect = 7000.;
 
     MKMapPoint mapPoint = [self mapPointForPoint:point];
 
