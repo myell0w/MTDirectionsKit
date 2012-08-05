@@ -403,7 +403,7 @@
 - (void)mtd_handleMapTap:(UITapGestureRecognizer *)tap {
     if ((tap.state & UIGestureRecognizerStateRecognized) == UIGestureRecognizerStateRecognized) {
         // Check if the directionsOverlay got tapped
-        if (self.directionsOverlayView) {
+        if (self.directionsOverlayView != nil) {
             // Get view frame rect in the mapView's coordinate system
             CGRect viewFrameInMapView = [self.directionsOverlayView.superview convertRect:self.directionsOverlayView.frame toView:self];
             // Get touch point in the mapView's coordinate system

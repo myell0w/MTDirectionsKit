@@ -140,15 +140,17 @@
 
 // This method re-orders the routes s.t. the active route is last in the array (to get drawn on top of the others)
 - (void)mtd_sortRoutes {
-    [_routes sortUsingComparator:^NSComparisonResult(MTDRoute *route1, MTDRoute *route2) {
-        if (route1 == self.activeRoute) {
-            return NSOrderedDescending;
-        } else if (route2 == self.activeRoute) {
-            return NSOrderedAscending;
-        } else {
-            return NSOrderedSame;
-        }
-    }];
+    @synchronized(_routes) {
+        [_routes sortUsingComparator:^NSComparisonResult(MTDRoute *route1, MTDRoute *route2) {
+            if (route1 == self.activeRoute) {
+                return NSOrderedDescending;
+            } else if (route2 == self.activeRoute) {
+                return NSOrderedAscending;
+            } else {
+                return NSOrderedSame;
+            }
+        }];
+    }
 }
 
 @end
