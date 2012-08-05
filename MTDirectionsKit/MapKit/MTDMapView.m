@@ -409,8 +409,15 @@
             // Get touch point in the mapView's coordinate system
             CGPoint point = [tap locationInView:self];
 
+            // we outset the frame of the overlay to also handle touches that are a bit outside
+            viewFrameInMapView = CGRectInset(viewFrameInMapView, -50.f, -50.f);
+
             // Check if the touch is within the view bounds
             if (CGRectContainsPoint(viewFrameInMapView, point)) {
+                MTDLogVerbose(@"Touch %@ was recognized to be inside of the overlay with the frame %@",
+                              NSStringFromCGPoint(point),
+                              NSStringFromCGRect(viewFrameInMapView));
+                
                 [self.directionsOverlayView mtd_handleTapAtPoint:[tap locationInView:self.directionsOverlayView]];
             }
         }

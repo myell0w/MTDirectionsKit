@@ -230,7 +230,7 @@
 
 // check whether a touch at the given point tried to select the given route
 - (CLLocationDistance)mtd_distanceOfTouchAtPoint:(CGPoint)point toRoute:(MTDRoute *)route {
-    static CLLocationDistance maxDistanceToSelect = 5000.;
+    static CLLocationDistance maxDistanceToSelect = 7000.;
 
     MKMapPoint mapPoint = [self mapPointForPoint:point];
 
