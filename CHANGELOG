@@ -5,7 +5,7 @@
  * All private methods are now prefixed with "mtd_"
  * Code got converted to Modern Objective-C Syntax
  * Parsing now happens on a global concurrent queue
- * More unit tests for Parsers
+ * Much more unit tests
  
 = 1.2.1 17.7.2012
  * Google Directions now supports Transit Directions
