@@ -52,7 +52,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (BOOL)isValid {
-    return CLLocationCoordinate2DIsValid(self.coordinate) || self.address.description.length > 0;
+    return CLLocationCoordinate2DIsValid(self.coordinate) || self.address.description.length > 0 || self == [MTDWaypoint waypointForCurrentLocation];
 }
 
 // Would love to put this in a category, but then we need to specify -ObjC

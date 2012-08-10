@@ -212,7 +212,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 + (MTDXMLElement *)mtd_nodeFromLibXMLNode:(xmlNodePtr)libXMLNode parentNode:(MTDXMLElement *)parentNode {
-	MTDXMLElement *node = [[MTDXMLElement alloc] init];
+	MTDXMLElement *node = [MTDXMLElement new];
 	
 	if (libXMLNode->name) {
 		node.name = @((const char *)libXMLNode->name);

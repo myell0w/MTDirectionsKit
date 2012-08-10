@@ -83,7 +83,7 @@
 	if (contentLength > 0) {
 		_data = [[NSMutableData alloc] initWithCapacity:(NSUInteger)contentLength];
 	} else {
-		_data = [[NSMutableData alloc] init];
+		_data = [NSMutableData new];
 	}
 }
 

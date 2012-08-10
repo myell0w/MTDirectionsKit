@@ -69,7 +69,7 @@ NSString* MTDGetFormattedTimeWithFormat(NSTimeInterval interval, NSString *forma
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        mtd_dateFormatter = [[NSDateFormatter alloc] init];
+        mtd_dateFormatter = [NSDateFormatter new];
         [mtd_dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
     });
     
