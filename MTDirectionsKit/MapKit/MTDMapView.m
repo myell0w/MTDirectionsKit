@@ -625,7 +625,7 @@
 
 #if !TARGET_IPHONE_SIMULATOR
         if ([[CLLocationManager class] respondsToSelector:@selector(authorizationStatus)] &&
-            [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized)) {
+            [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized) {
 #endif
             
             // this introduces a temporary strong-reference cycle (a.k.a retain cycle) that will vanish once the locationManager succeeds or fails
