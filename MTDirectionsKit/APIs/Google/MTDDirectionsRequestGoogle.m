@@ -10,6 +10,10 @@
 #define kMTDGoogleBaseAddress         @"http://maps.googleapis.com/maps/api/directions/xml"
 
 
+static NSString *mtd_clientId = nil;
+static NSString *mtd_signature = nil;
+
+
 @implementation MTDDirectionsRequestGoogle
 
 ////////////////////////////////////////////////////////////////////////
@@ -66,11 +70,30 @@
 }
 
 ////////////////////////////////////////////////////////////////////////
+#pragma mark - MTDDirectionsRequestGoogle
+////////////////////////////////////////////////////////////////////////
+
++ (void)registerBusinessWithClientId:(NSString *)clientId
+                           signature:(NSString *)signature {
+    mtd_clientId = clientId;
+    mtd_signature = signature;
+}
+
++ (BOOL)businessRegistered {
+    return mtd_clientId.length > 0 && mtd_signature.length > 0;
+}
+
+////////////////////////////////////////////////////////////////////////
 #pragma mark - Private
 ////////////////////////////////////////////////////////////////////////
 
 - (void)mtd_setup {
     [self setValue:@"true" forParameter:@"sensor"];
+
+    if ([[self class] businessRegistered]) {
+        [self setValue:mtd_clientId forKey:@"client"];
+        [self setValue:mtd_signature forKey:@"signature"];
+    }
 }
 
 @end

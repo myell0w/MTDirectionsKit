@@ -138,6 +138,14 @@
     [self doesNotRecognizeSelector:_cmd];
 }
 
+- (void)removeValueForParameter:(NSString *)parameter {
+    MTDAssert(parameter != nil, @"Parameter must be different from nil");
+
+    if (parameter != nil) {
+        [self.mtd_parameters removeObjectForKey:parameter];
+    }
+}
+
 - (NSString *)mtd_HTTPAddress {
     MTDLogError(@"mtd_HTTPAddress was called on a request that doesn't override it (Class: %@)",
                 NSStringFromClass([self class]));

@@ -121,4 +121,11 @@
  */
 - (void)setValueForParameterWithIntermediateGoals:(NSArray *)intermediateGoals;
 
+/**
+ Let's you remove a once specified value for a parameter
+
+ @param parameter the name of the parameter
+ */
+- (void)removeValueForParameter:(NSString *)parameter;
+
 @end
