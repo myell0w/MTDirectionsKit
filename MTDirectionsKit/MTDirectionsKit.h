@@ -27,3 +27,4 @@
 
 // Request
 #import <MTDirectionsKit/MTDDirectionsRequest.h>
+#import <MTDirectionsKit/MTDDirectionsRequestGoogle.h>

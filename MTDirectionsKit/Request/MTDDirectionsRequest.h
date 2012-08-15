@@ -11,6 +11,7 @@
 #import "MTDDirectionsDefines.h"
 #import "MTDHTTPRequest.h"
 #import "MTDDirectionsAPI.h"
+#import "MTDDirectionsRequestOption.h"
 
 
 @class MTDWaypoint;
@@ -66,7 +67,7 @@
                         to:(MTDWaypoint *)to
          intermediateGoals:(NSArray *)intermediateGoals
                  routeType:(MTDDirectionsRouteType)routeType
-                   options:(NSUInteger)options
+                   options:(MTDDirectionsRequestOptions)options
                 completion:(mtd_parser_block)completion;
 
 /**
@@ -84,14 +85,18 @@
                 to:(MTDWaypoint *)to
  intermediateGoals:(NSArray *)intermediateGoals
          routeType:(MTDDirectionsRouteType)routeType
-           options:(NSUInteger)options
+           options:(MTDDirectionsRequestOptions)options
         completion:(mtd_parser_block)completion;
 
 /******************************************
  @name Request
  ******************************************/
 
-/** Starts the request */
+/** 
+ This method first calls a subclass-hook to allow final modification of the URL to call and then starts the request.
+ 
+ @see preparedAddress:
+ */
 - (void)start;
 /** Cancels a possible ongoing request, does nothing if the request isn't active. */
 - (void)cancel;
@@ -127,5 +132,21 @@
  @param parameter the name of the parameter
  */
 - (void)removeValueForParameter:(NSString *)parameter;
+
+
+/******************************************
+ @name Subclass Hooks
+ ******************************************/
+
+/**
+ This method get's executed right before the request gets send to the specified API (- [MTDDirectionsRequest start]). The default implementation
+ just returns the address as is without changing it, but subclasses can override this method to change the
+ request address the way they want to. MTDDirectionsRequestGoogle for example uses this hook to compute a signature
+ for the address, when a business was registered. This method gets called on a global concurrent queue.
+ 
+ @param address the address we want to request from the specified API
+ @return the final address we will request
+ */
+- (NSString *)preparedAddress:(NSString *)address;
 
 @end

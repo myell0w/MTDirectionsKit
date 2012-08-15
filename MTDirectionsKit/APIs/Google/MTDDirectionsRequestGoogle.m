@@ -5,13 +5,17 @@
 #import "MTDDirectionsParserGoogle.h"
 #import "MTDWaypoint.h"
 #import "MTDFunctions.h"
+#import "MTDBase64.h"
+#import <CommonCrypto/CommonDigest.h>
+#import <CommonCrypto/CommonHMAC.h>
 
 
-#define kMTDGoogleBaseAddress         @"http://maps.googleapis.com/maps/api/directions/xml"
+#define kMTDGoogleDomain              @"http://maps.googleapis.com"
+#define kMTDGoogleBaseAddress         kMTDGoogleDomain @"/maps/api/directions/xml"
 
 
 static NSString *mtd_clientId = nil;
-static NSString *mtd_signature = nil;
+static NSString *mtd_cryptographicKey = nil;
 
 
 @implementation MTDDirectionsRequestGoogle
@@ -65,6 +69,31 @@ static NSString *mtd_signature = nil;
     }
 }
 
+// Overwritten to compute signature, if a business was registered
+// Algorithm is described here: https://developers.google.com/maps/documentation/business/webservices#digital_signatures
+// 1. Construct your URL, making sure to include your client and sensor parameters. (=address)
+- (NSString *)preparedAddress:(NSString *)address {
+    if (![[self class] businessRegistered]) {
+        return address;
+    }
+
+    // 2. Strip off the domain portion of the request, leaving only the path and the query
+    NSString *path = [address stringByReplacingOccurrencesOfString:kMTDGoogleDomain withString:@""];
+    NSData *pathData = [path dataUsingEncoding:NSASCIIStringEncoding];
+
+    // 3. Retrieve your private key, which is encoded in a modified Base64 for URLs, and sign the URL above using the HMAC-SHA1 algorithm.
+    NSData *binaryKey = MTDDataWithBase64EncodedString(mtd_cryptographicKey);
+    
+    // 4. Encode the resulting binary signature using the modified Base64 for URLs to convert this signature into something that can be passed within a URL
+    unsigned char result[CC_SHA1_DIGEST_LENGTH];
+    CCHmac(kCCHmacAlgSHA1, [binaryKey bytes], [binaryKey length], [pathData bytes], [pathData length], &result);
+    NSData *binarySignature = [NSData dataWithBytes:&result length:CC_SHA1_DIGEST_LENGTH];
+
+    // 5. Attach this signature to the URL within a signature parameter
+    NSString *signature = MTDBase64EncodedStringFromData(binarySignature);
+    return [address stringByAppendingFormat:@"&signature=%@", signature];
+}
+
 - (NSString *)mtd_HTTPAddress {
     return kMTDGoogleBaseAddress;
 }
@@ -74,13 +103,13 @@ static NSString *mtd_signature = nil;
 ////////////////////////////////////////////////////////////////////////
 
 + (void)registerBusinessWithClientId:(NSString *)clientId
-                           signature:(NSString *)signature {
+                    cryptographicKey:(NSString *)cryptographicKey {
     mtd_clientId = clientId;
-    mtd_signature = signature;
+    mtd_cryptographicKey = cryptographicKey;
 }
 
 + (BOOL)businessRegistered {
-    return mtd_clientId.length > 0 && mtd_signature.length > 0;
+    return mtd_clientId.length > 0 && mtd_cryptographicKey.length > 0;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -91,8 +120,7 @@ static NSString *mtd_signature = nil;
     [self setValue:@"true" forParameter:@"sensor"];
 
     if ([[self class] businessRegistered]) {
-        [self setValue:mtd_clientId forKey:@"client"];
-        [self setValue:mtd_signature forKey:@"signature"];
+        [self setValue:mtd_clientId forParameter:@"client"];
     }
 }
 

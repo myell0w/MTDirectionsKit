@@ -17,3 +17,6 @@ typedef enum {
     MTDDirectionsRequestOptionOptimize              = 1,
     MTDDirectionsRequestOptionAlternativeRoutes     = 1 << 1
 } MTDDirectionsRequestOption;
+
+
+typedef NSUInteger MTDDirectionsRequestOptions;

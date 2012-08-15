@@ -444,10 +444,6 @@
 
             // Check if the touch is within the view bounds
             if (CGRectContainsPoint(viewFrameInMapView, point)) {
-                MTDLogVerbose(@"Touch %@ was recognized to be inside of the overlay with the frame %@",
-                              NSStringFromCGPoint(point),
-                              NSStringFromCGRect(viewFrameInMapView));
-
                 [self.directionsOverlayView mtd_handleTapAtPoint:[tap locationInView:self.directionsOverlayView]];
             }
         }
