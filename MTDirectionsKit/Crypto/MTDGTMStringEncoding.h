@@ -31,7 +31,7 @@
 
 + (id)rfc4648Base64WebsafeStringEncoding;
 
-// Decode a 7-bit ASCII string to a raw binary buffer.
 - (NSData *)decode:(NSString *)string;
+- (NSString *)encode:(NSData *)inData;
 
 @end

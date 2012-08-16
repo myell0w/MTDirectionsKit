@@ -97,6 +97,51 @@ NS_INLINE int lcm(int a, int b) {
     return outData;
 }
 
+- (NSString *)encode:(NSData *)inData {
+    NSUInteger inLen = [inData length];
+    if (inLen <= 0) {
+        return @"";
+    }
+    unsigned char *inBuf = (unsigned char *)[inData bytes];
+    NSUInteger inPos = 0;
+
+    NSUInteger outLen = (inLen * 8 + (NSUInteger)shift_ - 1) / (NSUInteger)shift_;
+    if (doPad_) {
+        outLen = ((outLen + (NSUInteger)padLen_ - 1) / (NSUInteger)padLen_) * (NSUInteger)padLen_;
+    }
+    NSMutableData *outData = [NSMutableData dataWithLength:outLen];
+    unsigned char *outBuf = (unsigned char *)[outData mutableBytes];
+    NSUInteger outPos = 0;
+
+    int buffer = inBuf[inPos++];
+    int bitsLeft = 8;
+    while (bitsLeft > 0 || inPos < inLen) {
+        if (bitsLeft < shift_) {
+            if (inPos < inLen) {
+                buffer <<= 8;
+                buffer |= (inBuf[inPos++] & 0xff);
+                bitsLeft += 8;
+            } else {
+                int pad = shift_ - bitsLeft;
+                buffer <<= pad;
+                bitsLeft += pad;
+            }
+        }
+        int idx = (buffer >> (bitsLeft - shift_)) & mask_;
+        bitsLeft -= shift_;
+        outBuf[outPos++] = (unsigned char)charMap_[idx];
+    }
+
+    if (doPad_) {
+        while (outPos < outLen)
+            outBuf[outPos++] = (unsigned char)paddingChar_;
+    }
+
+    [outData setLength:outPos];
+    
+    return [[NSString alloc] initWithData:outData encoding:NSASCIIStringEncoding];
+}
+
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Private
 ////////////////////////////////////////////////////////////////////////
