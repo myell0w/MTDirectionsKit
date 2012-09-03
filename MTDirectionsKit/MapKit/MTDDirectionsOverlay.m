@@ -53,11 +53,17 @@
 }
 
 - (MKMapRect)boundingMapRect {
-    return self.activeRoute.mtd_polyline.boundingMapRect;
-}
+    if (self.routes.count > 0) {
+        MKMapRect boundingMapRect = MKMapRectMake(0., 0., 0., 0.);
 
-- (BOOL)intersectsMapRect:(MKMapRect)mapRect {
-    return [self.activeRoute.mtd_polyline intersectsMapRect:mapRect];
+        for (MTDRoute *route in self.routes) {
+            boundingMapRect = MKMapRectUnion(boundingMapRect, route.mtd_polyline.boundingMapRect);
+        }
+
+        return boundingMapRect;
+    } else {
+        return MKMapRectNull;
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////

@@ -1,7 +1,6 @@
 #import "MTDDirectionsRequest.h"
 #import "MTDDirectionsRequestMapQuest.h"
 #import "MTDDirectionsRequestGoogle.h"
-#import "MTDDirectionsRequestOption.h"
 #import "MTDDirectionsParser.h"
 #import "MTDDirectionsAPI+MTDirectionsPrivateAPI.h"
 #import "MTDFunctions.h"
@@ -36,21 +35,26 @@
                         to:(MTDWaypoint *)to
          intermediateGoals:(NSArray *)intermediateGoals
                  routeType:(MTDDirectionsRouteType)routeType
-                   options:(NSUInteger)options
+                   options:(MTDDirectionsRequestOptions)options
                 completion:(mtd_parser_block)completion {
-    return [[MTDDirectionsRequestClassForAPI(API) alloc] initWithFrom:from
-                                                                   to:to
-                                                    intermediateGoals:intermediateGoals
-                                                            routeType:routeType
-                                                              options:options
-                                                           completion:completion];
+
+    Class class = MTDDirectionsRequestClassForAPI(API);
+
+    MTDAssert(class != nil, @"No class can be created for the specified API.");
+
+    return [[class alloc] initWithFrom:from
+                                    to:to
+                     intermediateGoals:intermediateGoals
+                             routeType:routeType
+                               options:options
+                            completion:completion];
 }
 
 - (id)initWithFrom:(MTDWaypoint *)from
                 to:(MTDWaypoint *)to
  intermediateGoals:(NSArray *)intermediateGoals
          routeType:(MTDDirectionsRouteType)routeType
-           options:(NSUInteger)options
+           options:(MTDDirectionsRequestOptions)options
         completion:(mtd_parser_block)completion {
     if ((self = [super init])) {
         BOOL optimizeRoute = (options & MTDDirectionsRequestOptionOptimize) == MTDDirectionsRequestOptionOptimize;
@@ -77,13 +81,21 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (void)start {
-    NSString *address = self.mtd_fullAddress;
+    dispatch_queue_t prepareQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0L);
 
-    self.mtd_HTTPRequest = [[MTDHTTPRequest alloc] initWithAddress:address
-                                                    callbackTarget:self
-                                                            action:@selector(requestFinished:)];
+    dispatch_async(prepareQueue, ^{
+        NSString *address = [self preparedAddress:self.mtd_fullAddress];
 
-    [self.mtd_HTTPRequest start];
+        MTDLogVerbose(@"Will call address: %@", address);
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.mtd_HTTPRequest = [[MTDHTTPRequest alloc] initWithAddress:address
+                                                            callbackTarget:self
+                                                                    action:@selector(requestFinished:)];
+
+            [self.mtd_HTTPRequest start];
+        });
+    });
 }
 
 - (void)cancel {
@@ -138,6 +150,18 @@
     [self doesNotRecognizeSelector:_cmd];
 }
 
+- (void)removeValueForParameter:(NSString *)parameter {
+    MTDAssert(parameter != nil, @"Parameter must be different from nil");
+
+    if (parameter != nil) {
+        [self.mtd_parameters removeObjectForKey:parameter];
+    }
+}
+
+- (NSString *)preparedAddress:(NSString *)address {
+    return address;
+}
+
 - (NSString *)mtd_HTTPAddress {
     MTDLogError(@"mtd_HTTPAddress was called on a request that doesn't override it (Class: %@)",
                 NSStringFromClass([self class]));
@@ -186,7 +210,7 @@
         NSRange lastCharacterRange = NSMakeRange(address.length-1, 1);
         [address deleteCharactersInRange:lastCharacterRange];
     }
-    
+
     return [address copy];
 }
 

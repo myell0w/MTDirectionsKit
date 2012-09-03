@@ -18,6 +18,18 @@
     return [[[self class] alloc] initWithAddress:address];
 }
 
++ (MTDWaypoint *)waypointForCurrentLocation {
+    __strong static MTDWaypoint *waypointForCurrentLocation = nil;
+
+    static dispatch_once_t onceToken;
+
+    dispatch_once(&onceToken, ^{
+        waypointForCurrentLocation = [MTDWaypoint waypointWithCoordinate:kCLLocationCoordinate2DInvalid];
+    });
+
+    return waypointForCurrentLocation;
+}
+
 - (id)initWithCoordinate:(CLLocationCoordinate2D)coordinate {
     if ((self = [super init])) {
         _coordinate = coordinate;
@@ -48,7 +60,7 @@
 }
 
 - (BOOL)isValid {
-    return self.hasValidCoordinate || self.hasValidAddress;
+    return self.hasValidCoordinate || self.hasValidAddress || self == [MTDWaypoint waypointForCurrentLocation];
 }
 
 // Would love to put this in a category, but then we need to specify -ObjC
@@ -76,6 +88,10 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (NSString *)description {
+    if (self == [MTDWaypoint waypointForCurrentLocation]) {
+        return @"<MTDWaypoint currentLocation>";
+    }
+
     if (CLLocationCoordinate2DIsValid(self.coordinate)) {
         return [NSString stringWithFormat:@"<MTDWaypoint: %@>",
                 MTDStringFromCLLocationCoordinate2D(self.coordinate)];
@@ -88,6 +104,10 @@
 - (BOOL)isEqual:(id)object {
     if (![object isKindOfClass:[MTDWaypoint class]]) {
         return NO;
+    }
+
+    if (object == self) {
+        return YES;
     }
     
     MTDWaypoint *otherWaypoint = (MTDWaypoint *)object;
@@ -103,7 +123,7 @@
 }
 
 - (NSUInteger)hash {
-    if (CLLocationCoordinate2DIsValid(self.coordinate)) {
+    if (CLLocationCoordinate2DIsValid(self.coordinate) || self == [MTDWaypoint waypointForCurrentLocation]) {
         NSNumber *latitudeNumber = @(self.coordinate.latitude);
         NSNumber *longitudeNumber = @(self.coordinate.longitude);
         

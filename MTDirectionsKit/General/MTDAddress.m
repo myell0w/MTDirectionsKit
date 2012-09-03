@@ -8,6 +8,24 @@
 #pragma mark - Lifecycle
 ////////////////////////////////////////////////////////////////////////
 
++ (MTDAddress *)addressWithAddressString:(NSString *)addressString {
+    return [[self alloc] initWithAddressString:addressString];
+}
+
++ (MTDAddress *)addressWithCountry:(NSString *)country
+                             state:(NSString *)state
+                            county:(NSString *)county
+                        postalCode:(NSString *)postalCode
+                              city:(NSString *)city
+                            street:(NSString *)street {
+    return [[self alloc] initWithCountry:country
+                                   state:state
+                                  county:county
+                              postalCode:postalCode
+                                    city:city
+                                  street:street];
+}
+
 - (id)initWithAddressString:(NSString *)addressString {
     if ((self = [super init])) {
         _fullAddress = [addressString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];

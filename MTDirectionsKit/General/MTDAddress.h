@@ -60,6 +60,34 @@ typedef enum {
  ******************************************/
 
 /**
+ This class method is used to create an address from a single string description.
+ The resulting address object is not normalized.
+ 
+ @param addressString a single string-representation of the address
+ @return a non-normalized address object
+ */
++ (MTDAddress *)addressWithAddressString:(NSString *)addressString;
+
+/**
+ This class method is used to create an address object with normalized data.
+ The resulting address object is normalised as well.
+ 
+ @param country the country of the address
+ @param state the state of the address
+ @param county the county of the address
+ @param postalCode the postal code of the address
+ @param city the city of the address
+ @param street the street of the address
+ @return a normalised address object
+ */
++ (MTDAddress *)addressWithCountry:(NSString *)country
+                             state:(NSString *)state
+                            county:(NSString *)county
+                        postalCode:(NSString *)postalCode
+                              city:(NSString *)city
+                            street:(NSString *)street;
+
+/**
  Initializes an address object with a single string. The resulting address object
  is not normalized.
  
@@ -70,7 +98,8 @@ typedef enum {
 - (id)initWithAddressString:(NSString *)addressString;
 
 /**
- Initializes an address object with normalized data, the resulting address object is normalised.
+ Initializes an address object with normalized data.
+ The resulting address object is normalised as well.
  
  @param country the country of the address
  @param state the state of the address
@@ -97,18 +126,18 @@ typedef enum {
  On normalised address objects this method can be used to create a description of the
  address only including the specified address fields (via bitmask). Valid address fields are specified
  in the enum MTDAddressField:
-
-   - MTDAddressFieldCountry
-   - MTDAddressFieldState
-   - MTDAddressFieldCounty
-   - MTDAddressFieldPostalCode
-   - MTDAddressFieldCity
-   - MTDAddressFieldStreet
+ 
+ - MTDAddressFieldCountry
+ - MTDAddressFieldState
+ - MTDAddressFieldCounty
+ - MTDAddressFieldPostalCode
+ - MTDAddressFieldCity
+ - MTDAddressFieldStreet
  
  On non-normalized string objects this method just returns the fullAddress string.
  
  @param addressFieldMask a bitmaks including the address fields to include in the description,
-        e.g. MTDAddressFieldCountry | MTDAddressFieldCity
+ e.g. MTDAddressFieldCountry | MTDAddressFieldCity
  
  @return a string representation of the address including the specified fields
  */
