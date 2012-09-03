@@ -28,3 +28,4 @@
 // Request
 #import <MTDirectionsKit/MTDDirectionsRequest.h>
 #import <MTDirectionsKit/MTDDirectionsRequestGoogle.h>
+#import <MTDirectionsKit/MTDDirectionsRequestBing.h>

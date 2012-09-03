@@ -34,7 +34,7 @@
     if ((self = [super init])) {
         _coordinate = coordinate;
     }
-    
+
     return self;
 }
 
@@ -43,7 +43,7 @@
         _address = address;
         _coordinate = kCLLocationCoordinate2DInvalid;
     }
-    
+
     return self;
 }
 
@@ -59,16 +59,17 @@
 // for "Other Linker Flags" which complicates setup, that's why it's here
 - (NSString *)descriptionForAPI:(MTDDirectionsAPI)api {
     switch (api) {
-            // Currently there's no difference between MapQuest and Google APIs here
+        // Currently there's no difference between the used APIs here
         case MTDDirectionsAPIMapQuest:
-        case MTDDirectionsAPIGoogle: {
+        case MTDDirectionsAPIGoogle:
+        case MTDDirectionsAPIBing: {
             if (CLLocationCoordinate2DIsValid(self.coordinate)) {
                 return [NSString stringWithFormat:@"%f,%f",self.coordinate.latitude, self.coordinate.longitude];
             } else {
                 return self.address.description;
             }
         }
-            
+
         default: {
             return @"";
         }
@@ -101,12 +102,12 @@
     if (object == self) {
         return YES;
     }
-    
+
     MTDWaypoint *otherWaypoint = (MTDWaypoint *)object;
-    
+
     if (CLLocationCoordinate2DIsValid(self.coordinate)) {
         double epsilon = 0.0000001;
-        
+
         return (fabs(self.coordinate.latitude - otherWaypoint.coordinate.latitude) < epsilon &&
                 fabs(self.coordinate.longitude - otherWaypoint.coordinate.longitude) < epsilon);
     } else {
@@ -118,7 +119,7 @@
     if (CLLocationCoordinate2DIsValid(self.coordinate) || self == [MTDWaypoint waypointForCurrentLocation]) {
         NSNumber *latitudeNumber = @(self.coordinate.latitude);
         NSNumber *longitudeNumber = @(self.coordinate.longitude);
-        
+
         return latitudeNumber.hash >> 13 ^ longitudeNumber.hash;
     } else {
         return self.address.hash;

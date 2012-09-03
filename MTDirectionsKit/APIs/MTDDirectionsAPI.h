@@ -14,10 +14,15 @@
  The currently supported APIs are:
  
  - MTDDirectionsAPIMapQuest
+ - MTDDirectionsAPIGoogle
+ - MTDDirectionsAPIBing
+ - MTDDirectionsAPICustom: Implement your own data source/parser
  */
 typedef enum {
     MTDDirectionsAPIMapQuest,
     MTDDirectionsAPIGoogle,
+    MTDDirectionsAPIBing,
+    MTDDirectionsAPICustom,
     MTDDirectionsAPICount
 } MTDDirectionsAPI;
 
@@ -35,3 +40,7 @@ MTDDirectionsAPI MTDDirectionsGetActiveAPI(void);
  @param activeAPI the new active API to set
  */
 void MTDDirectionsSetActiveAPI(MTDDirectionsAPI activeAPI);
+
+
+//void MTDDirectionsAPIRegisterCustomRequestClass(Class requestClass);
+//void MTDDirectionsAPIRegisterCustomParserClass(Class parserClass);
