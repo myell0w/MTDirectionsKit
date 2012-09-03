@@ -26,12 +26,32 @@
 //  the License.
 //
 
-
+/**
+ MTDGTMStringEncoding is used to convert from and to a websafe base64 encoding.
+ */
 @interface MTDGTMStringEncoding : NSObject
 
+/**
+ Creates an instance of MTDGTMStringEncoding
+ 
+ @return an instance to perform websafe base64 encoding and decoding
+ */
 + (id)rfc4648Base64WebsafeStringEncoding;
 
+/**
+ Decodes the given string into the corresponding data.
+ 
+ @param string a bas64-encoded string
+ @return the decoded data
+ */
 - (NSData *)decode:(NSString *)string;
-- (NSString *)encode:(NSData *)inData;
+
+/**
+ Encodes the given data into a websafe base64-format.
+ 
+ @param data the data to encode
+ @return a base64-encoded string
+ */
+- (NSString *)encode:(NSData *)data;
 
 @end

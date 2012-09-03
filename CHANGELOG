@@ -1,3 +1,8 @@
+= 1.3.1 3.9.2012
+ * [MTDWaypoint waypointForCurrentLocation] can be specified as a goal along a route. If the current location is unknown, 
+    it get's determined first.
+ * Support for Google Maps API for Business
+
 = 1.3.0 7.8.2012
  * Support for Alternative Routes!
  * Intermediate goals now get reordered and appear in the same order returned by the used API, if the order got optimized
