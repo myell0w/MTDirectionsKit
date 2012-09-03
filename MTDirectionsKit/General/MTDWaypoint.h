@@ -58,6 +58,13 @@
 + (MTDWaypoint *)waypointWithAddress:(MTDAddress *)address;
 
 /**
+ Creates and returns a singleton waypoint object representing the device’s current location.
+ 
+ @return An MTDWaypoint object representing the current location.
+ */
++ (MTDWaypoint *)waypointForCurrentLocation;
+
+/**
  The initializer used to create an instance of MTDWaypoint that wraps a given coordinate.
  
  @param coordinate the coordinate to save

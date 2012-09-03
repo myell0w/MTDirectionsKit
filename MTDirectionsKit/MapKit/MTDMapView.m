@@ -11,7 +11,7 @@
 #import "MTDFunctions.h"
 
 
-@interface MTDMapView () <MKMapViewDelegate> {
+@interface MTDMapView () <MKMapViewDelegate, CLLocationManagerDelegate> {
     // flags for methods implemented in the delegate
     struct {
         unsigned int willStartLoadingDirections:1;
@@ -20,6 +20,8 @@
         unsigned int colorForOverlay:1;
         unsigned int lineWidthFactorForOverlay:1;
 	} _directionsDelegateFlags;
+
+    CLLocationCoordinate2D _mtd_userLocationCoordinate;
 }
 
 @property (nonatomic, strong, readwrite) MTDDirectionsOverlayView *directionsOverlayView; // re-defined as read/write
@@ -29,8 +31,10 @@
 /** The request object for retreiving directions from the specified API */
 @property (nonatomic, strong, setter = mtd_setRequest:) MTDDirectionsRequest *mtd_request;
 
-// Watermark
-- (void)_mtd_wm_:(NSTimer *)timer;
+/** The location manager used to request user location if needed */
+@property (nonatomic, strong) CLLocationManager *mtd_locationManager;
+/** The completion block executed after we found a location */
+@property (nonatomic, copy) dispatch_block_t mtd_locationCompletion;
 
 @end
 
@@ -140,6 +144,8 @@
 - (void)cancelLoadOfDirections {
     [self.mtd_request cancel];
     self.mtd_request = nil;
+
+    [self mtd_stopUpdatingLocationCallingCompletion:NO];
 }
 
 - (void)removeDirectionsOverlay {
@@ -255,6 +261,24 @@
 }
 
 ////////////////////////////////////////////////////////////////////////
+#pragma mark - CLLocationManagerDelegate
+////////////////////////////////////////////////////////////////////////
+
+- (void)locationManager:(__unused CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(__unused CLLocation *)oldLocation {
+    MTDLogVerbose(@"Location manager found a location for [MTDWaypoint waypointForCurrentLocation]");
+
+    _mtd_userLocationCoordinate = newLocation.coordinate;
+    [self mtd_stopUpdatingLocationCallingCompletion:YES];
+}
+
+- (void)locationManager:(__unused CLLocationManager *)manager didFailWithError:(NSError *)error {
+    MTDLogVerbose(@"Location manager failed while finding a location for [MTDWaypoint waypointForCurrentLocation]");
+
+    [self mtd_stopUpdatingLocationCallingCompletion:NO];
+    [self mtd_notifyDelegateDidFailLoadingOverlayWithError:error];
+}
+
+////////////////////////////////////////////////////////////////////////
 #pragma mark - MKMapViewDelegate Proxies
 ////////////////////////////////////////////////////////////////////////
 
@@ -304,6 +328,8 @@
     if ([self.mtd_trueDelegate respondsToSelector:@selector(mapView:didUpdateUserLocation:)]) {
         [self.mtd_trueDelegate mapView:mapView didUpdateUserLocation:userLocation];
     }
+
+    _mtd_userLocationCoordinate = userLocation.coordinate;
 }
 
 - (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error {
@@ -383,6 +409,7 @@
     [super setDelegate:self];
 
     _directionsDisplayType = MTDDirectionsDisplayTypeNone;
+    _mtd_userLocationCoordinate = kCLLocationCoordinate2DInvalid;
 
     // we need this GestureRecognizer to be able to select alternative routes
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mtd_handleMapTap:)];
@@ -424,10 +451,6 @@
 
             // Check if the touch is within the view bounds
             if (CGRectContainsPoint(viewFrameInMapView, point)) {
-                MTDLogVerbose(@"Touch %@ was recognized to be inside of the overlay with the frame %@",
-                              NSStringFromCGPoint(point),
-                              NSStringFromCGRect(viewFrameInMapView));
-                
                 [self.directionsOverlayView mtd_handleTapAtPoint:[tap locationInView:self.directionsOverlayView]];
             }
         }
@@ -513,34 +536,129 @@
     [self.mtd_request cancel];
 
     if (from.valid && to.valid) {
-        mtd_parser_block parserCompletion = ^(MTDDirectionsOverlay *overlay, NSError *error) {
-            __strong MTDMapView *strongSelf = weakSelf;
+        NSArray *allGoals = [self mtd_goalsByReplacingWaypointForCurrentLocationForFrom:from to:to intermediateGoals:intermediateGoals];
 
-            if (overlay != nil) {
-                overlay = [self mtd_notifyDelegateDidFinishLoadingOverlay:overlay];
+        [self mtd_stopUpdatingLocationCallingCompletion:NO];
 
-                strongSelf.directionsDisplayType = MTDDirectionsDisplayTypeOverview;
-                strongSelf.directionsOverlay = overlay;
+        if (allGoals == nil) {
+            // we have references to [MTDWaypoint waypointForCurrentLocation] within our goals, but no valid userLocation yet
+            // so we first need to request the location using CLLocationManager and once we have a valid location we can load
+            // the exact same directions again
+            [self mtd_startUpdatingLocationWithCompletion:^{
+                [self mtd_loadDirectionsFrom:from
+                                          to:to
+                                   routeType:routeType
+                        zoomToShowDirections:zoomToShowDirections
+                           intermediateGoals:intermediateGoals
+                                     options:options];
+            }];
 
-                if (zoomToShowDirections) {
-                    [strongSelf setRegionToShowDirectionsAnimated:YES];
-                }
-            } else {
-                [self mtd_notifyDelegateDidFailLoadingOverlayWithError:error];
-            }
-        };
+            // do not request directions yet
+            return;
+        }
 
         self.mtd_request = [MTDDirectionsRequest requestDirectionsAPI:MTDDirectionsGetActiveAPI()
-                                                                 from:from
-                                                                   to:to
-                                                    intermediateGoals:intermediateGoals
+                                                                 from:MTDFirstObjectOfArray(allGoals)
+                                                                   to:[allGoals lastObject]
+                                                    intermediateGoals:allGoals.count > 2 ? [allGoals subarrayWithRange:NSMakeRange(1, allGoals.count - 2)] : nil
                                                             routeType:routeType
                                                               options:options
-                                                           completion:parserCompletion];
+                                                           completion:^(MTDDirectionsOverlay *overlay, NSError *error) {
+                                                               __strong MTDMapView *strongSelf = weakSelf;
+
+                                                               if (overlay != nil && strongSelf != nil) {
+                                                                   overlay = [strongSelf mtd_notifyDelegateDidFinishLoadingOverlay:overlay];
+
+                                                                   strongSelf.directionsDisplayType = MTDDirectionsDisplayTypeOverview;
+                                                                   strongSelf.directionsOverlay = overlay;
+
+                                                                   if (zoomToShowDirections) {
+                                                                       [strongSelf setRegionToShowDirectionsAnimated:YES];
+                                                                   }
+                                                               } else {
+                                                                   [strongSelf mtd_notifyDelegateDidFailLoadingOverlayWithError:error];
+                                                               }
+                                                           }];
 
         [self mtd_notifyDelegateWillStartLoadingDirectionsFrom:from to:to routeType:routeType];
         [self.mtd_request start];
     }
+}
+
+- (NSArray *)mtd_goalsByReplacingWaypointForCurrentLocationForFrom:(MTDWaypoint *)from to:(MTDWaypoint *)to intermediateGoals:(NSArray *)intermediateGoals {
+    NSMutableArray *allGoals = [NSMutableArray arrayWithObject:from];
+
+    if (intermediateGoals.count > 0) {
+        [allGoals addObjectsFromArray:intermediateGoals];
+    }
+
+    [allGoals addObject:to];
+
+    NSIndexSet *indexesOfWaypointsForCurrentLocation = [allGoals indexesOfObjectsPassingTest:^BOOL(MTDWaypoint *waypoint, __unused NSUInteger idx, __unused BOOL *stop) {
+        return waypoint == [MTDWaypoint waypointForCurrentLocation];
+    }];
+
+    if (indexesOfWaypointsForCurrentLocation.count > 0) {
+        // if we already have a valid user location replace the references to waypointForCurrentLocation with the actual location
+        if (CLLocationCoordinate2DIsValid(_mtd_userLocationCoordinate)) {
+            MTDLogVerbose(@"We already have a valid current location, no need to start CLLocationManager");
+
+            NSMutableArray *validWaypoints = [NSMutableArray arrayWithCapacity:indexesOfWaypointsForCurrentLocation.count];
+
+            for (NSUInteger idx = 0; idx < indexesOfWaypointsForCurrentLocation.count; idx++) {
+                MTDWaypoint *waypoint = [MTDWaypoint waypointWithCoordinate:_mtd_userLocationCoordinate];
+                [validWaypoints addObject:waypoint];
+            }
+
+            [allGoals replaceObjectsAtIndexes:indexesOfWaypointsForCurrentLocation
+                                  withObjects:validWaypoints];
+        }
+
+        // we have no valid user location, so we indicate that we need to get one first by returning nil
+        else {
+            return nil;
+        }
+    }
+
+    return allGoals;
+}
+
+- (void)mtd_startUpdatingLocationWithCompletion:(dispatch_block_t)completion {
+    if ([CLLocationManager locationServicesEnabled]) {
+
+#if !TARGET_IPHONE_SIMULATOR
+        if ([[CLLocationManager class] respondsToSelector:@selector(authorizationStatus)] &&
+            [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized) {
+#endif
+            
+            // this introduces a temporary strong-reference cycle (a.k.a retain cycle) that will vanish once the locationManager succeeds or fails
+            self.mtd_locationCompletion = completion;
+
+            self.mtd_locationManager = [CLLocationManager new];
+            self.mtd_locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
+            self.mtd_locationManager.delegate = self;
+
+            [self.mtd_locationManager startUpdatingLocation];
+            MTDLogVerbose(@"Location manager was started to get a location for [MTDWaypoint waypointForCurrentLocation]");
+
+#if !TARGET_IPHONE_SIMULATOR
+        }
+#endif
+        
+    } else {
+        MTDLogWarning(@"Wanted to request location, but either location Services are not enabled or we are not authorized to request location");
+    }
+}
+
+- (void)mtd_stopUpdatingLocationCallingCompletion:(BOOL)callingCompletion {
+    if (callingCompletion) {
+        self.mtd_locationCompletion();
+    }
+
+    self.mtd_locationCompletion = nil;
+    self.mtd_locationManager.delegate = nil;
+    [self.mtd_locationManager stopUpdatingLocation];
+    self.mtd_locationManager = nil;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -556,8 +674,8 @@
 
     // post corresponding notification
     NSDictionary *userInfo = @{MTDDirectionsNotificationKeyFrom: from,
-                               MTDDirectionsNotificationKeyTo: to,
-                               MTDDirectionsNotificationKeyRouteType:@(routeType)};
+MTDDirectionsNotificationKeyTo: to,
+MTDDirectionsNotificationKeyRouteType:@(routeType)};
     NSNotification *notification = [NSNotification notificationWithName:MTDMapViewWillStartLoadingDirections
                                                                  object:self
                                                                userInfo:userInfo];
@@ -602,13 +720,13 @@
 - (UIColor *)mtd_askDelegateForColorOfOverlay:(MTDDirectionsOverlay *)overlay {
     if (_directionsDelegateFlags.colorForOverlay) {
         UIColor *color = [self.directionsDelegate mapView:self colorForDirectionsOverlay:overlay];
-
+        
         // sanity check if delegate returned valid color
         if ([color isKindOfClass:[UIColor class]]) {
             return color;
         }
     }
-
+    
     // nil doesn't get set as overlay color
     return nil;
 }

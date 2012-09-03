@@ -69,7 +69,7 @@
 		9B2C4297155EB6A400C0E4CE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B2C4296155EB6A400C0E4CE /* UIKit.framework */; };
 		9B2C42BA155EB85B00C0E4CE /* MTDDirectionsParserGoogle.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2C42B5155EB85B00C0E4CE /* MTDDirectionsParserGoogle.h */; };
 		9B2C42BB155EB85B00C0E4CE /* MTDDirectionsParserGoogle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C42B6155EB85B00C0E4CE /* MTDDirectionsParserGoogle.m */; };
-		9B2C42BC155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2C42B7155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.h */; };
+		9B2C42BC155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2C42B7155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B2C42BD155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C42B8155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.m */; };
 		9B2C42BE155EB85B00C0E4CE /* MTDDirectionsRouteType+Google.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2C42B9155EB85B00C0E4CE /* MTDDirectionsRouteType+Google.h */; };
 		9B4BCD1015CE3C22006B4DB9 /* google_alternatives.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B4BCD0A15CE3C22006B4DB9 /* google_alternatives.xml */; };
@@ -111,6 +111,14 @@
 		9BE9094C15C3A22B003E5462 /* MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BE9094A15C3A22B003E5462 /* MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h */; };
 		9BEE26EB155E92FC008A42F8 /* MTDHTTPRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BEE26E9155E92FC008A42F8 /* MTDHTTPRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9BEE26EC155E92FC008A42F8 /* MTDHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEE26EA155E92FC008A42F8 /* MTDHTTPRequest.m */; };
+		9BF3ED1915DC079300FAD2E6 /* MTDDirectionsRequestOption.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BE7A0FE15C52DA60025164A /* MTDDirectionsRequestOption.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9BF3ED2115DC140100FAD2E6 /* MTDBase64.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BF3ED1F15DC140100FAD2E6 /* MTDBase64.h */; };
+		9BF3ED2215DC140100FAD2E6 /* MTDBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF3ED2015DC140100FAD2E6 /* MTDBase64.m */; };
+		9BF3ED2515DC1AC500FAD2E6 /* MTDGTMStringEncoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BF3ED2315DC1AC500FAD2E6 /* MTDGTMStringEncoding.h */; };
+		9BF3ED2615DC1AC500FAD2E6 /* MTDGTMStringEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF3ED2415DC1AC500FAD2E6 /* MTDGTMStringEncoding.m */; };
+		9BF3ED2915DC1ED600FAD2E6 /* MTDCryptoTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF3ED2815DC1ED600FAD2E6 /* MTDCryptoTest.m */; };
+		9BFC194B15C53EF900C2CEF6 /* google_alternatives.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9BFC194915C53EF900C2CEF6 /* google_alternatives.xml */; };
+		9BFC194C15C53EF900C2CEF6 /* google_intermediate_optimized.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9BFC194A15C53EF900C2CEF6 /* google_intermediate_optimized.xml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -229,6 +237,12 @@
 		9BE9094A15C3A22B003E5462 /* MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h"; sourceTree = "<group>"; };
 		9BEE26E9155E92FC008A42F8 /* MTDHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDHTTPRequest.h; sourceTree = "<group>"; };
 		9BEE26EA155E92FC008A42F8 /* MTDHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDHTTPRequest.m; sourceTree = "<group>"; };
+		9BF3ED1F15DC140100FAD2E6 /* MTDBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDBase64.h; sourceTree = "<group>"; };
+		9BF3ED2015DC140100FAD2E6 /* MTDBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDBase64.m; sourceTree = "<group>"; };
+		9BF3ED2315DC1AC500FAD2E6 /* MTDGTMStringEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDGTMStringEncoding.h; sourceTree = "<group>"; };
+		9BF3ED2415DC1AC500FAD2E6 /* MTDGTMStringEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDGTMStringEncoding.m; sourceTree = "<group>"; };
+		9BF3ED2715DC1ED600FAD2E6 /* MTDCryptoTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDCryptoTest.h; sourceTree = "<group>"; };
+		9BF3ED2815DC1ED600FAD2E6 /* MTDCryptoTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDCryptoTest.m; sourceTree = "<group>"; };
 		9BFC194715C531B700C2CEF6 /* MTDDirectionsAPI+MTDirectionsPrivateAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MTDDirectionsAPI+MTDirectionsPrivateAPI.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -266,6 +280,8 @@
 			children = (
 				9B4E98DE15AD77E5002F0302 /* MTDAddressTest.h */,
 				9B4E98DF15AD77E5002F0302 /* MTDAddressTest.m */,
+				9BF3ED2715DC1ED600FAD2E6 /* MTDCryptoTest.h */,
+				9BF3ED2815DC1ED600FAD2E6 /* MTDCryptoTest.m */,
 				9B812604156948F100C9A6C8 /* MTDDistanceTest.h */,
 				9B812605156948F100C9A6C8 /* MTDDistanceTest.m */,
 				9B58087C15B5F0E200D04EB5 /* MTDFunctionsTest.h */,
@@ -452,6 +468,7 @@
 			isa = PBXGroup;
 			children = (
 				9B10AA09155D85B8002A3052 /* APIs */,
+				9BF3ED1E15DC13F000FAD2E6 /* Crypto */,
 				9B10AA12155D85B8002A3052 /* General */,
 				9B10AA18155D85B8002A3052 /* MapKit */,
 				9B10AA24155D85B8002A3052 /* Parser */,
@@ -476,6 +493,18 @@
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
+		};
+		9BF3ED1E15DC13F000FAD2E6 /* Crypto */ = {
+			isa = PBXGroup;
+			children = (
+				9BF3ED1F15DC140100FAD2E6 /* MTDBase64.h */,
+				9BF3ED2015DC140100FAD2E6 /* MTDBase64.m */,
+				9BF3ED2315DC1AC500FAD2E6 /* MTDGTMStringEncoding.h */,
+				9BF3ED2415DC1AC500FAD2E6 /* MTDGTMStringEncoding.m */,
+			);
+			name = Crypto;
+			path = MTDirectionsKit/Crypto;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -517,6 +546,9 @@
 				9B06FD1815C0A57900100A7C /* NSObject+MTDXcodeSubscriptingCompatibility.h in Headers */,
 				9BE9094815C39980003E5462 /* MTDDirectionsOverlay+MTDirectionsPrivateAPI.h in Headers */,
 				9BE9094C15C3A22B003E5462 /* MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h in Headers */,
+				9BF3ED1915DC079300FAD2E6 /* MTDDirectionsRequestOption.h in Headers */,
+				9BF3ED2115DC140100FAD2E6 /* MTDBase64.h in Headers */,
+				9BF3ED2515DC1AC500FAD2E6 /* MTDGTMStringEncoding.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -677,6 +709,7 @@
 				9B4E98E015AD77E5002F0302 /* MTDAddressTest.m in Sources */,
 				9BDE015015B203D1001A8132 /* MTDXMLElementTest.m in Sources */,
 				9B58087E15B5F0E200D04EB5 /* MTDFunctionsTest.m in Sources */,
+				9BF3ED2915DC1ED600FAD2E6 /* MTDCryptoTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -703,6 +736,8 @@
 				9B8126311569631500C9A6C8 /* MTDLogging.m in Sources */,
 				9B4E98DC15AD702A002F0302 /* MTDAddress.m in Sources */,
 				9BDE013B15B08A9E001A8132 /* MTDRoute.m in Sources */,
+				9BF3ED2215DC140100FAD2E6 /* MTDBase64.m in Sources */,
+				9BF3ED2615DC1AC500FAD2E6 /* MTDGTMStringEncoding.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -879,7 +914,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/MTDirections.dst;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MTDirectionsKit/Prefix.pch;
 				GCC_THUMB_SUPPORT = NO;
@@ -900,7 +935,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/MTDirections.dst;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MTDirectionsKit/Prefix.pch;
 				GCC_THUMB_SUPPORT = NO;

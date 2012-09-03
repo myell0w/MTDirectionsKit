@@ -70,10 +70,11 @@
 #pragma mark - NSURLConnectionDelegate
 ////////////////////////////////////////////////////////////////////////
 
-- (void)connection:(NSURLConnection *) __unused connection didReceiveResponse:(NSHTTPURLResponse *)response {
+- (void)connection:(__unused NSURLConnection *)connection didReceiveResponse:(NSHTTPURLResponse *)response {
 	_responseHeaderFields = [response allHeaderFields];
     
 	if (response.statusCode >= 400) {
+        _failureCode = response.statusCode;
 		[self mtd_close];
 		return;
 	}
@@ -83,15 +84,15 @@
 	if (contentLength > 0) {
 		_data = [[NSMutableData alloc] initWithCapacity:(NSUInteger)contentLength];
 	} else {
-		_data = [[NSMutableData alloc] init];
+		_data = [NSMutableData new];
 	}
 }
 
-- (void)connection:(NSURLConnection *) __unused connection didReceiveData:(NSData *)data {
+- (void)connection:(__unused NSURLConnection *)connection didReceiveData:(NSData *)data {
 	[_data appendData:data];
 }
 
-- (void)connection:(NSURLConnection *) __unused connection didFailWithError:(NSError *)error {
+- (void)connection:(__unused NSURLConnection *)connection didFailWithError:(NSError *)error {
 	if ([[error domain] isEqual:NSURLErrorDomain]) {
 		_failureCode = error.code;
 	}
@@ -99,7 +100,7 @@
 	[self mtd_close];
 }
 
-- (void)connectionDidFinishLoading:(NSURLConnection *) __unused connection {
+- (void)connectionDidFinishLoading:(__unused NSURLConnection *)connection {
 	[self mtd_close];
 }
 
