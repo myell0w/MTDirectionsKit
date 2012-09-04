@@ -37,14 +37,12 @@
         MTDXMLElement *copyrightNode = [MTDXMLElement nodeForXPathQuery:@"/b:Response/b:Copyright" onXML:self.data namespacePrefix:kMTDNamespacePrefix namespaceURI:kMTDNamespaceURI];
         NSArray *warningNodes = [MTDXMLElement nodesForXPathQuery:@"//b:Warning" onXML:self.data namespacePrefix:kMTDNamespacePrefix namespaceURI:kMTDNamespaceURI];
         NSMutableArray *routes = [NSMutableArray arrayWithCapacity:routeNodes.count];
-        NSArray *orderedIntermediateGoals = nil;
 
         // there is either only one route (possibly optimized with intermediate goals) or several without intermediate goals,
         // so in the second case the locations are always from and to and the locationSequence returns nil (gets checked in mtd_orderedIntermediateGoals)
         NSArray *addressNodesExceptTo = [MTDXMLElement nodesForXPathQuery:@"//b:Route[1]/b:RouteLeg/b:StartLocation/b:Address" onXML:self.data namespacePrefix:kMTDNamespacePrefix namespaceURI:kMTDNamespaceURI];
         MTDXMLElement *toAddressNode = [MTDXMLElement nodeForXPathQuery:@"//b:Route[1]/b:RouteLeg[last()]/b:EndLocation/b:Address" onXML:self.data namespacePrefix:kMTDNamespacePrefix namespaceURI:kMTDNamespaceURI];
         NSArray *locationAddressNodes = [addressNodesExceptTo arrayByAddingObject:toAddressNode];
-        NSArray *locationSequenceNodes = nil; // = [MTDXMLElement nodesForXPathQuery:@"//route[1]/waypoint_index" onXML:self.data];
 
 
         // Parse Routes
@@ -61,24 +59,14 @@
             }
         }
 
-        // Route optimization can reorder the intermediate goals, we want to know the final order
-        if (self.intermediateGoals.count > 0) {
-            // Order the intermediate goals in the order returned by the API (optimized)
-            // and parse the address information and save the address for each goal (from, to, intermediateGoals)
-            orderedIntermediateGoals = [self mtd_orderedIntermediateGoalsWithSequenceNodes:locationSequenceNodes];
-        }
-
         // Parse Addresses
         {
-            // We need to use the already ordered intermediate goals here because the addresses come in the in this order
-            //NSArray *allWaypoints = [self mtd_waypointsIncludingFromAndToWithIntermediateGoals:orderedIntermediateGoals];
-
             // Bing only seems to return addresses for the start- and endlocation
             [self mtd_addAddressesFromAddressNodes:locationAddressNodes toWaypoints:@[self.from, self.to]];
         }
 
         overlay = [[MTDDirectionsOverlay alloc] initWithRoutes:routes
-                                             intermediateGoals:orderedIntermediateGoals
+                                             intermediateGoals:self.intermediateGoals // Bing doesn't support route optimization :(
                                                      routeType:self.routeType];
     } else {
         error = [NSError errorWithDomain:MTDDirectionsKitErrorDomain
@@ -176,18 +164,6 @@
     return waypoints;
 }
 
-// This method parses all addresses and orders the intermediate goals in the same order as optimised by the API.
-// That is, if optimization is enabled the Google can reorder the intermediate goals to provide the fastest route possible.
-- (NSArray *)mtd_orderedIntermediateGoalsWithSequenceNodes:(NSArray *)sequenceNodes {
-    if (sequenceNodes.count == 0) {
-        return self.intermediateGoals;
-    }
-
-    NSArray *sequence = [sequenceNodes valueForKey:MTDKey(contentString)];
-    // Sort the intermediate goals to be in the order of the numbers contained in sequence
-    return MTDOrderedArrayWithSequence(self.intermediateGoals,sequence);
-}
-
 // This method updates the addresses of all given waypoints
 - (void)mtd_addAddressesFromAddressNodes:(NSArray *)addressNodes toWaypoints:(NSArray *)waypoints {
     // Parse Addresses of goals
@@ -224,17 +200,6 @@
                                                        street:[streetNode contentString]];
 
     return address;
-}
-
-// This method returns an array of all waypoints including from, to and intermediateGoals if specified
-- (NSArray *)mtd_waypointsIncludingFromAndToWithIntermediateGoals:(NSArray *)intermediateGoals {
-    NSMutableArray *allGoals = intermediateGoals != nil ? [NSMutableArray arrayWithArray:intermediateGoals] : [NSMutableArray array];
-    
-    // insert from and to at the right places
-    [allGoals insertObject:self.from atIndex:0];
-    [allGoals addObject:self.to];
-    
-    return allGoals;
 }
 
 @end
