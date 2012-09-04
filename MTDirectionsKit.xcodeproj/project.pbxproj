@@ -87,6 +87,7 @@
 		9B6C18C414A7E18200087893 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18C314A7E18200087893 /* Foundation.framework */; };
 		9B6C18F414A7E40A00087893 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18F314A7E40A00087893 /* libxml2.dylib */; };
 		9B76F452157146BA00B54B05 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76F451157146BA00B54B05 /* CoreGraphics.framework */; };
+		9B7D2AFA15F66D19005E1BE2 /* bing_alternatives.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B7D2AF915F66D19005E1BE2 /* bing_alternatives.xml */; };
 		9B812606156948F100C9A6C8 /* MTDDistanceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B812605156948F100C9A6C8 /* MTDDistanceTest.m */; };
 		9B81260A1569545F00C9A6C8 /* MTDDirectionsParserMapQuestTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B8126091569545F00C9A6C8 /* MTDDirectionsParserMapQuestTest.m */; };
 		9B8126111569576700C9A6C8 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18F314A7E40A00087893 /* libxml2.dylib */; };
@@ -214,6 +215,7 @@
 		9B6C18C314A7E18200087893 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9B6C18F314A7E40A00087893 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		9B76F451157146BA00B54B05 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		9B7D2AF915F66D19005E1BE2 /* bing_alternatives.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = bing_alternatives.xml; sourceTree = "<group>"; };
 		9B812604156948F100C9A6C8 /* MTDDistanceTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDDistanceTest.h; sourceTree = "<group>"; };
 		9B812605156948F100C9A6C8 /* MTDDistanceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDDistanceTest.m; sourceTree = "<group>"; };
 		9B8126081569545F00C9A6C8 /* MTDDirectionsParserMapQuestTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDDirectionsParserMapQuestTest.h; sourceTree = "<group>"; };
@@ -444,6 +446,7 @@
 		9B3F802415BF4479003C70EE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9B7D2AF915F66D19005E1BE2 /* bing_alternatives.xml */,
 				9B0364F415F62B9E00538307 /* bing_driving_path.xml */,
 				9B0364F515F62B9E00538307 /* bing_driving.xml */,
 				9B0364F615F62B9E00538307 /* bing_transit.xml */,
@@ -681,6 +684,7 @@
 				9B0364F915F62B9E00538307 /* bing_driving.xml in Resources */,
 				9B0364FA15F62B9E00538307 /* bing_transit.xml in Resources */,
 				9B0364FB15F62B9E00538307 /* bing_walking.xml in Resources */,
+				9B7D2AFA15F66D19005E1BE2 /* bing_alternatives.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

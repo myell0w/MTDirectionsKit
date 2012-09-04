@@ -13,6 +13,7 @@
 #import "MTDWaypoint.h"
 #import "MTDAddress.h"
 #import "MTDRoute.h"
+#import "NSObject+MTDXcodeSubscriptingCompatibility.h"
 
 
 @implementation MTDDirectionsParserBingTest
@@ -192,6 +193,57 @@
         }];
     });
     
+    while (!testFinished) {
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+    }
+}
+
+- (void)testAlternatives {
+    NSString *path = [[[NSBundle bundleForClass:[self class]] bundlePath] stringByAppendingPathComponent:@"bing_alternatives.xml"];
+    NSData *data = [NSData dataWithContentsOfFile:path];
+
+    STAssertNotNil(data, @"Couldn't read bing_alternatives.xml");
+
+    __block BOOL testFinished = NO;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        MTDDirectionsParserBing *parser = [[MTDDirectionsParserBing alloc] initWithFrom:[MTDWaypoint waypointWithCoordinate:CLLocationCoordinate2DMake(47.059298,16.324089)]
+                                                                                     to:[MTDWaypoint waypointWithCoordinate:CLLocationCoordinate2DMake(48.20255,16.368801)]
+                                                                      intermediateGoals:nil
+                                                                              routeType:MTDDirectionsRouteTypeShortestDriving
+                                                                                   data:data];
+
+
+        [parser parseWithCompletion:^(MTDDirectionsOverlay *overlay, NSError *error) {
+            STAssertNil(error,@"There was an error parsing bing_alternatives.xml");
+
+            STAssertTrue(overlay.routes.count == 2, @"Wrong number of routes");
+
+            STAssertEquals([overlay.distance distanceInMeter], 156629., @"Error parsing distance");
+            STAssertEquals(overlay.timeInSeconds, 6507., @"Error parsing time");
+            STAssertEqualObjects(overlay.formattedTime, @"1:48:27", @"Error formatting time");
+            STAssertTrue(overlay.waypoints.count == 710, @"Wrong number of waypoints");
+
+            MTDRoute *slowerRoute = overlay.routes[0];
+
+            STAssertEquals([slowerRoute.distance distanceInMeter], 180481., @"Error parsing distance");
+            STAssertEquals(slowerRoute.timeInSeconds, 7630., @"Error parsing time");
+            STAssertEqualObjects(slowerRoute.formattedTime, @"2:07:10", @"Error formatting time");
+            STAssertTrue(slowerRoute.waypoints.count == 874, @"Wrong number of waypoints");
+
+            MTDAddress *fromAddress = overlay.fromAddress;
+            MTDAddress *toAddress = overlay.toAddress;
+
+            STAssertEqualObjects(fromAddress.city, @"Güssing", @"fromAddress: error parsing city");
+            STAssertEqualObjects(fromAddress.state, @"Burgenland", @"fromAddress: error parsing state");
+            STAssertEqualObjects(fromAddress.country, @"Austria", @"fromAddress: error parsing country");
+            STAssertEqualObjects(toAddress.city, @"Vienna", @"toAddress: error parsing city");
+            STAssertEqualObjects(toAddress.state, @"Vienna", @"toAddress: error parsing state");
+            STAssertEqualObjects(toAddress.country, @"Austria", @"toAddress: error parsing country");
+
+            testFinished = YES;
+        }];
+    });
+
     while (!testFinished) {
         [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
     }
