@@ -1,0 +1,400 @@
+<Response xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/search/local/ws/rest/v1">
+  <Copyright>
+	Copyright © 2011 Microsoft and its suppliers. All rights reserved. This API cannot be accessed and the content and any results may not be used, reproduced or transmitted in any manner without express written permission from Microsoft Corporation.
+  </Copyright>
+  <BrandLogoUri>
+	http://dev.virtualearth.net/Branding/logo_powered_by.png
+  </BrandLogoUri>
+  <StatusCode>200</StatusCode>
+  <StatusDescription>OK</StatusDescription>
+  <AuthenticationResultCode>ValidCredentials</AuthenticationResultCode>
+  <TraceId>
+	5449c40063b0462596698e263e235aa7
+  </TraceId>
+  <ResourceSets>
+	<ResourceSet>
+	  <EstimatedTotal>1</EstimatedTotal>
+	  <Resources>
+		<Route>
+		  <Id>
+			v62,i0,a0,cen-US,dANjBD75mzgg=,y1,s1,m4,o1,t0,wjpNcA4TvHPU=~rrD3jQAAAAAAAAAAAAAAAAA=~R29sZGVuIEdhdGUgQnJpZGdlLCBDQQ==~~~,wHE9cA+mTHvU=~rrD3jQAAAAAAAAAAAAAAAAA=~RmlzaGVybWFuJ3MgV2hhcmYsIENB~~~,k1,u
+		  </Id>
+		  <BoundingBox>
+			<SouthLatitude>37.798793</SouthLatitude>
+			<WestLongitude>-122.478416</WestLongitude>
+			<NorthLatitude>37.818312</NorthLatitude>
+			<EastLongitude>-122.40625</EastLongitude>
+		  </BoundingBox>
+		  <DistanceUnit>Kilometer</DistanceUnit>
+		  <DurationUnit>Second</DurationUnit>
+		  <TravelDistance>2.363</TravelDistance>
+		  <TravelDuration>3416</TravelDuration>
+		  <RouteLeg>
+			<TravelDistance>2.363</TravelDistance>
+			<TravelDuration>3416</TravelDuration>
+			<ActualStart>
+			  <Latitude>37.807561</Latitude>
+			  <Longitude>-122.475024</Longitude>
+			</ActualStart>
+			<ActualEnd>
+			  <Latitude>37.80551</Latitude>
+			  <Longitude>-122.41784</Longitude>
+			</ActualEnd>
+			<StartLocation>
+			  <Name>Golden Gate Bridge, CA</Name>
+			  <Point>
+				<Latitude>37.818298</Latitude>
+				<Longitude>-122.478416</Longitude>
+			  </Point>
+			  <BoundingBox>
+				<SouthLatitude>37.789328</SouthLatitude>
+				<WestLongitude>-122.527295</WestLongitude>
+				<NorthLatitude>37.847269</NorthLatitude>
+				<EastLongitude>-122.429538</EastLongitude>
+			  </BoundingBox>
+			  <EntityType>Bridge</EntityType>
+			  <Address>
+				<AdminDistrict>CA</AdminDistrict>
+				<CountryRegion>United States</CountryRegion>
+				<FormattedAddress>Golden Gate Bridge, CA</FormattedAddress>
+				<Landmark>Golden Gate Bridge</Landmark>
+			  </Address>
+			  <Confidence>High</Confidence>
+			  <MatchCode>Good</MatchCode>
+			  <GeocodePoint>
+				<Latitude>37.818298</Latitude>
+				<Longitude>-122.478416</Longitude>
+				<CalculationMethod>Rooftop</CalculationMethod>
+				<UsageType>Display</UsageType>
+			  </GeocodePoint>
+			</StartLocation>
+			<EndLocation>
+			  <Name>Fisherman's Wharf, CA</Name>
+			  <Point>
+				<Latitude>37.806549</Latitude>
+				<Longitude>-122.40625</Longitude>
+			  </Point>
+			  <BoundingBox>
+				<SouthLatitude>37.777579</SouthLatitude>
+				<WestLongitude>-122.455121</WestLongitude>
+				<NorthLatitude>37.835519</NorthLatitude>
+				<EastLongitude>-122.357379</EastLongitude>
+			  </BoundingBox>
+			  <EntityType>PopulatedPlace</EntityType>
+			  <Address>
+				<AdminDistrict>CA</AdminDistrict>
+				<AdminDistrict2>San Francisco Co.</AdminDistrict2>
+				<CountryRegion>United States</CountryRegion>
+				<FormattedAddress>Fisherman's Wharf, CA</FormattedAddress>
+				<Locality>Fisherman's Wharf</Locality>
+			  </Address>
+			  <Confidence>High</Confidence>
+			  <MatchCode>Good</MatchCode>
+			  <GeocodePoint>
+				<Latitude>37.806549</Latitude>
+				<Longitude>-122.40625</Longitude>
+				<CalculationMethod>Rooftop</CalculationMethod>
+				<UsageType>Display</UsageType>
+			  </GeocodePoint>
+			</EndLocation>
+			<ItineraryItem>
+			  <TravelMode>Transit</TravelMode>
+			  <TravelDistance>1.307</TravelDistance>
+			  <TravelDuration>941</TravelDuration>
+			  <ManeuverPoint>
+				<Latitude>37.818298</Latitude>
+				<Longitude>-122.478416</Longitude>
+			  </ManeuverPoint>
+			  <Instruction maneuverType="DepartStart">
+				Walk: From Golden Gate Bridge, CA to Golden Gate Bridge/Parking Lot
+			  </Instruction>
+			  <CompassDirection/>
+			  <Detail>
+				<ManeuverType>Walk</ManeuverType>
+				<StartPathIndex>0</StartPathIndex>
+				<EndPathIndex>8</EndPathIndex>
+				<CompassDegrees>0</CompassDegrees>
+				<Mode>Transit</Mode>
+				<PreviousEntityId>0</PreviousEntityId>
+				<NextEntityId>0</NextEntityId>
+				<RoadType>NotApplicable</RoadType>
+			  </Detail>
+			  <Exit/>
+			  <TollZone/>
+			  <TransitTerminus/>
+			  <IconType>Walk</IconType>
+			  <Time>0001-01-01T00:00:00</Time>
+			  <TransitStopId>0</TransitStopId>
+			  <SideOfStreet>Unknown</SideOfStreet>
+			</ItineraryItem>
+			<ItineraryItem>
+			  <TravelMode>Transit</TravelMode>
+			  <TravelDistance>0</TravelDistance>
+			  <TravelDuration>711</TravelDuration>
+			  <ManeuverPoint>
+				<Latitude>37.807561</Latitude>
+				<Longitude>-122.475024</Longitude>
+			  </ManeuverPoint>
+			  <Instruction maneuverType="TakeTransit">Bus: Take 28 - Fort Mason</Instruction>
+			  <CompassDirection/>
+			  <Hint>Previous stop is Lombard St & Fillmore St</Hint>
+			  <Hint>
+				If you reach Buchanan St & Bay St, you've gone too far
+			  </Hint>
+			  <Detail>
+				<ManeuverType>TakeTransit</ManeuverType>
+				<StartPathIndex>8</StartPathIndex>
+				<EndPathIndex>35</EndPathIndex>
+				<CompassDegrees>0</CompassDegrees>
+				<Mode>Transit</Mode>
+				<PreviousEntityId>0</PreviousEntityId>
+				<NextEntityId>0</NextEntityId>
+				<RoadType>NotApplicable</RoadType>
+			  </Detail>
+			  <ChildItineraryItems>
+				<ItineraryItem>
+				  <TravelMode>Driving</TravelMode>
+				  <TravelDistance>0</TravelDistance>
+				  <TravelDuration>0</TravelDuration>
+				  <ManeuverPoint>
+					<Latitude>0</Latitude>
+					<Longitude>0</Longitude>
+				  </ManeuverPoint>
+				  <Instruction maneuverType="TransitDepart">Depart: Golden Gate Bridge/Parking Lot</Instruction>
+				  <CompassDirection/>
+				  <Detail>
+					<ManeuverType>TransitDepart</ManeuverType>
+					<Name>Golden Gate Bridge/Parking Lot</Name>
+					<CompassDegrees>0</CompassDegrees>
+					<Mode>Driving</Mode>
+					<PreviousEntityId>0</PreviousEntityId>
+					<NextEntityId>0</NextEntityId>
+					<RoadType>None</RoadType>
+				  </Detail>
+				  <Exit/>
+				  <TollZone/>
+				  <TransitTerminus/>
+				  <IconType>None</IconType>
+				  <Time>2011-11-01T15:17:43</Time>
+				  <TransitStopId>100966</TransitStopId>
+				  <SideOfStreet>Unknown</SideOfStreet>
+				</ItineraryItem>
+				<ItineraryItem>
+				  <TravelMode>Driving</TravelMode>
+				  <TravelDistance>0</TravelDistance>
+				  <TravelDuration>0</TravelDuration>
+				  <ManeuverPoint>
+					<Latitude>0</Latitude>
+					<Longitude>0</Longitude>
+				  </ManeuverPoint>
+				  <Instruction maneuverType="TransitArrive">Arrive: Laguna St & Chestnut St</Instruction>
+				  <CompassDirection/>
+				  <Detail>
+					<ManeuverType>TransitArrive</ManeuverType>
+					<Name>Laguna St & Chestnut St</Name>
+					<CompassDegrees>0</CompassDegrees>
+					<Mode>Driving</Mode>
+					<PreviousEntityId>0</PreviousEntityId>
+					<NextEntityId>0</NextEntityId>
+					<RoadType>None</RoadType>
+				  </Detail>
+				  <Exit/>
+				  <TollZone/>
+				  <TransitTerminus/>
+				  <IconType>None</IconType>
+				  <Time>2011-11-01T15:29:34</Time>
+				  <TransitStopId>101446</TransitStopId>
+				  <SideOfStreet>Unknown</SideOfStreet>
+				</ItineraryItem>
+			  </ChildItineraryItems>
+			  <Exit/>
+			  <TollZone/>
+			  <TransitTerminus>Fort Mason</TransitTerminus>
+			  <IconType>Bus</IconType>
+			  <Time>0001-01-01T00:00:00</Time>
+			  <TransitStopId>0</TransitStopId>
+			  <TransitLine>
+				<VerboseName>19TH AVENUE</VerboseName>
+				<AbbreviatedName>28</AbbreviatedName>
+				<AgencyId>30</AgencyId>
+				<AgencyName>San Francisco Municipal Transportation Agency</AgencyName>
+				<LineColor>16777215</LineColor>
+				<LineTextColor>16777215</LineTextColor>
+				<Uri>http://www.sfmta.com</Uri>
+				<PhoneNumber/>
+				<ProviderInfo>
+				  Service Provider: San Francisco Municipal Transportation Agency
+				</ProviderInfo>
+			  </TransitLine>
+			  <SideOfStreet>Unknown</SideOfStreet>
+			</ItineraryItem>
+			<ItineraryItem>
+			  <TravelMode>Transit</TravelMode>
+			  <TravelDistance>0.011</TravelDistance>
+			  <TravelDuration>60</TravelDuration>
+			  <ManeuverPoint>
+				<Latitude>37.80135</Latitude>
+				<Longitude>-122.43123</Longitude>
+			  </ManeuverPoint>
+			  <Instruction maneuverType="Walk">
+				Walk: From Laguna St & Chestnut St to Chestnut St & Laguna St
+			  </Instruction>
+			  <CompassDirection/>
+			  <Hint>8 minutes to make the connection</Hint>
+			  <Detail>
+				<ManeuverType>Walk</ManeuverType>
+				<StartPathIndex>35</StartPathIndex>
+				<EndPathIndex>38</EndPathIndex>
+				<CompassDegrees>0</CompassDegrees>
+				<Mode>Transit</Mode>
+				<PreviousEntityId>0</PreviousEntityId>
+				<NextEntityId>0</NextEntityId>
+				<RoadType>NotApplicable</RoadType>
+			  </Detail>
+			  <Exit/>
+			  <TollZone/>
+			  <TransitTerminus/>
+			  <IconType>Walk</IconType>
+			  <Time>0001-01-01T00:00:00</Time>
+			  <TransitStopId>0</TransitStopId>
+			  <SideOfStreet>Unknown</SideOfStreet>
+			</ItineraryItem>
+			<ItineraryItem>
+			  <TravelMode>Transit</TravelMode>
+			  <TravelDistance>0</TravelDistance>
+			  <TravelDuration>532</TravelDuration>
+			  <ManeuverPoint>
+				<Latitude>37.80137</Latitude>
+				<Longitude>-122.431406</Longitude>
+			  </ManeuverPoint>
+			  <Instruction maneuverType="TakeTransit">Bus: Take 30 - Townsend & 4 th St.</Instruction>
+			  <CompassDirection/>
+			  <Hint>Previous stop is North Point St & Hyde St</Hint>
+			  <Hint>
+				If you reach Columbus Ave & Francisco St, you've gone too far
+			  </Hint>
+			  <Detail>
+				<ManeuverType>TakeTransit</ManeuverType>
+				<StartPathIndex>38</StartPathIndex>
+				<EndPathIndex>46</EndPathIndex>
+				<CompassDegrees>0</CompassDegrees>
+				<Mode>Transit</Mode>
+				<PreviousEntityId>0</PreviousEntityId>
+				<NextEntityId>0</NextEntityId>
+				<RoadType>NotApplicable</RoadType>
+			  </Detail>
+			  <ChildItineraryItems>
+				<ItineraryItem>
+				  <TravelMode>Driving</TravelMode>
+				  <TravelDistance>0</TravelDistance>
+				  <TravelDuration>0</TravelDuration>
+				  <ManeuverPoint>
+					<Latitude>0</Latitude>
+					<Longitude>0</Longitude>
+				  </ManeuverPoint>
+				  <Instruction maneuverType="TransitDepart">Depart: Chestnut St & Laguna St</Instruction>
+				  <CompassDirection/>
+				  <Detail>
+					<ManeuverType>TransitDepart</ManeuverType>
+					<Name>Chestnut St & Laguna St</Name>
+					<CompassDegrees>0</CompassDegrees>
+					<Mode>Driving</Mode>
+					<PreviousEntityId>0</PreviousEntityId>
+					<NextEntityId>0</NextEntityId>
+					<RoadType>None</RoadType>
+				  </Detail>
+				  <Exit/>
+				  <TollZone/>
+				  <TransitTerminus/>
+				  <IconType>None</IconType>
+				  <Time>2011-11-01T15:37:34</Time>
+				  <TransitStopId>100197</TransitStopId>
+				  <SideOfStreet>Unknown</SideOfStreet>
+				</ItineraryItem>
+				<ItineraryItem>
+				  <TravelMode>Driving</TravelMode>
+				  <TravelDistance>0</TravelDistance>
+				  <TravelDuration>0</TravelDuration>
+				  <ManeuverPoint>
+					<Latitude>0</Latitude>
+					<Longitude>0</Longitude>
+				  </ManeuverPoint>
+				  <Instruction maneuverType="TransitArrive">Arrive: Columbus Ave & Bay St</Instruction>
+				  <CompassDirection/>
+				  <Detail>
+					<ManeuverType>TransitArrive</ManeuverType>
+					<Name>Columbus Ave & Bay St</Name>
+					<CompassDegrees>0</CompassDegrees>
+					<Mode>Driving</Mode>
+					<PreviousEntityId>0</PreviousEntityId>
+					<NextEntityId>0</NextEntityId>
+					<RoadType>None</RoadType>
+				  </Detail>
+				  <Exit/>
+				  <TollZone/>
+				  <TransitTerminus/>
+				  <IconType>None</IconType>
+				  <Time>2011-11-01T15:46:26</Time>
+				  <TransitStopId>100337</TransitStopId>
+				  <SideOfStreet>Unknown</SideOfStreet>
+				</ItineraryItem>
+			  </ChildItineraryItems>
+			  <Exit/>
+			  <TollZone/>
+			  <TransitTerminus>Townsend & 4 th St.</TransitTerminus>
+			  <IconType>Bus</IconType>
+			  <Time>0001-01-01T00:00:00</Time>
+			  <TransitStopId>0</TransitStopId>
+			  <TransitLine>
+				<VerboseName>STOCKTON</VerboseName>
+				<AbbreviatedName>30</AbbreviatedName>
+				<AgencyId>30</AgencyId>
+				<AgencyName>San Francisco Municipal Transportation Agency</AgencyName>
+				<LineColor>16777215</LineColor>
+				<LineTextColor>16777215</LineTextColor>
+				<Uri>http://www.sfmta.com</Uri>
+				<PhoneNumber/>
+				<ProviderInfo>
+				  Service Provider: San Francisco Municipal Transportation Agency
+				</ProviderInfo>
+			  </TransitLine>
+			  <SideOfStreet>Unknown</SideOfStreet>
+			</ItineraryItem>
+			<ItineraryItem>
+			  <TravelMode>Transit</TravelMode>
+			  <TravelDistance>1.045</TravelDistance>
+			  <TravelDuration>752</TravelDuration>
+			  <ManeuverPoint>
+				<Latitude>37.80551</Latitude>
+				<Longitude>-122.41784</Longitude>
+			  </ManeuverPoint>
+			  <Instruction maneuverType="ArriveFinish">
+				Walk: From Columbus Ave & Bay St to Fisherman's Wharf, CA
+			  </Instruction>
+			  <CompassDirection/>
+			  <Detail>
+				<ManeuverType>Walk</ManeuverType>
+				<StartPathIndex>46</StartPathIndex>
+				<EndPathIndex>50</EndPathIndex>
+				<CompassDegrees>0</CompassDegrees>
+				<Mode>Transit</Mode>
+				<PreviousEntityId>0</PreviousEntityId>
+				<NextEntityId>0</NextEntityId>
+				<RoadType>NotApplicable</RoadType>
+			  </Detail>
+			  <Exit/>
+			  <TollZone/>
+			  <TransitTerminus/>
+			  <IconType>Walk</IconType>
+			  <Time>0001-01-01T00:00:00</Time>
+			  <TransitStopId>0</TransitStopId>
+			  <SideOfStreet>Unknown</SideOfStreet>
+			</ItineraryItem>
+			<StartTime>2011-11-01T15:02:02</StartTime>
+			<EndTime>2011-11-01T15:58:58</EndTime>
+		  </RouteLeg>
+		</Route>
+	  </Resources>
+	</ResourceSet>
+  </ResourceSets>
+</Response>

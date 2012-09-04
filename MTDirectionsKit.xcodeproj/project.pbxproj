@@ -35,6 +35,10 @@
 
 /* Begin PBXBuildFile section */
 		9B0364F315F6271000538307 /* MTDDirectionsParserBingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0364F215F6271000538307 /* MTDDirectionsParserBingTest.m */; };
+		9B0364F815F62B9E00538307 /* bing_driving_path.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B0364F415F62B9E00538307 /* bing_driving_path.xml */; };
+		9B0364F915F62B9E00538307 /* bing_driving.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B0364F515F62B9E00538307 /* bing_driving.xml */; };
+		9B0364FA15F62B9E00538307 /* bing_transit.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B0364F615F62B9E00538307 /* bing_transit.xml */; };
+		9B0364FB15F62B9E00538307 /* bing_walking.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B0364F715F62B9E00538307 /* bing_walking.xml */; };
 		9B06FD1815C0A57900100A7C /* NSObject+MTDXcodeSubscriptingCompatibility.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B06FD1615C0A57900100A7C /* NSObject+MTDXcodeSubscriptingCompatibility.h */; };
 		9B10A99F155D5867002A3052 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B10A99E155D5867002A3052 /* SenTestingKit.framework */; };
 		9B10A9A2155D5867002A3052 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18C314A7E18200087893 /* Foundation.framework */; };
@@ -152,6 +156,10 @@
 /* Begin PBXFileReference section */
 		9B0364F115F6271000538307 /* MTDDirectionsParserBingTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDDirectionsParserBingTest.h; sourceTree = "<group>"; };
 		9B0364F215F6271000538307 /* MTDDirectionsParserBingTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDDirectionsParserBingTest.m; sourceTree = "<group>"; };
+		9B0364F415F62B9E00538307 /* bing_driving_path.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = bing_driving_path.xml; sourceTree = "<group>"; };
+		9B0364F515F62B9E00538307 /* bing_driving.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = bing_driving.xml; sourceTree = "<group>"; };
+		9B0364F615F62B9E00538307 /* bing_transit.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = bing_transit.xml; sourceTree = "<group>"; };
+		9B0364F715F62B9E00538307 /* bing_walking.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = bing_walking.xml; sourceTree = "<group>"; };
 		9B06FD1615C0A57900100A7C /* NSObject+MTDXcodeSubscriptingCompatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+MTDXcodeSubscriptingCompatibility.h"; path = "MTDirectionsKit/Supporting Files/NSObject+MTDXcodeSubscriptingCompatibility.h"; sourceTree = SOURCE_ROOT; };
 		9B10A99D155D5867002A3052 /* MTDirectionsKitTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MTDirectionsKitTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B10A99E155D5867002A3052 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -436,6 +444,10 @@
 		9B3F802415BF4479003C70EE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9B0364F415F62B9E00538307 /* bing_driving_path.xml */,
+				9B0364F515F62B9E00538307 /* bing_driving.xml */,
+				9B0364F615F62B9E00538307 /* bing_transit.xml */,
+				9B0364F715F62B9E00538307 /* bing_walking.xml */,
 				9BFC194915C53EF900C2CEF6 /* google_alternatives.xml */,
 				9B3F802515BF4479003C70EE /* google_guessing_vienna.xml */,
 				9BFC194A15C53EF900C2CEF6 /* google_intermediate_optimized.xml */,
@@ -665,6 +677,10 @@
 				9BEA8C8615C3746D00469D85 /* mapquest_alternatives.xml in Resources */,
 				9BFC194B15C53EF900C2CEF6 /* google_alternatives.xml in Resources */,
 				9BFC194C15C53EF900C2CEF6 /* google_intermediate_optimized.xml in Resources */,
+				9B0364F815F62B9E00538307 /* bing_driving_path.xml in Resources */,
+				9B0364F915F62B9E00538307 /* bing_driving.xml in Resources */,
+				9B0364FA15F62B9E00538307 /* bing_transit.xml in Resources */,
+				9B0364FB15F62B9E00538307 /* bing_walking.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
