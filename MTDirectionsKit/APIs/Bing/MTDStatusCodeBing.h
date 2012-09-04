@@ -13,7 +13,7 @@
  
  The currently supported status codes are:
 
- - MTDStatusCodeBingSuccess            = 0
+ - MTDStatusCodeBingSuccess            = 200
  - MTDStatusCodeBingBadRequest         = 400
  - MTDStatusCodeBingUnauthorized       = 401
  - MTDStatusCodeBingForbidden          = 403
@@ -25,7 +25,7 @@
  [Bing API Status Codes](http://msdn.microsoft.com/en-us/library/ff701703.aspx "Status Codes").
  */
 typedef enum {
-    MTDStatusCodeBingSuccess            = 0,
+    MTDStatusCodeBingSuccess            = 200,
     MTDStatusCodeBingBadRequest         = 400,
     MTDStatusCodeBingUnauthorized       = 401,
     MTDStatusCodeBingForbidden          = 403,

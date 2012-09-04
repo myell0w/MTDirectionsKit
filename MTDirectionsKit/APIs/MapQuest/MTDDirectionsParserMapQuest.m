@@ -20,12 +20,12 @@
     MTDAssert(completion != nil, @"Completion block must be set");
 
     MTDXMLElement *statusCodeNode = [MTDXMLElement nodeForXPathQuery:@"//statusCode" onXML:self.data];
-    NSInteger statusCode = MTDStatusCodeMapQuestSuccess;
+    MTDStatusCodeMapQuest statusCode = MTDStatusCodeMapQuestSuccess;
     MTDDirectionsOverlay *overlay = nil;
     NSError *error = nil;
 
     if (statusCodeNode != nil) {
-        statusCode = [statusCodeNode.contentString integerValue];
+        statusCode = (MTDStatusCodeMapQuest)[statusCodeNode.contentString integerValue];
     }
 
     if (statusCode == MTDStatusCodeMapQuestSuccess) {

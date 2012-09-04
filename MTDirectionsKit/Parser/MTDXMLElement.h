@@ -69,16 +69,7 @@
  */
 + (NSArray *)nodesForXPathQuery:(NSString *)query onXML:(NSData *)xmlData;
 
-/**
- Returns an array of all xml nodes matching the given query on the given html data.
- 
- @param query the xpath query
- @param htmlData data representing a html document
- @return array of MTDXMLElements
- @see nodesForXPathQuery:onXML:
- @see nodeForXPathQuery:onHTML:
- */
-+ (NSArray *)nodesForXPathQuery:(NSString *)query onHTML:(NSData *)htmlData;
++ (NSArray *)nodesForXPathQuery:(NSString *)query onXML:(NSData *)xmlData namespacePrefix:(NSString *)namespacePrefix namespaceURI:(NSString *)namespaceURI;
 
 /**
  Returns the first xml node matching the given query on the given xml data.
@@ -90,15 +81,7 @@
  */
 + (MTDXMLElement *)nodeForXPathQuery:(NSString *)query onXML:(NSData *)xmlData;
 
-/**
- Returns an array of all xml nodes matching the given query on the given html data.
- 
- @param query the xpath query
- @param htmlData data representing a html document
- @return MTDXMLElement representing the first node matching
- @see nodesForXPathQuery:onXML:
- */
-+ (MTDXMLElement *)nodeForXPathQuery:(NSString *)query onHTML:(NSData *)htmlData;
++ (MTDXMLElement *)nodeForXPathQuery:(NSString *)query onXML:(NSData *)xmlData namespacePrefix:(NSString *)namespacePrefix namespaceURI:(NSString *)namespaceURI;
 
 
 /******************************************
