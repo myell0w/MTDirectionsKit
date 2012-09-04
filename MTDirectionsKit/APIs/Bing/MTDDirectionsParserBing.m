@@ -41,10 +41,9 @@
 
         // there is either only one route (possibly optimized with intermediate goals) or several without intermediate goals,
         // so in the second case the locations are always from and to and the locationSequence returns nil (gets checked in mtd_orderedIntermediateGoals)
-        // TODO: 
-        //NSArray *addressNodesExceptTo = [MTDXMLElement nodesForXPathQuery:@"//Route[1]/leg/start_address" onXML:self.data];
-        //MTDXMLElement *toAddressNode = [MTDXMLElement nodeForXPathQuery:@"//route[1]/leg[last()]/end_address" onXML:self.data];
-        //NSArray *locationAddressNodes = [addressNodesExceptTo arrayByAddingObject:toAddressNode];
+        NSArray *addressNodesExceptTo = [MTDXMLElement nodesForXPathQuery:@"//b:Route[1]/b:RouteLeg/b:StartLocation/b:Address" onXML:self.data namespacePrefix:kMTDNamespacePrefix namespaceURI:kMTDNamespaceURI];
+        MTDXMLElement *toAddressNode = [MTDXMLElement nodeForXPathQuery:@"//b:Route[1]/b:RouteLeg[last()]/b:EndLocation/b:Address" onXML:self.data namespacePrefix:kMTDNamespacePrefix namespaceURI:kMTDNamespaceURI];
+        NSArray *locationAddressNodes = [addressNodesExceptTo arrayByAddingObject:toAddressNode];
         NSArray *locationSequenceNodes = nil; // = [MTDXMLElement nodesForXPathQuery:@"//route[1]/waypoint_index" onXML:self.data];
 
 
@@ -74,7 +73,8 @@
             // We need to use the already ordered intermediate goals here because the addresses come in the in this order
             //NSArray *allWaypoints = [self mtd_waypointsIncludingFromAndToWithIntermediateGoals:orderedIntermediateGoals];
 
-            //[self mtd_addAddressesFromAddressNodes:locationAddressNodes toWaypoints:allWaypoints];
+            // Bing only seems to return addresses for the start- and endlocation
+            [self mtd_addAddressesFromAddressNodes:locationAddressNodes toWaypoints:@[self.from, self.to]];
         }
 
         overlay = [[MTDDirectionsOverlay alloc] initWithRoutes:routes
@@ -115,9 +115,9 @@
     // Parse Additional Info of directions
     {
         if (distanceNode != nil) {
-            double distanceInMeters = [distanceNode.contentString doubleValue];
+            double distanceInKm = [distanceNode.contentString doubleValue];
 
-            distance = [MTDDistance distanceWithMeters:distanceInMeters];
+            distance = [MTDDistance distanceWithValue:distanceInKm measurementSystem:MTDMeasurementSystemMetric];
         }
 
         if (timeNode != nil) {
@@ -190,15 +190,16 @@
 
 // This method updates the addresses of all given waypoints
 - (void)mtd_addAddressesFromAddressNodes:(NSArray *)addressNodes toWaypoints:(NSArray *)waypoints {
-    MTDAssert(addressNodes.count == waypoints.count, @"Number of addresses doesn't match number of waypoints");
-
     // Parse Addresses of goals
     [addressNodes enumerateObjectsUsingBlock:^(MTDXMLElement *addressNode, NSUInteger idx, __unused BOOL *stop) {
         MTDAddress *address = [self mtd_addressFromAddressNode:addressNode];
+
+        if (idx < waypoints.count) {
         MTDWaypoint *waypoint = waypoints[idx];
 
         // update address of corresponding waypoint
         waypoint.address = address;
+        }
     }];
 }
 

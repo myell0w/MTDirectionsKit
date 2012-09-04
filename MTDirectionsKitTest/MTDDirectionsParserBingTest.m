@@ -8,7 +8,7 @@
 
 
 #import "MTDDirectionsParserBingTest.h"
-#import "MTDirectionsParserBing.h"
+#import "MTDDirectionsOverlay.h"
 #import "MTDDistance.h"
 #import "MTDWaypoint.h"
 #import "MTDAddress.h"
@@ -35,6 +35,23 @@
         [parser parseWithCompletion:^(MTDDirectionsOverlay *overlay, NSError *error) {
             STAssertNil(error,@"There was an error parsing bing_walking.xml");
 
+            STAssertTrue(overlay.routes.count == 1, @"Wrong number of routes");
+            STAssertEquals([overlay.distance distanceInMeter], 3854., @"Error parsing distance");
+            STAssertEquals(overlay.timeInSeconds, 2775., @"Error parsing time");
+            STAssertEqualObjects(overlay.formattedTime, @"46:15", @"Error formatting time");
+            STAssertTrue(overlay.waypoints.count == 2, @"Wrong number of waypoints");
+
+            MTDAddress *fromAddress = overlay.fromAddress;
+            MTDAddress *toAddress = overlay.toAddress;
+
+            STAssertEqualObjects(fromAddress.city, @"Paris", @"fromAddress: error parsing city");
+            STAssertEqualObjects(fromAddress.state, @"IdF", @"fromAddress: error parsing state");
+            STAssertEqualObjects(fromAddress.county, @"Paris", @"fromAddress: error parsing county");
+            STAssertEqualObjects(fromAddress.country, @"France", @"fromAddress: error parsing country");
+            STAssertEqualObjects(toAddress.city, @"Paris", @"toAddress: error parsing city");
+            STAssertEqualObjects(toAddress.state, @"IdF", @"toAddress: error parsing state");
+            STAssertEqualObjects(toAddress.county, @"Paris", @"toAddress: error parsing county");
+            STAssertEqualObjects(toAddress.country, @"France", @"toAddress: error parsing country");
 
             testFinished = YES;
         }];
@@ -63,6 +80,23 @@
         [parser parseWithCompletion:^(MTDDirectionsOverlay *overlay, NSError *error) {
             STAssertNil(error,@"There was an error parsing bing_driving.xml");
 
+            STAssertTrue(overlay.routes.count == 1, @"Wrong number of routes");
+            STAssertEquals([overlay.distance distanceInMeter], 26273., @"Error parsing distance");
+            STAssertEquals(overlay.timeInSeconds, 1094., @"Error parsing time");
+            STAssertEqualObjects(overlay.formattedTime, @"18:14", @"Error formatting time");
+            STAssertTrue(overlay.waypoints.count == 2, @"Wrong number of waypoints");
+
+            MTDAddress *fromAddress = overlay.fromAddress;
+            MTDAddress *toAddress = overlay.toAddress;
+
+            STAssertEqualObjects(fromAddress.city, @"Lynnwood", @"fromAddress: error parsing city");
+            STAssertEqualObjects(fromAddress.state, @"WA", @"fromAddress: error parsing state");
+            STAssertEqualObjects(fromAddress.county, @"Snohomish Co.", @"fromAddress: error parsing county");
+            STAssertEqualObjects(fromAddress.country, @"United States", @"fromAddress: error parsing country");
+            STAssertEqualObjects(toAddress.city, @"Seattle", @"toAddress: error parsing city");
+            STAssertEqualObjects(toAddress.state, @"WA", @"toAddress: error parsing state");
+            STAssertEqualObjects(toAddress.county, @"King Co.", @"toAddress: error parsing county");
+            STAssertEqualObjects(toAddress.country, @"United States", @"toAddress: error parsing country");
 
             testFinished = YES;
         }];
@@ -91,6 +125,21 @@
         [parser parseWithCompletion:^(MTDDirectionsOverlay *overlay, NSError *error) {
             STAssertNil(error,@"There was an error parsing bing_transit.xml");
 
+            STAssertTrue(overlay.routes.count == 1, @"Wrong number of routes");
+            STAssertEquals([overlay.distance distanceInMeter], 2363., @"Error parsing distance");
+            STAssertEquals(overlay.timeInSeconds, 3416., @"Error parsing time");
+            STAssertEqualObjects(overlay.formattedTime, @"56:56", @"Error formatting time");
+            STAssertTrue(overlay.waypoints.count == 2, @"Wrong number of waypoints");
+
+            MTDAddress *fromAddress = overlay.fromAddress;
+            MTDAddress *toAddress = overlay.toAddress;
+
+            STAssertEqualObjects(fromAddress.state, @"CA", @"fromAddress: error parsing state");
+            STAssertEqualObjects(fromAddress.country, @"United States", @"fromAddress: error parsing country");
+            // STAssertEqualObjects(toAddress.city, @"Fisherman's Wharf", @"toAddress: error parsing city");
+            STAssertEqualObjects(toAddress.state, @"CA", @"toAddress: error parsing state");
+            STAssertEqualObjects(toAddress.county, @"San Francisco Co.", @"toAddress: error parsing county");
+            STAssertEqualObjects(toAddress.country, @"United States", @"toAddress: error parsing country");
 
             testFinished = YES;
         }];
@@ -119,6 +168,23 @@
         [parser parseWithCompletion:^(MTDDirectionsOverlay *overlay, NSError *error) {
             STAssertNil(error,@"There was an error parsing bing_driving_path.xml");
 
+            STAssertTrue(overlay.routes.count == 1, @"Wrong number of routes");
+            STAssertEquals([overlay.distance distanceInMeter], 15211., @"Error parsing distance");
+            STAssertEquals(overlay.timeInSeconds, 1084., @"Error parsing time");
+            STAssertEqualObjects(overlay.formattedTime, @"18:04", @"Error formatting time");
+            STAssertTrue(overlay.waypoints.count == 69, @"Wrong number of waypoints %d", overlay.waypoints.count);
+
+            MTDAddress *fromAddress = overlay.fromAddress;
+            MTDAddress *toAddress = overlay.toAddress;
+
+            STAssertEqualObjects(fromAddress.city, @"Minneapolis", @"fromAddress: error parsing city");
+            STAssertEqualObjects(fromAddress.state, @"MN", @"fromAddress: error parsing state");
+            STAssertEqualObjects(fromAddress.county, @"Hennepin Co.", @"fromAddress: error parsing county");
+            STAssertEqualObjects(fromAddress.country, @"United States", @"fromAddress: error parsing country");
+            STAssertEqualObjects(toAddress.city, @"St Paul", @"toAddress: error parsing city");
+            STAssertEqualObjects(toAddress.state, @"MN", @"toAddress: error parsing state");
+            STAssertEqualObjects(toAddress.county, @"Ramsey Co.", @"toAddress: error parsing county");
+            STAssertEqualObjects(toAddress.country, @"United States", @"toAddress: error parsing country");
 
             testFinished = YES;
         }];
