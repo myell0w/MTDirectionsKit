@@ -35,6 +35,7 @@
         // All returned routes (can be several if using alternative routes)
         NSArray *routeNodes = [MTDXMLElement nodesForXPathQuery:@"//b:Route" onXML:self.data namespacePrefix:kMTDNamespacePrefix namespaceURI:kMTDNamespaceURI];
         MTDXMLElement *copyrightNode = [MTDXMLElement nodeForXPathQuery:@"/b:Response/b:Copyright" onXML:self.data namespacePrefix:kMTDNamespacePrefix namespaceURI:kMTDNamespaceURI];
+        NSArray *warningNodes = [MTDXMLElement nodesForXPathQuery:@"//b:Warning" onXML:self.data namespacePrefix:kMTDNamespacePrefix namespaceURI:kMTDNamespaceURI];
         NSMutableArray *routes = [NSMutableArray arrayWithCapacity:routeNodes.count];
         NSArray *orderedIntermediateGoals = nil;
 
@@ -50,9 +51,10 @@
         // Parse Routes
         {
             NSString *copyright = copyrightNode.contentString;
+            NSArray *warnings = warningNodes.count > 0 ? [warningNodes valueForKey:MTDKey(contentString)] : nil;
             
             for (MTDXMLElement *routeNode in routeNodes) {
-                MTDRoute *route = [self mtd_routeFromRouteNode:routeNode copyright:copyright];
+                MTDRoute *route = [self mtd_routeFromRouteNode:routeNode copyright:copyright warnings:warnings];
 
                 if (route != nil) {
                     [routes addObject:route];
@@ -97,7 +99,7 @@
 #pragma mark - Private
 ////////////////////////////////////////////////////////////////////////
 
-- (MTDRoute *)mtd_routeFromRouteNode:(MTDXMLElement *)routeNode copyright:(NSString *)copyright {
+- (MTDRoute *)mtd_routeFromRouteNode:(MTDXMLElement *)routeNode copyright:(NSString *)copyright warnings:(NSArray *)warnings {
     NSArray *waypointNodes = [routeNode childNodesTraversingAllChildrenWithPath:@"RoutePath.Line.Point"];
     MTDXMLElement *distanceNode = [routeNode firstChildNodeWithName:@"TravelDistance"];
     MTDXMLElement *timeNode = [routeNode firstChildNodeWithName:@"TravelDuration"];
@@ -124,6 +126,10 @@
 
         if (copyright != nil) {
             [additionalInfo setValue:copyright forKey:MTDAdditionalInfoCopyrightsKey];
+        }
+
+        if (warnings != nil) {
+            [additionalInfo setValue:warnings forKey:MTDAdditionalInfoWarningsKey];
         }
     }
 

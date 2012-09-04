@@ -77,8 +77,7 @@
 
         error = [NSError errorWithDomain:MTDDirectionsKitErrorDomain
                                     code:statusCode
-                                userInfo:@{MTDDirectionsKitDataKey: self.data,
-         MTDDirectionsKitErrorMessageKey: errorMessage}];
+                                userInfo:@{MTDDirectionsKitDataKey: self.data, MTDDirectionsKitErrorMessageKey: errorMessage}];
 
         MTDLogError(@"Error occurred during parsing of directions from %@ to %@: %@ \n%@",
                     self.from,
@@ -133,9 +132,9 @@
     }
 
     MTDRoute *route = [[MTDRoute alloc] initWithWaypoints:waypoints
-                                      distance:distance
-                                 timeInSeconds:timeInSeconds
-                                additionalInfo:additionalInfo];
+                                                 distance:distance
+                                            timeInSeconds:timeInSeconds
+                                           additionalInfo:additionalInfo];
 
     route.name = nameNode.contentString;
 
@@ -225,11 +224,11 @@
 // This method returns an array of all waypoints including from, to and intermediateGoals if specified
 - (NSArray *)mtd_waypointsIncludingFromAndToWithIntermediateGoals:(NSArray *)intermediateGoals {
     NSMutableArray *allGoals = intermediateGoals != nil ? [NSMutableArray arrayWithArray:intermediateGoals] : [NSMutableArray array];
-
+    
     // insert from and to at the right places
     [allGoals insertObject:self.from atIndex:0];
     [allGoals addObject:self.to];
-
+    
     return allGoals;
 }
 

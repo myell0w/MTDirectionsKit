@@ -34,6 +34,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		9B0364F315F6271000538307 /* MTDDirectionsParserBingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0364F215F6271000538307 /* MTDDirectionsParserBingTest.m */; };
 		9B06FD1815C0A57900100A7C /* NSObject+MTDXcodeSubscriptingCompatibility.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B06FD1615C0A57900100A7C /* NSObject+MTDXcodeSubscriptingCompatibility.h */; };
 		9B10A99F155D5867002A3052 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B10A99E155D5867002A3052 /* SenTestingKit.framework */; };
 		9B10A9A2155D5867002A3052 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18C314A7E18200087893 /* Foundation.framework */; };
@@ -149,6 +150,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9B0364F115F6271000538307 /* MTDDirectionsParserBingTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDDirectionsParserBingTest.h; sourceTree = "<group>"; };
+		9B0364F215F6271000538307 /* MTDDirectionsParserBingTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDDirectionsParserBingTest.m; sourceTree = "<group>"; };
 		9B06FD1615C0A57900100A7C /* NSObject+MTDXcodeSubscriptingCompatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+MTDXcodeSubscriptingCompatibility.h"; path = "MTDirectionsKit/Supporting Files/NSObject+MTDXcodeSubscriptingCompatibility.h"; sourceTree = SOURCE_ROOT; };
 		9B10A99D155D5867002A3052 /* MTDirectionsKitTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MTDirectionsKitTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B10A99E155D5867002A3052 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -297,6 +300,8 @@
 				9B58087D15B5F0E200D04EB5 /* MTDFunctionsTest.m */,
 				9B10A9A9155D5867002A3052 /* MTDWaypointTest.h */,
 				9B10A9AA155D5867002A3052 /* MTDWaypointTest.m */,
+				9B0364F115F6271000538307 /* MTDDirectionsParserBingTest.h */,
+				9B0364F215F6271000538307 /* MTDDirectionsParserBingTest.m */,
 				9B8126081569545F00C9A6C8 /* MTDDirectionsParserMapQuestTest.h */,
 				9B8126091569545F00C9A6C8 /* MTDDirectionsParserMapQuestTest.m */,
 				9B81265115698A8900C9A6C8 /* MTDDirectionsParserGoogleTest.h */,
@@ -736,6 +741,7 @@
 				9BDE015015B203D1001A8132 /* MTDXMLElementTest.m in Sources */,
 				9B58087E15B5F0E200D04EB5 /* MTDFunctionsTest.m in Sources */,
 				9BF3ED2915DC1ED600FAD2E6 /* MTDCryptoTest.m in Sources */,
+				9B0364F315F6271000538307 /* MTDDirectionsParserBingTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
