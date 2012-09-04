@@ -25,8 +25,8 @@
 
     __block BOOL testFinished = NO;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        MTDDirectionsParserBing *parser = [[MTDDirectionsParserBing alloc] initWithFrom:[MTDWaypoint waypointWithCoordinate:CLLocationCoordinate2DMake(47.0616,16.3236)]
-                                                                                     to:[MTDWaypoint waypointWithCoordinate:CLLocationCoordinate2DMake(48.209,16.354)]
+        MTDDirectionsParserBing *parser = [[MTDDirectionsParserBing alloc] initWithFrom:[MTDWaypoint waypointWithCoordinate:CLLocationCoordinate2DMake(48.85791,2.295273)]
+                                                                                     to:[MTDWaypoint waypointWithCoordinate:CLLocationCoordinate2DMake(48.860118,2.340455)]
                                                                       intermediateGoals:nil
                                                                               routeType:MTDDirectionsRouteTypeShortestDriving
                                                                                    data:data];
@@ -44,10 +44,12 @@
             MTDAddress *fromAddress = overlay.fromAddress;
             MTDAddress *toAddress = overlay.toAddress;
 
+            STAssertEqualObjects(fromAddress.street, @"Eiffel Tower", @"fromAddress: error parsing street");
             STAssertEqualObjects(fromAddress.city, @"Paris", @"fromAddress: error parsing city");
             STAssertEqualObjects(fromAddress.state, @"IdF", @"fromAddress: error parsing state");
             STAssertEqualObjects(fromAddress.county, @"Paris", @"fromAddress: error parsing county");
             STAssertEqualObjects(fromAddress.country, @"France", @"fromAddress: error parsing country");
+            STAssertEqualObjects(toAddress.street, @"Louvre", @"toAddress: error parsing street");
             STAssertEqualObjects(toAddress.city, @"Paris", @"toAddress: error parsing city");
             STAssertEqualObjects(toAddress.state, @"IdF", @"toAddress: error parsing state");
             STAssertEqualObjects(toAddress.county, @"Paris", @"toAddress: error parsing county");
@@ -70,8 +72,8 @@
 
     __block BOOL testFinished = NO;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        MTDDirectionsParserBing *parser = [[MTDDirectionsParserBing alloc] initWithFrom:[MTDWaypoint waypointWithCoordinate:CLLocationCoordinate2DMake(47.0616,16.3236)]
-                                                                                     to:[MTDWaypoint waypointWithCoordinate:CLLocationCoordinate2DMake(48.209,16.354)]
+        MTDDirectionsParserBing *parser = [[MTDDirectionsParserBing alloc] initWithFrom:[MTDWaypoint waypointWithCoordinate:CLLocationCoordinate2DMake(47.825321,-122.292407)]
+                                                                                     to:[MTDWaypoint waypointWithCoordinate:CLLocationCoordinate2DMake(47.603559,-122.329436)]
                                                                       intermediateGoals:nil
                                                                               routeType:MTDDirectionsRouteTypeShortestDriving
                                                                                    data:data];
@@ -115,8 +117,8 @@
 
     __block BOOL testFinished = NO;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        MTDDirectionsParserBing *parser = [[MTDDirectionsParserBing alloc] initWithFrom:[MTDWaypoint waypointWithCoordinate:CLLocationCoordinate2DMake(47.0616,16.3236)]
-                                                                                     to:[MTDWaypoint waypointWithCoordinate:CLLocationCoordinate2DMake(48.209,16.354)]
+        MTDDirectionsParserBing *parser = [[MTDDirectionsParserBing alloc] initWithFrom:[MTDWaypoint waypointWithCoordinate:CLLocationCoordinate2DMake(37.807561,-122.475024)]
+                                                                                     to:[MTDWaypoint waypointWithCoordinate:CLLocationCoordinate2DMake(37.80551,-122.41784)]
                                                                       intermediateGoals:nil
                                                                               routeType:MTDDirectionsRouteTypeShortestDriving
                                                                                    data:data];
@@ -158,8 +160,8 @@
 
     __block BOOL testFinished = NO;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        MTDDirectionsParserBing *parser = [[MTDDirectionsParserBing alloc] initWithFrom:[MTDWaypoint waypointWithCoordinate:CLLocationCoordinate2DMake(47.0616,16.3236)]
-                                                                                     to:[MTDWaypoint waypointWithCoordinate:CLLocationCoordinate2DMake(48.209,16.354)]
+        MTDDirectionsParserBing *parser = [[MTDDirectionsParserBing alloc] initWithFrom:[MTDWaypoint waypointWithCoordinate:CLLocationCoordinate2DMake(44.979063,-93.264908)]
+                                                                                     to:[MTDWaypoint waypointWithCoordinate:CLLocationCoordinate2DMake(44.943829,-93.093325)]
                                                                       intermediateGoals:nil
                                                                               routeType:MTDDirectionsRouteTypeShortestDriving
                                                                                    data:data];
@@ -185,11 +187,11 @@
             STAssertEqualObjects(toAddress.state, @"MN", @"toAddress: error parsing state");
             STAssertEqualObjects(toAddress.county, @"Ramsey Co.", @"toAddress: error parsing county");
             STAssertEqualObjects(toAddress.country, @"United States", @"toAddress: error parsing country");
-
+            
             testFinished = YES;
         }];
     });
-
+    
     while (!testFinished) {
         [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
     }

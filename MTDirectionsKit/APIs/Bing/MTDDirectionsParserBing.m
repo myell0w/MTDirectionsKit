@@ -212,6 +212,10 @@
     MTDXMLElement *postalCodeNode = [addressNode firstChildNodeWithName:@"PostalCode"];
     MTDXMLElement *countryNode = [addressNode firstChildNodeWithName:@"CountryRegion"];
 
+    if (streetNode == nil) {
+        streetNode = [addressNode firstChildNodeWithName:@"Landmark"];
+    }
+
     MTDAddress *address = [[MTDAddress alloc] initWithCountry:[countryNode contentString]
                                                         state:[stateNode contentString]
                                                        county:[countyNode contentString]
