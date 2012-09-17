@@ -8,10 +8,11 @@
 #import "MTDDirectionsOverlay.h"
 #import "MTDDirectionsOverlayView.h"
 #import "MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h"
+#import "MTDMapViewDelegateProxy.h"
 #import "MTDFunctions.h"
 
 
-@interface MTDMapView () <MKMapViewDelegate, CLLocationManagerDelegate> {
+@interface MTDMapView () <MKMapViewDelegate> {
     // flags for methods implemented in the delegate
     struct {
         unsigned int willStartLoadingDirections:1;
@@ -20,8 +21,6 @@
         unsigned int colorForOverlay:1;
         unsigned int lineWidthFactorForOverlay:1;
 	} _directionsDelegateFlags;
-
-    CLLocationCoordinate2D _mtd_userLocationCoordinate;
 }
 
 @property (nonatomic, strong, readwrite) MTDDirectionsOverlayView *directionsOverlayView; // re-defined as read/write
@@ -31,6 +30,9 @@
 /** The request object for retreiving directions from the specified API */
 @property (nonatomic, strong, setter = mtd_setRequest:) MTDDirectionsRequest *mtd_request;
 
+
+/** the delegate proxy for CLLocationManagerDelegate and UIGestureRecognizerDelegate */
+@property (nonatomic, strong) MTDMapViewDelegateProxy *mtd_delegateProxy;
 /** The location manager used to request user location if needed */
 @property (nonatomic, strong) CLLocationManager *mtd_locationManager;
 /** The completion block executed after we found a location */
@@ -64,6 +66,10 @@
 }
 
 - (void)dealloc {
+    _mtd_delegateProxy.mapView = nil;
+    _mtd_tapGestureRecognizer.delegate = nil;
+    _mtd_locationManager.delegate = nil;
+    self.delegate = nil;
     [self cancelLoadOfDirections];
 }
 
@@ -267,24 +273,6 @@
 }
 
 ////////////////////////////////////////////////////////////////////////
-#pragma mark - CLLocationManagerDelegate
-////////////////////////////////////////////////////////////////////////
-
-- (void)locationManager:(__unused CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(__unused CLLocation *)oldLocation {
-    MTDLogVerbose(@"Location manager found a location for [MTDWaypoint waypointForCurrentLocation]");
-
-    _mtd_userLocationCoordinate = newLocation.coordinate;
-    [self mtd_stopUpdatingLocationCallingCompletion:YES];
-}
-
-- (void)locationManager:(__unused CLLocationManager *)manager didFailWithError:(NSError *)error {
-    MTDLogVerbose(@"Location manager failed while finding a location for [MTDWaypoint waypointForCurrentLocation]");
-
-    [self mtd_stopUpdatingLocationCallingCompletion:NO];
-    [self mtd_notifyDelegateDidFailLoadingOverlayWithError:error];
-}
-
-////////////////////////////////////////////////////////////////////////
 #pragma mark - MKMapViewDelegate Proxies
 ////////////////////////////////////////////////////////////////////////
 
@@ -335,7 +323,7 @@
         [self.mtd_trueDelegate mapView:mapView didUpdateUserLocation:userLocation];
     }
 
-    _mtd_userLocationCoordinate = userLocation.coordinate;
+    self.mtd_delegateProxy.lastKnownUserCoordinate = userLocation.coordinate;
 }
 
 - (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error {
@@ -415,11 +403,12 @@
     [super setDelegate:self];
 
     _directionsDisplayType = MTDDirectionsDisplayTypeNone;
-    _mtd_userLocationCoordinate = kCLLocationCoordinate2DInvalid;
+    _mtd_delegateProxy = [[MTDMapViewDelegateProxy alloc] initWithMapView:self];
 
     // we need this GestureRecognizer to be able to select alternative routes
-    self.mtd_tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mtd_handleMapTap:)];
-    self.mtd_tapGestureRecognizer.enabled = NO;
+    _mtd_tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mtd_handleMapTap:)];
+    _mtd_tapGestureRecognizer.enabled = NO;
+    _mtd_tapGestureRecognizer.delegate = _mtd_delegateProxy;
 
     // we require all gesture recognizer except other single-tap gesture recognizers to fail
     for (UIGestureRecognizer *gesture in self.gestureRecognizers) {
@@ -427,14 +416,14 @@
             UITapGestureRecognizer *systemTap = (UITapGestureRecognizer *)gesture;
 
             if (systemTap.numberOfTapsRequired > 1) {
-                [self.mtd_tapGestureRecognizer requireGestureRecognizerToFail:systemTap];
+                [_mtd_tapGestureRecognizer requireGestureRecognizerToFail:systemTap];
             }
         } else {
-            [self.mtd_tapGestureRecognizer requireGestureRecognizerToFail:gesture];
+            [_mtd_tapGestureRecognizer requireGestureRecognizerToFail:gesture];
         }
     }
 
-    [self addGestureRecognizer:self.mtd_tapGestureRecognizer];
+    [self addGestureRecognizer:_mtd_tapGestureRecognizer];
 }
 
 - (void)mtd_handleMapTap:(UITapGestureRecognizer *)tap {
@@ -570,13 +559,13 @@
 
     if (indexesOfWaypointsForCurrentLocation.count > 0) {
         // if we already have a valid user location replace the references to waypointForCurrentLocation with the actual location
-        if (CLLocationCoordinate2DIsValid(_mtd_userLocationCoordinate)) {
+        if (CLLocationCoordinate2DIsValid(self.mtd_delegateProxy.lastKnownUserCoordinate)) {
             MTDLogVerbose(@"We already have a valid current location, no need to start CLLocationManager");
 
             NSMutableArray *validWaypoints = [NSMutableArray arrayWithCapacity:indexesOfWaypointsForCurrentLocation.count];
 
             for (NSUInteger idx = 0; idx < indexesOfWaypointsForCurrentLocation.count; idx++) {
-                MTDWaypoint *waypoint = [MTDWaypoint waypointWithCoordinate:_mtd_userLocationCoordinate];
+                MTDWaypoint *waypoint = [MTDWaypoint waypointWithCoordinate:self.mtd_delegateProxy.lastKnownUserCoordinate];
                 [validWaypoints addObject:waypoint];
             }
 
@@ -600,13 +589,13 @@
         if ([[CLLocationManager class] respondsToSelector:@selector(authorizationStatus)] &&
             [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized) {
 #endif
-            
+
             // this introduces a temporary strong-reference cycle (a.k.a retain cycle) that will vanish once the locationManager succeeds or fails
             self.mtd_locationCompletion = completion;
 
             self.mtd_locationManager = [CLLocationManager new];
             self.mtd_locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
-            self.mtd_locationManager.delegate = self;
+            self.mtd_locationManager.delegate = self.mtd_delegateProxy;
 
             [self.mtd_locationManager startUpdatingLocation];
             MTDLogVerbose(@"Location manager was started to get a location for [MTDWaypoint waypointForCurrentLocation]");
@@ -614,7 +603,7 @@
 #if !TARGET_IPHONE_SIMULATOR
         }
 #endif
-        
+
     } else {
         MTDLogWarning(@"Wanted to request location, but either location Services are not enabled or we are not authorized to request location");
     }
@@ -643,9 +632,9 @@
     }
 
     // post corresponding notification
-    NSDictionary *userInfo = @{MTDDirectionsNotificationKeyFrom: from,
-MTDDirectionsNotificationKeyTo: to,
-MTDDirectionsNotificationKeyRouteType:@(routeType)};
+    NSDictionary *userInfo = (@{MTDDirectionsNotificationKeyFrom: from,
+                              MTDDirectionsNotificationKeyTo: to,
+                              MTDDirectionsNotificationKeyRouteType:@(routeType)});
     NSNotification *notification = [NSNotification notificationWithName:MTDMapViewWillStartLoadingDirections
                                                                  object:self
                                                                userInfo:userInfo];

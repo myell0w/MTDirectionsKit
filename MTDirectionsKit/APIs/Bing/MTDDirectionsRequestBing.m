@@ -38,8 +38,13 @@ static NSString *mtd_apiKey = nil;
 
         // set parameter for alternative routes?
         BOOL alternativeRoutes = (self.mtd_options & MTDDirectionsRequestOptionAlternativeRoutes) == MTDDirectionsRequestOptionAlternativeRoutes;
+        BOOL optimizeRoute = (self.mtd_options & MTDDirectionsRequestOptionOptimize) == MTDDirectionsRequestOptionOptimize;
+
         if (alternativeRoutes) {
             [self setValue:kMTDBingMaxRoutes forParameter:@"maxSolutions"];
+        }
+        if (intermediateGoals.count > 0 && optimizeRoute) {
+            MTDLogInfo(@"Bing Routes API unfortunately doesn't support optimizing route goals.");
         }
 
         // set parameter route type
