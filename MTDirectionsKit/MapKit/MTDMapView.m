@@ -35,6 +35,8 @@
 @property (nonatomic, strong) CLLocationManager *mtd_locationManager;
 /** The completion block executed after we found a location */
 @property (nonatomic, copy) dispatch_block_t mtd_locationCompletion;
+/** Gesture recognizer to change active route */
+@property (nonatomic, strong) UITapGestureRecognizer *mtd_tapGestureRecognizer;
 
 @end
 
@@ -180,6 +182,10 @@
         if (directionsOverlay != nil) {
             [self addOverlay:directionsOverlay];
         }
+
+        // we enable the gesture recognizer to change the active route only,
+        // if there is more than one route
+        self.mtd_tapGestureRecognizer.enabled = directionsOverlay.routes.count > 1;
     }
 }
 
@@ -412,7 +418,8 @@
     _mtd_userLocationCoordinate = kCLLocationCoordinate2DInvalid;
 
     // we need this GestureRecognizer to be able to select alternative routes
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mtd_handleMapTap:)];
+    self.mtd_tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mtd_handleMapTap:)];
+    self.mtd_tapGestureRecognizer.enabled = NO;
 
     // we require all gesture recognizer except other single-tap gesture recognizers to fail
     for (UIGestureRecognizer *gesture in self.gestureRecognizers) {
@@ -420,14 +427,14 @@
             UITapGestureRecognizer *systemTap = (UITapGestureRecognizer *)gesture;
 
             if (systemTap.numberOfTapsRequired > 1) {
-                [tap requireGestureRecognizerToFail:systemTap];
+                [self.mtd_tapGestureRecognizer requireGestureRecognizerToFail:systemTap];
             }
         } else {
-            [tap requireGestureRecognizerToFail:gesture];
+            [self.mtd_tapGestureRecognizer requireGestureRecognizerToFail:gesture];
         }
     }
 
-    [self addGestureRecognizer:tap];
+    [self addGestureRecognizer:self.mtd_tapGestureRecognizer];
 }
 
 - (void)mtd_handleMapTap:(UITapGestureRecognizer *)tap {
