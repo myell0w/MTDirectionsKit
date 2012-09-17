@@ -160,7 +160,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (void)setRegionToShowDirectionsAnimated:(BOOL)animated {
-    [self mtd_setRegionFromWaypoints:self.directionsOverlay.waypoints edgePadding:UIEdgeInsetsZero animated:animated];
+    [self setVisibleMapRect:self.directionsOverlay.boundingMapRect edgePadding:UIEdgeInsetsZero animated:animated];
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -447,36 +447,6 @@
                 [self.directionsOverlayView mtd_handleTapAtPoint:[tap locationInView:self.directionsOverlayView]];
             }
         }
-    }
-}
-
-- (void)mtd_setRegionFromWaypoints:(NSArray *)waypoints edgePadding:(UIEdgeInsets)edgePadding animated:(BOOL)animated {
-    if (waypoints != nil) {
-        CLLocationDegrees maxX = -DBL_MAX;
-        CLLocationDegrees maxY = -DBL_MAX;
-        CLLocationDegrees minX = DBL_MAX;
-        CLLocationDegrees minY = DBL_MAX;
-
-        for (NSUInteger i=0; i<waypoints.count; i++) {
-            MTDWaypoint *currentLocation = waypoints[i];
-            MKMapPoint mapPoint = MKMapPointForCoordinate(currentLocation.coordinate);
-
-            if (mapPoint.x > maxX) {
-                maxX = mapPoint.x;
-            }
-            if (mapPoint.x < minX) {
-                minX = mapPoint.x;
-            }
-            if (mapPoint.y > maxY) {
-                maxY = mapPoint.y;
-            }
-            if (mapPoint.y < minY) {
-                minY = mapPoint.y;
-            }
-        }
-
-        MKMapRect mapRect = MKMapRectMake(minX,minY,maxX-minX,maxY-minY);
-        [self setVisibleMapRect:mapRect edgePadding:edgePadding animated:animated];
     }
 }
 
