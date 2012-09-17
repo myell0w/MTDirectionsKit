@@ -10,6 +10,14 @@
 #import "MTDStatusCodeMapQuest.h"
 
 
+@interface MTDDirectionsParserMapQuest ()
+
+@property (nonatomic, strong, readwrite) MTDWaypoint *from; // redefined as read/write
+@property (nonatomic, strong, readwrite) MTDWaypoint *to;
+
+@end
+
+
 @implementation MTDDirectionsParserMapQuest
 
 ////////////////////////////////////////////////////////////////////////
@@ -146,11 +154,6 @@
 - (NSArray *)mtd_waypointsFromWaypointNodes:(NSArray *)waypointNodes {
     NSMutableArray *waypoints = [NSMutableArray arrayWithCapacity:waypointNodes.count+2];
 
-    // add start coordinate
-    if (self.from != nil && CLLocationCoordinate2DIsValid(self.from.coordinate)) {
-        [waypoints addObject:self.from];
-    }
-
     // There should only be one element "shapePoints"
     for (MTDXMLElement *childNode in waypointNodes) {
         MTDXMLElement *latitudeNode = [childNode firstChildNodeWithName:@"lat"];
@@ -167,9 +170,18 @@
         }
     }
 
+    // add start coordinate
+    if (self.from != nil && CLLocationCoordinate2DIsValid(self.from.coordinate)) {
+        [waypoints insertObject:self.from atIndex:0];
+    } else if (waypoints.count > 0) {
+        self.from = waypoints[0];
+    }
+
     // add end coordinate
     if (self.to != nil && CLLocationCoordinate2DIsValid(self.to.coordinate)) {
         [waypoints addObject:self.to];
+    } else {
+        self.to = [waypoints lastObject];
     }
 
     return waypoints;

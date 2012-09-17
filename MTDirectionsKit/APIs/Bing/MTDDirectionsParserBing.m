@@ -13,6 +13,14 @@
 #define kMTDNamespaceURI        @"http://schemas.microsoft.com/search/local/ws/rest/v1"
 
 
+@interface MTDDirectionsParserBing ()
+
+@property (nonatomic, strong, readwrite) MTDWaypoint *from; // redefined as read/write
+@property (nonatomic, strong, readwrite) MTDWaypoint *to;
+
+@end
+
+
 @implementation MTDDirectionsParserBing
 
 ////////////////////////////////////////////////////////////////////////
@@ -44,12 +52,11 @@
         MTDXMLElement *toAddressNode = [MTDXMLElement nodeForXPathQuery:@"//b:Route[1]/b:RouteLeg[last()]/b:EndLocation/b:Address" onXML:self.data namespacePrefix:kMTDNamespacePrefix namespaceURI:kMTDNamespaceURI];
         NSArray *locationAddressNodes = [addressNodesExceptTo arrayByAddingObject:toAddressNode];
 
-
         // Parse Routes
         {
             NSString *copyright = copyrightNode.contentString;
             NSArray *warnings = warningNodes.count > 0 ? [warningNodes valueForKey:MTDKey(contentString)] : nil;
-            
+
             for (MTDXMLElement *routeNode in routeNodes) {
                 MTDRoute *route = [self mtd_routeFromRouteNode:routeNode copyright:copyright warnings:warnings];
 
@@ -135,11 +142,6 @@
 - (NSArray *)mtd_waypointsFromWaypointNodes:(NSArray *)waypointNodes {
     NSMutableArray *waypoints = [NSMutableArray arrayWithCapacity:waypointNodes.count+2];
 
-    // add start coordinate
-    if (self.from != nil && CLLocationCoordinate2DIsValid(self.from.coordinate)) {
-        [waypoints addObject:self.from];
-    }
-
     // There should only be one element "shapePoints"
     for (MTDXMLElement *childNode in waypointNodes) {
         MTDXMLElement *latitudeNode = [childNode firstChildNodeWithName:@"Latitude"];
@@ -156,11 +158,20 @@
         }
     }
 
+    // add start coordinate
+    if (self.from != nil && CLLocationCoordinate2DIsValid(self.from.coordinate)) {
+        [waypoints insertObject:self.from atIndex:0];
+    } else if (waypoints.count > 0) {
+        self.from = waypoints[0];
+    }
+
     // add end coordinate
     if (self.to != nil && CLLocationCoordinate2DIsValid(self.to.coordinate)) {
         [waypoints addObject:self.to];
+    } else {
+        self.to = [waypoints lastObject];
     }
-    
+
     return waypoints;
 }
 
@@ -171,10 +182,10 @@
         MTDAddress *address = [self mtd_addressFromAddressNode:addressNode];
 
         if (idx < waypoints.count) {
-        MTDWaypoint *waypoint = waypoints[idx];
+            MTDWaypoint *waypoint = waypoints[idx];
 
-        // update address of corresponding waypoint
-        waypoint.address = address;
+            // update address of corresponding waypoint
+            waypoint.address = address;
         }
     }];
 }
@@ -198,7 +209,7 @@
                                                    postalCode:[postalCodeNode contentString]
                                                          city:[cityNode contentString]
                                                        street:[streetNode contentString]];
-
+    
     return address;
 }
 
