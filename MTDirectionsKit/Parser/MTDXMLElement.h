@@ -64,11 +64,20 @@
  @param query the xpath query
  @param xmlData data representing a xml document
  @return array of MTDXMLElements
- @see nodesForXPathQuery:onHTML:
  @see nodeForXPathQuery:onXML:
  */
 + (NSArray *)nodesForXPathQuery:(NSString *)query onXML:(NSData *)xmlData;
 
+/**
+ Returns an array of all xml nodes matching the given query on the given xml data in the given namespace.
+
+ @param query the xpath query
+ @param xmlData data representing a xml document
+ @param namespacePrefix the XML namespace prefix used
+ @param namespaceURI the URI of the namesapce
+ @return array of MTDXMLElements
+ @see nodeForXPathQuery:onXML:
+ */
 + (NSArray *)nodesForXPathQuery:(NSString *)query onXML:(NSData *)xmlData namespacePrefix:(NSString *)namespacePrefix namespaceURI:(NSString *)namespaceURI;
 
 /**
@@ -77,10 +86,18 @@
  @param query the xpath query
  @param xmlData data representing a xml document
  @return MTDXMLElement representing the first node matching
- @see nodesForXPathQuery:onHTML:
  */
 + (MTDXMLElement *)nodeForXPathQuery:(NSString *)query onXML:(NSData *)xmlData;
 
+/**
+ Returns the first xml node matching the given query on the given xml data in the given namespace.
+
+ @param query the xpath query
+ @param xmlData data representing a xml document
+ @param namespacePrefix the XML namespace prefix used
+ @param namespaceURI the URI of the namesapce
+ @return MTDXMLElement representing the first node matching
+ */
 + (MTDXMLElement *)nodeForXPathQuery:(NSString *)query onXML:(NSData *)xmlData namespacePrefix:(NSString *)namespacePrefix namespaceURI:(NSString *)namespaceURI;
 
 
