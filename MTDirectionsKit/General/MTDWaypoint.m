@@ -51,8 +51,16 @@
 #pragma mark - MTDWaypoint
 ////////////////////////////////////////////////////////////////////////
 
+- (BOOL)hasValidCoordinate {
+    return CLLocationCoordinate2DIsValid(self.coordinate);
+}
+
+- (BOOL)hasValidAddress {
+    return self.address.description.length > 0;
+}
+
 - (BOOL)isValid {
-    return CLLocationCoordinate2DIsValid(self.coordinate) || self.address.description.length > 0 || self == [MTDWaypoint waypointForCurrentLocation];
+    return self.hasValidCoordinate || self.hasValidAddress || self == [MTDWaypoint waypointForCurrentLocation];
 }
 
 // Would love to put this in a category, but then we need to specify -ObjC

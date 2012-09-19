@@ -1,4 +1,5 @@
 #import "MTDFunctions.h"
+#import "MTDWaypoint.h"
 
 
 #define kMTDSecondsPerHour      (60. * 60.)
@@ -7,44 +8,61 @@
 static NSDateFormatter *mtd_dateFormatter = nil;
 
 
-BOOL MTDDirectionsOpenInMapsApp(CLLocationCoordinate2D fromCoordinate, CLLocationCoordinate2D toCoordinate, MTDDirectionsRouteType routeType) {
-	NSString *googleMapsURL = [NSString stringWithFormat:@"http://maps.google.com/maps?saddr=%f,%f&daddr=%f,%f",
-							   fromCoordinate.latitude,fromCoordinate.longitude, toCoordinate.latitude, toCoordinate.longitude];
-    
-    switch(routeType) {
-        case MTDDirectionsRouteTypePedestrian:
-        case MTDDirectionsRouteTypeBicycle: {
-            googleMapsURL = [googleMapsURL stringByAppendingString:@"&dirflg=w"];
-            break;
-        }
-            
-        case MTDDirectionsRouteTypePedestrianIncludingPublicTransport: {
-            googleMapsURL = [googleMapsURL stringByAppendingString:@"&dirflg=r"];
-            break;
-        }
-            
-        case MTDDirectionsRouteTypeFastestDriving:
-        case MTDDirectionsRouteTypeShortestDriving:
-        default: {
-            // do nothing
-            break;
+BOOL MTDDirectionsOpenInMapsApp(MTDWaypoint *from, MTDWaypoint *to, MTDDirectionsRouteType routeType) {
+    if (from.hasValidCoordinate && to.hasValidCoordinate) {
+        if (MTDDirectionsSupportsAppleMaps()) {
+            MKPlacemark *fromPlacemark = [[MKPlacemark alloc] initWithCoordinate:from.coordinate addressDictionary:nil];
+            MKPlacemark *toPlacemark = [[MKPlacemark alloc] initWithCoordinate:to.coordinate addressDictionary:nil];
+            MKMapItem *fromMapItem = [[MKMapItem alloc] initWithPlacemark:fromPlacemark];
+            MKMapItem *toMapItem = [[MKMapItem alloc] initWithPlacemark:toPlacemark];
+            NSDictionary *launchOptions = [NSDictionary dictionaryWithObjectsAndKeys:
+                                           MTDMKLaunchOptionFromMTDDirectionsRouteType(routeType), MKLaunchOptionsDirectionsModeKey,
+                                           nil];
+
+            return [MKMapItem openMapsWithItems:[NSArray arrayWithObjects:fromMapItem, toMapItem, nil]
+                           launchOptions:launchOptions];
+        } else {
+            NSString *googleMapsURL = [NSString stringWithFormat:@"http://maps.google.com/maps?saddr=%f,%f&daddr=%f,%f",
+                                       from.coordinate.latitude,from.coordinate.longitude, to.coordinate.latitude, to.coordinate.longitude];
+
+            switch (routeType) {
+                case MTDDirectionsRouteTypePedestrian:
+                case MTDDirectionsRouteTypeBicycle: {
+                    googleMapsURL = [googleMapsURL stringByAppendingString:@"&dirflg=w"];
+                    break;
+                }
+
+                case MTDDirectionsRouteTypePedestrianIncludingPublicTransport: {
+                    googleMapsURL = [googleMapsURL stringByAppendingString:@"&dirflg=r"];
+                    break;
+                }
+
+                case MTDDirectionsRouteTypeFastestDriving:
+                case MTDDirectionsRouteTypeShortestDriving:
+                default: {
+                    // do nothing
+                    break;
+                }
+            }
+
+            return [[UIApplication sharedApplication] openURL:[NSURL URLWithString:googleMapsURL]];
         }
     }
-    
-	return [[UIApplication sharedApplication] openURL:[NSURL URLWithString:googleMapsURL]];
+
+    return NO;
 }
 
 NSString* MTDURLEncodedString(NSString *string) {
     MTDAssert(string != nil, @"String must be set");
-    
+
     NSMutableString *preparedString = [NSMutableString stringWithString:string];
-    
+
     // replace umlauts, because they don't work in the MapQuest API
     [preparedString replaceOccurrencesOfString:@"ü" withString:@"ue" options:NSCaseInsensitiveSearch range:NSMakeRange(0, preparedString.length)];
     [preparedString replaceOccurrencesOfString:@"ö" withString:@"oe" options:NSCaseInsensitiveSearch range:NSMakeRange(0, preparedString.length)];
     [preparedString replaceOccurrencesOfString:@"ä" withString:@"ae" options:NSCaseInsensitiveSearch range:NSMakeRange(0, preparedString.length)];
     [preparedString replaceOccurrencesOfString:@"ß" withString:@"ss" options:NSCaseInsensitiveSearch range:NSMakeRange(0, preparedString.length)];
-    
+
     return (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
                                                                                  (__bridge CFStringRef)[preparedString description],
                                                                                  NULL,
@@ -62,19 +80,19 @@ NSString* MTDGetFormattedTime(NSTimeInterval interval) {
 
 NSString* MTDGetFormattedTimeWithFormat(NSTimeInterval interval, NSString *format) {
     MTDAssert(format.length > 0, @"Format must be set.");
-    
+
     if (interval <= 0. || format.length == 0) {
         return @"0:00";
     }
-    
+
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         mtd_dateFormatter = [NSDateFormatter new];
         [mtd_dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
     });
-    
+
     [mtd_dateFormatter setDateFormat:format];
-    
+
     return [mtd_dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSinceReferenceDate:interval]];
 }
 
@@ -89,17 +107,17 @@ NSString* MTDStringFromCLLocationCoordinate2D(CLLocationCoordinate2D coordinate)
 UIColor* MTDDarkenedColor(UIColor *color, CGFloat difference) {
     CGColorSpaceRef colorSpace = CGColorGetColorSpace(color.CGColor);
     NSUInteger numberOfComponents = CGColorSpaceGetNumberOfComponents(colorSpace);
-    
+
     if (numberOfComponents != 3) {
         return color;
     }
-    
+
     CGFloat alpha = CGColorGetAlpha(color.CGColor);
     const CGFloat *components = CGColorGetComponents(color.CGColor);
     const CGFloat r = components[0];
     const CGFloat g = components[1];
     const CGFloat b = components[2];
-    
+
     return [UIColor colorWithRed:MAX(0, r - difference)
                            green:MAX(0, g - difference)
                             blue:MAX(0, b - difference)
@@ -112,7 +130,7 @@ BOOL MTDDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMapRect rect
     double maxX = MAX(p0.x, p1.x);
     double maxY = MAX(p0.y, p1.y);
     MKMapRect r2 = MKMapRectMake(minX, minY, maxX - minX, maxY - minY);
-    
+
     return MKMapRectIntersectsRect(rect, r2);
 }
 
@@ -138,3 +156,13 @@ NSArray *MTDOrderedArrayWithSequence(NSArray *array, NSArray *sequence) {
     }];
 }
 
+BOOL MTDDirectionsSupportsAppleMaps(void) {
+    static BOOL supportsAppleMaps = NO;
+
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        supportsAppleMaps = NSClassFromString(@"MKDirectionsRequest") != nil;
+    });
+
+    return supportsAppleMaps;
+}

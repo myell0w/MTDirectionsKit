@@ -23,8 +23,8 @@
 /**
  An MTDMapView instance provides functionality to show directions directly on top of the MapView inside your App.
  MTDMapView is a subclass of MKMapView and therefore uses Apple's standard way of displaying map data, which we all
- know and love. Currently this means that Google Maps is used as a backend, let's see if this is still true once
- iOS 6 will be released :-)
+ know and love. Up until iOS 5 this means that Google Maps is used as a backend for the map data, starting with iOS 6
+ Apple Maps are used.
  
  Sample usage:
  
@@ -211,7 +211,7 @@
  that are currently displayed on top of your MTDMapView in the built-in Maps.app
  of the user's device. Does nothing otherwise.
  
- @return YES, if the Maps App was opened successfully, NO otherwise
+ @return YES in case the directionsOverlay is currently set and the Maps App was opened, NO otherwise
  */
 - (BOOL)openDirectionsInMapApp;
 

@@ -17,6 +17,11 @@
  - MTDDirectionsAPIGoogle
  - MTDDirectionsAPIBing
  - MTDDirectionsAPICustom: Implement your own data source/parser
+
+ Remark: 
+ The Google Directions API Terms of Usage explicitely state the Google Directions is only allowed to be used
+ when directions are displayed on a Google Map. MTDirectionsKit doesn't force you to do that, but it prints
+ a warning to the console if you are trying to do otherwise.
  */
 typedef enum {
     MTDDirectionsAPIMapQuest,
@@ -29,6 +34,7 @@ typedef enum {
 
 /** 
  This function returns the current used API for direction retreival.
+ The default value is MTDDirectionsAPIMapQuest.
  
  @return the current active API used for retreiving directions
  */

@@ -70,6 +70,7 @@
 		9B10AA43155D85B8002A3052 /* MTDDirectionsRequest+MTDirectionsPrivateAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B10AA28155D85B8002A3052 /* MTDDirectionsRequest+MTDirectionsPrivateAPI.h */; };
 		9B10AA44155D85B8002A3052 /* MTDDirectionsRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B10AA29155D85B8002A3052 /* MTDDirectionsRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B10AA45155D85B8002A3052 /* MTDDirectionsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B10AA2A155D85B8002A3052 /* MTDDirectionsRequest.m */; };
+		9B20B3451595F8E60007A057 /* MTDDirectionsRouteType.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B20B3441595F8E60007A057 /* MTDDirectionsRouteType.m */; };
 		9B23F65A15BEFE7C0069EAD1 /* MTDWeak.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B23F65915BEFAC00069EAD1 /* MTDWeak.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B2C4297155EB6A400C0E4CE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B2C4296155EB6A400C0E4CE /* UIKit.framework */; };
 		9B2C42BA155EB85B00C0E4CE /* MTDDirectionsParserGoogle.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2C42B5155EB85B00C0E4CE /* MTDDirectionsParserGoogle.h */; };
@@ -197,6 +198,7 @@
 		9B10AA28155D85B8002A3052 /* MTDDirectionsRequest+MTDirectionsPrivateAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTDDirectionsRequest+MTDirectionsPrivateAPI.h"; sourceTree = "<group>"; };
 		9B10AA29155D85B8002A3052 /* MTDDirectionsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDDirectionsRequest.h; sourceTree = "<group>"; };
 		9B10AA2A155D85B8002A3052 /* MTDDirectionsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDDirectionsRequest.m; sourceTree = "<group>"; };
+		9B20B3441595F8E60007A057 /* MTDDirectionsRouteType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDDirectionsRouteType.m; sourceTree = "<group>"; };
 		9B23F65715BEFAB40069EAD1 /* MTDAssert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MTDAssert.h; path = "MTDirectionsKit/Supporting Files/MTDAssert.h"; sourceTree = SOURCE_ROOT; };
 		9B23F65915BEFAC00069EAD1 /* MTDWeak.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MTDWeak.h; path = "MTDirectionsKit/Supporting Files/MTDWeak.h"; sourceTree = SOURCE_ROOT; };
 		9B2C4296155EB6A400C0E4CE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -375,6 +377,13 @@
 				9B10AA13155D85B8002A3052 /* MTDDirectionsDefines.h */,
 				9B10AA14155D85B8002A3052 /* MTDDirectionsDisplayType.h */,
 				9B10AA15155D85B8002A3052 /* MTDDirectionsRouteType.h */,
+				9B20B3441595F8E60007A057 /* MTDDirectionsRouteType.m */,
+				9B9945FD1562FCF300DE5B1B /* MTDMeasurementSystem.h */,
+				9B9945FE1562FCF300DE5B1B /* MTDMeasurementSystem.m */,
+				9BAC0BE9155DE0C40067C1A1 /* MTDFunctions.h */,
+				9BAC0BEA155DE0C40067C1A1 /* MTDFunctions.m */,
+				9B10AA16155D85B8002A3052 /* MTDWaypoint.h */,
+				9B10AA17155D85B8002A3052 /* MTDWaypoint.m */,
 				9B99460D1563027400DE5B1B /* MTDDistance.h */,
 				9B99460E1563027400DE5B1B /* MTDDistance.m */,
 				9BAC0BE9155DE0C40067C1A1 /* MTDFunctions.h */,
@@ -797,6 +806,7 @@
 				9B9946001562FCF300DE5B1B /* MTDMeasurementSystem.m in Sources */,
 				9B9946101563027400DE5B1B /* MTDDistance.m in Sources */,
 				9B8126311569631500C9A6C8 /* MTDLogging.m in Sources */,
+				9B20B3451595F8E60007A057 /* MTDDirectionsRouteType.m in Sources */,
 				9B4E98DC15AD702A002F0302 /* MTDAddress.m in Sources */,
 				9BDE013B15B08A9E001A8132 /* MTDRoute.m in Sources */,
 				9BF3ED2215DC140100FAD2E6 /* MTDBase64.m in Sources */,

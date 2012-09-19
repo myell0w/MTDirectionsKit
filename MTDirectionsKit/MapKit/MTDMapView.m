@@ -6,6 +6,7 @@
 #import "MTDDirectionsRequest.h"
 #import "MTDDirectionsRequestOption.h"
 #import "MTDDirectionsOverlay.h"
+#import "MTDRoute.h"
 #import "MTDDirectionsOverlayView.h"
 #import "MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h"
 #import "MTDMapViewDelegateProxy.h"
@@ -266,7 +267,9 @@
 
 - (BOOL)openDirectionsInMapApp {
     if (self.directionsOverlay != nil) {
-        return MTDDirectionsOpenInMapsApp(self.fromCoordinate, self.toCoordinate, self.directionsOverlay.routeType);
+        return MTDDirectionsOpenInMapsApp(self.directionsOverlay.activeRoute.from,
+                                          self.directionsOverlay.activeRoute.to,
+                                          self.directionsOverlay.routeType);
     }
 
     return NO;
@@ -635,6 +638,7 @@
     NSDictionary *userInfo = (@{MTDDirectionsNotificationKeyFrom: from,
                               MTDDirectionsNotificationKeyTo: to,
                               MTDDirectionsNotificationKeyRouteType:@(routeType)});
+
     NSNotification *notification = [NSNotification notificationWithName:MTDMapViewWillStartLoadingDirections
                                                                  object:self
                                                                userInfo:userInfo];

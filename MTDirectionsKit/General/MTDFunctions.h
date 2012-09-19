@@ -10,6 +10,9 @@
 #import "MTDDirectionsRouteType.h"
 
 
+@class MTDWaypoint;
+
+
 // Safer method for KVO
 #define MTDKey(_SEL)               (NSStringFromSelector(@selector(_SEL)))
 
@@ -20,12 +23,12 @@
  by public transport or by car, MTDDirectionsRouteTypePedestrian is used in case MTDDirectionsRouteTypeBicycle
  was specified.
  
- @param fromCoordinate the start coordinate of the route
- @param toCoordinate the end coordinate of the route
+ @param from the starting waypoint of the route
+ @param to the end waypoint of the route
  @param routeType the specified form of travelling, e.g. walking, by bike, by car
  @return YES, if the Maps App was opened successfully, NO otherwise
  */
-BOOL MTDDirectionsOpenInMapsApp(CLLocationCoordinate2D fromCoordinate, CLLocationCoordinate2D toCoordinate, MTDDirectionsRouteType routeType);
+BOOL MTDDirectionsOpenInMapsApp(MTDWaypoint *from, MTDWaypoint *to, MTDDirectionsRouteType routeType);
 
 /**
  Creates a percent-escaped version of the given string.
@@ -85,6 +88,14 @@ BOOL MTDDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMapRect rect
  @return a newly ordered array 
  */
 NSArray *MTDOrderedArrayWithSequence(NSArray *array, NSArray *sequence);
+
+/**
+ This function returns a flag that indicates whether we are running on iOS 6 or up and Apple Maps
+ are used as map source instead of Google Maps.
+
+ @return YES, if we are on iOS6 or up, NO otherwise
+ */
+BOOL MTDDirectionsSupportsAppleMaps(void);
 
 /**
  If there exists an element in the array with the given index, this function returns it.
