@@ -54,11 +54,15 @@
 
 - (MKMapRect)boundingMapRect {
     if (self.routes.count > 0) {
-        MKMapRect boundingMapRect = MKMapRectMake(0., 0., 0., 0.);
+        __block MKMapRect boundingMapRect = MKMapRectNull;
 
-        for (MTDRoute *route in self.routes) {
-            boundingMapRect = MKMapRectUnion(boundingMapRect, route.mtd_polyline.boundingMapRect);
-        }
+        [self.routes enumerateObjectsUsingBlock:^(MTDRoute *route, NSUInteger idx, __unused BOOL *stop) {
+            if (idx == 0) {
+                boundingMapRect = route.mtd_polyline.boundingMapRect;
+            } else {
+                boundingMapRect = MKMapRectUnion(boundingMapRect, route.mtd_polyline.boundingMapRect);
+            }
+        }];
 
         return boundingMapRect;
     } else {

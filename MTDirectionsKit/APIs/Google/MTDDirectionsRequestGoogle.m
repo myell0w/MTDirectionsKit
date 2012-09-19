@@ -33,8 +33,8 @@ static NSString *mtd_cryptographicKey = nil;
     if ((self = [super initWithFrom:from to:to intermediateGoals:intermediateGoals routeType:routeType options:options completion:completion])) {
         [self mtd_setup];
         
-        [self setValue:[from descriptionForAPI:MTDDirectionsAPIGoogle] forParameter:@"origin"];
-        [self setValue:[to descriptionForAPI:MTDDirectionsAPIGoogle] forParameter:@"destination"];
+        [self setValue:[from descriptionForAPI:[self API]] forParameter:@"origin"];
+        [self setValue:[to descriptionForAPI:[self API]] forParameter:@"destination"];
         [self setValue:MTDDirectionStringForDirectionRouteTypeGoogle(routeType) forParameter:@"mode"];
 
 
@@ -62,7 +62,7 @@ static NSString *mtd_cryptographicKey = nil;
         NSMutableString *parameter = [NSMutableString stringWithString:(optimizeRoute ? @"optimize:true" : @"optimize:false")];
         
         [intermediateGoals enumerateObjectsUsingBlock:^(id obj, __unused NSUInteger idx, __unused BOOL *stop) {
-            [parameter appendFormat:@"|%@",[obj descriptionForAPI:MTDDirectionsAPIGoogle]];
+            [parameter appendFormat:@"|%@",[obj descriptionForAPI:[self API]]];
         }];
         
         [self setValue:parameter forParameter:@"waypoints"];

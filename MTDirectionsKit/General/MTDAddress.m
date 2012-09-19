@@ -93,6 +93,46 @@
             MTDAddressFieldStreet];
 }
 
+- (NSDictionary *)addressDictionary {
+    if (!self.normalised) {
+        return nil;
+    }
+    
+    NSMutableDictionary *addressDictionary = [NSMutableDictionary dictionaryWithCapacity:6];
+
+    // The keys represent the values of the according kABPersonAddressXXXKey constants
+    // we don't use the constants directly because we don't want to link against AdressBook-Framework
+    // for only this reason. While this may theoretically break, it is very unlikely that the values
+    // of the constants will change.
+
+    if (self.street != nil) {
+        [addressDictionary setObject:self.street forKey:@"Street"]; // kABPersonAddressStreetKey
+    }
+
+    if (self.city != nil) {
+        [addressDictionary setObject:self.city forKey:@"City"];     // kABPersonAddressCityKey
+    }
+
+    if (self.state != nil) {
+        [addressDictionary setObject:self.street forKey:@"State"];  // kABPersonAddressStateKey
+    }
+
+    if (self.postalCode != nil) {
+        [addressDictionary setObject:self.street forKey:@"ZIP"];    // kABPersonAddressZIPKey
+    }
+
+    if (self.country != nil) {
+        [addressDictionary setObject:self.street forKey:@"Country"]; // kABPersonAddressCountryKey
+    }
+
+    // we don't want to return an empty dictionary
+    if (addressDictionary.allKeys.count > 0) {
+        return addressDictionary;
+    } else {
+        return nil;
+    }
+}
+
 - (NSString *)descriptionWithAddressFields:(NSUInteger)addressFieldMask {
     if (!self.normalised) {
         // using direct iVar here on purpose to not get an infinite loop

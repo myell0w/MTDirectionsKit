@@ -47,6 +47,8 @@ typedef enum {
 
 /** The full address string, concatenated via "," */
 @property (nonatomic, readonly) NSString *fullAddress;
+/** Dictionary representation of the address using the address property keys from ABPerson */
+@property (nonatomic, readonly) NSDictionary *addressDictionary;
 
 /** 
  This flag indicates whether this address is normalised and the

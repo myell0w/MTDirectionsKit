@@ -10,6 +10,14 @@
 #import "MTDStatusCodeMapQuest.h"
 
 
+@interface MTDDirectionsParserMapQuest ()
+
+@property (nonatomic, strong, readwrite) MTDWaypoint *from; // redefined as read/write
+@property (nonatomic, strong, readwrite) MTDWaypoint *to;
+
+@end
+
+
 @implementation MTDDirectionsParserMapQuest
 
 ////////////////////////////////////////////////////////////////////////
@@ -20,12 +28,12 @@
     MTDAssert(completion != nil, @"Completion block must be set");
 
     MTDXMLElement *statusCodeNode = [MTDXMLElement nodeForXPathQuery:@"//statusCode" onXML:self.data];
-    NSInteger statusCode = MTDStatusCodeMapQuestSuccess;
+    MTDStatusCodeMapQuest statusCode = MTDStatusCodeMapQuestSuccess;
     MTDDirectionsOverlay *overlay = nil;
     NSError *error = nil;
 
     if (statusCodeNode != nil) {
-        statusCode = [statusCodeNode.contentString integerValue];
+        statusCode = (MTDStatusCodeMapQuest)[statusCodeNode.contentString integerValue];
     }
 
     if (statusCode == MTDStatusCodeMapQuestSuccess) {
@@ -77,8 +85,7 @@
 
         error = [NSError errorWithDomain:MTDDirectionsKitErrorDomain
                                     code:statusCode
-                                userInfo:@{MTDDirectionsKitDataKey: self.data,
-         MTDDirectionsKitErrorMessageKey: errorMessage}];
+                                userInfo:@{MTDDirectionsKitDataKey: self.data, MTDDirectionsKitErrorMessageKey: errorMessage}];
 
         MTDLogError(@"Error occurred during parsing of directions from %@ to %@: %@ \n%@",
                     self.from,
@@ -133,9 +140,9 @@
     }
 
     MTDRoute *route = [[MTDRoute alloc] initWithWaypoints:waypoints
-                                      distance:distance
-                                 timeInSeconds:timeInSeconds
-                                additionalInfo:additionalInfo];
+                                                 distance:distance
+                                            timeInSeconds:timeInSeconds
+                                           additionalInfo:additionalInfo];
 
     route.name = nameNode.contentString;
 
@@ -146,11 +153,6 @@
 // This method parses the waypointNodes and returns an array of MTDWaypoints
 - (NSArray *)mtd_waypointsFromWaypointNodes:(NSArray *)waypointNodes {
     NSMutableArray *waypoints = [NSMutableArray arrayWithCapacity:waypointNodes.count+2];
-
-    // add start coordinate
-    if (self.from != nil && CLLocationCoordinate2DIsValid(self.from.coordinate)) {
-        [waypoints addObject:self.from];
-    }
 
     // There should only be one element "shapePoints"
     for (MTDXMLElement *childNode in waypointNodes) {
@@ -168,9 +170,18 @@
         }
     }
 
+    // add start coordinate
+    if (self.from != nil && CLLocationCoordinate2DIsValid(self.from.coordinate)) {
+        [waypoints insertObject:self.from atIndex:0];
+    } else if (waypoints.count > 0) {
+        self.from = waypoints[0];
+    }
+
     // add end coordinate
     if (self.to != nil && CLLocationCoordinate2DIsValid(self.to.coordinate)) {
         [waypoints addObject:self.to];
+    } else {
+        self.to = [waypoints lastObject];
     }
 
     return waypoints;
@@ -225,11 +236,11 @@
 // This method returns an array of all waypoints including from, to and intermediateGoals if specified
 - (NSArray *)mtd_waypointsIncludingFromAndToWithIntermediateGoals:(NSArray *)intermediateGoals {
     NSMutableArray *allGoals = intermediateGoals != nil ? [NSMutableArray arrayWithArray:intermediateGoals] : [NSMutableArray array];
-
+    
     // insert from and to at the right places
     [allGoals insertObject:self.from atIndex:0];
     [allGoals addObject:self.to];
-
+    
     return allGoals;
 }
 

@@ -31,9 +31,9 @@
     if ((self = [super initWithFrom:from to:to intermediateGoals:intermediateGoals routeType:routeType options:options completion:completion])) {
         [self mtd_setup];
 
-        [self setValue:[from descriptionForAPI:MTDDirectionsAPIMapQuest] forParameter:@"from"];
+        [self setValue:[from descriptionForAPI:[self API]] forParameter:@"from"];
         // "to" gets set in setValueForParameterWithIntermediateGoals
-        // [self setValue:[to descriptionForAPI:MTDDirectionsAPIMapQuest] forParameter:@"to"];
+        // [self setValue:[to descriptionForAPI:[self API]] forParameter:@"to"];
         [self setValue:MTDDirectionStringForDirectionRouteTypeMapQuest(routeType) forParameter:@"routeType"];
 
         // set parameter for alternative routes?
@@ -63,13 +63,13 @@
         
         // create new array with string-representation of Waypoints for API
         for (MTDWaypoint *destination in allDestinations) {
-            [transformedDestinations addObject:[destination descriptionForAPI:MTDDirectionsAPIMapQuest]];
+            [transformedDestinations addObject:[destination descriptionForAPI:[self API]]];
         }
         
         [self setArrayValue:transformedDestinations forParameter:@"to"];
     } else {
         // No intermediate goals, just one to parameter
-        [self setValue:[self.to descriptionForAPI:MTDDirectionsAPIMapQuest] forParameter:@"to"];
+        [self setValue:[self.to descriptionForAPI:[self API]] forParameter:@"to"];
     }
 }
 

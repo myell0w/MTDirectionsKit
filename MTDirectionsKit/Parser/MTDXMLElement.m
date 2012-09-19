@@ -22,33 +22,22 @@
 #pragma mark - Lifecycle
 ////////////////////////////////////////////////////////////////////////
 
-+ (NSArray *)nodesForXPathQuery:(NSString *)query onHTML:(NSData *)htmlData {
-    xmlDocPtr doc;
-    
-	doc = htmlReadMemory([htmlData bytes], (int)[htmlData length], "", NULL, HTML_PARSE_NOWARNING | HTML_PARSE_NOERROR);
-	
-    if (doc == NULL) {
-		return nil;
-    }
-	
-	NSArray *result = [MTDXMLElement mtd_nodesForXPathQuery:query onLibXMLDoc:doc];
-    xmlFreeDoc(doc); 
-	
-	return result;
++ (NSArray *)nodesForXPathQuery:(NSString *)query onXML:(NSData *)xmlData {
+    return [self nodesForXPathQuery:query onXML:xmlData namespacePrefix:nil namespaceURI:nil];
 }
 
-+ (NSArray *)nodesForXPathQuery:(NSString *)query onXML:(NSData *)xmlData {
++ (NSArray *)nodesForXPathQuery:(NSString *)query onXML:(NSData *)xmlData namespacePrefix:(NSString *)namespacePrefix namespaceURI:(NSString *)namespaceURI {
     xmlDocPtr doc;
-	
+
 	doc = xmlReadMemory([xmlData bytes], (int)[xmlData length], "", NULL, XML_PARSE_RECOVER);
-	
+
     if (doc == NULL) {
 		return nil;
     }
-	
-	NSArray *result = [MTDXMLElement mtd_nodesForXPathQuery:query onLibXMLDoc:doc];
-    xmlFreeDoc(doc); 
-	
+
+	NSArray *result = [MTDXMLElement mtd_nodesForXPathQuery:query namespacePrefix:namespacePrefix namespaceURI:namespaceURI libXMLDoc:doc];
+    xmlFreeDoc(doc);
+
 	return result;
 }
 
@@ -58,9 +47,9 @@
     return MTDFirstObjectOfArray(nodes);
 }
 
-+ (MTDXMLElement *)nodeForXPathQuery:(NSString *)query onHTML:(NSData *)htmlData {
-    NSArray *nodes = [self nodesForXPathQuery:query onHTML:htmlData];
-    
++ (MTDXMLElement *)nodeForXPathQuery:(NSString *)query onXML:(NSData *)xmlData namespacePrefix:(NSString *)namespacePrefix namespaceURI:(NSString *)namespaceURI {
+    NSArray *nodes = [self nodesForXPathQuery:query onXML:xmlData namespacePrefix:namespacePrefix namespaceURI:namespaceURI];
+
     return MTDFirstObjectOfArray(nodes);
 }
 
@@ -281,14 +270,20 @@
 	return node;
 }
 
-+ (NSArray *)mtd_nodesForXPathQuery:(NSString *)query onLibXMLDoc:(xmlDocPtr)doc {
++ (NSArray *)mtd_nodesForXPathQuery:(NSString *)query namespacePrefix:(NSString *)namespacePrefix namespaceURI:(NSString *)namespaceURI libXMLDoc:(xmlDocPtr)doc {
     xmlXPathContextPtr xpathCtx; 
     xmlXPathObjectPtr xpathObj; 
     
     xpathCtx = xmlXPathNewContext(doc);
     
-    if(xpathCtx == NULL) {
+    if (xpathCtx == NULL) {
 		return nil;
+    }
+
+    if (namespacePrefix != nil && namespaceURI != nil) {
+        xmlXPathRegisterNs(xpathCtx,
+                           (xmlChar *)[namespacePrefix cStringUsingEncoding:NSUTF8StringEncoding],
+                           (xmlChar *)[namespaceURI cStringUsingEncoding:NSUTF8StringEncoding]);
     }
     
     xpathObj = xmlXPathEvalExpression((xmlChar *)[query cStringUsingEncoding:NSUTF8StringEncoding], xpathCtx);

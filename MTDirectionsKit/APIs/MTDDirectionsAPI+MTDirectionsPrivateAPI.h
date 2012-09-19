@@ -10,8 +10,10 @@
 #import "MTDDirectionsAPI.h"
 #import "MTDDirectionsRequestGoogle.h"
 #import "MTDDirectionsRequestMapQuest.h"
+#import "MTDDirectionsRequestBing.h"
 #import "MTDDirectionsParserGoogle.h"
 #import "MTDDIrectionsParserMapQuest.h"
+#import "MTDDirectionsParserBing.h"
 
 
 /**
@@ -21,12 +23,17 @@
  */
 NS_INLINE Class MTDDirectionsRequestClassForAPI(MTDDirectionsAPI api) {
     switch (api) {
+        case MTDDirectionsAPIMapQuest:
+            return [MTDDirectionsRequestMapQuest class];
+
         case MTDDirectionsAPIGoogle:
             return [MTDDirectionsRequestGoogle class];
 
-        case MTDDirectionsAPIMapQuest:
+        case MTDDirectionsAPIBing:
+            return [MTDDirectionsRequestBing class];
+
         default:
-            return [MTDDirectionsRequestMapQuest class];
+            return nil;
     }
 }
 
@@ -37,11 +44,16 @@ NS_INLINE Class MTDDirectionsRequestClassForAPI(MTDDirectionsAPI api) {
  */
 NS_INLINE Class MTDDirectionsParserClassForAPI(MTDDirectionsAPI api) {
     switch (api) {
+        case MTDDirectionsAPIMapQuest:
+            return [MTDDirectionsParserMapQuest class];
+
         case MTDDirectionsAPIGoogle:
             return [MTDDirectionsParserGoogle class];
 
-        case MTDDirectionsAPIMapQuest:
-        default:
-            return [MTDDirectionsParserMapQuest class];
+        case MTDDirectionsAPIBing:
+            return [MTDDirectionsParserBing class];
+
+        default: return nil;
+
     }
 }

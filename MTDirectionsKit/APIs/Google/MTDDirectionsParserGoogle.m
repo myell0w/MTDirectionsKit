@@ -9,6 +9,14 @@
 #import "MTDStatusCodeGoogle.h"
 
 
+@interface MTDDirectionsParserGoogle ()
+
+@property (nonatomic, strong, readwrite) MTDWaypoint *from; // redefined as read/write
+@property (nonatomic, strong, readwrite) MTDWaypoint *to;
+
+@end
+
+
 @implementation MTDDirectionsParserGoogle
 
 ////////////////////////////////////////////////////////////////////////
@@ -40,7 +48,6 @@
         NSArray *locationAddressNodes = [addressNodesExceptTo arrayByAddingObject:toAddressNode];
         NSArray *locationSequenceNodes = [MTDXMLElement nodesForXPathQuery:@"//route[1]/waypoint_index" onXML:self.data];
 
-
         // Parse Routes
         {
             for (MTDXMLElement *routeNode in routeNodes) {
@@ -66,6 +73,7 @@
 
             [self mtd_addAddressesFromAddressNodes:locationAddressNodes toWaypoints:allWaypoints];
         }
+
 
         overlay = [[MTDDirectionsOverlay alloc] initWithRoutes:routes
                                              intermediateGoals:orderedIntermediateGoals
@@ -148,20 +156,24 @@
 - (NSArray *)mtd_waypointsFromWaypointNodes:(NSArray *)waypointNodes {
     NSMutableArray *waypoints = [NSMutableArray array];
 
-    // add start coordinate
-    if (self.from != nil && CLLocationCoordinate2DIsValid(self.from.coordinate)) {
-        [waypoints addObject:self.from];
-    }
-
     for (MTDXMLElement *waypointNode in waypointNodes) {
         NSString *encodedPolyline = [waypointNode contentString];
 
         [waypoints addObjectsFromArray:[self mtd_waypointsFromEncodedPolyline:encodedPolyline]];
     }
 
+    // add start coordinate
+    if (self.from != nil && CLLocationCoordinate2DIsValid(self.from.coordinate)) {
+        [waypoints insertObject:self.from atIndex:0];
+    } else if (waypoints.count > 0) {
+        self.from = waypoints[0];
+    }
+
     // add end coordinate
     if (self.to != nil && CLLocationCoordinate2DIsValid(self.to.coordinate)) {
         [waypoints addObject:self.to];
+    } else {
+        self.to = [waypoints lastObject];
     }
 
     return waypoints;
