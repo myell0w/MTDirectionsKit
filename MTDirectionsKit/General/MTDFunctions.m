@@ -1,5 +1,6 @@
 #import "MTDFunctions.h"
 #import "MTDWaypoint.h"
+#import "MTDAddress.h"
 
 
 #define kMTDSecondsPerHour      (60. * 60.)
@@ -11,17 +12,29 @@ static NSDateFormatter *mtd_dateFormatter = nil;
 BOOL MTDDirectionsOpenInMapsApp(MTDWaypoint *from, MTDWaypoint *to, MTDDirectionsRouteType routeType) {
     if (from.hasValidCoordinate && to.hasValidCoordinate) {
         if (MTDDirectionsSupportsAppleMaps()) {
-            MKPlacemark *fromPlacemark = [[MKPlacemark alloc] initWithCoordinate:from.coordinate addressDictionary:nil];
-            MKPlacemark *toPlacemark = [[MKPlacemark alloc] initWithCoordinate:to.coordinate addressDictionary:nil];
-            MKMapItem *fromMapItem = [[MKMapItem alloc] initWithPlacemark:fromPlacemark];
-            MKMapItem *toMapItem = [[MKMapItem alloc] initWithPlacemark:toPlacemark];
-            NSDictionary *launchOptions = [NSDictionary dictionaryWithObjectsAndKeys:
-                                           MTDMKLaunchOptionFromMTDDirectionsRouteType(routeType), MKLaunchOptionsDirectionsModeKey,
-                                           nil];
+            MKMapItem *fromMapItem = nil;
+            MKMapItem *toMapItem = nil;
 
-            return [MKMapItem openMapsWithItems:[NSArray arrayWithObjects:fromMapItem, toMapItem, nil]
-                           launchOptions:launchOptions];
-        } else {
+            if (from == [MTDWaypoint waypointForCurrentLocation]) {
+                fromMapItem = [MKMapItem mapItemForCurrentLocation];
+            } else {
+                MKPlacemark *fromPlacemark = [[MKPlacemark alloc] initWithCoordinate:from.coordinate addressDictionary:from.address.addressDictionary];
+                fromMapItem = [[MKMapItem alloc] initWithPlacemark:fromPlacemark];
+            }
+
+            if (to == [MTDWaypoint waypointForCurrentLocation]) {
+                toMapItem = [MKMapItem mapItemForCurrentLocation];
+            } else {
+                MKPlacemark *toPlacemark = [[MKPlacemark alloc] initWithCoordinate:to.coordinate addressDictionary:to.address.addressDictionary];
+                toMapItem = [[MKMapItem alloc] initWithPlacemark:toPlacemark];
+            }
+
+            NSDictionary *launchOptions = @{MKLaunchOptionsDirectionsModeKey: MTDMKLaunchOptionFromMTDDirectionsRouteType(routeType)};
+            return [MKMapItem openMapsWithItems:@[fromMapItem, toMapItem] launchOptions:launchOptions];
+        }
+
+        // Google Maps
+        else {
             NSString *googleMapsURL = [NSString stringWithFormat:@"http://maps.google.com/maps?saddr=%f,%f&daddr=%f,%f",
                                        from.coordinate.latitude,from.coordinate.longitude, to.coordinate.latitude, to.coordinate.longitude];
 

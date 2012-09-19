@@ -28,4 +28,3 @@
 - (void)mtd_notifyDelegateDidFailLoadingOverlayWithError:(NSError *)error;
 
 @end
-    
