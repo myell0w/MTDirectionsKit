@@ -17,10 +17,6 @@
 #define MTDKey(_SEL)               (NSStringFromSelector(@selector(_SEL)))
 
 
-extern NSInteger _mtd_wm_;
-
-
-
 /**
  Opens the built-in Maps.app and displays the directions from fromCoordinate to toCoordinate
  with the chosen routeType. Since the built-in Maps application only supports travelling per pedes,

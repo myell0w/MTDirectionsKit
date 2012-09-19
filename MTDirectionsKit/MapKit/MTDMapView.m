@@ -427,13 +427,6 @@
     }
 
     [self addGestureRecognizer:_mtd_tapGestureRecognizer];
-
-    // Watermark
-    [NSTimer scheduledTimerWithTimeInterval:5.0
-                                     target:self
-                                   selector:@selector(_mtd_wm_:)
-                                   userInfo:nil
-                                    repeats:YES];
 }
 
 - (void)mtd_handleMapTap:(UITapGestureRecognizer *)tap {
@@ -709,16 +702,6 @@
 
     // doesn't get set as line width
     return -1.f;
-}
-
-////////////////////////////////////////////////////////////////////////
-#pragma mark - Watermark
-////////////////////////////////////////////////////////////////////////
-
-- (void)_mtd_wm_:(NSTimer *) __unused timer {
-    if (!_mtd_wm_) {
-        [self removeOverlays:self.overlays];
-    }
 }
 
 @end
