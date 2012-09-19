@@ -42,6 +42,9 @@
  @name API
  ******************************************/
 
+/** the address of the the request to perform */
+@property (nonatomic, readonly) NSString *HTTPAddress;
+
 /** the used API of this request */
 @property (nonatomic, readonly) MTDDirectionsAPI API;
 
@@ -139,14 +142,14 @@
  ******************************************/
 
 /**
- This method get's executed right before the request gets send to the specified API (- [MTDDirectionsRequest start]). The default implementation
- just returns the address as is without changing it, but subclasses can override this method to change the
- request address the way they want to. MTDDirectionsRequestGoogle for example uses this hook to compute a signature
- for the address, when a business was registered. This method gets called on a global concurrent queue.
+ This method get's executed right before the request gets send to the specified API (- [MTDDirectionsRequest start]).
+ The default implementation just returns the address as is without changing it, but subclasses can override this
+ method to change the request address the way they want to. MTDDirectionsRequestGoogle for example uses this hook 
+ to compute a signature for the address, when a business was registered. This method gets called on a global concurrent queue.
  
  @param address the address we want to request from the specified API
- @return the final address we will request
+ @return the final URL we will request
  */
-- (NSString *)preparedAddress:(NSString *)address;
+- (NSURL *)preparedURLForAddress:(NSString *)address;
 
 @end

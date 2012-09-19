@@ -21,22 +21,20 @@
 #pragma mark - Lifecycle
 ////////////////////////////////////////////////////////////////////////
 
-- (id)initWithAddress:(NSString *)address callbackTarget:(id)callbackTarget action:(SEL)action {
+- (id)initWithURL:(NSURL *)URL callbackTarget:(id)callbackTarget action:(SEL)action {
     if ((self = [super init])) {
-        NSURL *url = [NSURL URLWithString:address];
-        
-        _urlRequest = [NSMutableURLRequest requestWithURL:url];
+        _urlRequest = [NSMutableURLRequest requestWithURL:URL];
         _action = action;
 		_mtd_callbackTarget = callbackTarget;
-		
-		
+
+
 		_mtd_connection = [[NSURLConnection alloc] initWithRequest:_urlRequest
-                                                     delegate:self
-                                             startImmediately:NO];
+                                                          delegate:self
+                                                  startImmediately:NO];
     }
-    
+
     return self;
-	
+
 }
 
 - (void)dealloc {
@@ -71,21 +69,25 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (void)connection:(__unused NSURLConnection *)connection didReceiveResponse:(NSHTTPURLResponse *)response {
-	_responseHeaderFields = [response allHeaderFields];
-    
-	if (response.statusCode >= 400) {
-        _failureCode = response.statusCode;
-		[self mtd_close];
-		return;
-	}
-	
-	NSInteger contentLength = [_responseHeaderFields[@"Content-Length"] integerValue];
-    
-	if (contentLength > 0) {
-		_data = [[NSMutableData alloc] initWithCapacity:(NSUInteger)contentLength];
-	} else {
-		_data = [NSMutableData new];
-	}
+    if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+        _responseHeaderFields = [response allHeaderFields];
+
+        if (response.statusCode >= 400) {
+            _failureCode = response.statusCode;
+            [self mtd_close];
+            return;
+        }
+
+        NSInteger contentLength = [_responseHeaderFields[@"Content-Length"] integerValue];
+
+        if (contentLength > 0) {
+            _data = [[NSMutableData alloc] initWithCapacity:(NSUInteger)contentLength];
+        } else {
+            _data = [NSMutableData new];
+        }
+    } else {
+        _data = [NSMutableData new];
+    }
 }
 
 - (void)connection:(__unused NSURLConnection *)connection didReceiveData:(NSData *)data {
@@ -96,7 +98,7 @@
 	if ([[error domain] isEqual:NSURLErrorDomain]) {
 		_failureCode = error.code;
 	}
-    
+
 	[self mtd_close];
 }
 
@@ -111,7 +113,7 @@
 - (void)mtd_close {
 	[self.mtd_connection cancel];
 	self.mtd_connection = nil;
-    
+
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 	[self.mtd_callbackTarget performSelector:_action withObject:self];

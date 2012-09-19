@@ -73,7 +73,7 @@
     }
 }
 
-- (NSString *)mtd_HTTPAddress {
+- (NSString *)HTTPAddress {
     NSString *routingMethod = kMTDMapQuestRoutingMethodDefault;
     BOOL optimizeRoute = (self.mtd_options & MTDDirectionsRequestOptionOptimize) == MTDDirectionsRequestOptionOptimize;
     BOOL alternativeRoutes = (self.mtd_options & MTDDirectionsRequestOptionAlternativeRoutes) == MTDDirectionsRequestOptionAlternativeRoutes;

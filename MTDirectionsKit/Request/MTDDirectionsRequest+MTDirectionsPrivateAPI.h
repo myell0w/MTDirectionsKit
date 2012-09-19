@@ -18,8 +18,6 @@
 
 /** object used to perform a HTTP request */
 @property (nonatomic, strong, setter = mtd_setHttpRequest:) MTDHTTPRequest *mtd_HTTPRequest;
-/** the address of the the request to perform */
-@property (nonatomic, readonly) NSString *mtd_HTTPAddress;
 /** bitmask of MTDDirectionsRequestOption flags */
 @property (nonatomic, readonly) NSUInteger mtd_options;
 

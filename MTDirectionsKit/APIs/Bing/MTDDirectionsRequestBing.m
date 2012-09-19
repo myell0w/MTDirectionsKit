@@ -88,7 +88,7 @@ static NSString *mtd_apiKey = nil;
       forParameter:[NSString stringWithFormat:@"waypoint.%d", waypointIndex]];
 }
 
-- (NSString *)mtd_HTTPAddress {
+- (NSString *)HTTPAddress {
     return [NSString stringWithFormat:@"%@/%@/%@",
             kMTDBingHostName,
             kMTDBingVersionNumber,

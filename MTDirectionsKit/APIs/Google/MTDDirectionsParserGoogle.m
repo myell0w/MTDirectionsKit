@@ -86,11 +86,7 @@
         MTDLogError(@"Error occurred during parsing of directions from %@ to %@:\n%@", self.from, self.to, error);
     }
 
-    if (completion != nil) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            completion(overlay, error);
-        });
-    }
+    [self callCompletion:completion overlay:overlay error:error];
 }
 
 ////////////////////////////////////////////////////////////////////////

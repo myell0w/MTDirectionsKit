@@ -38,13 +38,25 @@
 }
 
 ////////////////////////////////////////////////////////////////////////
-#pragma mark - MTDirectionsParser
+#pragma mark - MTDDirectionsParser Class
+////////////////////////////////////////////////////////////////////////
+
+- (void)callCompletion:(mtd_parser_block)completion overlay:(MTDDirectionsOverlay *)overlay error:(NSError *)error {
+    if (completion != nil) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(overlay, error);
+        });
+    }
+}
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - MTDirectionsParser Protocol
 ////////////////////////////////////////////////////////////////////////
 
 - (void)parseWithCompletion:(mtd_parser_block) __unused completion {
-    MTDLogError(@"parseWithCompletion was called on a parser that doesn't override it (Class: %@)", 
+    MTDLogError(@"parseWithCompletion was called on a parser that doesn't override it (Class: %@)",
                 NSStringFromClass([self class]));
-    
+
     [self doesNotRecognizeSelector:_cmd];
 }
 

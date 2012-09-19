@@ -2,7 +2,6 @@
 #import "MTDDirectionsRequestMapQuest.h"
 #import "MTDDirectionsRequestGoogle.h"
 #import "MTDDirectionsParser.h"
-#import "MTDDirectionsAPI+MTDirectionsPrivateAPI.h"
 #import "MTDFunctions.h"
 #import "MTDDirectionsDefines.h"
 
@@ -18,7 +17,6 @@
 
 // Private API from MTDDirectionsRequest+MTDDirectionsPrivateAPI.h
 @property (nonatomic, strong, setter = mtd_setHTTPRequest:) MTDHTTPRequest *mtd_HTTPRequest;
-@property (nonatomic, readonly) NSString *mtd_HTTPAddress;
 @property (nonatomic, readonly) NSUInteger mtd_options;
 
 @end
@@ -84,14 +82,12 @@
     dispatch_queue_t prepareQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0L);
 
     dispatch_async(prepareQueue, ^{
-        NSString *address = [self preparedAddress:self.mtd_fullAddress];
-
-        MTDLogVerbose(@"Will call address: %@", address);
+        NSURL *URL = [self preparedURLForAddress:self.mtd_fullAddress];
 
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.mtd_HTTPRequest = [[MTDHTTPRequest alloc] initWithAddress:address
-                                                            callbackTarget:self
-                                                                    action:@selector(requestFinished:)];
+            self.mtd_HTTPRequest = [[MTDHTTPRequest alloc] initWithURL:URL
+                                                        callbackTarget:self
+                                                                action:@selector(requestFinished:)];
 
             [self.mtd_HTTPRequest start];
         });
@@ -158,12 +154,12 @@
     }
 }
 
-- (NSString *)preparedAddress:(NSString *)address {
-    return address;
+- (NSURL *)preparedURLForAddress:(NSString *)address {
+    return [NSURL URLWithString:address];
 }
 
-- (NSString *)mtd_HTTPAddress {
-    MTDLogError(@"mtd_HTTPAddress was called on a request that doesn't override it (Class: %@)",
+- (NSString *)HTTPAddress {
+    MTDLogError(@"HTTPAddress was called on a request that doesn't override it (Class: %@)",
                 NSStringFromClass([self class]));
 
     [self doesNotRecognizeSelector:_cmd];
@@ -189,9 +185,9 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (NSString *)mtd_fullAddress {
-    MTDAssert(self.mtd_HTTPAddress.length > 0, @"HTTP Address must be set.");
+    MTDAssert(self.HTTPAddress.length > 0, @"HTTP Address must be set.");
 
-    NSMutableString *address = [NSMutableString stringWithString:self.mtd_HTTPAddress];
+    NSMutableString *address = [NSMutableString stringWithString:self.HTTPAddress];
 
     if (self.mtd_parameters.count > 0) {
         [address appendString:@"?"];
@@ -210,7 +206,7 @@
         NSRange lastCharacterRange = NSMakeRange(address.length-1, 1);
         [address deleteCharactersInRange:lastCharacterRange];
     }
-
+    
     return [address copy];
 }
 

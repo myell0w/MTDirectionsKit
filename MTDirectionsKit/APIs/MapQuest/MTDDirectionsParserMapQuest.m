@@ -94,11 +94,7 @@
                     error);
     }
 
-    if (completion != nil) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            completion(overlay, error);
-        });
-    }
+    [self callCompletion:completion overlay:overlay error:error];
 }
 
 ////////////////////////////////////////////////////////////////////////

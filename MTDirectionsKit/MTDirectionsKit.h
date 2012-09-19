@@ -29,3 +29,7 @@
 #import <MTDirectionsKit/MTDDirectionsRequest.h>
 #import <MTDirectionsKit/MTDDirectionsRequestGoogle.h>
 #import <MTDirectionsKit/MTDDirectionsRequestBing.h>
+
+// Parser
+#import <MTDirectionsKit/MTDDirectionsParser.h>
+#import <MTDirectionsKit/MTDDirectionsParserMapQuest.h>

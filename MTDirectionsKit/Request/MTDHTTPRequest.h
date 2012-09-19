@@ -28,11 +28,11 @@
 /**
  The designated initializer is used to create an instance of MTDHTTPRequest.
  
- @param address the string-representation of the URL to request
+ @param URL the URL to request
  @param callbackTarget the object that is called back when the request finishes/fails
  @param action the message that is sent to the callbackTarget
  */
-- (id)initWithAddress:(NSString *)address callbackTarget:(id)callbackTarget action:(SEL)action;
+- (id)initWithURL:(NSURL *)URL callbackTarget:(id)callbackTarget action:(SEL)action;
 
 /******************************************
  @name HTTP Connection

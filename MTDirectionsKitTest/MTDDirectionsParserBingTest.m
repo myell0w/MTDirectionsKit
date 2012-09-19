@@ -221,14 +221,14 @@
             STAssertEquals([overlay.distance distanceInMeter], 156629., @"Error parsing distance");
             STAssertEquals(overlay.timeInSeconds, 6507., @"Error parsing time");
             STAssertEqualObjects(overlay.formattedTime, @"1:48:27", @"Error formatting time");
-            STAssertTrue(overlay.waypoints.count == 710, @"Wrong number of waypoints");
+            STAssertTrue(overlay.waypoints.count == 711, @"Wrong number of waypoints");
 
             MTDRoute *slowerRoute = overlay.routes[0];
 
             STAssertEquals([slowerRoute.distance distanceInMeter], 180481., @"Error parsing distance");
             STAssertEquals(slowerRoute.timeInSeconds, 7630., @"Error parsing time");
             STAssertEqualObjects(slowerRoute.formattedTime, @"2:07:10", @"Error formatting time");
-            STAssertTrue(slowerRoute.waypoints.count == 874, @"Wrong number of waypoints");
+            STAssertTrue(slowerRoute.waypoints.count == 875, @"Wrong number of waypoints");
 
             MTDAddress *fromAddress = overlay.fromAddress;
             MTDAddress *toAddress = overlay.toAddress;

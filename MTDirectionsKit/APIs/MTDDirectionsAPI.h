@@ -47,6 +47,34 @@ MTDDirectionsAPI MTDDirectionsGetActiveAPI(void);
  */
 void MTDDirectionsSetActiveAPI(MTDDirectionsAPI activeAPI);
 
+/**
+ This function registers the given class as the custom request class.
+ To fully use a custom API provider you have to set the parser class as well with
+ MTDDirectionsAPIRegisterCustomParserClass() and set the active API to MTDDirectionsAPICustom.
+ 
+ @param requestClass the class of the custom request, must be a subclass of MTDDirectionsRequest
+ */
+void MTDDirectionsAPIRegisterCustomRequestClass(Class requestClass);
 
-//void MTDDirectionsAPIRegisterCustomRequestClass(Class requestClass);
-//void MTDDirectionsAPIRegisterCustomParserClass(Class parserClass);
+/**
+ This function registers the given class as the custom parser class.
+ To fully use a custom API provider you have to set the request class as well with
+ MTDDirectionsAPIRegisterCustomRequestClass() and set the active API to MTDDirectionsAPICustom.
+
+ @param parserClass the class of the custom parser, must conform to the protocol MTDDirectionsParser
+ */
+void MTDDirectionsAPIRegisterCustomParserClass(Class parserClass);
+
+/**
+ Returns the Class of the DirectionsRequest to use for the given API.
+
+ @return a subclass of MTDDirectionsRequest
+ */
+Class MTDDirectionsRequestClassForAPI(MTDDirectionsAPI api);
+
+/**
+ Returns the Class of the DirectionsParser to use for the given API.
+
+ @return a subclass of MTDDirectionsParser
+ */
+Class MTDDirectionsParserClassForAPI(MTDDirectionsAPI api);

@@ -72,9 +72,9 @@ static NSString *mtd_cryptographicKey = nil;
 // Overwritten to compute signature, if a business was registered
 // Algorithm is described here: https://developers.google.com/maps/documentation/business/webservices#digital_signatures
 // 1. Construct your URL, making sure to include your client and sensor parameters. (=address)
-- (NSString *)preparedAddress:(NSString *)address {
+- (NSURL *)preparedURLForAddress:(NSString *)address {
     if (![[self class] businessRegistered]) {
-        return address;
+        return [NSURL URLWithString:address];
     }
 
     // 2. Strip off the domain portion of the request, leaving only the path and the query
@@ -91,10 +91,12 @@ static NSString *mtd_cryptographicKey = nil;
 
     // 5. Attach this signature to the URL within a signature parameter
     NSString *signature = MTDBase64EncodedStringFromData(binarySignature);
-    return [address stringByAppendingFormat:@"&signature=%@", signature];
+
+    address = [address stringByAppendingFormat:@"&signature=%@", signature];
+    return [NSURL URLWithString:address];
 }
 
-- (NSString *)mtd_HTTPAddress {
+- (NSString *)HTTPAddress {
     return kMTDGoogleBaseAddress;
 }
 

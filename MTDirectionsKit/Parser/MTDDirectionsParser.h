@@ -79,4 +79,6 @@
               data:(id)data;
 
 
+- (void)callCompletion:(mtd_parser_block)completion overlay:(MTDDirectionsOverlay *)overlay error:(NSError *)error;
+
 @end
