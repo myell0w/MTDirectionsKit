@@ -24,6 +24,7 @@
 #import <MTDirectionsKit/MTDDirectionsDelegate.h>
 #import <MTDirectionsKit/MTDDirectionsOverlay.h>
 #import <MTDirectionsKit/MTDDirectionsOverlayView.h>
+#import <MTDirectionsKit/MTDRoute.h>
 
 // Request
 #import <MTDirectionsKit/MTDDirectionsRequest.h>
@@ -32,4 +33,3 @@
 
 // Parser
 #import <MTDirectionsKit/MTDDirectionsParser.h>
-#import <MTDirectionsKit/MTDDirectionsParserMapQuest.h>

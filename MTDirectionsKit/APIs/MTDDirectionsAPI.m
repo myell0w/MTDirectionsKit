@@ -60,10 +60,6 @@ void MTDDirectionsAPIRegisterCustomParserClass(Class parserClass) {
     }
 }
 
-////////////////////////////////////////////////////////////////////////
-#pragma mark - Private
-////////////////////////////////////////////////////////////////////////
-
 Class MTDDirectionsRequestClassForAPI(MTDDirectionsAPI api) {
     switch (api) {
         case MTDDirectionsAPIMapQuest:
