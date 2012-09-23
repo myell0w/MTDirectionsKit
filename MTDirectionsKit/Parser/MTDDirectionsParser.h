@@ -78,7 +78,13 @@
          routeType:(MTDDirectionsRouteType)routeType
               data:(id)data;
 
-
+/**
+ Calls the given completion block on the main queue, if it is not nil.
+ 
+ @param completion the block to execute on the main queue
+ @param overlay the overlay that get's passed to the completion block
+ @param error the error that get's passed to the completion block
+ */
 - (void)callCompletion:(mtd_parser_block)completion overlay:(MTDDirectionsOverlay *)overlay error:(NSError *)error;
 
 @end

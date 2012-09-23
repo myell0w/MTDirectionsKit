@@ -98,7 +98,7 @@
 /** 
  This method first calls a subclass-hook to allow final modification of the URL to call and then starts the request.
  
- @see preparedAddress:
+ @see preparedURLForAddress:
  */
 - (void)start;
 /** Cancels a possible ongoing request, does nothing if the request isn't active. */
