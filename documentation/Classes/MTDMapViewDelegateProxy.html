@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
-		<title>MTDDirectionsParser Protocol Reference</title>
+		<title>MTDMapViewDelegateProxy Class Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
@@ -17,7 +17,7 @@
 			</div>
 			
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">MTDDirectionsParser Protocol Reference</h1>
+				<h1 class="hideInXcode">MTDMapViewDelegateProxy Class Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -40,15 +40,9 @@
 	
 	<option value="properties">Properties</option>
 	
-	<option value="//api/name/data">&nbsp;&nbsp;&nbsp;&nbsp;data</option>
+	<option value="//api/name/lastKnownUserCoordinate">&nbsp;&nbsp;&nbsp;&nbsp;lastKnownUserCoordinate</option>
 	
-	<option value="//api/name/from">&nbsp;&nbsp;&nbsp;&nbsp;from</option>
-	
-	<option value="//api/name/intermediateGoals">&nbsp;&nbsp;&nbsp;&nbsp;intermediateGoals</option>
-	
-	<option value="//api/name/routeType">&nbsp;&nbsp;&nbsp;&nbsp;routeType</option>
-	
-	<option value="//api/name/to">&nbsp;&nbsp;&nbsp;&nbsp;to</option>
+	<option value="//api/name/mapView">&nbsp;&nbsp;&nbsp;&nbsp;mapView</option>
 	
 	
 	
@@ -57,7 +51,7 @@
 	
 	<option value="instance_methods">Instance Methods</option>
 	
-	<option value="//api/name/parseWithCompletion:">&nbsp;&nbsp;&nbsp;&nbsp;- parseWithCompletion:</option>
+	<option value="//api/name/initWithMapView:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithMapView:</option>
 	
 	
 	
@@ -75,10 +69,6 @@
 
 <li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Directions">Directions</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Parsing">Parsing</a></span></li>
-	
 </ul></li>
 
 
@@ -87,15 +77,9 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/data">data</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/lastKnownUserCoordinate">lastKnownUserCoordinate</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/from">from</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/intermediateGoals">intermediateGoals</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/routeType">routeType</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/to">to</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView">mapView</a></span></li>
 	
 </ul></li>
 
@@ -105,7 +89,7 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/parseWithCompletion:">parseWithCompletion:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithMapView:">initWithMapView:</a></span></li>
 	
 </ul></li>
 
@@ -114,7 +98,7 @@
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="MTDDirectionsParser Protocol Reference" name="top"></a>
+				<a title="MTDMapViewDelegateProxy Class Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -123,18 +107,21 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">MTDDirectionsParser Protocol Reference</h1>
+						<h1 class="title title-header">MTDMapViewDelegateProxy Class Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
 					
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
-	<td class="specification-title">Conforms to</td>
+	<td class="specification-title">Inherits from</td>
 	<td class="specification-value">NSObject</td>
 </tr><tr>
+	<td class="specification-title">Conforms to</td>
+	<td class="specification-value">CLLocationManagerDelegate<br />UIGestureRecognizerDelegate</td>
+</tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">MTDDirectionsParser.h</td>
+	<td class="specification-value">MTDMapViewDelegateProxy.h</td>
 </tr>
 						</tbody></table></div>
 					
@@ -144,8 +131,9 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>The <a href="../Classes/MTDDirectionsParser.html">MTDDirectionsParser</a> protocol defines a set of required methods that instances of
-<a href="../Classes/MTDDirectionsParser.html">MTDDirectionsParser</a> need <a href="#//api/name/to">to</a> implement, that want <a href="#//api/name/to">to</a> act as a directions parser.</p>
+						<p>Since we subclass MKMapView we don&rsquo;t want to interfere with it&rsquo;s delegate-behavious. MKMapView is known
+to at least respond to the protocol UIGestureRecognizerDelegate (not public), so we use an instance of
+MTDMapViewDelegateProxy as our delegate.</p>
 					</div>
 					
 					
@@ -157,61 +145,31 @@
 						<h2 class="subtitle subtitle-tasks">Tasks</h2>
 						
 						
-						<a title="Directions" name="task_Directions"></a>
-						<h3 class="subsubtitle task-title">Directions</h3>
+						
+						
 
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/data">&nbsp;&nbsp;data</a></code>
-		<span class="tooltip"><p>The object used <a href="#//api/name/to">to</a> store the information about the route.</p></span>
+		<code><a href="#//api/name/mapView">&nbsp;&nbsp;mapView</a></code>
+		<span class="tooltip"><p>The MapView to call back, when a delegate call happens</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
-	<span class="task-item-suffix">required method</span>
+	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/from">&nbsp;&nbsp;from</a></code>
-		<span class="tooltip"><p>The starting waypoint of the route</p></span>
+		<code><a href="#//api/name/lastKnownUserCoordinate">&nbsp;&nbsp;lastKnownUserCoordinate</a></code>
+		<span class="tooltip"><p>The last known location</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
-	<span class="task-item-suffix">required method</span>
+	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/to">&nbsp;&nbsp;to</a></code>
-		<span class="tooltip"><p>The end waypoint of the route</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	<span class="task-item-suffix">required method</span>
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/intermediateGoals">&nbsp;&nbsp;intermediateGoals</a></code>
-		<span class="tooltip"><p>The intermediate goals along the route</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	<span class="task-item-suffix">required method</span>
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/routeType">&nbsp;&nbsp;routeType</a></code>
-		<span class="tooltip"><p>The type of the route</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	<span class="task-item-suffix">required method</span>
-</li>
-						</ul>
-						
-						
-						<a title="Parsing" name="task_Parsing"></a>
-						<h3 class="subsubtitle task-title">Parsing</h3>
-
-						<ul class="task-list">
-							<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/parseWithCompletion:">&ndash;&nbsp;parseWithCompletion:</a></code>
-		<span class="tooltip"><p>This method is not implemented in <a href="../Classes/MTDDirectionsParser.html">MTDDirectionsParser</a> and must be overwritten by each concrete
-subclass. It parses the <a href="#//api/name/data">data</a> and calls the completion block once finished.</p></span>
+		<code><a href="#//api/name/initWithMapView:">&ndash;&nbsp;initWithMapView:</a></code>
+		<span class="tooltip"><p>Creates an instance of the delegate proxy that doesn‘t retain the <a href="#//api/name/mapView">mapView</a> to not create a retain cycle.</p></span>
 	</span>
 	
-	<span class="task-item-suffix">required method</span>
+	
 </li>
 						</ul>
 						
@@ -226,17 +184,17 @@ subclass. It parses the <a href="#//api/name/data">data</a> and calls the comple
 						<h2 class="subtitle subtitle-methods">Properties</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/data" title="data"></a>
-	<h3 class="subsubtitle method-title">data</h3>
+	<a name="//api/name/lastKnownUserCoordinate" title="lastKnownUserCoordinate"></a>
+	<h3 class="subsubtitle method-title">lastKnownUserCoordinate</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The object used <a href="#//api/name/to">to</a> store the information about the route.</p>
+		<p>The last known location</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong, readonly) id data</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) CLLocationCoordinate2D lastKnownUserCoordinate</code></div>
 	
 	
 	
@@ -253,24 +211,24 @@ subclass. It parses the <a href="#//api/name/data">data</a> and calls the comple
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDDirectionsParser.h</code><br />
+		<code class="declared-in-ref">MTDMapViewDelegateProxy.h</code><br />
 	</div>				
 	
 	
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/from" title="from"></a>
-	<h3 class="subsubtitle method-title">from</h3>
+	<a name="//api/name/mapView" title="mapView"></a>
+	<h3 class="subsubtitle method-title">mapView</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The starting waypoint of the route</p>
+		<p>The MapView to call back, when a delegate call happens</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong, readonly) MTDWaypoint *from</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, mtd_weak) MTDMapView *mapView</code></div>
 	
 	
 	
@@ -287,109 +245,7 @@ subclass. It parses the <a href="#//api/name/data">data</a> and calls the comple
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDDirectionsParser.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/intermediateGoals" title="intermediateGoals"></a>
-	<h3 class="subsubtitle method-title">intermediateGoals</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>The intermediate goals along the route</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, readonly) NSArray *intermediateGoals</code></div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDDirectionsParser.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/routeType" title="routeType"></a>
-	<h3 class="subsubtitle method-title">routeType</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>The type of the route</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign, readonly) MTDDirectionsRouteType routeType</code></div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDDirectionsParser.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/to" title="to"></a>
-	<h3 class="subsubtitle method-title">to</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>The end waypoint of the route</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong, readonly) MTDWaypoint *to</code></div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDDirectionsParser.h</code><br />
+		<code class="declared-in-ref">MTDMapViewDelegateProxy.h</code><br />
 	</div>				
 	
 	
@@ -406,31 +262,35 @@ subclass. It parses the <a href="#//api/name/data">data</a> and calls the comple
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/parseWithCompletion:" title="parseWithCompletion:"></a>
-	<h3 class="subsubtitle method-title">parseWithCompletion:</h3>
+	<a name="//api/name/initWithMapView:" title="initWithMapView:"></a>
+	<h3 class="subsubtitle method-title">initWithMapView:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>This method is not implemented in <a href="../Classes/MTDDirectionsParser.html">MTDDirectionsParser</a> and must be overwritten by each concrete
-subclass. It parses the <a href="#//api/name/data">data</a> and calls the completion block once finished.</p>
+		<p>Creates an instance of the delegate proxy that doesn‘t retain the <a href="#//api/name/mapView">mapView</a> to not create a retain cycle.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (void)parseWithCompletion:(mtd_parser_block)<em>completion</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (id)initWithMapView:(MTDMapView *)<em>mapView</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>completion</em></dt>
-			<dd><p>block that is called, once parsing is finished</p></dd>
+			<dt><em>mapView</em></dt>
+			<dd><p>the <a href="#//api/name/mapView">mapView</a> to call back</p></dd>
 		</dl>
 		
 	</div>
 	
 	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>an instance of MTDMapViewDelegateProxy</p>
+	</div>
 	
 	
 	
@@ -444,7 +304,7 @@ subclass. It parses the <a href="#//api/name/data">data</a> and calls the comple
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDDirectionsParser.h</code><br />
+		<code class="declared-in-ref">MTDMapViewDelegateProxy.h</code><br />
 	</div>				
 	
 	

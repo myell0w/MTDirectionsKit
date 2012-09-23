@@ -42,13 +42,13 @@
 	
 	<option value="//api/name/API">&nbsp;&nbsp;&nbsp;&nbsp;API</option>
 	
+	<option value="//api/name/HTTPAddress">&nbsp;&nbsp;&nbsp;&nbsp;HTTPAddress</option>
+	
 	<option value="//api/name/completion">&nbsp;&nbsp;&nbsp;&nbsp;completion</option>
 	
 	<option value="//api/name/from">&nbsp;&nbsp;&nbsp;&nbsp;from</option>
 	
 	<option value="//api/name/intermediateGoals">&nbsp;&nbsp;&nbsp;&nbsp;intermediateGoals</option>
-	
-	<option value="//api/name/mtd_HTTPAddress">&nbsp;&nbsp;&nbsp;&nbsp;mtd_HTTPAddress</option>
 	
 	<option value="//api/name/mtd_HTTPRequest">&nbsp;&nbsp;&nbsp;&nbsp;mtd_HTTPRequest</option>
 	
@@ -76,7 +76,7 @@
 	
 	<option value="//api/name/mtd_requestFinished:">&nbsp;&nbsp;&nbsp;&nbsp;- mtd_requestFinished:</option>
 	
-	<option value="//api/name/preparedAddress:">&nbsp;&nbsp;&nbsp;&nbsp;- preparedAddress:</option>
+	<option value="//api/name/preparedURLForAddress:">&nbsp;&nbsp;&nbsp;&nbsp;- preparedURLForAddress:</option>
 	
 	<option value="//api/name/removeValueForParameter:">&nbsp;&nbsp;&nbsp;&nbsp;- removeValueForParameter:</option>
 	
@@ -126,13 +126,13 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/API">API</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/HTTPAddress">HTTPAddress</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/completion">completion</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/from">from</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/intermediateGoals">intermediateGoals</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mtd_HTTPAddress">mtd_HTTPAddress</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mtd_HTTPRequest">mtd_HTTPRequest</a></span></li>
 	
@@ -162,7 +162,7 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mtd_requestFinished:">mtd_requestFinished:</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/preparedAddress:">preparedAddress:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/preparedURLForAddress:">preparedURLForAddress:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/removeValueForParameter:">removeValueForParameter:</a></span></li>
 	
@@ -276,6 +276,13 @@ You should not use the properties and methods exposed here directly in your code
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
+		<code><a href="#//api/name/HTTPAddress">&nbsp;&nbsp;HTTPAddress</a></code>
+		<span class="tooltip"><p>the address of the the request <a href="#//api/name/to">to</a> perform</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/API">&nbsp;&nbsp;API</a></code>
 		<span class="tooltip"><p>the used API of this request</p></span>
 	</span>
@@ -366,11 +373,11 @@ to=VALUE_1&amp;to=VALUE_2&amp;to=VALUE_3</p></span>
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/preparedAddress:">&ndash;&nbsp;preparedAddress:</a></code>
-		<span class="tooltip"><p>This method get&rsquo;s executed right before the request gets send to the specified API (&ndash; <a href="#//api/name/start">[MTDDirectionsRequest start]</a>). The default implementation
-just returns the address as is without changing it, but subclasses can override this method <a href="#//api/name/to">to</a> change the
-request address the way they want <a href="#//api/name/to">to</a>. <a href="../Classes/MTDDirectionsRequestGoogle.html">MTDDirectionsRequestGoogle</a> for example uses this hook <a href="#//api/name/to">to</a> compute a signature
-for the address, when a business was registered. This method gets called on a global concurrent queue.</p></span>
+		<code><a href="#//api/name/preparedURLForAddress:">&ndash;&nbsp;preparedURLForAddress:</a></code>
+		<span class="tooltip"><p>This method get&rsquo;s executed right before the request gets send to the specified API (&ndash; <a href="#//api/name/start">[MTDDirectionsRequest start]</a>).
+The default implementation just returns the address as is without changing it, but subclasses can override this
+method <a href="#//api/name/to">to</a> change the request address the way they want <a href="#//api/name/to">to</a>. <a href="../Classes/MTDDirectionsRequestGoogle.html">MTDDirectionsRequestGoogle</a> for example uses this hook
+<a href="#//api/name/to">to</a> compute a signature for the address, when a business was registered. This method gets called on a global concurrent queue.</p></span>
 	</span>
 	
 	
@@ -386,13 +393,6 @@ for the address, when a business was registered. This method gets called on a gl
 	<span class="tooltip">
 		<code><a href="#//api/name/mtd_HTTPRequest">&nbsp;&nbsp;mtd_HTTPRequest</a></code>
 		<span class="tooltip"><p>object used <a href="#//api/name/to">to</a> perform a HTTP request</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/mtd_HTTPAddress">&nbsp;&nbsp;mtd_HTTPAddress</a></code>
-		<span class="tooltip"><p>the address of the the request <a href="#//api/name/to">to</a> perform</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -435,6 +435,40 @@ for the address, when a business was registered. This method gets called on a gl
 	
 	
 	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) MTDDirectionsAPI API</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDDirectionsRequest.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/HTTPAddress" title="HTTPAddress"></a>
+	<h3 class="subsubtitle method-title">HTTPAddress</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>the address of the the request <a href="#//api/name/to">to</a> perform</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) NSString *HTTPAddress</code></div>
 	
 	
 	
@@ -554,40 +588,6 @@ for the address, when a business was registered. This method gets called on a gl
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
 		<code class="declared-in-ref">MTDDirectionsRequest.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/mtd_HTTPAddress" title="mtd_HTTPAddress"></a>
-	<h3 class="subsubtitle method-title">mtd_HTTPAddress</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>the address of the the request <a href="#//api/name/to">to</a> perform</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) NSString *mtd_HTTPAddress</code></div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDDirectionsRequest+MTDirectionsPrivateAPI.h</code><br />
 	</div>				
 	
 	
@@ -974,20 +974,20 @@ with a specified <a href="#//api/name/routeType">routeType</a>, options and opti
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/preparedAddress:" title="preparedAddress:"></a>
-	<h3 class="subsubtitle method-title">preparedAddress:</h3>
+	<a name="//api/name/preparedURLForAddress:" title="preparedURLForAddress:"></a>
+	<h3 class="subsubtitle method-title">preparedURLForAddress:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>This method get&rsquo;s executed right before the request gets send to the specified API (&ndash; <a href="#//api/name/start">[MTDDirectionsRequest start]</a>). The default implementation
-just returns the address as is without changing it, but subclasses can override this method <a href="#//api/name/to">to</a> change the
-request address the way they want <a href="#//api/name/to">to</a>. <a href="../Classes/MTDDirectionsRequestGoogle.html">MTDDirectionsRequestGoogle</a> for example uses this hook <a href="#//api/name/to">to</a> compute a signature
-for the address, when a business was registered. This method gets called on a global concurrent queue.</p>
+		<p>This method get&rsquo;s executed right before the request gets send to the specified API (&ndash; <a href="#//api/name/start">[MTDDirectionsRequest start]</a>).
+The default implementation just returns the address as is without changing it, but subclasses can override this
+method <a href="#//api/name/to">to</a> change the request address the way they want <a href="#//api/name/to">to</a>. <a href="../Classes/MTDDirectionsRequestGoogle.html">MTDDirectionsRequestGoogle</a> for example uses this hook
+<a href="#//api/name/to">to</a> compute a signature for the address, when a business was registered. This method gets called on a global concurrent queue.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (NSString *)preparedAddress:(NSString *)<em>address</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (NSURL *)preparedURLForAddress:(NSString *)<em>address</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
@@ -1004,7 +1004,7 @@ for the address, when a business was registered. This method gets called on a gl
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>the final address we will request</p>
+		<p>the final URL we will request</p>
 	</div>
 	
 	
@@ -1241,7 +1241,7 @@ to=VALUE_1&amp;to=VALUE_2&amp;to=VALUE_3</p>
 		<h4 class="method-subtitle">See Also</h4>
 		<ul>
 			
-			<li><code><p><a href="#//api/name/preparedAddress:">&ndash; preparedAddress:</a></p></code></li>
+			<li><code><p><a href="#//api/name/preparedURLForAddress:">&ndash; preparedURLForAddress:</a></p></code></li>
 			
 		</ul>
 	</div>
@@ -1269,7 +1269,7 @@ to=VALUE_1&amp;to=VALUE_2&amp;to=VALUE_3</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-09-03)</span><br />
+						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-09-23)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
 						

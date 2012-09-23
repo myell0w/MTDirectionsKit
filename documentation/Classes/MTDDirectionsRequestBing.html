@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
-		<title>MTDDirectionsParserMapQuest Class Reference</title>
+		<title>MTDDirectionsRequestBing Class Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
@@ -17,7 +17,7 @@
 			</div>
 			
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">MTDDirectionsParserMapQuest Class Reference</h1>
+				<h1 class="hideInXcode">MTDDirectionsRequestBing Class Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -32,10 +32,17 @@
 	
 	
 	
+	<option value="tasks">Tasks</option>
 	
 	
 	
 	
+	
+	
+	
+	<option value="class_methods">Class Methods</option>
+	
+	<option value="//api/name/registerAPIKey:">&nbsp;&nbsp;&nbsp;&nbsp;+ registerAPIKey:</option>
 	
 	
 	
@@ -53,11 +60,21 @@
 
 
 
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+</ul></li>
 
 
 
 
 
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/registerAPIKey:">registerAPIKey:</a></span></li>
+	
+</ul></li>
 
 
 
@@ -66,7 +83,7 @@
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="MTDDirectionsParserMapQuest Class Reference" name="top"></a>
+				<a title="MTDDirectionsRequestBing Class Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -75,7 +92,7 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">MTDDirectionsParserMapQuest Class Reference</h1>
+						<h1 class="title title-header">MTDDirectionsRequestBing Class Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
@@ -83,10 +100,10 @@
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
 	<td class="specification-title">Inherits from</td>
-	<td class="specification-value"><a href="../Classes/MTDDirectionsParser.html">MTDDirectionsParser</a> : NSObject</td>
+	<td class="specification-value"><a href="../Classes/MTDDirectionsRequest.html">MTDDirectionsRequest</a> : NSObject</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">MTDDirectionsParserMapQuest.h</td>
+	<td class="specification-value">MTDDirectionsRequestBing.h</td>
 </tr>
 						</tbody></table></div>
 					
@@ -96,12 +113,33 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>An instance of MTDDirectionsParserMapQuest is a concrete instance used to parse direction data obtained
-from the <a href="http://open.mapquestapi.com/directions/" title="MapQuest Open Directions API">MapQuest Open Directions API</a>.</p>
+						<p>An instance of MTDDirectionsRequestBing is a concrete instance to request directions data of a route
+from the <a href="http://msdn.microsoft.com/en-us/library/ff701705" title="Bing Routes API">Bing Routes API</a>.</p>
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						
+						
 
-<p>It checks the provided status code and in the case of a success the waypoints along the route and the
-total distance are parsed and an instance of MTDirectionsOverlay is created and passed into the completion block.
-In case of an error an NSError is created holding information about the error by setting the retreived status code.</p>
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/registerAPIKey:">+&nbsp;registerAPIKey:</a></code>
+		<span class="tooltip"><p>Set your Bing Maps API Key to be used, this key is mandatory.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
 					</div>
 					
 					
@@ -110,9 +148,55 @@ In case of an error an NSError is created holding information about the error by
 					
 					
 					
-					
-					
-					
+					<div class="section section-methods">
+						<a title="Class Methods" name="class_methods"></a>
+						<h2 class="subtitle subtitle-methods">Class Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/registerAPIKey:" title="registerAPIKey:"></a>
+	<h3 class="subsubtitle method-title">registerAPIKey:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Set your Bing Maps API Key to be used, this key is mandatory.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (void)registerAPIKey:(NSString *)<em>APIKey</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>APIKey</em></dt>
+			<dd><p>your Bing Maps API Key to use for making requests</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDDirectionsRequestBing.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
 					
 					
 					

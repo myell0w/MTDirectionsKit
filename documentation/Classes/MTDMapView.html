@@ -75,6 +75,10 @@
 	
 	<option value="//api/name/loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:">&nbsp;&nbsp;&nbsp;&nbsp;- loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:</option>
 	
+	<option value="//api/name/mtd_notifyDelegateDidFailLoadingOverlayWithError:">&nbsp;&nbsp;&nbsp;&nbsp;- mtd_notifyDelegateDidFailLoadingOverlayWithError:</option>
+	
+	<option value="//api/name/mtd_stopUpdatingLocationCallingCompletion:">&nbsp;&nbsp;&nbsp;&nbsp;- mtd_stopUpdatingLocationCallingCompletion:</option>
+	
 	<option value="//api/name/openDirectionsInMapApp">&nbsp;&nbsp;&nbsp;&nbsp;- openDirectionsInMapApp</option>
 	
 	<option value="//api/name/removeDirectionsOverlay">&nbsp;&nbsp;&nbsp;&nbsp;- removeDirectionsOverlay</option>
@@ -104,6 +108,8 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Inter-App">Inter-App</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Region">Region</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_MTDirectionsPrivateAPI Methods">MTDirectionsPrivateAPI Methods</a></span></li>
 	
 </ul></li>
 
@@ -148,6 +154,10 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/loadDirectionsFrom:to:routeType:zoomToShowDirections:">loadDirectionsFrom:to:routeType:zoomToShowDirections:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:">loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mtd_notifyDelegateDidFailLoadingOverlayWithError:">mtd_notifyDelegateDidFailLoadingOverlayWithError:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mtd_stopUpdatingLocationCallingCompletion:">mtd_stopUpdatingLocationCallingCompletion:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/openDirectionsInMapApp">openDirectionsInMapApp</a></span></li>
 	
@@ -194,8 +204,8 @@
 						<h2 class="subtitle subtitle-overview">Overview</h2>
 						<p>An MTDMapView instance provides functionality to show directions directly on top of the MapView inside your App.
 MTDMapView is a subclass of MKMapView and therefore uses Apple&rsquo;s standard way of displaying map data, which we all
-know and love. Currently this means that Google Maps is used as a backend, let&rsquo;s see if this is still true once
-iOS 6 will be released :&ndash;)</p>
+know and love. Up until iOS 5 this means that Google Maps is used as a backend for the map data, starting with iOS 6
+Apple Maps are used.</p>
 
 <p>Sample usage:</p>
 
@@ -206,6 +216,9 @@ iOS 6 will be released :&ndash;)</p>
 to:CLLocationCoordinate2DMake(51.4554, -0.9742)
 routeType:MTDDirectionsRouteTypeFastestDriving
 zoomToShowDirections:YES];</p>
+
+<p>This category exposes private API used in MTDirectionsKit to other classes to not generate warnings when using them.
+You should not use the properties and methods exposed here directly in your code.</p>
 					</div>
 					
 					
@@ -381,6 +394,28 @@ of the user&rsquo;s device. Does nothing otherwise.</p></span>
 	<span class="tooltip">
 		<code><a href="#//api/name/setRegionToShowDirectionsAnimated:">&ndash;&nbsp;setRegionToShowDirectionsAnimated:</a></code>
 		<span class="tooltip"><p>Sets the region of the MapView to show the whole <a href="#//api/name/directionsOverlay">directionsOverlay</a> at once.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="MTDirectionsPrivateAPI Methods" name="task_MTDirectionsPrivateAPI Methods"></a>
+						<h3 class="subsubtitle task-title">MTDirectionsPrivateAPI Methods</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mtd_stopUpdatingLocationCallingCompletion:">&ndash;&nbsp;mtd_stopUpdatingLocationCallingCompletion:</a></code>
+		<span class="tooltip"><p>Stops the internal CLLocationManager and calls the completion block, if specified.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mtd_notifyDelegateDidFailLoadingOverlayWithError:">&ndash;&nbsp;mtd_notifyDelegateDidFailLoadingOverlayWithError:</a></code>
+		<span class="tooltip"><p>Notifies the delegate of the mapView that loading of directions failed.</p></span>
 	</span>
 	
 	
@@ -1106,6 +1141,94 @@ the region gets zoomed (animated) to show the whole overlay, if the flag zoomToS
 </div>
 						
 						<div class="section-method">
+	<a name="//api/name/mtd_notifyDelegateDidFailLoadingOverlayWithError:" title="mtd_notifyDelegateDidFailLoadingOverlayWithError:"></a>
+	<h3 class="subsubtitle method-title">mtd_notifyDelegateDidFailLoadingOverlayWithError:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Notifies the delegate of the mapView that loading of directions failed.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)mtd_notifyDelegateDidFailLoadingOverlayWithError:(NSError *)<em>error</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>error</em></dt>
+			<dd><p>the error that is reported to the delegate</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDMapView+MTDirectionsPrivateAPI.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mtd_stopUpdatingLocationCallingCompletion:" title="mtd_stopUpdatingLocationCallingCompletion:"></a>
+	<h3 class="subsubtitle method-title">mtd_stopUpdatingLocationCallingCompletion:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Stops the internal CLLocationManager and calls the completion block, if specified.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)mtd_stopUpdatingLocationCallingCompletion:(BOOL)<em>callingCompletion</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>callingCompletion</em></dt>
+			<dd><p>if YES, the completion block of the location manager is called</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDMapView+MTDirectionsPrivateAPI.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/openDirectionsInMapApp" title="openDirectionsInMapApp"></a>
 	<h3 class="subsubtitle method-title">openDirectionsInMapApp</h3>
 	
@@ -1125,7 +1248,7 @@ of the user&rsquo;s device. Does nothing otherwise.</p>
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>YES, if the Maps App was opened successfully, NO otherwise</p>
+		<p>YES in case the <a href="#//api/name/directionsOverlay">directionsOverlay</a> is currently set and the Maps App was opened, NO otherwise</p>
 	</div>
 	
 	
@@ -1238,7 +1361,7 @@ if one exists. Does nothing otherwise.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-09-03)</span><br />
+						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-09-23)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
 						

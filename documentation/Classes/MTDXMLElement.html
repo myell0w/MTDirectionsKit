@@ -57,13 +57,13 @@
 	
 	<option value="class_methods">Class Methods</option>
 	
-	<option value="//api/name/nodeForXPathQuery:onHTML:">&nbsp;&nbsp;&nbsp;&nbsp;+ nodeForXPathQuery:onHTML:</option>
-	
 	<option value="//api/name/nodeForXPathQuery:onXML:">&nbsp;&nbsp;&nbsp;&nbsp;+ nodeForXPathQuery:onXML:</option>
 	
-	<option value="//api/name/nodesForXPathQuery:onHTML:">&nbsp;&nbsp;&nbsp;&nbsp;+ nodesForXPathQuery:onHTML:</option>
+	<option value="//api/name/nodeForXPathQuery:onXML:namespacePrefix:namespaceURI:">&nbsp;&nbsp;&nbsp;&nbsp;+ nodeForXPathQuery:onXML:namespacePrefix:namespaceURI:</option>
 	
 	<option value="//api/name/nodesForXPathQuery:onXML:">&nbsp;&nbsp;&nbsp;&nbsp;+ nodesForXPathQuery:onXML:</option>
+	
+	<option value="//api/name/nodesForXPathQuery:onXML:namespacePrefix:namespaceURI:">&nbsp;&nbsp;&nbsp;&nbsp;+ nodesForXPathQuery:onXML:namespacePrefix:namespaceURI:</option>
 	
 	
 	
@@ -126,13 +126,13 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/nodeForXPathQuery:onHTML:">nodeForXPathQuery:onHTML:</a></span></li>
-	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/nodeForXPathQuery:onXML:">nodeForXPathQuery:onXML:</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/nodesForXPathQuery:onHTML:">nodesForXPathQuery:onHTML:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/nodeForXPathQuery:onXML:namespacePrefix:namespaceURI:">nodeForXPathQuery:onXML:namespacePrefix:namespaceURI:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/nodesForXPathQuery:onXML:">nodesForXPathQuery:onXML:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/nodesForXPathQuery:onXML:namespacePrefix:namespaceURI:">nodesForXPathQuery:onXML:namespacePrefix:namespaceURI:</a></span></li>
 	
 </ul></li>
 
@@ -262,8 +262,8 @@ for convenient use of XPath.</p>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/nodesForXPathQuery:onHTML:">+&nbsp;nodesForXPathQuery:onHTML:</a></code>
-		<span class="tooltip"><p>Returns an array of all xml nodes matching the given query on the given html data.</p></span>
+		<code><a href="#//api/name/nodesForXPathQuery:onXML:namespacePrefix:namespaceURI:">+&nbsp;nodesForXPathQuery:onXML:namespacePrefix:namespaceURI:</a></code>
+		<span class="tooltip"><p>Returns an array of all xml nodes matching the given query on the given xml data in the given namespace.</p></span>
 	</span>
 	
 	
@@ -276,8 +276,8 @@ for convenient use of XPath.</p>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/nodeForXPathQuery:onHTML:">+&nbsp;nodeForXPathQuery:onHTML:</a></code>
-		<span class="tooltip"><p>Returns an array of all xml nodes matching the given query on the given html data.</p></span>
+		<code><a href="#//api/name/nodeForXPathQuery:onXML:namespacePrefix:namespaceURI:">+&nbsp;nodeForXPathQuery:onXML:namespacePrefix:namespaceURI:</a></code>
+		<span class="tooltip"><p>Returns the first xml node matching the given query on the given xml data in the given namespace.</p></span>
 	</span>
 	
 	
@@ -545,69 +545,6 @@ For all path components all children are traversed.</p></span>
 						<h2 class="subtitle subtitle-methods">Class Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/nodeForXPathQuery:onHTML:" title="nodeForXPathQuery:onHTML:"></a>
-	<h3 class="subsubtitle method-title">nodeForXPathQuery:onHTML:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Returns an array of all xml nodes matching the given query on the given html data.</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>+ (MTDXMLElement *)nodeForXPathQuery:(NSString *)<em>query</em> onHTML:(NSData *)<em>htmlData</em></code></div>
-	
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>query</em></dt>
-			<dd><p>the xpath query</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>htmlData</em></dt>
-			<dd><p>data representing a html document</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	<div class="method-subsection return">
-		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>MTDXMLElement representing the first node matching</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection see-also-section">
-		<h4 class="method-subtitle">See Also</h4>
-		<ul>
-			
-			<li><code><p><a href="#//api/name/nodesForXPathQuery:onXML:">+ nodesForXPathQuery:onXML:</a></p></code></li>
-			
-		</ul>
-	</div>
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDXMLElement.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
 	<a name="//api/name/nodeForXPathQuery:onXML:" title="nodeForXPathQuery:onXML:"></a>
 	<h3 class="subsubtitle method-title">nodeForXPathQuery:onXML:</h3>
 	
@@ -651,15 +588,6 @@ For all path components all children are traversed.</p></span>
 	
 	
 	
-	<div class="method-subsection see-also-section">
-		<h4 class="method-subtitle">See Also</h4>
-		<ul>
-			
-			<li><code><p><a href="#//api/name/nodesForXPathQuery:onHTML:">+ nodesForXPathQuery:onHTML:</a></p></code></li>
-			
-		</ul>
-	</div>
-	
 	
 	
 	<div class="method-subsection declared-in-section">
@@ -671,17 +599,17 @@ For all path components all children are traversed.</p></span>
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/nodesForXPathQuery:onHTML:" title="nodesForXPathQuery:onHTML:"></a>
-	<h3 class="subsubtitle method-title">nodesForXPathQuery:onHTML:</h3>
+	<a name="//api/name/nodeForXPathQuery:onXML:namespacePrefix:namespaceURI:" title="nodeForXPathQuery:onXML:namespacePrefix:namespaceURI:"></a>
+	<h3 class="subsubtitle method-title">nodeForXPathQuery:onXML:namespacePrefix:namespaceURI:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Returns an array of all xml nodes matching the given query on the given html data.</p>
+		<p>Returns the first xml node matching the given query on the given xml data in the given namespace.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>+ (NSArray *)nodesForXPathQuery:(NSString *)<em>query</em> onHTML:(NSData *)<em>htmlData</em></code></div>
+	<div class="method-subsection method-declaration"><code>+ (MTDXMLElement *)nodeForXPathQuery:(NSString *)<em>query</em> onXML:(NSData *)<em>xmlData</em> namespacePrefix:(NSString *)<em>namespacePrefix</em> namespaceURI:(NSString *)<em>namespaceURI</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
@@ -693,8 +621,18 @@ For all path components all children are traversed.</p></span>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>htmlData</em></dt>
-			<dd><p>data representing a html document</p></dd>
+			<dt><em>xmlData</em></dt>
+			<dd><p>data representing a xml document</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>namespacePrefix</em></dt>
+			<dd><p>the XML namespace prefix used</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>namespaceURI</em></dt>
+			<dd><p>the URI of the namesapce</p></dd>
 		</dl>
 		
 	</div>
@@ -703,7 +641,7 @@ For all path components all children are traversed.</p></span>
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>array of MTDXMLElements</p>
+		<p>MTDXMLElement representing the first node matching</p>
 	</div>
 	
 	
@@ -713,17 +651,6 @@ For all path components all children are traversed.</p></span>
 	
 	
 	
-	
-	<div class="method-subsection see-also-section">
-		<h4 class="method-subtitle">See Also</h4>
-		<ul>
-			
-			<li><code><p><a href="#//api/name/nodesForXPathQuery:onXML:">+ nodesForXPathQuery:onXML:</a></p></code></li>
-			
-			<li><code><p><a href="#//api/name/nodeForXPathQuery:onHTML:">+ nodeForXPathQuery:onHTML:</a></p></code></li>
-			
-		</ul>
-	</div>
 	
 	
 	
@@ -783,7 +710,78 @@ For all path components all children are traversed.</p></span>
 		<h4 class="method-subtitle">See Also</h4>
 		<ul>
 			
-			<li><code><p><a href="#//api/name/nodesForXPathQuery:onHTML:">+ nodesForXPathQuery:onHTML:</a></p></code></li>
+			<li><code><p><a href="#//api/name/nodeForXPathQuery:onXML:">+ nodeForXPathQuery:onXML:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDXMLElement.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/nodesForXPathQuery:onXML:namespacePrefix:namespaceURI:" title="nodesForXPathQuery:onXML:namespacePrefix:namespaceURI:"></a>
+	<h3 class="subsubtitle method-title">nodesForXPathQuery:onXML:namespacePrefix:namespaceURI:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns an array of all xml nodes matching the given query on the given xml data in the given namespace.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (NSArray *)nodesForXPathQuery:(NSString *)<em>query</em> onXML:(NSData *)<em>xmlData</em> namespacePrefix:(NSString *)<em>namespacePrefix</em> namespaceURI:(NSString *)<em>namespaceURI</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>query</em></dt>
+			<dd><p>the xpath query</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>xmlData</em></dt>
+			<dd><p>data representing a xml document</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>namespacePrefix</em></dt>
+			<dd><p>the XML namespace prefix used</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>namespaceURI</em></dt>
+			<dd><p>the URI of the namesapce</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>array of MTDXMLElements</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
 			
 			<li><code><p><a href="#//api/name/nodeForXPathQuery:onXML:">+ nodeForXPathQuery:onXML:</a></p></code></li>
 			
@@ -1019,7 +1017,7 @@ For all path components except the last one only the first child is traversed, i
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-09-03)</span><br />
+						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-09-23)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
 						
