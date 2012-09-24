@@ -272,6 +272,23 @@
 				
 				<div class="releases">
 					<article class="release">
+						<h2>Version 1.4</h2>
+						<span class="date">Released on September 24th, 2012</span>
+						<ul>							
+							<li class="new"><span><b>New</b></span>Support for <b>Bing Maps Routes API</b></li>
+							<li class="new"><span><b>New</b></span>Support for <b>custom APIs</b> with MTDDirectionsAPIRegisterCustom(Request|Parser)Class</li>
+							<li class="new"><span><b>New</b></span> Support for armv7s (iPhone 5), dropping support for iOS < 4.3 and armv6 (write us if you need armv6 support)</li>
+							<li class="new"><span><b>New</b></span>Fully tested under <b>iOS 6</b></li>
+							<li class="new"><span><b>New</b></span>MTDDirectionsOpenInMapsApp was adjusted foriOS 6 and supports [MTDWaypoint waypointForCurrentLocation]</li>
+							<li class="new"><span><b>New</b></span>Added - [MTDAddress addressDictionary] - is used when opening directions in the built-in Maps App</li>
+							<li class="fix"><span><b>Fix</b></span> zoomToShowRegionAnimated now shows a region including all routes, when alternative routes are requested</li>
+							<li class="fix"><span><b>Fix</b></span>Address parsing now works when the waypoint doesn't have a valid coordinate</li>
+							<li class="fix"><span><b>Fix</b></span> Custom gesture recognizer on MapView is only enabled, when alternative directions are visible</li>
+							<li class="fix"><span><b>Fix</b></span> Custom gesture recognizer doesn't interfere with other gesture recognizers of the MapView</li>
+						</ul>
+					</article>
+					
+					<article class="release">
 						<h2>Version 1.3.1</h2>
 						<span class="date">Released on September 3rd, 2012</span>
 						<ul>							
