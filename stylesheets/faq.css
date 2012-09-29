@@ -1,7 +1,7 @@
 .datagrid table {
- border-collapse: collapse;
+  border-collapse: collapse;
   text-align: left;
-   width: 100%; 
+  width: 100%; 
 } 
 .datagrid {
 font: normal 12px/150% Arial, Helvetica, sans-serif; 
