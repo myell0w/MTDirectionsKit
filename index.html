@@ -85,7 +85,7 @@
 				 We too, that’s why we built MTDirectionsKit. MTDirectionsKit is an <strong>easy-to-use</strong> and <strong>easy-to-integrate</strong> <strong>framework for iOS</strong> that let's you do just that - guiding your users in the easiest and most professional way available!
 			</p>
 			<p>
-				<a href="https://github.com/myell0w/MTDirectionsKitDemo"><strong style="font-size:14pt">Give it a shot and try the demo!</strong></a>
+				<a href="https://github.com/myell0w/MTDirectionsKitDemo"><strong style="font-size:14pt">Try out the free demo!</strong></a>
 			</p>
 			
 			<div class="buttons">
@@ -219,7 +219,7 @@
 					</div>
 				</div>
 				
-				<p style="text-align:center">  <b>Al minor 1.x updates</b> of MTDirectionsKit are <b>included</b>.</p>
+				<p style="text-align:center">  <b>All minor 1.x updates</b> of MTDirectionsKit are <b>included</b>.</p>
 			
 			</div>
 			<!-- End Purchase -->
@@ -268,10 +268,10 @@
 			<!-- End Features -->
 			
 			<!-- Start Updates -->
-			<div id="faq" class="page">
+			<div id="faq" class="page" style="width:100%">
 				<h1>FAQs</h1>
 				
-				<p class="faq"> Which APIs support which features?</p>
+				<p class="faq"> Which Features of MTDirectionsKit are supported by which APIs?</p>
 				<div class="datagrid">
 				<table>
 				<thead><tr><th>&nbsp;</th><th>MapQuest</th><th>Google</th><th>Bing</th></tr></thead>
@@ -290,6 +290,23 @@
 				</tbody>
 				</table>
 				</div>
+				
+				<p class="faq">I want to provide my own routing data, can I use MTDirectionsKit with my custom API?</p>
+				<p class="faq_answer"> 
+					Starting with MTDirectionsKit 1.4 you can use your own routing data by providing a custom request and parser (<i>MTDDirectionsAPIRegisterCustomRequestClass</i>, <i>MTDDirectionsAPIRegisterCustomParserClass</i>). Have a look at the <a href="https://github.com/myell0w/MTDirectionsKitDemo">Demo</a> to see it in action.
+				</p>
+				
+				<p class="faq"> What are the exact Terms of Usage for the provided APIs?</p>
+				<p class="faq_answer"> 
+					MapQuest Open Directions: <a href="http://developer.mapquest.com/web/info/terms-of-use"> Terms of Use</a> <br />
+					Google Directions: <a href="https://developers.google.com/maps/terms"> Terms of Service</a> <br />
+					Bing Routes: <a href="http://www.microsoft.com/maps/product/terms.html"> Terms of Use </a>
+				</p>
+				
+				<p class="faq"> Can I use the Google Directions API on iOS 6?</p>
+				<p class="faq_answer"> 
+					Unfortunately Google's <a href="https://developers.google.com/maps/terms">Terms of Service</a> prohibit using their data in combination with other map data then Google‘s. That means you can use the Google Directions API on iOS 4 and iOS 5, but are not allowed to use it on iOS 6. You can easily switch to one of our other supported data providers, MapQuest as well as Bing can be used on iOS 6.
+				</p>
 			</div>
 			
 			<!-- Start Updates -->
@@ -299,7 +316,7 @@
 				<div class="releases">
 					<article class="release">
 						<h2>Version 1.4</h2>
-						<span class="date">Released on September 24th, 2012</span>
+						<span class="date">Released on September 29th, 2012</span>
 						<ul>							
 							<li class="new"><span><b>New</b></span>Support for <b>Bing Maps Routes API</b></li>
 							<li class="new"><span><b>New</b></span>Support for <b>custom APIs</b> with MTDDirectionsAPIRegisterCustom(Request|Parser)Class</li>
