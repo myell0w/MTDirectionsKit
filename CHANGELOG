@@ -1,11 +1,11 @@
 = 1.4 24.9.2012
  * Support for Bing Routes API
  * Support for custom requests/parsers with MTDDirectionsAPIRegisterCustomRequestClass/MTDDirectionsAPIRegisterCustomParserClass
- * Fixed a bug where zoomToShowRegionAnimated didn't show the all routes, when alternative routes where requested
+ * Fixed a bug where zoomToShowRegionAnimated didn't show all routes, when alternative routes were requested
  * Fully tested under iOS 6
  * MTDDirectionsOpenInMapsApp works on iOS 6 and has support for [MTDWaypoint waypointForCurrentLocation]
  * Added - [MTDAddress addressDictionary] - this dictionary is used when opening directions in the built-in Maps App
- * Fixed a bug where address parsing didn't work, when the waypoint didn't have a valid coordinate (e.g. [MTDWaypoint waypointWithAddress:])
+ * Fixed a bug where address parsing didn't work when the waypoint didn't have a valid coordinate (e.g. [MTDWaypoint waypointWithAddress:])
  * Fixed: Custom gesture recognizer on MapView is only enabled, when alternative directions are visible
  * Fixed: Custom gesture recognizer doesn't interfere with other gesture recognizers of the MapView
  * Support for armv7s, dropping support for iOS < 4.3 and armv6
