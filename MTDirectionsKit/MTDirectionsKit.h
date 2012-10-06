@@ -22,6 +22,7 @@
 #import <MTDirectionsKit/MTDMeasurementSystem.h>
 #import <MTDirectionsKit/MTDFunctions.h>
 #import <MTDirectionsKit/MTDLogging.h>
+#import <MTDirectionsKit/MTDLocale.h>
 
 // MapKit
 #import <MTDirectionsKit/MTDMapView.h>

@@ -4,6 +4,7 @@
 #import "MTDDirectionsRouteType+Bing.h"
 #import "MTDWaypoint.h"
 #import "MTDFunctions.h"
+#import "MTDLocale+Bing.h"
 
 
 #define kMTDBingHostName                    @"http://dev.virtualearth.net/REST"
@@ -112,6 +113,7 @@ static NSString *mtd_apiKey = nil;
     [self setValue:@"true" forParameter:@"suppressStatus"];
     [self setValue:@"Points" forParameter:@"routePathOutput"];
     [self setValue:@"km" forParameter:@"distanceUnit"];
+    [self setValue:MTDDirectionsGetLocaleBing() forParameter:@"culture"];
 }
 
 @end

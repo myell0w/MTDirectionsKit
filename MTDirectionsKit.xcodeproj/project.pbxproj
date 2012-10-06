@@ -56,6 +56,8 @@
 		9B000FD91620656700E5FF03 /* MTDWaypoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B000FC41620656700E5FF03 /* MTDWaypoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B000FDA1620656700E5FF03 /* MTDWaypoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B000FC51620656700E5FF03 /* MTDWaypoint.m */; };
 		9B000FE916206FCD00E5FF03 /* MTDCardinalDirection.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B000FE816206FCD00E5FF03 /* MTDCardinalDirection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B000FF61620981F00E5FF03 /* MTDLocale.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B000FF41620981D00E5FF03 /* MTDLocale.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B000FF71620981F00E5FF03 /* MTDLocale.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B000FF51620981E00E5FF03 /* MTDLocale.m */; };
 		9B0364F315F6271000538307 /* MTDDirectionsParserBingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0364F215F6271000538307 /* MTDDirectionsParserBingTest.m */; };
 		9B0364F815F62B9E00538307 /* bing_driving_path.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B0364F415F62B9E00538307 /* bing_driving_path.xml */; };
 		9B0364F915F62B9E00538307 /* bing_driving.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B0364F515F62B9E00538307 /* bing_driving.xml */; };
@@ -191,6 +193,11 @@
 		9B000FE816206FCD00E5FF03 /* MTDCardinalDirection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDCardinalDirection.h; sourceTree = "<group>"; };
 		9B000FEA1620729200E5FF03 /* MTDCardinalDirection+MapQuest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MTDCardinalDirection+MapQuest.h"; sourceTree = "<group>"; };
 		9B000FEB1620771800E5FF03 /* MTDCardinalDirection+Bing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTDCardinalDirection+Bing.h"; sourceTree = "<group>"; };
+		9B000FF41620981D00E5FF03 /* MTDLocale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDLocale.h; sourceTree = "<group>"; };
+		9B000FF51620981E00E5FF03 /* MTDLocale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDLocale.m; sourceTree = "<group>"; };
+		9B000FF816209A7200E5FF03 /* MTDLocale+Bing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MTDLocale+Bing.h"; sourceTree = "<group>"; };
+		9B000FF916209A7D00E5FF03 /* MTDLocale+MapQuest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MTDLocale+MapQuest.h"; sourceTree = "<group>"; };
+		9B000FFA16209A8400E5FF03 /* MTDLocale+Google.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MTDLocale+Google.h"; sourceTree = "<group>"; };
 		9B0364F115F6271000538307 /* MTDDirectionsParserBingTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDDirectionsParserBingTest.h; sourceTree = "<group>"; };
 		9B0364F215F6271000538307 /* MTDDirectionsParserBingTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDDirectionsParserBingTest.m; sourceTree = "<group>"; };
 		9B0364F415F62B9E00538307 /* bing_driving_path.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = bing_driving_path.xml; sourceTree = "<group>"; };
@@ -335,6 +342,8 @@
 				9B000FB81620656700E5FF03 /* MTDDistance.m */,
 				9B000FB91620656700E5FF03 /* MTDFunctions.h */,
 				9B000FBA1620656700E5FF03 /* MTDFunctions.m */,
+				9B000FF41620981D00E5FF03 /* MTDLocale.h */,
+				9B000FF51620981E00E5FF03 /* MTDLocale.m */,
 				9B000FBB1620656700E5FF03 /* MTDLogging.h */,
 				9B000FBC1620656700E5FF03 /* MTDLogging.m */,
 				9B000FBD1620656700E5FF03 /* MTDManeuver.h */,
@@ -413,6 +422,7 @@
 				9B000FEA1620729200E5FF03 /* MTDCardinalDirection+MapQuest.h */,
 				9B10AA0F155D85B8002A3052 /* MTDDirectionsRouteType+MapQuest.h */,
 				9B8A2BB7155FE20000BAAE7B /* MTDStatusCodeMapQuest.h */,
+				9B000FF916209A7D00E5FF03 /* MTDLocale+MapQuest.h */,
 			);
 			path = MapQuest;
 			sourceTree = "<group>";
@@ -474,6 +484,7 @@
 				9B2C42B8155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.m */,
 				9B2C42B9155EB85B00C0E4CE /* MTDDirectionsRouteType+Google.h */,
 				9B81265015697B0800C9A6C8 /* MTDStatusCodeGoogle.h */,
+				9B000FFA16209A8400E5FF03 /* MTDLocale+Google.h */,
 			);
 			path = Google;
 			sourceTree = "<group>";
@@ -569,6 +580,7 @@
 				9B000FEB1620771800E5FF03 /* MTDCardinalDirection+Bing.h */,
 				9B92435E15F51A6A000BC591 /* MTDDirectionsRouteType+Bing.h */,
 				9B92436215F51AF8000BC591 /* MTDStatusCodeBing.h */,
+				9B000FF816209A7200E5FF03 /* MTDLocale+Bing.h */,
 			);
 			path = Bing;
 			sourceTree = "<group>";
@@ -636,6 +648,7 @@
 				9B000FD71620656700E5FF03 /* MTDRoute.h in Headers */,
 				9B000FD91620656700E5FF03 /* MTDWaypoint.h in Headers */,
 				9B000FE916206FCD00E5FF03 /* MTDCardinalDirection.h in Headers */,
+				9B000FF61620981F00E5FF03 /* MTDLocale.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -840,6 +853,7 @@
 				9B000FD51620656700E5FF03 /* MTDMeasurementSystem.m in Sources */,
 				9B000FD81620656700E5FF03 /* MTDRoute.m in Sources */,
 				9B000FDA1620656700E5FF03 /* MTDWaypoint.m in Sources */,
+				9B000FF71620981F00E5FF03 /* MTDLocale.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -933,9 +947,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = YES;
+				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -946,15 +967,21 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
@@ -971,21 +998,34 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = YES;
+				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (

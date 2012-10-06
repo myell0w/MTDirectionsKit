@@ -496,7 +496,13 @@
     _mtd_tapGestureRecognizer.delegate = _mtd_delegateProxy;
 
     // we require all gesture recognizer except other single-tap gesture recognizers to fail
-    for (UIGestureRecognizer *gesture in self.gestureRecognizers) {
+    NSMutableArray *mapViewGestureRecognizers = [NSMutableArray arrayWithArray:self.gestureRecognizers];
+
+    for (UIView *view in [self subviews]) {
+        [mapViewGestureRecognizers addObjectsFromArray:[view gestureRecognizers]];
+    }
+
+    for (UIGestureRecognizer *gesture in mapViewGestureRecognizers) {
         if ([gesture isKindOfClass:[UITapGestureRecognizer class]]) {
             UITapGestureRecognizer *systemTap = (UITapGestureRecognizer *)gesture;
 

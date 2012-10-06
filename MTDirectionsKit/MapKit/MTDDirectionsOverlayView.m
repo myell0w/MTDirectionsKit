@@ -74,6 +74,7 @@
     // of the currently drawn rect are included in the generated path.
     MKMapRect clipRect = MKMapRectInset(mapRect, -fullLineWidth, -fullLineWidth);
 
+    // we can't sort the routes and draw them simultanously
     @synchronized (self.mtd_directionsOverlay.routes) {
         for (MTDRoute *route in self.mtd_directionsOverlay.routes) {
             CGPathRef path = [self mtd_newPathForPoints:route.points
@@ -90,10 +91,10 @@
 
                 // draw non-active routes less intense
                 if (!isActiveRoute) {
-                    baseColor = [baseColor colorWithAlphaComponent:0.6f];
-                    lineWidth = fullLineWidth * 0.7f;
-                    shadowAlpha = 0.1f;
-                    secondNormalPathAlpha = 0.4f;
+                    baseColor = [baseColor colorWithAlphaComponent:0.65f];
+                    lineWidth = fullLineWidth * 0.75f;
+                    shadowAlpha = 0.15f;
+                    secondNormalPathAlpha = 0.45f;
                 }
 
                 UIColor *darkenedColor = MTDDarkenedColor(baseColor, 0.1f);

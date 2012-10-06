@@ -6,6 +6,7 @@
 #import "MTDWaypoint.h"
 #import "MTDFunctions.h"
 #import "MTDBase64.h"
+#import "MTDLocale+Google.h"
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonHMAC.h>
 
@@ -120,6 +121,7 @@ static NSString *mtd_cryptographicKey = nil;
 
 - (void)mtd_setup {
     [self setValue:@"true" forParameter:@"sensor"];
+    [self setValue:MTDDirectionsGetLocaleGoogle() forParameter:@"language"];
 
     if ([[self class] businessRegistered]) {
         [self setValue:mtd_clientId forParameter:@"client"];

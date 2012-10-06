@@ -4,6 +4,7 @@
 #import "MTDDirectionsRouteType+MapQuest.h"
 #import "MTDWaypoint.h"
 #import "MTDFunctions.h"
+#import "MTDLocale+MapQuest.h"
 
 
 #define kMTDMapQuestHostName                    @"http://open.mapquestapi.com"
@@ -105,6 +106,7 @@
     [self setValue:@"raw" forParameter:@"shapeFormat"];
     [self setValue:@"0" forParameter:@"generalize"];
     [self setValue:@"25" forParameter:@"timeOverage"];
+    [self setValue:MTDDirectionsGetLocaleMapQuest() forParameter:@"locale"];
 }
 
 @end

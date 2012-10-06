@@ -57,12 +57,13 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"<MTDManeuver: (Lat: %f, Lng: %f, Distance: %f, Time: %f, Direction: %d)>",
+    return [NSString stringWithFormat:@"<MTDManeuver (Lat: %f, Lng: %f, Distance: %f, Time: %f, Direction: %d):\n %@>",
             self.coordinate.latitude,
             self.coordinate.longitude,
             self.distance,
             self.time,
-            self.cardinalDirection];
+            self.cardinalDirection,
+            self.instructions];
 }
 
 @end
