@@ -188,6 +188,17 @@
     return waypoints;
 }
 
+// This method returns an array of all waypoints including from, to and intermediateGoals if specified
+- (NSArray *)mtd_waypointsIncludingFromAndToWithIntermediateGoals:(NSArray *)intermediateGoals {
+    NSMutableArray *allGoals = intermediateGoals != nil ? [NSMutableArray arrayWithArray:intermediateGoals] : [NSMutableArray array];
+
+    // insert from and to at the right places
+    [allGoals insertObject:self.from atIndex:0];
+    [allGoals addObject:self.to];
+
+    return allGoals;
+}
+
 // This method parses all addresses and orders the intermediate goals in the same order as optimised by the API.
 // That is, if optimization is enabled the MapQuest can reorder the intermediate goals to provide the fastest route possible.
 - (NSArray *)mtd_orderedIntermediateGoalsWithSequenceNode:(MTDXMLElement *)sequenceNode {
@@ -234,17 +245,6 @@
     return address;
 }
 
-// This method returns an array of all waypoints including from, to and intermediateGoals if specified
-- (NSArray *)mtd_waypointsIncludingFromAndToWithIntermediateGoals:(NSArray *)intermediateGoals {
-    NSMutableArray *allGoals = intermediateGoals != nil ? [NSMutableArray arrayWithArray:intermediateGoals] : [NSMutableArray array];
-
-    // insert from and to at the right places
-    [allGoals insertObject:self.from atIndex:0];
-    [allGoals addObject:self.to];
-
-    return allGoals;
-}
-
 // This method parses a maneuver and returns an instance of MTDManeuver
 - (MTDManeuver *)mtd_maneuverFromManeuverNode:(MTDXMLElement *)maneuverNode {
     MTDXMLElement *positionNode = [maneuverNode firstChildNodeWithName:@"startPoint"];
@@ -268,27 +268,15 @@
     }
 }
 
+// This method parses all maneuver nodes of a route
 - (NSArray *)mtd_maneuversFromManeuverNodes:(NSArray *)maneuverNodes {
     NSMutableArray *maneuvers = [NSMutableArray arrayWithCapacity:maneuverNodes.count];
 
     for (MTDXMLElement *maneuverNode in maneuverNodes) {
-        MTDXMLElement *positionNode = [maneuverNode firstChildNodeWithName:@"startPoint"];
-        MTDXMLElement *latitudeNode = [positionNode firstChildNodeWithName:@"lat"];
-        MTDXMLElement *longitudeNode = [positionNode firstChildNodeWithName:@"lng"];
+        MTDManeuver *maneuver = [self mtd_maneuverFromManeuverNode:maneuverNode];
 
-        if (latitudeNode != nil && longitudeNode != nil) {
-            MTDXMLElement *distanceNode = [maneuverNode firstChildNodeWithName:@"distance"];
-            MTDXMLElement *timeNode = [maneuverNode firstChildNodeWithName:@"time"];
-
-            CLLocationDistance maneuverDistance = [distanceNode.contentString doubleValue];
-            NSTimeInterval maneuverTime = [timeNode.contentString doubleValue];
-            CLLocationCoordinate2D maneuverCoordinate = CLLocationCoordinate2DMake([latitudeNode.contentString doubleValue],
-                                                                                   [longitudeNode.contentString doubleValue]);
-
-            
-            [maneuvers addObject:[MTDManeuver maneuverWithWaypoint:[MTDWaypoint waypointWithCoordinate:maneuverCoordinate]
-                                                          distance:maneuverDistance
-                                                              time:maneuverTime]];
+        if (maneuver != nil) {
+            [maneuvers addObject:maneuver];
         }
     }
 

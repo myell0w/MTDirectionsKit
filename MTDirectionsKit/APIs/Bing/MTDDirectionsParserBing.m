@@ -6,6 +6,7 @@
 #import "MTDWaypoint.h"
 #import "MTDRoute.h"
 #import "MTDAddress.h"
+#import "MTDManeuver.h"
 #import "MTDStatusCodeBing.h"
 
 
@@ -92,6 +93,7 @@
 
 - (MTDRoute *)mtd_routeFromRouteNode:(MTDXMLElement *)routeNode copyright:(NSString *)copyright warnings:(NSArray *)warnings {
     NSArray *waypointNodes = [routeNode childNodesTraversingAllChildrenWithPath:@"RoutePath.Line.Point"];
+    NSArray *maneuverNodes = [routeNode childNodesTraversingAllChildrenWithPath:@"RouteLeg.ItineraryItem"];
     MTDXMLElement *distanceNode = [routeNode firstChildNodeWithName:@"TravelDistance"];
     MTDXMLElement *timeNode = [routeNode firstChildNodeWithName:@"TravelDuration"];
     MTDXMLElement *idNode = [routeNode firstChildNodeWithName:@"Id"];
@@ -102,6 +104,8 @@
 
     // Parse waypoints
     NSArray *waypoints = [self mtd_waypointsFromWaypointNodes:waypointNodes];
+    // Parse Maneuvers
+    NSArray *maneuvers = [self mtd_maneuversFromManeuverNodes:maneuverNodes];
 
     // Parse Additional Info of directions
     {
@@ -130,6 +134,7 @@
                                            additionalInfo:additionalInfo];
 
     route.name = idNode.contentString;
+    route.maneuvers = maneuvers;
 
     return route;
 }
@@ -207,6 +212,44 @@
                                                        street:[streetNode contentString]];
     
     return address;
+}
+
+// This method parses a maneuver and returns an instance of MTDManeuver
+- (MTDManeuver *)mtd_maneuverFromManeuverNode:(MTDXMLElement *)maneuverNode {
+    MTDXMLElement *positionNode = [maneuverNode firstChildNodeWithName:@"ManeuverPoint"];
+    MTDXMLElement *latitudeNode = [positionNode firstChildNodeWithName:@"Latitude"];
+    MTDXMLElement *longitudeNode = [positionNode firstChildNodeWithName:@"Longitude"];
+
+    if (latitudeNode != nil && longitudeNode != nil) {
+        MTDXMLElement *distanceNode = [maneuverNode firstChildNodeWithName:@"TravelDistance"];
+        MTDXMLElement *timeNode = [maneuverNode firstChildNodeWithName:@"TravelDuration"];
+
+        CLLocationCoordinate2D maneuverCoordinate = CLLocationCoordinate2DMake([latitudeNode.contentString doubleValue],
+                                                                               [longitudeNode.contentString doubleValue]);
+        CLLocationDistance maneuverDistance = [distanceNode.contentString doubleValue];
+        NSTimeInterval maneuverTime = [timeNode.contentString doubleValue];
+
+        return [MTDManeuver maneuverWithWaypoint:[MTDWaypoint waypointWithCoordinate:maneuverCoordinate]
+                                        distance:maneuverDistance
+                                            time:maneuverTime];
+    } else {
+        return nil;
+    }
+}
+
+// This method parses all maneuver nodes of a route
+- (NSArray *)mtd_maneuversFromManeuverNodes:(NSArray *)maneuverNodes {
+    NSMutableArray *maneuvers = [NSMutableArray arrayWithCapacity:maneuverNodes.count];
+
+    for (MTDXMLElement *maneuverNode in maneuverNodes) {
+        MTDManeuver *maneuver = [self mtd_maneuverFromManeuverNode:maneuverNode];
+
+        if (maneuver != nil) {
+            [maneuvers addObject:maneuver];
+        }
+    }
+    
+    return maneuvers;
 }
 
 @end

@@ -6,6 +6,7 @@
 #import "MTDWaypoint.h"
 #import "MTDRoute.h"
 #import "MTDAddress.h"
+#import "MTDManeuver.h"
 #import "MTDStatusCodeGoogle.h"
 
 
@@ -94,6 +95,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (MTDRoute *)mtd_routeFromRouteNode:(MTDXMLElement *)routeNode {
+    NSArray *stepNodes = [routeNode childNodesTraversingAllChildrenWithPath:@"leg.step"];
     NSArray *waypointNodes = [routeNode childNodesTraversingAllChildrenWithPath:@"leg.step.polyline.points"];
     NSArray *distanceNodes = [routeNode childNodesTraversingAllChildrenWithPath:@"leg.distance.value"];
     NSArray *timeNodes = [routeNode childNodesTraversingAllChildrenWithPath:@"leg.duration.value"];
@@ -107,6 +109,8 @@
 
     // Parse waypoints
     NSArray *waypoints = [self mtd_waypointsFromWaypointNodes:waypointNodes];
+    // Parse Maneuvers
+    NSArray *maneuvers = [self mtd_maneuversFromStepNodes:stepNodes];
 
     // Parse Additional Info of directions
     {
@@ -144,6 +148,7 @@
                                            additionalInfo:additionalInfo];
 
     route.name = summaryNode.contentString;
+    route.maneuvers = maneuvers;
 
     return route;
 }
@@ -173,6 +178,17 @@
     }
 
     return waypoints;
+}
+
+// This method returns an array of all waypoints including from, to and intermediateGoals if specified
+- (NSArray *)mtd_waypointsIncludingFromAndToWithIntermediateGoals:(NSArray *)intermediateGoals {
+    NSMutableArray *allGoals = intermediateGoals != nil ? [NSMutableArray arrayWithArray:intermediateGoals] : [NSMutableArray array];
+
+    // insert from and to at the right places
+    [allGoals insertObject:self.from atIndex:0];
+    [allGoals addObject:self.to];
+
+    return allGoals;
 }
 
 // This method decodes a polyline and returns an array of MTDWaypoints
@@ -255,15 +271,42 @@
     return [[MTDAddress alloc] initWithAddressString:addressNode.contentString];
 }
 
-// This method returns an array of all waypoints including from, to and intermediateGoals if specified
-- (NSArray *)mtd_waypointsIncludingFromAndToWithIntermediateGoals:(NSArray *)intermediateGoals {
-    NSMutableArray *allGoals = intermediateGoals != nil ? [NSMutableArray arrayWithArray:intermediateGoals] : [NSMutableArray array];
+// This method parses a maneuver and returns an instance of MTDManeuver
+- (MTDManeuver *)mtd_maneuverFromStepNode:(MTDXMLElement *)stepNode {
+    MTDXMLElement *positionNode = [stepNode firstChildNodeWithName:@"start_location"];
+    MTDXMLElement *latitudeNode = [positionNode firstChildNodeWithName:@"lat"];
+    MTDXMLElement *longitudeNode = [positionNode firstChildNodeWithName:@"lng"];
+
+    if (latitudeNode != nil && longitudeNode != nil) {
+        MTDXMLElement *distanceNode = [[stepNode firstChildNodeWithName:@"distance"] firstChildNodeWithName:@"value"];
+        MTDXMLElement *timeNode = [[stepNode firstChildNodeWithName:@"duration"] firstChildNodeWithName:@"value"];
+
+        CLLocationCoordinate2D maneuverCoordinate = CLLocationCoordinate2DMake([latitudeNode.contentString doubleValue],
+                                                                               [longitudeNode.contentString doubleValue]);
+        CLLocationDistance maneuverDistance = [distanceNode.contentString doubleValue];
+        NSTimeInterval maneuverTime = [timeNode.contentString doubleValue];
+
+        return [MTDManeuver maneuverWithWaypoint:[MTDWaypoint waypointWithCoordinate:maneuverCoordinate]
+                                        distance:maneuverDistance
+                                            time:maneuverTime];
+    } else {
+        return nil;
+    }
+}
+
+// This method parses all maneuver nodes of a route
+- (NSArray *)mtd_maneuversFromStepNodes:(NSArray *)stepNodes {
+    NSMutableArray *maneuvers = [NSMutableArray arrayWithCapacity:stepNodes.count];
+
+    for (MTDXMLElement *stepNode in stepNodes) {
+        MTDManeuver *maneuver = [self mtd_maneuverFromStepNode:stepNode];
+
+        if (maneuver != nil) {
+            [maneuvers addObject:maneuver];
+        }
+    }
     
-    // insert from and to at the right places
-    [allGoals insertObject:self.from atIndex:0];
-    [allGoals addObject:self.to];
-    
-    return allGoals;
+    return maneuvers;
 }
 
 @end
