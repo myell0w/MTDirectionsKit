@@ -40,8 +40,14 @@
 #pragma mark - UIGestureRecognizerDelegate
 ////////////////////////////////////////////////////////////////////////
 
-- (BOOL)gestureRecognizer:(__unused UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(__unused UIGestureRecognizer *)otherGestureRecognizer {
-    return YES;
+- (BOOL)gestureRecognizer:(__unused UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    if ([otherGestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]) {
+        UITapGestureRecognizer *otherTapGestureRecognizer = (UITapGestureRecognizer *)otherGestureRecognizer;
+
+        return otherTapGestureRecognizer.numberOfTapsRequired == 1;
+    } else {
+        return YES;
+    }
 }
 
 @end
