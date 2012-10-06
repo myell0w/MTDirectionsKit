@@ -274,6 +274,7 @@
 // This method parses a maneuver and returns an instance of MTDManeuver
 - (MTDManeuver *)mtd_maneuverFromStepNode:(MTDXMLElement *)stepNode {
     MTDXMLElement *positionNode = [stepNode firstChildNodeWithName:@"start_location"];
+    MTDXMLElement *instructionNode = [stepNode firstChildNodeWithName:@"html_instructions"];
     MTDXMLElement *latitudeNode = [positionNode firstChildNodeWithName:@"lat"];
     MTDXMLElement *longitudeNode = [positionNode firstChildNodeWithName:@"lng"];
 
@@ -288,7 +289,9 @@
 
         return [MTDManeuver maneuverWithWaypoint:[MTDWaypoint waypointWithCoordinate:maneuverCoordinate]
                                         distance:maneuverDistance
-                                            time:maneuverTime];
+                                            time:maneuverTime
+                                    instructions:instructionNode.contentString
+                               cardinalDirection:MTDCardinalDirectionUnknown];
     } else {
         return nil;
     }

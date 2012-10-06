@@ -8,6 +8,7 @@
 #import "MTDAddress.h"
 #import "MTDManeuver.h"
 #import "MTDStatusCodeBing.h"
+#import "MTDCardinalDirection+Bing.h"
 
 
 #define kMTDNamespacePrefix     @"b"
@@ -217,6 +218,8 @@
 // This method parses a maneuver and returns an instance of MTDManeuver
 - (MTDManeuver *)mtd_maneuverFromManeuverNode:(MTDXMLElement *)maneuverNode {
     MTDXMLElement *positionNode = [maneuverNode firstChildNodeWithName:@"ManeuverPoint"];
+    MTDXMLElement *instructionNode = [maneuverNode firstChildNodeWithName:@"Instruction"];
+    MTDXMLElement *directionNode = [maneuverNode firstChildNodeWithName:@"CompassDirection"];
     MTDXMLElement *latitudeNode = [positionNode firstChildNodeWithName:@"Latitude"];
     MTDXMLElement *longitudeNode = [positionNode firstChildNodeWithName:@"Longitude"];
 
@@ -231,7 +234,9 @@
 
         return [MTDManeuver maneuverWithWaypoint:[MTDWaypoint waypointWithCoordinate:maneuverCoordinate]
                                         distance:maneuverDistance
-                                            time:maneuverTime];
+                                            time:maneuverTime
+                                    instructions:instructionNode.contentString
+                               cardinalDirection:MTDCardinalDirectionFromBingDescription(directionNode.contentString)];
     } else {
         return nil;
     }

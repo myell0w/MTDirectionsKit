@@ -9,6 +9,7 @@
 #import "MTDDirectionsRouteType.h"
 #import "MTDXMLElement.h"
 #import "MTDStatusCodeMapQuest.h"
+#import "MTDCardinalDirection+MapQuest.h"
 
 
 @interface MTDDirectionsParserMapQuest ()
@@ -248,6 +249,8 @@
 // This method parses a maneuver and returns an instance of MTDManeuver
 - (MTDManeuver *)mtd_maneuverFromManeuverNode:(MTDXMLElement *)maneuverNode {
     MTDXMLElement *positionNode = [maneuverNode firstChildNodeWithName:@"startPoint"];
+    MTDXMLElement *directionNode = [maneuverNode firstChildNodeWithName:@"direction"];
+    MTDXMLElement *instructionNode = [maneuverNode firstChildNodeWithName:@"narrative"];
     MTDXMLElement *latitudeNode = [positionNode firstChildNodeWithName:@"lat"];
     MTDXMLElement *longitudeNode = [positionNode firstChildNodeWithName:@"lng"];
 
@@ -262,7 +265,9 @@
 
         return [MTDManeuver maneuverWithWaypoint:[MTDWaypoint waypointWithCoordinate:maneuverCoordinate]
                                         distance:maneuverDistance
-                                            time:maneuverTime];
+                                            time:maneuverTime
+                                    instructions:instructionNode.contentString
+                               cardinalDirection:MTDCardinalDirectionFromMapQuestDescription(directionNode.contentString)];
     } else {
         return nil;
     }

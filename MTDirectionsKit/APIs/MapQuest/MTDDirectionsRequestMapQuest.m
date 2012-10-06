@@ -100,7 +100,8 @@
     [self setValue:@"ignore" forParameter:@"ambiguities"];
     [self setValue:@"true" forParameter:@"doReverseGeocode"];
     [self setValue:@"k" forParameter:@"unit"];
-    [self setValue:@"none" forParameter:@"narrativeType"];
+    [self setValue:@"text" forParameter:@"narrativeType"];
+    [self setValue:@"false" forParameter:@"enhancedNarrative"];
     [self setValue:@"raw" forParameter:@"shapeFormat"];
     [self setValue:@"0" forParameter:@"generalize"];
     [self setValue:@"25" forParameter:@"timeOverage"];
