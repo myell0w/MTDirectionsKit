@@ -58,6 +58,7 @@
 		9B000FE916206FCD00E5FF03 /* MTDCardinalDirection.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B000FE816206FCD00E5FF03 /* MTDCardinalDirection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B000FF61620981F00E5FF03 /* MTDLocale.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B000FF41620981D00E5FF03 /* MTDLocale.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B000FF71620981F00E5FF03 /* MTDLocale.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B000FF51620981E00E5FF03 /* MTDLocale.m */; };
+		9B0010001620BCDA00E5FF03 /* MTDTurnType.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B000FFF1620BCDA00E5FF03 /* MTDTurnType.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B0364F315F6271000538307 /* MTDDirectionsParserBingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0364F215F6271000538307 /* MTDDirectionsParserBingTest.m */; };
 		9B0364F815F62B9E00538307 /* bing_driving_path.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B0364F415F62B9E00538307 /* bing_driving_path.xml */; };
 		9B0364F915F62B9E00538307 /* bing_driving.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B0364F515F62B9E00538307 /* bing_driving.xml */; };
@@ -198,6 +199,10 @@
 		9B000FF816209A7200E5FF03 /* MTDLocale+Bing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MTDLocale+Bing.h"; sourceTree = "<group>"; };
 		9B000FF916209A7D00E5FF03 /* MTDLocale+MapQuest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MTDLocale+MapQuest.h"; sourceTree = "<group>"; };
 		9B000FFA16209A8400E5FF03 /* MTDLocale+Google.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MTDLocale+Google.h"; sourceTree = "<group>"; };
+		9B000FFF1620BCDA00E5FF03 /* MTDTurnType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDTurnType.h; sourceTree = "<group>"; };
+		9B0010011620BF5C00E5FF03 /* MTDTurnType+Bing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MTDTurnType+Bing.h"; sourceTree = "<group>"; };
+		9B0010021620BF6500E5FF03 /* MTDTurnType+MapQuest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MTDTurnType+MapQuest.h"; sourceTree = "<group>"; };
+		9B0010031620BF7100E5FF03 /* MTDTurnType+Google.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MTDTurnType+Google.h"; sourceTree = "<group>"; };
 		9B0364F115F6271000538307 /* MTDDirectionsParserBingTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDDirectionsParserBingTest.h; sourceTree = "<group>"; };
 		9B0364F215F6271000538307 /* MTDDirectionsParserBingTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDDirectionsParserBingTest.m; sourceTree = "<group>"; };
 		9B0364F415F62B9E00538307 /* bing_driving_path.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = bing_driving_path.xml; sourceTree = "<group>"; };
@@ -353,6 +358,7 @@
 				9B000FC11620656700E5FF03 /* MTDRoute+MTDirectionsPrivateAPI.h */,
 				9B000FC21620656700E5FF03 /* MTDRoute.h */,
 				9B000FC31620656700E5FF03 /* MTDRoute.m */,
+				9B000FFF1620BCDA00E5FF03 /* MTDTurnType.h */,
 				9B000FC41620656700E5FF03 /* MTDWaypoint.h */,
 				9B000FC51620656700E5FF03 /* MTDWaypoint.m */,
 			);
@@ -423,6 +429,7 @@
 				9B10AA0F155D85B8002A3052 /* MTDDirectionsRouteType+MapQuest.h */,
 				9B8A2BB7155FE20000BAAE7B /* MTDStatusCodeMapQuest.h */,
 				9B000FF916209A7D00E5FF03 /* MTDLocale+MapQuest.h */,
+				9B0010021620BF6500E5FF03 /* MTDTurnType+MapQuest.h */,
 			);
 			path = MapQuest;
 			sourceTree = "<group>";
@@ -485,6 +492,7 @@
 				9B2C42B9155EB85B00C0E4CE /* MTDDirectionsRouteType+Google.h */,
 				9B81265015697B0800C9A6C8 /* MTDStatusCodeGoogle.h */,
 				9B000FFA16209A8400E5FF03 /* MTDLocale+Google.h */,
+				9B0010031620BF7100E5FF03 /* MTDTurnType+Google.h */,
 			);
 			path = Google;
 			sourceTree = "<group>";
@@ -581,6 +589,7 @@
 				9B92435E15F51A6A000BC591 /* MTDDirectionsRouteType+Bing.h */,
 				9B92436215F51AF8000BC591 /* MTDStatusCodeBing.h */,
 				9B000FF816209A7200E5FF03 /* MTDLocale+Bing.h */,
+				9B0010011620BF5C00E5FF03 /* MTDTurnType+Bing.h */,
 			);
 			path = Bing;
 			sourceTree = "<group>";
@@ -649,6 +658,7 @@
 				9B000FD91620656700E5FF03 /* MTDWaypoint.h in Headers */,
 				9B000FE916206FCD00E5FF03 /* MTDCardinalDirection.h in Headers */,
 				9B000FF61620981F00E5FF03 /* MTDLocale.h in Headers */,
+				9B0010001620BCDA00E5FF03 /* MTDTurnType.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

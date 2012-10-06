@@ -8,6 +8,7 @@
 
 
 #import "MTDCardinalDirection.h"
+#import "MTDTurnType.h"
 
 
 @class MTDWaypoint;
@@ -20,19 +21,18 @@
 @property (nonatomic, assign, readonly) NSTimeInterval time;
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
 @property (nonatomic, copy, readonly) NSString *instructions;
-@property (nonatomic, assign, readonly) MTDCardinalDirection cardinalDirection;
+@property (nonatomic, assign) MTDCardinalDirection cardinalDirection;
+@property (nonatomic, assign) MTDTurnType turnType;
 
 + (MTDManeuver *)maneuverWithWaypoint:(MTDWaypoint *)waypoint
                              distance:(CLLocationDistance)distance
                                  time:(NSTimeInterval)time
-                         instructions:(NSString *)instructions
-                    cardinalDirection:(MTDCardinalDirection)cardinalDirection;
+                         instructions:(NSString *)instructions;
 
 
 - (id)initWithWaypoint:(MTDWaypoint *)waypoint
               distance:(CLLocationDistance)distance
                   time:(NSTimeInterval)time
-          instructions:(NSString *)instructions
-     cardinalDirection:(MTDCardinalDirection)cardinalDirection;
+          instructions:(NSString *)instructions;
 
 @end

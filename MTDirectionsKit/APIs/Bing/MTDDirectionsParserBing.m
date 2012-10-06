@@ -9,6 +9,7 @@
 #import "MTDManeuver.h"
 #import "MTDStatusCodeBing.h"
 #import "MTDCardinalDirection+Bing.h"
+#import "MTDTurnType+Bing.h"
 
 
 #define kMTDNamespacePrefix     @"b"
@@ -211,19 +212,19 @@
                                                    postalCode:[postalCodeNode contentString]
                                                          city:[cityNode contentString]
                                                        street:[streetNode contentString]];
-    
+
     return address;
 }
 
 // This method parses a maneuver and returns an instance of MTDManeuver
 - (MTDManeuver *)mtd_maneuverFromManeuverNode:(MTDXMLElement *)maneuverNode {
     MTDXMLElement *positionNode = [maneuverNode firstChildNodeWithName:@"ManeuverPoint"];
-    MTDXMLElement *instructionNode = [maneuverNode firstChildNodeWithName:@"Instruction"];
-    MTDXMLElement *directionNode = [maneuverNode firstChildNodeWithName:@"CompassDirection"];
     MTDXMLElement *latitudeNode = [positionNode firstChildNodeWithName:@"Latitude"];
     MTDXMLElement *longitudeNode = [positionNode firstChildNodeWithName:@"Longitude"];
 
     if (latitudeNode != nil && longitudeNode != nil) {
+        MTDXMLElement *instructionNode = [maneuverNode firstChildNodeWithName:@"Instruction"];
+        MTDXMLElement *directionNode = [maneuverNode firstChildNodeWithName:@"CompassDirection"];
         MTDXMLElement *distanceNode = [maneuverNode firstChildNodeWithName:@"TravelDistance"];
         MTDXMLElement *timeNode = [maneuverNode firstChildNodeWithName:@"TravelDuration"];
 
@@ -232,11 +233,15 @@
         CLLocationDistance maneuverDistance = [distanceNode.contentString doubleValue];
         NSTimeInterval maneuverTime = [timeNode.contentString doubleValue];
 
-        return [MTDManeuver maneuverWithWaypoint:[MTDWaypoint waypointWithCoordinate:maneuverCoordinate]
-                                        distance:maneuverDistance
-                                            time:maneuverTime
-                                    instructions:instructionNode.contentString
-                               cardinalDirection:MTDCardinalDirectionFromBingDescription(directionNode.contentString)];
+        MTDManeuver *maneuver =  [MTDManeuver maneuverWithWaypoint:[MTDWaypoint waypointWithCoordinate:maneuverCoordinate]
+                                                          distance:maneuverDistance
+                                                              time:maneuverTime
+                                                      instructions:instructionNode.contentString];
+
+        maneuver.cardinalDirection = MTDCardinalDirectionFromBingDescription(directionNode.contentString);
+        maneuver.turnType = MTDTurnTypeFromBingDescription([instructionNode attributeWithName:@"maneuverType"]);
+
+        return maneuver;
     } else {
         return nil;
     }
@@ -245,10 +250,10 @@
 // This method parses all maneuver nodes of a route
 - (NSArray *)mtd_maneuversFromManeuverNodes:(NSArray *)maneuverNodes {
     NSMutableArray *maneuvers = [NSMutableArray arrayWithCapacity:maneuverNodes.count];
-
+    
     for (MTDXMLElement *maneuverNode in maneuverNodes) {
         MTDManeuver *maneuver = [self mtd_maneuverFromManeuverNode:maneuverNode];
-
+        
         if (maneuver != nil) {
             [maneuvers addObject:maneuver];
         }

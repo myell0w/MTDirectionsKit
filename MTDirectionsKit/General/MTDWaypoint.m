@@ -71,7 +71,7 @@
         case MTDDirectionsAPIMapQuest:
         case MTDDirectionsAPIGoogle:
         case MTDDirectionsAPIBing: {
-            if (CLLocationCoordinate2DIsValid(self.coordinate)) {
+            if (self.hasValidCoordinate) {
                 return [NSString stringWithFormat:@"%f,%f",self.coordinate.latitude, self.coordinate.longitude];
             } else {
                 return self.address.description;

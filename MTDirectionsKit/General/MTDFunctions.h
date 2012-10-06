@@ -39,6 +39,22 @@ BOOL MTDDirectionsOpenInMapsApp(MTDWaypoint *from, MTDWaypoint *to, MTDDirection
 NSString* MTDURLEncodedString(NSString *string);
 
 /**
+ Creates a string representation where all XML/HTML tags are stripped.
+ 
+ @param string a string containing xml entities
+ @return a string without xml entities
+ */
+NSString* MTDStringByStrippingXMLTags(NSString *string);
+
+/**
+ Creates a string by squashing all whitespace
+ 
+ @param string the string to squash
+ @return a string with no more than one space in between words
+ */
+NSString* MTDStringByStrippingUnnecessaryWhitespace(NSString *string);
+
+/**
  Returns a formatted string description of a time-interval in seconds. 
  When the time interval is below 1 Hour, the format "mm:ss" is used, otherwise "H:mm:ss".
  

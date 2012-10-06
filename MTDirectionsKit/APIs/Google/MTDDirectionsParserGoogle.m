@@ -287,11 +287,16 @@
         CLLocationDistance maneuverDistance = [distanceNode.contentString doubleValue];
         NSTimeInterval maneuverTime = [timeNode.contentString doubleValue];
 
-        return [MTDManeuver maneuverWithWaypoint:[MTDWaypoint waypointWithCoordinate:maneuverCoordinate]
-                                        distance:maneuverDistance
-                                            time:maneuverTime
-                                    instructions:instructionNode.contentString
-                               cardinalDirection:MTDCardinalDirectionUnknown];
+        MTDManeuver *maneuver =  [MTDManeuver maneuverWithWaypoint:[MTDWaypoint waypointWithCoordinate:maneuverCoordinate]
+                                                          distance:maneuverDistance
+                                                              time:maneuverTime
+                                                      instructions:MTDStringByStrippingXMLTags(instructionNode.contentString)];
+
+        // Google unfortunately doesn't deliver information about the cardinalDirection or turnType
+        // maneuver.cardinalDirection = MTDCardinalDirectionUnknown;
+        // maneuver.turnType = MTDTurnTypeUnknown;
+
+        return maneuver;
     } else {
         return nil;
     }
@@ -300,10 +305,10 @@
 // This method parses all maneuver nodes of a route
 - (NSArray *)mtd_maneuversFromStepNodes:(NSArray *)stepNodes {
     NSMutableArray *maneuvers = [NSMutableArray arrayWithCapacity:stepNodes.count];
-
+    
     for (MTDXMLElement *stepNode in stepNodes) {
         MTDManeuver *maneuver = [self mtd_maneuverFromStepNode:stepNode];
-
+        
         if (maneuver != nil) {
             [maneuvers addObject:maneuver];
         }

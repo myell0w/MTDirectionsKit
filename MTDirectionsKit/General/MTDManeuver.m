@@ -15,33 +15,31 @@
 + (MTDManeuver *)maneuverWithWaypoint:(MTDWaypoint *)waypoint
                             distance:(CLLocationDistance)distance
                                 time:(NSTimeInterval)time
-                         instructions:(NSString *)instructions
-                    cardinalDirection:(MTDCardinalDirection)cardinalDirection {
+                         instructions:(NSString *)instructions {
     return [[MTDManeuver alloc] initWithWaypoint:waypoint
                                         distance:distance
                                             time:time
-                                    instructions:instructions
-                               cardinalDirection:cardinalDirection];
+                                    instructions:instructions];
 }
 
 - (id)initWithWaypoint:(MTDWaypoint *)waypoint
               distance:(CLLocationDistance)distance
                   time:(NSTimeInterval)time
-          instructions:(NSString *)instructions
-     cardinalDirection:(MTDCardinalDirection)cardinalDirection {
+          instructions:(NSString *)instructions {
     if ((self = [super init])) {
         _waypoint = waypoint;
         _distance = distance;
         _time = time;
         _instructions = [instructions copy];
-        _cardinalDirection = cardinalDirection;
+        _cardinalDirection = MTDCardinalDirectionUnknown;
+        _turnType = MTDTurnTypeUnknown;
     }
     
     return self;
 }
 
 - (id)init {
-    return [self initWithWaypoint:nil distance:0. time:0. instructions:nil cardinalDirection:MTDCardinalDirectionUnknown];
+    return [self initWithWaypoint:nil distance:0. time:0. instructions:nil];
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -57,7 +55,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"<MTDManeuver (Lat: %f, Lng: %f, Distance: %f, Time: %f, Direction: %d):\n %@>",
+    return [NSString stringWithFormat:@"<MTDManeuver (Lat: %f, Lng: %f, Distance: %f, Time: %f, Direction: %d): %@>",
             self.coordinate.latitude,
             self.coordinate.longitude,
             self.distance,

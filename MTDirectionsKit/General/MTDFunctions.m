@@ -83,6 +83,49 @@ NSString* MTDURLEncodedString(NSString *string) {
                                                                                  kCFStringEncodingUTF8);
 }
 
+NSString* MTDStringByStrippingXMLTags(NSString *string) {
+    if (string.length == 0) {
+        return nil;
+    }
+
+    // This is a simple scanning algorithm that doens't work for an arbitrary HTML/XML
+    // but it works for the HTML description returned by the used APIs
+    NSScanner *scanner = [[NSScanner alloc] initWithString:string];
+    NSString *scannedString = nil;
+    NSMutableString *finalString = [NSMutableString stringWithCapacity:string.length];
+
+    scanner.caseSensitive = YES;
+    scanner.charactersToBeSkipped = nil;
+
+    while (![scanner isAtEnd]) {
+        // scan characters until start of tag
+        [scanner scanUpToString:@"<" intoString:&scannedString];
+        // scan characters until end of tag
+        [scanner scanUpToString:@">" intoString:NULL];
+        [scanner scanString:@">" intoString:NULL];
+
+        if (scannedString != nil) {
+            [finalString appendFormat:@"%@ ", scannedString];
+            scannedString = nil;
+        }
+    }
+
+    return MTDStringByStrippingUnnecessaryWhitespace(finalString);
+}
+
+NSString* MTDStringByStrippingUnnecessaryWhitespace(NSString *string) {
+    // Algorithm taken from http://nshipster.com/nscharacterset/
+    // You should really read this blog, it's awesome.
+    string = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+
+    NSArray *components = [string componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    components = [components filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self <> ''"]];
+
+    string = [components componentsJoinedByString:@" "];
+
+    return string;
+}
+
 NSString* MTDGetFormattedTime(NSTimeInterval interval) {
     if (interval < kMTDSecondsPerHour) {
         return MTDGetFormattedTimeWithFormat(interval, @"mm:ss");

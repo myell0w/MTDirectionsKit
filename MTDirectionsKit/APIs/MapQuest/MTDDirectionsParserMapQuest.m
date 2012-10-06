@@ -10,6 +10,7 @@
 #import "MTDXMLElement.h"
 #import "MTDStatusCodeMapQuest.h"
 #import "MTDCardinalDirection+MapQuest.h"
+#import "MTDTurnType+MapQuest.h"
 
 
 @interface MTDDirectionsParserMapQuest ()
@@ -249,25 +250,30 @@
 // This method parses a maneuver and returns an instance of MTDManeuver
 - (MTDManeuver *)mtd_maneuverFromManeuverNode:(MTDXMLElement *)maneuverNode {
     MTDXMLElement *positionNode = [maneuverNode firstChildNodeWithName:@"startPoint"];
-    MTDXMLElement *directionNode = [maneuverNode firstChildNodeWithName:@"direction"];
-    MTDXMLElement *instructionNode = [maneuverNode firstChildNodeWithName:@"narrative"];
     MTDXMLElement *latitudeNode = [positionNode firstChildNodeWithName:@"lat"];
     MTDXMLElement *longitudeNode = [positionNode firstChildNodeWithName:@"lng"];
 
     if (latitudeNode != nil && longitudeNode != nil) {
+        MTDXMLElement *directionNode = [maneuverNode firstChildNodeWithName:@"direction"];
+        MTDXMLElement *instructionNode = [maneuverNode firstChildNodeWithName:@"narrative"];
         MTDXMLElement *distanceNode = [maneuverNode firstChildNodeWithName:@"distance"];
         MTDXMLElement *timeNode = [maneuverNode firstChildNodeWithName:@"time"];
+        MTDXMLElement *turnTypeNode = [maneuverNode firstChildNodeWithName:@"turnType"];
 
         CLLocationCoordinate2D maneuverCoordinate = CLLocationCoordinate2DMake([latitudeNode.contentString doubleValue],
                                                                                [longitudeNode.contentString doubleValue]);
         CLLocationDistance maneuverDistance = [distanceNode.contentString doubleValue];
         NSTimeInterval maneuverTime = [timeNode.contentString doubleValue];
 
-        return [MTDManeuver maneuverWithWaypoint:[MTDWaypoint waypointWithCoordinate:maneuverCoordinate]
-                                        distance:maneuverDistance
-                                            time:maneuverTime
-                                    instructions:instructionNode.contentString
-                               cardinalDirection:MTDCardinalDirectionFromMapQuestDescription(directionNode.contentString)];
+        MTDManeuver *maneuver = [MTDManeuver maneuverWithWaypoint:[MTDWaypoint waypointWithCoordinate:maneuverCoordinate]
+                                                         distance:maneuverDistance
+                                                             time:maneuverTime
+                                                     instructions:instructionNode.contentString];
+
+        maneuver.cardinalDirection = MTDCardinalDirectionFromMapQuestDescription(directionNode.contentString);
+        maneuver.turnType = MTDTurnTypeFromMapQuestDescription(turnTypeNode.contentString);
+
+        return maneuver;
     } else {
         return nil;
     }
@@ -276,15 +282,15 @@
 // This method parses all maneuver nodes of a route
 - (NSArray *)mtd_maneuversFromManeuverNodes:(NSArray *)maneuverNodes {
     NSMutableArray *maneuvers = [NSMutableArray arrayWithCapacity:maneuverNodes.count];
-
+    
     for (MTDXMLElement *maneuverNode in maneuverNodes) {
         MTDManeuver *maneuver = [self mtd_maneuverFromManeuverNode:maneuverNode];
-
+        
         if (maneuver != nil) {
             [maneuvers addObject:maneuver];
         }
     }
-
+    
     return maneuvers;
 }
 
