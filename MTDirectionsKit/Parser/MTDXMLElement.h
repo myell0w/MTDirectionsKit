@@ -36,6 +36,10 @@
  */
 @interface MTDXMLElement : NSObject
 
+/******************************************
+ @name XML Element
+ ******************************************/
+
 /** the tag name of the xml node */
 @property (nonatomic, strong, readonly) NSString *name;
 /** all attributes of the node */
@@ -55,23 +59,51 @@
  ******************************************/
 
 /**
- Returns an array of all xml nodes matching the given query on the given html data.
- 
- @param query the xpath query
- @param htmlData data representing a html document
- @return
- @see nodesForXPathQuery:onXML:
- */
-+ (NSArray *)nodesForXPathQuery:(NSString *)query onHTML:(NSData *)htmlData;
-
-/**
  Returns an array of all xml nodes matching the given query on the given xml data.
  
  @param query the xpath query
  @param xmlData data representing a xml document
- @see nodesForXPathQuery:onHTML:
+ @return array of MTDXMLElements
+ @see nodeForXPathQuery:onXML:
  */
 + (NSArray *)nodesForXPathQuery:(NSString *)query onXML:(NSData *)xmlData;
+
+/**
+ Returns an array of all xml nodes matching the given query on the given xml data in the given namespace.
+
+ @param query the xpath query
+ @param xmlData data representing a xml document
+ @param namespacePrefix the XML namespace prefix used
+ @param namespaceURI the URI of the namesapce
+ @return array of MTDXMLElements
+ @see nodeForXPathQuery:onXML:
+ */
++ (NSArray *)nodesForXPathQuery:(NSString *)query onXML:(NSData *)xmlData namespacePrefix:(NSString *)namespacePrefix namespaceURI:(NSString *)namespaceURI;
+
+/**
+ Returns the first xml node matching the given query on the given xml data.
+ 
+ @param query the xpath query
+ @param xmlData data representing a xml document
+ @return MTDXMLElement representing the first node matching
+ */
++ (MTDXMLElement *)nodeForXPathQuery:(NSString *)query onXML:(NSData *)xmlData;
+
+/**
+ Returns the first xml node matching the given query on the given xml data in the given namespace.
+
+ @param query the xpath query
+ @param xmlData data representing a xml document
+ @param namespacePrefix the XML namespace prefix used
+ @param namespaceURI the URI of the namesapce
+ @return MTDXMLElement representing the first node matching
+ */
++ (MTDXMLElement *)nodeForXPathQuery:(NSString *)query onXML:(NSData *)xmlData namespacePrefix:(NSString *)namespacePrefix namespaceURI:(NSString *)namespaceURI;
+
+
+/******************************************
+ @name Queries
+ ******************************************/
 
 /**
  Returns the first child node with the given tagname.
@@ -80,5 +112,31 @@
  @return an instance of MTDXMLElement representing the first found child node, or nil if there was none found
  */
 - (MTDXMLElement *)firstChildNodeWithName:(NSString *)name;
+
+/**
+ Returns an array of child nodes with the given tagname.
+ 
+ @param name the tag name of the children we want
+ @return an array of MTDXMLElements
+ */
+- (NSArray *)childNodesWithName:(NSString *)name;
+
+/**
+ Returns an array of child nodes with the given dot-separated path, e.g. shape.shapePoints.latLng
+ For all path components except the last one only the first child is traversed, if there are several.
+ 
+ @param path a dot-separated path of tag names
+ @return an array of MTDXMLElements
+ */
+- (NSArray *)childNodesTraversingFirstChildWithPath:(NSString *)path;
+
+/**
+ Returns an array of child nodes with the given dot-separated path, e.g. shape.shapePoints.latLng
+ For all path components all children are traversed.
+
+ @param path a dot-separated path of tag names
+ @return an array of MTDXMLElements
+ */
+- (NSArray *)childNodesTraversingAllChildrenWithPath:(NSString *)path;
 
 @end

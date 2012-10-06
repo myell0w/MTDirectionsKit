@@ -1,3 +1,41 @@
+= 1.4 24.9.2012
+ * Support for Bing Routes API
+ * Support for custom requests/parsers with MTDDirectionsAPIRegisterCustomRequestClass/MTDDirectionsAPIRegisterCustomParserClass
+ * Fixed a bug where zoomToShowRegionAnimated didn't show all routes, when alternative routes were requested
+ * Fully tested under iOS 6
+ * MTDDirectionsOpenInMapsApp works on iOS 6 and has support for [MTDWaypoint waypointForCurrentLocation]
+ * Added - [MTDAddress addressDictionary] - this dictionary is used when opening directions in the built-in Maps App
+ * Fixed a bug where address parsing didn't work when the waypoint didn't have a valid coordinate (e.g. [MTDWaypoint waypointWithAddress:])
+ * Fixed: Custom gesture recognizer on MapView is only enabled, when alternative directions are visible
+ * Fixed: Custom gesture recognizer doesn't interfere with other gesture recognizers of the MapView
+ * Support for armv7s, dropping support for iOS < 4.3 and armv6
+
+= 1.3.1 3.9.2012
+ * [MTDWaypoint waypointForCurrentLocation] can be specified as a goal along a route. If the current location is unknown, 
+    it get's determined first.
+ * Support for Google Maps API for Business
+
+= 1.3.0 7.8.2012
+ * Support for Alternative Routes!
+ * Intermediate goals now get reordered and appear in the same order returned by the used API, if the order got optimized
+ * Addresses of intermediate goals now get parsed as well
+ * All private methods are now prefixed with "mtd_"
+ * Code got converted to Modern Objective-C Syntax
+ * Parsing now happens on a global concurrent queue
+ * Much more unit tests
+ 
+= 1.2.1 17.7.2012
+ * Google Directions now supports Transit Directions
+ * New Google API URL
+ * MTDDirectionsOverlay now has information about intermediate goals
+ * Better Address Parsing of the start- and end-location of a route
+ 
+= 1.2.0 1.7.2012
+ * Possibility to specify the thickness of the route overlay
+ * Turned on a lot of warnings in the compiler and make sure none of them exists in MTDirectionsKit
+ * Optimizing the route when providing intermediate goals is now optional
+ * More AppleDoc Documentation
+
 = 1.1.1 4.6.2012
  * Using optimizedroute call when using MapQuest API to allow for reordering of intermediate goals
 

@@ -57,3 +57,4 @@ void MTDLogWithLevel(MTDLogLevel logLevel, NSString *file, unsigned int line, NS
 #define MTDLogInfo(...)          MTDLogWithLevel(MTDLogLevelInfo, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:__VA_ARGS__])
 #define MTDLogWarning(...)       MTDLogWithLevel(MTDLogLevelWarning, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:__VA_ARGS__])
 #define MTDLogError(...)         MTDLogWithLevel(MTDLogLevelError, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:__VA_ARGS__])
+#define MTDLogAlways(...)        MTDLogWithLevel(MTDLogLevelNone, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:__VA_ARGS__])

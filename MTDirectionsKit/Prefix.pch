@@ -2,17 +2,18 @@
 // Prefix header for all source files of the 'MTDirectionsKit' target in the 'MTDirectionsKit' project
 //
 
+
+#if defined(DEBUG) || defined(CONFIGURATION_Debug)
+    #define MTD_DEBUG   YES
+#endif
+
+
 #ifdef __OBJC__
     #import <Foundation/Foundation.h>
     #import <CoreLocation/CoreLocation.h>
     #import <MapKit/MapKit.h>
-#endif
-
-
-#if __has_feature(objc_arc_weak)
-#define mtd_weak  weak
-#define __mtd_weak __weak
-#else
-#define mtd_weak  unsafe_unretained
-#define __mtd_weak __unsafe_unretained
+    #import "MTDLogging.h"
+    #import "MTDWeak.h"
+    #import "MTDAssert.h"
+    #import "NSObject+MTDXcodeSubscriptingCompatibility.h"
 #endif

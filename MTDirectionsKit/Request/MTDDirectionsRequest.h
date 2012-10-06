@@ -10,6 +10,8 @@
 #import "MTDDirectionsRouteType.h"
 #import "MTDDirectionsDefines.h"
 #import "MTDHTTPRequest.h"
+#import "MTDDirectionsAPI.h"
+#import "MTDDirectionsRequestOption.h"
 
 
 @class MTDWaypoint;
@@ -37,25 +39,39 @@
 @property (nonatomic, readonly) MTDDirectionsRouteType routeType;
 
 /******************************************
+ @name API
+ ******************************************/
+
+/** the address of the the request to perform */
+@property (nonatomic, readonly) NSString *HTTPAddress;
+
+/** the used API of this request */
+@property (nonatomic, readonly) MTDDirectionsAPI API;
+
+/******************************************
  @name Lifecycle
  ******************************************/
 
 /**
- This method is used to create a request from a given start waypoint to a given end waypoint with a 
- specified routeType and optional intermediate goals.
+ This method is used to create a request of a specific API from a given start- to a given end waypoint
+ with a specified routeType, options and optional intermediate goals.
  
+ @param API the API used to request the data (MTDDirectionsAPI)
  @param from the start waypoint of the route to request
  @param to the end waypoint of the route to request
  @param intermediateGoals an optional array of waypoint we want to travel to along the route
  @param routeType the type of the route to request
+ @param options a bitmask of MTDDirectionsRequestOption
+        (MTDDirectionsRequestOptionAlternativeRoutes and MTDDirectionsRequestOptionOptimize can't be specified  at once)
  @param completion the block to execute when the request is finished
  */
-+ (id)requestFrom:(MTDWaypoint *)from
-               to:(MTDWaypoint *)to
-intermediateGoals:(NSArray *)intermediateGoals
-        routeType:(MTDDirectionsRouteType)routeType
-       completion:(mtd_parser_block)completion;
-
++ (id)requestDirectionsAPI:(MTDDirectionsAPI)API
+                      from:(MTDWaypoint *)from
+                        to:(MTDWaypoint *)to
+         intermediateGoals:(NSArray *)intermediateGoals
+                 routeType:(MTDDirectionsRouteType)routeType
+                   options:(MTDDirectionsRequestOptions)options
+                completion:(mtd_parser_block)completion;
 
 /**
  The designated initializer used to instantiate an MTDDirectionsRequest.
@@ -64,19 +80,26 @@ intermediateGoals:(NSArray *)intermediateGoals
  @param to the end waypoint of the route to request
  @param intermediateGoals an optional array of waypoint we want to travel to along the route
  @param routeType the type of route to request
+ @param options a bitmask of MTDDirectionsRequestOption 
+        (MTDDirectionsRequestOptionAlternativeRoutes and MTDDirectionsRequestOptionOptimize can't be specified  at once)
  @param completion block that is executed when requesting of the route is finished
  */
 - (id)initWithFrom:(MTDWaypoint *)from
                 to:(MTDWaypoint *)to
  intermediateGoals:(NSArray *)intermediateGoals
          routeType:(MTDDirectionsRouteType)routeType
+           options:(MTDDirectionsRequestOptions)options
         completion:(mtd_parser_block)completion;
 
 /******************************************
  @name Request
  ******************************************/
 
-/** Starts the request */
+/** 
+ This method first calls a subclass-hook to allow final modification of the URL to call and then starts the request.
+ 
+ @see preparedURLForAddress:
+ */
 - (void)start;
 /** Cancels a possible ongoing request, does nothing if the request isn't active. */
 - (void)cancel;
@@ -105,5 +128,28 @@ intermediateGoals:(NSArray *)intermediateGoals
  @param intermediateGoals array of waypoints we want to travel to along the route
  */
 - (void)setValueForParameterWithIntermediateGoals:(NSArray *)intermediateGoals;
+
+/**
+ Let's you remove a once specified value for a parameter
+
+ @param parameter the name of the parameter
+ */
+- (void)removeValueForParameter:(NSString *)parameter;
+
+
+/******************************************
+ @name Subclass Hooks
+ ******************************************/
+
+/**
+ This method get's executed right before the request gets send to the specified API (- [MTDDirectionsRequest start]).
+ The default implementation just returns the address as is without changing it, but subclasses can override this
+ method to change the request address the way they want to. MTDDirectionsRequestGoogle for example uses this hook 
+ to compute a signature for the address, when a business was registered. This method gets called on a global concurrent queue.
+ 
+ @param address the address we want to request from the specified API
+ @return the final URL we will request
+ */
+- (NSURL *)preparedURLForAddress:(NSString *)address;
 
 @end

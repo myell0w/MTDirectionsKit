@@ -1,5 +1,4 @@
 #import "MTDMeasurementSystem.h"
-#import "MTDLogging.h"
 
 
 #define kMTDMeasurementSystemMetric     @"Metric"
@@ -58,12 +57,12 @@ NSString* MTDGetFormattedDistanceInMeasurementSystem(CLLocationDistance distance
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        mtd_numberFormatter = [[NSNumberFormatter alloc] init];
+        mtd_numberFormatter = [NSNumberFormatter new];
         
         [mtd_numberFormatter setLocale:[NSLocale currentLocale]];
         [mtd_numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
         [mtd_numberFormatter setMaximumFractionDigits:1];
     });
     
-    return [NSString stringWithFormat:format, [mtd_numberFormatter stringFromNumber:[NSNumber numberWithDouble:distance]]];
+    return [NSString stringWithFormat:format, [mtd_numberFormatter stringFromNumber:@(distance)]];
 }

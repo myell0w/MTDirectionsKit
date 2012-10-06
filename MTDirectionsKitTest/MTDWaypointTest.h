@@ -9,6 +9,7 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 #import "MTDWaypoint.h"
+#import "MTDAddress.h"
 
 
 @interface MTDWaypointTest : SenTestCase {

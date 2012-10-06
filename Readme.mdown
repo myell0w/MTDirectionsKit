@@ -93,6 +93,6 @@ everywhere where you want to use it.
 
 ## Requirements
 
-MTDirectionsKit needs Xcode ≥ 4.3, iOS Base SDK ≥ 5.1 and Clang LLVM >= 3.1 to compile. It doesn't work with the old LLVM GCC compiler.
+MTDirectionsKit needs Xcode ≥ 4.4, iOS Base SDK ≥ 5.1 and Clang LLVM >= 3.1 to compile. It doesn't work with the old LLVM GCC compiler.
 
-MTDirectionsKit works on a deployment target of ≥ iOS 4.0 and can be used in ARC or non-ARC applications.
+MTDirectionsKit works on a deployment target of ≥ iOS 4.3 on armv7 and armv7s and can be used in ARC as well as non-ARC applications.

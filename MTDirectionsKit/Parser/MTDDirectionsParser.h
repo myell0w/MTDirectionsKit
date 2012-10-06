@@ -32,6 +32,8 @@
 @property (nonatomic, strong, readonly) MTDWaypoint *from;
 /** The end waypoint of the route */
 @property (nonatomic, strong, readonly) MTDWaypoint *to;
+/** The intermediate goals along the route */
+@property (nonatomic, copy, readonly) NSArray *intermediateGoals;
 /** The type of the route */
 @property (nonatomic, assign, readonly) MTDDirectionsRouteType routeType;
 
@@ -66,13 +68,23 @@
  
  @param from the starting waypoint of the route
  @param to the end waypoint of the route
+ @param intermediateGoals the intermediate goals along the route
  @param routeType the type of the route
  @param data the data holding information about the route
  */
 - (id)initWithFrom:(MTDWaypoint *)from
                 to:(MTDWaypoint *)to
+ intermediateGoals:(NSArray *)intermediateGoals
          routeType:(MTDDirectionsRouteType)routeType
               data:(id)data;
 
+/**
+ Calls the given completion block on the main queue, if it is not nil.
+ 
+ @param completion the block to execute on the main queue
+ @param overlay the overlay that get's passed to the completion block
+ @param error the error that get's passed to the completion block
+ */
+- (void)callCompletion:(mtd_parser_block)completion overlay:(MTDDirectionsOverlay *)overlay error:(NSError *)error;
 
 @end
