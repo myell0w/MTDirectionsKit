@@ -2,7 +2,7 @@
 //  MTDManeuver.h
 //  MTDirectionsKit
 //
-//  Created by Matthias Tretter on 21.01.12.
+//  Created by Matthias Tretter
 //  Copyright (c) 2012 Matthias Tretter (@myell0w). All rights reserved.
 //
 
@@ -12,16 +12,16 @@
 
 @interface MTDManeuver : NSObject
 
-@property (nonatomic, strong) MTDWaypoint *waypoint;
-@property (nonatomic, assign) CLLocationDistance distance;
-@property (nonatomic, assign) NSTimeInterval time;
+@property (nonatomic, strong, readonly) MTDWaypoint *waypoint;
+@property (nonatomic, assign, readonly) CLLocationDistance distance;
+@property (nonatomic, assign, readonly) NSTimeInterval time;
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
 
 + (MTDManeuver *)maneuverWithWaypoint:(MTDWaypoint *)waypoint
-                            distance:(CLLocationDistance)distance
-                                time:(NSTimeInterval)time;
+                             distance:(CLLocationDistance)distance
+                                 time:(NSTimeInterval)time;
 
-- (id)init;
+
 - (id)initWithWaypoint:(MTDWaypoint *)waypoint
               distance:(CLLocationDistance)distance
                   time:(NSTimeInterval)time;

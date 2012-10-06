@@ -18,10 +18,6 @@
     return [[MTDManeuver alloc] initWithWaypoint:waypoint distance:distance time:time];
 }
 
-- (id)init {
-    return [self initWithWaypoint:nil distance:0. time:0.];
-}
-
 - (id)initWithWaypoint:(MTDWaypoint *)waypoint
               distance:(CLLocationDistance)distance
                   time:(NSTimeInterval)time {
@@ -32,6 +28,10 @@
     }
     
     return self;
+}
+
+- (id)init {
+    return [self initWithWaypoint:nil distance:0. time:0.];
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -48,8 +48,8 @@
 
 - (NSString *)description {
     return [NSString stringWithFormat:@"<MTDManeuver: (Lat: %f, Lng: %f, Distance: %f, Time: %f)>", 
-            self.waypoint.coordinate.latitude,
-            self.waypoint.coordinate.longitude,
+            self.coordinate.latitude,
+            self.coordinate.longitude,
             self.distance,
             self.time];
 }

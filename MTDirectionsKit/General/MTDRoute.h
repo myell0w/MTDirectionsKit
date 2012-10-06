@@ -43,6 +43,9 @@
 /** the estimated time as formatted string */
 @property (nonatomic, readonly) NSString *formattedTime;
 
+/** all maneuvers on this route */
+@property (nonatomic, copy) NSArray *maneuvers;
+
 /** 
  Dictionary containing additional information retreived, e.g. warnings and copyrights when 
  using the Google Directions API. You have to handle this information on your own and stick

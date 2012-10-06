@@ -2,7 +2,7 @@
 //  MTDManeuverInfoView.h
 //  MTDirectionsKit
 //
-//  Created by Matthias Tretter on 21.01.12.
+//  Created by Matthias Tretter
 //  Copyright (c) 2012 Matthias Tretter (@myell0w). All rights reserved.
 //
 

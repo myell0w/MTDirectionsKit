@@ -558,13 +558,14 @@
     }
 }
 
+// TODO: Implement method
 - (void)mtd_showManeuverStartingFromIndex:(NSUInteger)maneuverStartIndex {
     NSUInteger maneuverEndIndex = maneuverStartIndex + 1;
     
     if (maneuverEndIndex < self.directionsOverlay.maneuvers.count) {
         MTDManeuver *startManeuver = [self.directionsOverlay.maneuvers objectAtIndex:maneuverStartIndex];
-        MTDManeuver *endManeuver = [self.directionsOverlay.maneuvers objectAtIndex:maneuverEndIndex];
-        NSArray *waypoints = [NSArray arrayWithObjects:startManeuver.waypoint, endManeuver.waypoint, nil];
+        // MTDManeuver *endManeuver = [self.directionsOverlay.maneuvers objectAtIndex:maneuverEndIndex];
+        // NSArray *waypoints = @[startManeuver.waypoint, endManeuver.waypoint];
         CGPoint circlePoint = [self convertCoordinate:startManeuver.coordinate toPointToView:self];
         
         self.maneuverInfoView.infoText = [NSString stringWithFormat:@"Distanz: %f", startManeuver.distance];
@@ -574,7 +575,6 @@
                              self.circleView.center = circlePoint;
                          } completion:^(BOOL finished) {
                              if (finished) {
-                                 // TODO
                                  /*[self setRegionFromWaypoints:waypoints
                                                   edgePadding:UIEdgeInsetsMake(10.f,10.f,10.f,10.f)
                                                      animated:YES];*/

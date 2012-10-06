@@ -4,6 +4,7 @@
 #import "MTDDistance.h"
 #import "MTDFunctions.h"
 #import "MTDRoute.h"
+#import "MTDManeuver.h"
 #import "MTDDirectionsOverlay.h"
 #import "MTDDirectionsRouteType.h"
 #import "MTDXMLElement.h"
@@ -72,29 +73,6 @@
             [self mtd_addAddressesFromAddressNodes:locationAddressNodes toWaypoints:allWaypoints];
         }
 
-        // Parse Maneuvers
-        /*{
-            for (MTDXMLElement *maneuverNode in maneuverNodes) {
-                MTDXMLElement *positionNode = [maneuverNode firstChildNodeWithName:@"startPoint"];
-                MTDXMLElement *latitudeNode = [positionNode firstChildNodeWithName:@"lat"];
-                MTDXMLElement *longitudeNode = [positionNode firstChildNodeWithName:@"lng"];
-
-                if (latitudeNode != nil && longitudeNode != nil) {
-                    MTDXMLElement *distanceNode = [maneuverNode firstChildNodeWithName:@"distance"];
-                    MTDXMLElement *timeNode = [maneuverNode firstChildNodeWithName:@"time"];
-
-                    CLLocationCoordinate2D maneuverCoordinate = CLLocationCoordinate2DMake([latitudeNode.contentString doubleValue],
-                                                                                           [longitudeNode.contentString doubleValue]);
-                    CLLocationDistance maneuverDistance = [distanceNode.contentString doubleValue];
-                    NSTimeInterval maneuverTime = [timeNode.contentString doubleValue];
-
-                    [maneuvers addObject:[MTDManeuver maneuverWithWaypoint:[MTDWaypoint waypointWithCoordinate:maneuverCoordinate]
-                                                                  distance:maneuverDistance
-                                                                      time:maneuverTime]];
-                }
-            }
-        }*/
-
         overlay = [[MTDDirectionsOverlay alloc] initWithRoutes:routes
                                              intermediateGoals:orderedIntermediateGoals
                                                      routeType:self.routeType];
@@ -127,6 +105,7 @@
 // This method parses a route and returns an instance of MTDRoute
 - (MTDRoute *)mtd_routeFromRouteNode:(MTDXMLElement *)routeNode {
     NSArray *waypointNodes = [routeNode childNodesTraversingFirstChildWithPath:@"shape.shapePoints.latLng"];
+    NSArray *maneuverNodes = [routeNode childNodesTraversingAllChildrenWithPath:@"legs.leg.maneuvers.maneuver"];
     MTDXMLElement *distanceNode = [routeNode firstChildNodeWithName:@"distance"];
     MTDXMLElement *timeNode = [routeNode firstChildNodeWithName:@"time"];
     MTDXMLElement *copyrightNode = [MTDXMLElement nodeForXPathQuery:@"/response/info/copyright/text" onXML:self.data];
@@ -138,6 +117,8 @@
 
     // Parse waypoints
     NSArray *waypoints = [self mtd_waypointsFromWaypointNodes:waypointNodes];
+    // Parse Maneuvers
+    NSArray *maneuvers = [self mtd_maneuversFromManeuverNodes:maneuverNodes];
 
     // Parse Additional Info of directions
     {
@@ -164,6 +145,7 @@
                                            additionalInfo:additionalInfo];
 
     route.name = nameNode.contentString;
+    route.maneuvers = maneuvers;
 
     return route;
 }
@@ -255,12 +237,62 @@
 // This method returns an array of all waypoints including from, to and intermediateGoals if specified
 - (NSArray *)mtd_waypointsIncludingFromAndToWithIntermediateGoals:(NSArray *)intermediateGoals {
     NSMutableArray *allGoals = intermediateGoals != nil ? [NSMutableArray arrayWithArray:intermediateGoals] : [NSMutableArray array];
-    
+
     // insert from and to at the right places
     [allGoals insertObject:self.from atIndex:0];
     [allGoals addObject:self.to];
-    
+
     return allGoals;
+}
+
+// This method parses a maneuver and returns an instance of MTDManeuver
+- (MTDManeuver *)mtd_maneuverFromManeuverNode:(MTDXMLElement *)maneuverNode {
+    MTDXMLElement *positionNode = [maneuverNode firstChildNodeWithName:@"startPoint"];
+    MTDXMLElement *latitudeNode = [positionNode firstChildNodeWithName:@"lat"];
+    MTDXMLElement *longitudeNode = [positionNode firstChildNodeWithName:@"lng"];
+
+    if (latitudeNode != nil && longitudeNode != nil) {
+        MTDXMLElement *distanceNode = [maneuverNode firstChildNodeWithName:@"distance"];
+        MTDXMLElement *timeNode = [maneuverNode firstChildNodeWithName:@"time"];
+
+        CLLocationCoordinate2D maneuverCoordinate = CLLocationCoordinate2DMake([latitudeNode.contentString doubleValue],
+                                                                               [longitudeNode.contentString doubleValue]);
+        CLLocationDistance maneuverDistance = [distanceNode.contentString doubleValue];
+        NSTimeInterval maneuverTime = [timeNode.contentString doubleValue];
+
+        return [MTDManeuver maneuverWithWaypoint:[MTDWaypoint waypointWithCoordinate:maneuverCoordinate]
+                                        distance:maneuverDistance
+                                            time:maneuverTime];
+    } else {
+        return nil;
+    }
+}
+
+- (NSArray *)mtd_maneuversFromManeuverNodes:(NSArray *)maneuverNodes {
+    NSMutableArray *maneuvers = [NSMutableArray arrayWithCapacity:maneuverNodes.count];
+
+    for (MTDXMLElement *maneuverNode in maneuverNodes) {
+        MTDXMLElement *positionNode = [maneuverNode firstChildNodeWithName:@"startPoint"];
+        MTDXMLElement *latitudeNode = [positionNode firstChildNodeWithName:@"lat"];
+        MTDXMLElement *longitudeNode = [positionNode firstChildNodeWithName:@"lng"];
+
+        if (latitudeNode != nil && longitudeNode != nil) {
+            MTDXMLElement *distanceNode = [maneuverNode firstChildNodeWithName:@"distance"];
+            MTDXMLElement *timeNode = [maneuverNode firstChildNodeWithName:@"time"];
+
+            CLLocationDistance maneuverDistance = [distanceNode.contentString doubleValue];
+            NSTimeInterval maneuverTime = [timeNode.contentString doubleValue];
+            CLLocationCoordinate2D maneuverCoordinate = CLLocationCoordinate2DMake([latitudeNode.contentString doubleValue],
+                                                                                   [longitudeNode.contentString doubleValue]);
+
+            
+            [maneuvers addObject:[MTDManeuver maneuverWithWaypoint:[MTDWaypoint waypointWithCoordinate:maneuverCoordinate]
+                                                          distance:maneuverDistance
+                                                              time:maneuverTime]];
+        }
+    }
+
+    return maneuvers;
 }
 
 @end
