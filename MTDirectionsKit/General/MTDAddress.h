@@ -26,7 +26,7 @@ typedef NS_ENUM(NSUInteger, MTDAddressField) {
  for country, county, postalCode etc.) or with a single string. Currently a 
  single string doens't get parsed and normalised.
  */
-@interface MTDAddress : NSObject
+@interface MTDAddress : NSObject <NSCopying>
 
 /******************************************
  @name Address data

@@ -20,7 +20,7 @@
  - MTDMeasurementSystemMetric
  - MTDMeasurementSystemUS
  */
-@interface MTDDistance : NSObject
+@interface MTDDistance : NSObject <NSCopying>
 
 /******************************************
  @name Distance

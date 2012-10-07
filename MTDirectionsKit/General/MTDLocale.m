@@ -4,6 +4,7 @@
 static NSLocale *mtd_locale = nil;
 
 
+// Initializes default value
 NS_INLINE __attribute__((constructor)) void MTDLoadLocale(void) {
     @autoreleasepool {
         mtd_locale = [NSLocale currentLocale];
@@ -13,7 +14,7 @@ NS_INLINE __attribute__((constructor)) void MTDLoadLocale(void) {
 void MTDDirectionsSetLocale(NSLocale* locale) {
     mtd_locale = locale;
 
-    MTDLogVerbose(@"Locale was set to %@",[locale localeIdentifier]);
+    MTDLogVerbose(@"Locale was set to %@", [locale localeIdentifier]);
 }
 
 NSLocale* MTDDirectionsGetLocale(void) {

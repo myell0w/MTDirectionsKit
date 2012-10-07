@@ -19,7 +19,7 @@
  a CLLocationCoordinate2D coordinate or an address string representing a location (or both).
  It is used in MTDDirectionsKit to store coordinates in collections like NSArray.
  */
-@interface MTDWaypoint : NSObject
+@interface MTDWaypoint : NSObject <NSCopying>
 
 /******************************************
  @name Location

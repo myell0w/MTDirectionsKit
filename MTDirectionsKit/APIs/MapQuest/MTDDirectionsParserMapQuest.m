@@ -144,12 +144,12 @@
     }
 
     MTDRoute *route = [[MTDRoute alloc] initWithWaypoints:waypoints
+                                                maneuvers:maneuvers
                                                  distance:distance
                                             timeInSeconds:timeInSeconds
                                            additionalInfo:additionalInfo];
 
     route.name = nameNode.contentString;
-    route.maneuvers = maneuvers;
 
     return route;
 }
@@ -267,10 +267,10 @@
         CLLocationDistance maneuverDistance = [distanceNode.contentString doubleValue];
         NSTimeInterval maneuverTime = [timeNode.contentString doubleValue];
 
-        MTDManeuver *maneuver = [MTDManeuver maneuverWithWaypoint:[MTDWaypoint waypointWithCoordinate:maneuverCoordinate]
-                                                         distance:[MTDDistance distanceWithValue:maneuverDistance measurementSystem:MTDMeasurementSystemMetric]
-                                                    timeInSeconds:maneuverTime
-                                                     instructions:instructionNode.contentString];
+        MTDManeuver *maneuver = [[MTDManeuver alloc] initWithWaypoint:[MTDWaypoint waypointWithCoordinate:maneuverCoordinate]
+                                                             distance:[MTDDistance distanceWithValue:maneuverDistance measurementSystem:MTDMeasurementSystemMetric]
+                                                        timeInSeconds:maneuverTime
+                                                         instructions:instructionNode.contentString];
 
         maneuver.cardinalDirection = MTDCardinalDirectionFromMapQuestDescription(directionNode.contentString);
         maneuver.turnType = MTDTurnTypeFromMapQuestDescription(turnTypeNode.contentString);

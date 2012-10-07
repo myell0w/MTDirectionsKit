@@ -9,16 +9,6 @@
 #pragma mark - Lifecycle
 ////////////////////////////////////////////////////////////////////////
 
-+ (MTDManeuver *)maneuverWithWaypoint:(MTDWaypoint *)waypoint
-                             distance:(MTDDistance *)distance
-                        timeInSeconds:(NSTimeInterval)timeInSeconds
-                         instructions:(NSString *)instructions {
-    return [[MTDManeuver alloc] initWithWaypoint:waypoint
-                                        distance:distance
-                                   timeInSeconds:timeInSeconds
-                                    instructions:instructions];
-}
-
 - (id)initWithWaypoint:(MTDWaypoint *)waypoint
               distance:(MTDDistance *)distance
          timeInSeconds:(NSTimeInterval)timeInSeconds
