@@ -138,3 +138,12 @@ NS_INLINE id MTDObjectAtIndexOfArray(NSArray *array, NSUInteger index) {
 NS_INLINE id MTDFirstObjectOfArray(NSArray *array) {
     return MTDObjectAtIndexOfArray(array, 0);
 }
+
+/**
+ This function returns a version string of the current MTDirectionsKit version.
+ 
+ @return MTDirectionsKit version string
+ */
+NS_INLINE NSString* MTDDirectionsKitGetVersionString() {
+    return @"1.5.0";
+}

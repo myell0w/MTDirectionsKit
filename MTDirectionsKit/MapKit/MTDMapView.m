@@ -322,7 +322,7 @@
     return kCLLocationCoordinate2DInvalid;
 }
 
-- (double)distanceInMeter {
+- (CLLocationDistance)distanceInMeter {
     return [self.directionsOverlay.distance distanceInMeter];
 }
 
@@ -338,7 +338,7 @@
 #pragma mark - Inter-App
 ////////////////////////////////////////////////////////////////////////
 
-- (BOOL)openDirectionsInMapApp {
+- (BOOL)openDirectionsInMapsApp {
     if (self.directionsOverlay != nil) {
         return MTDDirectionsOpenInMapsApp(self.directionsOverlay.activeRoute.from,
                                           self.directionsOverlay.activeRoute.to,
