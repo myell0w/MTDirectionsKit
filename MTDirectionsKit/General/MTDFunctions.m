@@ -88,8 +88,8 @@ NSString* MTDStringByStrippingXMLTags(NSString *string) {
         return nil;
     }
 
-    // This is a simple scanning algorithm that doens't work for an arbitrary HTML/XML
-    // but it works for the HTML description returned by the used APIs
+    // This is a simple scanning algorithm that doens't work for arbitrary HTML/XML strings,
+    // but it works reliably and fast for the simplified HTML descriptions returned by the used APIs
     NSScanner *scanner = [[NSScanner alloc] initWithString:string];
     NSString *scannedString = nil;
     NSMutableString *finalString = [NSMutableString stringWithCapacity:string.length];

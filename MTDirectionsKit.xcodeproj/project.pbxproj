@@ -203,6 +203,7 @@
 		9B0010011620BF5C00E5FF03 /* MTDTurnType+Bing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MTDTurnType+Bing.h"; sourceTree = "<group>"; };
 		9B0010021620BF6500E5FF03 /* MTDTurnType+MapQuest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MTDTurnType+MapQuest.h"; sourceTree = "<group>"; };
 		9B0010031620BF7100E5FF03 /* MTDTurnType+Google.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MTDTurnType+Google.h"; sourceTree = "<group>"; };
+		9B00100E1621B5A500E5FF03 /* MTDirectionsKit.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MTDirectionsKit.bundle; path = Resources/MTDirectionsKit.bundle; sourceTree = "<group>"; };
 		9B0364F115F6271000538307 /* MTDDirectionsParserBingTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDDirectionsParserBingTest.h; sourceTree = "<group>"; };
 		9B0364F215F6271000538307 /* MTDDirectionsParserBingTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDDirectionsParserBingTest.m; sourceTree = "<group>"; };
 		9B0364F415F62B9E00538307 /* bing_driving_path.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = bing_driving_path.xml; sourceTree = "<group>"; };
@@ -366,6 +367,14 @@
 			path = MTDirectionsKit/General;
 			sourceTree = SOURCE_ROOT;
 		};
+		9B00100D1621B59800E5FF03 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9B00100E1621B5A500E5FF03 /* MTDirectionsKit.bundle */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		9B10A9A3155D5867002A3052 /* MTDirectionsKitTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -520,6 +529,7 @@
 			children = (
 				9B6C18C514A7E18200087893 /* MTDirectionsKit */,
 				9B10A9A3155D5867002A3052 /* MTDirectionsKitTest */,
+				9B00100D1621B59800E5FF03 /* Resources */,
 				9B6C18C214A7E18200087893 /* Frameworks */,
 				9B6C18C114A7E18200087893 /* Products */,
 			);

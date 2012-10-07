@@ -27,7 +27,7 @@ NS_INLINE MTDTurnType MTDTurnTypeFromMapQuestDescription(NSString *description) 
             return MTDTurnTypeSharpRight;
 
         case 4: // reverse
-            return MTDTurnTypeReverse;
+            return MTDTurnTypeTurn;
 
         case 5: // sharp left
             return MTDTurnTypeSharpLeft;

@@ -288,8 +288,8 @@
         NSTimeInterval maneuverTime = [timeNode.contentString doubleValue];
 
         MTDManeuver *maneuver =  [MTDManeuver maneuverWithWaypoint:[MTDWaypoint waypointWithCoordinate:maneuverCoordinate]
-                                                          distance:maneuverDistance
-                                                              time:maneuverTime
+                                                          distance:[MTDDistance distanceWithMeters:maneuverDistance]
+                                                     timeInSeconds:maneuverTime
                                                       instructions:MTDStringByStrippingXMLTags(instructionNode.contentString)];
 
         // Google unfortunately doesn't deliver information about the cardinalDirection or turnType

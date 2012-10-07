@@ -9,7 +9,7 @@
 typedef enum {
     MTDTurnTypeUnknown = -1,
     MTDTurnTypeStraight,
-    MTDTurnTypeReverse,
+    MTDTurnTypeTurn,
     MTDTurnTypeBearRight,
     MTDTurnTypeRight,
     MTDTurnTypeSharpRight,
@@ -17,12 +17,17 @@ typedef enum {
     MTDTurnTypeLeft,
     MTDTurnTypeSharpLeft,
     MTDTurnTypeUTurn,
+    MTDTurnTypeMerge,
     MTDTurnTypeMergeRight,
     MTDTurnTypeMergeLeft,
     MTDTurnTypeTakeRampLeft,
     MTDTurnTypeTakeRampRight,
     MTDTurnTypeLeaveRampLeft,
     MTDTurnTypeLeaveRampRight,
+    MTDTurnTypeDepart,
+    MTDTurnTypeArrive,
+    MTDTurnTypeWalk,
+    MTDTurnTypeTakeTransit
 } MTDTurnType;
 
 

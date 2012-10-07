@@ -79,11 +79,13 @@
                                              intermediateGoals:orderedIntermediateGoals
                                                      routeType:self.routeType];
     } else {
-        MTDXMLElement *messageNode = [MTDXMLElement nodeForXPathQuery:@"//messages/message" onXML:self.data];
+        NSArray *messageNodes = [MTDXMLElement nodesForXPathQuery:@"//messages/message" onXML:self.data];
         NSString *errorMessage = nil;
 
-        if (messageNode != nil) {
-            errorMessage = messageNode.contentString;
+        if (messageNodes.count > 0) {
+            errorMessage = [[messageNodes valueForKey:MTDKey(contentString)] componentsJoinedByString:@"\n"];
+        } else {
+            errorMessage = @"No error message";
         }
 
         error = [NSError errorWithDomain:MTDDirectionsKitErrorDomain
@@ -93,7 +95,7 @@
         MTDLogError(@"Error occurred during parsing of directions from %@ to %@: %@ \n%@",
                     self.from,
                     self.to,
-                    errorMessage ?: @"No error message",
+                    errorMessage,
                     error);
     }
 
@@ -266,8 +268,8 @@
         NSTimeInterval maneuverTime = [timeNode.contentString doubleValue];
 
         MTDManeuver *maneuver = [MTDManeuver maneuverWithWaypoint:[MTDWaypoint waypointWithCoordinate:maneuverCoordinate]
-                                                         distance:maneuverDistance
-                                                             time:maneuverTime
+                                                         distance:[MTDDistance distanceWithValue:maneuverDistance measurementSystem:MTDMeasurementSystemMetric]
+                                                    timeInSeconds:maneuverTime
                                                      instructions:instructionNode.contentString];
 
         maneuver.cardinalDirection = MTDCardinalDirectionFromMapQuestDescription(directionNode.contentString);
@@ -282,7 +284,7 @@
 // This method parses all maneuver nodes of a route
 - (NSArray *)mtd_maneuversFromManeuverNodes:(NSArray *)maneuverNodes {
     NSMutableArray *maneuvers = [NSMutableArray arrayWithCapacity:maneuverNodes.count];
-    
+
     for (MTDXMLElement *maneuverNode in maneuverNodes) {
         MTDManeuver *maneuver = [self mtd_maneuverFromManeuverNode:maneuverNode];
         

@@ -24,6 +24,7 @@
         unsigned int willStartLoadingDirections:1;
         unsigned int didFinishLoadingOverlay:1;
         unsigned int didFailLoadingOverlay:1;
+        unsigned int didActivateRouteOfOverlay:1;
         unsigned int colorForOverlay:1;
         unsigned int lineWidthFactorForOverlay:1;
 	} _directionsDelegateFlags;
@@ -261,6 +262,7 @@
         _directionsDelegateFlags.willStartLoadingDirections = (unsigned int)[_directionsDelegate respondsToSelector:@selector(mapView:willStartLoadingDirectionsFrom:to:routeType:)];
         _directionsDelegateFlags.didFinishLoadingOverlay = (unsigned int)[_directionsDelegate respondsToSelector:@selector(mapView:didFinishLoadingDirectionsOverlay:)];
         _directionsDelegateFlags.didFailLoadingOverlay = (unsigned int)[_directionsDelegate respondsToSelector:@selector(mapView:didFailLoadingDirectionsOverlayWithError:)];
+        _directionsDelegateFlags.didActivateRouteOfOverlay = (unsigned int)[_directionsDelegate respondsToSelector:@selector(mapView:didActivateRoute:ofDirectionsOverlay:)];
         _directionsDelegateFlags.colorForOverlay = (unsigned int)[_directionsDelegate respondsToSelector:@selector(mapView:colorForDirectionsOverlay:)];
         _directionsDelegateFlags.lineWidthFactorForOverlay = (unsigned int)[_directionsDelegate respondsToSelector:@selector(mapView:lineWidthFactorForDirectionsOverlay:)];
     }
@@ -365,7 +367,7 @@
     
     if (self.activeManeuverIndex != NSNotFound && self.directionsDisplayType == MTDDirectionsDisplayTypeDetailedManeuvers) {
         MTDManeuver *activeManeuver = [self.directionsOverlay.maneuvers objectAtIndex:self.activeManeuverIndex];
-        CGPoint circlePoint = [self convertCoordinate:activeManeuver.coordinate toPointToView:self];
+        CGPoint circlePoint = [self convertCoordinate:activeManeuver.waypoint.coordinate toPointToView:self];
         
         self.circleView.alpha = 1.f;
         self.circleView.center = circlePoint;
@@ -531,7 +533,15 @@
 
             // Check if the touch is within the view bounds
             if (CGRectContainsPoint(viewFrameInMapView, point)) {
+                MTDRoute *activeRouteBefore = self.directionsOverlay.activeRoute;
+
                 [self.directionsOverlayView mtd_handleTapAtPoint:[tap locationInView:self.directionsOverlayView]];
+
+                MTDRoute *activeRouteAfter = self.directionsOverlay.activeRoute;
+
+                if (activeRouteBefore != activeRouteAfter) {
+                    [self mtd_notifyDelegateDidActivateRoute:activeRouteAfter ofOverlay:self.directionsOverlay];
+                }
             }
         }
     }
@@ -572,9 +582,9 @@
         MTDManeuver *startManeuver = [self.directionsOverlay.maneuvers objectAtIndex:maneuverStartIndex];
         // MTDManeuver *endManeuver = [self.directionsOverlay.maneuvers objectAtIndex:maneuverEndIndex];
         // NSArray *waypoints = @[startManeuver.waypoint, endManeuver.waypoint];
-        CGPoint circlePoint = [self convertCoordinate:startManeuver.coordinate toPointToView:self];
+        CGPoint circlePoint = [self convertCoordinate:startManeuver.waypoint.coordinate toPointToView:self];
         
-        self.maneuverInfoView.infoText = [NSString stringWithFormat:@"Distanz: %f", startManeuver.distance];
+        self.maneuverInfoView.infoText = [NSString stringWithFormat:@"Distanz: %@", startManeuver.distance];
         
         [UIView animateWithDuration:kMTCircleMoveDuration
                          animations:^{
@@ -807,6 +817,19 @@
     // post corresponding notification
     NSDictionary *userInfo = @{MTDDirectionsNotificationKeyError: error};
     NSNotification *notification = [NSNotification notificationWithName:MTDMapViewDidFailLoadingDirectionsOverlay
+                                                                 object:self
+                                                               userInfo:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+}
+
+- (void)mtd_notifyDelegateDidActivateRoute:(MTDRoute *)route ofOverlay:(MTDDirectionsOverlay *)overlay {
+    if (_directionsDelegateFlags.didActivateRouteOfOverlay) {
+        [self.directionsDelegate mapView:self didActivateRoute:route ofDirectionsOverlay:overlay];
+    }
+
+    // post corresponding notification
+    NSDictionary *userInfo = @{MTDDirectionsNotificationKeyOverlay: overlay, MTDDirectionsNotificationKeyRoute: route};
+    NSNotification *notification = [NSNotification notificationWithName:MTDMapViewDidActivateRouteOfDirectionsOverlay
                                                                  object:self
                                                                userInfo:userInfo];
     [[NSNotificationCenter defaultCenter] postNotification:notification];

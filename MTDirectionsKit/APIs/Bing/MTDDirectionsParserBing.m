@@ -234,8 +234,8 @@
         NSTimeInterval maneuverTime = [timeNode.contentString doubleValue];
 
         MTDManeuver *maneuver =  [MTDManeuver maneuverWithWaypoint:[MTDWaypoint waypointWithCoordinate:maneuverCoordinate]
-                                                          distance:maneuverDistance
-                                                              time:maneuverTime
+                                                          distance:[MTDDistance distanceWithValue:maneuverDistance measurementSystem:MTDMeasurementSystemMetric]
+                                                     timeInSeconds:maneuverTime
                                                       instructions:instructionNode.contentString];
 
         maneuver.cardinalDirection = MTDCardinalDirectionFromBingDescription(directionNode.contentString);
@@ -250,7 +250,7 @@
 // This method parses all maneuver nodes of a route
 - (NSArray *)mtd_maneuversFromManeuverNodes:(NSArray *)maneuverNodes {
     NSMutableArray *maneuvers = [NSMutableArray arrayWithCapacity:maneuverNodes.count];
-    
+
     for (MTDXMLElement *maneuverNode in maneuverNodes) {
         MTDManeuver *maneuver = [self mtd_maneuverFromManeuverNode:maneuverNode];
         

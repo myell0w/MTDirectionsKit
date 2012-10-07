@@ -165,7 +165,7 @@
 }
 
 - (void)mtd_drawManeuver:(MTDManeuver *)maneuver lineWidth:(CGFloat)lineWidth inContext:(CGContextRef)context {
-    MKMapPoint mapPoint = MKMapPointForCoordinate(maneuver.coordinate);
+    MKMapPoint mapPoint = MKMapPointForCoordinate(maneuver.waypoint.coordinate);
     CGPoint point = [self pointForMapPoint:mapPoint];
     CGFloat radius = lineWidth;
     CGRect rect = CGRectMake(point.x - radius, point.y - radius, 2.f*radius, 2.f*radius);

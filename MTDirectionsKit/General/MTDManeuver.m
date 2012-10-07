@@ -1,35 +1,32 @@
 #import "MTDManeuver.h"
 #import "MTDWaypoint.h"
+#import "MTDDistance.h"
 
 
 @implementation MTDManeuver
-
-@synthesize waypoint = _waypoint;
-@synthesize distance = _distance;
-@synthesize time = _time;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
 ////////////////////////////////////////////////////////////////////////
 
 + (MTDManeuver *)maneuverWithWaypoint:(MTDWaypoint *)waypoint
-                            distance:(CLLocationDistance)distance
-                                time:(NSTimeInterval)time
+                             distance:(MTDDistance *)distance
+                        timeInSeconds:(NSTimeInterval)timeInSeconds
                          instructions:(NSString *)instructions {
     return [[MTDManeuver alloc] initWithWaypoint:waypoint
                                         distance:distance
-                                            time:time
+                                   timeInSeconds:timeInSeconds
                                     instructions:instructions];
 }
 
 - (id)initWithWaypoint:(MTDWaypoint *)waypoint
-              distance:(CLLocationDistance)distance
-                  time:(NSTimeInterval)time
+              distance:(MTDDistance *)distance
+         timeInSeconds:(NSTimeInterval)timeInSeconds
           instructions:(NSString *)instructions {
     if ((self = [super init])) {
         _waypoint = waypoint;
         _distance = distance;
-        _time = time;
+        _timeInSeconds = timeInSeconds;
         _instructions = [instructions copy];
         _cardinalDirection = MTDCardinalDirectionUnknown;
         _turnType = MTDTurnTypeUnknown;
@@ -39,7 +36,7 @@
 }
 
 - (id)init {
-    return [self initWithWaypoint:nil distance:0. time:0. instructions:nil];
+    return [self initWithWaypoint:nil distance:nil timeInSeconds:0. instructions:nil];
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -55,11 +52,11 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"<MTDManeuver (Lat: %f, Lng: %f, Distance: %f, Time: %f, Direction: %d): %@>",
+    return [NSString stringWithFormat:@"<MTDManeuver (Lat: %f, Lng: %f, Distance: %@, Time: %f, Direction: %d): %@>",
             self.coordinate.latitude,
             self.coordinate.longitude,
             self.distance,
-            self.time,
+            self.timeInSeconds,
             self.cardinalDirection,
             self.instructions];
 }

@@ -13,6 +13,7 @@
 // Notifications
 #define MTDMapViewWillStartLoadingDirections            @"MTDMapViewWillStartLoadingDirections"
 #define MTDMapViewDidFinishLoadingDirectionsOverlay     @"MTDMapViewDidFinishLoadingDirectionsOverlay"
+#define MTDMapViewDidActivateRouteOfDirectionsOverlay   @"MTDMapViewDidActivateRouteOfDirectionsOverlay"
 #define MTDMapViewDidFailLoadingDirectionsOverlay       @"MTDMapViewDidFailLoadingDirectionsOverlay"
 
 // Keys for Notification UserInfo
@@ -20,11 +21,13 @@
 #define MTDDirectionsNotificationKeyTo                  @"MTDDirectionsNotificationKeyTo"
 #define MTDDirectionsNotificationKeyRouteType           @"MTDDirectionsNotificationKeyRouteType"
 #define MTDDirectionsNotificationKeyOverlay             @"MTDDirectionsNotificationKeyOverlay"
+#define MTDDirectionsNotificationKeyRoute               @"MTDDirectionsNotificationKeyRoute"
 #define MTDDirectionsNotificationKeyError               @"MTDDirectionsNotificationKeyError"
 
 
 @class MTDMapView;
 @class MTDDirectionsOverlay;
+@class MTDRoute;
 
 
 /**
@@ -63,6 +66,15 @@
  @param error the error that occured
  */
 - (void)mapView:(MTDMapView *)mapView didFailLoadingDirectionsOverlayWithError:(NSError *)error;
+
+/**
+ Tells the delegate that the user activated the specified route by tapping on it
+
+ @param mapView the mapView that displays the directions
+ @param route the new active route
+ @param directionsOverlay the directions overlay containing several routes
+ */
+- (void)mapView:(MTDMapView *)mapView didActivateRoute:(MTDRoute *)route ofDirectionsOverlay:(MTDDirectionsOverlay *)directionsOverlay;
 
 /**
  Asks the delegate for the color for the corresponding view for the specified directionsOverlay.
