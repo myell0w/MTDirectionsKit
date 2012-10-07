@@ -13,7 +13,6 @@
 #import "MTDWaypoint.h"
 #import "MTDAddress.h"
 #import "MTDRoute.h"
-#import "NSObject+MTDXcodeSubscriptingCompatibility.h"
 
 
 @implementation MTDDirectionsParserBingTest

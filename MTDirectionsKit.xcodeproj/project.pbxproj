@@ -37,7 +37,7 @@
 		9B000FC61620656700E5FF03 /* MTDAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B000FB11620656700E5FF03 /* MTDAddress.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B000FC71620656700E5FF03 /* MTDAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B000FB21620656700E5FF03 /* MTDAddress.m */; };
 		9B000FC81620656700E5FF03 /* MTDDirectionsDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B000FB31620656700E5FF03 /* MTDDirectionsDefines.h */; };
-		9B000FC91620656700E5FF03 /* MTDDirectionsDisplayType.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B000FB41620656700E5FF03 /* MTDDirectionsDisplayType.h */; };
+		9B000FC91620656700E5FF03 /* MTDDirectionsDisplayType.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B000FB41620656700E5FF03 /* MTDDirectionsDisplayType.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B000FCA1620656700E5FF03 /* MTDDirectionsRouteType.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B000FB51620656700E5FF03 /* MTDDirectionsRouteType.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B000FCB1620656700E5FF03 /* MTDDirectionsRouteType.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B000FB61620656700E5FF03 /* MTDDirectionsRouteType.m */; };
 		9B000FCC1620656700E5FF03 /* MTDDistance.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B000FB71620656700E5FF03 /* MTDDistance.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -64,7 +64,6 @@
 		9B0364F915F62B9E00538307 /* bing_driving.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B0364F515F62B9E00538307 /* bing_driving.xml */; };
 		9B0364FA15F62B9E00538307 /* bing_transit.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B0364F615F62B9E00538307 /* bing_transit.xml */; };
 		9B0364FB15F62B9E00538307 /* bing_walking.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B0364F715F62B9E00538307 /* bing_walking.xml */; };
-		9B06FD1815C0A57900100A7C /* NSObject+MTDXcodeSubscriptingCompatibility.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B06FD1615C0A57900100A7C /* NSObject+MTDXcodeSubscriptingCompatibility.h */; };
 		9B10A99F155D5867002A3052 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B10A99E155D5867002A3052 /* SenTestingKit.framework */; };
 		9B10A9A2155D5867002A3052 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18C314A7E18200087893 /* Foundation.framework */; };
 		9B10A9A8155D5867002A3052 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9B10A9A6155D5867002A3052 /* InfoPlist.strings */; };
@@ -210,7 +209,6 @@
 		9B0364F515F62B9E00538307 /* bing_driving.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = bing_driving.xml; sourceTree = "<group>"; };
 		9B0364F615F62B9E00538307 /* bing_transit.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = bing_transit.xml; sourceTree = "<group>"; };
 		9B0364F715F62B9E00538307 /* bing_walking.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = bing_walking.xml; sourceTree = "<group>"; };
-		9B06FD1615C0A57900100A7C /* NSObject+MTDXcodeSubscriptingCompatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+MTDXcodeSubscriptingCompatibility.h"; path = "MTDirectionsKit/Supporting Files/NSObject+MTDXcodeSubscriptingCompatibility.h"; sourceTree = SOURCE_ROOT; };
 		9B10A99D155D5867002A3052 /* MTDirectionsKitTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MTDirectionsKitTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B10A99E155D5867002A3052 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		9B10A9A5155D5867002A3052 /* MTDirectionsKitTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MTDirectionsKitTest-Info.plist"; sourceTree = "<group>"; };
@@ -583,7 +581,6 @@
 				9B8F515E155C516E00A9C10C /* MTDirectionsKit.h */,
 				9B23F65915BEFAC00069EAD1 /* MTDWeak.h */,
 				9B8F515F155C516E00A9C10C /* Prefix.pch */,
-				9B06FD1615C0A57900100A7C /* NSObject+MTDXcodeSubscriptingCompatibility.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -643,7 +640,6 @@
 				9B8A2C1B1560129F00BAAE7B /* MTDXMLElement.h in Headers */,
 				9B9945F41562F15D00DE5B1B /* MTDDirectionsDelegate.h in Headers */,
 				9B23F65A15BEFE7C0069EAD1 /* MTDWeak.h in Headers */,
-				9B06FD1815C0A57900100A7C /* NSObject+MTDXcodeSubscriptingCompatibility.h in Headers */,
 				9BE9094815C39980003E5462 /* MTDDirectionsOverlay+MTDirectionsPrivateAPI.h in Headers */,
 				9BE9094C15C3A22B003E5462 /* MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h in Headers */,
 				9BF3ED1915DC079300FAD2E6 /* MTDDirectionsRequestOption.h in Headers */,

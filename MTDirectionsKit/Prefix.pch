@@ -15,5 +15,4 @@
     #import "MTDLogging.h"
     #import "MTDWeak.h"
     #import "MTDAssert.h"
-    #import "NSObject+MTDXcodeSubscriptingCompatibility.h"
 #endif

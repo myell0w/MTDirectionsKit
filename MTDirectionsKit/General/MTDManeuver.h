@@ -23,6 +23,10 @@
  */
 @interface MTDManeuver : NSObject
 
+/******************************************
+ @name Maneuver
+ ******************************************/
+
 /** the startPoint of the maneuver */
 @property (nonatomic, strong, readonly) MTDWaypoint *waypoint;
 /** the distance between the startPoint of this maneuver and the next maneuver */
@@ -36,6 +40,10 @@
 @property (nonatomic, assign) MTDCardinalDirection cardinalDirection;
 /** the turn type of this maneuver, can be undefined */
 @property (nonatomic, assign) MTDTurnType turnType;
+
+/******************************************
+ @name Lifecycle
+ ******************************************/
 
 /**
  The designated initializer, creates a maneuver.
