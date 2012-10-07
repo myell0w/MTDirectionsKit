@@ -16,8 +16,8 @@
  - MTDDirectionsDisplayTypeNone: don't display anything
  - MTDDirectionsDisplayTypeOverview: displays a polyline with all Waypoints of the route
  */
-typedef enum {
+typedef NS_ENUM(NSUInteger, MTDDirectionsDisplayType) {
     MTDDirectionsDisplayTypeNone = 0,
     MTDDirectionsDisplayTypeOverview,
     MTDDirectionsDisplayTypeDetailedManeuvers
-} MTDDirectionsDisplayType;
+};

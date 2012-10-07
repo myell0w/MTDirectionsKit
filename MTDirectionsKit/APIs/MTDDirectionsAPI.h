@@ -23,13 +23,13 @@
  when directions are displayed on a Google Map. MTDirectionsKit doesn't force you to do that, but it prints
  a warning to the console if you are trying to do otherwise.
  */
-typedef enum {
-    MTDDirectionsAPIMapQuest,
+typedef NS_ENUM(NSUInteger, MTDDirectionsAPI) {
+    MTDDirectionsAPIMapQuest = 0,
     MTDDirectionsAPIGoogle,
     MTDDirectionsAPIBing,
     MTDDirectionsAPICustom,
     MTDDirectionsAPICount
-} MTDDirectionsAPI;
+};
 
 
 /** 

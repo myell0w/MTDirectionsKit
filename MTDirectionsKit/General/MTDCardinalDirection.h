@@ -7,7 +7,7 @@
 //
 
 
-typedef enum {
+typedef NS_ENUM(NSUInteger, MTDCardinalDirection) {
     MTDCardinalDirectionUnknown = 0,
     MTDCardinalDirectionNorth,
     MTDCardinalDirectionNorthNorthEast,
@@ -25,4 +25,4 @@ typedef enum {
     MTDCardinalDirectionWestNorthWest,
     MTDCardinalDirectionNorthWest,
     MTDCardinalDirectionNorthNorthWest
-} MTDCardinalDirection;
+};

@@ -16,13 +16,13 @@
  - MTDLogLevelError: Only print error messages
  - MTDLogLevelNone: Don't print any log messages
  */
-typedef enum {
+typedef NS_ENUM(NSUInteger, MTDLogLevel) {
     MTDLogLevelVerbose = 0,
     MTDLogLevelInfo,
     MTDLogLevelWarning,
     MTDLogLevelError,
     MTDLogLevelNone
-} MTDLogLevel;
+};
 
 
 /**

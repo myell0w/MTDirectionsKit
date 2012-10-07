@@ -10,14 +10,14 @@
 /**
  This enum can be used to generate a specific string-representation of a normalised address object.
  */
-typedef enum {
+typedef NS_ENUM(NSUInteger, MTDAddressField) {
     MTDAddressFieldCountry          = 1,
     MTDAddressFieldState            = 1 << 1,
     MTDAddressFieldCounty           = 1 << 2,
     MTDAddressFieldPostalCode       = 1 << 3,
     MTDAddressFieldCity             = 1 << 4,
     MTDAddressFieldStreet           = 1 << 5
-} MTDAddressField;
+};
 
 
 /**

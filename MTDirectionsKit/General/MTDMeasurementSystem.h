@@ -14,10 +14,10 @@
  MTDirectionsKit can calculate it's distances using either Miles (U.S. System) or Kilometers (Metric System).
  MTDirectionsKit tries to be smart and sets the default used measurement system to the one set in the system locale.
  */
-typedef enum {
+typedef NS_ENUM(NSUInteger, MTDMeasurementSystem) {
     MTDMeasurementSystemMetric = 1,
     MTDMeasurementSystemUS
-} MTDMeasurementSystem;
+};
 
 
 /** 

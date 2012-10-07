@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Matthias Tretter (@myell0w). All rights reserved.
 //
 
-typedef enum {
+typedef NS_ENUM(NSInteger, MTDTurnType) {
     MTDTurnTypeUnknown = -1,
     MTDTurnTypeStraight,
     MTDTurnTypeTurn,
@@ -28,7 +28,7 @@ typedef enum {
     MTDTurnTypeArrive,
     MTDTurnTypeWalk,
     MTDTurnTypeTakeTransit
-} MTDTurnType;
+};
 
 
 NS_INLINE UIImage* MTDGetImageForTurnType(MTDTurnType turnType) {
