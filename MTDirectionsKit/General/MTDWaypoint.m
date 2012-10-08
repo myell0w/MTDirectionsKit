@@ -18,6 +18,10 @@
     return [[[self class] alloc] initWithAddress:address];
 }
 
++ (MTDWaypoint *)waypointWithAddressString:(NSString *)addressString {
+    return [[self class] waypointWithAddress:[MTDAddress addressWithAddressString:addressString]];
+}
+
 + (MTDWaypoint *)waypointForCurrentLocation {
     __strong static MTDWaypoint *waypointForCurrentLocation = nil;
 
