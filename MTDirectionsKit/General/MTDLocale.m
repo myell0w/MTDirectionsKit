@@ -14,6 +14,7 @@ NS_INLINE __attribute__((constructor)) void MTDLoadLocale(void) {
         MTDDirectionsSetLocale([NSLocale currentLocale]);
 
         // currently known locales that are supported by MapQuest API
+        // taken from http://developer.mapquest.com/web/products/open/forums/-/message_boards/view_message/390942
         mtd_mapQuestLocales = (@[
                                @"da_DK",
                                @"de_DE",
