@@ -12,10 +12,6 @@
 #import "MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h"
 #import "MTDMapViewDelegateProxy.h"
 #import "MTDFunctions.h"
-#import "MTDManeuverInfoView.h"
-
-
-#define kMTCircleMoveDuration       0.3
 
 
 @interface MTDMapView () <MKMapViewDelegate> {
@@ -31,11 +27,6 @@
 }
 
 @property (nonatomic, strong, readwrite) MTDDirectionsOverlayView *directionsOverlayView; // re-defined as read/write
-
-
-@property (nonatomic, assign) NSUInteger activeManeuverIndex;
-@property (nonatomic, strong) UIImageView *circleView;
-@property (nonatomic, strong) MTDManeuverInfoView *maneuverInfoView;
 
 /** The delegate that was set by the user, we forward all delegate calls */
 @property (nonatomic, mtd_weak, setter = mtd_setTrueDelegate:) id<MKMapViewDelegate> mtd_trueDelegate;
@@ -175,44 +166,6 @@
 }
 
 ////////////////////////////////////////////////////////////////////////
-#pragma mark - Maneuvers
-////////////////////////////////////////////////////////////////////////
-
-- (BOOL)showNextManeuver {
-    if (self.directionsDisplayType != MTDDirectionsDisplayTypeDetailedManeuvers) {
-        // this call updates the UI to show first maneuver
-        self.directionsDisplayType = MTDDirectionsDisplayTypeDetailedManeuvers;
-        return YES;
-    }
-    
-    NSUInteger activeManeuverIndex = self.activeManeuverIndex;
-    
-    if (activeManeuverIndex >= self.directionsOverlay.maneuvers.count - 1) {
-        return NO;
-    }
-    
-    activeManeuverIndex++;
-    self.activeManeuverIndex = activeManeuverIndex;
-    [self mtd_showManeuverStartingFromIndex:activeManeuverIndex];
-    
-    return YES;
-}
-
-- (BOOL)showPreviousManeuver {
-    NSUInteger activeManeuverIndex = self.activeManeuverIndex;
-    
-    if (activeManeuverIndex == 0) {
-        return NO;
-    }
-    
-    activeManeuverIndex--;
-    self.activeManeuverIndex = activeManeuverIndex;
-    [self mtd_showManeuverStartingFromIndex:activeManeuverIndex];
-    
-    return YES;
-}
-
-////////////////////////////////////////////////////////////////////////
 #pragma mark - Region
 ////////////////////////////////////////////////////////////////////////
 
@@ -250,7 +203,6 @@
         self.directionsOverlayView.drawManeuvers = (directionsDisplayType == MTDDirectionsDisplayTypeDetailedManeuvers);
         
         [self mtd_updateUIForDirectionsDisplayType:directionsDisplayType];
-
     }
 }
 
@@ -282,28 +234,6 @@
 
 - (id<MKMapViewDelegate>)delegate {
     return _mtd_trueDelegate;
-}
-
-- (UIImageView *)circleView {
-    if (_circleView == nil) {
-        _circleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MTDirectionsKit.bundle/DirectionsCircleShiny"]];
-        [self addSubview:_circleView];
-    }
-    
-    [self bringSubviewToFront:_circleView];
-    
-    return _circleView;
-}
-
-- (MTDManeuverInfoView *)maneuverInfoView {
-    if (_maneuverInfoView == nil) {
-        _maneuverInfoView = [MTDManeuverInfoView infoViewForMapView:self];
-        [self addSubview:_maneuverInfoView];
-    }
-    
-    [self bringSubviewToFront:_maneuverInfoView];
-    
-    return _maneuverInfoView;
 }
 
 - (CLLocationCoordinate2D)fromCoordinate {
@@ -356,21 +286,11 @@
     if ([self.mtd_trueDelegate respondsToSelector:@selector(mapView:regionWillChangeAnimated:)]) {
         [self.mtd_trueDelegate mapView:mapView regionWillChangeAnimated:animated];
     }
-    
-    self.circleView.alpha = 0.f;
 }
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
     if ([self.mtd_trueDelegate respondsToSelector:@selector(mapView:regionDidChangeAnimated:)]) {
         [self.mtd_trueDelegate mapView:mapView regionDidChangeAnimated:animated];
-    }
-    
-    if (self.activeManeuverIndex != NSNotFound && self.directionsDisplayType == MTDDirectionsDisplayTypeDetailedManeuvers) {
-        MTDManeuver *activeManeuver = [self.directionsOverlay.maneuvers objectAtIndex:self.activeManeuverIndex];
-        CGPoint circlePoint = [self convertCoordinate:activeManeuver.waypoint.coordinate toPointToView:self];
-        
-        self.circleView.alpha = 1.f;
-        self.circleView.center = circlePoint;
     }
 }
 
@@ -489,7 +409,6 @@
     [super setDelegate:self];
 
     _directionsDisplayType = MTDDirectionsDisplayTypeNone;
-    _activeManeuverIndex = NSNotFound;
     _mtd_delegateProxy = [[MTDMapViewDelegateProxy alloc] initWithMapView:self];
 
     // we need this GestureRecognizer to be able to select alternative routes
@@ -504,6 +423,8 @@
         [mapViewGestureRecognizers addObjectsFromArray:[view gestureRecognizers]];
     }
 
+    MTDAssert(mapViewGestureRecognizers.count > 0, @"Wasn't able to find gesture recognizers of MapView");
+    
     for (UIGestureRecognizer *gesture in mapViewGestureRecognizers) {
         if ([gesture isKindOfClass:[UITapGestureRecognizer class]]) {
             UITapGestureRecognizer *systemTap = (UITapGestureRecognizer *)gesture;
@@ -552,50 +473,6 @@
         [self removeOverlay:_directionsOverlay];
         _directionsOverlayView = nil;
         [self addOverlay:_directionsOverlay];
-
-        switch (displayType) {
-            case MTDDirectionsDisplayTypeOverview: {
-                self.activeManeuverIndex = NSNotFound;
-                break;
-            }
-
-            case MTDDirectionsDisplayTypeDetailedManeuvers: {
-                self.activeManeuverIndex = 0;
-                [self mtd_showManeuverStartingFromIndex:0];
-                break;
-            }
-
-            case MTDDirectionsDisplayTypeNone:
-            default: {
-                self.activeManeuverIndex = NSNotFound;
-                break;
-            }
-        }
-    }
-}
-
-// TODO: Implement method
-- (void)mtd_showManeuverStartingFromIndex:(NSUInteger)maneuverStartIndex {
-    NSUInteger maneuverEndIndex = maneuverStartIndex + 1;
-    
-    if (maneuverEndIndex < self.directionsOverlay.maneuvers.count) {
-        MTDManeuver *startManeuver = [self.directionsOverlay.maneuvers objectAtIndex:maneuverStartIndex];
-        // MTDManeuver *endManeuver = [self.directionsOverlay.maneuvers objectAtIndex:maneuverEndIndex];
-        // NSArray *waypoints = @[startManeuver.waypoint, endManeuver.waypoint];
-        CGPoint circlePoint = [self convertCoordinate:startManeuver.waypoint.coordinate toPointToView:self];
-        
-        self.maneuverInfoView.infoText = [NSString stringWithFormat:@"Distanz: %@", startManeuver.distance];
-        
-        [UIView animateWithDuration:kMTCircleMoveDuration
-                         animations:^{
-                             self.circleView.center = circlePoint;
-                         } completion:^(BOOL finished) {
-                             if (finished) {
-                                 /*[self setRegionFromWaypoints:waypoints
-                                                  edgePadding:UIEdgeInsetsMake(10.f,10.f,10.f,10.f)
-                                                     animated:YES];*/
-                             }
-                         }];
     }
 }
 

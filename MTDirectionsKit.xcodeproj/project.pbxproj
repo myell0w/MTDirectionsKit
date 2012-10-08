@@ -94,8 +94,6 @@
 		9B2C42BC155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2C42B7155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B2C42BD155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C42B8155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.m */; };
 		9B2C42BE155EB85B00C0E4CE /* MTDDirectionsRouteType+Google.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2C42B9155EB85B00C0E4CE /* MTDDirectionsRouteType+Google.h */; };
-		9B2C42DD155EB8F500C0E4CE /* MTDManeuverInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C42D9155EB8F500C0E4CE /* MTDManeuverInfoView.m */; };
-		9B2C42DE155EB8F500C0E4CE /* MTDManeuverInfoView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2C42DA155EB8F500C0E4CE /* MTDManeuverInfoView.h */; };
 		9B4E98E015AD77E5002F0302 /* MTDAddressTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4E98DF15AD77E5002F0302 /* MTDAddressTest.m */; };
 		9B58087E15B5F0E200D04EB5 /* MTDFunctionsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B58087D15B5F0E200D04EB5 /* MTDFunctionsTest.m */; };
 		9B68099916234FD700A12B83 /* MTDLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B000FBB1620656700E5FF03 /* MTDLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -243,8 +241,6 @@
 		9B2C42B7155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDDirectionsRequestGoogle.h; sourceTree = "<group>"; };
 		9B2C42B8155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDDirectionsRequestGoogle.m; sourceTree = "<group>"; };
 		9B2C42B9155EB85B00C0E4CE /* MTDDirectionsRouteType+Google.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTDDirectionsRouteType+Google.h"; sourceTree = "<group>"; };
-		9B2C42D9155EB8F500C0E4CE /* MTDManeuverInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDManeuverInfoView.m; sourceTree = "<group>"; };
-		9B2C42DA155EB8F500C0E4CE /* MTDManeuverInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDManeuverInfoView.h; sourceTree = "<group>"; };
 		9B4E98DE15AD77E5002F0302 /* MTDAddressTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDAddressTest.h; sourceTree = "<group>"; };
 		9B4E98DF15AD77E5002F0302 /* MTDAddressTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDAddressTest.m; sourceTree = "<group>"; };
 		9B58087C15B5F0E200D04EB5 /* MTDFunctionsTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDFunctionsTest.h; sourceTree = "<group>"; };
@@ -450,8 +446,6 @@
 				9B10AA1B155D85B8002A3052 /* MTDDirectionsOverlayView.h */,
 				9B10AA1C155D85B8002A3052 /* MTDDirectionsOverlayView.m */,
 				9BE9094A15C3A22B003E5462 /* MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h */,
-				9B2C42DA155EB8F500C0E4CE /* MTDManeuverInfoView.h */,
-				9B2C42D9155EB8F500C0E4CE /* MTDManeuverInfoView.m */,
 				9B10AA1D155D85B8002A3052 /* MTDMapView.h */,
 				9B10AA1E155D85B8002A3052 /* MTDMapView.m */,
 				9BF323DA1607C4DB0024D664 /* MTDMapView+MTDirectionsPrivateAPI.h */,
@@ -631,7 +625,6 @@
 				9B10AA43155D85B8002A3052 /* MTDDirectionsRequest+MTDirectionsPrivateAPI.h in Headers */,
 				9B10AA44155D85B8002A3052 /* MTDDirectionsRequest.h in Headers */,
 				9BEE26EB155E92FC008A42F8 /* MTDHTTPRequest.h in Headers */,
-				9B2C42DE155EB8F500C0E4CE /* MTDManeuverInfoView.h in Headers */,
 				9B2C42BA155EB85B00C0E4CE /* MTDDirectionsParserGoogle.h in Headers */,
 				9B2C42BC155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.h in Headers */,
 				9B2C42BE155EB85B00C0E4CE /* MTDDirectionsRouteType+Google.h in Headers */,
@@ -849,7 +842,6 @@
 				9B10AA42155D85B8002A3052 /* MTDDirectionsParser.m in Sources */,
 				9B10AA45155D85B8002A3052 /* MTDDirectionsRequest.m in Sources */,
 				9BEE26EC155E92FC008A42F8 /* MTDHTTPRequest.m in Sources */,
-				9B2C42DD155EB8F500C0E4CE /* MTDManeuverInfoView.m in Sources */,
 				9B2C42BB155EB85B00C0E4CE /* MTDDirectionsParserGoogle.m in Sources */,
 				9B2C42BD155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.m in Sources */,
 				9B8A2C1C1560129F00BAAE7B /* MTDXMLElement.m in Sources */,
