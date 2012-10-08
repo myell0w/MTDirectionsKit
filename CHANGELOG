@@ -1,4 +1,22 @@
-= 1.4 24.9.2012
+=1.5.0 10.10.2012
+ * Further improved gesture recognizer support that doesn't infere with the default gesture recognizers of MKMapView
+ * New delegate call mapView:didActivateRoute:ofDirectionsOverlay: that indicates when the user actives a given route
+ * Added function MTDDirectionsKitGetVersionString()
+ * NSCopying support for MTDDistance, MTDAddress and MTDWaypoint
+ * NS_ENUM used for all enums, now requiring Xcode 4.5
+ * Removed subscripting category for Xcode 4.4
+ * Shortcut for creating a waypoint from an address string + [MTDWaypoint waypointWithAddressString:]
+ * Much faster performance when parsing data from MapQuest and Bing APIs
+ * Support for maneuvers for all 3 APIs to allow for a textual representation of the route, with information about
+    - coordinate
+    - duration
+    - time
+    - textual instructions
+    - cardinal direction (except Google)
+    - turn type (except Google)
+ * Locale can be set to request maneuver description in a given language
+
+= 1.4.0 24.9.2012
  * Support for Bing Routes API
  * Support for custom requests/parsers with MTDDirectionsAPIRegisterCustomRequestClass/MTDDirectionsAPIRegisterCustomParserClass
  * Fixed a bug where zoomToShowRegionAnimated didn't show all routes, when alternative routes were requested
