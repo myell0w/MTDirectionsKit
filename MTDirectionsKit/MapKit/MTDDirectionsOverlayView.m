@@ -5,7 +5,6 @@
 #import "MTDRoute.h"
 #import "MTDFunctions.h"
 #import "MTDWaypoint.h"
-#import <CoreLocation/CoreLocation.h>
 
 
 #define kMTDDefaultOverlayColor         [UIColor colorWithRed:0.f green:0.25f blue:1.f alpha:1.f]
@@ -31,6 +30,7 @@
     if ((self = [super initWithOverlay:overlay])) {
         _overlayLineWidthFactor = kMTDDefaultLineWidthFactor;
         _overlayColor = kMTDDefaultOverlayColor;
+        _drawManeuvers = NO;
     }
 
     return self;
@@ -43,13 +43,14 @@
 - (void)setOverlayColor:(UIColor *)overlayColor {
     if (overlayColor != _overlayColor && overlayColor != nil) {
         _overlayColor = overlayColor;
-        [self setNeedsDisplay];
+        [self setNeedsDisplayInMapRect:MKMapRectWorld];
     }
 }
 
 - (void)setOverlayLineWidthFactor:(CGFloat)overlayLineWidthFactor {
     if (overlayLineWidthFactor >= kMTDMinimumLineWidthFactor && overlayLineWidthFactor <= kMTDMaximumLineWidthFactor) {
         _overlayLineWidthFactor = overlayLineWidthFactor;
+        [self setNeedsDisplayInMapRect:MKMapRectWorld];
     }
 }
 
@@ -189,15 +190,14 @@
 }
 
 - (CGPathRef)mtd_newPathForPoints:(MKMapPoint *)points
-pointCount:(NSUInteger)pointCount
-clipRect:(MKMapRect)mapRect
-zoomScale:(MKZoomScale)zoomScale CF_RETURNS_RETAINED {
+                       pointCount:(NSUInteger)pointCount
+                         clipRect:(MKMapRect)mapRect
+                        zoomScale:(MKZoomScale)zoomScale CF_RETURNS_RETAINED {
     // The fastest way to draw a path in an MKOverlayView is to simplify the
     // geometry for the screen by eliding points that are too close together
     // and to omit any line segments that do not intersect the clipping rect.
     // While it is possible to just add all the points and let CoreGraphics
     // handle clipping and flatness, it is much faster to do it yourself:
-    //
     if (pointCount < 2) {
         return NULL;
     }

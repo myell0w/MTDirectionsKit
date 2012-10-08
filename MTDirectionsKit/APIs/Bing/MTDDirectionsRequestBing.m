@@ -104,6 +104,10 @@ static NSString *mtd_apiKey = nil;
     mtd_apiKey = APIKey;
 }
 
++ (BOOL)isAPIKeyRegistered {
+    return mtd_apiKey.length > 0;
+}
+
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Private
 ////////////////////////////////////////////////////////////////////////
@@ -115,11 +119,7 @@ static NSString *mtd_apiKey = nil;
     [self setValue:@"true" forParameter:@"suppressStatus"];
     [self setValue:@"Points" forParameter:@"routePathOutput"];
     [self setValue:@"km" forParameter:@"distanceUnit"];
-
-    if (locale != nil) {
-        [self setValue:@"ki" forParameter:@"culture"];
-        // [self setValue:locale forParameter:@"culture"];
-    }
+    [self setValue:locale forParameter:@"culture"];
 }
 
 @end

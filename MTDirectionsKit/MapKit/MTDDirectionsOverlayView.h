@@ -14,7 +14,7 @@
  */
 @interface MTDDirectionsOverlayView : MKOverlayView
 
-/** Flag that indicates whether the maneuver points are drawn */
+/** Flag that indicates whether the maneuver points are drawn, defaults to NO */
 @property (nonatomic, assign) BOOL drawManeuvers;
 
 /** The color used to draw the overlay, default is a blue color */

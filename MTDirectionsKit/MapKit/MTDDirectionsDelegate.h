@@ -86,6 +86,7 @@
 
 /**
  Asks the delegate for the factor to multiply MKRoadWidthAtZoomScale with to compute the total overlay line width for the specified directionsOverlay.
+ The default value, if not implemented, is 1.8f
  
  @param mapView the mapView that began loading the directions
  @param directionsOverlay the overlay we want the line width factor of

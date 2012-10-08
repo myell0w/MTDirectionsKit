@@ -174,14 +174,14 @@
     }
 
     // add start coordinate
-    if (self.from != nil && CLLocationCoordinate2DIsValid(self.from.coordinate)) {
+    if (self.from != nil && self.from.hasValidCoordinate) {
         [waypoints insertObject:self.from atIndex:0];
     } else if (waypoints.count > 0) {
         self.from = waypoints[0];
     }
 
     // add end coordinate
-    if (self.to != nil && CLLocationCoordinate2DIsValid(self.to.coordinate)) {
+    if (self.to != nil && self.to.hasValidCoordinate) {
         [waypoints addObject:self.to];
     } else {
         self.to = [waypoints lastObject];

@@ -58,16 +58,18 @@
  @return the wrapper object created to store the address
  
  @see initWithAddress:
+ @see waypointWithAddressString:
  */
 + (MTDWaypoint *)waypointWithAddress:(MTDAddress *)address;
 
 /**
  This method is used to create an instance of MTDWaypoint with a given address string.
 
- @param address the string-representation of the address of the waypoint
+ @param addressString the string-representation of the address of the waypoint
  @return the wrapper object created to store the address
 
  @see initWithAddress:
+ @see waypointWithAddress:
  */
 + (MTDWaypoint *)waypointWithAddressString:(NSString *)addressString;
 

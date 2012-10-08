@@ -7,6 +7,10 @@
 //
 
 
+/**
+ This enum represents all cardinal directions that can be returned by an API.
+ The cardinal direction may be part of an instance of MTDManeuver.
+ */
 typedef NS_ENUM(NSUInteger, MTDCardinalDirection) {
     MTDCardinalDirectionUnknown = 0,
     MTDCardinalDirectionNorth,

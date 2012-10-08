@@ -1,6 +1,7 @@
 #import "MTDManeuver.h"
 #import "MTDWaypoint.h"
 #import "MTDDistance.h"
+#import "MTDFunctions.h"
 
 
 @implementation MTDManeuver
@@ -35,6 +36,18 @@
 
 - (CLLocationCoordinate2D)coordinate {
     return self.waypoint.coordinate;
+}
+
+- (NSString *)formattedTime {
+    return [self formattedTimeWithFormat:nil];
+}
+
+- (NSString *)formattedTimeWithFormat:(NSString *)format {
+    if (format != nil) {
+        return MTDGetFormattedTimeWithFormat(self.timeInSeconds, format);
+    } else {
+        return MTDGetFormattedTime(self.timeInSeconds);
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////

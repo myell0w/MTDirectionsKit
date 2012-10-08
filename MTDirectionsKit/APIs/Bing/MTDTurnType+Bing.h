@@ -24,6 +24,10 @@ NS_INLINE MTDTurnType MTDTurnTypeFromBingDescription(__unused NSString *descript
         return MTDTurnTypeWalk;
     } else if ([description isEqualToString:@"Merge"]) {
         return MTDTurnTypeMerge;
+    } else if ([description isEqualToString:@"TakeRampStraight"] || [description isEqualToString:@"KeepStraight"] ||
+               [description isEqualToString:@"KeepOnRampStraight"] || [description isEqualToString:@"KeepToStayStraight"] ||
+               [description isEqualToString:@"RampThenHighwayStraight"]) {
+        return MTDTurnTypeStraight;
     }
 
     // Groups of turnTypes
@@ -37,21 +41,16 @@ NS_INLINE MTDTurnType MTDTurnTypeFromBingDescription(__unused NSString *descript
         return MTDTurnTypeBearRight;
     } else if ([description rangeOfString:@"Transit"].location != NSNotFound ||
                [description isEqualToString:@"Transfer"] || [description isEqualToString:@"Wait"]) {
-        return MTDTurnTypeTakeTransit;
+        return MTDTurnTypeTakePublicTransport;
     } else if ([description hasPrefix:@"TurnLeft"]) {
         return MTDTurnTypeLeft;
     } else if ([description hasPrefix:@"TurnRight"]) {
         return MTDTurnTypeRight;
-    } else if ([description isEqualToString:@"TakeRampStraight"] || [description isEqualToString:@"KeepStraight"] ||
-               [description isEqualToString:@"KeepOnRampStraight"] || [description isEqualToString:@"KeepToStayStraight"] ||
-               [description isEqualToString:@"RampThenHighwayStraight"]) {
-        return MTDTurnTypeStraight;
     } else if ([description hasPrefix:@"Depart"]) {
         return MTDTurnTypeDepart;
     } else if ([description hasPrefix:@"Turn"]) {
         return MTDTurnTypeTurn;
     }
 
-    // TODO: Implement
     return MTDTurnTypeUnknown;
 }

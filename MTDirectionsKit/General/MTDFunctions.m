@@ -88,8 +88,8 @@ NSString* MTDStringByStrippingXMLTags(NSString *string) {
         return nil;
     }
 
-    // This is a simple scanning algorithm that doens't work for arbitrary HTML/XML strings,
-    // but it works reliably and fast for the simplified HTML descriptions returned by the used APIs
+    // This is a simple scanning algorithm that doens't work for arbitrary HTML/XML documents including comments etc.,
+    // but it works reliably and fast for the simplified HTML descriptions returned by the Google Directions API
     NSScanner *scanner = [[NSScanner alloc] initWithString:string];
     NSString *scannedString = nil;
     NSMutableString *finalString = [NSMutableString stringWithCapacity:string.length];
@@ -115,7 +115,7 @@ NSString* MTDStringByStrippingXMLTags(NSString *string) {
 
 NSString* MTDStringByStrippingUnnecessaryWhitespace(NSString *string) {
     // Algorithm taken from http://nshipster.com/nscharacterset/
-    // You should really read this blog, it's awesome.
+    // You should really read this blog, it's awesome - thanks @mattt!
     string = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 
     NSArray *components = [string componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];

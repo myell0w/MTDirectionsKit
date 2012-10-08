@@ -37,6 +37,6 @@
  @return YES if clientId and cryptographicKey are both set, NO otherwise
  @see registerBusinessWithClientId:cryptographicKey:
  */
-+ (BOOL)businessRegistered;
++ (BOOL)isBusinessRegistered;
 
 @end

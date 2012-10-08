@@ -1,12 +1,3 @@
-//
-//  MTDDirectionsParserBingTest.m
-//  MTDirectionsKit
-//
-//  Created by Matthias Tretter
-//  Copyright (c) 2012 Matthias Tretter (@myell0w). All rights reserved.
-//
-
-
 #import "MTDDirectionsParserBingTest.h"
 #import "MTDDirectionsOverlay.h"
 #import "MTDDistance.h"

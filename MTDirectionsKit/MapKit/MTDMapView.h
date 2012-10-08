@@ -43,9 +43,7 @@
  @name Delegate
  ******************************************/
 
-/**
- The receiver's directionsDelegate
- */
+/** The receiver's directionsDelegate */
 @property (nonatomic, mtd_weak) id<MTDDirectionsDelegate> directionsDelegate;
 
 /******************************************

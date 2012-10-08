@@ -97,6 +97,8 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (void)mtd_setup {
+    NSString *locale = MTDDirectionsGetLocaleMapQuest();
+    
     [self setValue:@"xml" forParameter:@"outFormat"];
     [self setValue:@"ignore" forParameter:@"ambiguities"];
     [self setValue:@"true" forParameter:@"doReverseGeocode"];
@@ -106,7 +108,7 @@
     [self setValue:@"raw" forParameter:@"shapeFormat"];
     [self setValue:@"0" forParameter:@"generalize"];
     [self setValue:@"25" forParameter:@"timeOverage"];
-    [self setValue:MTDDirectionsGetLocaleMapQuest() forParameter:@"locale"];
+    [self setValue:locale forParameter:@"locale"];
 }
 
 @end

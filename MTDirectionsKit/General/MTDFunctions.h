@@ -42,15 +42,15 @@ NSString* MTDURLEncodedString(NSString *string);
  Creates a string representation where all XML/HTML tags are stripped.
  
  @param string a string containing xml entities
- @return a string without xml entities
+ @return a string without xml entities, keeping all content
  */
 NSString* MTDStringByStrippingXMLTags(NSString *string);
 
 /**
- Creates a string by squashing all whitespace
+ Creates a string by squashing all whitespace s.t. no 2 whitespace characters occur right after each other.
  
- @param string the string to squash
- @return a string with no more than one space in between words
+ @param string the string to squash the whitespace of
+ @return a string with no more than one whitespace character in between other characters
  */
 NSString* MTDStringByStrippingUnnecessaryWhitespace(NSString *string);
 
