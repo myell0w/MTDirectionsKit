@@ -169,9 +169,7 @@
                                                                            [longitudeNode.contentString doubleValue]);
             MTDWaypoint *waypoint = [MTDWaypoint waypointWithCoordinate:coordinate];
 
-            if (![waypoints containsObject:waypoint]) {
-                [waypoints addObject:waypoint];
-            }
+            [waypoints addObject:waypoint];
         }
     }
 
