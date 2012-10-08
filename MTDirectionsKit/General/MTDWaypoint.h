@@ -15,8 +15,9 @@
 
 
 /**
- An instance of MTDWaypoint is a lightweight immutable object wrapper for either 
- a CLLocationCoordinate2D coordinate or an address string representing a location (or both).
+ An instance of MTDWaypoint is a lightweight object wrapper for either a CLLocationCoordinate2D 
+ coordinate or an address string representing a location (or both).
+ 
  It is used in MTDDirectionsKit to store coordinates in collections like NSArray.
  */
 @interface MTDWaypoint : NSObject <NSCopying>
@@ -26,7 +27,7 @@
  ******************************************/
 
 /** the coordinate wrapped, may be invalid */
-@property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
+@property (nonatomic, assign) CLLocationCoordinate2D coordinate;
 /** the address wrapped, may be nil */
 @property (nonatomic, retain) MTDAddress *address;
 

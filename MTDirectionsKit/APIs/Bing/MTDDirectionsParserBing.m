@@ -147,16 +147,18 @@
     NSMutableArray *waypoints = [NSMutableArray arrayWithCapacity:waypointNodes.count+2];
 
     // There should only be one element "shapePoints"
-    for (MTDXMLElement *childNode in waypointNodes) {
-        MTDXMLElement *latitudeNode = [childNode firstChildNodeWithName:@"Latitude"];
-        MTDXMLElement *longitudeNode = [childNode firstChildNodeWithName:@"Longitude"];
+    @autoreleasepool {
+        for (MTDXMLElement *childNode in waypointNodes) {
+            MTDXMLElement *latitudeNode = [childNode firstChildNodeWithName:@"Latitude"];
+            MTDXMLElement *longitudeNode = [childNode firstChildNodeWithName:@"Longitude"];
 
-        if (latitudeNode != nil && longitudeNode != nil) {
-            CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([latitudeNode.contentString doubleValue],
-                                                                           [longitudeNode.contentString doubleValue]);
-            MTDWaypoint *waypoint = [MTDWaypoint waypointWithCoordinate:coordinate];
+            if (latitudeNode != nil && longitudeNode != nil) {
+                CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([latitudeNode.contentString doubleValue],
+                                                                               [longitudeNode.contentString doubleValue]);
+                MTDWaypoint *waypoint = [MTDWaypoint waypointWithCoordinate:coordinate];
 
-            [waypoints addObject:waypoint];
+                [waypoints addObject:waypoint];
+            }
         }
     }
 
@@ -249,7 +251,7 @@
 // This method parses all maneuver nodes of a route
 - (NSArray *)mtd_maneuversFromManeuverNodes:(NSArray *)maneuverNodes {
     NSMutableArray *maneuvers = [NSMutableArray arrayWithCapacity:maneuverNodes.count];
-
+    
     for (MTDXMLElement *maneuverNode in maneuverNodes) {
         MTDManeuver *maneuver = [self mtd_maneuverFromManeuverNode:maneuverNode];
         

@@ -214,29 +214,31 @@
     MKMapPoint point, lastPoint = points[0];
     NSUInteger i;
 
-    for (i = 1; i < pointCount - 1; i++) {
-        point = points[i];
-        double a2b2 = (point.x - lastPoint.x) * (point.x - lastPoint.x) + (point.y - lastPoint.y) * (point.y - lastPoint.y);
+    @autoreleasepool {
+        for (i = 1; i < pointCount - 1; i++) {
+            point = points[i];
+            double a2b2 = (point.x - lastPoint.x) * (point.x - lastPoint.x) + (point.y - lastPoint.y) * (point.y - lastPoint.y);
 
-        if (a2b2 >= c2) {
-            if (MTDDirectionLineIntersectsRect(point, lastPoint, mapRect)) {
-                if (!path) {
-                    path = CGPathCreateMutable();
+            if (a2b2 >= c2) {
+                if (MTDDirectionLineIntersectsRect(point, lastPoint, mapRect)) {
+                    if (!path) {
+                        path = CGPathCreateMutable();
+                    }
+
+                    if (needsMove) {
+                        CGPoint lastCGPoint = [self pointForMapPoint:lastPoint];
+                        CGPathMoveToPoint(path, NULL, lastCGPoint.x, lastCGPoint.y);
+                    }
+
+                    CGPoint cgPoint = [self pointForMapPoint:point];
+                    CGPathAddLineToPoint(path, NULL, cgPoint.x, cgPoint.y);
+                } else {
+                    // discontinuity, lift the pen
+                    needsMove = YES;
                 }
 
-                if (needsMove) {
-                    CGPoint lastCGPoint = [self pointForMapPoint:lastPoint];
-                    CGPathMoveToPoint(path, NULL, lastCGPoint.x, lastCGPoint.y);
-                }
-
-                CGPoint cgPoint = [self pointForMapPoint:point];
-                CGPathAddLineToPoint(path, NULL, cgPoint.x, cgPoint.y);
-            } else {
-                // discontinuity, lift the pen
-                needsMove = YES;
+                lastPoint = point;
             }
-
-            lastPoint = point;
         }
     }
 
@@ -292,7 +294,7 @@
 - (MTDRoute *)mtd_routeTouchedByPoint:(CGPoint)point {
     MTDRoute *nearestRoute = nil;
     CLLocationDistance minimumDistance = DBL_MAX;
-    
+
     for (MTDRoute *route in self.mtd_directionsOverlay.routes) {
         CLLocationDistance distance = [self mtd_distanceOfTouchAtPoint:point toRoute:route];
         

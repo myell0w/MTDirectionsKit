@@ -157,10 +157,12 @@
 - (NSArray *)mtd_waypointsFromWaypointNodes:(NSArray *)waypointNodes {
     NSMutableArray *waypoints = [NSMutableArray array];
 
-    for (MTDXMLElement *waypointNode in waypointNodes) {
-        NSString *encodedPolyline = [waypointNode contentString];
+    @autoreleasepool {
+        for (MTDXMLElement *waypointNode in waypointNodes) {
+            NSString *encodedPolyline = [waypointNode contentString];
 
-        [waypoints addObjectsFromArray:[self mtd_waypointsFromEncodedPolyline:encodedPolyline]];
+            [waypoints addObjectsFromArray:[self mtd_waypointsFromEncodedPolyline:encodedPolyline]];
+        }
     }
 
     // add start coordinate

@@ -56,7 +56,11 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (id)copyWithZone:(__unused NSZone *)zone {
-    return self;
+    MTDWaypoint *copy = [[[self class] allocWithZone:zone] initWithAddress:self.address];
+
+    copy->_coordinate = self.coordinate;
+
+    return copy;
 }
 
 ////////////////////////////////////////////////////////////////////////
