@@ -1,4 +1,4 @@
-=1.5.0 10.10.2012
+=1.5.0 12.10.2012
  * Further improved gesture recognizer support that doesn't infere with the default gesture recognizers of MKMapView
  * New delegate call mapView:didActivateRoute:ofDirectionsOverlay: that indicates when the user actives a given route
  * Added function MTDDirectionsKitGetVersionString()
