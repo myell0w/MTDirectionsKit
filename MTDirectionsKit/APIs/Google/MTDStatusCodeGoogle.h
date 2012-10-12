@@ -25,7 +25,7 @@
  For further information have a look at the 
  [Google Directions API Status Codes](https://developers.google.com/maps/documentation/directions/?hl=en-EN#StatusCodes "Status Codes").
  */
-typedef enum {
+typedef NS_ENUM(NSUInteger, MTDStatusCodeGoogle) {
     MTDStatusCodeGoogleSuccess                  = 0,
     MTDStatusCodeGoogleNotFound                 = 404,
     MTDStatusCodeGoogleZeroResults              = 701,
@@ -34,7 +34,7 @@ typedef enum {
     MTDStatusCodeGoogleOverQueryLimit,
     MTDStatusCodeGoogleRequestDenied,
     MTDStatusCodeGoogleUnknownError
-} MTDStatusCodeGoogle;
+};
 
 
 NS_INLINE NSString* MTDStatusCodeGoogleDescription(MTDStatusCodeGoogle statusCode) {

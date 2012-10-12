@@ -9,15 +9,16 @@
 
 /**
  This enum can be used to generate a specific string-representation of a normalised address object.
+ Each enum value is a flag representing one field of the address.
  */
-typedef enum {
+typedef NS_ENUM(NSUInteger, MTDAddressField) {
     MTDAddressFieldCountry          = 1,
     MTDAddressFieldState            = 1 << 1,
     MTDAddressFieldCounty           = 1 << 2,
     MTDAddressFieldPostalCode       = 1 << 3,
     MTDAddressFieldCity             = 1 << 4,
     MTDAddressFieldStreet           = 1 << 5
-} MTDAddressField;
+};
 
 
 /**
@@ -26,7 +27,7 @@ typedef enum {
  for country, county, postalCode etc.) or with a single string. Currently a 
  single string doens't get parsed and normalised.
  */
-@interface MTDAddress : NSObject
+@interface MTDAddress : NSObject <NSCopying>
 
 /******************************************
  @name Address data

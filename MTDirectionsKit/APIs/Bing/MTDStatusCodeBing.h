@@ -24,7 +24,7 @@
  For further information have a look at the
  [Bing API Status Codes](http://msdn.microsoft.com/en-us/library/ff701703.aspx "Status Codes").
  */
-typedef enum {
+typedef NS_ENUM(NSUInteger, MTDStatusCodeBing) {
     MTDStatusCodeBingSuccess            = 200,
     MTDStatusCodeBingBadRequest         = 400,
     MTDStatusCodeBingUnauthorized       = 401,
@@ -32,4 +32,4 @@ typedef enum {
     MTDStatusCodeBingNotFound           = 404,
     MTDStatusCodeBingInternalError      = 500,
     MTDStatusCodeBingServiceUnavailable = 503
-} MTDStatusCodeBing;
+};

@@ -12,17 +12,20 @@ static MTDMeasurementSystem mtd_measurementSystem = (MTDMeasurementSystem)-1;
 static NSNumberFormatter *mtd_numberFormatter = nil;
 
 
-MTDMeasurementSystem MTDDirectionsGetMeasurementSystem(void) {
-    if (mtd_measurementSystem == (MTDMeasurementSystem)-1) {
-        NSString *measurementSystem = [[NSLocale systemLocale] objectForKey:NSLocaleMeasurementSystem];
-        
+NS_INLINE __attribute__((constructor)) void MTDLoadMeasurementSystem(void) {
+    @autoreleasepool {
+        NSLocale *locale = [NSLocale autoupdatingCurrentLocale];
+        NSString *measurementSystem = [locale objectForKey:NSLocaleMeasurementSystem];
+
         if ([measurementSystem isEqualToString:kMTDMeasurementSystemMetric]) {
             MTDDirectionsSetMeasurementSystem(MTDMeasurementSystemMetric);
         } else {
             MTDDirectionsSetMeasurementSystem(MTDMeasurementSystemUS);
-        }   
+        }
     }
-    
+}
+
+MTDMeasurementSystem MTDDirectionsGetMeasurementSystem(void) {
     return mtd_measurementSystem;
 }
 

@@ -20,7 +20,7 @@
  - MTDMeasurementSystemMetric
  - MTDMeasurementSystemUS
  */
-@interface MTDDistance : NSObject
+@interface MTDDistance : NSObject <NSCopying>
 
 /******************************************
  @name Distance
@@ -48,7 +48,7 @@
  
  @param meters the number of meters
  */
-+ (MTDDistance *)distanceWithMeters:(double)meters;
++ (MTDDistance *)distanceWithMeters:(CLLocationDistance)meters;
 
 /**
  The designated initializer of MTDDistance is used to create an instance with the given value and measurementSystem.
@@ -82,7 +82,7 @@
  
  @param meters the value specified in meters
  */
-- (void)addDistanceWithMeters:(double)meters;
+- (void)addDistanceWithMeters:(CLLocationDistance)meters;
 
 /**
  Returns the distance value in the given measurementSystem.
@@ -90,6 +90,5 @@
   @param measurementSystem the measurement system we want our distance to convert to, either Metric or U.S.
  */
 - (double)distanceInMeasurementSystem:(MTDMeasurementSystem)measurementSystem;
-
 
 @end

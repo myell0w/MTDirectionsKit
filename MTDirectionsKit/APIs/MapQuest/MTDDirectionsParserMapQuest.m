@@ -4,10 +4,13 @@
 #import "MTDDistance.h"
 #import "MTDFunctions.h"
 #import "MTDRoute.h"
+#import "MTDManeuver.h"
 #import "MTDDirectionsOverlay.h"
 #import "MTDDirectionsRouteType.h"
 #import "MTDXMLElement.h"
 #import "MTDStatusCodeMapQuest.h"
+#import "MTDCardinalDirection+MapQuest.h"
+#import "MTDTurnType+MapQuest.h"
 
 
 @interface MTDDirectionsParserMapQuest ()
@@ -69,18 +72,20 @@
             // We need to use the already ordered intermediate goals here because the addresses come in the in this order
             NSArray *allWaypoints = [self mtd_waypointsIncludingFromAndToWithIntermediateGoals:orderedIntermediateGoals];
 
-            [self mtd_addAddressesFromAddressNodes:locationAddressNodes toWaypoints:allWaypoints];
+            [self mtd_addAddressesFromLocationNodes:locationAddressNodes toWaypoints:allWaypoints];
         }
 
         overlay = [[MTDDirectionsOverlay alloc] initWithRoutes:routes
                                              intermediateGoals:orderedIntermediateGoals
                                                      routeType:self.routeType];
     } else {
-        MTDXMLElement *messageNode = [MTDXMLElement nodeForXPathQuery:@"//messages/message" onXML:self.data];
+        NSArray *messageNodes = [MTDXMLElement nodesForXPathQuery:@"//messages/message" onXML:self.data];
         NSString *errorMessage = nil;
 
-        if (messageNode != nil) {
-            errorMessage = messageNode.contentString;
+        if (messageNodes.count > 0) {
+            errorMessage = [[messageNodes valueForKey:MTDKey(contentString)] componentsJoinedByString:@"\n"];
+        } else {
+            errorMessage = @"No error message";
         }
 
         error = [NSError errorWithDomain:MTDDirectionsKitErrorDomain
@@ -90,7 +95,7 @@
         MTDLogError(@"Error occurred during parsing of directions from %@ to %@: %@ \n%@",
                     self.from,
                     self.to,
-                    errorMessage ?: @"No error message",
+                    errorMessage,
                     error);
     }
 
@@ -104,6 +109,7 @@
 // This method parses a route and returns an instance of MTDRoute
 - (MTDRoute *)mtd_routeFromRouteNode:(MTDXMLElement *)routeNode {
     NSArray *waypointNodes = [routeNode childNodesTraversingFirstChildWithPath:@"shape.shapePoints.latLng"];
+    NSArray *maneuverNodes = [routeNode childNodesTraversingAllChildrenWithPath:@"legs.leg.maneuvers.maneuver"];
     MTDXMLElement *distanceNode = [routeNode firstChildNodeWithName:@"distance"];
     MTDXMLElement *timeNode = [routeNode firstChildNodeWithName:@"time"];
     MTDXMLElement *copyrightNode = [MTDXMLElement nodeForXPathQuery:@"/response/info/copyright/text" onXML:self.data];
@@ -115,6 +121,8 @@
 
     // Parse waypoints
     NSArray *waypoints = [self mtd_waypointsFromWaypointNodes:waypointNodes];
+    // Parse Maneuvers
+    NSArray *maneuvers = [self mtd_maneuversFromManeuverNodes:maneuverNodes];
 
     // Parse Additional Info of directions
     {
@@ -136,6 +144,7 @@
     }
 
     MTDRoute *route = [[MTDRoute alloc] initWithWaypoints:waypoints
+                                                maneuvers:maneuvers
                                                  distance:distance
                                             timeInSeconds:timeInSeconds
                                            additionalInfo:additionalInfo];
@@ -150,37 +159,48 @@
 - (NSArray *)mtd_waypointsFromWaypointNodes:(NSArray *)waypointNodes {
     NSMutableArray *waypoints = [NSMutableArray arrayWithCapacity:waypointNodes.count+2];
 
-    // There should only be one element "shapePoints"
-    for (MTDXMLElement *childNode in waypointNodes) {
-        MTDXMLElement *latitudeNode = [childNode firstChildNodeWithName:@"lat"];
-        MTDXMLElement *longitudeNode = [childNode firstChildNodeWithName:@"lng"];
+    @autoreleasepool {
+        // There should only be one element "shapePoints"
+        for (MTDXMLElement *childNode in waypointNodes) {
+            MTDXMLElement *latitudeNode = [childNode firstChildNodeWithName:@"lat"];
+            MTDXMLElement *longitudeNode = [childNode firstChildNodeWithName:@"lng"];
 
-        if (latitudeNode != nil && longitudeNode != nil) {
-            CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([latitudeNode.contentString doubleValue],
-                                                                           [longitudeNode.contentString doubleValue]);
-            MTDWaypoint *waypoint = [MTDWaypoint waypointWithCoordinate:coordinate];
+            if (latitudeNode != nil && longitudeNode != nil) {
+                CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([latitudeNode.contentString doubleValue],
+                                                                               [longitudeNode.contentString doubleValue]);
+                MTDWaypoint *waypoint = [MTDWaypoint waypointWithCoordinate:coordinate];
 
-            if (![waypoints containsObject:waypoint]) {
                 [waypoints addObject:waypoint];
             }
         }
     }
 
     // add start coordinate
-    if (self.from != nil && CLLocationCoordinate2DIsValid(self.from.coordinate)) {
+    if (self.from != nil && self.from.hasValidCoordinate) {
         [waypoints insertObject:self.from atIndex:0];
     } else if (waypoints.count > 0) {
         self.from = waypoints[0];
     }
 
     // add end coordinate
-    if (self.to != nil && CLLocationCoordinate2DIsValid(self.to.coordinate)) {
+    if (self.to != nil && self.to.hasValidCoordinate) {
         [waypoints addObject:self.to];
     } else {
         self.to = [waypoints lastObject];
     }
 
     return waypoints;
+}
+
+// This method returns an array of all waypoints including from, to and intermediateGoals if specified
+- (NSArray *)mtd_waypointsIncludingFromAndToWithIntermediateGoals:(NSArray *)intermediateGoals {
+    NSMutableArray *allGoals = intermediateGoals != nil ? [NSMutableArray arrayWithArray:intermediateGoals] : [NSMutableArray array];
+
+    // insert from and to at the right places
+    [allGoals insertObject:self.from atIndex:0];
+    [allGoals addObject:self.to];
+
+    return allGoals;
 }
 
 // This method parses all addresses and orders the intermediate goals in the same order as optimised by the API.
@@ -197,27 +217,34 @@
 }
 
 // This method updates the addresses of all given waypoints
-- (void)mtd_addAddressesFromAddressNodes:(NSArray *)addressNodes toWaypoints:(NSArray *)waypoints {
-    MTDAssert(addressNodes.count == waypoints.count, @"Number of addresses doesn't match number of waypoints");
+- (void)mtd_addAddressesFromLocationNodes:(NSArray *)locationNodes toWaypoints:(NSArray *)waypoints {
+    MTDAssert(locationNodes.count == waypoints.count, @"Number of locations doesn't match number of waypoints");
 
     // Parse Addresses of goals
-    [addressNodes enumerateObjectsUsingBlock:^(MTDXMLElement *addressNode, NSUInteger idx, __unused BOOL *stop) {
-        MTDAddress *address = [self mtd_addressFromAddressNode:addressNode];
+    [locationNodes enumerateObjectsUsingBlock:^(MTDXMLElement *locationNode, NSUInteger idx, __unused BOOL *stop) {
+        MTDAddress *address = [self mtd_addressFromLocationNode:locationNode];
         MTDWaypoint *waypoint = waypoints[idx];
 
         // update address of corresponding waypoint
         waypoint.address = address;
+
+        // update coordinate if not available
+        if (!waypoint.hasValidCoordinate) {
+            CLLocationCoordinate2D coordinate = [self mtd_coordinateFromLocationNode:locationNode];
+
+            waypoint.coordinate = coordinate;
+        }
     }];
 }
 
 // This method parses an address and returns an instance of MTDAddress
-- (MTDAddress *)mtd_addressFromAddressNode:(MTDXMLElement *)addressNode {
-    MTDXMLElement *streetNode = [addressNode firstChildNodeWithName:@"street"];
-    MTDXMLElement *cityNode = [addressNode firstChildNodeWithName:@"adminArea5"];
-    MTDXMLElement *stateNode = [addressNode firstChildNodeWithName:@"adminArea3"];
-    MTDXMLElement *countyNode = [addressNode firstChildNodeWithName:@"adminArea4"];
-    MTDXMLElement *postalCodeNode = [addressNode firstChildNodeWithName:@"postalCode"];
-    MTDXMLElement *countryNode = [addressNode firstChildNodeWithName:@"adminArea1"];
+- (MTDAddress *)mtd_addressFromLocationNode:(MTDXMLElement *)locationNode {
+    MTDXMLElement *streetNode = [locationNode firstChildNodeWithName:@"street"];
+    MTDXMLElement *cityNode = [locationNode firstChildNodeWithName:@"adminArea5"];
+    MTDXMLElement *stateNode = [locationNode firstChildNodeWithName:@"adminArea3"];
+    MTDXMLElement *countyNode = [locationNode firstChildNodeWithName:@"adminArea4"];
+    MTDXMLElement *postalCodeNode = [locationNode firstChildNodeWithName:@"postalCode"];
+    MTDXMLElement *countryNode = [locationNode firstChildNodeWithName:@"adminArea1"];
 
     MTDAddress *address = [[MTDAddress alloc] initWithCountry:[countryNode contentString]
                                                         state:[stateNode contentString]
@@ -229,15 +256,63 @@
     return address;
 }
 
-// This method returns an array of all waypoints including from, to and intermediateGoals if specified
-- (NSArray *)mtd_waypointsIncludingFromAndToWithIntermediateGoals:(NSArray *)intermediateGoals {
-    NSMutableArray *allGoals = intermediateGoals != nil ? [NSMutableArray arrayWithArray:intermediateGoals] : [NSMutableArray array];
+- (CLLocationCoordinate2D)mtd_coordinateFromLocationNode:(MTDXMLElement *)locationNode {
+    MTDXMLElement *positionNode = [locationNode firstChildNodeWithName:@"latLng"];
+    MTDXMLElement *latitudeNode = [positionNode firstChildNodeWithName:@"lat"];
+    MTDXMLElement *longitudeNode = [positionNode firstChildNodeWithName:@"lng"];
+
+    if (latitudeNode != nil && longitudeNode != nil) {
+        return CLLocationCoordinate2DMake([latitudeNode.contentString doubleValue], [longitudeNode.contentString doubleValue]);
+    } else {
+        return kCLLocationCoordinate2DInvalid;
+    }
+}
+
+// This method parses a maneuver and returns an instance of MTDManeuver
+- (MTDManeuver *)mtd_maneuverFromManeuverNode:(MTDXMLElement *)maneuverNode {
+    MTDXMLElement *positionNode = [maneuverNode firstChildNodeWithName:@"startPoint"];
+    MTDXMLElement *latitudeNode = [positionNode firstChildNodeWithName:@"lat"];
+    MTDXMLElement *longitudeNode = [positionNode firstChildNodeWithName:@"lng"];
+
+    if (latitudeNode != nil && longitudeNode != nil) {
+        MTDXMLElement *directionNode = [maneuverNode firstChildNodeWithName:@"direction"];
+        MTDXMLElement *instructionNode = [maneuverNode firstChildNodeWithName:@"narrative"];
+        MTDXMLElement *distanceNode = [maneuverNode firstChildNodeWithName:@"distance"];
+        MTDXMLElement *timeNode = [maneuverNode firstChildNodeWithName:@"time"];
+        MTDXMLElement *turnTypeNode = [maneuverNode firstChildNodeWithName:@"turnType"];
+
+        CLLocationCoordinate2D maneuverCoordinate = CLLocationCoordinate2DMake([latitudeNode.contentString doubleValue],
+                                                                               [longitudeNode.contentString doubleValue]);
+        CLLocationDistance maneuverDistance = [distanceNode.contentString doubleValue];
+        NSTimeInterval maneuverTime = [timeNode.contentString doubleValue];
+
+        MTDManeuver *maneuver = [[MTDManeuver alloc] initWithWaypoint:[MTDWaypoint waypointWithCoordinate:maneuverCoordinate]
+                                                             distance:[MTDDistance distanceWithValue:maneuverDistance measurementSystem:MTDMeasurementSystemMetric]
+                                                        timeInSeconds:maneuverTime
+                                                         instructions:instructionNode.contentString];
+
+        maneuver.cardinalDirection = MTDCardinalDirectionFromMapQuestDescription(directionNode.contentString);
+        maneuver.turnType = MTDTurnTypeFromMapQuestDescription(turnTypeNode.contentString);
+
+        return maneuver;
+    } else {
+        return nil;
+    }
+}
+
+// This method parses all maneuver nodes of a route
+- (NSArray *)mtd_maneuversFromManeuverNodes:(NSArray *)maneuverNodes {
+    NSMutableArray *maneuvers = [NSMutableArray arrayWithCapacity:maneuverNodes.count];
     
-    // insert from and to at the right places
-    [allGoals insertObject:self.from atIndex:0];
-    [allGoals addObject:self.to];
+    for (MTDXMLElement *maneuverNode in maneuverNodes) {
+        MTDManeuver *maneuver = [self mtd_maneuverFromManeuverNode:maneuverNode];
+        
+        if (maneuver != nil) {
+            [maneuvers addObject:maneuver];
+        }
+    }
     
-    return allGoals;
+    return maneuvers;
 }
 
 @end

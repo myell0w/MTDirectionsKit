@@ -36,7 +36,7 @@
 
             STAssertEquals(overlay.timeInSeconds, 7915., @"Error parsing time");
             STAssertEqualObjects(overlay.formattedTime, @"2:11:55", @"Error formatting time");
-            STAssertTrue(overlay.waypoints.count == 248, @"Error parsing waypoints");
+            STAssertTrue(overlay.waypoints.count == 296, @"Error parsing waypoints %d", overlay.waypoints.count);
             STAssertEqualsWithAccuracy([overlay.distance distanceInMeasurementSystem:MTDMeasurementSystemMetric], 150.8663, 0.001, @"Error parsing distance");
 
             testFinished = YES;
@@ -71,7 +71,7 @@
 
 
         [parser parseWithCompletion:^(MTDDirectionsOverlay *overlay, NSError *error) {
-            STAssertNil(error,@"There was an error parsing mapquest_guessing_vienna.xml");
+            STAssertNil(error,@"There was an error parsing mapquest_intermediate_optimized.xml");
 
             MTDAddress *fromAddress = overlay.fromAddress;
             MTDAddress *toAddress = overlay.toAddress;
@@ -89,7 +89,7 @@
 
             STAssertEquals(overlay.timeInSeconds, 2263., @"Error parsing time");
             STAssertEqualObjects(overlay.formattedTime, @"37:43", @"Error formatting time");
-            STAssertTrue(overlay.waypoints.count == 388, @"Error parsing waypoints");
+            STAssertTrue(overlay.waypoints.count == 454, @"Error parsing waypoints %d", overlay.waypoints.count);
             STAssertEqualsWithAccuracy([overlay.distance distanceInMeasurementSystem:MTDMeasurementSystemMetric], 21.8195, 0.001, @"Error parsing distance");
 
             NSArray *intermediateGoals = overlay.intermediateGoals;
@@ -147,7 +147,7 @@
             // Check shortest route
             STAssertEquals(overlay.timeInSeconds, 9557., @"Error parsing time");
             STAssertEqualObjects(overlay.formattedTime, @"2:39:17", @"Error formatting time");
-            STAssertTrue(overlay.waypoints.count == 99, @"Error parsing waypoints %d", overlay.waypoints.count);
+            STAssertTrue(overlay.waypoints.count == 123, @"Error parsing waypoints %d", overlay.waypoints.count);
             STAssertEqualsWithAccuracy([overlay.distance distanceInMeasurementSystem:MTDMeasurementSystemMetric], 137.845, 0.001, @"Error parsing distance");
 
             for (MTDRoute *route in overlay.routes) {

@@ -32,9 +32,9 @@
  _mapView.directionsDelegate = self;
  
  [_mapView loadDirectionsFrom:CLLocationCoordinate2DMake(51.38713, -1.0316)
- to:CLLocationCoordinate2DMake(51.4554, -0.9742)
- routeType:MTDDirectionsRouteTypeFastestDriving
- zoomToShowDirections:YES];
+                           to:CLLocationCoordinate2DMake(51.4554, -0.9742)
+                    routeType:MTDDirectionsRouteTypeFastestDriving
+         zoomToShowDirections:YES];
  
  */
 @interface MTDMapView : MKMapView
@@ -43,9 +43,7 @@
  @name Delegate
  ******************************************/
 
-/**
- The receiver's directionsDelegate
- */
+/** The receiver's directionsDelegate */
 @property (nonatomic, mtd_weak) id<MTDDirectionsDelegate> directionsDelegate;
 
 /******************************************
@@ -84,7 +82,7 @@
 @property (nonatomic, readonly) CLLocationCoordinate2D toCoordinate;
 
 /** the total distance of the directions of the currenty displayed overlay in meters */
-@property (nonatomic, readonly) double distanceInMeter;
+@property (nonatomic, readonly) CLLocationDistance distanceInMeter;
 /** the total estimated time of the directions */
 @property (nonatomic, readonly) NSTimeInterval timeInSeconds;
 
@@ -213,7 +211,7 @@
  
  @return YES in case the directionsOverlay is currently set and the Maps App was opened, NO otherwise
  */
-- (BOOL)openDirectionsInMapApp;
+- (BOOL)openDirectionsInMapsApp;
 
 /******************************************
  @name Region
@@ -225,6 +223,5 @@
  @param animated flag whether the region gets changed animated, or not
  */
 - (void)setRegionToShowDirectionsAnimated:(BOOL)animated;
-
 
 @end

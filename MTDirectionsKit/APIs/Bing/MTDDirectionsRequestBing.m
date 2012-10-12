@@ -4,6 +4,7 @@
 #import "MTDDirectionsRouteType+Bing.h"
 #import "MTDWaypoint.h"
 #import "MTDFunctions.h"
+#import "MTDLocale+Bing.h"
 
 
 #define kMTDBingHostName                    @"http://dev.virtualearth.net/REST"
@@ -54,7 +55,7 @@ static NSString *mtd_apiKey = nil;
             [self setValue:@"distance" forParameter:@"optimize"];
         }
 
-        // set parameter for API Key
+            // set parameter for API Key
         MTDAssert(mtd_apiKey != nil, @"An API Key must be set using [MTDDirectionsRequestBing registerAPIKey:] to use Bing Routes.");
         if (mtd_apiKey != nil) {
             [self setValue:mtd_apiKey forParameter:@"key"];
@@ -103,15 +104,22 @@ static NSString *mtd_apiKey = nil;
     mtd_apiKey = APIKey;
 }
 
++ (BOOL)isAPIKeyRegistered {
+    return mtd_apiKey.length > 0;
+}
+
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Private
 ////////////////////////////////////////////////////////////////////////
 
 - (void)mtd_setup {
+    NSString *locale = MTDDirectionsGetLocaleBing();
+    
     [self setValue:@"xml" forParameter:@"output"];
     [self setValue:@"true" forParameter:@"suppressStatus"];
     [self setValue:@"Points" forParameter:@"routePathOutput"];
     [self setValue:@"km" forParameter:@"distanceUnit"];
+    [self setValue:locale forParameter:@"culture"];
 }
 
 @end

@@ -19,13 +19,13 @@
  - MTDDirectionsRouteTypePedestrianIncludingPublicTransport
  - MTDDirectionsRouteTypeBicycle
  */
-typedef enum {
+typedef NS_ENUM(NSUInteger, MTDDirectionsRouteType) {
     MTDDirectionsRouteTypeFastestDriving = 0,
     MTDDirectionsRouteTypeShortestDriving,
     MTDDirectionsRouteTypePedestrian,
     MTDDirectionsRouteTypePedestrianIncludingPublicTransport,
     MTDDirectionsRouteTypeBicycle
-} MTDDirectionsRouteType;
+};
 
 
 /**

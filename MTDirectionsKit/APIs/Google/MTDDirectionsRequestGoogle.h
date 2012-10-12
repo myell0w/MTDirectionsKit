@@ -25,7 +25,7 @@
  
  @param clientId Your client ID, this is passed as the value of the client parameter to the service
  @param cryptographicKey The key used to create the unique signature
- @see businessRegistered
+ @see isBusinessRegistered
  */
  
 + (void)registerBusinessWithClientId:(NSString *)clientId
@@ -37,6 +37,6 @@
  @return YES if clientId and cryptographicKey are both set, NO otherwise
  @see registerBusinessWithClientId:cryptographicKey:
  */
-+ (BOOL)businessRegistered;
++ (BOOL)isBusinessRegistered;
 
 @end

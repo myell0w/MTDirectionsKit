@@ -6,6 +6,10 @@
 //  Copyright (c) 2012 Matthias Tretter (@myell0w). All rights reserved.
 //
 
+// System Frameworks
+#import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
+
 // API
 #import <MTDirectionsKit/MTDDirectionsAPI.h>
 
@@ -18,12 +22,14 @@
 #import <MTDirectionsKit/MTDMeasurementSystem.h>
 #import <MTDirectionsKit/MTDFunctions.h>
 #import <MTDirectionsKit/MTDLogging.h>
+#import <MTDirectionsKit/MTDLocale.h>
 
 // MapKit
 #import <MTDirectionsKit/MTDMapView.h>
 #import <MTDirectionsKit/MTDDirectionsDelegate.h>
 #import <MTDirectionsKit/MTDDirectionsOverlay.h>
 #import <MTDirectionsKit/MTDDirectionsOverlayView.h>
+#import <MTDirectionsKit/MTDManeuver.h>
 #import <MTDirectionsKit/MTDRoute.h>
 
 // Request

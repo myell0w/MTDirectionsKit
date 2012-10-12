@@ -5,7 +5,7 @@
 MTDGTMStringEncoding *mtd_encoding = nil;
 
 
-NS_INLINE __attribute__((constructor)) void MTDLoadEncoding() {
+NS_INLINE __attribute__((constructor)) void MTDLoadEncoding(void) {
     @autoreleasepool {
         mtd_encoding = [MTDGTMStringEncoding rfc4648Base64WebsafeStringEncoding];
     }

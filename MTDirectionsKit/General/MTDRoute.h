@@ -27,10 +27,12 @@
  @name Route
  ******************************************/
 
-/** a unique name of the route */
+/** a unique name of the route, can be changed */
 @property (nonatomic, copy) NSString *name;
 /** all waypoints of the route/directions, including from and to */
 @property (nonatomic, copy, readonly) NSArray *waypoints;
+/** all maneuvers on this route */
+@property (nonatomic, copy, readonly) NSArray *maneuvers;
 /** the starting point of the directions */
 @property (nonatomic, readonly) MTDWaypoint *from;
 /** the end point of the directions */
@@ -67,12 +69,14 @@
  Creates a route with the given waypoints, distance, duration and additional information.
  
  @param waypoints the waypoints of the route
+ @param maneuvers the maneuvers along the route
  @param distance the total distance from the first to the last waypoint
  @param timeInSeconds the estimated total duration needed for traversing the waypoints in the given routeType
  @param additionalInfo dictionary with additional information provided by the API, e.g. copyrights
  @return a route object encapsulating the given route-information
  */
 - (id)initWithWaypoints:(NSArray *)waypoints
+              maneuvers:(NSArray *)maneuvers
                distance:(MTDDistance *)distance
           timeInSeconds:(NSTimeInterval)timeInSeconds
          additionalInfo:(NSDictionary *)additionalInfo;

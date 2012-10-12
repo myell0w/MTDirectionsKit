@@ -11,10 +11,11 @@ others that don't offer this functionality.
 
 Convinced? Let's get you started.
 
-MTDirectionsKit can use the following two APIs for gathering routing information:
+MTDirectionsKit can use the following three APIs for gathering routing information:
 
 1. [MapQuest Open Directions API](http://open.mapquestapi.com/directions/)
 2. [Google Directions API](https://developers.google.com/maps/documentation/directions/)
+3. [Bing Routes API](http://msdn.microsoft.com/en-us/library/ff701705)
 
 ## How to use?
 
@@ -93,6 +94,6 @@ everywhere where you want to use it.
 
 ## Requirements
 
-MTDirectionsKit needs Xcode ≥ 4.4, iOS Base SDK ≥ 5.1 and Clang LLVM >= 3.1 to compile. It doesn't work with the old LLVM GCC compiler.
+MTDirectionsKit needs Xcode ≥ 4.5, iOS Base SDK ≥ 6.0 and Clang LLVM >= 3.1 to compile. It doesn't work with the old LLVM GCC compiler.
 
 MTDirectionsKit works on a deployment target of ≥ iOS 4.3 on armv7 and armv7s and can be used in ARC as well as non-ARC applications.

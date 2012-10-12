@@ -42,6 +42,22 @@ BOOL MTDDirectionsOpenInMapsApp(MTDWaypoint *from, MTDWaypoint *to, MTDDirection
 NSString* MTDURLEncodedString(NSString *string);
 
 /**
+ Creates a string representation where all XML/HTML tags are stripped.
+ 
+ @param string a string containing xml entities
+ @return a string without xml entities, keeping all content
+ */
+NSString* MTDStringByStrippingXMLTags(NSString *string);
+
+/**
+ Creates a string by squashing all whitespace s.t. no 2 whitespace characters occur right after each other.
+ 
+ @param string the string to squash the whitespace of
+ @return a string with no more than one whitespace character in between other characters
+ */
+NSString* MTDStringByStrippingUnnecessaryWhitespace(NSString *string);
+
+/**
  Returns a formatted string description of a time-interval in seconds. 
  When the time interval is below 1 Hour, the format "mm:ss" is used, otherwise "H:mm:ss".
  
@@ -124,4 +140,13 @@ NS_INLINE id MTDObjectAtIndexOfArray(NSArray *array, NSUInteger index) {
  */
 NS_INLINE id MTDFirstObjectOfArray(NSArray *array) {
     return MTDObjectAtIndexOfArray(array, 0);
+}
+
+/**
+ This function returns a version string of the current MTDirectionsKit version.
+ 
+ @return MTDirectionsKit version string
+ */
+NS_INLINE NSString* MTDDirectionsKitGetVersionString() {
+    return @"1.5.0";
 }

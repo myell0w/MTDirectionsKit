@@ -13,6 +13,7 @@
 
 // Re-defining properties as readwrite
 @property (nonatomic, copy, readwrite) NSArray *waypoints;
+@property (nonatomic, copy, readwrite) NSArray *maneuvers;
 @property (nonatomic, strong, readwrite) MTDDistance *distance;
 @property (nonatomic, assign, readwrite) NSTimeInterval timeInSeconds;
 @property (nonatomic, copy, readwrite) NSDictionary *additionalInfo;
@@ -27,6 +28,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (id)initWithWaypoints:(NSArray *)waypoints
+              maneuvers:(NSArray *)maneuvers
                distance:(MTDDistance *)distance
           timeInSeconds:(NSTimeInterval)timeInSeconds
          additionalInfo:(NSDictionary *)additionalInfo {
@@ -50,11 +52,12 @@
             } 
         }
         
-        self.mtd_polyline = [MKPolyline polylineWithPoints:points count:pointIndex];
-        self.waypoints = waypoints;
-        self.distance = distance;
-        self.timeInSeconds = timeInSeconds;
-        self.additionalInfo = additionalInfo;
+        _mtd_polyline = [MKPolyline polylineWithPoints:points count:pointIndex];
+        _waypoints = [waypoints copy];
+        _maneuvers = [maneuvers copy];
+        _distance = distance;
+        _timeInSeconds = timeInSeconds;
+        _additionalInfo = [additionalInfo copy];
         
         free(points);
     }
@@ -67,10 +70,11 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"<MTDRoute from=%@ to=%@, # of waypoints: %d, distance: %@>",
+    return [NSString stringWithFormat:@"<MTDRoute from=%@ to=%@, # of waypoints: %d, # of maneuvers: %d, distance: %@>",
             self.from,
             self.to,
             self.waypoints.count,
+            self.maneuvers.count,
             self.distance];
 }
 

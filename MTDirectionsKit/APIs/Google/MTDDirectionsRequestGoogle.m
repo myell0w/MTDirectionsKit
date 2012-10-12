@@ -6,6 +6,7 @@
 #import "MTDWaypoint.h"
 #import "MTDFunctions.h"
 #import "MTDBase64.h"
+#import "MTDLocale+Google.h"
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonHMAC.h>
 
@@ -73,7 +74,7 @@ static NSString *mtd_cryptographicKey = nil;
 // Algorithm is described here: https://developers.google.com/maps/documentation/business/webservices#digital_signatures
 // 1. Construct your URL, making sure to include your client and sensor parameters. (=address)
 - (NSURL *)preparedURLForAddress:(NSString *)address {
-    if (![[self class] businessRegistered]) {
+    if (![[self class] isBusinessRegistered]) {
         return [NSURL URLWithString:address];
     }
 
@@ -110,7 +111,7 @@ static NSString *mtd_cryptographicKey = nil;
     mtd_cryptographicKey = cryptographicKey;
 }
 
-+ (BOOL)businessRegistered {
++ (BOOL)isBusinessRegistered {
     return mtd_clientId.length > 0 && mtd_cryptographicKey.length > 0;
 }
 
@@ -119,9 +120,12 @@ static NSString *mtd_cryptographicKey = nil;
 ////////////////////////////////////////////////////////////////////////
 
 - (void)mtd_setup {
-    [self setValue:@"true" forParameter:@"sensor"];
+    NSString *locale = MTDDirectionsGetLocaleGoogle();
 
-    if ([[self class] businessRegistered]) {
+    [self setValue:@"true" forParameter:@"sensor"];
+    [self setValue:locale forParameter:@"language"];
+
+    if ([[self class] isBusinessRegistered]) {
         [self setValue:mtd_clientId forParameter:@"client"];
     }
 }

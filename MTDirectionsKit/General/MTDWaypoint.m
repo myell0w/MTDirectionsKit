@@ -18,6 +18,10 @@
     return [[[self class] alloc] initWithAddress:address];
 }
 
++ (MTDWaypoint *)waypointWithAddressString:(NSString *)addressString {
+    return [[self class] waypointWithAddress:[MTDAddress addressWithAddressString:addressString]];
+}
+
 + (MTDWaypoint *)waypointForCurrentLocation {
     __strong static MTDWaypoint *waypointForCurrentLocation = nil;
 
@@ -48,6 +52,18 @@
 }
 
 ////////////////////////////////////////////////////////////////////////
+#pragma mark - NSCopying
+////////////////////////////////////////////////////////////////////////
+
+- (id)copyWithZone:(__unused NSZone *)zone {
+    MTDWaypoint *copy = [[[self class] allocWithZone:zone] initWithAddress:self.address];
+
+    copy->_coordinate = self.coordinate;
+
+    return copy;
+}
+
+////////////////////////////////////////////////////////////////////////
 #pragma mark - MTDWaypoint
 ////////////////////////////////////////////////////////////////////////
 
@@ -71,7 +87,7 @@
         case MTDDirectionsAPIMapQuest:
         case MTDDirectionsAPIGoogle:
         case MTDDirectionsAPIBing: {
-            if (CLLocationCoordinate2DIsValid(self.coordinate)) {
+            if (self.hasValidCoordinate) {
                 return [NSString stringWithFormat:@"%f,%f",self.coordinate.latitude, self.coordinate.longitude];
             } else {
                 return self.address.description;

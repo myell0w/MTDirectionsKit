@@ -22,4 +22,12 @@
  */
 + (void)registerAPIKey:(NSString *)APIKey;
 
+/**
+ This method indicates whether an API Key was set or not. It delivers no information
+ whether the set API Key is valid or not.
+ 
+ @return YES if an API Key was set, NO otherwise
+ */
++ (BOOL)isAPIKeyRegistered;
+
 @end

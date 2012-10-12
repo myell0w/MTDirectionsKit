@@ -1,11 +1,3 @@
-//
-//  MTDCryptoTest.m
-//  MTDirectionsKit
-//
-//  Created by Matthias Tretter on 15.08.12.
-//  Copyright (c) 2012 Matthias Tretter (@myell0w). All rights reserved.
-//
-
 #import "MTDCryptoTest.h"
 
 @implementation MTDCryptoTest

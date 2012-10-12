@@ -4,6 +4,7 @@
 #import "MTDDirectionsRouteType+MapQuest.h"
 #import "MTDWaypoint.h"
 #import "MTDFunctions.h"
+#import "MTDLocale+MapQuest.h"
 
 
 #define kMTDMapQuestHostName                    @"http://open.mapquestapi.com"
@@ -96,14 +97,18 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (void)mtd_setup {
+    NSString *locale = MTDDirectionsGetLocaleMapQuest();
+    
     [self setValue:@"xml" forParameter:@"outFormat"];
     [self setValue:@"ignore" forParameter:@"ambiguities"];
     [self setValue:@"true" forParameter:@"doReverseGeocode"];
     [self setValue:@"k" forParameter:@"unit"];
-    [self setValue:@"none" forParameter:@"narrativeType"];
+    [self setValue:@"text" forParameter:@"narrativeType"];
+    [self setValue:@"false" forParameter:@"enhancedNarrative"];
     [self setValue:@"raw" forParameter:@"shapeFormat"];
     [self setValue:@"0" forParameter:@"generalize"];
     [self setValue:@"25" forParameter:@"timeOverage"];
+    [self setValue:locale forParameter:@"locale"];
 }
 
 @end

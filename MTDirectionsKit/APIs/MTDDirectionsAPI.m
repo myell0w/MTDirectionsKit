@@ -9,6 +9,7 @@
 #import "MTDDirectionsParserGoogle.h"
 #import "MTDDIrectionsParserMapQuest.h"
 #import "MTDDirectionsParserBing.h"
+#import "MTDLocale.h"
 
 
 #define kMTDDirectionsDefaultAPI              MTDDirectionsAPIMapQuest
@@ -35,9 +36,17 @@ void MTDDirectionsSetActiveAPI(MTDDirectionsAPI activeAPI) {
         mtd_activeAPI = activeAPI;
         
         // Google Directions API Terms allow the usage only in combination with Google Maps data
-        if (MTDDirectionsSupportsAppleMaps() && activeAPI == MTDDirectionsAPIGoogle) {
+        if (activeAPI == MTDDirectionsAPIGoogle && MTDDirectionsSupportsAppleMaps()) {
             MTDLogAlways(@"The Google Directions API Terms forbid using MTDDirectionsAPIGoogle to display directions"
                          @"on top of Apple Maps. You should switch the active API by calling MTDDirectionsSetActiveAPI().");
+        }
+
+        // Re-check if the current locale is supported, if not set to English
+        NSLocale *locale = MTDDirectionsGetLocale();
+        
+        if (!MTDDirectionsLocaleIsSupportedByAPI(locale, activeAPI)) {
+            MTDDirectionsSetLocale([[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]);
+            MTDLogWarning(@"Currently set locale '%@' isn't supported by API %d, locale was reset to en_US.", locale, activeAPI);
         }
     }
 }
@@ -97,8 +106,5 @@ Class MTDDirectionsParserClassForAPI(MTDDirectionsAPI api) {
         case MTDDirectionsAPICount:
         default:
             return nil;
-            
     }
 }
-
-

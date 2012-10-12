@@ -62,6 +62,8 @@
 @property (nonatomic, assign, readonly) NSTimeInterval timeInSeconds;
 /** the estimated time of the active route as formatted string */
 @property (nonatomic, readonly) NSString *formattedTime;
+/** all maneuvers of the active route */
+@property (nonatomic, strong) NSArray *maneuvers;
 
 /******************************************
  @name Lifecycle

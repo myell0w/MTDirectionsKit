@@ -23,7 +23,7 @@
     return [[MTDDistance alloc] initWithDistanceValue:value measurementSystem:measurementSystem];
 }
 
-+ (MTDDistance *)distanceWithMeters:(double)meters {
++ (MTDDistance *)distanceWithMeters:(CLLocationDistance)meters {
     return [[MTDDistance alloc] initWithDistanceValue:meters/1000. measurementSystem:MTDMeasurementSystemMetric];
 }
 
@@ -55,6 +55,14 @@
 }
 
 ////////////////////////////////////////////////////////////////////////
+#pragma mark - NSCopying
+////////////////////////////////////////////////////////////////////////
+
+- (id)copyWithZone:(__unused NSZone *)zone {
+    return self;
+}
+
+////////////////////////////////////////////////////////////////////////
 #pragma mark - MTDDistance
 ////////////////////////////////////////////////////////////////////////
 
@@ -66,7 +74,7 @@
     [self addDistance:[MTDDistance distanceWithValue:value measurementSystem:measurementSystem]];
 }
 
-- (void)addDistanceWithMeters:(double)meters {
+- (void)addDistanceWithMeters:(CLLocationDistance)meters {
     [self addDistanceWithValue:meters/1000. measurementSystem:MTDMeasurementSystemMetric];
 }
 

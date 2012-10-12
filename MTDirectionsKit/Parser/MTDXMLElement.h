@@ -139,4 +139,12 @@
  */
 - (NSArray *)childNodesTraversingAllChildrenWithPath:(NSString *)path;
 
+/**
+ Returns the attribute value of attribute with the given name.
+ 
+ @param attributeName the name of the attribute
+ @return the value of the attribute
+ */
+- (id)attributeWithName:(NSString *)attributeName;
+
 @end
