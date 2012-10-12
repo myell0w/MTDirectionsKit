@@ -46,6 +46,8 @@
 	
 	<option value="//api/name/mapView:colorForDirectionsOverlay:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:colorForDirectionsOverlay:</option>
 	
+	<option value="//api/name/mapView:didActivateRoute:ofDirectionsOverlay:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:didActivateRoute:ofDirectionsOverlay:</option>
+	
 	<option value="//api/name/mapView:didFailLoadingDirectionsOverlayWithError:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:didFailLoadingDirectionsOverlayWithError:</option>
 	
 	<option value="//api/name/mapView:didFinishLoadingDirectionsOverlay:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:didFinishLoadingDirectionsOverlay:</option>
@@ -83,6 +85,8 @@
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:colorForDirectionsOverlay:">mapView:colorForDirectionsOverlay:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:didActivateRoute:ofDirectionsOverlay:">mapView:didActivateRoute:ofDirectionsOverlay:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:didFailLoadingDirectionsOverlayWithError:">mapView:didFailLoadingDirectionsOverlayWithError:</a></span></li>
 	
@@ -171,6 +175,13 @@ by returning a different overlay than the one received as parameter</p></span>
 	
 </li><li>
 	<span class="tooltip">
+		<code><a href="#//api/name/mapView:didActivateRoute:ofDirectionsOverlay:">&ndash;&nbsp;mapView:didActivateRoute:ofDirectionsOverlay:</a></code>
+		<span class="tooltip"><p>Tells the delegate that the user activated the specified route by tapping on it</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/mapView:colorForDirectionsOverlay:">&ndash;&nbsp;mapView:colorForDirectionsOverlay:</a></code>
 		<span class="tooltip"><p>Asks the delegate for the color for the corresponding view for the specified directionsOverlay.</p></span>
 	</span>
@@ -179,7 +190,8 @@ by returning a different overlay than the one received as parameter</p></span>
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/mapView:lineWidthFactorForDirectionsOverlay:">&ndash;&nbsp;mapView:lineWidthFactorForDirectionsOverlay:</a></code>
-		<span class="tooltip"><p>Asks the delegate for the factor to multiply MKRoadWidthAtZoomScale with to compute the total overlay line width for the specified directionsOverlay.</p></span>
+		<span class="tooltip"><p>Asks the delegate for the factor to multiply MKRoadWidthAtZoomScale with to compute the total overlay line width for the specified directionsOverlay.
+The default value, if not implemented, is 1.8f</p></span>
 	</span>
 	
 	
@@ -225,6 +237,60 @@ by returning a different overlay than the one received as parameter</p></span>
 		<dl class="argument-def parameter-def">
 			<dt><em>directionsOverlay</em></dt>
 			<dd><p>the overlay we want the color of</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDDirectionsDelegate.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mapView:didActivateRoute:ofDirectionsOverlay:" title="mapView:didActivateRoute:ofDirectionsOverlay:"></a>
+	<h3 class="subsubtitle method-title">mapView:didActivateRoute:ofDirectionsOverlay:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Tells the delegate that the user activated the specified route by tapping on it</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)mapView:(MTDMapView *)<em>mapView</em> didActivateRoute:(MTDRoute *)<em>route</em> ofDirectionsOverlay:(MTDDirectionsOverlay *)<em>directionsOverlay</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p>the mapView that displays the directions</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>route</em></dt>
+			<dd><p>the new active route</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>directionsOverlay</em></dt>
+			<dd><p>the directions overlay containing several routes</p></dd>
 		</dl>
 		
 	</div>
@@ -361,7 +427,8 @@ by returning a different overlay than the one received as parameter</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Asks the delegate for the factor to multiply MKRoadWidthAtZoomScale with to compute the total overlay line width for the specified directionsOverlay.</p>
+		<p>Asks the delegate for the factor to multiply MKRoadWidthAtZoomScale with to compute the total overlay line width for the specified directionsOverlay.
+The default value, if not implemented, is 1.8f</p>
 	</div>		
 	
 	
@@ -475,7 +542,7 @@ by returning a different overlay than the one received as parameter</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-09-23)</span><br />
+						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-10-12)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
 						

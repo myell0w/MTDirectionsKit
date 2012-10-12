@@ -59,6 +59,8 @@
 	
 	<option value="//api/name/waypointWithAddress:">&nbsp;&nbsp;&nbsp;&nbsp;+ waypointWithAddress:</option>
 	
+	<option value="//api/name/waypointWithAddressString:">&nbsp;&nbsp;&nbsp;&nbsp;+ waypointWithAddressString:</option>
+	
 	<option value="//api/name/waypointWithCoordinate:">&nbsp;&nbsp;&nbsp;&nbsp;+ waypointWithCoordinate:</option>
 	
 	
@@ -122,6 +124,8 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/waypointWithAddress:">waypointWithAddress:</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/waypointWithAddressString:">waypointWithAddressString:</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/waypointWithCoordinate:">waypointWithCoordinate:</a></span></li>
 	
 </ul></li>
@@ -162,6 +166,9 @@
 	<td class="specification-title">Inherits from</td>
 	<td class="specification-value">NSObject</td>
 </tr><tr>
+	<td class="specification-title">Conforms to</td>
+	<td class="specification-value">NSCopying</td>
+</tr><tr>
 	<td class="specification-title">Declared in</td>
 	<td class="specification-value">MTDWaypoint.h</td>
 </tr>
@@ -173,9 +180,10 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>An instance of MTDWaypoint is a lightweight immutable object wrapper for either
-a CLLocationCoordinate2D <a href="#//api/name/coordinate">coordinate</a> or an <a href="#//api/name/address">address</a> string representing a location (or both).
-It is used in MTDDirectionsKit to store coordinates in collections like NSArray.</p>
+						<p>An instance of MTDWaypoint is a lightweight object wrapper for either a CLLocationCoordinate2D
+<a href="#//api/name/coordinate">coordinate</a> or an <a href="#//api/name/address">address</a> string representing a location (or both).</p>
+
+<p>It is used in MTDDirectionsKit to store coordinates in collections like NSArray.</p>
 					</div>
 					
 					
@@ -244,6 +252,13 @@ It is used in MTDDirectionsKit to store coordinates in collections like NSArray.
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/waypointWithAddress:">+&nbsp;waypointWithAddress:</a></code>
+		<span class="tooltip"><p>This method is used to create an instance of MTDWaypoint with a given <a href="#//api/name/address">address</a> object.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/waypointWithAddressString:">+&nbsp;waypointWithAddressString:</a></code>
 		<span class="tooltip"><p>This method is used to create an instance of MTDWaypoint with a given <a href="#//api/name/address">address</a> string.</p></span>
 	</span>
 	
@@ -342,7 +357,7 @@ It is used in MTDDirectionsKit to store coordinates in collections like NSArray.
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) CLLocationCoordinate2D coordinate</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) CLLocationCoordinate2D coordinate</code></div>
 	
 	
 	
@@ -521,7 +536,7 @@ It is used in MTDDirectionsKit to store coordinates in collections like NSArray.
 	
 	
 	<div class="method-subsection brief-description">
-		<p>This method is used to create an instance of MTDWaypoint with a given <a href="#//api/name/address">address</a> string.</p>
+		<p>This method is used to create an instance of MTDWaypoint with a given <a href="#//api/name/address">address</a> object.</p>
 	</div>		
 	
 	
@@ -558,6 +573,68 @@ It is used in MTDDirectionsKit to store coordinates in collections like NSArray.
 		<ul>
 			
 			<li><code><p><a href="#//api/name/initWithAddress:">&ndash; initWithAddress:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/waypointWithAddressString:">+ waypointWithAddressString:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDWaypoint.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/waypointWithAddressString:" title="waypointWithAddressString:"></a>
+	<h3 class="subsubtitle method-title">waypointWithAddressString:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>This method is used to create an instance of MTDWaypoint with a given <a href="#//api/name/address">address</a> string.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (MTDWaypoint *)waypointWithAddressString:(NSString *)<em>addressString</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>addressString</em></dt>
+			<dd><p>the string-representation of the <a href="#//api/name/address">address</a> of the waypoint</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>the wrapper object created to store the <a href="#//api/name/address">address</a></p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/initWithAddress:">&ndash; initWithAddress:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/waypointWithAddress:">+ waypointWithAddress:</a></p></code></li>
 			
 		</ul>
 	</div>
@@ -798,7 +875,7 @@ It is used in MTDDirectionsKit to store coordinates in collections like NSArray.
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-09-23)</span><br />
+						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-10-12)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
 						
