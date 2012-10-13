@@ -2,8 +2,15 @@
 #import <MTDirectionsKit/MTDirectionsKit.h>
 
 
+#define kMTDImageViewFrame                  CGRectMake(5.f,5.f,50.f,50.f)
+#define kMTDImageViewWidthIncludingMargin   (2*CGRectGetMinX(kMTDImageViewFrame) + CGRectGetWidth(kMTDImageViewFrame))
+#define kMTDImageViewHeightIncludingMargin  (2*CGRectGetMinY(kMTDImageViewFrame) + CGRectGetHeight(kMTDImageViewFrame))
+#define kMTDMinCellHeight                   kMTDImageViewHeightIncludingMargin
+
+
 static UIFont *mtd_distanceFont = nil;
 static UIFont *mtd_instructionsFont = nil;
+static BOOL mtd_bundleLoaded = NO;
 
 
 @implementation MTDManeuverTableViewCell
@@ -16,6 +23,11 @@ static UIFont *mtd_instructionsFont = nil;
     if (self == [MTDManeuverTableViewCell class]) {
         mtd_distanceFont = [UIFont boldSystemFontOfSize:16.f];
         mtd_instructionsFont = [UIFont systemFontOfSize:12.f];
+
+        // Test if the bundle was added to see if the images can be displayed.
+        // If not, we don't use the imageView size to calculate the size of the cell
+        UIImage *testImage = MTDGetImageForTurnType(MTDTurnTypeLeft);
+        mtd_bundleLoaded = testImage != nil;
     }
 }
 
@@ -41,13 +53,13 @@ static UIFont *mtd_instructionsFont = nil;
 ////////////////////////////////////////////////////////////////////////
 
 + (CGFloat)neededHeightForManeuver:(MTDManeuver *)maneuver constrainedToWidth:(CGFloat)width {
-    BOOL imageVisible = NO; // maneuver.turnType != MTDTurnTypeUnknown;
+    BOOL imageVisible = mtd_bundleLoaded && maneuver.turnType != MTDTurnTypeUnknown;
     CGFloat innerWidth = width - 20.f;
     NSString *headerText = [maneuver.distance description];
     NSString *detailText = maneuver.instructions;
 
     if (imageVisible) {
-        // innerWidth -= CGRectGetWidth(kFKImageViewRect) + kFKPaddingXLeft;
+        innerWidth -= kMTDImageViewWidthIncludingMargin;
     }
 
     CGSize constraint = CGSizeMake(innerWidth, CGFLOAT_MAX);
@@ -60,7 +72,7 @@ static UIFont *mtd_instructionsFont = nil;
                                        lineBreakMode:UILineBreakModeWordWrap];
 
     CGFloat computedHeight = sizeHeaderText.height + sizeDetailText.height + 16.f;
-    CGFloat neededHeight = imageVisible ? MAX(computedHeight, 50.f) : computedHeight;
+    CGFloat neededHeight = imageVisible ? MAX(computedHeight, kMTDMinCellHeight) : computedHeight;
 
     return neededHeight;
 }
@@ -78,6 +90,16 @@ static UIFont *mtd_instructionsFont = nil;
 }
 
 ////////////////////////////////////////////////////////////////////////
+#pragma mark - UIView
+////////////////////////////////////////////////////////////////////////
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+
+    self.imageView.frame = kMTDImageViewFrame;
+}
+
+////////////////////////////////////////////////////////////////////////
 #pragma mark - UITableViewCell
 ////////////////////////////////////////////////////////////////////////
 
@@ -85,6 +107,7 @@ static UIFont *mtd_instructionsFont = nil;
     if (maneuver != _maneuver) {
         _maneuver = maneuver;
 
+        self.imageView.image = MTDGetImageForTurnType(maneuver.turnType);
         self.textLabel.text = [maneuver.distance description];
         self.detailTextLabel.text = maneuver.instructions;
         [self setNeedsLayout];
