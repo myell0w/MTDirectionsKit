@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Bing</key>
+	<array/>
+	<key>MapQuest</key>
+	<array>
+		<string>da_DK</string>
+		<string>de_DE</string>
+		<string>en_GB</string>
+		<string>en_US</string>
+		<string>en_CA</string>
+		<string>es_ES</string>
+		<string>es_XL</string>
+		<string>fr_CA</string>
+		<string>fr_FR</string>
+		<string>it_IT</string>
+		<string>nb_NO</string>
+		<string>nl_NL</string>
+		<string>pt_PT</string>
+		<string>sv_SE</string>
+		<string>zh_TW</string>
+		<string>zh_CN</string>
+		<string>nl_BE</string>
+		<string>ja_JP</string>
+		<string>hi_IN</string>
+		<string>zh_HK</string>
+		<string>el_GR</string>
+		<string>ga_IE</string>
+		<string>hu_HU</string>
+		<string>id_ID</string>
+		<string>ru_RU</string>
+		<string>uk_UA</string>
+		<string>vi_VN</string>
+		<string>he_IL</string>
+	</array>
+	<key>Google</key>
+	<array/>
+</dict>
+</plist>
