@@ -26,6 +26,8 @@ NS_INLINE __attribute__((constructor)) void MTDLoadLocale(void) {
 
         // If we can't find the plist in the bundle create a default one
         if (mtd_supportedLocales == nil) {
+            MTDLogWarning(@"MTDirectionsKit.bundle is missing, make sure to add it to your bundle resources!");
+
             mtd_supportedLocales = (@{
                                     // Google and Bing have a fallback to English
                                     kMTDKeyGoogle : @[],
