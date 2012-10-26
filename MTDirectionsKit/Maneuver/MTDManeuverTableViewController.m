@@ -62,7 +62,9 @@
 }
 
 - (void)tableView:(__unused UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.maneuverDelegate maneuverTableViewController:self didSelectManeuverAtIndexPath:indexPath];
+    id<MTDManeuverTableViewControllerDelegate> delegate = self.maneuverDelegate;
+    
+    [delegate maneuverTableViewController:self didSelectManeuverAtIndexPath:indexPath];
 }
 
 @end

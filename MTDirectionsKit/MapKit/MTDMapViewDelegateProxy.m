@@ -23,17 +23,21 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (void)locationManager:(__unused CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(__unused CLLocation *)oldLocation {
+    MTDMapView *mapView = self.mapView;
+    
     MTDLogVerbose(@"Location manager found a location for [MTDWaypoint waypointForCurrentLocation]");
 
     self.lastKnownUserCoordinate = newLocation.coordinate;
-    [self.mapView mtd_stopUpdatingLocationCallingCompletion:YES];
+    [mapView mtd_stopUpdatingLocationCallingCompletion:YES];
 }
 
 - (void)locationManager:(__unused CLLocationManager *)manager didFailWithError:(NSError *)error {
+    MTDMapView *mapView = self.mapView;
+    
     MTDLogVerbose(@"Location manager failed while finding a location for [MTDWaypoint waypointForCurrentLocation]");
 
-    [self.mapView mtd_stopUpdatingLocationCallingCompletion:NO];
-    [self.mapView mtd_notifyDelegateDidFailLoadingOverlayWithError:error];
+    [mapView mtd_stopUpdatingLocationCallingCompletion:NO];
+    [mapView mtd_notifyDelegateDidFailLoadingOverlayWithError:error];
 }
 
 ////////////////////////////////////////////////////////////////////////
