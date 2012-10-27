@@ -434,6 +434,14 @@
     }
 }
 
+- (void)mapView:(MKMapView *)mapView didChangeUserTrackingMode:(MKUserTrackingMode)mode animated:(BOOL)animated {
+    id<MKMapViewDelegate> trueDelegate = self.mtd_trueDelegate;
+
+    if ([trueDelegate respondsToSelector:@selector(mapView:didChangeUserTrackingMode:animated:)]) {
+        [trueDelegate mapView:mapView didChangeUserTrackingMode:mode animated:animated];
+    }
+}
+
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Private
 ////////////////////////////////////////////////////////////////////////
