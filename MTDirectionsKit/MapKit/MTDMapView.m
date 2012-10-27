@@ -408,18 +408,23 @@
 
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay {
     id<MKMapViewDelegate> trueDelegate = self.mtd_trueDelegate;
-    
-    // first check if the delegate provides a custom annotation
+    BOOL overlayIsDirectionsOverlay = [overlay isKindOfClass:[MTDDirectionsOverlay class]];
+
+    // first check if the delegate provides a custom overlay view
     if ([trueDelegate respondsToSelector:@selector(mapView:viewForOverlay:)]) {
         MKOverlayView *delegateResult = [trueDelegate mapView:mapView viewForOverlay:overlay];
 
         if (delegateResult != nil) {
+            if (overlayIsDirectionsOverlay) {
+                MTDLogInfo(@"MKMapViewDelegate provided a custom overlay view for MTDDirectionsOverlay, make sure this is really what you want.");
+            }
+
             return delegateResult;
         }
     }
 
     // otherwise provide a default overlay for directions
-    if ([overlay isKindOfClass:[MTDDirectionsOverlay class]]) {
+    if (overlayIsDirectionsOverlay) {
         return [self mtd_viewForDirectionsOverlay:overlay];
     }
 
