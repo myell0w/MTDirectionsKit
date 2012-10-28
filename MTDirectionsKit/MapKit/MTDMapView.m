@@ -533,10 +533,21 @@
         return nil;
     }
 
+    UIColor *overlayColor = [self mtd_askDelegateForColorOfOverlay:self.directionsOverlay];
+    CGFloat overlayLineWidthFactor = [self mtd_askDelegateForLineWidthFactorOfOverlay:self.directionsOverlay];
+
     self.directionsOverlayView = [[MTDDirectionsOverlayView alloc] initWithOverlay:self.directionsOverlay];
     self.directionsOverlayView.drawManeuvers = (self.directionsDisplayType == MTDDirectionsDisplayTypeDetailedManeuvers);
-    self.directionsOverlayView.overlayColor = [self mtd_askDelegateForColorOfOverlay:self.directionsOverlay];
-    self.directionsOverlayView.overlayLineWidthFactor = [self mtd_askDelegateForLineWidthFactorOfOverlay:self.directionsOverlay];
+
+    // If we always set the color it breaks UIAppearance because it deactivates the proxy color if we
+    // call the setter, even if we don't accept nil there.
+    if (overlayColor != nil) {
+        self.directionsOverlayView.overlayColor = overlayColor;
+    }
+    // same goes for the line width factor
+    if (overlayLineWidthFactor > 0.f) {
+        self.directionsOverlayView.overlayLineWidthFactor = overlayLineWidthFactor;
+    }
 
     return self.directionsOverlayView;
 }

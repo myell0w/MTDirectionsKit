@@ -12,7 +12,7 @@
  to draw the directions/route on top your instance of MTDMapView. It draws a path
  including all waypoints stored in the underlying instance of MTDDirectionsOverlay.
  */
-@interface MTDDirectionsOverlayView : MKOverlayView <UIAppearanceContainer>
+@interface MTDDirectionsOverlayView : MKOverlayView
 
 /** Flag that indicates whether the maneuver points are drawn, defaults to NO */
 @property (nonatomic, assign) BOOL drawManeuvers;
@@ -22,7 +22,7 @@
 
 /**
  The factor MKRoadWidthAtZoomScale gets multiplicated with to compute the width of the overlay.
- The default value is 1.8f, the valid range is between 0.5f and 3.f.
+ The default value is 1.8f, the valid range is between 0.7f and 3.f.
  */
 @property (nonatomic, assign) CGFloat overlayLineWidthFactor UI_APPEARANCE_SELECTOR;
 
