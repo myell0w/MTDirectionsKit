@@ -293,12 +293,15 @@
     xpathObj = xmlXPathEvalExpression((xmlChar *)[query cStringUsingEncoding:NSUTF8StringEncoding], xpathCtx);
     
     if(xpathObj == NULL) {
+        xmlXPathFreeContext(xpathCtx); 
 		return nil;
     }
 	
 	xmlNodeSetPtr nodes = xpathObj->nodesetval;
 	
     if (!nodes) {
+        xmlXPathFreeObject(xpathObj);
+        xmlXPathFreeContext(xpathCtx);
 		return nil;
 	}
 	
