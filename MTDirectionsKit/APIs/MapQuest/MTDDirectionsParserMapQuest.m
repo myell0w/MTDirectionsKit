@@ -147,10 +147,9 @@
                                                 maneuvers:maneuvers
                                                  distance:distance
                                             timeInSeconds:timeInSeconds
+                                                     name:nameNode.contentString
+                                                routeType:self.routeType
                                            additionalInfo:additionalInfo];
-
-    route.name = nameNode.contentString;
-
     return route;
 }
 
