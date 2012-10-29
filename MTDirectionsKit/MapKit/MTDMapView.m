@@ -170,7 +170,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (void)setRegionToShowDirectionsAnimated:(BOOL)animated {
-    [self setVisibleMapRect:self.directionsOverlay.boundingMapRect edgePadding:UIEdgeInsetsZero animated:animated];
+    [self setVisibleMapRect:self.directionsOverlay.boundingMapRect edgePadding:UIEdgeInsetsMake(40, 15, 15, 15) animated:animated];
 }
 
 ////////////////////////////////////////////////////////////////////////
