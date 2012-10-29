@@ -35,7 +35,7 @@ static NSString *mtd_apiKey = nil;
         [self setValue:[from descriptionForAPI:MTDDirectionsAPIBing] forParameter:@"waypoint.0"];
         // "to" gets set in setValueForParameterWithIntermediateGoals
         // [self setValue:[to descriptionForAPI:MTDDirectionsAPIBing] forParameter:@"to"];
-        [self setValue:MTDDirectionStringForDirectionRouteTypeBing(routeType) forParameter:@"routeType"];
+        [self setValue:MTDDirectionStringForDirectionRouteTypeBing(routeType) forParameter:@"travelMode"];
 
         // set parameter for alternative routes?
         BOOL alternativeRoutes = (self.mtd_options & MTDDirectionsRequestOptionAlternativeRoutes) == MTDDirectionsRequestOptionAlternativeRoutes;
@@ -90,10 +90,11 @@ static NSString *mtd_apiKey = nil;
 }
 
 - (NSString *)HTTPAddress {
-    return [NSString stringWithFormat:@"%@/%@/%@",
+    return [NSString stringWithFormat:@"%@/%@/%@%@",
             kMTDBingHostName,
             kMTDBingVersionNumber,
-            kMTDBingRestAPI];
+            kMTDBingRestAPI,
+			self.routeType == MTDDirectionsRouteTypePedestrian ? @"/Walking" : @""];
 }
 
 ////////////////////////////////////////////////////////////////////////
