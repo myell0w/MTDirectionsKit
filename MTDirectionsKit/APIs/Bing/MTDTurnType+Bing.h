@@ -14,9 +14,13 @@ NS_INLINE MTDTurnType MTDTurnTypeFromBingDescription(__unused NSString *descript
         return MTDTurnTypeStraight;
     } else if ([description isEqualToString:@"TakeRampLeft"] || [description isEqualToString:@"RampThenHighwayLeft"]) {
         return MTDTurnTypeTakeRampLeft;
-    } else if ([description isEqualToString:@"TakeRampRight"] || [description isEqualToString:@"RampThenHighwayRight"]) {
+    } else if ([description isEqualToString:@"RampThenHighwayRight"]) {
         return MTDTurnTypeTakeRampRight;
-    } else if ([description isEqualToString:@"UTurn"]) {
+    } else if ([description isEqualToString:@"TakeRampRight"]) {
+        return MTDTurnTypeLeaveRampRight;
+    } else if ([description isEqualToString:@"TakeRampLeft"]) {
+        return MTDTurnTypeLeaveRampLeft;
+    } else if ([description isEqualToString:@"UTurn"] || [description isEqualToString:@"TurnBack"]) {
         return MTDTurnTypeUTurn;
     } else if ([description isEqualToString:@"Unknown"]) {
         return MTDTurnTypeUnknown;
@@ -26,9 +30,15 @@ NS_INLINE MTDTurnType MTDTurnTypeFromBingDescription(__unused NSString *descript
         return MTDTurnTypeMerge;
     } else if ([description isEqualToString:@"TakeRampStraight"] || [description isEqualToString:@"KeepStraight"] ||
                [description isEqualToString:@"KeepOnRampStraight"] || [description isEqualToString:@"KeepToStayStraight"] ||
-               [description isEqualToString:@"RampThenHighwayStraight"]) {
+               [description isEqualToString:@"RampThenHighwayStraight"] || [description isEqualToString:@"RampToHighwayStraight"]) {
         return MTDTurnTypeStraight;
-    }
+    } else if ([description isEqualToString:@"TurnToStayRight"]) {
+		return MTDTurnTypeTurnRightToStay;
+	} else if ([description isEqualToString:@"TurnToStayLeft"]) {
+		return MTDTurnTypeTurnLeftToStay;
+	} else if ([description isEqualToString:@"EnterThenExitRoundabout"]) {
+		return MTDTurnTypeRoundabout;
+	}
 
     // Groups of turnTypes
     else if ([description hasPrefix:@"Arrive"]) {
