@@ -310,6 +310,9 @@
             [maneuvers addObject:maneuver];
         }
     }
+	MTDManeuver *maneuver = [[MTDManeuver alloc] initWithWaypoint:self.to distance:nil timeInSeconds:0 instructions:nil];
+	maneuver.turnType = MTDTurnTypeArrive;
+	[maneuvers addObject:maneuver];
     
     return maneuvers;
 }
