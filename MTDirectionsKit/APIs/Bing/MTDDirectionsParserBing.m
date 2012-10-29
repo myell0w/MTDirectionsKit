@@ -67,6 +67,41 @@
                     [routes addObject:route];
                 }
             }
+			
+			// calculate route name by taking the maneuver.name of the longest unique maneuver
+			for (MTDRoute *route in routes) {
+				CLLocationDistance longestDistance = 0;
+				NSString *name;
+				NSMutableArray *otherRoutes = [routes mutableCopy];
+				[otherRoutes removeObject:route];
+				
+				for (MTDManeuver *maneuver in route.maneuvers) {
+					if (!maneuver.name) {
+						continue;
+					}
+					if (maneuver.distance.distanceInMeter > longestDistance) {
+						BOOL otherNameFound = NO;
+						for (MTDRoute *otherRoute in otherRoutes) {
+							for (MTDManeuver *otherManeuver in otherRoute.maneuvers) {
+								if ([maneuver isEqual:otherManeuver]) {
+									otherNameFound = YES;
+									break;
+								}
+							}
+							if (otherNameFound) {
+								break;
+							}
+						}
+						if (!otherNameFound) {
+							name = maneuver.name;
+							longestDistance = maneuver.distance.distanceInMeter;
+						}
+
+					}
+				}
+				route.name = name;
+			}
+			
         }
 
         // Parse Addresses
@@ -242,6 +277,13 @@
         maneuver.cardinalDirection = MTDCardinalDirectionFromBingDescription(directionNode.contentString);
         maneuver.turnType = MTDTurnTypeFromBingDescription([instructionNode attributeWithName:@"maneuverType"]);
 
+		for (MTDXMLElement *detailNode in [maneuverNode childNodesWithName:@"Detail"]) {
+			MTDXMLElement *nameNode = [detailNode firstChildNodeWithName:@"Name"];
+			if (nameNode.contentString) {
+				maneuver.name = nameNode.contentString;
+			}
+		}
+		
         return maneuver;
     } else {
         return nil;

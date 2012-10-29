@@ -46,6 +46,8 @@
 /** the turn type of this maneuver, can be undefined */
 @property (nonatomic, assign) MTDTurnType turnType;
 
+@property (nonatomic, strong) NSString *name;
+
 /******************************************
  @name Lifecycle
  ******************************************/
