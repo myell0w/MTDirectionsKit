@@ -12,6 +12,10 @@
 #define kMTDMinimumLineWidthFactor      0.7f
 #define kMTDMaximumLineWidthFactor      3.0f
 
+CGFloat sqr(CGFloat x);
+CGFloat dist2(CGPoint v, CGPoint w);
+CGFloat distanceToSegmentSquared(CGPoint p, CGPoint v, CGPoint w);
+CGFloat distanceToSegment(CGPoint point, CGPoint segmentPointV, CGPoint segmentPointW);
 
 @interface MTDDirectionsOverlayView ()
 
@@ -272,31 +276,40 @@
 }
 
 // check whether a touch at the given point tried to select the given route
-- (CLLocationDistance)mtd_distanceOfTouchAtPoint:(CGPoint)point toRoute:(MTDRoute *)route {
-    static CLLocationDistance maxDistanceToSelect = 7000.;
+- (CGFloat)mtd_distanceOfTouchAtPoint:(CGPoint)point toRoute:(MTDRoute *)route {
+	CGFloat shortestDistance = FLT_MAX;
+	
+	MKMapView *mapView = (MKMapView*)self.superview;
+	while (true) {
+		mapView = (MKMapView*)mapView.superview;
+		if ([mapView isKindOfClass:[MKMapView class]])
+			break;
+	}
+	
+	CGPoint tapPoint = [mapView convertPoint:point fromView:self];
+	
+	CGPoint startPoint = [mapView convertCoordinate:((MTDWaypoint*)[route.waypoints objectAtIndex:0]).coordinate toPointToView:mapView];
+	
+    for (MTDWaypoint *waypoint in [route.waypoints subarrayWithRange:NSMakeRange(1, route.waypoints.count - 1)]) {
+		CGPoint cgWaypoint = [mapView convertCoordinate:waypoint.coordinate toPointToView:mapView];
+		CGFloat distance = distanceToSegment(tapPoint, startPoint, cgWaypoint);
 
-    MKMapPoint mapPoint = [self mapPointForPoint:point];
-
-    // TODO: How to optimize/improve this check?
-    for (MTDWaypoint *waypoint in route.waypoints) {
-        MKMapPoint waypointMapPoint = MKMapPointForCoordinate(waypoint.coordinate);
-        CLLocationDistance distance = MKMetersBetweenMapPoints(mapPoint, waypointMapPoint);
-
-        if (distance < maxDistanceToSelect) {
-            return distance;
+        if (distance < shortestDistance) {
+            shortestDistance = distance;
         }
+		startPoint = cgWaypoint;
     }
 
-    return DBL_MAX;
+    return shortestDistance;
 }
 
 // returns the first route that get's hit by the touch at the given point
 - (MTDRoute *)mtd_routeTouchedByPoint:(CGPoint)point {
     MTDRoute *nearestRoute = nil;
-    CLLocationDistance minimumDistance = DBL_MAX;
+    CGFloat minimumDistance = 25;
 
     for (MTDRoute *route in self.mtd_directionsOverlay.routes) {
-        CLLocationDistance distance = [self mtd_distanceOfTouchAtPoint:point toRoute:route];
+        CGFloat distance = [self mtd_distanceOfTouchAtPoint:point toRoute:route];
         
         if (distance < minimumDistance) {
             minimumDistance = distance;
@@ -308,3 +321,23 @@
 }
 
 @end
+
+// http://stackoverflow.com/a/12185597/235297
+CGFloat sqr(CGFloat x) {
+	return x*x;
+}
+CGFloat dist2(CGPoint v, CGPoint w) {
+	return sqr(v.x - w.x) + sqr(v.y - w.y);
+}
+CGFloat distanceToSegmentSquared(CGPoint p, CGPoint v, CGPoint w) {
+    CGFloat l2 = dist2(v, w);
+    if (l2 == 0.0f) return dist2(p, v);
+	
+    CGFloat t = ((p.x - v.x) * (w.x - v.x) + (p.y - v.y) * (w.y - v.y)) / l2;
+    if (t < 0.0f) return dist2(p, v);
+    if (t > 1.0f) return dist2(p, w);
+    return dist2(p, CGPointMake(v.x + t * (w.x - v.x), v.y + t * (w.y - v.y)));
+}
+CGFloat distanceToSegment(CGPoint point, CGPoint segmentPointV, CGPoint segmentPointW) {
+    return sqrtf(distanceToSegmentSquared(point, segmentPointV, segmentPointW));
+}
