@@ -547,6 +547,7 @@
 				9B6C18C114A7E18200087893 /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		9B6C18C114A7E18200087893 /* Products */ = {
 			isa = PBXGroup;
