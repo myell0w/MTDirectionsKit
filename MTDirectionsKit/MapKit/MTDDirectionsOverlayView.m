@@ -6,7 +6,6 @@
 #import "MTDFunctions.h"
 #import "MTDWaypoint.h"
 
-
 #define kMTDDefaultOverlayColor         [UIColor colorWithRed:0.f green:0.25f blue:1.f alpha:1.f]
 #define kMTDDefaultLineWidthFactor      1.8f
 #define kMTDMinimumLineWidthFactor      0.7f
@@ -73,11 +72,11 @@ CGFloat distanceToSegment(CGPoint point, CGPoint segmentPointV, CGPoint segmentP
           zoomScale:(MKZoomScale)zoomScale
           inContext:(CGContextRef)context {
     CGFloat screenScale = [UIScreen mainScreen].scale;
-    CGFloat fullLineWidth = MKRoadWidthAtZoomScale(zoomScale) * self.overlayLineWidthFactor * screenScale;
+    _fullLineWidth = MKRoadWidthAtZoomScale(zoomScale) * self.overlayLineWidthFactor * screenScale;
 
     // outset the map rect by the line width so that points just outside
     // of the currently drawn rect are included in the generated path.
-    MKMapRect clipRect = MKMapRectInset(mapRect, -fullLineWidth, -fullLineWidth);
+    MKMapRect clipRect = MKMapRectInset(mapRect, -_fullLineWidth, -_fullLineWidth);
 
     // we can't sort the routes and draw them simultanously
     @synchronized (self.mtd_directionsOverlay.routes) {
@@ -92,12 +91,12 @@ CGFloat distanceToSegment(CGPoint point, CGPoint segmentPointV, CGPoint segmentP
                 BOOL isActiveRoute = (route == self.mtd_directionsOverlay.activeRoute);
                 CGFloat shadowAlpha = 0.4f;
                 CGFloat secondNormalPathAlpha = 0.7f;
-                CGFloat lineWidth = fullLineWidth;
+                CGFloat lineWidth = _fullLineWidth;
 
                 // draw non-active routes less intense
                 if (!isActiveRoute) {
                     baseColor = [baseColor colorWithAlphaComponent:0.65f];
-                    lineWidth = fullLineWidth * 0.75f;
+                    lineWidth = _fullLineWidth * 0.75f;
                     shadowAlpha = 0.15f;
                     secondNormalPathAlpha = 0.45f;
                 }
