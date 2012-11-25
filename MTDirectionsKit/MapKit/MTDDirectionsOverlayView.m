@@ -6,15 +6,15 @@
 #import "MTDFunctions.h"
 #import "MTDWaypoint.h"
 
+
 #define kMTDDefaultOverlayColor         [UIColor colorWithRed:0.f green:0.25f blue:1.f alpha:1.f]
 #define kMTDDefaultLineWidthFactor      1.8f
 #define kMTDMinimumLineWidthFactor      0.7f
 #define kMTDMaximumLineWidthFactor      3.0f
 
-CGFloat sqr(CGFloat x);
-CGFloat dist2(CGPoint v, CGPoint w);
-CGFloat distanceToSegmentSquared(CGPoint p, CGPoint v, CGPoint w);
-CGFloat distanceToSegment(CGPoint point, CGPoint segmentPointV, CGPoint segmentPointW);
+
+NS_INLINE CGFloat MTDDistanceToSegment(CGPoint point, CGPoint segmentPointV, CGPoint segmentPointW);
+
 
 @interface MTDDirectionsOverlayView ()
 
@@ -277,25 +277,29 @@ CGFloat distanceToSegment(CGPoint point, CGPoint segmentPointV, CGPoint segmentP
 // check whether a touch at the given point tried to select the given route
 - (CGFloat)mtd_distanceOfTouchAtPoint:(CGPoint)point toRoute:(MTDRoute *)route {
 	CGFloat shortestDistance = FLT_MAX;
-	
-	MKMapView *mapView = (MKMapView*)self.superview;
+	MKMapView *mapView = (MKMapView *)self.superview;
+
+    // walk view hierarchy to find mapView
 	while (true) {
-		mapView = (MKMapView*)mapView.superview;
-		if ([mapView isKindOfClass:[MKMapView class]])
+		mapView = (MKMapView *)mapView.superview;
+
+        if ([mapView isKindOfClass:[MKMapView class]]) {
 			break;
+        }
 	}
 	
 	CGPoint tapPoint = [mapView convertPoint:point fromView:self];
-	
-	CGPoint startPoint = [mapView convertCoordinate:((MTDWaypoint*)[route.waypoints objectAtIndex:0]).coordinate toPointToView:mapView];
+	CGPoint startPoint = [mapView convertCoordinate:((MTDWaypoint *)route.waypoints[0]).coordinate
+                                      toPointToView:mapView];
 	
     for (MTDWaypoint *waypoint in [route.waypoints subarrayWithRange:NSMakeRange(1, route.waypoints.count - 1)]) {
 		CGPoint cgWaypoint = [mapView convertCoordinate:waypoint.coordinate toPointToView:mapView];
-		CGFloat distance = distanceToSegment(tapPoint, startPoint, cgWaypoint);
+		CGFloat distance = MTDDistanceToSegment(tapPoint, startPoint, cgWaypoint);
 
         if (distance < shortestDistance) {
             shortestDistance = distance;
         }
+        
 		startPoint = cgWaypoint;
     }
 
@@ -305,7 +309,7 @@ CGFloat distanceToSegment(CGPoint point, CGPoint segmentPointV, CGPoint segmentP
 // returns the first route that get's hit by the touch at the given point
 - (MTDRoute *)mtd_routeTouchedByPoint:(CGPoint)point {
     MTDRoute *nearestRoute = nil;
-    CGFloat minimumDistance = 25;
+    CGFloat minimumDistance = 25.f;
 
     for (MTDRoute *route in self.mtd_directionsOverlay.routes) {
         CGFloat distance = [self mtd_distanceOfTouchAtPoint:point toRoute:route];
@@ -321,22 +325,42 @@ CGFloat distanceToSegment(CGPoint point, CGPoint segmentPointV, CGPoint segmentP
 
 @end
 
-// http://stackoverflow.com/a/12185597/235297
-CGFloat sqr(CGFloat x) {
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - Helper Functions
+////////////////////////////////////////////////////////////////////////
+
+// Helper functions for calculating the distance to each line segment
+// Taken from http://stackoverflow.com/a/12185597/235297
+
+NS_INLINE CGFloat MTDSqr(CGFloat x) {
 	return x*x;
 }
-CGFloat dist2(CGPoint v, CGPoint w) {
-	return sqr(v.x - w.x) + sqr(v.y - w.y);
+
+NS_INLINE CGFloat MTDDist2(CGPoint v, CGPoint w) {
+	return MTDSqr(v.x - w.x) + MTDSqr(v.y - w.y);
 }
-CGFloat distanceToSegmentSquared(CGPoint p, CGPoint v, CGPoint w) {
-    CGFloat l2 = dist2(v, w);
-    if (l2 == 0.0f) return dist2(p, v);
+
+NS_INLINE CGFloat MTDDistanceToSegmentSquared(CGPoint p, CGPoint v, CGPoint w) {
+    CGFloat l2 = MTDDist2(v, w);
+
+    if (l2 == 0.f) {
+        return MTDDist2(p, v);
+    }
 	
     CGFloat t = ((p.x - v.x) * (w.x - v.x) + (p.y - v.y) * (w.y - v.y)) / l2;
-    if (t < 0.0f) return dist2(p, v);
-    if (t > 1.0f) return dist2(p, w);
-    return dist2(p, CGPointMake(v.x + t * (w.x - v.x), v.y + t * (w.y - v.y)));
+
+    if (t < 0.f) {
+        return MTDDist2(p, v);
+    }
+
+    if (t > 1.f) {
+        return MTDDist2(p, w);
+    }
+
+    return MTDDist2(p, CGPointMake(v.x + t * (w.x - v.x), v.y + t * (w.y - v.y)));
 }
-CGFloat distanceToSegment(CGPoint point, CGPoint segmentPointV, CGPoint segmentPointW) {
-    return sqrtf(distanceToSegmentSquared(point, segmentPointV, segmentPointW));
+
+NS_INLINE CGFloat MTDDistanceToSegment(CGPoint point, CGPoint segmentPointV, CGPoint segmentPointW) {
+    return sqrtf(MTDDistanceToSegmentSquared(point, segmentPointV, segmentPointW));
 }

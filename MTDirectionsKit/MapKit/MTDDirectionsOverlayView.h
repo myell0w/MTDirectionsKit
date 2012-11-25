@@ -14,6 +14,9 @@
  */
 @interface MTDDirectionsOverlayView : MKOverlayView
 
+/** Current line width at the current zoom level */
+@property (nonatomic, readonly) CGFloat fullLineWidth;
+
 /** Flag that indicates whether the maneuver points are drawn, defaults to NO */
 @property (nonatomic, assign) BOOL drawManeuvers;
 
@@ -26,8 +29,6 @@
  */
 @property (nonatomic, assign) CGFloat overlayLineWidthFactor UI_APPEARANCE_SELECTOR;
 
-/** Current line width at the current zoom level */
-@property (nonatomic, readonly) CGFloat fullLineWidth;
 
 - (CGFloat)mtd_distanceOfTouchAtPoint:(CGPoint)point toRoute:(MTDRoute *)route;
 
