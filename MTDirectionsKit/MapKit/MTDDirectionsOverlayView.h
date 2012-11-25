@@ -29,7 +29,14 @@
  */
 @property (nonatomic, assign) CGFloat overlayLineWidthFactor UI_APPEARANCE_SELECTOR;
 
-
-- (CGFloat)mtd_distanceOfTouchAtPoint:(CGPoint)point toRoute:(MTDRoute *)route;
+/**
+ Returns the shortest distance between a given point and a route.
+ 
+ @param point a (touch) point on the overlay view
+ @param route one of the routes of the overlay
+ 
+ @return the shortest distance between the point and the route, or FLT_MAX
+ */
+- (CGFloat)distanceBetweenPoint:(CGPoint)point route:(MTDRoute *)route;
 
 @end

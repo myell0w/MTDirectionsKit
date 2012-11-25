@@ -45,8 +45,8 @@
 @property (nonatomic, assign) MTDCardinalDirection cardinalDirection;
 /** the turn type of this maneuver, can be undefined */
 @property (nonatomic, assign) MTDTurnType turnType;
-
-@property (nonatomic, strong) NSString *name;
+/** the name of the maneuver */
+@property (nonatomic, copy) NSString *name;
 
 /******************************************
  @name Lifecycle
