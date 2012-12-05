@@ -103,16 +103,20 @@
     if (httpRequest.failureCode == 0) {
         MTDAssert([self.mtd_parserClass isSubclassOfClass:[MTDDirectionsParser class]], @"Parser class must be subclass of MTDDirectionsParser.");
 
-        MTDDirectionsParser *parser = [[self.mtd_parserClass alloc] initWithFrom:self.from
-                                                                              to:self.to
-                                                               intermediateGoals:self.intermediateGoals
-                                                                       routeType:self.routeType
-                                                                            data:httpRequest.data];
+        if (self.completion != nil) {
+            MTDDirectionsParser *parser = [[self.mtd_parserClass alloc] initWithFrom:self.from
+                                                                                  to:self.to
+                                                                   intermediateGoals:self.intermediateGoals
+                                                                           routeType:self.routeType
+                                                                                data:httpRequest.data];
 
-        dispatch_queue_t parserQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0L);
-        dispatch_async(parserQueue, ^{
-            [parser parseWithCompletion:self.completion];
-        });
+            dispatch_queue_t parserQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0L);
+            dispatch_async(parserQueue, ^{
+                [parser parseWithCompletion:self.completion];
+            });
+        } else {
+            MTDLogWarning(@"No completion block set, didn't parse.");
+        }
     } else {
         NSError *error = [NSError errorWithDomain:MTDDirectionsKitErrorDomain
                                              code:httpRequest.failureCode
