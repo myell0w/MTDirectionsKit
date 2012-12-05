@@ -88,7 +88,7 @@
 @property (nonatomic, readonly) NSTimeInterval timeInSeconds;
 
 /** 
- the type of travelling used to compute the directions of the currently displayed overlay 
+ The type of travelling used to compute the directions of the currently displayed overlay 
  
  The following types of travelling are supported:
  
@@ -101,10 +101,10 @@
 @property (nonatomic, readonly) MTDDirectionsRouteType routeType;
 
 /**
- padding that will be used when zooming the map to the displayed routes.
+ The padding that will be used when zooming the map to the displayed directions.
  If not specified, a default padding of UIEdgeInsetsMake(40.f, 15.f, 15.f, 15.f) will be used.
  */
-@property (nonatomic, assign) UIEdgeInsets edgePadding;
+@property (nonatomic, assign) UIEdgeInsets directionsEdgePadding;
 
 /**
  Starts a request and loads the directions between the specified coordinates.
@@ -210,8 +210,10 @@
 /**
  If multiple routes are available, selects the active route.
  The delegate will be called as if the user had changed the active route by tapping on it
+ 
+ @param route the new active route
  */
-- (void)activateRoute:(MTDRoute*)route;
+- (void)activateRoute:(MTDRoute *)route;
 
 /******************************************
  @name Inter-App

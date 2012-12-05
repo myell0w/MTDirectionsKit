@@ -166,7 +166,7 @@
     _directionsOverlayView = nil;
 }
 
-- (void)activateRoute:(MTDRoute*)route {
+- (void)activateRoute:(MTDRoute *)route {
     MTDRoute *activeRouteBefore = self.directionsOverlay.activeRoute;
     [self.directionsOverlay mtd_activateRoute:route];
     MTDRoute *activeRouteAfter = self.directionsOverlay.activeRoute;
@@ -182,7 +182,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (void)setRegionToShowDirectionsAnimated:(BOOL)animated {
-    [self setVisibleMapRect:self.directionsOverlay.boundingMapRect edgePadding:self.edgePadding animated:animated];
+    [self setVisibleMapRect:self.directionsOverlay.boundingMapRect edgePadding:self.directionsEdgePadding animated:animated];
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -468,6 +468,7 @@
     [super setDelegate:self];
 
     _directionsDisplayType = MTDDirectionsDisplayTypeNone;
+    _directionsEdgePadding = UIEdgeInsetsMake(40.f, 15.f, 15.f, 15.f);
     _mtd_delegateProxy = [[MTDMapViewDelegateProxy alloc] initWithMapView:self];
 
     // we need this GestureRecognizer to be able to select alternative routes
@@ -497,8 +498,6 @@
     }
 
     [self addGestureRecognizer:_mtd_tapGestureRecognizer];
-    
-    self.edgePadding = UIEdgeInsetsMake(40.f, 15.f, 15.f, 15.f);
 }
 
 - (void)mtd_handleMapTap:(UITapGestureRecognizer *)tap {
