@@ -182,7 +182,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (void)setRegionToShowDirectionsAnimated:(BOOL)animated {
-    [self setVisibleMapRect:self.directionsOverlay.boundingMapRect edgePadding:UIEdgeInsetsMake(40.f, 15.f, 15.f, 15.f) animated:animated];
+    [self setVisibleMapRect:self.directionsOverlay.boundingMapRect edgePadding:self.edgePadding animated:animated];
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -497,6 +497,8 @@
     }
 
     [self addGestureRecognizer:_mtd_tapGestureRecognizer];
+    
+    self.edgePadding = UIEdgeInsetsMake(40.f, 15.f, 15.f, 15.f);
 }
 
 - (void)mtd_handleMapTap:(UITapGestureRecognizer *)tap {

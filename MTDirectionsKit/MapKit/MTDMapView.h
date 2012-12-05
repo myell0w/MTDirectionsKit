@@ -101,6 +101,12 @@
 @property (nonatomic, readonly) MTDDirectionsRouteType routeType;
 
 /**
+ padding that will be used when zooming the map to the displayed routes.
+ If not specified, a default padding of UIEdgeInsetsMake(40.f, 15.f, 15.f, 15.f) will be used.
+ */
+@property (nonatomic, assign) UIEdgeInsets edgePadding;
+
+/**
  Starts a request and loads the directions between the specified coordinates.
  When the request is finished the directionsOverlay gets set on the MapView and
  the region gets zoomed (animated) to show the whole overlay, if the flag zoomToShowDirections is set.
