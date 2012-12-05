@@ -7,6 +7,7 @@
 #import "MTDDirectionsRequest.h"
 #import "MTDDirectionsRequestOption.h"
 #import "MTDDirectionsOverlay.h"
+#import "MTDDirectionsOverlay+MTDirectionsPrivateAPI.h"
 #import "MTDRoute.h"
 #import "MTDDirectionsOverlayView.h"
 #import "MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h"
@@ -163,6 +164,17 @@
 
     _directionsOverlay = nil;
     _directionsOverlayView = nil;
+}
+
+- (void)activateRoute:(MTDRoute*)route {
+    MTDRoute *activeRouteBefore = self.directionsOverlay.activeRoute;
+    [self.directionsOverlay mtd_activateRoute:route];
+    MTDRoute *activeRouteAfter = self.directionsOverlay.activeRoute;
+    
+    if (activeRouteBefore != activeRouteAfter) {
+        [self mtd_notifyDelegateDidActivateRoute:activeRouteAfter ofOverlay:self.directionsOverlay];
+        [self.directionsOverlayView setNeedsDisplayInMapRect:MKMapRectWorld];
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////

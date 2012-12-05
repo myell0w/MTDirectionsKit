@@ -17,6 +17,7 @@
 @class MTDWaypoint;
 @class MTDDirectionsOverlay;
 @class MTDDirectionsOverlayView;
+@class MTDRoute;
 @protocol MTDDirectionsDelegate;
 
 
@@ -199,6 +200,12 @@
  if one exists. Does nothing otherwise.
  */
 - (void)removeDirectionsOverlay;
+
+/**
+ If multiple routes are available, selects the active route.
+ The delegate will be called as if the user had changed the active route by tapping on it
+ */
+- (void)activateRoute:(MTDRoute*)route;
 
 /******************************************
  @name Inter-App
