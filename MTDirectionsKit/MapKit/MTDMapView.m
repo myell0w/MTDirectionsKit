@@ -72,6 +72,7 @@
     _mtd_delegateProxy.mapView = nil;
     _mtd_tapGestureRecognizer.delegate = nil;
     _mtd_locationManager.delegate = nil;
+    _directionsDelegate = nil;
     self.delegate = nil;
     [self cancelLoadOfDirections];
 }
