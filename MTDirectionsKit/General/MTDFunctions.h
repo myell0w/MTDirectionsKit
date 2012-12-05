@@ -114,6 +114,15 @@ NSArray *MTDOrderedArrayWithSequence(NSArray *array, NSArray *sequence);
 BOOL MTDDirectionsSupportsAppleMaps(void);
 
 /**
+ In case overriddenClassNames contains a valid override (subclass) for classToUse the subclass is returned.
+ 
+ @param overriddenClassNames a dictionary containing all overrides
+ @param classToUse the class we want to check
+ @return an overridden class or classToUse in case there is no valid override
+ */
+Class MTDOverriddenClass(NSDictionary *overriddenClassNames, Class classToUse);
+
+/**
  If there exists an element in the array with the given index, this function returns it.
  If not, the function returns nil.
  
