@@ -95,6 +95,7 @@
 }
 
 - (void)cancel {
+    _completion = nil;
     [self.mtd_HTTPRequest cancel];
 }
 
