@@ -6,7 +6,10 @@
 //  Copyright (c) 2012 Matthias Tretter (@myell0w). All rights reserved.
 //
 
+
 @class MTDRoute;
+
+
 /**
  An instance of MTDDirectionsOverlayView is a subclass of MKOverlayView and is used
  to draw the directions/route on top your instance of MTDMapView. It draws a path
@@ -38,5 +41,27 @@
  @return the shortest distance between the point and the route, or FLT_MAX
  */
 - (CGFloat)distanceBetweenPoint:(CGPoint)point route:(MTDRoute *)route;
+
+
+/**
+ This method draws the given path of the route in the mapRect at the given zoom scale.
+
+ You can override this method in a subclass if you want to customize the drawing in ways that cannot be changed 
+ using overlayColor and overlayLineWidthFactor. Be sure to call super in case you want to draw the default route
+ and only add your custom drawing to it.
+ 
+ @param path the path ref to draw
+ @param route the route that was used to compute the path
+ @param activeRoute flag that indicates whether the route is the currently selected one
+ @param mapRect the mapRect in which the path is drawn
+ @param zoomScale the current zoom scale
+ @param context the context used for drawing
+ */
+- (void)drawPath:(CGPathRef)path
+         ofRoute:(MTDRoute *)route
+     activeRoute:(BOOL)activeRoute
+         mapRect:(MKMapRect)mapRect
+       zoomScale:(MKZoomScale)zoomScale
+       inContext:(CGContextRef)context;
 
 @end

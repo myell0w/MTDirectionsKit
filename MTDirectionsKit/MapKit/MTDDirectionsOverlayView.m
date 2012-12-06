@@ -47,6 +47,7 @@ NS_INLINE CGFloat MTDDistanceToSegment(CGPoint point, CGPoint segmentPointV, CGP
           zoomScale:(MKZoomScale)zoomScale
           inContext:(CGContextRef)context {
     CGFloat screenScale = [UIScreen mainScreen].scale;
+
     _fullLineWidth = MKRoadWidthAtZoomScale(zoomScale) * self.overlayLineWidthFactor * screenScale;
 
     // outset the map rect by the line width so that points just outside
@@ -62,74 +63,19 @@ NS_INLINE CGFloat MTDDistanceToSegment(CGPoint point, CGPoint segmentPointV, CGP
                                               zoomScale:zoomScale];
 
             if (path != NULL) {
-                UIColor *baseColor = self.overlayColor;
                 BOOL isActiveRoute = (route == self.mtd_directionsOverlay.activeRoute);
-                CGFloat shadowAlpha = 0.4f;
-                CGFloat secondNormalPathAlpha = 0.7f;
-                CGFloat lineWidth = _fullLineWidth;
 
-                // draw non-active routes less intense
-                if (!isActiveRoute) {
-                    baseColor = [baseColor colorWithAlphaComponent:0.65f];
-                    lineWidth = _fullLineWidth * 0.75f;
-                    shadowAlpha = 0.15f;
-                    secondNormalPathAlpha = 0.45f;
+                [self drawPath:path ofRoute:route activeRoute:isActiveRoute mapRect:clipRect zoomScale:zoomScale inContext:context];
+
+                // TODO: Make public
+                if (self.drawManeuvers) {
+                    for (MTDManeuver *maneuver in self.mtd_directionsOverlay.maneuvers) {
+                        [self mtd_drawManeuver:maneuver lineWidth:self.fullLineWidth inContext:context];
+                    }
                 }
-
-                UIColor *darkenedColor = MTDDarkenedColor(baseColor, 0.1f);
-                CGFloat darkPathLineWidth = lineWidth;
-                CGFloat normalPathLineWidth = roundf(darkPathLineWidth * 0.8f);
-                CGFloat innerGlowPathLineWidth = roundf(darkPathLineWidth * 0.9f);
-
-                // Setup graphics context
-                CGContextSetLineCap(context, kCGLineCapRound);
-                CGContextSetLineJoin(context, kCGLineJoinRound);
-
-                // Draw dark path
-                CGContextSaveGState(context);
-                CGContextSetLineWidth(context, darkPathLineWidth);
-                CGContextSetFillColorWithColor(context, darkenedColor.CGColor);
-                CGContextSetStrokeColorWithColor(context, darkenedColor.CGColor);
-                CGContextSetShadowWithColor(context, CGSizeMake(0.f, darkPathLineWidth/10.f), darkPathLineWidth/10.f, [UIColor colorWithWhite:0.f alpha:shadowAlpha].CGColor);
-                CGContextAddPath(context, path);
-                CGContextStrokePath(context);
-                CGContextRestoreGState(context);
-
-                // Draw normal path
-                CGContextSaveGState(context);
-                CGContextSetBlendMode(context, kCGBlendModeCopy);
-                CGContextSetLineWidth(context, normalPathLineWidth);
-                CGContextSetStrokeColorWithColor(context, baseColor.CGColor);
-                CGContextAddPath(context, path);
-                CGContextStrokePath(context);
-                CGContextRestoreGState(context);
-
-                // Draw inner glow path
-                CGContextSaveGState(context);
-                CGContextSetLineWidth(context, innerGlowPathLineWidth);
-                CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:1.f alpha:0.1f].CGColor);
-                CGContextAddPath(context, path);
-                CGContextStrokePath(context);
-                CGContextRestoreGState(context);
-
-                // Draw normal path again
-                CGContextSaveGState(context);
-                CGContextSetBlendMode(context, kCGBlendModeCopy);
-                normalPathLineWidth = roundf(lineWidth * 0.6f);
-                CGContextSetLineWidth(context, normalPathLineWidth);
-                CGContextSetStrokeColorWithColor(context, [baseColor colorWithAlphaComponent:secondNormalPathAlpha].CGColor);
-                CGContextAddPath(context, path);
-                CGContextStrokePath(context);
-                CGContextRestoreGState(context);
 
                 // Cleanup
                 CGPathRelease(path);
-
-                if (self.drawManeuvers) {
-                    for (MTDManeuver *maneuver in self.mtd_directionsOverlay.maneuvers) {
-                        [self mtd_drawManeuver:maneuver lineWidth:lineWidth inContext:context];
-                    }
-                }
             }
         }
     }
@@ -138,6 +84,72 @@ NS_INLINE CGFloat MTDDistanceToSegment(CGPoint point, CGPoint segmentPointV, CGP
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - MTDDirectionsOverlayView
 ////////////////////////////////////////////////////////////////////////
+
+- (void)drawPath:(CGPathRef)path
+         ofRoute:(__unused MTDRoute *)route
+     activeRoute:(BOOL)activeRoute
+         mapRect:(__unused MKMapRect)mapRect
+       zoomScale:(__unused MKZoomScale)zoomScale
+       inContext:(CGContextRef)context {
+    UIColor *baseColor = self.overlayColor;
+    CGFloat shadowAlpha = 0.4f;
+    CGFloat secondNormalPathAlpha = 0.7f;
+    CGFloat lineWidth = _fullLineWidth;
+
+    // draw non-active routes less intense
+    if (!activeRoute) {
+        baseColor = [baseColor colorWithAlphaComponent:0.65f];
+        lineWidth = _fullLineWidth * 0.75f;
+        shadowAlpha = 0.15f;
+        secondNormalPathAlpha = 0.45f;
+    }
+
+    UIColor *darkenedColor = MTDDarkenedColor(baseColor, 0.1f);
+    CGFloat darkPathLineWidth = lineWidth;
+    CGFloat normalPathLineWidth = roundf(darkPathLineWidth * 0.8f);
+    CGFloat innerGlowPathLineWidth = roundf(darkPathLineWidth * 0.9f);
+
+    // Setup graphics context
+    CGContextSetLineCap(context, kCGLineCapRound);
+    CGContextSetLineJoin(context, kCGLineJoinRound);
+
+    // Draw dark path
+    CGContextSaveGState(context);
+    CGContextSetLineWidth(context, darkPathLineWidth);
+    CGContextSetFillColorWithColor(context, darkenedColor.CGColor);
+    CGContextSetStrokeColorWithColor(context, darkenedColor.CGColor);
+    CGContextSetShadowWithColor(context, CGSizeMake(0.f, darkPathLineWidth/10.f), darkPathLineWidth/10.f, [UIColor colorWithWhite:0.f alpha:shadowAlpha].CGColor);
+    CGContextAddPath(context, path);
+    CGContextStrokePath(context);
+    CGContextRestoreGState(context);
+
+    // Draw normal path
+    CGContextSaveGState(context);
+    CGContextSetBlendMode(context, kCGBlendModeCopy);
+    CGContextSetLineWidth(context, normalPathLineWidth);
+    CGContextSetStrokeColorWithColor(context, baseColor.CGColor);
+    CGContextAddPath(context, path);
+    CGContextStrokePath(context);
+    CGContextRestoreGState(context);
+
+    // Draw inner glow path
+    CGContextSaveGState(context);
+    CGContextSetLineWidth(context, innerGlowPathLineWidth);
+    CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:1.f alpha:0.1f].CGColor);
+    CGContextAddPath(context, path);
+    CGContextStrokePath(context);
+    CGContextRestoreGState(context);
+
+    // Draw normal path again
+    CGContextSaveGState(context);
+    CGContextSetBlendMode(context, kCGBlendModeCopy);
+    normalPathLineWidth = roundf(lineWidth * 0.6f);
+    CGContextSetLineWidth(context, normalPathLineWidth);
+    CGContextSetStrokeColorWithColor(context, [baseColor colorWithAlphaComponent:secondNormalPathAlpha].CGColor);
+    CGContextAddPath(context, path);
+    CGContextStrokePath(context);
+    CGContextRestoreGState(context);
+}
 
 - (void)setOverlayColor:(UIColor *)overlayColor {
     if (overlayColor != _overlayColor && overlayColor != nil) {
@@ -188,7 +200,7 @@ NS_INLINE CGFloat MTDDistanceToSegment(CGPoint point, CGPoint segmentPointV, CGP
 
 		startPoint = cgWaypoint;
     }
-    
+
     return shortestDistance;
 }
 
@@ -225,9 +237,9 @@ NS_INLINE CGFloat MTDDistanceToSegment(CGPoint point, CGPoint segmentPointV, CGP
 }
 
 - (CGPathRef)mtd_newPathForPoints:(MKMapPoint *)points
-                       pointCount:(NSUInteger)pointCount
-                         clipRect:(MKMapRect)mapRect
-                        zoomScale:(MKZoomScale)zoomScale CF_RETURNS_RETAINED {
+pointCount:(NSUInteger)pointCount
+clipRect:(MKMapRect)mapRect
+zoomScale:(MKZoomScale)zoomScale CF_RETURNS_RETAINED {
     // The fastest way to draw a path in an MKOverlayView is to simplify the
     // geometry for the screen by eliding points that are too close together
     // and to omit any line segments that do not intersect the clipping rect.
@@ -313,13 +325,13 @@ NS_INLINE CGFloat MTDDistanceToSegment(CGPoint point, CGPoint segmentPointV, CGP
 
     for (MTDRoute *route in self.mtd_directionsOverlay.routes) {
         CGFloat distance = [self distanceBetweenPoint:point route:route];
-        
+
         if (distance < minimumDistance) {
             minimumDistance = distance;
             nearestRoute = route;
         }
     }
-    
+
     return nearestRoute;
 }
 
@@ -347,7 +359,7 @@ NS_INLINE CGFloat MTDDistanceToSegmentSquared(CGPoint p, CGPoint v, CGPoint w) {
     if (l2 == 0.f) {
         return MTDDist2(p, v);
     }
-	
+
     CGFloat t = ((p.x - v.x) * (w.x - v.x) + (p.y - v.y) * (w.y - v.y)) / l2;
 
     if (t < 0.f) {
