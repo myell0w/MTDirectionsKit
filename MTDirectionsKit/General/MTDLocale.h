@@ -17,6 +17,9 @@
  English, if the set locale isn't supported by the API, MapQuest does return an error-message.
  Therefore we check against a known list of supported locales when MapQuest is set as the API.
  
+ You can configure the list of Locales you want to support by adding MTDirectionsKit.bundle to
+ your project and changing SupportedLocales.plist.
+ 
  @param locale the new locale to use when requesting directions
  */
 void MTDDirectionsSetLocale(NSLocale* locale);

@@ -33,7 +33,10 @@ typedef NS_ENUM(NSInteger, MTDTurnType) {
     MTDTurnTypeDepart,                      // depart your journey/from an intermediate goal
     MTDTurnTypeArrive,                      // arrive at the destination
     MTDTurnTypeWalk,                        // walk
-    MTDTurnTypeTakePublicTransport          // use transit
+    MTDTurnTypeTakePublicTransport,         // use transit
+    MTDTurnTypeTurnRightToStay,             // turn to stay right
+    MTDTurnTypeTurnLeftToStay,              // turn to stay left
+    MTDTurnTypeRoundabout,                  // enter and exit roundabout
 };
 
 

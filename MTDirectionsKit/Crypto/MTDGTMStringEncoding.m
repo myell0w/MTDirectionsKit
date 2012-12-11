@@ -34,7 +34,7 @@ NS_INLINE int lcm(int a, int b) {
 #pragma mark - Lifecycle
 ////////////////////////////////////////////////////////////////////////
 
-+ (id)rfc4648Base64WebsafeStringEncoding {
++ (instancetype)rfc4648Base64WebsafeStringEncoding {
     MTDGTMStringEncoding *ret = [[[self class] alloc] initWithString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_"];
 
     [ret setPaddingChar:'='];

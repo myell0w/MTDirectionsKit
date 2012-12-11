@@ -67,6 +67,8 @@
                     [routes addObject:route];
                 }
             }
+			
+			[self mtd_setRouteNamesFromLongestDistanceManeuver:routes];
         }
 
         // Parse Addresses
@@ -135,10 +137,9 @@
                                                 maneuvers:maneuvers
                                                  distance:distance
                                             timeInSeconds:timeInSeconds
+                                                     name:idNode.contentString
+                                                routeType:self.routeType
                                            additionalInfo:additionalInfo];
-
-    route.name = idNode.contentString;
-
     return route;
 }
 
@@ -242,6 +243,13 @@
         maneuver.cardinalDirection = MTDCardinalDirectionFromBingDescription(directionNode.contentString);
         maneuver.turnType = MTDTurnTypeFromBingDescription([instructionNode attributeWithName:@"maneuverType"]);
 
+		for (MTDXMLElement *detailNode in [maneuverNode childNodesWithName:@"Detail"]) {
+			MTDXMLElement *nameNode = [detailNode firstChildNodeWithName:@"Name"];
+			if (nameNode.contentString) {
+				maneuver.name = nameNode.contentString;
+			}
+		}
+		
         return maneuver;
     } else {
         return nil;
@@ -261,6 +269,47 @@
     }
     
     return maneuvers;
+}
+
+// calculate route name by taking the maneuver.name of the longest unique maneuver
+- (void)mtd_setRouteNamesFromLongestDistanceManeuver:(NSArray *)routes {
+    for (MTDRoute *route in routes) {
+        NSString *name = nil;
+        CLLocationDistance longestDistance = 0.;
+        NSMutableArray *otherRoutes = [routes mutableCopy];
+
+        [otherRoutes removeObject:route];
+
+        for (MTDManeuver *maneuver in route.maneuvers) {
+            if (!maneuver.name) {
+                continue;
+            }
+            
+            if (maneuver.distance.distanceInMeter > longestDistance) {
+                BOOL otherNameFound = NO;
+
+                for (MTDRoute *otherRoute in otherRoutes) {
+                    for (MTDManeuver *otherManeuver in otherRoute.maneuvers) {
+                        if ([maneuver isEqual:otherManeuver]) {
+                            otherNameFound = YES;
+                            break;
+                        }
+                    }
+                    
+                    if (otherNameFound) {
+                        break;
+                    }
+                }
+                
+                if (!otherNameFound) {
+                    name = maneuver.name;
+                    longestDistance = maneuver.distance.distanceInMeter;
+                }
+            }
+        }
+        
+        route.name = name;
+    }
 }
 
 @end

@@ -147,10 +147,9 @@
                                                 maneuvers:maneuvers
                                                  distance:distance
                                             timeInSeconds:timeInSeconds
+                                                     name:nameNode.contentString
+                                                routeType:self.routeType
                                            additionalInfo:additionalInfo];
-
-    route.name = nameNode.contentString;
-
     return route;
 }
 
@@ -311,6 +310,11 @@
             [maneuvers addObject:maneuver];
         }
     }
+
+    // manually add maneuver for arriving at destination
+	MTDManeuver *arrivalManeuver = [[MTDManeuver alloc] initWithWaypoint:self.to distance:nil timeInSeconds:0 instructions:nil];
+	arrivalManeuver.turnType = MTDTurnTypeArrive;
+	[maneuvers addObject:arrivalManeuver];
     
     return maneuvers;
 }

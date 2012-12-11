@@ -31,6 +31,8 @@
               maneuvers:(NSArray *)maneuvers
                distance:(MTDDistance *)distance
           timeInSeconds:(NSTimeInterval)timeInSeconds
+                   name:(NSString *)name
+              routeType:(MTDDirectionsRouteType)routeType
          additionalInfo:(NSDictionary *)additionalInfo {
     MTDAssert(waypoints.count > 0, @"There must be waypoints on a route");
 
@@ -57,6 +59,8 @@
         _maneuvers = [maneuvers copy];
         _distance = distance;
         _timeInSeconds = timeInSeconds;
+        _name = name;
+        _routeType = routeType;
         _additionalInfo = [additionalInfo copy];
         
         free(points);

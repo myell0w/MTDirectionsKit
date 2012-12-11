@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Matthias Tretter (@myell0w). All rights reserved.
 //
 
+#import "MTDDirectionsRouteType.h"
 
 @class MTDWaypoint;
 @class MTDDistance;
@@ -44,7 +45,8 @@
 @property (nonatomic, assign, readonly) NSTimeInterval timeInSeconds;
 /** the estimated time as formatted string */
 @property (nonatomic, readonly) NSString *formattedTime;
-
+/** the type of travelling used to compute the directions, e.g. walking, by bike etc. */
+@property (nonatomic) MTDDirectionsRouteType routeType;
 /** 
  Dictionary containing additional information retreived, e.g. warnings and copyrights when 
  using the Google Directions API. You have to handle this information on your own and stick
@@ -72,6 +74,8 @@
  @param maneuvers the maneuvers along the route
  @param distance the total distance from the first to the last waypoint
  @param timeInSeconds the estimated total duration needed for traversing the waypoints in the given routeType
+ @param name the name of the route
+ @param routeType the travel type of the route
  @param additionalInfo dictionary with additional information provided by the API, e.g. copyrights
  @return a route object encapsulating the given route-information
  */
@@ -79,6 +83,8 @@
               maneuvers:(NSArray *)maneuvers
                distance:(MTDDistance *)distance
           timeInSeconds:(NSTimeInterval)timeInSeconds
+                   name:(NSString *)name
+              routeType:(MTDDirectionsRouteType)routeType
          additionalInfo:(NSDictionary *)additionalInfo;
 
 

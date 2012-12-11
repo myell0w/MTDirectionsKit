@@ -148,5 +148,5 @@ NS_INLINE id MTDFirstObjectOfArray(NSArray *array) {
  @return MTDirectionsKit version string
  */
 NS_INLINE NSString* MTDDirectionsKitGetVersionString() {
-    return @"1.5.0";
+    return @"1.5.1";
 }

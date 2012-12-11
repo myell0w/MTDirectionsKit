@@ -41,13 +41,13 @@
 	return result;
 }
 
-+ (MTDXMLElement *)nodeForXPathQuery:(NSString *)query onXML:(NSData *)xmlData {
++ (instancetype)nodeForXPathQuery:(NSString *)query onXML:(NSData *)xmlData {
     NSArray *nodes = [self nodesForXPathQuery:query onXML:xmlData];
 
     return MTDFirstObjectOfArray(nodes);
 }
 
-+ (MTDXMLElement *)nodeForXPathQuery:(NSString *)query onXML:(NSData *)xmlData namespacePrefix:(NSString *)namespacePrefix namespaceURI:(NSString *)namespaceURI {
++ (instancetype)nodeForXPathQuery:(NSString *)query onXML:(NSData *)xmlData namespacePrefix:(NSString *)namespacePrefix namespaceURI:(NSString *)namespaceURI {
     NSArray *nodes = [self nodesForXPathQuery:query onXML:xmlData namespacePrefix:namespacePrefix namespaceURI:namespaceURI];
 
     return MTDFirstObjectOfArray(nodes);
@@ -293,12 +293,15 @@
     xpathObj = xmlXPathEvalExpression((xmlChar *)[query cStringUsingEncoding:NSUTF8StringEncoding], xpathCtx);
     
     if(xpathObj == NULL) {
+        xmlXPathFreeContext(xpathCtx); 
 		return nil;
     }
 	
 	xmlNodeSetPtr nodes = xpathObj->nodesetval;
 	
     if (!nodes) {
+        xmlXPathFreeObject(xpathObj);
+        xmlXPathFreeContext(xpathCtx);
 		return nil;
 	}
 	
