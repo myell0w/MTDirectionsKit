@@ -87,7 +87,7 @@
  @param xmlData data representing a xml document
  @return MTDXMLElement representing the first node matching
  */
-+ (MTDXMLElement *)nodeForXPathQuery:(NSString *)query onXML:(NSData *)xmlData;
++ (instancetype)nodeForXPathQuery:(NSString *)query onXML:(NSData *)xmlData;
 
 /**
  Returns the first xml node matching the given query on the given xml data in the given namespace.
@@ -98,7 +98,7 @@
  @param namespaceURI the URI of the namesapce
  @return MTDXMLElement representing the first node matching
  */
-+ (MTDXMLElement *)nodeForXPathQuery:(NSString *)query onXML:(NSData *)xmlData namespacePrefix:(NSString *)namespacePrefix namespaceURI:(NSString *)namespaceURI;
++ (instancetype)nodeForXPathQuery:(NSString *)query onXML:(NSData *)xmlData namespacePrefix:(NSString *)namespacePrefix namespaceURI:(NSString *)namespaceURI;
 
 
 /******************************************

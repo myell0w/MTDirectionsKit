@@ -28,13 +28,13 @@
 #pragma mark - Lifecycle
 ////////////////////////////////////////////////////////////////////////
 
-+ (id)requestDirectionsAPI:(MTDDirectionsAPI)API
-                      from:(MTDWaypoint *)from
-                        to:(MTDWaypoint *)to
-         intermediateGoals:(NSArray *)intermediateGoals
-                 routeType:(MTDDirectionsRouteType)routeType
-                   options:(MTDDirectionsRequestOptions)options
-                completion:(mtd_parser_block)completion {
++ (instancetype)requestDirectionsAPI:(MTDDirectionsAPI)API
+                                from:(MTDWaypoint *)from
+                                  to:(MTDWaypoint *)to
+                   intermediateGoals:(NSArray *)intermediateGoals
+                           routeType:(MTDDirectionsRouteType)routeType
+                             options:(MTDDirectionsRequestOptions)options
+                          completion:(mtd_parser_block)completion {
 
     Class class = MTDDirectionsRequestClassForAPI(API);
 
@@ -206,7 +206,7 @@
                 [address appendFormat:@"%@=%@&", key, MTDURLEncodedString([obj description])];
             }
         }];
-
+        
         // remove last "&"
         NSRange lastCharacterRange = NSMakeRange(address.length-1, 1);
         [address deleteCharactersInRange:lastCharacterRange];

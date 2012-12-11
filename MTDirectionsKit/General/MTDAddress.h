@@ -24,7 +24,7 @@ typedef NS_ENUM(NSUInteger, MTDAddressField) {
 /**
  MTDAddress represents the human readable address description of a waypoint.
  It can either be initialized and read in a normalized form (separate fields
- for country, county, postalCode etc.) or with a single string. Currently a 
+ for country, county, postalCode etc.) or with a single string. Currently a
  single string doens't get parsed and normalised.
  */
 @interface MTDAddress : NSObject <NSCopying>
@@ -51,7 +51,7 @@ typedef NS_ENUM(NSUInteger, MTDAddressField) {
 /** Dictionary representation of the address using the address property keys from ABPerson */
 @property (nonatomic, readonly) NSDictionary *addressDictionary;
 
-/** 
+/**
  This flag indicates whether this address is normalised and the
  separate properties for country, county etc. return valid data
  */
@@ -65,16 +65,16 @@ typedef NS_ENUM(NSUInteger, MTDAddressField) {
 /**
  This class method is used to create an address from a single string description.
  The resulting address object is not normalized.
- 
+
  @param addressString a single string-representation of the address
  @return a non-normalized address object
  */
-+ (MTDAddress *)addressWithAddressString:(NSString *)addressString;
++ (instancetype)addressWithAddressString:(NSString *)addressString;
 
 /**
  This class method is used to create an address object with normalized data.
  The resulting address object is normalised as well.
- 
+
  @param country the country of the address
  @param state the state of the address
  @param county the county of the address
@@ -83,7 +83,7 @@ typedef NS_ENUM(NSUInteger, MTDAddressField) {
  @param street the street of the address
  @return a normalised address object
  */
-+ (MTDAddress *)addressWithCountry:(NSString *)country
++ (instancetype)addressWithCountry:(NSString *)country
                              state:(NSString *)state
                             county:(NSString *)county
                         postalCode:(NSString *)postalCode
@@ -93,7 +93,7 @@ typedef NS_ENUM(NSUInteger, MTDAddressField) {
 /**
  Initializes an address object with a single string. The resulting address object
  is not normalized.
- 
+
  @param addressString a single string-representation of the address
  @return a non-normalized address object
  @see initWithCountry:state:county:postalCode:city:street:
@@ -103,7 +103,7 @@ typedef NS_ENUM(NSUInteger, MTDAddressField) {
 /**
  Initializes an address object with normalized data.
  The resulting address object is normalised as well.
- 
+
  @param country the country of the address
  @param state the state of the address
  @param county the county of the address
@@ -129,19 +129,19 @@ typedef NS_ENUM(NSUInteger, MTDAddressField) {
  On normalised address objects this method can be used to create a description of the
  address only including the specified address fields (via bitmask). Valid address fields are specified
  in the enum MTDAddressField:
- 
+
  - MTDAddressFieldCountry
  - MTDAddressFieldState
  - MTDAddressFieldCounty
  - MTDAddressFieldPostalCode
  - MTDAddressFieldCity
  - MTDAddressFieldStreet
- 
+
  On non-normalized string objects this method just returns the fullAddress string.
- 
+
  @param addressFieldMask a bitmaks including the address fields to include in the description,
  e.g. MTDAddressFieldCountry | MTDAddressFieldCity
- 
+
  @return a string representation of the address including the specified fields
  */
 - (NSString *)descriptionWithAddressFields:(NSUInteger)addressFieldMask;

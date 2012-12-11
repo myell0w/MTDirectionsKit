@@ -36,7 +36,7 @@
  
  @return an instance to perform websafe base64 encoding and decoding
  */
-+ (id)rfc4648Base64WebsafeStringEncoding;
++ (instancetype)rfc4648Base64WebsafeStringEncoding;
 
 /**
  Decodes the given string into the corresponding data.
