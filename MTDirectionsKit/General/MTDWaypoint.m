@@ -10,19 +10,19 @@
 #pragma mark - Lifecycle
 ////////////////////////////////////////////////////////////////////////
 
-+ (MTDWaypoint *)waypointWithCoordinate:(CLLocationCoordinate2D)coordinate {
++ (instancetype)waypointWithCoordinate:(CLLocationCoordinate2D)coordinate {
     return [[[self class] alloc] initWithCoordinate:coordinate];
 }
 
-+ (MTDWaypoint *)waypointWithAddress:(MTDAddress *)address {
++ (instancetype)waypointWithAddress:(MTDAddress *)address {
     return [[[self class] alloc] initWithAddress:address];
 }
 
-+ (MTDWaypoint *)waypointWithAddressString:(NSString *)addressString {
++ (instancetype)waypointWithAddressString:(NSString *)addressString {
     return [[self class] waypointWithAddress:[MTDAddress addressWithAddressString:addressString]];
 }
 
-+ (MTDWaypoint *)waypointForCurrentLocation {
++ (instancetype)waypointForCurrentLocation {
     __strong static MTDWaypoint *waypointForCurrentLocation = nil;
 
     static dispatch_once_t onceToken;

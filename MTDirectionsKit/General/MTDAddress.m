@@ -8,11 +8,11 @@
 #pragma mark - Lifecycle
 ////////////////////////////////////////////////////////////////////////
 
-+ (MTDAddress *)addressWithAddressString:(NSString *)addressString {
++ (instancetype)addressWithAddressString:(NSString *)addressString {
     return [[self alloc] initWithAddressString:addressString];
 }
 
-+ (MTDAddress *)addressWithCountry:(NSString *)country
++ (instancetype)addressWithCountry:(NSString *)country
                              state:(NSString *)state
                             county:(NSString *)county
                         postalCode:(NSString *)postalCode
@@ -30,7 +30,7 @@
     if ((self = [super init])) {
         _fullAddress = [addressString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     }
-    
+
     return self;
 }
 
@@ -48,7 +48,7 @@
         _city = [city stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         _street = [street stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     }
-    
+
     return self;
 }
 
@@ -105,7 +105,7 @@
     if (!self.normalised) {
         return nil;
     }
-    
+
     NSMutableDictionary *addressDictionary = [NSMutableDictionary dictionaryWithCapacity:6];
 
     // The keys represent the values of the according kABPersonAddressXXXKey constants
@@ -193,7 +193,7 @@
 
         [address deleteCharactersInRange:lastCharactersRange];
     }
-
+    
     return [address copy];
 }
 

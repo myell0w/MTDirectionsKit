@@ -50,7 +50,7 @@
  
  @see initWithCoordinate:
  */
-+ (MTDWaypoint *)waypointWithCoordinate:(CLLocationCoordinate2D)coordinate;
++ (instancetype)waypointWithCoordinate:(CLLocationCoordinate2D)coordinate;
 
 /**
  This method is used to create an instance of MTDWaypoint with a given address object.
@@ -61,7 +61,7 @@
  @see initWithAddress:
  @see waypointWithAddressString:
  */
-+ (MTDWaypoint *)waypointWithAddress:(MTDAddress *)address;
++ (instancetype)waypointWithAddress:(MTDAddress *)address;
 
 /**
  This method is used to create an instance of MTDWaypoint with a given address string.
@@ -72,14 +72,14 @@
  @see initWithAddress:
  @see waypointWithAddress:
  */
-+ (MTDWaypoint *)waypointWithAddressString:(NSString *)addressString;
++ (instancetype)waypointWithAddressString:(NSString *)addressString;
 
 /**
  Creates and returns a singleton waypoint object representing the device’s current location.
  
  @return An MTDWaypoint object representing the current location.
  */
-+ (MTDWaypoint *)waypointForCurrentLocation;
++ (instancetype)waypointForCurrentLocation;
 
 /**
  The initializer used to create an instance of MTDWaypoint that wraps a given coordinate.

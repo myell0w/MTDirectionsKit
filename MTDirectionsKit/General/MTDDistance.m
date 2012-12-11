@@ -19,11 +19,11 @@
 #pragma mark - Lifecycle
 ////////////////////////////////////////////////////////////////////////
 
-+ (MTDDistance *)distanceWithValue:(double)value measurementSystem:(MTDMeasurementSystem)measurementSystem {
++ (instancetype)distanceWithValue:(double)value measurementSystem:(MTDMeasurementSystem)measurementSystem {
     return [[MTDDistance alloc] initWithDistanceValue:value measurementSystem:measurementSystem];
 }
 
-+ (MTDDistance *)distanceWithMeters:(CLLocationDistance)meters {
++ (instancetype)distanceWithMeters:(CLLocationDistance)meters {
     return [[MTDDistance alloc] initWithDistanceValue:meters/1000. measurementSystem:MTDMeasurementSystemMetric];
 }
 
