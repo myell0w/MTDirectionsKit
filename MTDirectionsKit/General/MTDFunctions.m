@@ -1,7 +1,6 @@
 #import "MTDFunctions.h"
 #import "MTDWaypoint.h"
 #import "MTDAddress.h"
-#import <objc/runtime.h>
 
 
 #define kMTDSecondsPerHour      (60. * 60.)
@@ -222,48 +221,4 @@ BOOL MTDDirectionsSupportsAppleMaps(void) {
     });
 
     return supportsAppleMaps;
-}
-
-Class MTDOverriddenClass(NSDictionary *overriddenClassNames, Class classToUse) {
-    MTDAssert(classToUse != Nil, @"Can't specifiy Nil for class to use");
-
-    if (classToUse == Nil) {
-        return Nil;
-    }
-
-    // check for override
-    Class overriddenClass = [overriddenClassNames objectForKey:(id)classToUse];
-
-    // check if string was used as key
-    if (overriddenClass == Nil) {
-        NSString *className = NSStringFromClass(classToUse);
-        
-        overriddenClass = [overriddenClassNames objectForKey:className];
-    }
-
-    // still no override, return classToUse
-    if (overriddenClass == Nil) {
-        return classToUse;
-    }
-
-    Class classToCheckHierarchy = overriddenClass;
-    BOOL isSubclass = NO;
-
-    while (classToCheckHierarchy != Nil) {
-        if (classToCheckHierarchy == classToUse) {
-            isSubclass = YES;
-            break;
-        }
-
-        // check superclass in next turn
-        classToCheckHierarchy = class_getSuperclass(classToCheckHierarchy);
-    }
-
-    MTDAssert(isSubclass, @"The overridden class must be a subclass of the class to use");
-
-    if (isSubclass) {
-        return overriddenClass;
-    } else {
-        return classToUse;
-    }
 }

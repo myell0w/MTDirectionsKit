@@ -48,22 +48,6 @@
 @property (nonatomic, mtd_weak) id<MTDDirectionsDelegate> directionsDelegate;
 
 /******************************************
- @name Customization
- ******************************************/
-
-/**
- Use this to use specific subclasses instead of the default MTD* classes.
- 
- E.g. add an entry of [MTDDirectionsOverlayView class] / [MyCustomOverlayView class] as key/value pair to use the custom subclass.
- MyCustomOverlayView must be a subclass of MTDDirectionsOverlayView, otherwise an exception is thrown.
- Hide the warning “Incompatible pointer types sending ‘Class’ to parameter of type ‘id’ ” with casting class to (id), it’s perfectly safe to do so. 
- Alternatively you can also use NSStrings.
- 
- Note: Currently the only supported class for this usage is MTDDirectionsOverlayView
- */
-@property (nonatomic, copy) NSDictionary *overrideClassNames;
-
-/******************************************
  @name Directions
  ******************************************/
 

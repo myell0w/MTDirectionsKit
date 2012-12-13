@@ -13,6 +13,7 @@
 #import "MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h"
 #import "MTDMapViewDelegateProxy.h"
 #import "MTDFunctions.h"
+#import "MTDCustomization.h"
 
 
 @interface MTDMapView () <MKMapViewDelegate> {
@@ -549,7 +550,7 @@
 
     UIColor *overlayColor = [self mtd_askDelegateForColorOfOverlay:self.directionsOverlay];
     CGFloat overlayLineWidthFactor = [self mtd_askDelegateForLineWidthFactorOfOverlay:self.directionsOverlay];
-    Class directionsOverlayClass = MTDOverriddenClass(self.overrideClassNames, [MTDDirectionsOverlayView class]);
+    Class directionsOverlayClass = MTDOverriddenClass([MTDDirectionsOverlayView class]);
 
     if (directionsOverlayClass != Nil) {
         self.directionsOverlayView = [[directionsOverlayClass alloc] initWithOverlay:self.directionsOverlay];
