@@ -7,6 +7,9 @@
 //
 
 
+#import "MTDCustomization.h"
+
+
 @class MTDRoute;
 
 
@@ -14,8 +17,10 @@
  An instance of MTDDirectionsOverlayView is a subclass of MKOverlayView and is used
  to draw the directions/route on top your instance of MTDMapView. It draws a path
  including all waypoints stored in the underlying instance of MTDDirectionsOverlay.
+ 
+ This class can be overridden with a subclass by using MTDOverrideClass.
  */
-@interface MTDDirectionsOverlayView : MKOverlayView
+@interface MTD_CUSTOMIZATION_SUPPORTED MTDDirectionsOverlayView : MKOverlayView
 
 /** Current line width at the current zoom level */
 @property (nonatomic, readonly) CGFloat fullLineWidth;

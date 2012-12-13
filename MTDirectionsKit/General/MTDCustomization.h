@@ -7,6 +7,10 @@
 //
 
 
+// Used to annotate classes in the headers, that support customization by overriding
+#define MTD_CUSTOMIZATION_SUPPORTED
+
+
 /**
  Use this to use specific subclasses instead of the default MTD* classes.
 
