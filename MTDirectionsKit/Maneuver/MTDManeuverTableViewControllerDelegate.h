@@ -16,6 +16,17 @@
  */
 @protocol MTDManeuverTableViewControllerDelegate <NSObject>
 
+@optional
+
+/**
+ Asks the delegate whether the maneuver at the given index path can be selected.
+ 
+ @param maneuverTableViewController an instance of MTDManeuverTableViewController
+ @param indexPath the index path of the row that got selected
+ @return YES in case the maneuver can be selected, NO otherwise
+ */
+- (BOOL)maneuverTableViewController:(MTDManeuverTableViewController *)maneuverTableViewController canSelectManeuverAtIndexPath:(NSIndexPath *)indexPath;
+
 /**
  Tells the delegate that the specific maneuveur at the given index path is now selected.
  

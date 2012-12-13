@@ -51,4 +51,13 @@
  */
 + (void)setInstructionsFont:(UIFont *)instructionsFont;
 
+/**
+ Set the background color of the cell for the selected state. You can easily customize this property using UIAppearance.
+ 
+ e.g. [[MTDManeuverTableViewCell appearance] setSelectedBackgroundColor:[UIColor redColor]];
+
+ @param backgroundColor the color of the selectedBackgroundView
+ */
+- (void)setSelectedBackgroundColor:(UIColor *)backgroundColor UI_APPEARANCE_SELECTOR;
+
 @end

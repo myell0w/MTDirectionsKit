@@ -33,7 +33,7 @@ static BOOL mtd_bundleLoaded = NO;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
-        self.selectionStyle = UITableViewCellSelectionStyleGray;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
 
         self.textLabel.textColor = [UIColor darkGrayColor];
         self.textLabel.font = mtd_distanceFont;
@@ -103,15 +103,50 @@ static BOOL mtd_bundleLoaded = NO;
 #pragma mark - UITableViewCell
 ////////////////////////////////////////////////////////////////////////
 
+- (void)prepareForReuse {
+    [super prepareForReuse];
+
+    self.maneuver = nil;
+}
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - MTDManeuverTableViewCell
+////////////////////////////////////////////////////////////////////////
+
 - (void)setManeuver:(MTDManeuver *)maneuver {
     if (maneuver != _maneuver) {
         _maneuver = maneuver;
 
-        self.imageView.image = MTDGetImageForTurnType(maneuver.turnType);
-        self.textLabel.text = [maneuver.distance description];
-        self.detailTextLabel.text = maneuver.instructions;
+        if (maneuver != nil) {
+            self.imageView.image = MTDGetImageForTurnType(maneuver.turnType);
+            self.detailTextLabel.text = maneuver.instructions;
+
+            if (maneuver.distance.distanceInMeter > 0.) {
+                self.textLabel.text = [maneuver.distance description];
+            } else {
+                self.textLabel.text = nil;
+            }
+        } else {
+            self.imageView.image = nil;
+            self.textLabel.text = nil;
+            self.detailTextLabel.text = nil;
+        }
+        
         [self setNeedsLayout];
     }
+}
+
+- (void)setSelectedBackgroundColor:(UIColor *)backgroundColor {
+    UIView *backgroundView = self.selectedBackgroundView;
+
+    if (backgroundView == nil || ![backgroundView isMemberOfClass:[UIView class]]) {
+        backgroundView = [[UIView alloc] initWithFrame:self.bounds];
+        backgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        self.selectedBackgroundView = backgroundView;
+    }
+
+    self.selectionStyle = UITableViewCellSelectionStyleGray;
+    backgroundView.backgroundColor = backgroundColor;
 }
 
 @end
