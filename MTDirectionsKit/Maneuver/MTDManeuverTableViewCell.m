@@ -3,7 +3,7 @@
 
 
 #define kMTDImageMargin                     10.f
-#define kMTDImageViewSize                   CGSizeMake(40.f,42.f)
+#define kMTDImageViewSize                   CGSizeMake(44.f,44.f)
 #define kMTDImageViewWidthIncludingMargin   (2*kMTDImageMargin + kMTDImageViewSize.width)
 #define kMTDImageViewHeightIncludingMargin  (2*kMTDImageMargin + kMTDImageViewSize.height)
 #define kMTDMinCellHeight                   (kMTDImageViewHeightIncludingMargin + 10.f)
