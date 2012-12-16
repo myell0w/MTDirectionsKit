@@ -22,7 +22,7 @@
         _cardinalDirection = MTDCardinalDirectionUnknown;
         _turnType = MTDTurnTypeUnknown;
     }
-    
+
     return self;
 }
 
@@ -68,13 +68,13 @@
 	if (![aManeuver isMemberOfClass:self.class]) {
 		return NO;
 	}
-	
-	return [self.waypoint isEqual:aManeuver.waypoint] &&
-	self.distance.distanceInMeter == aManeuver.distance.distanceInMeter &&
-	self.timeInSeconds == aManeuver.timeInSeconds &&
-	[self.instructions isEqualToString:aManeuver.instructions] &&
-	self.cardinalDirection == aManeuver.cardinalDirection &&
-	self.turnType == aManeuver.turnType &&
-	((!self.name && !aManeuver.name) || [self.name isEqualToString:aManeuver.name]);
+
+	return ([self.waypoint isEqual:aManeuver.waypoint] &&
+            self.distance.distanceInMeter == aManeuver.distance.distanceInMeter &&
+            self.timeInSeconds == aManeuver.timeInSeconds &&
+            [self.instructions isEqualToString:aManeuver.instructions] &&
+            self.cardinalDirection == aManeuver.cardinalDirection &&
+            self.turnType == aManeuver.turnType &&
+            ((!self.name && !aManeuver.name) || [self.name isEqualToString:aManeuver.name]));
 }
 @end

@@ -21,7 +21,7 @@ NS_INLINE __attribute__((constructor)) void MTDLoadLocale(void) {
         MTDDirectionsSetLocale([NSLocale currentLocale]);
 
         // the user can configure the supported locales by changing MTDirectionsKit.bundle/SupportedLocales.plist
-        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"MTDirectionsKit.bundle/SupportedLocales" ofType:@"plist"];
+        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"MTDirectionsKit.bundle/supported-locales" ofType:@"plist"];
         mtd_supportedLocales = [NSDictionary dictionaryWithContentsOfFile:plistPath];
 
         // If we can't find the plist in the bundle create a default one

@@ -222,3 +222,21 @@ BOOL MTDDirectionsSupportsAppleMaps(void) {
 
     return supportsAppleMaps;
 }
+
+UIImage *MTDColoredImage(CGSize size, UIColor *color) {
+    CGRect rect = (CGRect){CGPointZero, size};
+    UIImage *image = nil;
+
+    UIGraphicsBeginImageContext(size);
+    {
+        CGContextRef context = UIGraphicsGetCurrentContext();
+
+        CGContextSetFillColorWithColor(context, color.CGColor);
+        CGContextFillRect(context, rect);
+        
+        image = UIGraphicsGetImageFromCurrentImageContext();
+    }
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
