@@ -11,6 +11,8 @@
         unsigned int canSelect:1;
         unsigned int didSelect:1;
 	} _delegateFlags;
+
+    BOOL _hideTurnTypeImages;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -22,6 +24,12 @@
         self.title = route.name;
 
         _route = route;
+
+        NSArray *maneuversWithDefinedTurnType = [route.maneuvers filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(MTDManeuver *evaluatedObject, __unused NSDictionary *bindings) {
+            return evaluatedObject.turnType != MTDTurnTypeUnknown;
+        }]];
+
+        _hideTurnTypeImages = maneuversWithDefinedTurnType.count == 0;
     }
 
     return self;
@@ -35,6 +43,12 @@
     [super viewDidLoad];
 
     self.tableView.separatorColor = [UIColor colorWithRed:0.878f green:0.878f blue:0.878f alpha:1.f];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    [MTDManeuverTableViewCell setTurnTypeImageHidden:_hideTurnTypeImages];
 }
 
 ////////////////////////////////////////////////////////////////////////

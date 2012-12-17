@@ -1,18 +1,19 @@
 #import "MTDManeuverTableViewCell.h"
 #import <MTDirectionsKit/MTDirectionsKit.h>
 
+#import <QuartzCore/QuartzCore.h>
 
 #define kMTDImageMargin                     10.f
-#define kMTDImageViewSize                   CGSizeMake(44.f,44.f)
-#define kMTDImageViewWidthIncludingMargin   (2*kMTDImageMargin + kMTDImageViewSize.width)
-#define kMTDImageViewHeightIncludingMargin  (2*kMTDImageMargin + kMTDImageViewSize.height)
+#define kMTDImageViewWidthIncludingMargin   (2*kMTDImageMargin + mtd_imageSize.width)
+#define kMTDImageViewHeightIncludingMargin  (2*kMTDImageMargin + mtd_imageSize.height)
 #define kMTDMinCellHeight                   (kMTDImageViewHeightIncludingMargin + 10.f)
 
 
 static UIFont *mtd_distanceFont = nil;
 static UIFont *mtd_instructionsFont = nil;
+static BOOL mtd_turnTypeImageHidden = NO;
 static UIImage *mtd_emptyImage = nil;
-static BOOL mtd_bundleLoaded = NO;
+static CGSize mtd_imageSize = (CGSize){0.f,0.f};
 
 
 @implementation MTDManeuverTableViewCell
@@ -29,13 +30,11 @@ static BOOL mtd_bundleLoaded = NO;
         // Test if the bundle was added to see if the images can be displayed.
         // If not, we don't use the imageView size to calculate the size of the cell
         UIImage *testImage = MTDGetImageForTurnType(MTDTurnTypeLeft);
-        mtd_bundleLoaded = testImage != nil;
 
+        mtd_imageSize = testImage.size;
         // if there is no image specified for some turn type we display a
         // transparent one instead to align the labels
-        if (mtd_bundleLoaded) {
-            mtd_emptyImage = MTDColoredImage(kMTDImageViewSize, [UIColor clearColor]);
-        }
+        mtd_emptyImage = MTDColoredImage(mtd_imageSize, [UIColor clearColor]);
     }
 }
 
@@ -61,7 +60,7 @@ static BOOL mtd_bundleLoaded = NO;
 ////////////////////////////////////////////////////////////////////////
 
 + (CGFloat)neededHeightForManeuver:(MTDManeuver *)maneuver constrainedToWidth:(CGFloat)width {
-    BOOL imageVisible = mtd_bundleLoaded && maneuver.turnType != MTDTurnTypeUnknown;
+    BOOL imageVisible = !mtd_turnTypeImageHidden && !CGSizeEqualToSize(mtd_imageSize, CGSizeZero);
     CGFloat innerWidth = width - 20.f;
     NSString *headerText = [maneuver.distance description];
     NSString *detailText = maneuver.instructions;
@@ -97,6 +96,10 @@ static BOOL mtd_bundleLoaded = NO;
     }
 }
 
++ (void)setTurnTypeImageHidden:(BOOL)imageHidden {
+    mtd_turnTypeImageHidden = imageHidden;
+}
+
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - UIView
 ////////////////////////////////////////////////////////////////////////
@@ -106,7 +109,7 @@ static BOOL mtd_bundleLoaded = NO;
 
     CGRect frame = self.imageView.frame;
 
-    frame.size = kMTDImageViewSize;
+    frame.size = mtd_imageSize;
     frame.origin.x = kMTDImageMargin;
     frame.origin.y = (CGRectGetHeight(self.frame) - CGRectGetHeight(frame)) / 2.f;
 
@@ -132,7 +135,7 @@ static BOOL mtd_bundleLoaded = NO;
         _maneuver = maneuver;
 
         if (maneuver != nil) {
-            if (mtd_bundleLoaded) {
+            if (!mtd_turnTypeImageHidden && !CGSizeEqualToSize(mtd_imageSize, CGSizeZero)) {
                 UIImage *image =  MTDGetImageForTurnType(maneuver.turnType);
 
                 if (CGSizeEqualToSize(image.size, CGSizeZero)) {

@@ -52,6 +52,14 @@
 + (void)setInstructionsFont:(UIFont *)instructionsFont;
 
 /**
+ Let's you programatically hide the turn type image displayed on the left, if 
+ MTDirectionsKit.bundle is added to your resources. Defaults to NO.
+ 
+ @param imageHidden YES if you want to hide the image, NO otherwise
+ */
++ (void)setTurnTypeImageHidden:(BOOL)imageHidden;
+
+/**
  Set the background color of the cell for the selected state. You can easily customize this property using UIAppearance.
  
  e.g. [[MTDManeuverTableViewCell appearance] setSelectedBackgroundColor:[UIColor redColor]];
