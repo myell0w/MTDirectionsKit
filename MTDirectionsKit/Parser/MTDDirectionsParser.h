@@ -78,6 +78,19 @@
          routeType:(MTDDirectionsRouteType)routeType
               data:(id)data;
 
+
+/******************************************
+ @name Parsing
+ ******************************************/
+
+/**
+ Updates the names of the routes with the name of the longest maneuver on this route.
+ 
+ @param routes array of MTDRoute objects
+ @param forceUpdate if forceUpdate is set to YES the name of the route gets updated, even if it's already set
+ */
+- (void)updateRouteNamesFromLongestDistanceManeuver:(NSArray *)routes forceUpdate:(BOOL)forceUpdate;
+
 /**
  Calls the given completion block on the main queue, if it is not nil.
  

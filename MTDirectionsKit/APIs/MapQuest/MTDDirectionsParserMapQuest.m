@@ -49,17 +49,6 @@
         NSMutableArray *routes = [NSMutableArray arrayWithCapacity:routeNodes.count];
         NSArray *orderedIntermediateGoals = nil;
 
-        // Parse Routes
-        {
-            for (MTDXMLElement *routeNode in routeNodes) {
-                MTDRoute *route = [self mtd_routeFromRouteNode:routeNode];
-
-                if (route != nil) {
-                    [routes addObject:route];
-                }
-            }
-        }
-
         // Route optimization can reorder the intermediate goals, we want to know the final order
         if (self.intermediateGoals.count > 0) {
             // Order the intermediate goals in the order returned by the API (optimized)
@@ -73,6 +62,17 @@
             NSArray *allWaypoints = [self mtd_waypointsIncludingFromAndToWithIntermediateGoals:orderedIntermediateGoals];
 
             [self mtd_addAddressesFromLocationNodes:locationAddressNodes toWaypoints:allWaypoints];
+        }
+
+        // Parse Routes
+        {
+            for (MTDXMLElement *routeNode in routeNodes) {
+                MTDRoute *route = [self mtd_routeFromRouteNode:routeNode];
+
+                if (route != nil) {
+                    [routes addObject:route];
+                }
+            }
         }
 
         overlay = [[MTDDirectionsOverlay alloc] initWithRoutes:routes
@@ -312,11 +312,25 @@
     }
 
     // manually add maneuver for arriving at destination
-	MTDManeuver *arrivalManeuver = [[MTDManeuver alloc] initWithWaypoint:self.to distance:nil timeInSeconds:0 instructions:nil];
-	arrivalManeuver.turnType = MTDTurnTypeArrive;
+	MTDManeuver *arrivalManeuver = [self mtd_arrivalManeuverWithWaypoint:self.to];
 	[maneuvers addObject:arrivalManeuver];
     
     return maneuvers;
+}
+
+// This method returns a hand-made arrival maneuver
+- (MTDManeuver *)mtd_arrivalManeuverWithWaypoint:(MTDWaypoint *)waypoint {
+    // TODO: localize, offer possibility for custom localization
+    NSString *destination = waypoint.address != nil ? [waypoint.address fullAddress] : @"destination";
+    NSString *instructions = [NSString stringWithFormat:@"Arrive at %@", destination];
+    MTDManeuver *arrivalManeuver = [[MTDManeuver alloc] initWithWaypoint:waypoint
+                                                                distance:nil
+                                                           timeInSeconds:0.
+                                                            instructions:instructions];
+
+	arrivalManeuver.turnType = MTDTurnTypeArrive;
+
+    return arrivalManeuver;
 }
 
 @end
