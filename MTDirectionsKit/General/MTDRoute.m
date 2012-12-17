@@ -89,7 +89,7 @@
     
     MTDRoute *route = (MTDRoute *)object;
     
-    return [self.waypoints isEqualToArray:route.waypoints];
+    return self.waypoints == route.waypoints || [self.waypoints isEqualToArray:route.waypoints];
 }
 
 ////////////////////////////////////////////////////////////////////////

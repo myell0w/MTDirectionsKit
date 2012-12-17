@@ -64,17 +64,19 @@
             self.instructions];
 }
 
-- (BOOL)isEqual:(MTDManeuver*)aManeuver {
-	if (![aManeuver isMemberOfClass:self.class]) {
+- (BOOL)isEqual:(id)object {
+	if (![object isMemberOfClass:[MTDManeuver class]]) {
 		return NO;
 	}
 
-	return ([self.waypoint isEqual:aManeuver.waypoint] &&
-            self.distance.distanceInMeter == aManeuver.distance.distanceInMeter &&
-            self.timeInSeconds == aManeuver.timeInSeconds &&
-            [self.instructions isEqualToString:aManeuver.instructions] &&
-            self.cardinalDirection == aManeuver.cardinalDirection &&
-            self.turnType == aManeuver.turnType &&
-            ((!self.name && !aManeuver.name) || [self.name isEqualToString:aManeuver.name]));
+    MTDManeuver *maneuver = (MTDManeuver *)object;
+
+	return ((self.waypoint == maneuver.waypoint || [self.waypoint isEqual:maneuver.waypoint]) &&
+            self.distance.distanceInMeter == maneuver.distance.distanceInMeter &&
+            self.timeInSeconds == maneuver.timeInSeconds &&
+            [self.instructions isEqualToString:maneuver.instructions] &&
+            self.cardinalDirection == maneuver.cardinalDirection &&
+            self.turnType == maneuver.turnType &&
+            (self.name == maneuver.name || [self.name isEqualToString:maneuver.name]));
 }
 @end

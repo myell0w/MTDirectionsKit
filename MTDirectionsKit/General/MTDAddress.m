@@ -62,7 +62,10 @@
 
 - (BOOL)isEqual:(id)object {
     if ([object isKindOfClass:[MTDAddress class]]) {
-        return [[self description] isEqualToString:[object description]];
+        NSString *address1 = [self fullAddress];
+        NSString *address2 = [object fullAddress];
+
+        return address1 == address2 || [address1 isEqualToString:address2];
     }
 
     return NO;

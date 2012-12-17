@@ -109,12 +109,15 @@
         return @"<MTDWaypoint currentLocation>";
     }
 
+    NSString *addressDescription = self.address != nil ? [self.address description] : @"Unknown";
+
     if (CLLocationCoordinate2DIsValid(self.coordinate)) {
-        return [NSString stringWithFormat:@"<MTDWaypoint: %@>",
-                MTDStringFromCLLocationCoordinate2D(self.coordinate)];
+        return [NSString stringWithFormat:@"<MTDWaypoint: %@ (Address: %@)>",
+                MTDStringFromCLLocationCoordinate2D(self.coordinate),
+                addressDescription];
     } else {
         return [NSString stringWithFormat:@"<MTDWaypoint: (Address: %@)>",
-                self.address != nil ? self.address : @"Unknown"];
+                addressDescription];
     }
 }
 
@@ -135,7 +138,7 @@
         return (fabs(self.coordinate.latitude - otherWaypoint.coordinate.latitude) < epsilon &&
                 fabs(self.coordinate.longitude - otherWaypoint.coordinate.longitude) < epsilon);
     } else {
-        return [self.address isEqual:otherWaypoint.address];
+        return self.address == otherWaypoint.address || [self.address isEqual:otherWaypoint.address];
     }
 }
 
