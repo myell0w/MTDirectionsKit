@@ -8,7 +8,7 @@
 
 #import "MTDTurnType.h"
 
-NS_INLINE MTDTurnType MTDTurnTypeFromBingDescription(__unused NSString *description) {
+NS_INLINE MTDTurnType MTDTurnTypeFromBingDescription(NSString *description) {
     // exact matching
     if ([description isEqualToString:@"Continue"]) {
         return MTDTurnTypeStraight;

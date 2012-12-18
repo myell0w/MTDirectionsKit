@@ -101,6 +101,8 @@
 		9B2C42BD155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C42B8155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.m */; };
 		9B2C42BE155EB85B00C0E4CE /* MTDDirectionsRouteType+Google.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2C42B9155EB85B00C0E4CE /* MTDDirectionsRouteType+Google.h */; };
 		9B4E98E015AD77E5002F0302 /* MTDAddressTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4E98DF15AD77E5002F0302 /* MTDAddressTest.m */; };
+		9B528114167A784200D4A816 /* MTDCustomization.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B528112167A784200D4A816 /* MTDCustomization.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B528115167A784200D4A816 /* MTDCustomization.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B528113167A784200D4A816 /* MTDCustomization.m */; };
 		9B58087E15B5F0E200D04EB5 /* MTDFunctionsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B58087D15B5F0E200D04EB5 /* MTDFunctionsTest.m */; };
 		9B68099916234FD700A12B83 /* MTDLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B000FBB1620656700E5FF03 /* MTDLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B68099A16234FE100A12B83 /* MTDLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B000FBC1620656700E5FF03 /* MTDLogging.m */; };
@@ -254,6 +256,8 @@
 		9B2C42B9155EB85B00C0E4CE /* MTDDirectionsRouteType+Google.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTDDirectionsRouteType+Google.h"; sourceTree = "<group>"; };
 		9B4E98DE15AD77E5002F0302 /* MTDAddressTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDAddressTest.h; sourceTree = "<group>"; };
 		9B4E98DF15AD77E5002F0302 /* MTDAddressTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDAddressTest.m; sourceTree = "<group>"; };
+		9B528112167A784200D4A816 /* MTDCustomization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDCustomization.h; sourceTree = "<group>"; };
+		9B528113167A784200D4A816 /* MTDCustomization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDCustomization.m; sourceTree = "<group>"; };
 		9B58087C15B5F0E200D04EB5 /* MTDFunctionsTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDFunctionsTest.h; sourceTree = "<group>"; };
 		9B58087D15B5F0E200D04EB5 /* MTDFunctionsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDFunctionsTest.m; sourceTree = "<group>"; };
 		9B6C18C014A7E18200087893 /* libMTDirectionsKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMTDirectionsKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -342,6 +346,8 @@
 			children = (
 				9B2A5ADC1629F14B00CE4709 /* MTDAddress.h */,
 				9B2A5ADD1629F14B00CE4709 /* MTDAddress.m */,
+				9B528112167A784200D4A816 /* MTDCustomization.h */,
+				9B528113167A784200D4A816 /* MTDCustomization.m */,
 				9B000FB31620656700E5FF03 /* MTDDirectionsDefines.h */,
 				9B2A5ADE1629F14B00CE4709 /* MTDDirectionsDisplayType.h */,
 				9B2A5ADF1629F14B00CE4709 /* MTDDirectionsRouteType.h */,
@@ -684,6 +690,7 @@
 				9B2A5AF21629F14B00CE4709 /* MTDWaypoint.h in Headers */,
 				9B2A5AF61629F1CB00CE4709 /* MTDCardinalDirection.h in Headers */,
 				9B2A5AF71629F1CB00CE4709 /* MTDTurnType.h in Headers */,
+				9B528114167A784200D4A816 /* MTDCustomization.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -890,6 +897,7 @@
 				9B2A5AEE1629F14B00CE4709 /* MTDDistance.m in Sources */,
 				9B2A5AF01629F14B00CE4709 /* MTDRoute.m in Sources */,
 				9B2A5AF31629F14B00CE4709 /* MTDWaypoint.m in Sources */,
+				9B528115167A784200D4A816 /* MTDCustomization.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

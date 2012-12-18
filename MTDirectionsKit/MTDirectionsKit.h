@@ -15,6 +15,7 @@
 
 // General
 #import <MTDirectionsKit/MTDAddress.h>
+#import <MTDirectionsKit/MTDCustomization.h>
 #import <MTDirectionsKit/MTDWaypoint.h>
 #import <MTDirectionsKit/MTDDistance.h>
 #import <MTDirectionsKit/MTDDirectionsDisplayType.h>

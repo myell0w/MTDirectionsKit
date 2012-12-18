@@ -1,3 +1,24 @@
+=1.6.0 15.12.2012
+ * Out of the box UI for displayed textual maneuver instructions
+ * MTDirectionsKit style icons for maneuver turn types
+ * Supported Locales can be customized on a per-API basis via MTDirectionsKit.bundle/SupportedLocales.plist
+ * Fix warning 'weak receiver may unpredictably nil' when the deployment target is set to >= 5.0
+ * Fixed: added missing delegate forwarding of mapView:didChangeUserTrackingMode:animated:
+ * Fixed possible memory leaks in MTDXMLElement
+ * Support for UIAppearance
+ * New Turn Types: Roundabout, turn left/right to stay
+ * Better Turn Type mapping from APIs
+ * Fixed: Bing Pedestrian Mode
+ * Dynamically generate a Route-Name when Bing API is used instead of using the cryptic value returned by the API
+ * Manually add arrival maneuver to MapQuest API
+ * Much improved route tap selection
+ * Default padding is used when zooming to directions. Padding can be customized by setting directionsEdgeInsets.
+ * Added [MTDMapView activateRoute:] to programatically activate a route
+ * Fixed a possible crash in [MTDMapView dealloc]
+ * Easy overlay customization: Provide your own subclass of MTDDirectionsOverlayView
+ * Using instancetype wherever appropriate
+ * Special thanks to @manuelmaly for the turn type icons and to @ortwingentz for contributing a lot of fixes to this release!
+
 =1.5.0 12.10.2012
  * Further improved gesture recognizer support that doesn't infere with the default gesture recognizers of MKMapView
  * New delegate call mapView:didActivateRoute:ofDirectionsOverlay: that indicates when the user actives a given route

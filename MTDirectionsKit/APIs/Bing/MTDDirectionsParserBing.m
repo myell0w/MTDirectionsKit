@@ -67,8 +67,9 @@
                     [routes addObject:route];
                 }
             }
-			
-			[self mtd_setRouteNamesFromLongestDistanceManeuver:routes];
+
+            // We force a route name update because Bing returns cryptic values for the route name
+			[self updateRouteNamesFromLongestDistanceManeuver:routes forceUpdate:YES];
         }
 
         // Parse Addresses
@@ -269,47 +270,6 @@
     }
     
     return maneuvers;
-}
-
-// calculate route name by taking the maneuver.name of the longest unique maneuver
-- (void)mtd_setRouteNamesFromLongestDistanceManeuver:(NSArray *)routes {
-    for (MTDRoute *route in routes) {
-        NSString *name = nil;
-        CLLocationDistance longestDistance = 0.;
-        NSMutableArray *otherRoutes = [routes mutableCopy];
-
-        [otherRoutes removeObject:route];
-
-        for (MTDManeuver *maneuver in route.maneuvers) {
-            if (!maneuver.name) {
-                continue;
-            }
-            
-            if (maneuver.distance.distanceInMeter > longestDistance) {
-                BOOL otherNameFound = NO;
-
-                for (MTDRoute *otherRoute in otherRoutes) {
-                    for (MTDManeuver *otherManeuver in otherRoute.maneuvers) {
-                        if ([maneuver isEqual:otherManeuver]) {
-                            otherNameFound = YES;
-                            break;
-                        }
-                    }
-                    
-                    if (otherNameFound) {
-                        break;
-                    }
-                }
-                
-                if (!otherNameFound) {
-                    name = maneuver.name;
-                    longestDistance = maneuver.distance.distanceInMeter;
-                }
-            }
-        }
-        
-        route.name = name;
-    }
 }
 
 @end

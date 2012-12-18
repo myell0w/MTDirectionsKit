@@ -1,5 +1,8 @@
 #import "MTDDirectionsParser.h"
 #import "MTDWaypoint.h"
+#import "MTDRoute.h"
+#import "MTDManeuver.h"
+#import "MTDDistance.h"
 
 
 @interface MTDDirectionsParser ()
@@ -33,13 +36,59 @@
         _data = data;
         _routeType = routeType;
     }
-    
+
     return self;
 }
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - MTDDirectionsParser Class
 ////////////////////////////////////////////////////////////////////////
+
+- (void)updateRouteNamesFromLongestDistanceManeuver:(NSArray *)routes forceUpdate:(BOOL)forceUpdate {
+    for (MTDRoute *route in routes) {
+        if (!forceUpdate && route.name.length > 0) {
+            continue;
+        }
+
+        NSString *name = nil;
+        CLLocationDistance longestDistance = 0.;
+        NSMutableArray *otherRoutes = [routes mutableCopy];
+
+        [otherRoutes removeObject:route];
+
+        for (MTDManeuver *maneuver in route.maneuvers) {
+            if (!maneuver.name) {
+                continue;
+            }
+
+            if (maneuver.distance.distanceInMeter > longestDistance) {
+                BOOL otherNameFound = NO;
+
+                for (MTDRoute *otherRoute in otherRoutes) {
+                    for (MTDManeuver *otherManeuver in otherRoute.maneuvers) {
+                        if ([maneuver isEqual:otherManeuver]) {
+                            otherNameFound = YES;
+                            break;
+                        }
+                    }
+
+                    if (otherNameFound) {
+                        break;
+                    }
+                }
+
+                if (!otherNameFound) {
+                    name = maneuver.name;
+                    longestDistance = maneuver.distance.distanceInMeter;
+                }
+            }
+        }
+
+        if (name != nil) {
+            route.name = name;
+        }
+    }
+}
 
 - (void)callCompletion:(mtd_parser_block)completion overlay:(MTDDirectionsOverlay *)overlay error:(NSError *)error {
     if (completion != nil) {

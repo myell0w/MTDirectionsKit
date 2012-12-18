@@ -13,6 +13,7 @@
 #import "MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h"
 #import "MTDMapViewDelegateProxy.h"
 #import "MTDFunctions.h"
+#import "MTDCustomization.h"
 
 
 @interface MTDMapView () <MKMapViewDelegate> {
@@ -171,7 +172,7 @@
     MTDRoute *activeRouteBefore = self.directionsOverlay.activeRoute;
     [self.directionsOverlay mtd_activateRoute:route];
     MTDRoute *activeRouteAfter = self.directionsOverlay.activeRoute;
-    
+
     if (activeRouteBefore != activeRouteAfter) {
         [self mtd_notifyDelegateDidActivateRoute:activeRouteAfter ofOverlay:self.directionsOverlay];
         [self.directionsOverlayView setNeedsDisplayInMapRect:MKMapRectWorld];
@@ -214,7 +215,7 @@
     if (directionsDisplayType != _directionsDisplayType) {
         _directionsDisplayType = directionsDisplayType;
         self.directionsOverlayView.drawManeuvers = (directionsDisplayType == MTDDirectionsDisplayTypeDetailedManeuvers);
-        
+
         [self mtd_updateUIForDirectionsDisplayType:directionsDisplayType];
     }
 }
@@ -305,7 +306,7 @@
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
     id<MKMapViewDelegate> trueDelegate = self.mtd_trueDelegate;
-    
+
     if ([trueDelegate respondsToSelector:@selector(mapView:regionDidChangeAnimated:)]) {
         [trueDelegate mapView:mapView regionDidChangeAnimated:animated];
     }
@@ -313,7 +314,7 @@
 
 - (void)mapViewWillStartLoadingMap:(MKMapView *)mapView {
     id<MKMapViewDelegate> trueDelegate = self.mtd_trueDelegate;
-    
+
     if ([trueDelegate respondsToSelector:@selector(mapViewWillStartLoadingMap:)]) {
         [trueDelegate mapViewWillStartLoadingMap:mapView];
     }
@@ -321,7 +322,7 @@
 
 - (void)mapViewDidFinishLoadingMap:(MKMapView *)mapView {
     id<MKMapViewDelegate> trueDelegate = self.mtd_trueDelegate;
-    
+
     if ([trueDelegate respondsToSelector:@selector(mapViewDidFinishLoadingMap:)]) {
         [trueDelegate mapViewDidFinishLoadingMap:mapView];
     }
@@ -329,7 +330,7 @@
 
 - (void)mapViewDidFailLoadingMap:(MKMapView *)mapView withError:(NSError *)error {
     id<MKMapViewDelegate> trueDelegate = self.mtd_trueDelegate;
-    
+
     if ([trueDelegate respondsToSelector:@selector(mapViewDidFailLoadingMap:withError:)]) {
         [trueDelegate mapViewDidFailLoadingMap:mapView withError:error];
     }
@@ -337,7 +338,7 @@
 
 - (void)mapViewWillStartLocatingUser:(MKMapView *)mapView {
     id<MKMapViewDelegate> trueDelegate = self.mtd_trueDelegate;
-    
+
     if ([trueDelegate respondsToSelector:@selector(mapViewWillStartLocatingUser:)]) {
         [trueDelegate mapViewWillStartLocatingUser:mapView];
     }
@@ -345,7 +346,7 @@
 
 - (void)mapViewDidStopLocatingUser:(MKMapView *)mapView {
     id<MKMapViewDelegate> trueDelegate = self.mtd_trueDelegate;
-    
+
     if ([trueDelegate respondsToSelector:@selector(mapViewDidStopLocatingUser:)]) {
         [trueDelegate mapViewDidStopLocatingUser:mapView];
     }
@@ -353,7 +354,7 @@
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
     id<MKMapViewDelegate> trueDelegate = self.mtd_trueDelegate;
-    
+
     if ([trueDelegate respondsToSelector:@selector(mapView:didUpdateUserLocation:)]) {
         [trueDelegate mapView:mapView didUpdateUserLocation:userLocation];
     }
@@ -363,7 +364,7 @@
 
 - (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error {
     id<MKMapViewDelegate> trueDelegate = self.mtd_trueDelegate;
-    
+
     if ([trueDelegate respondsToSelector:@selector(mapView:didFailToLocateUserWithError:)]) {
         [trueDelegate mapView:mapView didFailToLocateUserWithError:error];
     }
@@ -371,7 +372,7 @@
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
     id<MKMapViewDelegate> trueDelegate = self.mtd_trueDelegate;
-    
+
     if ([trueDelegate respondsToSelector:@selector(mapView:viewForAnnotation:)]) {
         return [trueDelegate mapView:mapView viewForAnnotation:annotation];
     }
@@ -381,7 +382,7 @@
 
 - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
     id<MKMapViewDelegate> trueDelegate = self.mtd_trueDelegate;
-    
+
     if ([trueDelegate respondsToSelector:@selector(mapView:didAddAnnotationViews:)]) {
         [trueDelegate mapView:mapView didAddAnnotationViews:views];
     }
@@ -389,7 +390,7 @@
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
     id<MKMapViewDelegate> trueDelegate = self.mtd_trueDelegate;
-    
+
     if ([trueDelegate respondsToSelector:@selector(mapView:annotationView:calloutAccessoryControlTapped:)]) {
         [trueDelegate mapView:mapView annotationView:view calloutAccessoryControlTapped:control];
     }
@@ -397,7 +398,7 @@
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)annotationView didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState {
     id<MKMapViewDelegate> trueDelegate = self.mtd_trueDelegate;
-    
+
     if ([trueDelegate respondsToSelector:@selector(mapView:annotationView:didChangeDragState:fromOldState:)]) {
         [trueDelegate mapView:mapView annotationView:annotationView didChangeDragState:newState fromOldState:oldState];
     }
@@ -405,7 +406,7 @@
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
     id<MKMapViewDelegate> trueDelegate = self.mtd_trueDelegate;
-    
+
     if ([trueDelegate respondsToSelector:@selector(mapView:didSelectAnnotationView:)]) {
         [trueDelegate mapView:mapView didSelectAnnotationView:view];
     }
@@ -413,7 +414,7 @@
 
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
     id<MKMapViewDelegate> trueDelegate = self.mtd_trueDelegate;
-    
+
     if ([trueDelegate respondsToSelector:@selector(mapView:didDeselectAnnotationView:)]) {
         [trueDelegate mapView:mapView didDeselectAnnotationView:view];
     }
@@ -485,7 +486,7 @@
     }
 
     MTDAssert(mapViewGestureRecognizers.count > 0, @"Wasn't able to find gesture recognizers of MapView");
-    
+
     for (UIGestureRecognizer *gesture in mapViewGestureRecognizers) {
         if ([gesture isKindOfClass:[UITapGestureRecognizer class]]) {
             UITapGestureRecognizer *systemTap = (UITapGestureRecognizer *)gesture;
@@ -556,18 +557,21 @@
 
     UIColor *overlayColor = [self mtd_askDelegateForColorOfOverlay:self.directionsOverlay];
     CGFloat overlayLineWidthFactor = [self mtd_askDelegateForLineWidthFactorOfOverlay:self.directionsOverlay];
+    Class directionsOverlayClass = MTDOverriddenClass([MTDDirectionsOverlayView class]);
 
-    self.directionsOverlayView = [[MTDDirectionsOverlayView alloc] initWithOverlay:self.directionsOverlay];
-    self.directionsOverlayView.drawManeuvers = (self.directionsDisplayType == MTDDirectionsDisplayTypeDetailedManeuvers);
+    if (directionsOverlayClass != Nil) {
+        self.directionsOverlayView = [[directionsOverlayClass alloc] initWithOverlay:self.directionsOverlay];
+        self.directionsOverlayView.drawManeuvers = (self.directionsDisplayType == MTDDirectionsDisplayTypeDetailedManeuvers);
 
-    // If we always set the color it breaks UIAppearance because it deactivates the proxy color if we
-    // call the setter, even if we don't accept nil there.
-    if (overlayColor != nil) {
-        self.directionsOverlayView.overlayColor = overlayColor;
-    }
-    // same goes for the line width factor
-    if (overlayLineWidthFactor > 0.f) {
-        self.directionsOverlayView.overlayLineWidthFactor = overlayLineWidthFactor;
+        // If we always set the color it breaks UIAppearance because it deactivates the proxy color if we
+        // call the setter, even if we don't accept nil there.
+        if (overlayColor != nil) {
+            self.directionsOverlayView.overlayColor = overlayColor;
+        }
+        // same goes for the line width factor
+        if (overlayLineWidthFactor > 0.f) {
+            self.directionsOverlayView.overlayLineWidthFactor = overlayLineWidthFactor;
+        }
     }
 
     return self.directionsOverlayView;
@@ -770,7 +774,7 @@
 
 - (void)mtd_notifyDelegateDidFailLoadingOverlayWithError:(NSError *)error {
     id<MTDDirectionsDelegate> delegate = self.directionsDelegate;
-    
+
     if (_directionsDelegateFlags.didFailLoadingOverlay) {
         [delegate mapView:self didFailLoadingDirectionsOverlayWithError:error];
     }
@@ -785,7 +789,7 @@
 
 - (void)mtd_notifyDelegateDidActivateRoute:(MTDRoute *)route ofOverlay:(MTDDirectionsOverlay *)overlay {
     id<MTDDirectionsDelegate> delegate = self.directionsDelegate;
-    
+
     if (_directionsDelegateFlags.didActivateRouteOfOverlay) {
         [delegate mapView:self didActivateRoute:route ofDirectionsOverlay:overlay];
     }
@@ -800,7 +804,7 @@
 
 - (UIColor *)mtd_askDelegateForColorOfOverlay:(MTDDirectionsOverlay *)overlay {
     id<MTDDirectionsDelegate> delegate = self.directionsDelegate;
-    
+
     if (_directionsDelegateFlags.colorForOverlay) {
         UIColor *color = [delegate mapView:self colorForDirectionsOverlay:overlay];
         
@@ -821,7 +825,7 @@
         CGFloat lineWidthFactor = [delegate mapView:self lineWidthFactorForDirectionsOverlay:overlay];
         return lineWidthFactor;
     }
-
+    
     // doesn't get set as line width
     return -1.f;
 }

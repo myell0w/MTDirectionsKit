@@ -117,6 +117,15 @@ NSArray *MTDOrderedArrayWithSequence(NSArray *array, NSArray *sequence);
 BOOL MTDDirectionsSupportsAppleMaps(void);
 
 /**
+ This function returns an image with the given size and color.
+ 
+ @param size the size of the image
+ @param color the color of the image
+ @return a solid image with the given parameters
+ */
+UIImage *MTDColoredImage(CGSize size, UIColor *color);
+
+/**
  If there exists an element in the array with the given index, this function returns it.
  If not, the function returns nil.
  
@@ -148,5 +157,5 @@ NS_INLINE id MTDFirstObjectOfArray(NSArray *array) {
  @return MTDirectionsKit version string
  */
 NS_INLINE NSString* MTDDirectionsKitGetVersionString() {
-    return @"1.5.1";
+    return @"1.6";
 }

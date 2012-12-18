@@ -61,10 +61,10 @@ NS_INLINE MTDTurnType MTDTurnTypeFromMapQuestDescription(NSString *description) 
             return MTDTurnTypeLeaveRampLeft;
 
         case 16: // right fork
-            return MTDTurnTypeRight;
+            return MTDTurnTypeBearRight;
 
         case 17: // left fork
-            return MTDTurnTypeLeft;
+            return MTDTurnTypeBearLeft;
 
         case 18: // straight fork
             return MTDTurnTypeStraight;
