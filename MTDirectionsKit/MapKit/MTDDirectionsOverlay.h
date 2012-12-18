@@ -13,6 +13,7 @@
 @class MTDDistance;
 @class MTDAddress;
 @class MTDRoute;
+@class MTDWaypoint;
 
 
 /**
@@ -46,16 +47,12 @@
  @name Forwarding to Active Route
  ******************************************/
 
-/** all waypoints of the active route, including fromCoordinate and toCoordinate */
+/** all waypoints of the active route, including from and to */
 @property (nonatomic, strong, readonly) NSArray *waypoints;
-/** the starting coordinate of the active route */
-@property (nonatomic, readonly) CLLocationCoordinate2D fromCoordinate;
-/** the end coordinate of the active route */
-@property (nonatomic, readonly) CLLocationCoordinate2D toCoordinate;
-/** The address of the starting coordinat of the active route */
-@property (nonatomic, readonly) MTDAddress *fromAddress;
-/** The address of the end coordinate of the active route */
-@property (nonatomic, readonly) MTDAddress *toAddress;
+/** the starting point of the active route */
+@property (nonatomic, readonly) MTDWaypoint *from;
+/** the end point of the active route */
+@property (nonatomic, readonly) MTDWaypoint *to;
 /** the total distance between fromCoordinate and toCoordinate of the active route, when travelled along the given waypoints */
 @property (nonatomic, strong, readonly) MTDDistance *distance;
 /** the total estimated time for the active route */

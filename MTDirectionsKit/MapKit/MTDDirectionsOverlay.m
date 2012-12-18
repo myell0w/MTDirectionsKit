@@ -112,12 +112,12 @@
     return self.activeRoute.to.coordinate;
 }
 
-- (MTDAddress *)fromAddress {
-    return self.activeRoute.from.address;
+- (MTDWaypoint *)from {
+    return self.activeRoute.from;
 }
 
-- (MTDAddress *)toAddress {
-    return self.activeRoute.to.address;
+- (MTDWaypoint *)to {
+    return self.activeRoute.to;
 }
 
 - (MTDDistance *)distance {
