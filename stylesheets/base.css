@@ -208,6 +208,11 @@ section { }
 /*--------------------------------------------
 4. Home
 ---------------------------------------------*/
+div#sale_badge {
+	position:absolute;
+	display:none;
+}
+
 div#slider {
 	margin-top: -50px;
 	margin-left: -30px;
@@ -633,6 +638,16 @@ h1 {
 h2 {
 	font-size: 16px;
 	color: #353535;
+}
+h2.price {
+	margin-bottom:5px;
+	
+}
+h2.saleOldPrice {
+	margin-bottom:5px;
+	font-size: 10pt;
+	text-decoration:line-through;
+	font-weight: lighter;
 }
 	h2.icon {
 		background: url('../images/features_icons.png') no-repeat top left;

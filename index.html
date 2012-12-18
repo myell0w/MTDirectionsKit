@@ -27,6 +27,7 @@
 	<script type="text/javascript" src="javascripts/jquery.infieldlabel.js"></script>
 	<script type="text/javascript" src="javascripts/jquery.echoslider.js"></script>
 	<script type="text/javascript" src="javascripts/fluidapp.js"></script>
+	<script type="text/javascript" src="javascripts/sale.js"></script>
 	
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="images/favicon.png" />
@@ -65,6 +66,7 @@
 				<span class="arrow"></span>
 			</nav>
 			<!-- End Navigation -->
+			
 		</div>
 	</header>
 	<!-- End Header -->
@@ -73,13 +75,15 @@
 		
 		<!-- Start App Info -->
 		<div id="app_info">
+			<!-- Sale Badge -->
+			<div id="sale_badge"><img src="images/sale.png" alt="MTDirectionsKit is on sale" /> </div>
 			<!-- Start Logo -->
-			<a href="#home" class="logo">
+			<a href="#home" class="logo" id="logo_container">
 				<img src="images/light-logo.png" alt="MTDirectionsKit Logo" />
 			</a>
 			<!-- End Logo -->
 			<span class="tagline">drop-in solution to show routes directly inside your iOS App</span>
-			<span class="current_info">MTDirectionsKit works great on iOS6 as well!</span>
+			<span class="current_info">Works great on iOS4, iOS5 and iOS6!</span>
 			<p>
 				Did you ever wonder why Apple didn’t provide a way to show directions directly on top of MKMapView and force you to take your users to their built-in Maps.app just to guide them somewhere? </br>
 				 We too, that’s why we built MTDirectionsKit. MTDirectionsKit is an <strong>easy-to-use</strong> and <strong>easy-to-integrate</strong> <strong>framework for iOS</strong> that let's you do just that - guiding your users in the easiest and most professional way available!
@@ -113,11 +117,11 @@
 					<div class="slide" data-effect-out="slide">
 						
 						<div class="background iphone-black">
-							<img src="images/slider/slider_iphone_7.png" alt="" />
+							<img src="images/slider/slider_iphone_8.png" alt="" />
 						</div>
 						
 						<div class="foreground iphone-black">
-							<img src="images/slider/slider_iphone_3.png" alt="" />
+							<img src="images/slider/slider_iphone_7.png" alt="" />
 						</div>
 						
 					</div>
@@ -171,7 +175,8 @@
 							<li class="opened">
 								<div class="title" active="false" style="text-align:center">
 									<h1 style="color:#888;margin-bottom:10px">BINARY + FULL SOURCE CODE</h1>
-									<h2 style="margin-bottom:5px">€ 249 EUR | $ 329 USD</h2>
+									<h2 class="saleOldPrice">€ 249 EUR | $ 329 USD</h2>
+									<h2 class="price">€ 199 EUR | $ 259 USD</h2>
 								</div>
 								<div class="content">
 									<p style="font-size: 14px; text-align:justify">
@@ -199,7 +204,8 @@
 							<li class="opened">
 								<div class="title" active="false" style="text-align:center">
 									<h1 style="color:#999;margin-bottom:10px">BINARY ONLY</h1>
-									<h2 style="margin-bottom:5px">€ 149 EUR | $ 199 USD</h2>
+									<h2 class="saleOldPrice">€ 149 EUR | $ 199 USD</h2>
+									<h2 class="price">€ 119 EUR | $ 159 USD</h2>
 								</div>
 								<div class="content">
 									<p style="font-size: 14px; text-align:justify">
@@ -219,7 +225,8 @@
 					</div>
 				</div>
 				
-				<p style="text-align:center">  <b>All minor 1.x updates</b> of MTDirectionsKit are <b>included</b>.</p>
+				<p style="text-align:center">  <b>All 1.x updates</b> of MTDirectionsKit are <b>included</b>.</p>
+				<p style="text-align:center"> The license is valid for a single app bundle id. <a href="mailto:support@mtdirectionsk.it">Contact us</a> to get a <b>discount</b> for additional licenses. </p>
 			
 			</div>
 			<!-- End Purchase -->
@@ -430,7 +437,7 @@
 				<div class="screenshot_grid content_box">
 					
 					<div class="one_third">
-						<a href="images/screenshots/iphone_standing.png" class="fancybox" rel="group" title="Vienna - Our Hometown :-)"><img src="images/screenshots/iphone_standing.png" alt="Vienna" /></a>
+						<a href="images/screenshots/iphone_hand.png" class="fancybox" rel="group" title="Never get lost: textual instructions and images are built-in"><img src="images/screenshots/iphone_hand.png" alt="MTDirectionsKit showing textual instructions" /></a>
 					</div>
 
 					<div class="one_third">
@@ -451,6 +458,10 @@
 					
 					<div class="one_third column_last">
 						<a href="images/screenshots/iphone_reflection_white.png" class="fancybox" rel="group" title="Vienna University of Technology"><img src="images/screenshots/iphone_reflection_white.png" alt="Vienna University of Technology" /></a>
+					</div>
+					
+					<div class="one_third">
+						<a href="images/screenshots/iphone_standing.png" class="fancybox" rel="group" title="Vienna - Our Hometown :-)"><img src="images/screenshots/iphone_standing.png" alt="Vienna" /></a>
 					</div>
 										
 				</div>
