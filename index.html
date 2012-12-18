@@ -235,6 +235,7 @@
 			<div id="features" class="page">
 				
 				<h1>MTDirectionsKit is...</h1>
+				<p class="faq">For a list of supported features visit the section <a href="#updates">Updates</a></p>
 				
 				<div class="feature_list content_box">
 					<div class="one_half">
@@ -256,7 +257,7 @@
 
 					<div class="one_half column_last">
 						<h2 class="icon beautiful">Beautiful</h2>
-						<p>The directions drawn on top of MKMapView are <strong>beautifully handcrafted</strong> and look <strong>stunning</strong> on retina displays as well as regular ones, just take a look at the screenshots provided. You can easily tint the overlay in any color you want.</p>
+						<p>The directions drawn on top of MKMapView are <strong>beautifully handcrafted</strong> and look <strong>stunning</strong> on retina displays as well as regular ones, just take a look at the screenshots provided. You can easily tint the overlay in any color you want. MTDirectionsKit also features beautiful default turn type images for textual instructions, created by <a href="http://twitter.com/manuelmaly">Manuel Maly</a>.</p>
 					</div>
 
 					<div class="one_half">
@@ -285,6 +286,8 @@
 					<tr class="alt"><td>Alternative Routes</td><td class="check"></td><td class="check"></td><td class="check"></td></tr>
 					<tr><td>Intermediate Goals</td><td class="check"></td><td class="check"></td><td class="check"></td></tr>
 					<tr class="indented alt"><td>Route Optimization</td><td class="check"></td><td class="check"></td><td class="unsupported"></td></tr>
+					<tr><td>Textual Instructions</td><td class="check"></td><td class="check"></td><td class="check"></td></tr>
+					<tr class="indented alt"><td>Turn Type Images</td><td class="check"></td><td class="unsupported"></td><td class="check"></td></tr>
 					<tr><td colspan="4">Reverse Geocoding</td></tr>
 					<tr class="indented alt"><td>Start and Destination</td><td class="check"></td><td class="check"></td><td class="check"></td></tr>
 					<tr class="indented"><td>Intermediate Goals</td><td class="check"></td><td class="check"></td><td class="unsupported"></td></tr>
@@ -311,7 +314,10 @@
 				
 				<p class="faq"> Can I use the Google Directions API on iOS 6?</p>
 				<p class="faq_answer"> 
-					Unfortunately Google's <a href="https://developers.google.com/maps/terms">Terms of Service</a> prohibit using their data in combination with other map data then Google‘s. That means you can use the Google Directions API on iOS 4 and iOS 5, but are not allowed to use it on iOS 6. You can easily switch to one of our other supported data providers - MapQuest as well as Bing can be used on iOS 6.
+					Unfortunately Google's <a href="https://developers.google.com/maps/terms">Terms of Service</a> prohibit using their data in combination with other map data then Google‘s. That means you can use the Google Directions API on iOS 4 and iOS 5, but are not allowed to use it on iOS 6 as long as you are using MapKit to display your maps. You can easily switch to one of our other supported data providers - MapQuest as well as Bing can be used on iOS 6.
+					
+					<br /> <br />
+					<strong>Update:</strong> Since Google released an iOS SDK for Google Maps it will be possible to use the Google Directions API on iOS 6 once MTDirectionsKit supports it. Stay tuned!
 				</p>
 			</div>
 			
@@ -320,6 +326,29 @@
 				<h1>Updates</h1>
 				
 				<div class="releases">
+					<article class="release">
+						<h2>Version 1.6.0</h2>
+						<span class="date">Released on Dezember 18th, 2012</span>
+						<ul>							
+							<li class="new"><span><b>New</b></span><b>Built-in images and UI</b> for maneuvers with textual instructions</li>
+							<li class="new"><span><b>New</b></span>Possibility to override the overlay view class used for <b>customized direction overlays</b></li>
+							<li class="new"><span><b>New</b></span>Support for <b>UIAppearance</b> (iOS 5 and up)</li>
+							<li class="new"><span><b>New</b></span>Possibility to configure the list of supported locales via supported-locales.plist</li>
+							<li class="new"><span><b>New</b></span>Possibility to customize the padding when zooming to show an overview of the directions</li>
+							<li class="new"><span><b>New</b></span>Added - [MTDMapView activateRoute:] to programatically activate a route</li>
+							<li class="fix"><span><b>Fix</b></span>Greatly <b>improved tap detection</b> for selecting active route</li>
+							<li class="fix"><span><b>Fix</b></span>Fixed potention crash in - [MTDMapView setDelegate:] when called from dealloc</li>
+							<li class="fix"><span><b>Fix</b></span>Add missing delegate forward for - [MKMapViewDelegate mapView:didChangeUserTrackingMode:animated:]</li>
+							<li class="fix"><span><b>Fix</b></span>Fixed possible memory leak in MTDXMLElement</li>
+							<li class="fix"><span><b>Fix</b></span>Added more turn types (turn left/right to stay, roundabout) and improve turn type mapping from APIs</li>
+							<li class="fix"><span><b>Fix</b></span>Fixed Bing pedestrian mode</li>
+							<li class="fix"><span><b>Fix</b></span>Dynamically generate route name for Bing API from most significant maneuver</li>
+							<li class="fix"><span><b>Fix</b></span>custom isEqual: methods now correctly work with null values</li>
+						</ul>
+						
+						<p style="font-weight:bold">Special thanks to <a href="http://twitter.com/ortwingentz">Ortwin Gentz</a> from <a href="http://www.futuretap.com">FutureTap</a> for contributing to this release as well as to <a href="http://twitter.com/manuelmaly">Manuel Maly</a> for creating the turn type images of MTDirectionsKit!</p>
+					</article>
+					
 					<article class="release">
 						<h2>Version 1.5.0</h2>
 						<span class="date">Released on October 12th, 2012</span>
