@@ -15,20 +15,16 @@
     return [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:kMTDURLScheme]];
 }
 
-// comgooglemaps://?saddr=Google+Inc,+8th+Avenue,+New+York,+NY&daddr=John+F.+Kennedy+International+Airport,+Van+Wyck+Expressway,+Jamaica,+New+York&directionsmode=transit
 + (BOOL)openDirectionsFrom:(MTDWaypoint *)from to:(MTDWaypoint *)to routeType:(MTDDirectionsRouteType)routeType {
-    if ((from.hasValidCoordinate || from == [MTDWaypoint waypointForCurrentLocation]) &&
-        (to.hasValidCoordinate || to == [MTDWaypoint waypointForCurrentLocation])) {
-        NSString *googleMapsURL = kMTDURLScheme @"?";
+    if ((from.hasValidCoordinate || from == [MTDWaypoint waypointForCurrentLocation]) && to.hasValidCoordinate) {
+        NSString *googleMapsURL = [NSString stringWithFormat:@"%@?daddr=%f,%f",
+                                   kMTDURLScheme,
+                                   to.coordinate.latitude,to.coordinate.longitude];
 
         // if we don't specify from or to, the current location is used
         if (from != [MTDWaypoint waypointForCurrentLocation]) {
-            googleMapsURL = [googleMapsURL stringByAppendingFormat:@"saddr=%f,%f", from.coordinate.latitude,from.coordinate.longitude];
+            googleMapsURL = [googleMapsURL stringByAppendingFormat:@"&saddr=%f,%f", from.coordinate.latitude,from.coordinate.longitude];
         }
-        
-        if (to != [MTDWaypoint waypointForCurrentLocation]) {
-            googleMapsURL = [googleMapsURL stringByAppendingFormat:@"daddr=%f,%f", to.coordinate.latitude,to.coordinate.longitude];
-        } 
 
         switch (routeType) {
             case MTDDirectionsRouteTypePedestrian:
