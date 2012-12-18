@@ -14,7 +14,7 @@
  * Much improved route tap selection
  * Default padding is used when zooming to directions. Padding can be customized by setting directionsEdgeInsets.
  * Added [MTDMapView activateRoute:] to programatically activate a route
- * Fixed a possible crash in [MTDMapView dealloc]
+ * Fixed a possible crash in - [MTDMapView dealloc]
  * Easy overlay customization: Provide your own subclass of MTDDirectionsOverlayView
  * Using instancetype wherever appropriate
  * Special thanks to @manuelmaly for the turn type icons and to @ortwingentz for contributing a lot of fixes to this release!
