@@ -252,7 +252,7 @@
 
 - (CLLocationCoordinate2D)fromCoordinate {
     if (self.directionsOverlay != nil) {
-        return self.directionsOverlay.fromCoordinate;
+        return self.directionsOverlay.from.coordinate;
     }
 
     return kCLLocationCoordinate2DInvalid;
@@ -260,7 +260,7 @@
 
 - (CLLocationCoordinate2D)toCoordinate {
     if (self.directionsOverlay != nil) {
-        return self.directionsOverlay.toCoordinate;
+        return self.directionsOverlay.to.coordinate;
     }
 
     return kCLLocationCoordinate2DInvalid;
@@ -570,11 +570,6 @@
     return self.directionsOverlayView;
 }
 
-/**
- Internal helper method that performs the work needed to load directions, depending on the set parameter.
-
- @param alternativeDirections this flag determines whether alternative directions are used or not
- */
 - (void)mtd_loadDirectionsFrom:(MTDWaypoint *)from
                             to:(MTDWaypoint *)to
                      routeType:(MTDDirectionsRouteType)routeType
