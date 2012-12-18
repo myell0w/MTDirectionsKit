@@ -50,10 +50,6 @@
 	
 	<option value="//api/name/intermediateGoals">&nbsp;&nbsp;&nbsp;&nbsp;intermediateGoals</option>
 	
-	<option value="//api/name/mtd_HTTPRequest">&nbsp;&nbsp;&nbsp;&nbsp;mtd_HTTPRequest</option>
-	
-	<option value="//api/name/mtd_options">&nbsp;&nbsp;&nbsp;&nbsp;mtd_options</option>
-	
 	<option value="//api/name/routeType">&nbsp;&nbsp;&nbsp;&nbsp;routeType</option>
 	
 	<option value="//api/name/to">&nbsp;&nbsp;&nbsp;&nbsp;to</option>
@@ -73,8 +69,6 @@
 	<option value="//api/name/cancel">&nbsp;&nbsp;&nbsp;&nbsp;- cancel</option>
 	
 	<option value="//api/name/initWithFrom:to:intermediateGoals:routeType:options:completion:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithFrom:to:intermediateGoals:routeType:options:completion:</option>
-	
-	<option value="//api/name/mtd_requestFinished:">&nbsp;&nbsp;&nbsp;&nbsp;- mtd_requestFinished:</option>
 	
 	<option value="//api/name/preparedURLForAddress:">&nbsp;&nbsp;&nbsp;&nbsp;- preparedURLForAddress:</option>
 	
@@ -114,8 +108,6 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Subclass Hooks">Subclass Hooks</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_MTDirectionsPrivateAPI Methods">MTDirectionsPrivateAPI Methods</a></span></li>
-	
 </ul></li>
 
 
@@ -133,10 +125,6 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/from">from</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/intermediateGoals">intermediateGoals</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mtd_HTTPRequest">mtd_HTTPRequest</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mtd_options">mtd_options</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/routeType">routeType</a></span></li>
 	
@@ -159,8 +147,6 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/cancel">cancel</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithFrom:to:intermediateGoals:routeType:options:completion:">initWithFrom:to:intermediateGoals:routeType:options:completion:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mtd_requestFinished:">mtd_requestFinished:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/preparedURLForAddress:">preparedURLForAddress:</a></span></li>
 	
@@ -213,9 +199,6 @@
 						<h2 class="subtitle subtitle-overview">Overview</h2>
 						<p>An instance of MTDDirectionsRequest is used <a href="#//api/name/to">to</a> retreive information about a route <a href="#//api/name/from">from</a> a given fromCoordinate
 <a href="#//api/name/to">to</a> a given toCoordinate. MTDDirectionsRequest itself cannot be instantiated and must be subclassed.</p>
-
-<p>This category exposes private <a href="#//api/name/API">API</a> used in MTDirectionsKit <a href="#//api/name/to">to</a> other classes <a href="#//api/name/to">to</a> not generate warnings when using them.
-You should not use the properties and methods exposed here directly in your code.</p>
 					</div>
 					
 					
@@ -378,35 +361,6 @@ to=VALUE_1&amp;to=VALUE_2&amp;to=VALUE_3</p></span>
 The default implementation just returns the address as is without changing it, but subclasses can override this
 method <a href="#//api/name/to">to</a> change the request address the way they want <a href="#//api/name/to">to</a>. <a href="../Classes/MTDDirectionsRequestGoogle.html">MTDDirectionsRequestGoogle</a> for example uses this hook
 <a href="#//api/name/to">to</a> compute a signature for the address, when a business was registered. This method gets called on a global concurrent queue.</p></span>
-	</span>
-	
-	
-</li>
-						</ul>
-						
-						
-						<a title="MTDirectionsPrivateAPI Methods" name="task_MTDirectionsPrivateAPI Methods"></a>
-						<h3 class="subsubtitle task-title">MTDirectionsPrivateAPI Methods</h3>
-
-						<ul class="task-list">
-							<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/mtd_HTTPRequest">&nbsp;&nbsp;mtd_HTTPRequest</a></code>
-		<span class="tooltip"><p>object used <a href="#//api/name/to">to</a> perform a HTTP request</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/mtd_options">&nbsp;&nbsp;mtd_options</a></code>
-		<span class="tooltip"><p>bitmask of MTDDirectionsRequestOption flags</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/mtd_requestFinished:">&ndash;&nbsp;mtd_requestFinished:</a></code>
-		<span class="tooltip"><p>This method is called once the request is finished.</p></span>
 	</span>
 	
 	
@@ -594,74 +548,6 @@ method <a href="#//api/name/to">to</a> change the request address the way they w
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/mtd_HTTPRequest" title="mtd_HTTPRequest"></a>
-	<h3 class="subsubtitle method-title">mtd_HTTPRequest</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>object used <a href="#//api/name/to">to</a> perform a HTTP request</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong, setter=mtd_setHttpRequest, :) MTDHTTPRequest *mtd_HTTPRequest</code></div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDDirectionsRequest+MTDirectionsPrivateAPI.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/mtd_options" title="mtd_options"></a>
-	<h3 class="subsubtitle method-title">mtd_options</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>bitmask of MTDDirectionsRequestOption flags</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) NSUInteger mtd_options</code></div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDDirectionsRequest+MTDirectionsPrivateAPI.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
 	<a name="//api/name/routeType" title="routeType"></a>
 	<h3 class="subsubtitle method-title">routeType</h3>
 	
@@ -749,7 +635,7 @@ with a specified <a href="#//api/name/routeType">routeType</a>, options and opti
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>+ (id)requestDirectionsAPI:(MTDDirectionsAPI)<em>API</em> from:(MTDWaypoint *)<em>from</em> to:(MTDWaypoint *)<em>to</em> intermediateGoals:(NSArray *)<em>intermediateGoals</em> routeType:(MTDDirectionsRouteType)<em>routeType</em> options:(MTDDirectionsRequestOptions)<em>options</em> completion:(mtd_parser_block)<em>completion</em></code></div>
+	<div class="method-subsection method-declaration"><code>+ (instancetype)requestDirectionsAPI:(MTDDirectionsAPI)<em>API</em> from:(MTDWaypoint *)<em>from</em> to:(MTDWaypoint *)<em>to</em> intermediateGoals:(NSArray *)<em>intermediateGoals</em> routeType:(MTDDirectionsRouteType)<em>routeType</em> options:(MTDDirectionsRequestOptions)<em>options</em> completion:(mtd_parser_block)<em>completion</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
@@ -782,10 +668,8 @@ with a specified <a href="#//api/name/routeType">routeType</a>, options and opti
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>options</em></dt>
-			<dd><p>a bitmask of MTDDirectionsRequestOption</p>
-
-<pre><code>    (MTDDirectionsRequestOptionAlternativeRoutes and MTDDirectionsRequestOptionOptimize can't be specified  at once)
-</code></pre></dd>
+			<dd><p>a bitmask of MTDDirectionsRequestOption
+(MTDDirectionsRequestOptionAlternativeRoutes and MTDDirectionsRequestOptionOptimize can&rsquo;t be specified  at once)</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
@@ -896,10 +780,8 @@ with a specified <a href="#//api/name/routeType">routeType</a>, options and opti
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>options</em></dt>
-			<dd><p>a bitmask of MTDDirectionsRequestOption</p>
-
-<pre><code>    (MTDDirectionsRequestOptionAlternativeRoutes and MTDDirectionsRequestOptionOptimize can't be specified  at once)
-</code></pre></dd>
+			<dd><p>a bitmask of MTDDirectionsRequestOption
+(MTDDirectionsRequestOptionAlternativeRoutes and MTDDirectionsRequestOptionOptimize can&rsquo;t be specified  at once)</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
@@ -924,50 +806,6 @@ with a specified <a href="#//api/name/routeType">routeType</a>, options and opti
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
 		<code class="declared-in-ref">MTDDirectionsRequest.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/mtd_requestFinished:" title="mtd_requestFinished:"></a>
-	<h3 class="subsubtitle method-title">mtd_requestFinished:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>This method is called once the request is finished.</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>- (void)mtd_requestFinished:(MTDHTTPRequest *)<em>httpRequest</em></code></div>
-	
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>httpRequest</em></dt>
-			<dd><p>the object used <a href="#//api/name/to">to</a> perform the request</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDDirectionsRequest+MTDirectionsPrivateAPI.h</code><br />
 	</div>				
 	
 	
@@ -1269,7 +1107,7 @@ to=VALUE_1&amp;to=VALUE_2&amp;to=VALUE_3</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-10-12)</span><br />
+						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-12-18)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
 						

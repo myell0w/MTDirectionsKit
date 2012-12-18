@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
-		<title>MTDDirectionsParser Class Reference</title>
+		<title>MTDManeuverTableViewController Class Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
@@ -17,7 +17,7 @@
 			</div>
 			
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">MTDDirectionsParser Class Reference</h1>
+				<h1 class="hideInXcode">MTDManeuverTableViewController Class Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -38,17 +38,22 @@
 	
 	
 	
+	<option value="properties">Properties</option>
+	
+	<option value="//api/name/maneuverDelegate">&nbsp;&nbsp;&nbsp;&nbsp;maneuverDelegate</option>
+	
+	<option value="//api/name/route">&nbsp;&nbsp;&nbsp;&nbsp;route</option>
+	
+	
 	
 	
 	
 	
 	<option value="instance_methods">Instance Methods</option>
 	
-	<option value="//api/name/callCompletion:overlay:error:">&nbsp;&nbsp;&nbsp;&nbsp;- callCompletion:overlay:error:</option>
+	<option value="//api/name/initWithRoute:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithRoute:</option>
 	
-	<option value="//api/name/initWithFrom:to:intermediateGoals:routeType:data:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithFrom:to:intermediateGoals:routeType:data:</option>
-	
-	<option value="//api/name/updateRouteNamesFromLongestDistanceManeuver:forceUpdate:">&nbsp;&nbsp;&nbsp;&nbsp;- updateRouteNamesFromLongestDistanceManeuver:forceUpdate:</option>
+	<option value="//api/name/maneuverAtIndexPath:">&nbsp;&nbsp;&nbsp;&nbsp;- maneuverAtIndexPath:</option>
 	
 	
 	
@@ -66,9 +71,17 @@
 
 <li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Lifecycle">Lifecycle</a></span></li>
+</ul></li>
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Parsing">Parsing</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/maneuverDelegate">maneuverDelegate</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/route">route</a></span></li>
 	
 </ul></li>
 
@@ -76,17 +89,11 @@
 
 
 
-
-
-
-
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/callCompletion:overlay:error:">callCompletion:overlay:error:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithRoute:">initWithRoute:</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithFrom:to:intermediateGoals:routeType:data:">initWithFrom:to:intermediateGoals:routeType:data:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/updateRouteNamesFromLongestDistanceManeuver:forceUpdate:">updateRouteNamesFromLongestDistanceManeuver:forceUpdate:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/maneuverAtIndexPath:">maneuverAtIndexPath:</a></span></li>
 	
 </ul></li>
 
@@ -95,7 +102,7 @@
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="MTDDirectionsParser Class Reference" name="top"></a>
+				<a title="MTDManeuverTableViewController Class Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -104,7 +111,7 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">MTDDirectionsParser Class Reference</h1>
+						<h1 class="title title-header">MTDManeuverTableViewController Class Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
@@ -112,13 +119,10 @@
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
 	<td class="specification-title">Inherits from</td>
-	<td class="specification-value">NSObject</td>
-</tr><tr>
-	<td class="specification-title">Conforms to</td>
-	<td class="specification-value"><a href="../Protocols/MTDDirectionsParser.html">MTDDirectionsParser</a></td>
+	<td class="specification-value">UITableViewController</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">MTDDirectionsParser.h</td>
+	<td class="specification-value">MTDManeuverTableViewController.h</td>
 </tr>
 						</tbody></table></div>
 					
@@ -128,9 +132,8 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>An instance of MTDDirectionsParser is used to parse information about a route from a given fromCoordinate to a given
-toCoordinate. MTDDirectionsParser itself doesn&rsquo;t implement any logic and crashes if you try to parse data with a direct
-instance of MTDDirectionsParser, but is the base class for each concrete parser used in MTDirectionsKit.</p>
+						<p>MTDManeuverTableViewController is a subclass of UITableViewController that can be used to
+conveniently display a list of textual instructions of a <a href="#//api/name/route">route</a>.</p>
 					</div>
 					
 					
@@ -142,36 +145,36 @@ instance of MTDDirectionsParser, but is the base class for each concrete parser 
 						<h2 class="subtitle subtitle-tasks">Tasks</h2>
 						
 						
-						<a title="Lifecycle" name="task_Lifecycle"></a>
-						<h3 class="subsubtitle task-title">Lifecycle</h3>
+						
+						
 
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initWithFrom:to:intermediateGoals:routeType:data:">&ndash;&nbsp;initWithFrom:to:intermediateGoals:routeType:data:</a></code>
-		<span class="tooltip"><p>This method is used to instantiate a concrete MTDDirctionsParser-subclass.</p></span>
+		<code><a href="#//api/name/route">&nbsp;&nbsp;route</a></code>
+		<span class="tooltip"><p>The route which maneuvers get displayed</p></span>
 	</span>
+	<span class="task-item-suffix">property</span>
 	
-	
-</li>
-						</ul>
-						
-						
-						<a title="Parsing" name="task_Parsing"></a>
-						<h3 class="subsubtitle task-title">Parsing</h3>
-
-						<ul class="task-list">
-							<li>
+</li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/updateRouteNamesFromLongestDistanceManeuver:forceUpdate:">&ndash;&nbsp;updateRouteNamesFromLongestDistanceManeuver:forceUpdate:</a></code>
-		<span class="tooltip"><p>Updates the names of the routes with the name of the longest maneuver on this route.</p></span>
+		<code><a href="#//api/name/maneuverDelegate">&nbsp;&nbsp;maneuverDelegate</a></code>
+		<span class="tooltip"><p>The delegate for information about maneuver-specific events</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithRoute:">&ndash;&nbsp;initWithRoute:</a></code>
+		<span class="tooltip"><p>The designated intializer. Creates an instance of MTDManeuverTableViewController with the given
+<a href="#//api/name/route">route</a> and the style UITableViewStylePlain.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/callCompletion:overlay:error:">&ndash;&nbsp;callCompletion:overlay:error:</a></code>
-		<span class="tooltip"><p>Calls the given completion block on the main queue, if it is not nil.</p></span>
+		<code><a href="#//api/name/maneuverAtIndexPath:">&ndash;&nbsp;maneuverAtIndexPath:</a></code>
+		<span class="tooltip"><p>Returns the maneuver at the given indexPath.</p></span>
 	</span>
 	
 	
@@ -184,6 +187,80 @@ instance of MTDDirectionsParser, but is the base class for each concrete parser 
 					
 					
 					
+					<div class="section section-methods">
+						<a title="Properties" name="properties"></a>
+						<h2 class="subtitle subtitle-methods">Properties</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/maneuverDelegate" title="maneuverDelegate"></a>
+	<h3 class="subsubtitle method-title">maneuverDelegate</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The delegate for information about maneuver-specific events</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, mtd_weak) id&lt;&gt; maneuverDelegate</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDManeuverTableViewController.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/route" title="route"></a>
+	<h3 class="subsubtitle method-title">route</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The route which maneuvers get displayed</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) MTDRoute *route</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDManeuverTableViewController.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
 					
 					
 					
@@ -193,40 +270,36 @@ instance of MTDDirectionsParser, but is the base class for each concrete parser 
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/callCompletion:overlay:error:" title="callCompletion:overlay:error:"></a>
-	<h3 class="subsubtitle method-title">callCompletion:overlay:error:</h3>
+	<a name="//api/name/initWithRoute:" title="initWithRoute:"></a>
+	<h3 class="subsubtitle method-title">initWithRoute:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Calls the given completion block on the main queue, if it is not nil.</p>
+		<p>The designated intializer. Creates an instance of MTDManeuverTableViewController with the given
+<a href="#//api/name/route">route</a> and the style UITableViewStylePlain.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (void)callCompletion:(mtd_parser_block)<em>completion</em> overlay:(MTDDirectionsOverlay *)<em>overlay</em> error:(NSError *)<em>error</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (id)initWithRoute:(MTDRoute *)<em>route</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>completion</em></dt>
-			<dd><p>the block to execute on the main queue</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>overlay</em></dt>
-			<dd><p>the overlay that get&rsquo;s passed to the completion block</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>error</em></dt>
-			<dd><p>the error that get&rsquo;s passed to the completion block</p></dd>
+			<dt><em>route</em></dt>
+			<dd><p>the <a href="#//api/name/route">route</a> to display the maneuvers of</p></dd>
 		</dl>
 		
 	</div>
 	
 	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>an instance of MTDManeuverTableViewController</p>
+	</div>
 	
 	
 	
@@ -240,57 +313,42 @@ instance of MTDDirectionsParser, but is the base class for each concrete parser 
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDDirectionsParser.h</code><br />
+		<code class="declared-in-ref">MTDManeuverTableViewController.h</code><br />
 	</div>				
 	
 	
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/initWithFrom:to:intermediateGoals:routeType:data:" title="initWithFrom:to:intermediateGoals:routeType:data:"></a>
-	<h3 class="subsubtitle method-title">initWithFrom:to:intermediateGoals:routeType:data:</h3>
+	<a name="//api/name/maneuverAtIndexPath:" title="maneuverAtIndexPath:"></a>
+	<h3 class="subsubtitle method-title">maneuverAtIndexPath:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>This method is used to instantiate a concrete MTDDirctionsParser-subclass.</p>
+		<p>Returns the maneuver at the given indexPath.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (id)initWithFrom:(MTDWaypoint *)<em>from</em> to:(MTDWaypoint *)<em>to</em> intermediateGoals:(NSArray *)<em>intermediateGoals</em> routeType:(MTDDirectionsRouteType)<em>routeType</em> data:(id)<em>data</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (MTDManeuver *)maneuverAtIndexPath:(NSIndexPath *)<em>indexPath</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>from</em></dt>
-			<dd><p>the starting waypoint of the route</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>to</em></dt>
-			<dd><p>the end waypoint of the route</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>intermediateGoals</em></dt>
-			<dd><p>the intermediate goals along the route</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>routeType</em></dt>
-			<dd><p>the type of the route</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>data</em></dt>
-			<dd><p>the data holding information about the route</p></dd>
+			<dt><em>indexPath</em></dt>
+			<dd><p>the index path of the row</p></dd>
 		</dl>
 		
 	</div>
 	
 	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>an instance of <a href="../Classes/MTDManeuver.html">MTDManeuver</a> that is displayed at the given indexPath</p>
+	</div>
 	
 	
 	
@@ -304,56 +362,7 @@ instance of MTDDirectionsParser, but is the base class for each concrete parser 
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDDirectionsParser.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/updateRouteNamesFromLongestDistanceManeuver:forceUpdate:" title="updateRouteNamesFromLongestDistanceManeuver:forceUpdate:"></a>
-	<h3 class="subsubtitle method-title">updateRouteNamesFromLongestDistanceManeuver:forceUpdate:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Updates the names of the routes with the name of the longest maneuver on this route.</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>- (void)updateRouteNamesFromLongestDistanceManeuver:(NSArray *)<em>routes</em> forceUpdate:(BOOL)<em>forceUpdate</em></code></div>
-	
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>routes</em></dt>
-			<dd><p>array of <a href="../Classes/MTDRoute.html">MTDRoute</a> objects</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>forceUpdate</em></dt>
-			<dd><p>if forceUpdate is set to YES the name of the route gets updated, even if it&rsquo;s already set</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDDirectionsParser.h</code><br />
+		<code class="declared-in-ref">MTDManeuverTableViewController.h</code><br />
 	</div>				
 	
 	
