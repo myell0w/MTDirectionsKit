@@ -7,28 +7,9 @@
 //
 
 
-#import "MTDDirectionsRouteType.h"
-
-
-@class MTDWaypoint;
-
-
 // Safer method for KVO
 #define MTDKey(_SEL)               (NSStringFromSelector(@selector(_SEL)))
 
-
-/**
- Opens the built-in Maps.app and displays the directions from fromCoordinate to toCoordinate
- with the chosen routeType. Since the built-in Maps application only supports travelling per pedes,
- by public transport or by car, MTDDirectionsRouteTypePedestrian is used in case MTDDirectionsRouteTypeBicycle
- was specified.
- 
- @param from the starting waypoint of the route
- @param to the end waypoint of the route
- @param routeType the specified form of travelling, e.g. walking, by bike, by car
- @return YES, if the Maps App was opened successfully, NO otherwise
- */
-BOOL MTDDirectionsOpenInMapsApp(MTDWaypoint *from, MTDWaypoint *to, MTDDirectionsRouteType routeType);
 
 /**
  Creates a percent-escaped version of the given string.
@@ -106,14 +87,6 @@ BOOL MTDDirectionLineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMapRect rect
 NSArray *MTDOrderedArrayWithSequence(NSArray *array, NSArray *sequence);
 
 /**
- This function returns a flag that indicates whether we are running on iOS 6 or up and Apple Maps
- are used as map source instead of Google Maps.
-
- @return YES, if we are on iOS6 or up, NO otherwise
- */
-BOOL MTDDirectionsSupportsAppleMaps(void);
-
-/**
  This function returns an image with the given size and color.
  
  @param size the size of the image
@@ -121,6 +94,14 @@ BOOL MTDDirectionsSupportsAppleMaps(void);
  @return a solid image with the given parameters
  */
 UIImage *MTDColoredImage(CGSize size, UIColor *color);
+
+/**
+ This function returns a flag that indicates whether we are running on iOS 6 or up and Apple Maps
+ are used as map source instead of Google Maps.
+
+ @return YES, if we are on iOS6 or up, NO otherwise
+ */
+BOOL MTDDirectionsSupportsAppleMaps(void);
 
 /**
  If there exists an element in the array with the given index, this function returns it.

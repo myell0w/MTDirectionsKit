@@ -14,6 +14,7 @@
 #import "MTDMapViewDelegateProxy.h"
 #import "MTDFunctions.h"
 #import "MTDCustomization.h"
+#import "MTDInterApp.h"
 
 
 @interface MTDMapView () <MKMapViewDelegate> {
@@ -284,9 +285,9 @@
 
 - (BOOL)openDirectionsInMapsApp {
     if (self.directionsOverlay != nil) {
-        return MTDDirectionsOpenInMapsApp(self.directionsOverlay.activeRoute.from,
-                                          self.directionsOverlay.activeRoute.to,
-                                          self.directionsOverlay.routeType);
+        return [MTDNavigationAppBuiltInMaps openDirectionsFrom:self.directionsOverlay.activeRoute.from
+                                                            to:self.directionsOverlay.activeRoute.to
+                                                     routeType:self.directionsOverlay.routeType];
     }
 
     return NO;

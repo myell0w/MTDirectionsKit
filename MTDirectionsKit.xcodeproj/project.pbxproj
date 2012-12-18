@@ -108,6 +108,13 @@
 		9B68099A16234FE100A12B83 /* MTDLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B000FBC1620656700E5FF03 /* MTDLogging.m */; };
 		9B6C18C414A7E18200087893 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18C314A7E18200087893 /* Foundation.framework */; };
 		9B6C18F414A7E40A00087893 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18F314A7E40A00087893 /* libxml2.dylib */; };
+		9B76386C1680E21F007C0C81 /* MTDNavigationApp.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B76386A1680E21F007C0C81 /* MTDNavigationApp.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B76386D1680E21F007C0C81 /* MTDNavigationApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B76386B1680E21F007C0C81 /* MTDNavigationApp.m */; };
+		9B7638701680E348007C0C81 /* MTDNavigationAppBuiltInMaps.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B76386E1680E347007C0C81 /* MTDNavigationAppBuiltInMaps.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B7638711680E348007C0C81 /* MTDNavigationAppBuiltInMaps.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B76386F1680E347007C0C81 /* MTDNavigationAppBuiltInMaps.m */; };
+		9B7638741680E429007C0C81 /* MTDNavigationAppGoogleMaps.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B7638721680E429007C0C81 /* MTDNavigationAppGoogleMaps.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B7638751680E429007C0C81 /* MTDNavigationAppGoogleMaps.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B7638731680E429007C0C81 /* MTDNavigationAppGoogleMaps.m */; };
+		9B7638761680E9CD007C0C81 /* MTDInterApp.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B7638611680E079007C0C81 /* MTDInterApp.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B76F452157146BA00B54B05 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76F451157146BA00B54B05 /* CoreGraphics.framework */; };
 		9B7D2AFA15F66D19005E1BE2 /* bing_alternatives.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B7D2AF915F66D19005E1BE2 /* bing_alternatives.xml */; };
 		9B812606156948F100C9A6C8 /* MTDDistanceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B812605156948F100C9A6C8 /* MTDDistanceTest.m */; };
@@ -263,6 +270,13 @@
 		9B6C18C014A7E18200087893 /* libMTDirectionsKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMTDirectionsKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B6C18C314A7E18200087893 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9B6C18F314A7E40A00087893 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		9B7638611680E079007C0C81 /* MTDInterApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTDInterApp.h; sourceTree = "<group>"; };
+		9B76386A1680E21F007C0C81 /* MTDNavigationApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDNavigationApp.h; sourceTree = "<group>"; };
+		9B76386B1680E21F007C0C81 /* MTDNavigationApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDNavigationApp.m; sourceTree = "<group>"; };
+		9B76386E1680E347007C0C81 /* MTDNavigationAppBuiltInMaps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDNavigationAppBuiltInMaps.h; sourceTree = "<group>"; };
+		9B76386F1680E347007C0C81 /* MTDNavigationAppBuiltInMaps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDNavigationAppBuiltInMaps.m; sourceTree = "<group>"; };
+		9B7638721680E429007C0C81 /* MTDNavigationAppGoogleMaps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDNavigationAppGoogleMaps.h; sourceTree = "<group>"; };
+		9B7638731680E429007C0C81 /* MTDNavigationAppGoogleMaps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDNavigationAppGoogleMaps.m; sourceTree = "<group>"; };
 		9B76F451157146BA00B54B05 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		9B7D2AF915F66D19005E1BE2 /* bing_alternatives.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = bing_alternatives.xml; sourceTree = "<group>"; };
 		9B812604156948F100C9A6C8 /* MTDDistanceTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDDistanceTest.h; sourceTree = "<group>"; };
@@ -584,6 +598,7 @@
 				9B10AA09155D85B8002A3052 /* APIs */,
 				9BF3ED1E15DC13F000FAD2E6 /* Crypto */,
 				9B000FB01620656700E5FF03 /* General */,
+				9B76385F1680E05E007C0C81 /* InterApp */,
 				9B2A5AC71629EFA800CE4709 /* Maneuver */,
 				9B10AA18155D85B8002A3052 /* MapKit */,
 				9B10AA24155D85B8002A3052 /* Parser */,
@@ -607,6 +622,21 @@
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
+		};
+		9B76385F1680E05E007C0C81 /* InterApp */ = {
+			isa = PBXGroup;
+			children = (
+				9B7638611680E079007C0C81 /* MTDInterApp.h */,
+				9B76386A1680E21F007C0C81 /* MTDNavigationApp.h */,
+				9B76386B1680E21F007C0C81 /* MTDNavigationApp.m */,
+				9B76386E1680E347007C0C81 /* MTDNavigationAppBuiltInMaps.h */,
+				9B76386F1680E347007C0C81 /* MTDNavigationAppBuiltInMaps.m */,
+				9B7638721680E429007C0C81 /* MTDNavigationAppGoogleMaps.h */,
+				9B7638731680E429007C0C81 /* MTDNavigationAppGoogleMaps.m */,
+			);
+			name = InterApp;
+			path = MTDirectionsKit/InterApp;
+			sourceTree = SOURCE_ROOT;
 		};
 		9B92435415F51970000BC591 /* Bing */ = {
 			isa = PBXGroup;
@@ -691,6 +721,10 @@
 				9B2A5AF61629F1CB00CE4709 /* MTDCardinalDirection.h in Headers */,
 				9B2A5AF71629F1CB00CE4709 /* MTDTurnType.h in Headers */,
 				9B528114167A784200D4A816 /* MTDCustomization.h in Headers */,
+				9B76386C1680E21F007C0C81 /* MTDNavigationApp.h in Headers */,
+				9B7638701680E348007C0C81 /* MTDNavigationAppBuiltInMaps.h in Headers */,
+				9B7638741680E429007C0C81 /* MTDNavigationAppGoogleMaps.h in Headers */,
+				9B7638761680E9CD007C0C81 /* MTDInterApp.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -898,6 +932,9 @@
 				9B2A5AF01629F14B00CE4709 /* MTDRoute.m in Sources */,
 				9B2A5AF31629F14B00CE4709 /* MTDWaypoint.m in Sources */,
 				9B528115167A784200D4A816 /* MTDCustomization.m in Sources */,
+				9B76386D1680E21F007C0C81 /* MTDNavigationApp.m in Sources */,
+				9B7638711680E348007C0C81 /* MTDNavigationAppBuiltInMaps.m in Sources */,
+				9B7638751680E429007C0C81 /* MTDNavigationAppGoogleMaps.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

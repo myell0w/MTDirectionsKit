@@ -25,6 +25,9 @@
 #import <MTDirectionsKit/MTDLogging.h>
 #import <MTDirectionsKit/MTDLocale.h>
 
+// InterApp
+#import <MTDirectionsKit/MTDInterApp.h>
+
 // Maneuver
 #import <MTDirectionsKit/MTDManeuver.h>
 #import <MTDirectionsKit/MTDManeuverTableViewCell.h>
