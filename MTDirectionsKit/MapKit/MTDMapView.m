@@ -179,6 +179,21 @@
     }
 }
 
+- (CGFloat)distanceBetweenActiveRouteAndCoordinate:(CLLocationCoordinate2D)coordinate {
+    MTDAssert(CLLocationCoordinate2DIsValid(coordinate), @"We can't measure distance to invalid coordinates");
+
+    MTDRoute *activeRoute = self.directionsOverlay.activeRoute;
+
+    if (activeRoute == nil || !CLLocationCoordinate2DIsValid(coordinate)) {
+        return FLT_MAX;
+    }
+
+    CGPoint point = [self convertCoordinate:coordinate toPointToView:self.directionsOverlayView];
+    CGFloat distance = [self.directionsOverlayView distanceBetweenPoint:point route:self.directionsOverlay.activeRoute];
+
+    return distance;
+}
+
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Region
 ////////////////////////////////////////////////////////////////////////

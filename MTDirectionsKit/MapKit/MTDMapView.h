@@ -215,6 +215,17 @@
  */
 - (void)activateRoute:(MTDRoute *)route;
 
+/**
+ Returns the minimum distance in points between the givon coordinate and the currently active route.
+ You can use this method to determine if the user has moved away a specified value from the desired
+ route and reload the directions in that case.
+
+ @param coordinate a coordinate on the map
+ @return in case there currently is an active route the minimum distance between the coordinate to any line segment of the route.
+ In case there is no active route, FLT_MAX is returned
+ */
+- (CGFloat)distanceBetweenActiveRouteAndCoordinate:(CLLocationCoordinate2D)coordinate;
+
 /******************************************
  @name Inter-App
  ******************************************/
