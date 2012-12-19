@@ -76,7 +76,11 @@
 }
 
 - (BOOL)isValid {
-    return self.hasValidCoordinate || self.hasValidAddress || self == [MTDWaypoint waypointForCurrentLocation];
+    return self.hasValidCoordinate || self.hasValidAddress || [self isWaypointForCurrentLocation];
+}
+
+- (BOOL)isWaypointForCurrentLocation {
+    return self == [MTDWaypoint waypointForCurrentLocation];
 }
 
 // Would love to put this in a category, but then we need to specify -ObjC
@@ -105,7 +109,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (NSString *)description {
-    if (self == [MTDWaypoint waypointForCurrentLocation]) {
+    if ([self isWaypointForCurrentLocation]) {
         return @"<MTDWaypoint currentLocation>";
     }
 
