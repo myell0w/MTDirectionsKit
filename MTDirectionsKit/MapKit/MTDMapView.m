@@ -25,6 +25,7 @@
         unsigned int didActivateRouteOfOverlay:1;
         unsigned int colorForOverlay:1;
         unsigned int lineWidthFactorForOverlay:1;
+        unsigned int didUpdateUserLocationWithDistance:1;
 	} _directionsDelegateFlags;
 }
 
@@ -246,6 +247,7 @@
         _directionsDelegateFlags.didActivateRouteOfOverlay = (unsigned int)[directionsDelegate respondsToSelector:@selector(mapView:didActivateRoute:ofDirectionsOverlay:)];
         _directionsDelegateFlags.colorForOverlay = (unsigned int)[directionsDelegate respondsToSelector:@selector(mapView:colorForDirectionsOverlay:)];
         _directionsDelegateFlags.lineWidthFactorForOverlay = (unsigned int)[directionsDelegate respondsToSelector:@selector(mapView:lineWidthFactorForDirectionsOverlay:)];
+        _directionsDelegateFlags.didUpdateUserLocationWithDistance = (unsigned int)[directionsDelegate respondsToSelector:@selector(mapView:didUpdateUserLocation:distanceToActiveRoute:)];
     }
 }
 
@@ -375,6 +377,7 @@
     }
 
     self.mtd_delegateProxy.lastKnownUserCoordinate = userLocation.coordinate;
+    [self mtd_notifyDelegateDidUpdateUserLocation:userLocation];
 }
 
 - (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error {
@@ -810,27 +813,49 @@
 
     if (_directionsDelegateFlags.colorForOverlay) {
         UIColor *color = [delegate mapView:self colorForDirectionsOverlay:overlay];
-        
+
         // sanity check if delegate returned valid color
         if ([color isKindOfClass:[UIColor class]]) {
             return color;
         }
     }
-    
+
     // nil doesn't get set as overlay color
     return nil;
 }
 
 - (CGFloat)mtd_askDelegateForLineWidthFactorOfOverlay:(MTDDirectionsOverlay *)overlay {
     id<MTDDirectionsDelegate> delegate = self.directionsDelegate;
-    
+
     if (_directionsDelegateFlags.lineWidthFactorForOverlay) {
         CGFloat lineWidthFactor = [delegate mapView:self lineWidthFactorForDirectionsOverlay:overlay];
         return lineWidthFactor;
     }
-    
+
     // doesn't get set as line width
     return -1.f;
+}
+
+- (void)mtd_notifyDelegateDidUpdateUserLocation:(MKUserLocation *)userLocation {
+    id<MTDDirectionsDelegate> delegate = self.directionsDelegate;
+    CGFloat distance = [self distanceBetweenActiveRouteAndCoordinate:userLocation.coordinate];
+
+    if (distance != FLT_MAX) {
+        if (_directionsDelegateFlags.didUpdateUserLocationWithDistance) {
+            [delegate mapView:self didUpdateUserLocation:userLocation distanceToActiveRoute:distance];
+        }
+        
+        // post corresponding notification
+        NSDictionary *userInfo = (@{
+                                  MTDDirectionsNotificationKeyUserLocation: userLocation,
+                                  MTDDirectionsNotificationKeyDistanceToActiveRoute: @(distance),
+                                  MTDDirectionsNotificationKeyRoute: self.directionsOverlay.activeRoute
+                                  });
+        NSNotification *notification = [NSNotification notificationWithName:MTDMapViewDidUpdateUserLocationWithDistanceToActiveRoute
+                                                                     object:self
+                                                                   userInfo:userInfo];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+    }
 }
 
 @end
