@@ -4,6 +4,13 @@
 #import "MTDDirectionsDefines.h"
 
 
+@interface MTDWaypoint ()
+
+@property (nonatomic, assign, readwrite) CLLocationCoordinate2D coordinate; // re-defined as read/write
+
+@end
+
+
 @implementation MTDWaypoint
 
 ////////////////////////////////////////////////////////////////////////

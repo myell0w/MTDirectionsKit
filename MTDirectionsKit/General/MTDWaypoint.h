@@ -27,7 +27,7 @@
  ******************************************/
 
 /** the coordinate wrapped, may be invalid */
-@property (nonatomic, assign) CLLocationCoordinate2D coordinate;
+@property (nonatomic, assign, readonly) CLLocationCoordinate2D coordinate;
 /** the address wrapped, may be nil */
 @property (nonatomic, retain) MTDAddress *address;
 

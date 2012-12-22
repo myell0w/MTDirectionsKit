@@ -1,5 +1,6 @@
 #import "MTDDirectionsParserMapQuest.h"
 #import "MTDWaypoint.h"
+#import "MTDWaypoint+MTDirectionsPrivateAPI.h"
 #import "MTDAddress.h"
 #import "MTDDistance.h"
 #import "MTDFunctions.h"
