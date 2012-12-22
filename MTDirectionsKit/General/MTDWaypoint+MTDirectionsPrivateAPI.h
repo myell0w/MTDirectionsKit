@@ -14,4 +14,11 @@
 
 @property (nonatomic, assign, readwrite) CLLocationCoordinate2D coordinate;
 
+/**
+ Update the coordinate of [MTDWaypoint waypointForCurrentLocation] with the given coordinate.
+ 
+ @param coordinate the coordinate of the user location
+ */
++ (void)mtd_updateCurrentLocationCoordinate:(CLLocationCoordinate2D)coordinate;
+
 @end

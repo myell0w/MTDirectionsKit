@@ -164,4 +164,12 @@
     }
 }
 
+////////////////////////////////////////////////////////////////////////
+#pragma mark - Private
+////////////////////////////////////////////////////////////////////////
+
++ (void)mtd_updateCurrentLocationCoordinate:(CLLocationCoordinate2D)coordinate {
+    [MTDWaypoint waypointForCurrentLocation].coordinate = coordinate;
+}
+
 @end

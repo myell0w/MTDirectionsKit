@@ -1,6 +1,7 @@
 #import "MTDMapView.h"
 #import "MTDAddress.h"
 #import "MTDWaypoint.h"
+#import "MTDWaypoint+MTDirectionsPrivateAPI.h"
 #import "MTDManeuver.h"
 #import "MTDDistance.h"
 #import "MTDDirectionsDelegate.h"
@@ -376,7 +377,7 @@
         [trueDelegate mapView:mapView didUpdateUserLocation:userLocation];
     }
 
-    self.mtd_delegateProxy.lastKnownUserCoordinate = userLocation.coordinate;
+    [MTDWaypoint mtd_updateCurrentLocationCoordinate:userLocation.location.coordinate];
     [self mtd_notifyDelegateDidUpdateUserLocation:userLocation];
 }
 
@@ -606,7 +607,7 @@
     [self.mtd_request cancel];
 
     if (from.valid && to.valid) {
-        NSArray *allGoals = [self mtd_goalsByReplacingWaypointForCurrentLocationForFrom:from to:to intermediateGoals:intermediateGoals];
+        NSArray *allGoals = [self mtd_allGoalsWithFrom:from to:to intermediateGoals:intermediateGoals];
 
         [self mtd_stopUpdatingLocationCallingCompletion:NO];
 
@@ -655,7 +656,8 @@
     }
 }
 
-- (NSArray *)mtd_goalsByReplacingWaypointForCurrentLocationForFrom:(MTDWaypoint *)from to:(MTDWaypoint *)to intermediateGoals:(NSArray *)intermediateGoals {
+// returns nil if there are reference to [MTDWaypoint waypointForCurrentLocation] and we have no valid user location yet
+- (NSArray *)mtd_allGoalsWithFrom:(MTDWaypoint *)from to:(MTDWaypoint *)to intermediateGoals:(NSArray *)intermediateGoals {
     NSMutableArray *allGoals = [NSMutableArray arrayWithObject:from];
 
     if (intermediateGoals.count > 0) {
@@ -665,27 +667,13 @@
     [allGoals addObject:to];
 
     NSIndexSet *indexesOfWaypointsForCurrentLocation = [allGoals indexesOfObjectsPassingTest:^BOOL(MTDWaypoint *waypoint, __unused NSUInteger idx, __unused BOOL *stop) {
-        return waypoint == [MTDWaypoint waypointForCurrentLocation];
+        return [waypoint isWaypointForCurrentLocation];
     }];
 
+    // check if we have references to the current location in the array but no valid user location.
+    // in this case we indicate that we need to get one first by returning nil
     if (indexesOfWaypointsForCurrentLocation.count > 0) {
-        // if we already have a valid user location replace the references to waypointForCurrentLocation with the actual location
-        if (CLLocationCoordinate2DIsValid(self.mtd_delegateProxy.lastKnownUserCoordinate)) {
-            MTDLogVerbose(@"We already have a valid current location, no need to start CLLocationManager");
-
-            NSMutableArray *validWaypoints = [NSMutableArray arrayWithCapacity:indexesOfWaypointsForCurrentLocation.count];
-
-            for (NSUInteger idx = 0; idx < indexesOfWaypointsForCurrentLocation.count; idx++) {
-                MTDWaypoint *waypoint = [MTDWaypoint waypointWithCoordinate:self.mtd_delegateProxy.lastKnownUserCoordinate];
-                [validWaypoints addObject:waypoint];
-            }
-
-            [allGoals replaceObjectsAtIndexes:indexesOfWaypointsForCurrentLocation
-                                  withObjects:validWaypoints];
-        }
-
-        // we have no valid user location, so we indicate that we need to get one first by returning nil
-        else {
+        if (![MTDWaypoint waypointForCurrentLocation].hasValidCoordinate) {
             return nil;
         }
     }
@@ -747,7 +735,7 @@
     // post corresponding notification
     NSDictionary *userInfo = (@{MTDDirectionsNotificationKeyFrom: from,
                               MTDDirectionsNotificationKeyTo: to,
-                              MTDDirectionsNotificationKeyRouteType:@(routeType)});
+                              MTDDirectionsNotificationKeyRouteType: @(routeType)});
 
     NSNotification *notification = [NSNotification notificationWithName:MTDMapViewWillStartLoadingDirections
                                                                  object:self
