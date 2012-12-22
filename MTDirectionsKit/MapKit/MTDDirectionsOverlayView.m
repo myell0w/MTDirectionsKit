@@ -187,19 +187,28 @@ NS_INLINE CGFloat MTDDistanceToSegment(CGPoint point, CGPoint segmentPointV, CGP
 	}
 
     if ([mapView isKindOfClass:[MKMapView class]]) {
-        CGPoint tapPoint = [mapView convertPoint:point fromView:self];
-        CGPoint startPoint = [mapView convertCoordinate:((MTDWaypoint *)route.waypoints[0]).coordinate
-                                          toPointToView:mapView];
+        // we remove all instances of [MTDWaypoint waypointForCurrentLocation] from the list because if point
+        // refers to the user location (which is the most common use-case for this method) the distance will
+        // always be 0.f otherwise
+        NSArray *waypointsWithoutCurrentLocation = [route.waypoints filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(MTDWaypoint *evaluatedObject, __unused NSDictionary *bindings) {
+            return ![evaluatedObject isWaypointForCurrentLocation];
+        }]];
 
-        for (MTDWaypoint *waypoint in [route.waypoints subarrayWithRange:NSMakeRange(1, route.waypoints.count - 1)]) {
-            CGPoint cgWaypoint = [mapView convertCoordinate:waypoint.coordinate toPointToView:mapView];
-            CGFloat distance = MTDDistanceToSegment(tapPoint, startPoint, cgWaypoint);
+        if (waypointsWithoutCurrentLocation.count > 0) {
+            CGPoint tapPoint = [mapView convertPoint:point fromView:self];
+            CGPoint startPoint = [mapView convertCoordinate:[waypointsWithoutCurrentLocation[0] coordinate]
+                                              toPointToView:mapView];
 
-            if (distance < shortestDistance) {
-                shortestDistance = distance;
+            for (MTDWaypoint *waypoint in [waypointsWithoutCurrentLocation subarrayWithRange:NSMakeRange(1, waypointsWithoutCurrentLocation.count - 1)]) {
+                CGPoint cgWaypoint = [mapView convertCoordinate:waypoint.coordinate toPointToView:mapView];
+                CGFloat distance = MTDDistanceToSegment(tapPoint, startPoint, cgWaypoint);
+
+                if (distance < shortestDistance) {
+                    shortestDistance = distance;
+                }
+                
+                startPoint = cgWaypoint;
             }
-
-            startPoint = cgWaypoint;
         }
     }
 
