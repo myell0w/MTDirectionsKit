@@ -10,14 +10,19 @@ static NSMutableDictionary *mtd_overriddenClasses =  nil;
 ////////////////////////////////////////////////////////////////////////
 
 void MTDOverrideClass(Class classToOverride, Class classToUseInstead) {
-    MTDAssert(classToOverride != Nil && classToUseInstead != Nil, @"Can't specifiy Nil for class to use or to override");
+    MTDAssert(classToOverride != Nil, @"Can't specifiy Nil for class to override");
 
-    if (classToOverride == Nil || classToUseInstead == Nil) {
+    if (classToOverride == Nil) {
         return;
     }
 
     if (mtd_overriddenClasses == nil) {
         mtd_overriddenClasses = [NSMutableDictionary new];
+    }
+
+    if (classToUseInstead == Nil) {
+        [mtd_overriddenClasses removeObjectForKey:(id<NSCopying>)classToOverride];
+        return;
     }
 
     Class classToCheckHierarchy = classToUseInstead;
