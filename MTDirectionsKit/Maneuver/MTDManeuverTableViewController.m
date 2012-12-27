@@ -42,6 +42,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    { // Watermark
+        UILabel *watermarkLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, 0.f, 75.f)];
+        watermarkLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        watermarkLabel.backgroundColor = [UIColor colorWithRed:1.f green:0.f blue:0.f alpha:0.4f];
+        watermarkLabel.textAlignment = UITextAlignmentCenter;
+        watermarkLabel.text = @"MTDirectionsKit Demo Version:\nThis watermarked version only supports German instructions.";
+        watermarkLabel.numberOfLines = 0;
+        self.tableView.tableHeaderView = watermarkLabel;
+    }
+
     self.tableView.separatorColor = [UIColor colorWithRed:0.878f green:0.878f blue:0.878f alpha:1.f];
 }
 
@@ -94,7 +104,7 @@
     }
 
     cell.maneuver = maneuver;
-    
+
     return cell;
 }
 
@@ -139,7 +149,7 @@
 - (void)mtd_notifyDelegateDidSelectManeuverAtIndexPath:(NSIndexPath *)indexPath {
     if (_delegateFlags.didSelect) {
         id<MTDManeuverTableViewControllerDelegate> delegate = self.maneuverDelegate;
-
+        
         [delegate maneuverTableViewController:self didSelectManeuverAtIndexPath:indexPath];
     }
 }

@@ -16,27 +16,18 @@ static NSDictionary *mtd_supportedLocales = nil;
 NS_INLINE __attribute__((constructor)) void MTDLoadLocale(void) {
     @autoreleasepool {
         // we first set the locale to English
-        mtd_locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+        mtd_locale = [[NSLocale alloc] initWithLocaleIdentifier:@"de_DE"];
         // and then try to set the current locale, if it is supported
         MTDDirectionsSetLocale([NSLocale currentLocale]);
 
-        // the user can configure the supported locales by changing MTDirectionsKit.bundle/SupportedLocales.plist
-        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"MTDirectionsKit.bundle/supported-locales" ofType:@"plist"];
-        mtd_supportedLocales = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-
-        // If we can't find the plist in the bundle create a default one
-        if (mtd_supportedLocales == nil) {
-            MTDLogWarning(@"MTDirectionsKit.bundle is missing, make sure to add it to your bundle resources!");
-
-            mtd_supportedLocales = (@{
-                                    // Google and Bing have a fallback to English
-                                    kMTDKeyGoogle : @[@"de_DE"],
-                                    kMTDKeyBing : @[@"de_DE"],
-                                    // currently known locales that are supported by MapQuest API
-                                    // taken from http://developer.mapquest.com/web/products/open/forums/-/message_boards/view_message/390942
-                                    kMTDKeyMapQuest : @[@"de_DE"]
-                                    });
-        }
+        mtd_supportedLocales = (@{
+                                // Google and Bing have a fallback to English
+                                kMTDKeyGoogle : @[@"de_DE"],
+                                kMTDKeyBing : @[@"de_DE"],
+                                // currently known locales that are supported by MapQuest API
+                                // taken from http://developer.mapquest.com/web/products/open/forums/-/message_boards/view_message/390942
+                                kMTDKeyMapQuest : @[@"de_DE"]
+                                });
     }
 }
 
@@ -91,7 +82,7 @@ BOOL MTDDirectionsLocaleIsSupportedByAPI(NSLocale *locale, MTDDirectionsAPI API)
         case MTDDirectionsAPICustom: {
             return YES;
         }
-            
+
         case MTDDirectionsAPICount:
         default: {
             return NO;
