@@ -4,6 +4,13 @@
 #import "MTDDirectionsDefines.h"
 
 
+@interface MTDWaypoint ()
+
+@property (nonatomic, assign, readwrite) CLLocationCoordinate2D coordinate; // re-defined as read/write
+
+@end
+
+
 @implementation MTDWaypoint
 
 ////////////////////////////////////////////////////////////////////////
@@ -76,7 +83,11 @@
 }
 
 - (BOOL)isValid {
-    return self.hasValidCoordinate || self.hasValidAddress || self == [MTDWaypoint waypointForCurrentLocation];
+    return self.hasValidCoordinate || self.hasValidAddress || [self isWaypointForCurrentLocation];
+}
+
+- (BOOL)isWaypointForCurrentLocation {
+    return self == [MTDWaypoint waypointForCurrentLocation];
 }
 
 // Would love to put this in a category, but then we need to specify -ObjC
@@ -105,7 +116,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (NSString *)description {
-    if (self == [MTDWaypoint waypointForCurrentLocation]) {
+    if ([self isWaypointForCurrentLocation]) {
         return @"<MTDWaypoint currentLocation>";
     }
 
@@ -151,6 +162,14 @@
     } else {
         return self.address.hash;
     }
+}
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - Private
+////////////////////////////////////////////////////////////////////////
+
++ (void)mtd_updateCurrentLocationCoordinate:(CLLocationCoordinate2D)coordinate {
+    [MTDWaypoint waypointForCurrentLocation].coordinate = coordinate;
 }
 
 @end

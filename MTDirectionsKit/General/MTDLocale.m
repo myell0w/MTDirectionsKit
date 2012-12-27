@@ -30,47 +30,17 @@ NS_INLINE __attribute__((constructor)) void MTDLoadLocale(void) {
 
             mtd_supportedLocales = (@{
                                     // Google and Bing have a fallback to English
-                                    kMTDKeyGoogle : @[],
-                                    kMTDKeyBing : @[],
+                                    kMTDKeyGoogle : @[@"de_DE"],
+                                    kMTDKeyBing : @[@"de_DE"],
                                     // currently known locales that are supported by MapQuest API
                                     // taken from http://developer.mapquest.com/web/products/open/forums/-/message_boards/view_message/390942
-                                    kMTDKeyMapQuest : (@[
-                                                       @"da_DK",
-                                                       @"de_DE",
-                                                       @"en_GB",
-                                                       @"en_US",
-                                                       @"en_CA",
-                                                       @"es_ES",
-                                                       @"es_XL",
-                                                       @"fr_CA",
-                                                       @"fr_FR",
-                                                       @"it_IT",
-                                                       @"nb_NO",
-                                                       @"nl_NL",
-                                                       @"pt_PT",
-                                                       @"sv_SE",
-                                                       @"zh_TW",
-                                                       @"zh_CN",
-                                                       @"nl_BE",
-                                                       @"ja_JP",
-                                                       @"hi_IN",
-                                                       @"zh_HK",
-                                                       @"el_GR",
-                                                       @"ga_IE",
-                                                       @"hu_HU",
-                                                       @"id_ID",
-                                                       @"ru_RU",
-                                                       @"uk_UA",
-                                                       @"vi_VN",
-                                                       @"he_IL"
-                                                       ])
-
+                                    kMTDKeyMapQuest : @[@"de_DE"]
                                     });
         }
     }
 }
 
-void MTDDirectionsSetLocale(NSLocale* locale) {
+void MTDDirectionsSetLocale(NSLocale *locale) {
     MTDDirectionsAPI API = MTDDirectionsGetActiveAPI();
 
     if (MTDDirectionsLocaleIsSupportedByAPI(locale, API)) {
@@ -95,6 +65,10 @@ NSString* MTDDirectionsGetCountryCode(void) {
 
 BOOL MTDDirectionsLocaleIsSupportedByAPI(NSLocale *locale, MTDDirectionsAPI API) {
     NSString *identifier = [locale localeIdentifier];
+
+    if (identifier.length == 0) {
+        return NO;
+    }
 
     switch (API) {
         case MTDDirectionsAPIGoogle: {

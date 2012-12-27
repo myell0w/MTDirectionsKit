@@ -7,22 +7,22 @@
 //
 
 
-#import <Foundation/Foundation.h>
-
-
 // Notifications
-#define MTDMapViewWillStartLoadingDirections            @"MTDMapViewWillStartLoadingDirections"
-#define MTDMapViewDidFinishLoadingDirectionsOverlay     @"MTDMapViewDidFinishLoadingDirectionsOverlay"
-#define MTDMapViewDidActivateRouteOfDirectionsOverlay   @"MTDMapViewDidActivateRouteOfDirectionsOverlay"
-#define MTDMapViewDidFailLoadingDirectionsOverlay       @"MTDMapViewDidFailLoadingDirectionsOverlay"
+#define MTDMapViewWillStartLoadingDirections                        @"MTDMapViewWillStartLoadingDirections"
+#define MTDMapViewDidFinishLoadingDirectionsOverlay                 @"MTDMapViewDidFinishLoadingDirectionsOverlay"
+#define MTDMapViewDidActivateRouteOfDirectionsOverlay               @"MTDMapViewDidActivateRouteOfDirectionsOverlay"
+#define MTDMapViewDidFailLoadingDirectionsOverlay                   @"MTDMapViewDidFailLoadingDirectionsOverlay"
+#define MTDMapViewDidUpdateUserLocationWithDistanceToActiveRoute    @"MTDMapViewDidUpdateUserLocationWithDistanceToActiveRoute"
 
 // Keys for Notification UserInfo
-#define MTDDirectionsNotificationKeyFrom                @"MTDDirectionsNotificationKeyFrom"
-#define MTDDirectionsNotificationKeyTo                  @"MTDDirectionsNotificationKeyTo"
-#define MTDDirectionsNotificationKeyRouteType           @"MTDDirectionsNotificationKeyRouteType"
-#define MTDDirectionsNotificationKeyOverlay             @"MTDDirectionsNotificationKeyOverlay"
-#define MTDDirectionsNotificationKeyRoute               @"MTDDirectionsNotificationKeyRoute"
-#define MTDDirectionsNotificationKeyError               @"MTDDirectionsNotificationKeyError"
+#define MTDDirectionsNotificationKeyFrom                            @"MTDDirectionsNotificationKeyFrom"
+#define MTDDirectionsNotificationKeyTo                              @"MTDDirectionsNotificationKeyTo"
+#define MTDDirectionsNotificationKeyRouteType                       @"MTDDirectionsNotificationKeyRouteType"
+#define MTDDirectionsNotificationKeyOverlay                         @"MTDDirectionsNotificationKeyOverlay"
+#define MTDDirectionsNotificationKeyRoute                           @"MTDDirectionsNotificationKeyRoute"
+#define MTDDirectionsNotificationKeyError                           @"MTDDirectionsNotificationKeyError"
+#define MTDDirectionsNotificationKeyUserLocation                    @"MTDDirectionsNotificationKeyUserLocation"
+#define MTDDirectionsNotificationKeyDistanceToActiveRoute           @"MTDDirectionsNotificationKeyDistanceToActiveRoute"
 
 
 @class MTDMapView;
@@ -92,5 +92,22 @@
  @param directionsOverlay the overlay we want the line width factor of
  */
 - (CGFloat)mapView:(MTDMapView *)mapView lineWidthFactorForDirectionsOverlay:(MTDDirectionsOverlay *)directionsOverlay;
+
+/**
+ This method is an extended version of - [MKMapViewDelegate mapView:didUpdateUserLocation] and is called at exactly the same times.
+ 
+ From Apple's documentation:
+ While the showsUserLocation property is set to YES, this method is called whenever a new location update is
+ received by the map view. This method is also called if the map view’s user tracking mode is set to
+ MKUserTrackingModeFollowWithHeading and the heading changes.
+
+ This method is not called if the application is currently running in the background. If you want to receive location 
+ updates while running in the background, you must use the Core Location framework.
+
+ @param mapView the map view that is tracking the user’s location
+ @param userLocation the location object representing the user’s latest location 
+ @param distanceToActiveRoute the distance in points between the userLocation and the active route on the mapView
+ */
+- (void)mapView:(MTDMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation distanceToActiveRoute:(CGFloat)distanceToActiveRoute;
 
 @end

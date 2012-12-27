@@ -204,19 +204,30 @@ NS_INLINE CGFloat MTDDistanceToSegment(CGPoint point, CGPoint segmentPointV, CGP
         }
 	}
 
-	CGPoint tapPoint = [mapView convertPoint:point fromView:self];
-	CGPoint startPoint = [mapView convertCoordinate:((MTDWaypoint *)route.waypoints[0]).coordinate
-                                      toPointToView:mapView];
+    if ([mapView isKindOfClass:[MKMapView class]]) {
+        // we remove all instances of [MTDWaypoint waypointForCurrentLocation] from the list because if point
+        // refers to the user location (which is the most common use-case for this method) the distance will
+        // always be 0.f otherwise
+        NSArray *waypointsWithoutCurrentLocation = [route.waypoints filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(MTDWaypoint *evaluatedObject, __unused NSDictionary *bindings) {
+            return ![evaluatedObject isWaypointForCurrentLocation];
+        }]];
 
-    for (MTDWaypoint *waypoint in [route.waypoints subarrayWithRange:NSMakeRange(1, route.waypoints.count - 1)]) {
-		CGPoint cgWaypoint = [mapView convertCoordinate:waypoint.coordinate toPointToView:mapView];
-		CGFloat distance = MTDDistanceToSegment(tapPoint, startPoint, cgWaypoint);
+        if (waypointsWithoutCurrentLocation.count > 0) {
+            CGPoint tapPoint = [mapView convertPoint:point fromView:self];
+            CGPoint startPoint = [mapView convertCoordinate:[waypointsWithoutCurrentLocation[0] coordinate]
+                                              toPointToView:mapView];
 
-        if (distance < shortestDistance) {
-            shortestDistance = distance;
+            for (MTDWaypoint *waypoint in [waypointsWithoutCurrentLocation subarrayWithRange:NSMakeRange(1, waypointsWithoutCurrentLocation.count - 1)]) {
+                CGPoint cgWaypoint = [mapView convertCoordinate:waypoint.coordinate toPointToView:mapView];
+                CGFloat distance = MTDDistanceToSegment(tapPoint, startPoint, cgWaypoint);
+
+                if (distance < shortestDistance) {
+                    shortestDistance = distance;
+                }
+                
+                startPoint = cgWaypoint;
+            }
         }
-
-		startPoint = cgWaypoint;
     }
 
     return shortestDistance;
@@ -255,9 +266,9 @@ NS_INLINE CGFloat MTDDistanceToSegment(CGPoint point, CGPoint segmentPointV, CGP
 }
 
 - (CGPathRef)mtd_newPathForPoints:(MKMapPoint *)points
-pointCount:(NSUInteger)pointCount
-clipRect:(MKMapRect)mapRect
-zoomScale:(MKZoomScale)zoomScale CF_RETURNS_RETAINED {
+                       pointCount:(NSUInteger)pointCount
+                         clipRect:(MKMapRect)mapRect
+                        zoomScale:(MKZoomScale)zoomScale CF_RETURNS_RETAINED {
     // The fastest way to draw a path in an MKOverlayView is to simplify the
     // geometry for the screen by eliding points that are too close together
     // and to omit any line segments that do not intersect the clipping rect.
@@ -383,11 +394,11 @@ NS_INLINE CGFloat MTDDistanceToSegmentSquared(CGPoint p, CGPoint v, CGPoint w) {
     if (t < 0.f) {
         return MTDDist2(p, v);
     }
-
+    
     if (t > 1.f) {
         return MTDDist2(p, w);
     }
-
+    
     return MTDDist2(p, CGPointMake(v.x + t * (w.x - v.x), v.y + t * (w.y - v.y)));
 }
 

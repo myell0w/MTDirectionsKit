@@ -27,7 +27,7 @@
  ******************************************/
 
 /** the coordinate wrapped, may be invalid */
-@property (nonatomic, assign) CLLocationCoordinate2D coordinate;
+@property (nonatomic, assign, readonly) CLLocationCoordinate2D coordinate;
 /** the address wrapped, may be nil */
 @property (nonatomic, retain) MTDAddress *address;
 
@@ -37,6 +37,13 @@
 @property (nonatomic, readonly) BOOL hasValidAddress;
 /** is this waypoint valid (valid coordinate or set address) */
 @property (nonatomic, readonly, getter = isValid) BOOL valid;
+
+/**
+ Checks whether the given waypoint is the singleton instance representing the current location.
+ 
+ @return YES if the waypoint represents the current location, NO otherwise
+ */
+- (BOOL)isWaypointForCurrentLocation;
 
 /******************************************
  @name Lifecycle
