@@ -5,9 +5,11 @@
 #import "MTDManeuver.h"
 #import "MTDWaypoint.h"
 #import "MTDAddress.h"
+#import "MTDFunctions.h"
 
 
-#define kMTDFromToCellHeight                70.f
+#define kMTDInfoCellHeight                  65.f
+#define kMTDFromToCellHeight                65.f
 
 
 @implementation MTDManeuverTableViewController {
@@ -26,7 +28,7 @@
 
 - (id)initWithRoute:(MTDRoute *)route {
     if ((self = [super initWithStyle:UITableViewStylePlain])) {
-        self.title = route.name;
+        self.title = MTDLocalizedStringFromUIKit(@"Route");
 
         _route = route;
 
@@ -112,7 +114,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self mtd_isInfoCellAtIndexPath:indexPath]) {
-        return 60.f;
+        return kMTDInfoCellHeight;
     } else if ([self mtd_isFromLocationCellAtIndexPath:indexPath] || [self mtd_isToLocationCellAtIndexPath:indexPath]) {
         return kMTDFromToCellHeight;
     }  else {
@@ -166,14 +168,24 @@
     return row == [self.route.maneuvers count] + 2;
 }
 
-- (UITableViewCell *)mtd_infoCellForTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)mtd_infoCellForTableView:(UITableView *)tableView indexPath:(__unused NSIndexPath *)indexPath {
     static NSString *cellID = @"MTDManeuverInfoTableViewCell";
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
 
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
+
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:14.f];
+        cell.textLabel.numberOfLines = 2;
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:14.f];
+        cell.imageView.contentMode = UIViewContentModeCenter;
+        cell.imageView.clipsToBounds = YES;
     }
+
+    cell.textLabel.text = self.route.name;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@", self.route.formattedTime, self.route.distance];
+    cell.imageView.image = [UIImage imageNamed:@"MTDirectionsKit.bundle/route-header"];
 
     return cell;
 }
