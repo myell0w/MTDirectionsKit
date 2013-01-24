@@ -8,7 +8,7 @@
 #import "MTDFunctions.h"
 
 
-#define kMTDInfoCellHeight                  65.f
+#define kMTDInfoCellHeight                  60.f
 #define kMTDFromToCellHeight                65.f
 
 
@@ -183,7 +183,7 @@
         cell.imageView.clipsToBounds = YES;
     }
 
-    cell.textLabel.text = self.route.name;
+    cell.textLabel.text = self.route.name ?: self.title;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@", self.route.formattedTime, self.route.distance];
     cell.imageView.image = [UIImage imageNamed:@"MTDirectionsKit.bundle/route-header"];
 
@@ -201,7 +201,7 @@
     }
 
     cell.imageView.image = [UIImage imageNamed:@"MTDirectionsKit.bundle/cell-depart"];
-    cell.textLabel.text = [from.address fullAddress];
+    cell.textLabel.text = [from.address fullAddress] ?: MTDLocalizedStringFromUIKit(@"Departure");
 
     return cell;
 }
@@ -217,7 +217,7 @@
     }
 
     cell.imageView.image = [UIImage imageNamed:@"MTDirectionsKit.bundle/cell-arrive"];
-    cell.textLabel.text = [to.address fullAddress];
+    cell.textLabel.text = [to.address fullAddress] ?: MTDLocalizedStringFromUIKit(@"Destination");
 
     return cell;
 }

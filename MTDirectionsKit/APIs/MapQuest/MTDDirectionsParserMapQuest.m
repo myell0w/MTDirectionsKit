@@ -322,8 +322,8 @@
 // This method returns a hand-made arrival maneuver
 - (MTDManeuver *)mtd_arrivalManeuverWithWaypoint:(MTDWaypoint *)waypoint {
     // TODO: localize, offer possibility for custom localization
-    NSString *destination = waypoint.address != nil ? [waypoint.address fullAddress] : @"destination";
-    NSString *instructions = [NSString stringWithFormat:@"Arrive at %@", destination];
+    NSString *destination = [waypoint.address fullAddress] ?: @"destination";
+    NSString *instructions = [NSString stringWithFormat:@"Arrive at %@.", destination];
     MTDManeuver *arrivalManeuver = [[MTDManeuver alloc] initWithWaypoint:waypoint
                                                                 distance:nil
                                                            timeInSeconds:0.
