@@ -12,7 +12,7 @@
  Be careful to not specify MTDDirectionsRequestOptionOptimize and MTDDirectionsRequestOptionAlternativeRoutes
  at the same time since this is not supported.
  */
-typedef NS_ENUM(NSUInteger, MTDDirectionsRequestOption) {
+typedef NS_OPTIONS(NSUInteger, MTDDirectionsRequestOption) {
     MTDDirectionsRequestOptionNone                  = 0,
     MTDDirectionsRequestOptionOptimize              = 1,
     MTDDirectionsRequestOptionAlternativeRoutes     = 1 << 1
