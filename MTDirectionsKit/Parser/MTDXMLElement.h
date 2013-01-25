@@ -112,6 +112,15 @@
  @return an instance of MTDXMLElement representing the first found child node, or nil if there was none found
  */
 - (MTDXMLElement *)firstChildNodeWithName:(NSString *)name;
+/**
+ Returns the first child node with the given tagname and attribute value.
+
+ @param name the tag name of the child we want
+ @param attributeName the name of the attribute to query
+ @param attributeValue the desired value of the attribute
+ @return an instance of MTDXMLElement representing the first found child node, or nil if there was none found
+ */
+- (MTDXMLElement *)firstChildNodeWithName:(NSString *)name attribute:(NSString *)attributeName attributeValue:(NSString *)attributeValue;
 
 /**
  Returns an array of child nodes with the given tagname.

@@ -48,6 +48,15 @@ static NSString *mtd_apiKey = nil;
             MTDLogInfo(@"Bing Routes API unfortunately doesn't support optimizing route goals.");
         }
 
+        // avoid certain routes?
+        BOOL avoidTollRoads = (self.mtd_options & MTDDirectionsRequestOptionAvoidTollRoads) == MTDDirectionsRequestOptionAvoidTollRoads;
+        BOOL avoidHighways = (self.mtd_options & MTDDirectionsRequestOptionAvoidHighways) == MTDDirectionsRequestOptionAvoidHighways;
+        if (avoidTollRoads) {
+            [self setValue:@"tolls" forParameter:@"avoid"];
+        } else if (avoidHighways) { // can't set both, tolls has higher priority
+            [self setValue:@"highways" forParameter:@"avoid"];
+        }
+
         // set parameter route type
         if (routeType == MTDDirectionsRouteTypeFastestDriving) {
             [self setValue:@"time" forParameter:@"optimize"];

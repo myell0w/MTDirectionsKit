@@ -44,6 +44,15 @@ static NSString *mtd_cryptographicKey = nil;
         if (alternativeRoutes) {
             [self setValue:@"true" forParameter:@"alternatives"];
         }
+
+        // avoid certain routes?
+        BOOL avoidTollRoads = (self.mtd_options & MTDDirectionsRequestOptionAvoidTollRoads) == MTDDirectionsRequestOptionAvoidTollRoads;
+        BOOL avoidHighways = (self.mtd_options & MTDDirectionsRequestOptionAvoidHighways) == MTDDirectionsRequestOptionAvoidHighways;
+        if (avoidTollRoads) {
+            [self setValue:@"tolls" forParameter:@"avoid"];
+        } else if (avoidHighways) { // can't set both, tolls has higher priority
+            [self setValue:@"highways" forParameter:@"avoid"];
+        }
     }
     
     return self;

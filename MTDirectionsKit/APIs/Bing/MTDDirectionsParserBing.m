@@ -106,6 +106,7 @@
 
     MTDDistance *distance = nil;
     NSTimeInterval timeInSeconds = -1.;
+    BOOL containsTollRoad = NO;
     NSMutableDictionary *additionalInfo = [NSMutableDictionary dictionary];
 
     // Parse waypoints
@@ -132,6 +133,15 @@
         if (warnings != nil) {
             [additionalInfo setValue:warnings forKey:MTDAdditionalInfoWarningsKey];
         }
+
+        for (MTDXMLElement *maneuverNode in maneuverNodes) {
+            MTDXMLElement *tollNode = [maneuverNode firstChildNodeWithName:@"Warning" attribute:@"warningType" attributeValue:@"TollRoad"];
+
+            if (tollNode.contentString.length > 0) {
+                containsTollRoad = YES;
+                break;
+            }
+        }
     }
 
     MTDRoute *route = [[MTDRoute alloc] initWithWaypoints:waypoints
@@ -140,6 +150,7 @@
                                             timeInSeconds:timeInSeconds
                                                      name:idNode.contentString
                                                 routeType:self.routeType
+                                         containsTollRoad:containsTollRoad
                                            additionalInfo:additionalInfo];
     return route;
 }

@@ -42,6 +42,21 @@
         if (alternativeRoutes) {
             [self setValue:kMTDMapQuestMaxRoutes forParameter:@"maxRoutes"];
         }
+
+        // avoid certain routes?
+        BOOL avoidTollRoads = (self.mtd_options & MTDDirectionsRequestOptionAvoidTollRoads) == MTDDirectionsRequestOptionAvoidTollRoads;
+        BOOL avoidHighways = (self.mtd_options & MTDDirectionsRequestOptionAvoidHighways) == MTDDirectionsRequestOptionAvoidHighways;
+        NSMutableArray *avoidings = [NSMutableArray arrayWithCapacity:2];
+
+        if (avoidTollRoads) {
+            [avoidings addObject:@"Toll Road"];
+        }
+        if (avoidHighways) {
+            [avoidings addObject:@"Limited Access"];
+        }
+        if (avoidings.count > 0) {
+            [self setArrayValue:avoidings forParameter:@"avoids"];
+        }
     }
     
     return self;
