@@ -19,6 +19,7 @@ NS_INLINE CGFloat MTDDistanceToSegment(CGPoint point, CGPoint segmentPointV, CGP
 @interface MTDDirectionsOverlayView ()
 
 @property (nonatomic, readonly) MTDDirectionsOverlay *mtd_directionsOverlay;
+@property (nonatomic, strong) NSMutableDictionary *mtd_routeColors;
 
 @end
 
@@ -86,12 +87,12 @@ NS_INLINE CGFloat MTDDistanceToSegment(CGPoint point, CGPoint segmentPointV, CGP
 ////////////////////////////////////////////////////////////////////////
 
 - (void)drawPath:(CGPathRef)path
-         ofRoute:(__unused MTDRoute *)route
+         ofRoute:(MTDRoute *)route
      activeRoute:(BOOL)activeRoute
          mapRect:(__unused MKMapRect)mapRect
        zoomScale:(__unused MKZoomScale)zoomScale
        inContext:(CGContextRef)context {
-    UIColor *baseColor = self.overlayColor;
+    UIColor *baseColor = [self overlayColorForRoute:route];
     CGFloat shadowAlpha = 0.4f;
     CGFloat secondNormalPathAlpha = 0.7f;
     CGFloat lineWidth = _fullLineWidth;
@@ -158,6 +159,28 @@ NS_INLINE CGFloat MTDDistanceToSegment(CGPoint point, CGPoint segmentPointV, CGP
     }
 }
 
+- (void)setOverlayColor:(UIColor *)overlayColor forRoute:(MTDRoute *)route {
+    MTDAssert(overlayColor != nil && route != nil, @"overlayColor and route must be different from nil");
+
+    if (overlayColor != nil && route != nil) {
+        if (_mtd_routeColors == nil) {
+            _mtd_routeColors = [NSMutableDictionary dictionary];
+        }
+
+        [_mtd_routeColors setObject:overlayColor forKey:route.name];
+    }
+}
+
+- (UIColor *)overlayColorForRoute:(MTDRoute *)route {
+    UIColor *color = self.mtd_routeColors[route.name];
+
+    if (color == nil) {
+        color = self.overlayColor;
+    }
+
+    return color;
+}
+
 - (void)setOverlayLineWidthFactor:(CGFloat)overlayLineWidthFactor {
     if (overlayLineWidthFactor >= kMTDMinimumLineWidthFactor && overlayLineWidthFactor <= kMTDMaximumLineWidthFactor) {
         _overlayLineWidthFactor = overlayLineWidthFactor;
@@ -206,7 +229,7 @@ NS_INLINE CGFloat MTDDistanceToSegment(CGPoint point, CGPoint segmentPointV, CGP
                 if (distance < shortestDistance) {
                     shortestDistance = distance;
                 }
-                
+
                 startPoint = cgWaypoint;
             }
         }
@@ -366,11 +389,11 @@ NS_INLINE CGFloat MTDDistanceToSegmentSquared(CGPoint p, CGPoint v, CGPoint w) {
     if (t < 0.f) {
         return MTDDist2(p, v);
     }
-    
+
     if (t > 1.f) {
         return MTDDist2(p, w);
     }
-    
+
     return MTDDist2(p, CGPointMake(v.x + t * (w.x - v.x), v.y + t * (w.y - v.y)));
 }
 

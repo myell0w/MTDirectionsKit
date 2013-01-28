@@ -25,7 +25,7 @@
         unsigned int didFailLoadingOverlay:1;
         unsigned int shouldActivateRouteOfOverlay:1;
         unsigned int didActivateRouteOfOverlay:1;
-        unsigned int colorForOverlay:1;
+        unsigned int colorForRoute:1;
         unsigned int lineWidthFactorForOverlay:1;
         unsigned int didUpdateUserLocationWithDistance:1;
 	} _directionsDelegateFlags;
@@ -251,7 +251,7 @@
         _directionsDelegateFlags.didFailLoadingOverlay = (unsigned int)[directionsDelegate respondsToSelector:@selector(mapView:didFailLoadingDirectionsOverlayWithError:)];
         _directionsDelegateFlags.shouldActivateRouteOfOverlay = (unsigned int)[directionsDelegate respondsToSelector:@selector(mapView:shouldActivateRoute:ofDirectionsOverlay:)];
         _directionsDelegateFlags.didActivateRouteOfOverlay = (unsigned int)[directionsDelegate respondsToSelector:@selector(mapView:didActivateRoute:ofDirectionsOverlay:)];
-        _directionsDelegateFlags.colorForOverlay = (unsigned int)[directionsDelegate respondsToSelector:@selector(mapView:colorForDirectionsOverlay:)];
+        _directionsDelegateFlags.colorForRoute = (unsigned int)[directionsDelegate respondsToSelector:@selector(mapView:colorForRoute:ofDirectionsOverlay:)];
         _directionsDelegateFlags.lineWidthFactorForOverlay = (unsigned int)[directionsDelegate respondsToSelector:@selector(mapView:lineWidthFactorForDirectionsOverlay:)];
         _directionsDelegateFlags.didUpdateUserLocationWithDistance = (unsigned int)[directionsDelegate respondsToSelector:@selector(mapView:didUpdateUserLocation:distanceToActiveRoute:)];
     }
@@ -569,22 +569,26 @@
         return nil;
     }
 
-    UIColor *overlayColor = [self mtd_askDelegateForColorOfOverlay:self.directionsOverlay];
-    CGFloat overlayLineWidthFactor = [self mtd_askDelegateForLineWidthFactorOfOverlay:self.directionsOverlay];
+    MTDDirectionsOverlay *directionsOverlay = overlay;
+    CGFloat overlayLineWidthFactor = [self mtd_askDelegateForLineWidthFactorOfOverlay:directionsOverlay];
     Class directionsOverlayClass = MTDOverriddenClass([MTDDirectionsOverlayView class]);
 
     if (directionsOverlayClass != Nil) {
-        self.directionsOverlayView = [[directionsOverlayClass alloc] initWithOverlay:self.directionsOverlay];
+        self.directionsOverlayView = [[directionsOverlayClass alloc] initWithOverlay:directionsOverlay];
         self.directionsOverlayView.drawManeuvers = (self.directionsDisplayType == MTDDirectionsDisplayTypeDetailedManeuvers);
 
-        // If we always set the color it breaks UIAppearance because it deactivates the proxy color if we
-        // call the setter, even if we don't accept nil there.
-        if (overlayColor != nil) {
-            self.directionsOverlayView.overlayColor = overlayColor;
-        }
-        // same goes for the line width factor
-        if (overlayLineWidthFactor > 0.f) {
-            self.directionsOverlayView.overlayLineWidthFactor = overlayLineWidthFactor;
+        for (MTDRoute *route in directionsOverlay.routes) {
+            UIColor *overlayColor = [self mtd_askDelegateForColorOfRoute:route ofOverlay:self.directionsOverlay];
+            
+            // If we always set the color it breaks UIAppearance because it deactivates the proxy color if we
+            // call the setter, even if we don't accept nil there.
+            if (overlayColor != nil) {
+                [self.directionsOverlayView setOverlayColor:overlayColor forRoute:route];
+            }
+            // same goes for the line width factor
+            if (overlayLineWidthFactor > 0.f) {
+                self.directionsOverlayView.overlayLineWidthFactor = overlayLineWidthFactor;
+            }
         }
     }
 
@@ -812,11 +816,11 @@
     [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
-- (UIColor *)mtd_askDelegateForColorOfOverlay:(MTDDirectionsOverlay *)overlay {
+- (UIColor *)mtd_askDelegateForColorOfRoute:(MTDRoute *)route ofOverlay:(MTDDirectionsOverlay *)overlay {
     id<MTDDirectionsDelegate> delegate = self.directionsDelegate;
 
-    if (_directionsDelegateFlags.colorForOverlay) {
-        UIColor *color = [delegate mapView:self colorForDirectionsOverlay:overlay];
+    if (_directionsDelegateFlags.colorForRoute) {
+        UIColor *color = [delegate mapView:self colorForRoute:route ofDirectionsOverlay:overlay];
 
         // sanity check if delegate returned valid color
         if ([color isKindOfClass:[UIColor class]]) {

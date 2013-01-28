@@ -146,8 +146,6 @@
 		9BF3ED2515DC1AC500FAD2E6 /* MTDGTMStringEncoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BF3ED2315DC1AC500FAD2E6 /* MTDGTMStringEncoding.h */; };
 		9BF3ED2615DC1AC500FAD2E6 /* MTDGTMStringEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF3ED2415DC1AC500FAD2E6 /* MTDGTMStringEncoding.m */; };
 		9BF3ED2915DC1ED600FAD2E6 /* MTDCryptoTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF3ED2815DC1ED600FAD2E6 /* MTDCryptoTest.m */; };
-		9BFC194B15C53EF900C2CEF6 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		9BFC194C15C53EF900C2CEF6 /* (null) in Resources */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -774,8 +772,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B10A9A8155D5867002A3052 /* InfoPlist.strings in Resources */,
-				9BFC194B15C53EF900C2CEF6 /* (null) in Resources */,
-				9BFC194C15C53EF900C2CEF6 /* (null) in Resources */,
 				9B0364F815F62B9E00538307 /* bing_driving_path.xml in Resources */,
 				9B0364F915F62B9E00538307 /* bing_driving.xml in Resources */,
 				9B0364FA15F62B9E00538307 /* bing_transit.xml in Resources */,
