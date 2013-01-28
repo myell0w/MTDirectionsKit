@@ -23,6 +23,7 @@
         unsigned int willStartLoadingDirections:1;
         unsigned int didFinishLoadingOverlay:1;
         unsigned int didFailLoadingOverlay:1;
+        unsigned int shouldActivateRouteOfOverlay:1;
         unsigned int didActivateRouteOfOverlay:1;
         unsigned int colorForOverlay:1;
         unsigned int lineWidthFactorForOverlay:1;
@@ -172,12 +173,15 @@
 
 - (void)activateRoute:(MTDRoute *)route {
     MTDRoute *activeRouteBefore = self.directionsOverlay.activeRoute;
-    [self.directionsOverlay mtd_activateRoute:route];
-    MTDRoute *activeRouteAfter = self.directionsOverlay.activeRoute;
 
-    if (activeRouteBefore != activeRouteAfter) {
-        [self mtd_notifyDelegateDidActivateRoute:activeRouteAfter ofOverlay:self.directionsOverlay];
-        [self.directionsOverlayView setNeedsDisplayInMapRect:MKMapRectWorld];
+    if (route != nil && route != activeRouteBefore) {
+        [self.directionsOverlay mtd_activateRoute:route];
+        MTDRoute *activeRouteAfter = self.directionsOverlay.activeRoute;
+
+        if (activeRouteBefore != activeRouteAfter) {
+            [self mtd_notifyDelegateDidActivateRoute:activeRouteAfter ofOverlay:self.directionsOverlay];
+            [self.directionsOverlayView setNeedsDisplayInMapRect:MKMapRectWorld];
+        }
     }
 }
 
@@ -245,6 +249,7 @@
         _directionsDelegateFlags.willStartLoadingDirections = (unsigned int)[directionsDelegate respondsToSelector:@selector(mapView:willStartLoadingDirectionsFrom:to:routeType:)];
         _directionsDelegateFlags.didFinishLoadingOverlay = (unsigned int)[directionsDelegate respondsToSelector:@selector(mapView:didFinishLoadingDirectionsOverlay:)];
         _directionsDelegateFlags.didFailLoadingOverlay = (unsigned int)[directionsDelegate respondsToSelector:@selector(mapView:didFailLoadingDirectionsOverlayWithError:)];
+        _directionsDelegateFlags.shouldActivateRouteOfOverlay = (unsigned int)[directionsDelegate respondsToSelector:@selector(mapView:shouldActivateRoute:ofDirectionsOverlay:)];
         _directionsDelegateFlags.didActivateRouteOfOverlay = (unsigned int)[directionsDelegate respondsToSelector:@selector(mapView:didActivateRoute:ofDirectionsOverlay:)];
         _directionsDelegateFlags.colorForOverlay = (unsigned int)[directionsDelegate respondsToSelector:@selector(mapView:colorForDirectionsOverlay:)];
         _directionsDelegateFlags.lineWidthFactorForOverlay = (unsigned int)[directionsDelegate respondsToSelector:@selector(mapView:lineWidthFactorForDirectionsOverlay:)];
@@ -535,14 +540,11 @@
 
             // Check if the touch is within the view bounds
             if (CGRectContainsPoint(viewFrameInMapView, point)) {
-                MTDRoute *activeRouteBefore = self.directionsOverlay.activeRoute;
+                MTDRoute *selectedRoute = [self.directionsOverlayView mtd_routeTouchedByPoint:[tap locationInView:self.directionsOverlayView]];
 
-                [self.directionsOverlayView mtd_handleTapAtPoint:[tap locationInView:self.directionsOverlayView]];
-
-                MTDRoute *activeRouteAfter = self.directionsOverlay.activeRoute;
-
-                if (activeRouteBefore != activeRouteAfter) {
-                    [self mtd_notifyDelegateDidActivateRoute:activeRouteAfter ofOverlay:self.directionsOverlay];
+                // ask delegate if we should activate the route
+                if ([self mtd_askDelegateForSelectionEnabledStateOfRoute:selectedRoute ofOverlay:self.directionsOverlay]) {
+                    [self activateRoute:selectedRoute];
                 }
             }
         }
@@ -781,6 +783,20 @@
     [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
+- (BOOL)mtd_askDelegateForSelectionEnabledStateOfRoute:(MTDRoute *)route ofOverlay:(MTDDirectionsOverlay *)overlay {
+    id<MTDDirectionsDelegate> delegate = self.directionsDelegate;
+
+    if (route == nil || overlay == nil) {
+        return NO;
+    }
+
+    if (_directionsDelegateFlags.shouldActivateRouteOfOverlay) {
+        return [delegate mapView:self shouldActivateRoute:route ofDirectionsOverlay:overlay];
+    } else {
+        return YES;
+    }
+}
+
 - (void)mtd_notifyDelegateDidActivateRoute:(MTDRoute *)route ofOverlay:(MTDDirectionsOverlay *)overlay {
     id<MTDDirectionsDelegate> delegate = self.directionsDelegate;
 
@@ -832,7 +848,7 @@
         if (_directionsDelegateFlags.didUpdateUserLocationWithDistance) {
             [delegate mapView:self didUpdateUserLocation:userLocation distanceToActiveRoute:distance];
         }
-        
+
         // post corresponding notification
         NSDictionary *userInfo = (@{
                                   MTDDirectionsNotificationKeyUserLocation: userLocation,

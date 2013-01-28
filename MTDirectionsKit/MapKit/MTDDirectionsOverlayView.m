@@ -319,16 +319,6 @@ NS_INLINE CGFloat MTDDistanceToSegment(CGPoint point, CGPoint segmentPointV, CGP
     return path;
 }
 
-// gets called from the UIGestureRecognizer on the MTDMapView
-- (void)mtd_handleTapAtPoint:(CGPoint)point {
-    MTDRoute *selectedRoute = [self mtd_routeTouchedByPoint:point];
-
-    if (selectedRoute != nil && selectedRoute != self.mtd_directionsOverlay.activeRoute) {
-        [self.mtd_directionsOverlay mtd_activateRoute:selectedRoute];
-        [self setNeedsDisplayInMapRect:MKMapRectWorld];
-    }
-}
-
 // returns the first route that get's hit by the touch at the given point
 - (MTDRoute *)mtd_routeTouchedByPoint:(CGPoint)point {
     MTDRoute *nearestRoute = nil;

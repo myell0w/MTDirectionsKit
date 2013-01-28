@@ -15,10 +15,11 @@
 
 /**
  Since touchesBegan/UIGestureRecognizer on MKOverlayView don't seem to work we add a gesture recognizer
- to the MapView, this method forwards a recognized gesture to the tapped overlayView.
+ to the MapView. This method returns the first route that get's hit by the touch at the given point.
  
  @param point the location of the tap in the overlay view
+ @return the route the got hit by the given point or nil, if no route got hit
  */
-- (void)mtd_handleTapAtPoint:(CGPoint)point;
+- (MTDRoute *)mtd_routeTouchedByPoint:(CGPoint)point;
 
 @end

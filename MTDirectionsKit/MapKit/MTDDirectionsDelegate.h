@@ -68,6 +68,16 @@
 - (void)mapView:(MTDMapView *)mapView didFailLoadingDirectionsOverlayWithError:(NSError *)error;
 
 /**
+ Asks the delegate whether the specified route should be activated by tapping on it. 
+ If this method isn't implemented route activation is enabled by default.
+
+ @param mapView the mapView that displays the directions
+ @param route the new active route
+ @param directionsOverlay the directions overlay containing several routes
+ */
+- (BOOL)mapView:(MTDMapView *)mapView shouldActivateRoute:(MTDRoute *)route ofDirectionsOverlay:(MTDDirectionsOverlay *)directionsOverlay;
+
+/**
  Tells the delegate that the user activated the specified route by tapping on it
 
  @param mapView the mapView that displays the directions
