@@ -112,7 +112,7 @@
     // Parse waypoints
     NSArray *waypoints = [self mtd_waypointsFromWaypointNodes:waypointNodes];
     // Parse Maneuvers
-    NSArray *maneuvers = [self mtd_maneuversFromManeuverNodes:maneuverNodes];
+    NSArray *maneuvers = [self mtd_maneuversFromManeuverNodes:maneuverNodes getContainsTollRoad:&containsTollRoad];
 
     // Parse Additional Info of directions
     {
@@ -132,15 +132,6 @@
 
         if (warnings != nil) {
             [additionalInfo setValue:warnings forKey:MTDAdditionalInfoWarningsKey];
-        }
-
-        for (MTDXMLElement *maneuverNode in maneuverNodes) {
-            MTDXMLElement *tollNode = [maneuverNode firstChildNodeWithName:@"Warning" attribute:@"warningType" attributeValue:@"TollRoad"];
-
-            if (tollNode.contentString.length > 0) {
-                containsTollRoad = YES;
-                break;
-            }
         }
     }
 
@@ -261,7 +252,7 @@
 				maneuver.name = nameNode.contentString;
 			}
 		}
-		
+
         return maneuver;
     } else {
         return nil;
@@ -269,14 +260,23 @@
 }
 
 // This method parses all maneuver nodes of a route
-- (NSArray *)mtd_maneuversFromManeuverNodes:(NSArray *)maneuverNodes {
+- (NSArray *)mtd_maneuversFromManeuverNodes:(NSArray *)maneuverNodes getContainsTollRoad:(BOOL *)containsTollRoad {
     NSMutableArray *maneuvers = [NSMutableArray arrayWithCapacity:maneuverNodes.count];
-    
+
     for (MTDXMLElement *maneuverNode in maneuverNodes) {
         MTDManeuver *maneuver = [self mtd_maneuverFromManeuverNode:maneuverNode];
-        
+
         if (maneuver != nil) {
             [maneuvers addObject:maneuver];
+        }
+
+        // check if there is a warning for a toll road
+        if (containsTollRoad != NULL && *containsTollRoad == NO) {
+            MTDXMLElement *tollNode = [maneuverNode firstChildNodeWithName:@"Warning" attribute:@"warningType" attributeValue:@"TollRoad"];
+            
+            if (tollNode.contentString.length > 0) {
+                *containsTollRoad = YES;
+            }
         }
     }
     
