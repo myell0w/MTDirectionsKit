@@ -22,7 +22,7 @@
  When requesting directions alternative routes can be provided, each of whom is represented by
  an instance of MTDRoute.
  */
-@interface MTDRoute : NSObject
+@interface MTDRoute : NSObject <NSCopying>
 
 /******************************************
  @name Route

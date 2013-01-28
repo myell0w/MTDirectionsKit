@@ -10,6 +10,7 @@
 #import "MTDDirectionsRouteType.h"
 #import "MTDDirectionsDisplayType.h"
 #import "MTDDirectionsDefines.h"
+#import "MTDDirectionsRequestOption.h"
 #import "MTDWeak.h"
 
 
@@ -117,7 +118,7 @@
  @param zoomToShowDirections flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)
  
  @see loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:
- @see loadDirectionsFrom:to:intermediateGoals:optimizeRoute:routeType:zoomToShowDirections:
+ @see loadDirectionsFrom:to:intermediateGoals:routeType:options:zoomToShowDirections:
  @see loadAlternativeDirectionsFrom:to:routeType:zoomToShowDirections:
  @see cancelLoadOfDirections
  */
@@ -137,7 +138,7 @@
  @param zoomToShowDirections flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)
  
  @see loadDirectionsFrom:to:routeType:zoomToShowDirections:
- @see loadDirectionsFrom:to:intermediateGoals:optimizeRoute:routeType:zoomToShowDirections:
+ @see loadDirectionsFrom:to:intermediateGoals:routeType:options:zoomToShowDirections:
  @see loadAlternativeDirectionsFrom:to:routeType:zoomToShowDirections:
  @see cancelLoadOfDirections
  */
@@ -155,9 +156,8 @@
  @param from the starting waypoint of the route
  @param to the end waypoint of the route
  @param intermediateGoals an optional array of waypoint we want to travel to along the route
- @param optimizeRoute a flag that indicates whether the route shall get optimized if there are intermediate goals.
- if YES, the intermediate goals can get reordered to guarantee a fast route traversal
  @param routeType the type of the route requested, e.g. pedestrian, cycling, fastest driving
+ @param options mask of options that can be specified on the request, e.g. optimization of the route, avoiding toll roads etc.
  @param zoomToShowDirections flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)
  
  @see loadDirectionsFrom:to:routeType:zoomToShowDirections:
@@ -168,8 +168,8 @@
 - (void)loadDirectionsFrom:(MTDWaypoint *)from
                         to:(MTDWaypoint *)to
          intermediateGoals:(NSArray *)intermediateGoals
-             optimizeRoute:(BOOL)optimizeRoute
                  routeType:(MTDDirectionsRouteType)routeType
+                   options:(MTDDirectionsRequestOptions)options
       zoomToShowDirections:(BOOL)zoomToShowDirections;
 
 /**
@@ -185,7 +185,7 @@
  
  @see loadDirectionsFrom:to:routeType:zoomToShowDirections:
  @see loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:
- @see loadDirectionsFrom:to:intermediateGoals:optimizeRoute:routeType:zoomToShowDirections:
+ @see loadDirectionsFrom:to:intermediateGoals:routeType:options:zoomToShowDirections:
  @see cancelLoadOfDirections
  */
 - (void)loadAlternativeDirectionsFrom:(MTDWaypoint *)from

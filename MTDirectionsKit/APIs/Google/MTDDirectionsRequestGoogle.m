@@ -40,7 +40,7 @@ static NSString *mtd_cryptographicKey = nil;
 
 
         // set parameter for alternative routes?
-        BOOL alternativeRoutes = (self.mtd_options & MTDDirectionsRequestOptionAlternativeRoutes) == MTDDirectionsRequestOptionAlternativeRoutes;
+        BOOL alternativeRoutes = (self.mtd_options & _MTDDirectionsRequestOptionAlternativeRoutes) == _MTDDirectionsRequestOptionAlternativeRoutes;
         if (alternativeRoutes) {
             [self setValue:@"true" forParameter:@"alternatives"];
         }
@@ -68,7 +68,7 @@ static NSString *mtd_cryptographicKey = nil;
 
 - (void)setValueForParameterWithIntermediateGoals:(NSArray *)intermediateGoals {
     if (intermediateGoals.count > 0 && self.routeType != MTDDirectionsRouteTypePedestrianIncludingPublicTransport) {
-        BOOL optimizeRoute = (self.mtd_options & MTDDirectionsRequestOptionOptimize) == MTDDirectionsRequestOptionOptimize;
+        BOOL optimizeRoute = (self.mtd_options & MTDDirectionsRequestOptionOptimizeRoute) == MTDDirectionsRequestOptionOptimizeRoute;
         NSMutableString *parameter = [NSMutableString stringWithString:(optimizeRoute ? @"optimize:true" : @"optimize:false")];
         
         [intermediateGoals enumerateObjectsUsingBlock:^(id obj, __unused NSUInteger idx, __unused BOOL *stop) {

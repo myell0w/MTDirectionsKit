@@ -167,12 +167,12 @@ NS_INLINE CGFloat MTDDistanceToSegment(CGPoint point, CGPoint segmentPointV, CGP
             _mtd_routeColors = [NSMutableDictionary dictionary];
         }
 
-        [_mtd_routeColors setObject:overlayColor forKey:route.name];
+        [_mtd_routeColors setObject:overlayColor forKey:route];
     }
 }
 
 - (UIColor *)overlayColorForRoute:(MTDRoute *)route {
-    UIColor *color = self.mtd_routeColors[route.name];
+    UIColor *color = self.mtd_routeColors[route];
 
     if (color == nil) {
         color = self.overlayColor;

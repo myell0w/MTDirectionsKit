@@ -15,12 +15,15 @@
 typedef NS_OPTIONS(NSUInteger, MTDDirectionsRequestOption) {
     MTDDirectionsRequestOptionNone                  = 0,
 
-    MTDDirectionsRequestOptionOptimize              = 1 << 0,
-
-    MTDDirectionsRequestOptionAlternativeRoutes     = 1 << 1,
+    MTDDirectionsRequestOptionOptimizeRoute         = 1 << 1,
 
     MTDDirectionsRequestOptionAvoidTollRoads        = 1 << 2,
     MTDDirectionsRequestOptionAvoidHighways         = 1 << 3
+};
+
+/** Private options to specify, don't use them directly */
+typedef NS_OPTIONS(NSUInteger, MTDDirectionsRequestOptionPrivate) {
+    _MTDDirectionsRequestOptionAlternativeRoutes     = 1 << 0
 };
 
 

@@ -55,8 +55,8 @@
            options:(MTDDirectionsRequestOptions)options
         completion:(mtd_parser_block)completion {
     if ((self = [super init])) {
-        BOOL optimizeRoute = (options & MTDDirectionsRequestOptionOptimize) == MTDDirectionsRequestOptionOptimize;
-        BOOL alternativeRoutes = (options & MTDDirectionsRequestOptionAlternativeRoutes) == MTDDirectionsRequestOptionAlternativeRoutes;
+        BOOL optimizeRoute = (options & MTDDirectionsRequestOptionOptimizeRoute) == MTDDirectionsRequestOptionOptimizeRoute;
+        BOOL alternativeRoutes = (options & _MTDDirectionsRequestOptionAlternativeRoutes) == _MTDDirectionsRequestOptionAlternativeRoutes;
 
         MTDAssert(!(optimizeRoute && alternativeRoutes), @"Option optimize and alternative routes can't be specified at the same time.");
 

@@ -38,7 +38,7 @@
         [self setValue:MTDDirectionStringForDirectionRouteTypeMapQuest(routeType) forParameter:@"routeType"];
 
         // set parameter for alternative routes?
-        BOOL alternativeRoutes = (self.mtd_options & MTDDirectionsRequestOptionAlternativeRoutes) == MTDDirectionsRequestOptionAlternativeRoutes;
+        BOOL alternativeRoutes = (self.mtd_options & _MTDDirectionsRequestOptionAlternativeRoutes) == _MTDDirectionsRequestOptionAlternativeRoutes;
         if (alternativeRoutes) {
             [self setValue:kMTDMapQuestMaxRoutes forParameter:@"maxRoutes"];
         }
@@ -91,8 +91,8 @@
 
 - (NSString *)HTTPAddress {
     NSString *routingMethod = kMTDMapQuestRoutingMethodDefault;
-    BOOL optimizeRoute = (self.mtd_options & MTDDirectionsRequestOptionOptimize) == MTDDirectionsRequestOptionOptimize;
-    BOOL alternativeRoutes = (self.mtd_options & MTDDirectionsRequestOptionAlternativeRoutes) == MTDDirectionsRequestOptionAlternativeRoutes;
+    BOOL optimizeRoute = (self.mtd_options & MTDDirectionsRequestOptionOptimizeRoute) == MTDDirectionsRequestOptionOptimizeRoute;
+    BOOL alternativeRoutes = (self.mtd_options & _MTDDirectionsRequestOptionAlternativeRoutes) == _MTDDirectionsRequestOptionAlternativeRoutes;
 
     if (optimizeRoute) {
         routingMethod = kMTDMapQuestRoutingMethodOptimized;

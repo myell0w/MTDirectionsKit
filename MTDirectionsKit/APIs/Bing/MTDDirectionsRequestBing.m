@@ -38,8 +38,8 @@ static NSString *mtd_apiKey = nil;
         [self setValue:MTDDirectionStringForDirectionRouteTypeBing(routeType) forParameter:@"travelMode"];
 
         // set parameter for alternative routes?
-        BOOL alternativeRoutes = (self.mtd_options & MTDDirectionsRequestOptionAlternativeRoutes) == MTDDirectionsRequestOptionAlternativeRoutes;
-        BOOL optimizeRoute = (self.mtd_options & MTDDirectionsRequestOptionOptimize) == MTDDirectionsRequestOptionOptimize;
+        BOOL alternativeRoutes = (self.mtd_options & _MTDDirectionsRequestOptionAlternativeRoutes) == _MTDDirectionsRequestOptionAlternativeRoutes;
+        BOOL optimizeRoute = (self.mtd_options & MTDDirectionsRequestOptionOptimizeRoute) == MTDDirectionsRequestOptionOptimizeRoute;
 
         if (alternativeRoutes) {
             [self setValue:kMTDBingMaxRoutes forParameter:@"maxSolutions"];
