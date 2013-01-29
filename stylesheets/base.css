@@ -509,14 +509,14 @@ div.press_mentions { padding-top: 15px; }
 			div.press_mentions ul li .logo {
 				float: left;
 				position: relative;
-				border: 1px solid #eaeaea;
-				width: 75px;
-				height: 65px;
+				/*border: 1px solid #eaeaea;*/
+				width: 68px;
+				height: 68px;
 			}
 				div.press_mentions ul .logo img {
 					position: absolute;
-					top: 2px;
-					left: 4px;
+					top: 0px;
+					left: 0px;
 				}
 			div.press_mentions ul li .details {
 				margin-left: 95px;
@@ -524,7 +524,7 @@ div.press_mentions { padding-top: 15px; }
 			}
 			div.press_mentions ul li p {
 				font-style: italic;
-				color: #5d5d5d;
+				color: #6d6d6d;
 				font-size: 15px;
 				margin-bottom: 8px;
 				line-height: 22px;

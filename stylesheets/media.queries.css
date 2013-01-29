@@ -134,7 +134,7 @@
 		padding-bottom: 20px;
 		margin-bottom: 0;
 	}
-	div.team_members .person{
+	div.team_members .person {
 		float: none;
 		width: 100%;
 	}
@@ -158,6 +158,10 @@
 	article.release:last-child { margin-bottom: 0; }
 		article.release h2 { padding-right: 5px; }
 	/* Press */
+	div.press_mentions {
+		float: none;
+		width: 100%;
+	}
 	div.press_mentions ul li:last-child { margin-bottom: 0; }
 	/* Contact */
 	div#contact_form p.left,
