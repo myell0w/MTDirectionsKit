@@ -14,6 +14,10 @@
 #import "MTDDirectionsRequestOption.h"
 
 
+#define kMTDRequestProtocolUnsecure        @"http://"
+#define kMTDRequestProtocolSecure          @"https://"
+
+
 @class MTDWaypoint;
 
 
@@ -94,6 +98,23 @@
 /******************************************
  @name Request
  ******************************************/
+
+/**
+ Set's whether HTTPS should be used, when possible. Currently Google and Bing support HTTPS for their requests,
+ MapQuest doesn't. Defaults to NO.
+
+ @param useHTTPS flag whether HTTPS should be used when possible
+ @see prefersHTTPS
+ */
++ (void)setPrefersHTTPS:(BOOL)useHTTPS;
+
+/**
+ Returns whether HTTPS is used, when possible. Defaults to NO.
+ 
+ @return YES if HTTPS is used when possible, NO otherwise. Note: this doesn't indicate whether HTTPS is actually used, only if it is preferred
+ @see setPrefersHTTPS:
+ */
++ (BOOL)prefersHTTPS;
 
 /**
  This method first calls a subclass-hook to allow final modification of the URL to call and then starts the request.

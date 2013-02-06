@@ -7,7 +7,7 @@
 #import "MTDLocale+MapQuest.h"
 
 
-#define kMTDMapQuestHostName                    @"http://open.mapquestapi.com"
+#define kMTDMapQuestHostName                    @"open.mapquestapi.com"
 #define kMTDMapQuestServiceName                 @"directions"
 #define kMTDMapQuestVersionNumber               @"v1"
 #define kMTDMapQuestRoutingMethodDefault        @"route"
@@ -66,6 +66,11 @@
 #pragma mark - MTDDirectionsRequest
 ////////////////////////////////////////////////////////////////////////
 
++ (BOOL)prefersHTTPS {
+    // MapQuest doesn't support HTTPS atm
+    return NO;
+}
+
 - (MTDDirectionsAPI)API {
     return MTDDirectionsAPIMapQuest;
 }
@@ -90,6 +95,8 @@
 }
 
 - (NSString *)HTTPAddress {
+    BOOL useHTTPS = [[self class] prefersHTTPS];
+    NSString *protocol = useHTTPS ? kMTDRequestProtocolSecure : kMTDRequestProtocolUnsecure;
     NSString *routingMethod = kMTDMapQuestRoutingMethodDefault;
     BOOL optimizeRoute = (self.mtd_options & MTDDirectionsRequestOptionOptimizeRoute) == MTDDirectionsRequestOptionOptimizeRoute;
     BOOL alternativeRoutes = (self.mtd_options & _MTDDirectionsRequestOptionAlternativeRoutes) == _MTDDirectionsRequestOptionAlternativeRoutes;
@@ -100,7 +107,8 @@
         routingMethod = kMTDMapQuestRoutingMethodAlternatives;
     }
     
-    return [NSString stringWithFormat:@"%@/%@/%@/%@",
+    return [NSString stringWithFormat:@"%@%@/%@/%@/%@",
+            protocol,
             kMTDMapQuestHostName,
             kMTDMapQuestServiceName,
             kMTDMapQuestVersionNumber,

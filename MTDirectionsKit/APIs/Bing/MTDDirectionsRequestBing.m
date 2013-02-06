@@ -7,7 +7,7 @@
 #import "MTDLocale+Bing.h"
 
 
-#define kMTDBingHostName                    @"http://dev.virtualearth.net/REST"
+#define kMTDBingHostName                    @"dev.virtualearth.net/REST"
 #define kMTDBingVersionNumber               @"v1"
 #define kMTDBingRestAPI                     @"Routes"
 
@@ -99,7 +99,11 @@ static NSString *mtd_apiKey = nil;
 }
 
 - (NSString *)HTTPAddress {
-    return [NSString stringWithFormat:@"%@/%@/%@%@",
+    BOOL useHTTPS = [[self class] prefersHTTPS];
+    NSString *protocol = useHTTPS ? kMTDRequestProtocolSecure : kMTDRequestProtocolUnsecure;
+    
+    return [NSString stringWithFormat:@"%@%@/%@/%@%@",
+            protocol,
             kMTDBingHostName,
             kMTDBingVersionNumber,
             kMTDBingRestAPI,
