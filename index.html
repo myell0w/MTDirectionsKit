@@ -335,6 +335,24 @@
 				
 				<div class="releases">
 					<article class="release">
+						<h2>Version 1.6.1</h2>
+						<span class="date">Released on February 6th, 2013</span>
+						<ul>							
+							<li class="new"><span><b>New</b></span>Support for <b>HTTPS</b> when requesting directions</li>
+							<li class="new"><span><b>New</b></span>Support for <b>avoiding toll roads as well as highways</b> when requesting directions</li>
+							<li class="new"><span><b>New</b></span>Added -[MTDMapView distanceBetweenActiveRouteAndCoordinate:] to determine minimum distance between given point and active route</li>
+							<li class="new"><span><b>New</b></span>New delegate call mapView:colorForRoute:ofDirectionsOverlay: to allow different colors for each route</li>
+							<li class="new"><span><b>New</b></span>New delegate call mapView:shouldActivateRoute:ofDirectionsOverlay: to give fine-grained control whether a route can be activated by tapping on it</li>
+							<li class="new"><span><b>New</b></span>New delegate call mapView:didUpdateUserLocation:distanceToActiveRoute:ofDirectionsOverlay: that includes the distance between the user location and the active route of the directions overlay</li>
+							<li class="new"><span><b>New</b></span>Added -[MTDRoute containsTollRoad] property to check if a route contains toll roads</li>
+							<li class="new"><span><b>New</b></span>MTDManeuverTableViewController now contains a header/footer cell with information about departure, destination and the route</li>
+							<li class="fix"><span><b>Fix</b></span>Calling MTDOverrideClass with Nil as classToUse removes a previously overridden class</li>
+							<li class="fix"><span><b>Fix</b></span>[MTDWaypoint coordinate] is now readonly</li>
+							<li class="fix"><span><b>Fix</b></span>[MTDWaypoint waypointForCurrentLocation] updates its coordinate property when user location gets updated</li>
+						</ul>
+					</article>
+					
+					<article class="release">
 						<h2>Version 1.6.0</h2>
 						<span class="date">Released on December 18th, 2012</span>
 						<ul>							
