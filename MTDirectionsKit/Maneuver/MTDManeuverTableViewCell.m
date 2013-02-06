@@ -1,7 +1,9 @@
 #import "MTDManeuverTableViewCell.h"
 #import <MTDirectionsKit/MTDirectionsKit.h>
-
 #import <QuartzCore/QuartzCore.h>
+
+
+#define kMTDRunInTestTarget                 (NSClassFromString(@"SenTestCase") != Nil)
 
 #define kMTDImageMargin                     10.f
 #define kMTDImageViewWidthIncludingMargin   (2*kMTDImageMargin + mtd_imageSize.width)
@@ -24,17 +26,21 @@ static CGSize mtd_imageSize = (CGSize){0.f,0.f};
 
 + (void)initialize {
     if (self == [MTDManeuverTableViewCell class]) {
-        mtd_distanceFont = [UIFont systemFontOfSize:18.f];
-        mtd_instructionsFont = [UIFont boldSystemFontOfSize:12.f];
+        // SenTestingKit doesn't like UIKit and somehow calls initialize on this TableViewCell (why?)
+        // Prevent the UIKit-stuff to be created when run as test
+        if (kMTDRunInTestTarget == NO) {
+            mtd_distanceFont = [UIFont systemFontOfSize:18.f];
+            mtd_instructionsFont = [UIFont boldSystemFontOfSize:12.f];
 
-        // Test if the bundle was added to see if the images can be displayed.
-        // If not, we don't use the imageView size to calculate the size of the cell
-        UIImage *testImage = MTDGetImageForTurnType(MTDTurnTypeLeft);
+            // Test if the bundle was added to see if the images can be displayed.
+            // If not, we don't use the imageView size to calculate the size of the cell
+            UIImage *testImage = MTDGetImageForTurnType(MTDTurnTypeLeft);
 
-        mtd_imageSize = testImage.size;
-        // if there is no image specified for some turn type we display a
-        // transparent one instead to align the labels
-        mtd_emptyImage = MTDColoredImage(mtd_imageSize, [UIColor clearColor]);
+            mtd_imageSize = testImage.size;
+            // if there is no image specified for some turn type we display a
+            // transparent one instead to align the labels
+            mtd_emptyImage = MTDColoredImage(mtd_imageSize, [UIColor clearColor]);
+        }
     }
 }
 
@@ -51,7 +57,7 @@ static CGSize mtd_imageSize = (CGSize){0.f,0.f};
         self.detailTextLabel.numberOfLines = 0;
         self.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
     }
-    
+
     return self;
 }
 
@@ -146,7 +152,7 @@ static CGSize mtd_imageSize = (CGSize){0.f,0.f};
             } else {
                 self.imageView.image = nil;
             }
-            
+
             self.detailTextLabel.text = maneuver.instructions;
 
             if (maneuver.distance.distanceInMeter > 0.) {
@@ -159,7 +165,7 @@ static CGSize mtd_imageSize = (CGSize){0.f,0.f};
             self.textLabel.text = nil;
             self.detailTextLabel.text = nil;
         }
-        
+
         [self setNeedsLayout];
     }
 }
@@ -172,7 +178,7 @@ static CGSize mtd_imageSize = (CGSize){0.f,0.f};
         backgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         self.selectedBackgroundView = backgroundView;
     }
-
+    
     self.selectionStyle = UITableViewCellSelectionStyleGray;
     backgroundView.backgroundColor = backgroundColor;
 }
