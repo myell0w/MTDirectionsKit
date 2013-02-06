@@ -7,7 +7,7 @@
 #import "MTDLocale+Bing.h"
 
 
-#define kMTDBingHostName                    @"http://dev.virtualearth.net/REST"
+#define kMTDBingHostName                    @"dev.virtualearth.net/REST"
 #define kMTDBingVersionNumber               @"v1"
 #define kMTDBingRestAPI                     @"Routes"
 
@@ -38,14 +38,23 @@ static NSString *mtd_apiKey = nil;
         [self setValue:MTDDirectionStringForDirectionRouteTypeBing(routeType) forParameter:@"travelMode"];
 
         // set parameter for alternative routes?
-        BOOL alternativeRoutes = (self.mtd_options & MTDDirectionsRequestOptionAlternativeRoutes) == MTDDirectionsRequestOptionAlternativeRoutes;
-        BOOL optimizeRoute = (self.mtd_options & MTDDirectionsRequestOptionOptimize) == MTDDirectionsRequestOptionOptimize;
+        BOOL alternativeRoutes = (self.mtd_options & _MTDDirectionsRequestOptionAlternativeRoutes) == _MTDDirectionsRequestOptionAlternativeRoutes;
+        BOOL optimizeRoute = (self.mtd_options & MTDDirectionsRequestOptionOptimizeRoute) == MTDDirectionsRequestOptionOptimizeRoute;
 
         if (alternativeRoutes) {
             [self setValue:kMTDBingMaxRoutes forParameter:@"maxSolutions"];
         }
         if (intermediateGoals.count > 0 && optimizeRoute) {
             MTDLogInfo(@"Bing Routes API unfortunately doesn't support optimizing route goals.");
+        }
+
+        // avoid certain routes?
+        BOOL avoidTollRoads = (self.mtd_options & MTDDirectionsRequestOptionAvoidTollRoads) == MTDDirectionsRequestOptionAvoidTollRoads;
+        BOOL avoidHighways = (self.mtd_options & MTDDirectionsRequestOptionAvoidHighways) == MTDDirectionsRequestOptionAvoidHighways;
+        if (avoidTollRoads) {
+            [self setValue:@"tolls" forParameter:@"avoid"];
+        } else if (avoidHighways) { // can't set both, tolls has higher priority
+            [self setValue:@"highways" forParameter:@"avoid"];
         }
 
         // set parameter route type
@@ -90,7 +99,11 @@ static NSString *mtd_apiKey = nil;
 }
 
 - (NSString *)HTTPAddress {
-    return [NSString stringWithFormat:@"%@/%@/%@%@",
+    BOOL useHTTPS = [[self class] prefersHTTPS];
+    NSString *protocol = useHTTPS ? kMTDRequestProtocolSecure : kMTDRequestProtocolUnsecure;
+    
+    return [NSString stringWithFormat:@"%@%@/%@/%@%@",
+            protocol,
             kMTDBingHostName,
             kMTDBingVersionNumber,
             kMTDBingRestAPI,

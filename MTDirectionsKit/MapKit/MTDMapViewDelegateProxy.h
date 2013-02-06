@@ -11,7 +11,7 @@
 
 
 /**
- Since we subclass MKMapView we don't want to interfere with it's delegate-behavious. MKMapView is known
+ Since we subclass MKMapView we don't want to interfere with it's delegate-behaviour. MKMapView is known
  to at least respond to the protocol UIGestureRecognizerDelegate (not public), so we use an instance of
  MTDMapViewDelegateProxy as our delegate.
  */
@@ -19,8 +19,6 @@
 
 /** The MapView to call back, when a delegate call happens */
 @property (nonatomic, mtd_weak) MTDMapView *mapView;
-/** The last known location */
-@property (nonatomic, assign) CLLocationCoordinate2D lastKnownUserCoordinate;
 
 /**
  Creates an instance of the delegate proxy that doesn‘t retain the mapView to not create a retain cycle.

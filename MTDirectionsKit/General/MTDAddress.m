@@ -195,6 +195,8 @@
         NSRange lastCharactersRange = NSMakeRange(address.length-2, 2);
 
         [address deleteCharactersInRange:lastCharactersRange];
+    } else {
+        address = nil;
     }
     
     return [address copy];

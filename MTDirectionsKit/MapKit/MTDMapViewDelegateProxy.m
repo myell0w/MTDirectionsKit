@@ -1,6 +1,8 @@
 #import "MTDMapViewDelegateProxy.h"
 #import "MTDMapView.h"
 #import "MTDMapView+MTDirectionsPrivateAPI.h"
+#import "MTDWaypoint.h"
+#import "MTDWaypoint+MTDirectionsPrivateAPI.h"
 
 
 @implementation MTDMapViewDelegateProxy 
@@ -12,7 +14,6 @@
 - (id)initWithMapView:(MTDMapView *)mapView {
     if ((self = [super init])) {
         _mapView = mapView;
-        _lastKnownUserCoordinate = kCLLocationCoordinate2DInvalid;
     }
 
     return self;
@@ -27,7 +28,7 @@
     
     MTDLogVerbose(@"Location manager found a location for [MTDWaypoint waypointForCurrentLocation]");
 
-    self.lastKnownUserCoordinate = newLocation.coordinate;
+    [MTDWaypoint mtd_updateCurrentLocationCoordinate:newLocation.coordinate];
     [mapView mtd_stopUpdatingLocationCallingCompletion:YES];
 }
 

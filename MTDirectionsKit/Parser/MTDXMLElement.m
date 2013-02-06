@@ -144,6 +144,19 @@
     return foundNode;
 }
 
+- (MTDXMLElement *)firstChildNodeWithName:(NSString *)name attribute:(NSString *)attributeName attributeValue:(NSString *)attributeValue {
+    __block MTDXMLElement *foundNode = nil;
+
+    [self.childNodes enumerateObjectsUsingBlock:^(MTDXMLElement *element, __unused NSUInteger idx, BOOL *stop) {
+        if ([element.name isEqualToString:name] && [[element attributeWithName:attributeName] isEqualToString:attributeValue]) {
+            foundNode = element;
+            *stop = YES;
+        }
+    }];
+
+    return foundNode;
+}
+
 - (NSArray *)childNodesWithName:(NSString *)name {
     return [self.childNodes filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(MTDXMLElement *element, __unused NSDictionary *bindings) {
         return [element.name isEqualToString:name];

@@ -26,8 +26,8 @@
         [parser parseWithCompletion:^(MTDDirectionsOverlay *overlay, NSError *error) {
             STAssertNil(error,@"There was an error parsing mapquest_guessing_vienna.xml");
 
-            MTDAddress *fromAddress = overlay.fromAddress;
-            MTDAddress *toAddress = overlay.toAddress;
+            MTDAddress *fromAddress = overlay.from.address;
+            MTDAddress *toAddress = overlay.to.address;
 
             STAssertEqualObjects(fromAddress.state, @"Burgenland", @"fromAddress: error parsing state");
             STAssertEqualObjects(fromAddress.country, @"Austria", @"fromAddress: error parsing country");
@@ -73,8 +73,8 @@
         [parser parseWithCompletion:^(MTDDirectionsOverlay *overlay, NSError *error) {
             STAssertNil(error,@"There was an error parsing mapquest_intermediate_optimized.xml");
 
-            MTDAddress *fromAddress = overlay.fromAddress;
-            MTDAddress *toAddress = overlay.toAddress;
+            MTDAddress *fromAddress = overlay.from.address;
+            MTDAddress *toAddress = overlay.to.address;
 
             STAssertEqualObjects(fromAddress.city, @"Reading", @"fromAddress: error parsing city");
             STAssertEqualObjects(fromAddress.state, @"England", @"fromAddress: error parsing state");

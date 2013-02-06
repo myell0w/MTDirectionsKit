@@ -19,6 +19,7 @@ NS_INLINE CGFloat MTDDistanceToSegment(CGPoint point, CGPoint segmentPointV, CGP
 @interface MTDDirectionsOverlayView ()
 
 @property (nonatomic, readonly) MTDDirectionsOverlay *mtd_directionsOverlay;
+@property (nonatomic, strong) NSMutableDictionary *mtd_routeColors;
 
 @end
 
@@ -86,12 +87,12 @@ NS_INLINE CGFloat MTDDistanceToSegment(CGPoint point, CGPoint segmentPointV, CGP
 ////////////////////////////////////////////////////////////////////////
 
 - (void)drawPath:(CGPathRef)path
-         ofRoute:(__unused MTDRoute *)route
+         ofRoute:(MTDRoute *)route
      activeRoute:(BOOL)activeRoute
          mapRect:(__unused MKMapRect)mapRect
        zoomScale:(__unused MKZoomScale)zoomScale
        inContext:(CGContextRef)context {
-    UIColor *baseColor = self.overlayColor;
+    UIColor *baseColor = [self overlayColorForRoute:route];
     CGFloat shadowAlpha = 0.4f;
     CGFloat secondNormalPathAlpha = 0.7f;
     CGFloat lineWidth = _fullLineWidth;
@@ -158,6 +159,28 @@ NS_INLINE CGFloat MTDDistanceToSegment(CGPoint point, CGPoint segmentPointV, CGP
     }
 }
 
+- (void)setOverlayColor:(UIColor *)overlayColor forRoute:(MTDRoute *)route {
+    MTDAssert(overlayColor != nil && route != nil, @"overlayColor and route must be different from nil");
+
+    if (overlayColor != nil && route != nil) {
+        if (_mtd_routeColors == nil) {
+            _mtd_routeColors = [NSMutableDictionary dictionary];
+        }
+
+        [_mtd_routeColors setObject:overlayColor forKey:route];
+    }
+}
+
+- (UIColor *)overlayColorForRoute:(MTDRoute *)route {
+    UIColor *color = self.mtd_routeColors[route];
+
+    if (color == nil) {
+        color = self.overlayColor;
+    }
+
+    return color;
+}
+
 - (void)setOverlayLineWidthFactor:(CGFloat)overlayLineWidthFactor {
     if (overlayLineWidthFactor >= kMTDMinimumLineWidthFactor && overlayLineWidthFactor <= kMTDMaximumLineWidthFactor) {
         _overlayLineWidthFactor = overlayLineWidthFactor;
@@ -187,19 +210,28 @@ NS_INLINE CGFloat MTDDistanceToSegment(CGPoint point, CGPoint segmentPointV, CGP
 	}
 
     if ([mapView isKindOfClass:[MKMapView class]]) {
-        CGPoint tapPoint = [mapView convertPoint:point fromView:self];
-        CGPoint startPoint = [mapView convertCoordinate:((MTDWaypoint *)route.waypoints[0]).coordinate
-                                          toPointToView:mapView];
+        // we remove all instances of [MTDWaypoint waypointForCurrentLocation] from the list because if point
+        // refers to the user location (which is the most common use-case for this method) the distance will
+        // always be 0.f otherwise
+        NSArray *waypointsWithoutCurrentLocation = [route.waypoints filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(MTDWaypoint *evaluatedObject, __unused NSDictionary *bindings) {
+            return ![evaluatedObject isWaypointForCurrentLocation];
+        }]];
 
-        for (MTDWaypoint *waypoint in [route.waypoints subarrayWithRange:NSMakeRange(1, route.waypoints.count - 1)]) {
-            CGPoint cgWaypoint = [mapView convertCoordinate:waypoint.coordinate toPointToView:mapView];
-            CGFloat distance = MTDDistanceToSegment(tapPoint, startPoint, cgWaypoint);
+        if (waypointsWithoutCurrentLocation.count > 0) {
+            CGPoint tapPoint = [mapView convertPoint:point fromView:self];
+            CGPoint startPoint = [mapView convertCoordinate:[waypointsWithoutCurrentLocation[0] coordinate]
+                                              toPointToView:mapView];
 
-            if (distance < shortestDistance) {
-                shortestDistance = distance;
+            for (MTDWaypoint *waypoint in [waypointsWithoutCurrentLocation subarrayWithRange:NSMakeRange(1, waypointsWithoutCurrentLocation.count - 1)]) {
+                CGPoint cgWaypoint = [mapView convertCoordinate:waypoint.coordinate toPointToView:mapView];
+                CGFloat distance = MTDDistanceToSegment(tapPoint, startPoint, cgWaypoint);
+
+                if (distance < shortestDistance) {
+                    shortestDistance = distance;
+                }
+
+                startPoint = cgWaypoint;
             }
-
-            startPoint = cgWaypoint;
         }
     }
 
@@ -310,16 +342,6 @@ NS_INLINE CGFloat MTDDistanceToSegment(CGPoint point, CGPoint segmentPointV, CGP
     return path;
 }
 
-// gets called from the UIGestureRecognizer on the MTDMapView
-- (void)mtd_handleTapAtPoint:(CGPoint)point {
-    MTDRoute *selectedRoute = [self mtd_routeTouchedByPoint:point];
-
-    if (selectedRoute != nil && selectedRoute != self.mtd_directionsOverlay.activeRoute) {
-        [self.mtd_directionsOverlay mtd_activateRoute:selectedRoute];
-        [self setNeedsDisplayInMapRect:MKMapRectWorld];
-    }
-}
-
 // returns the first route that get's hit by the touch at the given point
 - (MTDRoute *)mtd_routeTouchedByPoint:(CGPoint)point {
     MTDRoute *nearestRoute = nil;
@@ -367,11 +389,11 @@ NS_INLINE CGFloat MTDDistanceToSegmentSquared(CGPoint p, CGPoint v, CGPoint w) {
     if (t < 0.f) {
         return MTDDist2(p, v);
     }
-    
+
     if (t > 1.f) {
         return MTDDist2(p, w);
     }
-    
+
     return MTDDist2(p, CGPointMake(v.x + t * (w.x - v.x), v.y + t * (w.y - v.y)));
 }
 

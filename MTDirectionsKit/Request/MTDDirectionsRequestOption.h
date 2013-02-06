@@ -12,10 +12,18 @@
  Be careful to not specify MTDDirectionsRequestOptionOptimize and MTDDirectionsRequestOptionAlternativeRoutes
  at the same time since this is not supported.
  */
-typedef NS_ENUM(NSUInteger, MTDDirectionsRequestOption) {
+typedef NS_OPTIONS(NSUInteger, MTDDirectionsRequestOption) {
     MTDDirectionsRequestOptionNone                  = 0,
-    MTDDirectionsRequestOptionOptimize              = 1,
-    MTDDirectionsRequestOptionAlternativeRoutes     = 1 << 1
+
+    MTDDirectionsRequestOptionOptimizeRoute         = 1 << 1,
+
+    MTDDirectionsRequestOptionAvoidTollRoads        = 1 << 2,
+    MTDDirectionsRequestOptionAvoidHighways         = 1 << 3
+};
+
+/** Private options to specify, don't use them directly */
+typedef NS_OPTIONS(NSUInteger, MTDDirectionsRequestOptionPrivate) {
+    _MTDDirectionsRequestOptionAlternativeRoutes     = 1 << 0
 };
 
 

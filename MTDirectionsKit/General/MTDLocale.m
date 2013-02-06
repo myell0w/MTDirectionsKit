@@ -70,7 +70,7 @@ NS_INLINE __attribute__((constructor)) void MTDLoadLocale(void) {
     }
 }
 
-void MTDDirectionsSetLocale(NSLocale* locale) {
+void MTDDirectionsSetLocale(NSLocale *locale) {
     MTDDirectionsAPI API = MTDDirectionsGetActiveAPI();
 
     if (MTDDirectionsLocaleIsSupportedByAPI(locale, API)) {
@@ -95,6 +95,10 @@ NSString* MTDDirectionsGetCountryCode(void) {
 
 BOOL MTDDirectionsLocaleIsSupportedByAPI(NSLocale *locale, MTDDirectionsAPI API) {
     NSString *identifier = [locale localeIdentifier];
+
+    if (identifier.length == 0) {
+        return NO;
+    }
 
     switch (API) {
         case MTDDirectionsAPIGoogle: {

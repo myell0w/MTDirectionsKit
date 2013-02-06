@@ -4,6 +4,13 @@
 #import "MTDDirectionsDefines.h"
 
 
+@interface MTDWaypoint ()
+
+@property (nonatomic, assign, readwrite) CLLocationCoordinate2D coordinate; // re-defined as read/write
+
+@end
+
+
 @implementation MTDWaypoint
 
 ////////////////////////////////////////////////////////////////////////
@@ -155,6 +162,14 @@
     } else {
         return self.address.hash;
     }
+}
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - Private
+////////////////////////////////////////////////////////////////////////
+
++ (void)mtd_updateCurrentLocationCoordinate:(CLLocationCoordinate2D)coordinate {
+    [MTDWaypoint waypointForCurrentLocation].coordinate = coordinate;
 }
 
 @end
