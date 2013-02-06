@@ -50,9 +50,7 @@
 	
 	<option value="//api/name/formattedTime">&nbsp;&nbsp;&nbsp;&nbsp;formattedTime</option>
 	
-	<option value="//api/name/fromAddress">&nbsp;&nbsp;&nbsp;&nbsp;fromAddress</option>
-	
-	<option value="//api/name/fromCoordinate">&nbsp;&nbsp;&nbsp;&nbsp;fromCoordinate</option>
+	<option value="//api/name/from">&nbsp;&nbsp;&nbsp;&nbsp;from</option>
 	
 	<option value="//api/name/intermediateGoals">&nbsp;&nbsp;&nbsp;&nbsp;intermediateGoals</option>
 	
@@ -66,9 +64,7 @@
 	
 	<option value="//api/name/timeInSeconds">&nbsp;&nbsp;&nbsp;&nbsp;timeInSeconds</option>
 	
-	<option value="//api/name/toAddress">&nbsp;&nbsp;&nbsp;&nbsp;toAddress</option>
-	
-	<option value="//api/name/toCoordinate">&nbsp;&nbsp;&nbsp;&nbsp;toCoordinate</option>
+	<option value="//api/name/to">&nbsp;&nbsp;&nbsp;&nbsp;to</option>
 	
 	<option value="//api/name/waypoints">&nbsp;&nbsp;&nbsp;&nbsp;waypoints</option>
 	
@@ -125,9 +121,7 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/formattedTime">formattedTime</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/fromAddress">fromAddress</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/fromCoordinate">fromCoordinate</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/from">from</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/intermediateGoals">intermediateGoals</a></span></li>
 	
@@ -141,9 +135,7 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/timeInSeconds">timeInSeconds</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/toAddress">toAddress</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/toCoordinate">toCoordinate</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/to">to</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/waypoints">waypoints</a></span></li>
 	
@@ -200,8 +192,8 @@
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
 						<p>An instance of MTDirectionsOverlay implements the MKOverlay protocol and represents
-an overlay used to store information about already parsed directions with a given
-<a href="#//api/name/fromCoordinate">fromCoordinate</a> and <a href="#//api/name/toCoordinate">toCoordinate</a>. It stores all waypoint along the route and the total
+an overlay used <a href="#//api/name/to">to</a> store information about already parsed directions with a given
+fromCoordinate and toCoordinate. It stores all waypoint along the route and the total
 <a href="#//api/name/distance">distance</a> of the route.</p>
 					</div>
 					
@@ -235,7 +227,7 @@ an overlay used to store information about already parsed directions with a give
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/bestRoute">&nbsp;&nbsp;bestRoute</a></code>
-		<span class="tooltip"><p>the best route of the alternatives according to the API used</p></span>
+		<span class="tooltip"><p>the best route of the alternatives according <a href="#//api/name/to">to</a> the API used</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -263,7 +255,7 @@ an overlay used to store information about already parsed directions with a give
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/routeType">&nbsp;&nbsp;routeType</a></code>
-		<span class="tooltip"><p>the type of travelling used to compute the directions, e.g. walking, by bike etc.</p></span>
+		<span class="tooltip"><p>the type of travelling used <a href="#//api/name/to">to</a> compute the directions, e.g. walking, by bike etc.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -278,42 +270,28 @@ an overlay used to store information about already parsed directions with a give
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/waypoints">&nbsp;&nbsp;waypoints</a></code>
-		<span class="tooltip"><p>all waypoints of the active route, including <a href="#//api/name/fromCoordinate">fromCoordinate</a> and <a href="#//api/name/toCoordinate">toCoordinate</a></p></span>
+		<span class="tooltip"><p>all waypoints of the active route, including <a href="#//api/name/from">from</a> and <a href="#//api/name/to">to</a></p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/fromCoordinate">&nbsp;&nbsp;fromCoordinate</a></code>
-		<span class="tooltip"><p>the starting coordinate of the active route</p></span>
+		<code><a href="#//api/name/from">&nbsp;&nbsp;from</a></code>
+		<span class="tooltip"><p>the starting point of the active route</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/toCoordinate">&nbsp;&nbsp;toCoordinate</a></code>
-		<span class="tooltip"><p>the end coordinate of the active route</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/fromAddress">&nbsp;&nbsp;fromAddress</a></code>
-		<span class="tooltip"><p>The address of the starting coordinat of the active route</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/toAddress">&nbsp;&nbsp;toAddress</a></code>
-		<span class="tooltip"><p>The address of the end coordinate of the active route</p></span>
+		<code><a href="#//api/name/to">&nbsp;&nbsp;to</a></code>
+		<span class="tooltip"><p>the end point of the active route</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/distance">&nbsp;&nbsp;distance</a></code>
-		<span class="tooltip"><p>the total distance between <a href="#//api/name/fromCoordinate">fromCoordinate</a> and <a href="#//api/name/toCoordinate">toCoordinate</a> of the active route, when travelled along the given <a href="#//api/name/waypoints">waypoints</a></p></span>
+		<span class="tooltip"><p>the total distance between fromCoordinate and toCoordinate of the active route, when travelled along the given <a href="#//api/name/waypoints">waypoints</a></p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -422,7 +400,7 @@ an overlay used to store information about already parsed directions with a give
 	
 	
 	<div class="method-subsection brief-description">
-		<p>the best route of the alternatives according to the API used</p>
+		<p>the best route of the alternatives according <a href="#//api/name/to">to</a> the API used</p>
 	</div>		
 	
 	
@@ -456,7 +434,7 @@ an overlay used to store information about already parsed directions with a give
 	
 	
 	<div class="method-subsection brief-description">
-		<p>the total distance between <a href="#//api/name/fromCoordinate">fromCoordinate</a> and <a href="#//api/name/toCoordinate">toCoordinate</a> of the active route, when travelled along the given <a href="#//api/name/waypoints">waypoints</a></p>
+		<p>the total distance between fromCoordinate and toCoordinate of the active route, when travelled along the given <a href="#//api/name/waypoints">waypoints</a></p>
 	</div>		
 	
 	
@@ -552,51 +530,17 @@ an overlay used to store information about already parsed directions with a give
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/fromAddress" title="fromAddress"></a>
-	<h3 class="subsubtitle method-title">fromAddress</h3>
+	<a name="//api/name/from" title="from"></a>
+	<h3 class="subsubtitle method-title">from</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The address of the starting coordinat of the active route</p>
+		<p>the starting point of the active route</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) MTDAddress *fromAddress</code></div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDDirectionsOverlay.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/fromCoordinate" title="fromCoordinate"></a>
-	<h3 class="subsubtitle method-title">fromCoordinate</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>the starting coordinate of the active route</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) CLLocationCoordinate2D fromCoordinate</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) MTDWaypoint *from</code></div>
 	
 	
 	
@@ -694,7 +638,7 @@ an overlay used to store information about already parsed directions with a give
 	
 	
 	<div class="method-subsection brief-description">
-		<p>the type of travelling used to compute the directions, e.g. walking, by bike etc.</p>
+		<p>the type of travelling used <a href="#//api/name/to">to</a> compute the directions, e.g. walking, by bike etc.</p>
 	</div>		
 	
 	
@@ -824,51 +768,17 @@ an overlay used to store information about already parsed directions with a give
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/toAddress" title="toAddress"></a>
-	<h3 class="subsubtitle method-title">toAddress</h3>
+	<a name="//api/name/to" title="to"></a>
+	<h3 class="subsubtitle method-title">to</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The address of the end coordinate of the active route</p>
+		<p>the end point of the active route</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) MTDAddress *toAddress</code></div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDDirectionsOverlay.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/toCoordinate" title="toCoordinate"></a>
-	<h3 class="subsubtitle method-title">toCoordinate</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>the end coordinate of the active route</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) CLLocationCoordinate2D toCoordinate</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) MTDWaypoint *to</code></div>
 	
 	
 	
@@ -898,7 +808,7 @@ an overlay used to store information about already parsed directions with a give
 	
 	
 	<div class="method-subsection brief-description">
-		<p>all waypoints of the active route, including <a href="#//api/name/fromCoordinate">fromCoordinate</a> and <a href="#//api/name/toCoordinate">toCoordinate</a></p>
+		<p>all waypoints of the active route, including <a href="#//api/name/from">from</a> and <a href="#//api/name/to">to</a></p>
 	</div>		
 	
 	
@@ -1056,7 +966,7 @@ an overlay used to store information about already parsed directions with a give
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-12-18)</span><br />
+						<p><span class="copyright">&copy; 2013 @myell0w. All rights reserved. (Last updated: 2013-02-06)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
 						

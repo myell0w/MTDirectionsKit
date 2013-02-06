@@ -59,6 +59,10 @@
 	
 	<option value="//api/name/drawPath:ofRoute:activeRoute:mapRect:zoomScale:inContext:">&nbsp;&nbsp;&nbsp;&nbsp;- drawPath:ofRoute:activeRoute:mapRect:zoomScale:inContext:</option>
 	
+	<option value="//api/name/overlayColorForRoute:">&nbsp;&nbsp;&nbsp;&nbsp;- overlayColorForRoute:</option>
+	
+	<option value="//api/name/setOverlayColor:forRoute:">&nbsp;&nbsp;&nbsp;&nbsp;- setOverlayColor:forRoute:</option>
+	
 	
 	
 </select>
@@ -102,6 +106,10 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/distanceBetweenPoint:route:">distanceBetweenPoint:route:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/drawPath:ofRoute:activeRoute:mapRect:zoomScale:inContext:">drawPath:ofRoute:activeRoute:mapRect:zoomScale:inContext:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/overlayColorForRoute:">overlayColorForRoute:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setOverlayColor:forRoute:">setOverlayColor:forRoute:</a></span></li>
 	
 </ul></li>
 
@@ -177,7 +185,8 @@ including all waypoints stored in the underlying instance of <a href="../Classes
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/overlayColor">&nbsp;&nbsp;overlayColor</a></code>
-		<span class="tooltip"><p>The color used to draw the overlay, default is a blue color</p></span>
+		<span class="tooltip"><p>The color used to draw the overlay, default is a blue color.
+This color is used if you don&rsquo;t set a specific color for a route with <a href="#//api/name/setOverlayColor:forRoute:">setOverlayColor:forRoute:</a></p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -193,6 +202,20 @@ The default value is 1.8f, the valid range is between 0.7f and 3.f.</p></span>
 	<span class="tooltip">
 		<code><a href="#//api/name/distanceBetweenPoint:route:">&ndash;&nbsp;distanceBetweenPoint:route:</a></code>
 		<span class="tooltip"><p>Returns the shortest distance between a given point and a route.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setOverlayColor:forRoute:">&ndash;&nbsp;setOverlayColor:forRoute:</a></code>
+		<span class="tooltip"><p>The color used to draw the route. If you don&rsquo;t set a specific color for a route self.<a href="#//api/name/overlayColor">overlayColor</a> is used.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/overlayColorForRoute:">&ndash;&nbsp;overlayColorForRoute:</a></code>
+		<span class="tooltip"><p>Returns the color with which the route is drawn.</p></span>
 	</span>
 	
 	
@@ -291,7 +314,8 @@ The default value is 1.8f, the valid range is between 0.7f and 3.f.</p></span>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The color used to draw the overlay, default is a blue color</p>
+		<p>The color used to draw the overlay, default is a blue color.
+This color is used if you don&rsquo;t set a specific color for a route with <a href="#//api/name/setOverlayColor:forRoute:">setOverlayColor:forRoute:</a></p>
 	</div>		
 	
 	
@@ -307,6 +331,15 @@ The default value is 1.8f, the valid range is between 0.7f and 3.f.</p></span>
 	
 	
 	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/setOverlayColor:forRoute:">&ndash; setOverlayColor:forRoute:</a></p></code></li>
+			
+		</ul>
+	</div>
 	
 	
 	
@@ -493,6 +526,113 @@ and only add your custom drawing to it.</p>
 	
 </div>
 						
+						<div class="section-method">
+	<a name="//api/name/overlayColorForRoute:" title="overlayColorForRoute:"></a>
+	<h3 class="subsubtitle method-title">overlayColorForRoute:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns the color with which the route is drawn.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (UIColor *)overlayColorForRoute:(MTDRoute *)<em>route</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>route</em></dt>
+			<dd><p>the route we wan&rsquo;t the color of</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>the color of the route or self.<a href="#//api/name/overlayColor">overlayColor</a> if none was set</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDDirectionsOverlayView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/setOverlayColor:forRoute:" title="setOverlayColor:forRoute:"></a>
+	<h3 class="subsubtitle method-title">setOverlayColor:forRoute:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The color used to draw the route. If you don&rsquo;t set a specific color for a route self.<a href="#//api/name/overlayColor">overlayColor</a> is used.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)setOverlayColor:(UIColor *)<em>overlayColor</em> forRoute:(MTDRoute *)<em>route</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>overlayColor</em></dt>
+			<dd><p>the color to draw the route with</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>route</em></dt>
+			<dd><p>the route we set the color of</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/overlayColor">@property overlayColor</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDDirectionsOverlayView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
 					</div>
 					
 					
@@ -506,7 +646,7 @@ and only add your custom drawing to it.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-12-18)</span><br />
+						<p><span class="copyright">&copy; 2013 @myell0w. All rights reserved. (Last updated: 2013-02-06)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
 						

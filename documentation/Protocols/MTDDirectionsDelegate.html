@@ -44,7 +44,7 @@
 	
 	<option value="instance_methods">Instance Methods</option>
 	
-	<option value="//api/name/mapView:colorForDirectionsOverlay:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:colorForDirectionsOverlay:</option>
+	<option value="//api/name/mapView:colorForRoute:ofDirectionsOverlay:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:colorForRoute:ofDirectionsOverlay:</option>
 	
 	<option value="//api/name/mapView:didActivateRoute:ofDirectionsOverlay:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:didActivateRoute:ofDirectionsOverlay:</option>
 	
@@ -52,7 +52,11 @@
 	
 	<option value="//api/name/mapView:didFinishLoadingDirectionsOverlay:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:didFinishLoadingDirectionsOverlay:</option>
 	
+	<option value="//api/name/mapView:didUpdateUserLocation:distanceToActiveRoute:ofDirectionsOverlay:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:didUpdateUserLocation:distanceToActiveRoute:ofDirectionsOverlay:</option>
+	
 	<option value="//api/name/mapView:lineWidthFactorForDirectionsOverlay:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:lineWidthFactorForDirectionsOverlay:</option>
+	
+	<option value="//api/name/mapView:shouldActivateRoute:ofDirectionsOverlay:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:shouldActivateRoute:ofDirectionsOverlay:</option>
 	
 	<option value="//api/name/mapView:willStartLoadingDirectionsFrom:to:routeType:">&nbsp;&nbsp;&nbsp;&nbsp;- mapView:willStartLoadingDirectionsFrom:to:routeType:</option>
 	
@@ -84,7 +88,7 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:colorForDirectionsOverlay:">mapView:colorForDirectionsOverlay:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:colorForRoute:ofDirectionsOverlay:">mapView:colorForRoute:ofDirectionsOverlay:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:didActivateRoute:ofDirectionsOverlay:">mapView:didActivateRoute:ofDirectionsOverlay:</a></span></li>
 	
@@ -92,7 +96,11 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:didFinishLoadingDirectionsOverlay:">mapView:didFinishLoadingDirectionsOverlay:</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:didUpdateUserLocation:distanceToActiveRoute:ofDirectionsOverlay:">mapView:didUpdateUserLocation:distanceToActiveRoute:ofDirectionsOverlay:</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:lineWidthFactorForDirectionsOverlay:">mapView:lineWidthFactorForDirectionsOverlay:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:shouldActivateRoute:ofDirectionsOverlay:">mapView:shouldActivateRoute:ofDirectionsOverlay:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView:willStartLoadingDirectionsFrom:to:routeType:">mapView:willStartLoadingDirectionsFrom:to:routeType:</a></span></li>
 	
@@ -175,6 +183,14 @@ by returning a different overlay than the one received as parameter</p></span>
 	
 </li><li>
 	<span class="tooltip">
+		<code><a href="#//api/name/mapView:shouldActivateRoute:ofDirectionsOverlay:">&ndash;&nbsp;mapView:shouldActivateRoute:ofDirectionsOverlay:</a></code>
+		<span class="tooltip"><p>Asks the delegate whether the specified route should be activated by tapping on it.
+If this method isn&rsquo;t implemented route activation is enabled by default.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/mapView:didActivateRoute:ofDirectionsOverlay:">&ndash;&nbsp;mapView:didActivateRoute:ofDirectionsOverlay:</a></code>
 		<span class="tooltip"><p>Tells the delegate that the user activated the specified route by tapping on it</p></span>
 	</span>
@@ -182,8 +198,8 @@ by returning a different overlay than the one received as parameter</p></span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/mapView:colorForDirectionsOverlay:">&ndash;&nbsp;mapView:colorForDirectionsOverlay:</a></code>
-		<span class="tooltip"><p>Asks the delegate for the color for the corresponding view for the specified directionsOverlay.</p></span>
+		<code><a href="#//api/name/mapView:colorForRoute:ofDirectionsOverlay:">&ndash;&nbsp;mapView:colorForRoute:ofDirectionsOverlay:</a></code>
+		<span class="tooltip"><p>Asks the delegate for the color for the corresponding route of the specified directionsOverlay.</p></span>
 	</span>
 	
 	
@@ -192,6 +208,13 @@ by returning a different overlay than the one received as parameter</p></span>
 		<code><a href="#//api/name/mapView:lineWidthFactorForDirectionsOverlay:">&ndash;&nbsp;mapView:lineWidthFactorForDirectionsOverlay:</a></code>
 		<span class="tooltip"><p>Asks the delegate for the factor to multiply MKRoadWidthAtZoomScale with to compute the total overlay line width for the specified directionsOverlay.
 The default value, if not implemented, is 1.8f</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mapView:didUpdateUserLocation:distanceToActiveRoute:ofDirectionsOverlay:">&ndash;&nbsp;mapView:didUpdateUserLocation:distanceToActiveRoute:ofDirectionsOverlay:</a></code>
+		<span class="tooltip"><p>This method is an extended version of &ndash; [MKMapViewDelegate mapView:didUpdateUserLocation] and is called at exactly the same times.</p></span>
 	</span>
 	
 	
@@ -213,17 +236,17 @@ The default value, if not implemented, is 1.8f</p></span>
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/mapView:colorForDirectionsOverlay:" title="mapView:colorForDirectionsOverlay:"></a>
-	<h3 class="subsubtitle method-title">mapView:colorForDirectionsOverlay:</h3>
+	<a name="//api/name/mapView:colorForRoute:ofDirectionsOverlay:" title="mapView:colorForRoute:ofDirectionsOverlay:"></a>
+	<h3 class="subsubtitle method-title">mapView:colorForRoute:ofDirectionsOverlay:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Asks the delegate for the color for the corresponding view for the specified directionsOverlay.</p>
+		<p>Asks the delegate for the color for the corresponding route of the specified directionsOverlay.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (UIColor *)mapView:(MTDMapView *)<em>mapView</em> colorForDirectionsOverlay:(MTDDirectionsOverlay *)<em>directionsOverlay</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (UIColor *)mapView:(MTDMapView *)<em>mapView</em> colorForRoute:(MTDRoute *)<em>route</em> ofDirectionsOverlay:(MTDDirectionsOverlay *)<em>directionsOverlay</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
@@ -235,8 +258,13 @@ The default value, if not implemented, is 1.8f</p></span>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
+			<dt><em>route</em></dt>
+			<dd><p>the route we want the color of</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
 			<dt><em>directionsOverlay</em></dt>
-			<dd><p>the overlay we want the color of</p></dd>
+			<dd><p>the overlay that contains the route</p></dd>
 		</dl>
 		
 	</div>
@@ -421,6 +449,76 @@ by returning a different overlay than the one received as parameter</p>
 </div>
 						
 						<div class="section-method">
+	<a name="//api/name/mapView:didUpdateUserLocation:distanceToActiveRoute:ofDirectionsOverlay:" title="mapView:didUpdateUserLocation:distanceToActiveRoute:ofDirectionsOverlay:"></a>
+	<h3 class="subsubtitle method-title">mapView:didUpdateUserLocation:distanceToActiveRoute:ofDirectionsOverlay:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>This method is an extended version of &ndash; [MKMapViewDelegate mapView:didUpdateUserLocation] and is called at exactly the same times.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)mapView:(MTDMapView *)<em>mapView</em> didUpdateUserLocation:(MKUserLocation *)<em>userLocation</em> distanceToActiveRoute:(CGFloat)<em>distanceToActiveRoute</em> ofDirectionsOverlay:(MTDDirectionsOverlay *)<em>directionsOverlay</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p>the map view that is tracking the user’s location</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>userLocation</em></dt>
+			<dd><p>the location object representing the user’s latest location</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>distanceToActiveRoute</em></dt>
+			<dd><p>the distance in points between the userLocation and the active route on the mapView</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>directionsOverlay</em></dt>
+			<dd><p>the overlay that contains the active route</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>From Apple&rsquo;s documentation:
+While the showsUserLocation property is set to YES, this method is called whenever a new location update is
+received by the map view. This method is also called if the map view’s user tracking mode is set to
+MKUserTrackingModeFollowWithHeading and the heading changes.</p>
+
+<p>This method is not called if the application is currently running in the background. If you want to receive location
+updates while running in the background, you must use the Core Location framework.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDDirectionsDelegate.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/mapView:lineWidthFactorForDirectionsOverlay:" title="mapView:lineWidthFactorForDirectionsOverlay:"></a>
 	<h3 class="subsubtitle method-title">mapView:lineWidthFactorForDirectionsOverlay:</h3>
 	
@@ -446,6 +544,61 @@ The default value, if not implemented, is 1.8f</p>
 		<dl class="argument-def parameter-def">
 			<dt><em>directionsOverlay</em></dt>
 			<dd><p>the overlay we want the line width factor of</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDDirectionsDelegate.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mapView:shouldActivateRoute:ofDirectionsOverlay:" title="mapView:shouldActivateRoute:ofDirectionsOverlay:"></a>
+	<h3 class="subsubtitle method-title">mapView:shouldActivateRoute:ofDirectionsOverlay:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Asks the delegate whether the specified route should be activated by tapping on it.
+If this method isn&rsquo;t implemented route activation is enabled by default.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (BOOL)mapView:(MTDMapView *)<em>mapView</em> shouldActivateRoute:(MTDRoute *)<em>route</em> ofDirectionsOverlay:(MTDDirectionsOverlay *)<em>directionsOverlay</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mapView</em></dt>
+			<dd><p>the mapView that displays the directions</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>route</em></dt>
+			<dd><p>the new active route</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>directionsOverlay</em></dt>
+			<dd><p>the directions overlay containing several routes</p></dd>
 		</dl>
 		
 	</div>
@@ -542,7 +695,7 @@ The default value, if not implemented, is 1.8f</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-12-18)</span><br />
+						<p><span class="copyright">&copy; 2013 @myell0w. All rights reserved. (Last updated: 2013-02-06)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
 						

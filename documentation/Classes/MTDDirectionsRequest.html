@@ -59,7 +59,11 @@
 	
 	<option value="class_methods">Class Methods</option>
 	
+	<option value="//api/name/prefersHTTPS">&nbsp;&nbsp;&nbsp;&nbsp;+ prefersHTTPS</option>
+	
 	<option value="//api/name/requestDirectionsAPI:from:to:intermediateGoals:routeType:options:completion:">&nbsp;&nbsp;&nbsp;&nbsp;+ requestDirectionsAPI:from:to:intermediateGoals:routeType:options:completion:</option>
+	
+	<option value="//api/name/setPrefersHTTPS:">&nbsp;&nbsp;&nbsp;&nbsp;+ setPrefersHTTPS:</option>
 	
 	
 	
@@ -136,7 +140,11 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/prefersHTTPS">prefersHTTPS</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/requestDirectionsAPI:from:to:intermediateGoals:routeType:options:completion:">requestDirectionsAPI:from:to:intermediateGoals:routeType:options:completion:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setPrefersHTTPS:">setPrefersHTTPS:</a></span></li>
 	
 </ul></li>
 
@@ -303,6 +311,21 @@ with a specified <a href="#//api/name/routeType">routeType</a>, options and opti
 
 						<ul class="task-list">
 							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setPrefersHTTPS:">+&nbsp;setPrefersHTTPS:</a></code>
+		<span class="tooltip"><p>Set&rsquo;s whether HTTPS should be used, when possible. Currently Google and Bing support HTTPS for their requests,
+MapQuest doesn&rsquo;t. Defaults <a href="#//api/name/to">to</a> NO.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/prefersHTTPS">+&nbsp;prefersHTTPS</a></code>
+		<span class="tooltip"><p>Returns whether HTTPS is used, when possible. Defaults <a href="#//api/name/to">to</a> NO.</p></span>
+	</span>
+	
+	
+</li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/start">&ndash;&nbsp;start</a></code>
 		<span class="tooltip"><p>This method first calls a subclass-hook <a href="#//api/name/to">to</a> allow final modification of the URL <a href="#//api/name/to">to</a> call and then starts the request.</p></span>
@@ -624,6 +647,54 @@ method <a href="#//api/name/to">to</a> change the request address the way they w
 						<h2 class="subtitle subtitle-methods">Class Methods</h2>
 						
 						<div class="section-method">
+	<a name="//api/name/prefersHTTPS" title="prefersHTTPS"></a>
+	<h3 class="subsubtitle method-title">prefersHTTPS</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns whether HTTPS is used, when possible. Defaults <a href="#//api/name/to">to</a> NO.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (BOOL)prefersHTTPS</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>YES if HTTPS is used when possible, NO otherwise. Note: this doesn&rsquo;t indicate whether HTTPS is actually used, only if it is preferred</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/setPrefersHTTPS:">+ setPrefersHTTPS:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDDirectionsRequest.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/requestDirectionsAPI:from:to:intermediateGoals:routeType:options:completion:" title="requestDirectionsAPI:from:to:intermediateGoals:routeType:options:completion:"></a>
 	<h3 class="subsubtitle method-title">requestDirectionsAPI:from:to:intermediateGoals:routeType:options:completion:</h3>
 	
@@ -688,6 +759,60 @@ with a specified <a href="#//api/name/routeType">routeType</a>, options and opti
 	
 	
 	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDDirectionsRequest.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/setPrefersHTTPS:" title="setPrefersHTTPS:"></a>
+	<h3 class="subsubtitle method-title">setPrefersHTTPS:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Set&rsquo;s whether HTTPS should be used, when possible. Currently Google and Bing support HTTPS for their requests,
+MapQuest doesn&rsquo;t. Defaults <a href="#//api/name/to">to</a> NO.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (void)setPrefersHTTPS:(BOOL)<em>useHTTPS</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>useHTTPS</em></dt>
+			<dd><p>flag whether HTTPS should be used when possible</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/prefersHTTPS">+ prefersHTTPS</a></p></code></li>
+			
+		</ul>
+	</div>
 	
 	
 	
@@ -1107,7 +1232,7 @@ to=VALUE_1&amp;to=VALUE_2&amp;to=VALUE_3</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 @myell0w. All rights reserved. (Last updated: 2012-12-18)</span><br />
+						<p><span class="copyright">&copy; 2013 @myell0w. All rights reserved. (Last updated: 2013-02-06)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
 						
