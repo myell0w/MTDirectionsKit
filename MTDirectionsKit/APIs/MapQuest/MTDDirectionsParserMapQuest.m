@@ -14,6 +14,12 @@
 #import "MTDTurnType+MapQuest.h"
 
 
+static BOOL MTDBOOLFromAPIString(NSString *string) {
+    return [string caseInsensitiveCompare:@"false"] != NSOrderedSame;
+}
+
+
+
 @interface MTDDirectionsParserMapQuest ()
 
 @property (nonatomic, strong, readwrite) MTDWaypoint *from; // redefined as read/write
@@ -115,9 +121,11 @@
     MTDXMLElement *timeNode = [routeNode firstChildNodeWithName:@"time"];
     MTDXMLElement *copyrightNode = [MTDXMLElement nodeForXPathQuery:@"/response/info/copyright/text" onXML:self.data];
     MTDXMLElement *nameNode = [routeNode firstChildNodeWithName:@"name"];
+    MTDXMLElement *tollRoadNode = [routeNode firstChildNodeWithName:@"hasTollRoad"];
 
     MTDDistance *distance = nil;
     NSTimeInterval timeInSeconds = -1.;
+    BOOL containsTollRoad = NO;
     NSMutableDictionary *additionalInfo = [NSMutableDictionary dictionary];
 
     // Parse waypoints
@@ -139,6 +147,10 @@
             timeInSeconds = [timeNode.contentString doubleValue];
         }
 
+        if (tollRoadNode != nil) {
+            containsTollRoad = MTDBOOLFromAPIString(tollRoadNode.contentString);
+        }
+
         if (copyrightNode != nil) {
             [additionalInfo setValue:copyrightNode.contentString forKey:MTDAdditionalInfoCopyrightsKey];
         }
@@ -150,6 +162,7 @@
                                             timeInSeconds:timeInSeconds
                                                      name:nameNode.contentString
                                                 routeType:self.routeType
+                                         containsTollRoad:containsTollRoad
                                            additionalInfo:additionalInfo];
     return route;
 }
@@ -322,8 +335,8 @@
 // This method returns a hand-made arrival maneuver
 - (MTDManeuver *)mtd_arrivalManeuverWithWaypoint:(MTDWaypoint *)waypoint {
     // TODO: localize, offer possibility for custom localization
-    NSString *destination = waypoint.address != nil ? [waypoint.address fullAddress] : @"destination";
-    NSString *instructions = [NSString stringWithFormat:@"Arrive at %@", destination];
+    NSString *destination = [waypoint.address fullAddress] ?: @"destination";
+    NSString *instructions = [NSString stringWithFormat:@"Arrive at %@.", destination];
     MTDManeuver *arrivalManeuver = [[MTDManeuver alloc] initWithWaypoint:waypoint
                                                                 distance:nil
                                                            timeInSeconds:0.

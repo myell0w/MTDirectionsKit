@@ -11,7 +11,7 @@
 #import <CommonCrypto/CommonHMAC.h>
 
 
-#define kMTDGoogleDomain              @"http://maps.googleapis.com"
+#define kMTDGoogleDomain              @"maps.googleapis.com"
 #define kMTDGoogleBaseAddress         kMTDGoogleDomain @"/maps/api/directions/xml"
 
 
@@ -40,9 +40,18 @@ static NSString *mtd_cryptographicKey = nil;
 
 
         // set parameter for alternative routes?
-        BOOL alternativeRoutes = (self.mtd_options & MTDDirectionsRequestOptionAlternativeRoutes) == MTDDirectionsRequestOptionAlternativeRoutes;
+        BOOL alternativeRoutes = (self.mtd_options & _MTDDirectionsRequestOptionAlternativeRoutes) == _MTDDirectionsRequestOptionAlternativeRoutes;
         if (alternativeRoutes) {
             [self setValue:@"true" forParameter:@"alternatives"];
+        }
+
+        // avoid certain routes?
+        BOOL avoidTollRoads = (self.mtd_options & MTDDirectionsRequestOptionAvoidTollRoads) == MTDDirectionsRequestOptionAvoidTollRoads;
+        BOOL avoidHighways = (self.mtd_options & MTDDirectionsRequestOptionAvoidHighways) == MTDDirectionsRequestOptionAvoidHighways;
+        if (avoidTollRoads) {
+            [self setValue:@"tolls" forParameter:@"avoid"];
+        } else if (avoidHighways) { // can't set both, tolls has higher priority
+            [self setValue:@"highways" forParameter:@"avoid"];
         }
     }
     
@@ -59,7 +68,7 @@ static NSString *mtd_cryptographicKey = nil;
 
 - (void)setValueForParameterWithIntermediateGoals:(NSArray *)intermediateGoals {
     if (intermediateGoals.count > 0 && self.routeType != MTDDirectionsRouteTypePedestrianIncludingPublicTransport) {
-        BOOL optimizeRoute = (self.mtd_options & MTDDirectionsRequestOptionOptimize) == MTDDirectionsRequestOptionOptimize;
+        BOOL optimizeRoute = (self.mtd_options & MTDDirectionsRequestOptionOptimizeRoute) == MTDDirectionsRequestOptionOptimizeRoute;
         NSMutableString *parameter = [NSMutableString stringWithString:(optimizeRoute ? @"optimize:true" : @"optimize:false")];
         
         [intermediateGoals enumerateObjectsUsingBlock:^(id obj, __unused NSUInteger idx, __unused BOOL *stop) {
@@ -80,6 +89,8 @@ static NSString *mtd_cryptographicKey = nil;
 
     // 2. Strip off the domain portion of the request, leaving only the path and the query
     NSString *path = [address stringByReplacingOccurrencesOfString:kMTDGoogleDomain withString:@""];
+    path = [path stringByReplacingOccurrencesOfString:kMTDRequestProtocolUnsecure withString:@""];
+    path = [path stringByReplacingOccurrencesOfString:kMTDRequestProtocolSecure withString:@""];
     NSData *pathData = [path dataUsingEncoding:NSASCIIStringEncoding];
 
     // 3. Retrieve your private key, which is encoded in a modified Base64 for URLs, and sign the URL above using the HMAC-SHA1 algorithm.
@@ -98,7 +109,10 @@ static NSString *mtd_cryptographicKey = nil;
 }
 
 - (NSString *)HTTPAddress {
-    return kMTDGoogleBaseAddress;
+    BOOL useHTTPS = [[self class] prefersHTTPS];
+    NSString *protocol = useHTTPS ? kMTDRequestProtocolSecure : kMTDRequestProtocolUnsecure;
+
+    return [protocol stringByAppendingString:kMTDGoogleBaseAddress];
 }
 
 ////////////////////////////////////////////////////////////////////////

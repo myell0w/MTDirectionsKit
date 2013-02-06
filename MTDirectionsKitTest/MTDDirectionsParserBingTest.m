@@ -32,8 +32,8 @@
             STAssertEqualObjects(overlay.formattedTime, @"46:15", @"Error formatting time");
             STAssertTrue(overlay.waypoints.count == 2, @"Wrong number of waypoints");
 
-            MTDAddress *fromAddress = overlay.fromAddress;
-            MTDAddress *toAddress = overlay.toAddress;
+            MTDAddress *fromAddress = overlay.from.address;
+            MTDAddress *toAddress = overlay.to.address;
 
             STAssertEqualObjects(fromAddress.street, @"Eiffel Tower", @"fromAddress: error parsing street");
             STAssertEqualObjects(fromAddress.city, @"Paris", @"fromAddress: error parsing city");
@@ -79,8 +79,8 @@
             STAssertEqualObjects(overlay.formattedTime, @"18:14", @"Error formatting time");
             STAssertTrue(overlay.waypoints.count == 2, @"Wrong number of waypoints");
 
-            MTDAddress *fromAddress = overlay.fromAddress;
-            MTDAddress *toAddress = overlay.toAddress;
+            MTDAddress *fromAddress = overlay.from.address;
+            MTDAddress *toAddress = overlay.to.address;
 
             STAssertEqualObjects(fromAddress.city, @"Lynnwood", @"fromAddress: error parsing city");
             STAssertEqualObjects(fromAddress.state, @"WA", @"fromAddress: error parsing state");
@@ -124,8 +124,8 @@
             STAssertEqualObjects(overlay.formattedTime, @"56:56", @"Error formatting time");
             STAssertTrue(overlay.waypoints.count == 2, @"Wrong number of waypoints");
 
-            MTDAddress *fromAddress = overlay.fromAddress;
-            MTDAddress *toAddress = overlay.toAddress;
+            MTDAddress *fromAddress = overlay.from.address;
+            MTDAddress *toAddress = overlay.to.address;
 
             STAssertEqualObjects(fromAddress.state, @"CA", @"fromAddress: error parsing state");
             STAssertEqualObjects(fromAddress.country, @"United States", @"fromAddress: error parsing country");
@@ -167,8 +167,8 @@
             STAssertEqualObjects(overlay.formattedTime, @"18:04", @"Error formatting time");
             STAssertTrue(overlay.waypoints.count == 69, @"Wrong number of waypoints %d", overlay.waypoints.count);
 
-            MTDAddress *fromAddress = overlay.fromAddress;
-            MTDAddress *toAddress = overlay.toAddress;
+            MTDAddress *fromAddress = overlay.from.address;
+            MTDAddress *toAddress = overlay.to.address;
 
             STAssertEqualObjects(fromAddress.city, @"Minneapolis", @"fromAddress: error parsing city");
             STAssertEqualObjects(fromAddress.state, @"MN", @"fromAddress: error parsing state");
@@ -220,8 +220,8 @@
             STAssertEqualObjects(slowerRoute.formattedTime, @"2:07:10", @"Error formatting time");
             STAssertTrue(slowerRoute.waypoints.count == 875, @"Wrong number of waypoints");
 
-            MTDAddress *fromAddress = overlay.fromAddress;
-            MTDAddress *toAddress = overlay.toAddress;
+            MTDAddress *fromAddress = overlay.from.address;
+            MTDAddress *toAddress = overlay.to.address;
 
             STAssertEqualObjects(fromAddress.city, @"Güssing", @"fromAddress: error parsing city");
             STAssertEqualObjects(fromAddress.state, @"Burgenland", @"fromAddress: error parsing state");

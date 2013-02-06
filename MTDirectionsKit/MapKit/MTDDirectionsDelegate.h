@@ -68,6 +68,16 @@
 - (void)mapView:(MTDMapView *)mapView didFailLoadingDirectionsOverlayWithError:(NSError *)error;
 
 /**
+ Asks the delegate whether the specified route should be activated by tapping on it. 
+ If this method isn't implemented route activation is enabled by default.
+
+ @param mapView the mapView that displays the directions
+ @param route the new active route
+ @param directionsOverlay the directions overlay containing several routes
+ */
+- (BOOL)mapView:(MTDMapView *)mapView shouldActivateRoute:(MTDRoute *)route ofDirectionsOverlay:(MTDDirectionsOverlay *)directionsOverlay;
+
+/**
  Tells the delegate that the user activated the specified route by tapping on it
 
  @param mapView the mapView that displays the directions
@@ -77,12 +87,13 @@
 - (void)mapView:(MTDMapView *)mapView didActivateRoute:(MTDRoute *)route ofDirectionsOverlay:(MTDDirectionsOverlay *)directionsOverlay;
 
 /**
- Asks the delegate for the color for the corresponding view for the specified directionsOverlay.
+ Asks the delegate for the color for the corresponding route of the specified directionsOverlay.
  
  @param mapView the mapView that began loading the directions
- @param directionsOverlay the overlay we want the color of
+ @param route the route we want the color of
+ @param directionsOverlay the overlay that contains the route
  */
-- (UIColor *)mapView:(MTDMapView *)mapView colorForDirectionsOverlay:(MTDDirectionsOverlay *)directionsOverlay;
+- (UIColor *)mapView:(MTDMapView *)mapView colorForRoute:(MTDRoute *)route ofDirectionsOverlay:(MTDDirectionsOverlay *)directionsOverlay;
 
 /**
  Asks the delegate for the factor to multiply MKRoadWidthAtZoomScale with to compute the total overlay line width for the specified directionsOverlay.

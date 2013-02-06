@@ -28,7 +28,12 @@
 /** Flag that indicates whether the maneuver points are drawn, defaults to NO */
 @property (nonatomic, assign) BOOL drawManeuvers;
 
-/** The color used to draw the overlay, default is a blue color */
+/** 
+ The color used to draw the overlay, default is a blue color. 
+ This color is used if you don't set a specific color for a route with setOverlayColor:forRoute:
+ 
+ @see setOverlayColor:forRoute:
+ */
 @property (nonatomic, strong) UIColor *overlayColor UI_APPEARANCE_SELECTOR;
 
 /**
@@ -46,6 +51,23 @@
  @return the shortest distance between the point and the route, or FLT_MAX
  */
 - (CGFloat)distanceBetweenPoint:(CGPoint)point route:(MTDRoute *)route;
+
+/**
+ The color used to draw the route. If you don't set a specific color for a route self.overlayColor is used.
+ 
+ @param overlayColor the color to draw the route with
+ @param route the route we set the color of
+ @see setOverlayColor:
+ */
+- (void)setOverlayColor:(UIColor *)overlayColor forRoute:(MTDRoute *)route;
+
+/**
+ Returns the color with which the route is drawn.
+ 
+ @param route the route we wan't the color of
+ @return the color of the route or self.overlayColor if none was set
+ */
+- (UIColor *)overlayColorForRoute:(MTDRoute *)route;
 
 
 /**

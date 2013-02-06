@@ -148,6 +148,7 @@
                                             timeInSeconds:timeInSeconds
                                                      name:summaryNode.contentString
                                                 routeType:self.routeType
+                                         containsTollRoad:NO // API provides no info :(
                                            additionalInfo:additionalInfo];
     return route;
 }

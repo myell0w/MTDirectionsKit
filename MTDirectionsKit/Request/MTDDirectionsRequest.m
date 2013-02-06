@@ -6,6 +6,9 @@
 #import "MTDDirectionsDefines.h"
 
 
+static BOOL mtd_prefersHTTPS = NO;
+
+
 @interface MTDDirectionsRequest ()
 
 /** Dictionary containing all parameter key-value pairs of the request */
@@ -55,8 +58,8 @@
            options:(MTDDirectionsRequestOptions)options
         completion:(mtd_parser_block)completion {
     if ((self = [super init])) {
-        BOOL optimizeRoute = (options & MTDDirectionsRequestOptionOptimize) == MTDDirectionsRequestOptionOptimize;
-        BOOL alternativeRoutes = (options & MTDDirectionsRequestOptionAlternativeRoutes) == MTDDirectionsRequestOptionAlternativeRoutes;
+        BOOL optimizeRoute = (options & MTDDirectionsRequestOptionOptimizeRoute) == MTDDirectionsRequestOptionOptimizeRoute;
+        BOOL alternativeRoutes = (options & _MTDDirectionsRequestOptionAlternativeRoutes) == _MTDDirectionsRequestOptionAlternativeRoutes;
 
         MTDAssert(!(optimizeRoute && alternativeRoutes), @"Option optimize and alternative routes can't be specified at the same time.");
 
@@ -77,6 +80,14 @@
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - MTDDirectionRequest
 ////////////////////////////////////////////////////////////////////////
+
++ (void)setPrefersHTTPS:(BOOL)useHTTPS {
+    mtd_prefersHTTPS = useHTTPS;
+}
+
++ (BOOL)prefersHTTPS {
+    return mtd_prefersHTTPS;
+}
 
 - (void)start {
     dispatch_queue_t prepareQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0L);

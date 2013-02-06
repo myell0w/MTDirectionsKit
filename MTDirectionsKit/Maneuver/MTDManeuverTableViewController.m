@@ -3,6 +3,13 @@
 #import "MTDManeuverTableViewControllerDelegate.h"
 #import "MTDRoute.h"
 #import "MTDManeuver.h"
+#import "MTDWaypoint.h"
+#import "MTDAddress.h"
+#import "MTDFunctions.h"
+
+
+#define kMTDInfoCellHeight                  60.f
+#define kMTDFromToCellHeight                65.f
 
 
 @implementation MTDManeuverTableViewController {
@@ -21,7 +28,7 @@
 
 - (id)initWithRoute:(MTDRoute *)route {
     if ((self = [super initWithStyle:UITableViewStylePlain])) {
-        self.title = route.name;
+        self.title = MTDLocalizedStringFromUIKit(@"Route");
 
         _route = route;
 
@@ -66,10 +73,10 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (MTDManeuver *)maneuverAtIndexPath:(NSIndexPath *)indexPath {
-    NSUInteger row = (NSUInteger)indexPath.row;
+    NSInteger row = indexPath.row - 2; // -2 => info cell, from location cell
 
-    if (row < self.route.maneuvers.count) {
-        return self.route.maneuvers[row];
+    if (row >= 0 && (NSUInteger)row < self.route.maneuvers.count) {
+        return self.route.maneuvers[(NSUInteger)row];
     }
 
     return nil;
@@ -90,21 +97,24 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (NSInteger)tableView:(__unused UITableView *)tableView numberOfRowsInSection:(__unused NSInteger)section {
-    return (NSInteger)[self.route.maneuvers count];
+    return (NSInteger)[self.route.maneuvers count] + 3; // +3 => Route Info cell, start location cell, end location cell
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellID = @"MTDManeuverTableViewCell";
+    UITableViewCell *cell = nil;
 
-    MTDManeuver *maneuver = [self maneuverAtIndexPath:indexPath];
-    MTDManeuverTableViewCell *cell = (MTDManeuverTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
-
-    if (cell == nil) {
-        cell = [[MTDManeuverTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
+    if ([self mtd_isInfoCellAtIndexPath:indexPath]) {
+        cell = [self mtd_infoCellForTableView:tableView indexPath:indexPath];
+    } else if ([self mtd_isFromLocationCellAtIndexPath:indexPath]) {
+        cell = [self mtd_fromLocationCellForTableView:tableView indexPath:indexPath];
+    } else if ([self mtd_isToLocationCellAtIndexPath:indexPath]) {
+        cell = [self mtd_toLocationCellForTableView:tableView indexPath:indexPath];
+    } else {
+        cell = [self mtd_maneuverCellForTableView:tableView indexPath:indexPath];
     }
 
-    cell.maneuver = maneuver;
-
+    MTDAssert(cell != nil, @"No cell was created for the given indexPath: %@", indexPath);
+    
     return cell;
 }
 
@@ -113,12 +123,24 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MTDManeuver *maneuver = [self maneuverAtIndexPath:indexPath];
+    if ([self mtd_isInfoCellAtIndexPath:indexPath]) {
+        return kMTDInfoCellHeight;
+    } else if ([self mtd_isFromLocationCellAtIndexPath:indexPath] || [self mtd_isToLocationCellAtIndexPath:indexPath]) {
+        return kMTDFromToCellHeight;
+    }  else {
+        MTDManeuver *maneuver = [self maneuverAtIndexPath:indexPath];
 
-    return [MTDManeuverTableViewCell neededHeightForManeuver:maneuver constrainedToWidth:CGRectGetWidth(tableView.bounds)];
+        return [MTDManeuverTableViewCell neededHeightForManeuver:maneuver constrainedToWidth:CGRectGetWidth(tableView.bounds)];
+    }
 }
 
 - (NSIndexPath *)tableView:(__unused UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([self mtd_isInfoCellAtIndexPath:indexPath]
+        || [self mtd_isFromLocationCellAtIndexPath:indexPath]
+        || [self mtd_isToLocationCellAtIndexPath:indexPath]) {
+        return nil;
+    }
+
     BOOL canSelect = [self mtd_askDelegateIfSelectionIsSupportedAtIndexPath:indexPath];
 
     if (canSelect) {
@@ -133,7 +155,113 @@
 }
 
 ////////////////////////////////////////////////////////////////////////
+#pragma mark -
 #pragma mark - Private
+#pragma mark -
+////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - UI
+////////////////////////////////////////////////////////////////////////
+
+- (BOOL)mtd_isInfoCellAtIndexPath:(NSIndexPath *)indexPath {
+    return indexPath.row == 0;
+}
+
+- (BOOL)mtd_isFromLocationCellAtIndexPath:(NSIndexPath *)indexPath {
+    return indexPath.row == 1;
+}
+
+- (BOOL)mtd_isToLocationCellAtIndexPath:(NSIndexPath *)indexPath {
+    NSUInteger row = (NSUInteger)indexPath.row;
+    
+    return row == [self.route.maneuvers count] + 2;
+}
+
+- (UITableViewCell *)mtd_infoCellForTableView:(UITableView *)tableView indexPath:(__unused NSIndexPath *)indexPath {
+    static NSString *cellID = @"MTDManeuverInfoTableViewCell";
+
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
+
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:14.f];
+        cell.textLabel.numberOfLines = 2;
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:14.f];
+        cell.imageView.contentMode = UIViewContentModeCenter;
+        cell.imageView.clipsToBounds = YES;
+    }
+
+    cell.textLabel.text = self.route.name ?: self.title;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@", self.route.formattedTime, self.route.distance];
+    cell.imageView.image = [UIImage imageNamed:@"MTDirectionsKit.bundle/route-header"];
+
+    return cell;
+}
+
+- (UITableViewCell *)mtd_fromLocationCellForTableView:(UITableView *)tableView indexPath:(__unused NSIndexPath *)indexPath {
+    static NSString *cellID = @"MTDManeuverFromLocationTableViewCell";
+
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    MTDWaypoint *from = self.route.from;
+
+    if (cell == nil) {
+        cell = [self mtd_fromToCellWithReuseIdentifier:cellID];
+    }
+
+    cell.imageView.image = [UIImage imageNamed:@"MTDirectionsKit.bundle/cell-depart"];
+    cell.textLabel.text = [from.address fullAddress] ?: MTDLocalizedStringFromUIKit(@"Departure");
+
+    return cell;
+}
+
+- (UITableViewCell *)mtd_toLocationCellForTableView:(UITableView *)tableView indexPath:(__unused NSIndexPath *)indexPath {
+    static NSString *cellID = @"MTDManeuverToLocationTableViewCell";
+
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    MTDWaypoint *to = self.route.to;
+
+    if (cell == nil) {
+        cell = [self mtd_fromToCellWithReuseIdentifier:cellID];
+    }
+
+    cell.imageView.image = [UIImage imageNamed:@"MTDirectionsKit.bundle/cell-arrive"];
+    cell.textLabel.text = [to.address fullAddress] ?: MTDLocalizedStringFromUIKit(@"Destination");
+
+    return cell;
+}
+
+- (UITableViewCell *)mtd_maneuverCellForTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath {
+    static NSString *cellID = @"MTDManeuverTableViewCell";
+
+    MTDManeuverTableViewCell *cell = (MTDManeuverTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+    MTDManeuver *maneuver = [self maneuverAtIndexPath:indexPath];
+
+    if (cell == nil) {
+        cell = [[MTDManeuverTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
+    }
+
+    cell.maneuver = maneuver;
+
+    return cell;
+}
+
+- (UITableViewCell *)mtd_fromToCellWithReuseIdentifier:(NSString *)cellID {
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+
+    cell.textLabel.numberOfLines = 3;
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:14.f];
+    cell.textLabel.backgroundColor = [UIColor colorWithRed:229.f/255.f green:234.f/255.f blue:239.f/255.f alpha:1.f];
+    cell.contentView.backgroundColor = cell.textLabel.backgroundColor;
+    cell.imageView.contentMode = UIViewContentModeCenter;
+    cell.imageView.clipsToBounds = YES;
+
+    return cell;
+}
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - Delegate
 ////////////////////////////////////////////////////////////////////////
 
 - (BOOL)mtd_askDelegateIfSelectionIsSupportedAtIndexPath:(NSIndexPath *)indexPath {

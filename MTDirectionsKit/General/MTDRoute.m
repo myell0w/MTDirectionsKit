@@ -33,6 +33,7 @@
           timeInSeconds:(NSTimeInterval)timeInSeconds
                    name:(NSString *)name
               routeType:(MTDDirectionsRouteType)routeType
+       containsTollRoad:(BOOL)containsTollRoad
          additionalInfo:(NSDictionary *)additionalInfo {
     MTDAssert(waypoints.count > 0, @"There must be waypoints on a route");
 
@@ -61,11 +62,20 @@
         _timeInSeconds = timeInSeconds;
         _name = name;
         _routeType = routeType;
+        _containsTollRoad = containsTollRoad;
         _additionalInfo = [additionalInfo copy];
         
         free(points);
     }
     
+    return self;
+}
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - NSCoyping
+////////////////////////////////////////////////////////////////////////
+
+- (id)copyWithZone:(__unused NSZone *)zone {
     return self;
 }
 

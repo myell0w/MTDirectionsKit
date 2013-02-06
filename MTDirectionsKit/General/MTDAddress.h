@@ -11,7 +11,7 @@
  This enum can be used to generate a specific string-representation of a normalised address object.
  Each enum value is a flag representing one field of the address.
  */
-typedef NS_ENUM(NSUInteger, MTDAddressField) {
+typedef NS_OPTIONS(NSUInteger, MTDAddressField) {
     MTDAddressFieldCountry          = 1,
     MTDAddressFieldState            = 1 << 1,
     MTDAddressFieldCounty           = 1 << 2,

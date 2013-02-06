@@ -152,6 +152,19 @@ NS_INLINE id MTDFirstObjectOfArray(NSArray *array) {
 }
 
 /**
+ Returns a localized string found in UIKit.
+ 
+ @param string the string to localize
+ @return a localized string in case one is found, string otherwise
+ */
+NS_INLINE NSString* MTDLocalizedStringFromUIKit(NSString *string) {
+    // derived from https://github.com/0xced/XCDFormInputAccessoryView/blob/master/XCDFormInputAccessoryView/XCDFormInputAccessoryView.m
+	NSBundle *UIKitBundle = [NSBundle bundleForClass:[UIApplication class]];
+
+	return [UIKitBundle localizedStringForKey:string value:string table:nil] ?: string;
+}
+
+/**
  This function returns a version string of the current MTDirectionsKit version.
  
  @return MTDirectionsKit version string

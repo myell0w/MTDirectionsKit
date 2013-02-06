@@ -7,7 +7,7 @@
 #import "MTDLocale+MapQuest.h"
 
 
-#define kMTDMapQuestHostName                    @"http://open.mapquestapi.com"
+#define kMTDMapQuestHostName                    @"open.mapquestapi.com"
 #define kMTDMapQuestServiceName                 @"directions"
 #define kMTDMapQuestVersionNumber               @"v1"
 #define kMTDMapQuestRoutingMethodDefault        @"route"
@@ -38,9 +38,24 @@
         [self setValue:MTDDirectionStringForDirectionRouteTypeMapQuest(routeType) forParameter:@"routeType"];
 
         // set parameter for alternative routes?
-        BOOL alternativeRoutes = (self.mtd_options & MTDDirectionsRequestOptionAlternativeRoutes) == MTDDirectionsRequestOptionAlternativeRoutes;
+        BOOL alternativeRoutes = (self.mtd_options & _MTDDirectionsRequestOptionAlternativeRoutes) == _MTDDirectionsRequestOptionAlternativeRoutes;
         if (alternativeRoutes) {
             [self setValue:kMTDMapQuestMaxRoutes forParameter:@"maxRoutes"];
+        }
+
+        // avoid certain routes?
+        BOOL avoidTollRoads = (self.mtd_options & MTDDirectionsRequestOptionAvoidTollRoads) == MTDDirectionsRequestOptionAvoidTollRoads;
+        BOOL avoidHighways = (self.mtd_options & MTDDirectionsRequestOptionAvoidHighways) == MTDDirectionsRequestOptionAvoidHighways;
+        NSMutableArray *avoidings = [NSMutableArray arrayWithCapacity:2];
+
+        if (avoidTollRoads) {
+            [avoidings addObject:@"Toll Road"];
+        }
+        if (avoidHighways) {
+            [avoidings addObject:@"Limited Access"];
+        }
+        if (avoidings.count > 0) {
+            [self setArrayValue:avoidings forParameter:@"avoids"];
         }
     }
     
@@ -50,6 +65,11 @@
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - MTDDirectionsRequest
 ////////////////////////////////////////////////////////////////////////
+
++ (BOOL)prefersHTTPS {
+    // MapQuest doesn't support HTTPS atm
+    return NO;
+}
 
 - (MTDDirectionsAPI)API {
     return MTDDirectionsAPIMapQuest;
@@ -75,9 +95,11 @@
 }
 
 - (NSString *)HTTPAddress {
+    BOOL useHTTPS = [[self class] prefersHTTPS];
+    NSString *protocol = useHTTPS ? kMTDRequestProtocolSecure : kMTDRequestProtocolUnsecure;
     NSString *routingMethod = kMTDMapQuestRoutingMethodDefault;
-    BOOL optimizeRoute = (self.mtd_options & MTDDirectionsRequestOptionOptimize) == MTDDirectionsRequestOptionOptimize;
-    BOOL alternativeRoutes = (self.mtd_options & MTDDirectionsRequestOptionAlternativeRoutes) == MTDDirectionsRequestOptionAlternativeRoutes;
+    BOOL optimizeRoute = (self.mtd_options & MTDDirectionsRequestOptionOptimizeRoute) == MTDDirectionsRequestOptionOptimizeRoute;
+    BOOL alternativeRoutes = (self.mtd_options & _MTDDirectionsRequestOptionAlternativeRoutes) == _MTDDirectionsRequestOptionAlternativeRoutes;
 
     if (optimizeRoute) {
         routingMethod = kMTDMapQuestRoutingMethodOptimized;
@@ -85,7 +107,8 @@
         routingMethod = kMTDMapQuestRoutingMethodAlternatives;
     }
     
-    return [NSString stringWithFormat:@"%@/%@/%@/%@",
+    return [NSString stringWithFormat:@"%@%@/%@/%@/%@",
+            protocol,
             kMTDMapQuestHostName,
             kMTDMapQuestServiceName,
             kMTDMapQuestVersionNumber,

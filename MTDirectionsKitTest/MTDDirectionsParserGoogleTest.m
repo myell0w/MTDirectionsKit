@@ -26,8 +26,8 @@
         [parser parseWithCompletion:^(MTDDirectionsOverlay *overlay, NSError *error) {
             STAssertNil(error,@"There was an error parsing google_guessing_vienna.xml");
 
-            STAssertEqualObjects(overlay.fromAddress.fullAddress, @"Güssing, Austria", @"Error parsing fromAddress");
-            STAssertEqualObjects(overlay.toAddress.fullAddress, @"Vienna, Austria", @"Error parsing toAddress");
+            STAssertEqualObjects(overlay.from.address.fullAddress, @"Güssing, Austria", @"Error parsing fromAddress");
+            STAssertEqualObjects(overlay.to.address.fullAddress, @"Vienna, Austria", @"Error parsing toAddress");
 
             STAssertEquals(overlay.timeInSeconds, 7079., @"Error parsing time");
             STAssertEqualObjects(overlay.formattedTime, @"1:57:59", @"Error formatting time");
@@ -68,8 +68,8 @@
         [parser parseWithCompletion:^(MTDDirectionsOverlay *overlay, NSError *error) {
             STAssertNil(error,@"There was an error parsing mapquest_guessing_vienna.xml");
 
-            MTDAddress *fromAddress = overlay.fromAddress;
-            MTDAddress *toAddress = overlay.toAddress;
+            MTDAddress *fromAddress = overlay.from.address;
+            MTDAddress *toAddress = overlay.to.address;
 
             STAssertEqualObjects(fromAddress.fullAddress, @"57 St Mary's Butts, Reading RG1, Vereinigtes Königreich", @"error parsing fromAddress");
             STAssertEqualObjects(toAddress.fullAddress, @"New Rd, Reading, Berkshire RG7, Vereinigtes Königreich", @"error parsing toAddress");

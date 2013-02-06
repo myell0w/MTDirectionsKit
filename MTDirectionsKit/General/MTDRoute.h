@@ -22,7 +22,7 @@
  When requesting directions alternative routes can be provided, each of whom is represented by
  an instance of MTDRoute.
  */
-@interface MTDRoute : NSObject
+@interface MTDRoute : NSObject <NSCopying>
 
 /******************************************
  @name Route
@@ -46,7 +46,10 @@
 /** the estimated time as formatted string */
 @property (nonatomic, readonly) NSString *formattedTime;
 /** the type of travelling used to compute the directions, e.g. walking, by bike etc. */
-@property (nonatomic) MTDDirectionsRouteType routeType;
+@property (nonatomic, readonly) MTDDirectionsRouteType routeType;
+/** information whether the route contains a toll road or not */
+@property (nonatomic, readonly) BOOL containsTollRoad;
+
 /** 
  Dictionary containing additional information retreived, e.g. warnings and copyrights when 
  using the Google Directions API. You have to handle this information on your own and stick
@@ -76,6 +79,7 @@
  @param timeInSeconds the estimated total duration needed for traversing the waypoints in the given routeType
  @param name the name of the route
  @param routeType the travel type of the route
+ @param containsTollRoad flag whether the route contains toll roads or not
  @param additionalInfo dictionary with additional information provided by the API, e.g. copyrights
  @return a route object encapsulating the given route-information
  */
@@ -85,6 +89,7 @@
           timeInSeconds:(NSTimeInterval)timeInSeconds
                    name:(NSString *)name
               routeType:(MTDDirectionsRouteType)routeType
+       containsTollRoad:(BOOL)containsTollRoad
          additionalInfo:(NSDictionary *)additionalInfo;
 
 
