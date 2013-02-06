@@ -1,3 +1,13 @@
+=1.6.1 6.2.2013
+ * Removed fromLocation/fromAddress & toLocation/toAddress in favor of from and to in MTDDirectionsOverlay
+ * Convenience method on MTDWaypoint to check if it represents the current location
+ * Method to determine distance between given point and active route
+ * New delegate call: mapView:didUpdateUserLocation:distanceToActiveRoute:ofDirectionsOverlay: that includes the distance between the user location and the active route of the directions overlay
+ * [MTDWaypoint coordinate] is now readonly
+ * [MTDWaypoint waypointForCurrentLocation] updates it's coordinate property when user location get's updated
+ * Calling MTDOverrideClass with Nil/nil as classToUse removes a previously overridden class
+ * 
+
 =1.6.0 15.12.2012
  * Out of the box UI for displayed textual maneuver instructions
  * MTDirectionsKit style icons for maneuver turn types
