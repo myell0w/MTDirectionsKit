@@ -15,11 +15,6 @@ static NSDictionary *mtd_supportedLocales = nil;
 // Initializes default value
 NS_INLINE __attribute__((constructor)) void MTDLoadLocale(void) {
     @autoreleasepool {
-        // we first set the locale to English
-        mtd_locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-        // and then try to set the current locale, if it is supported
-        MTDDirectionsSetLocale([NSLocale currentLocale]);
-
         // the user can configure the supported locales by changing MTDirectionsKit.bundle/SupportedLocales.plist
         NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"MTDirectionsKit.bundle/supported-locales" ofType:@"plist"];
         mtd_supportedLocales = [NSDictionary dictionaryWithContentsOfFile:plistPath];
@@ -67,11 +62,22 @@ NS_INLINE __attribute__((constructor)) void MTDLoadLocale(void) {
 
                                     });
         }
+
+        // we first set the locale to English
+        mtd_locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+        // and then try to set the current locale, if it is supported
+        MTDDirectionsSetLocale([NSLocale currentLocale]);
     }
 }
 
 void MTDDirectionsSetLocale(NSLocale *locale) {
     MTDDirectionsAPI API = MTDDirectionsGetActiveAPI();
+
+    // TODO: this is just a quick workaround for Austria
+    NSString *identifier = [locale localeIdentifier];
+    if ([identifier isEqualToString:@"de_AT"]) {
+        locale = [[NSLocale alloc] initWithLocaleIdentifier:@"de_DE"];
+    }
 
     if (MTDDirectionsLocaleIsSupportedByAPI(locale, API)) {
         mtd_locale = locale;
