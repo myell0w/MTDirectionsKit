@@ -49,6 +49,11 @@
  */
 - (void)parseWithCompletion:(mtd_parser_block)completion;
 
+/**
+ If the request gets cancelled during parsing the completion block won't get called.
+ */
+- (void)cancel;
+
 @end
 
 

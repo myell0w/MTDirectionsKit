@@ -175,8 +175,6 @@
         MTDAssert(intermediateGoals.count == 0, @"Intermediate goals mustn't be specified when requesting alternative routes.");
     }
 
-    __mtd_weak MTDMapView *weakSelf = self;
-
     [self.mtd_request cancel];
 
     if (from.valid && to.valid) {
@@ -201,6 +199,7 @@
             return;
         }
 
+        __mtd_weak MTDMapView *weakSelf = self;
         self.mtd_request = [MTDDirectionsRequest requestDirectionsAPI:MTDDirectionsGetActiveAPI()
                                                                  from:MTDFirstObjectOfArray(allGoals)
                                                                    to:[allGoals lastObject]
