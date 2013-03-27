@@ -118,7 +118,8 @@
  @param mapView the map view that is tracking the user’s location
  @param userLocation the location object representing the user’s latest location 
  @param distanceToActiveRoute the distance in points between the userLocation and the active route on the mapView
+ @param directionsOverlay the overlay that contains the active route
  */
-- (void)mapView:(MTDMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation distanceToActiveRoute:(CGFloat)distanceToActiveRoute;
+- (void)mapView:(MTDMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation distanceToActiveRoute:(CGFloat)distanceToActiveRoute ofDirectionsOverlay:(MTDDirectionsOverlay *)directionsOverlay;
 
 @end

@@ -1,3 +1,18 @@
+=1.6.1 6.2.2013
+ * Removed fromLocation/fromAddress & toLocation/toAddress in favor of from and to in MTDDirectionsOverlay
+ * Convenience method on MTDWaypoint to check if it represents the current location
+ * Method to determine distance between given point and active route
+ * New delegate call: mapView:didUpdateUserLocation:distanceToActiveRoute:ofDirectionsOverlay: that includes the distance between the user location and the active route of the directions overlay
+ * [MTDWaypoint coordinate] is now readonly
+ * [MTDWaypoint waypointForCurrentLocation] updates its coordinate property when user location gets updated
+ * Calling MTDOverrideClass with Nil/nil as classToUse removes a previously overridden class
+ * Updated UI of MTDManeuverTableViewController: displays a header/footer cell with information about departure, destination and the route
+ * Add - [MTDRoute containsTollRoad] property to check if a route contains toll roads (only supported for MapQuest & Bing APIs)
+ * Support for avoiding toll roads as well as highways when requesting directions
+ * New delegate call: mapView:shouldActivateRoute:ofDirectionsOverlay: to give fine-grained control whether a route can be activated by tapping on it
+ * New delegate call: mapView:colorForRoute:ofDirectionsOverlay: to allow different colors for each route, when alternative routes are enabled
+ * Support for HTTPS when requesting directions (only supported by Google and Bing API)
+
 =1.6.0 15.12.2012
  * Out of the box UI for displayed textual maneuver instructions
  * MTDirectionsKit style icons for maneuver turn types

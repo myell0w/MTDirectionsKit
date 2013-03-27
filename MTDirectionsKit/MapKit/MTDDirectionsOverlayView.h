@@ -57,7 +57,7 @@
  
  @param overlayColor the color to draw the route with
  @param route the route we set the color of
- @see setOverlayColor:
+ @see overlayColor
  */
 - (void)setOverlayColor:(UIColor *)overlayColor forRoute:(MTDRoute *)route;
 
