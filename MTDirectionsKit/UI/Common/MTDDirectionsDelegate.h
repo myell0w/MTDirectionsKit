@@ -120,6 +120,6 @@
  @param distanceToActiveRoute the distance in points between the userLocation and the active route on the mapView
  @param directionsOverlay the overlay that contains the active route
  */
-- (void)mapView:(id<MTDMapView>)mapView didUpdateUserLocation:(MKUserLocation *)userLocation distanceToActiveRoute:(CGFloat)distanceToActiveRoute ofDirectionsOverlay:(MTDDirectionsOverlay *)directionsOverlay;
+- (void)mapView:(id<MTDMapView>)mapView didUpdateUserLocation:(CLLocation *)location distanceToActiveRoute:(CGFloat)distanceToActiveRoute ofDirectionsOverlay:(MTDDirectionsOverlay *)directionsOverlay;
 
 @end

@@ -131,7 +131,7 @@
         return nil;
     }
 
-    BOOL canSelect = [self mtd_askDelegateIfSelectionIsSupportedAtIndexPath:indexPath];
+    BOOL canSelect = [self askDelegateIfSelectionIsSupportedAtIndexPath:indexPath];
 
     if (canSelect) {
         return indexPath;
@@ -141,7 +141,7 @@
 }
 
 - (void)tableView:(__unused UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self mtd_notifyDelegateDidSelectManeuverAtIndexPath:indexPath];
+    [self notifyDelegateDidSelectManeuverAtIndexPath:indexPath];
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -254,7 +254,7 @@
 #pragma mark - Delegate
 ////////////////////////////////////////////////////////////////////////
 
-- (BOOL)mtd_askDelegateIfSelectionIsSupportedAtIndexPath:(NSIndexPath *)indexPath {
+- (BOOL)askDelegateIfSelectionIsSupportedAtIndexPath:(NSIndexPath *)indexPath {
     if (_delegateFlags.canSelect) {
         id<MTDManeuverTableViewControllerDelegate> delegate = self.maneuverDelegate;
 
@@ -264,7 +264,7 @@
     return NO;
 }
 
-- (void)mtd_notifyDelegateDidSelectManeuverAtIndexPath:(NSIndexPath *)indexPath {
+- (void)notifyDelegateDidSelectManeuverAtIndexPath:(NSIndexPath *)indexPath {
     if (_delegateFlags.didSelect) {
         id<MTDManeuverTableViewControllerDelegate> delegate = self.maneuverDelegate;
 

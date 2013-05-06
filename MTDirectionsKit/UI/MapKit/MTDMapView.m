@@ -13,28 +13,20 @@
 #import "MTDDirectionsOverlayView.h"
 #import "MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h"
 #import "MTDMapViewProxy.h"
-#import "MTDMapViewProxyPrivate.h"
-#import "MTDFunctions.h"
 #import "MTDCustomization.h"
 #import "MTDInterApp.h"
 #import "MTDAssert.h"
 
 
-@interface MTDMapView () <MKMapViewDelegate, MTDMapViewProxyPrivate> 
+@interface MTDMapView () <MKMapViewDelegate> 
 
 @property (nonatomic, strong, readwrite) MTDDirectionsOverlayView *directionsOverlayView; // re-defined as read/write
 
 /** The delegate that was set by the user, we forward all delegate calls */
 @property (nonatomic, mtd_weak, setter = mtd_setTrueDelegate:) id<MKMapViewDelegate> mtd_trueDelegate;
-/** The request object for retreiving directions from the specified API */
-@property (nonatomic, strong, setter = mtd_setRequest:) MTDDirectionsRequest *mtd_request;
 
 /** the delegate proxy for CLLocationManagerDelegate and UIGestureRecognizerDelegate */
 @property (nonatomic, strong) MTDMapViewProxy *mtd_proxy;
-/** The location manager used to request user location if needed */
-@property (nonatomic, strong) CLLocationManager *mtd_locationManager;
-/** The completion block executed after we found a location */
-@property (nonatomic, copy) dispatch_block_t mtd_locationCompletion;
 /** Gesture recognizer to change active route */
 @property (nonatomic, strong) UITapGestureRecognizer *mtd_tapGestureRecognizer;
 
@@ -70,7 +62,6 @@
     _mtd_proxy.mapView = nil;
     _mtd_proxy = nil;
     _mtd_tapGestureRecognizer.delegate = nil;
-    _mtd_locationManager.delegate = nil;
     self.delegate = nil;
     [self cancelLoadOfDirections];
 }
@@ -143,70 +134,16 @@
                    options:(MTDDirectionsRequestOptions)options
       zoomToShowDirections:(BOOL)zoomToShowDirections {
 
-    BOOL alternativeRoutes = (options & _MTDDirectionsRequestOptionAlternativeRoutes) == _MTDDirectionsRequestOptionAlternativeRoutes;
-
-    if (alternativeRoutes) {
-        MTDAssert(intermediateGoals.count == 0, @"Intermediate goals mustn't be specified when requesting alternative routes.");
-    }
-
-    [self.mtd_request cancel];
-
-    if (from.valid && to.valid) {
-        NSArray *allGoals = [self mtd_allGoalsWithFrom:from to:to intermediateGoals:intermediateGoals];
-
-        [self mtd_stopUpdatingLocationCallingCompletion:NO];
-
-        if (allGoals == nil) {
-            // we have references to [MTDWaypoint waypointForCurrentLocation] within our goals, but no valid userLocation yet
-            // so we first need to request the location using CLLocationManager and once we have a valid location we can load
-            // the exact same directions again
-            [self mtd_startUpdatingLocationWithCompletion:^{
-                [self loadDirectionsFrom:from
-                                      to:to
-                       intermediateGoals:intermediateGoals
-                               routeType:routeType
-                                 options:options
-                    zoomToShowDirections:zoomToShowDirections];
-            }];
-
-            // do not request directions yet
-            return;
-        }
-
-        __mtd_weak __typeof__(self) weakSelf = self;
-        self.mtd_request = [MTDDirectionsRequest requestDirectionsAPI:MTDDirectionsGetActiveAPI()
-                                                                 from:MTDFirstObjectOfArray(allGoals)
-                                                                   to:[allGoals lastObject]
-                                                    intermediateGoals:allGoals.count > 2 ? [allGoals subarrayWithRange:NSMakeRange(1, allGoals.count - 2)] : nil
-                                                            routeType:routeType
-                                                              options:options
-                                                           completion:^(MTDDirectionsOverlay *overlay, NSError *error) {
-                                                               __strong __typeof__(self) strongSelf = weakSelf;
-
-                                                               if (overlay != nil && strongSelf != nil) {
-                                                                   overlay = [strongSelf.mtd_proxy mtd_notifyDelegateDidFinishLoadingOverlay:overlay];
-
-                                                                   strongSelf.directionsDisplayType = MTDDirectionsDisplayTypeOverview;
-                                                                   strongSelf.directionsOverlay = overlay;
-
-                                                                   if (zoomToShowDirections) {
-                                                                       [strongSelf setRegionToShowDirectionsAnimated:YES];
-                                                                   }
-                                                               } else {
-                                                                   [strongSelf.mtd_proxy mtd_notifyDelegateDidFailLoadingOverlayWithError:error];
-                                                               }
-                                                           }];
-        
-        [self.mtd_proxy mtd_notifyDelegateWillStartLoadingDirectionsFrom:from to:to routeType:routeType];
-        [self.mtd_request start];
-    }
+    [self.mtd_proxy loadDirectionsFrom:from
+                                    to:to
+                     intermediateGoals:intermediateGoals
+                             routeType:routeType
+                               options:options
+                  zoomToShowDirections:zoomToShowDirections];
 }
 
 - (void)cancelLoadOfDirections {
-    [self.mtd_request cancel];
-    self.mtd_request = nil;
-
-    [self mtd_stopUpdatingLocationCallingCompletion:NO];
+    [self.mtd_proxy cancelLoadOfDirections];
 }
 
 - (void)removeDirectionsOverlay {
@@ -224,7 +161,7 @@
         MTDRoute *activeRouteAfter = self.directionsOverlay.activeRoute;
 
         if (activeRouteBefore != activeRouteAfter) {
-            [self.mtd_proxy mtd_notifyDelegateDidActivateRoute:activeRouteAfter ofOverlay:self.directionsOverlay];
+            [self.mtd_proxy notifyDelegateDidActivateRoute:activeRouteAfter ofOverlay:self.directionsOverlay];
             [self.directionsOverlayView setNeedsDisplayInMapRect:MKMapRectWorld];
         }
     }
@@ -408,7 +345,7 @@
     }
 
     [MTDWaypoint mtd_updateCurrentLocationCoordinate:userLocation.location.coordinate];
-    [self.mtd_proxy mtd_notifyDelegateDidUpdateUserLocation:userLocation];
+    [self.mtd_proxy notifyDelegateDidUpdateUserLocation:userLocation.location];
 }
 
 - (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error {
@@ -568,7 +505,7 @@
                 MTDRoute *selectedRoute = [self.directionsOverlayView mtd_routeTouchedByPoint:[tap locationInView:self.directionsOverlayView]];
 
                 // ask delegate if we should activate the route
-                if ([self.mtd_proxy mtd_askDelegateForSelectionEnabledStateOfRoute:selectedRoute ofOverlay:self.directionsOverlay]) {
+                if ([self.mtd_proxy askDelegateForSelectionEnabledStateOfRoute:selectedRoute ofOverlay:self.directionsOverlay]) {
                     [self activateRoute:selectedRoute];
                 }
             }
@@ -595,7 +532,7 @@
     }
 
     MTDDirectionsOverlay *directionsOverlay = overlay;
-    CGFloat overlayLineWidthFactor = [self.mtd_proxy mtd_askDelegateForLineWidthFactorOfOverlay:directionsOverlay];
+    CGFloat overlayLineWidthFactor = [self.mtd_proxy askDelegateForLineWidthFactorOfOverlay:directionsOverlay];
     Class directionsOverlayClass = MTDOverriddenClass([MTDDirectionsOverlayView class]);
 
     if (directionsOverlayClass != Nil) {
@@ -603,7 +540,7 @@
         self.directionsOverlayView.drawManeuvers = (self.directionsDisplayType == MTDDirectionsDisplayTypeDetailedManeuvers);
 
         for (MTDRoute *route in directionsOverlay.routes) {
-            UIColor *overlayColor = [self.mtd_proxy mtd_askDelegateForColorOfRoute:route ofOverlay:self.directionsOverlay];
+            UIColor *overlayColor = [self.mtd_proxy askDelegateForColorOfRoute:route ofOverlay:self.directionsOverlay];
             
             // If we always set the color it breaks UIAppearance because it deactivates the proxy color if we
             // call the setter, even if we don't accept nil there.
@@ -618,69 +555,6 @@
     }
 
     return self.directionsOverlayView;
-}
-
-// returns nil if there are reference to [MTDWaypoint waypointForCurrentLocation] and we have no valid user location yet
-- (NSArray *)mtd_allGoalsWithFrom:(MTDWaypoint *)from to:(MTDWaypoint *)to intermediateGoals:(NSArray *)intermediateGoals {
-    NSMutableArray *allGoals = [NSMutableArray arrayWithObject:from];
-
-    if (intermediateGoals.count > 0) {
-        [allGoals addObjectsFromArray:intermediateGoals];
-    }
-
-    [allGoals addObject:to];
-
-    NSIndexSet *indexesOfWaypointsForCurrentLocation = [allGoals indexesOfObjectsPassingTest:^BOOL(MTDWaypoint *waypoint, __unused NSUInteger idx, __unused BOOL *stop) {
-        return [waypoint isWaypointForCurrentLocation];
-    }];
-
-    // check if we have references to the current location in the array but no valid user location.
-    // in this case we indicate that we need to get one first by returning nil
-    if (indexesOfWaypointsForCurrentLocation.count > 0) {
-        if (![MTDWaypoint waypointForCurrentLocation].hasValidCoordinate) {
-            return nil;
-        }
-    }
-
-    return allGoals;
-}
-
-- (void)mtd_startUpdatingLocationWithCompletion:(dispatch_block_t)completion {
-    if ([CLLocationManager locationServicesEnabled]) {
-
-#if !TARGET_IPHONE_SIMULATOR
-        if ([[CLLocationManager class] respondsToSelector:@selector(authorizationStatus)] &&
-            [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized) {
-#endif
-
-            // this introduces a temporary strong-reference cycle (a.k.a retain cycle) that will vanish once the locationManager succeeds or fails
-            self.mtd_locationCompletion = completion;
-
-            self.mtd_locationManager = [CLLocationManager new];
-            self.mtd_locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
-            self.mtd_locationManager.delegate = self.mtd_proxy;
-
-            [self.mtd_locationManager startUpdatingLocation];
-            MTDLogVerbose(@"Location manager was started to get a location for [MTDWaypoint waypointForCurrentLocation]");
-
-#if !TARGET_IPHONE_SIMULATOR
-        }
-#endif
-
-    } else {
-        MTDLogWarning(@"Wanted to request location, but either location Services are not enabled or we are not authorized to request location");
-    }
-}
-
-- (void)mtd_stopUpdatingLocationCallingCompletion:(BOOL)callingCompletion {
-    if (callingCompletion) {
-        self.mtd_locationCompletion();
-    }
-
-    self.mtd_locationCompletion = nil;
-    self.mtd_locationManager.delegate = nil;
-    [self.mtd_locationManager stopUpdatingLocation];
-    self.mtd_locationManager = nil;
 }
 
 @end

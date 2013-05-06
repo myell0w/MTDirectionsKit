@@ -112,7 +112,6 @@
 		9B3159C61737B76E004D9E16 /* MTDMapViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159B71737A70B004D9E16 /* MTDMapViewProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B3159D1173801B4004D9E16 /* MTDMapViewProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159CF173801B3004D9E16 /* MTDMapViewProxy.h */; };
 		9B3159D2173801B4004D9E16 /* MTDMapViewProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3159D0173801B4004D9E16 /* MTDMapViewProxy.m */; };
-		9B3159D41738026E004D9E16 /* MTDMapViewProxyPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159D31738026D004D9E16 /* MTDMapViewProxyPrivate.h */; };
 		9B4E98E015AD77E5002F0302 /* MTDAddressTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4E98DF15AD77E5002F0302 /* MTDAddressTest.m */; };
 		9B528114167A784200D4A816 /* MTDCustomization.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B528112167A784200D4A816 /* MTDCustomization.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B528115167A784200D4A816 /* MTDCustomization.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B528113167A784200D4A816 /* MTDCustomization.m */; };
@@ -280,7 +279,6 @@
 		9B3159C31737B0A7004D9E16 /* MTDRoute+MTDGoogleMapsSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MTDRoute+MTDGoogleMapsSDK.m"; sourceTree = "<group>"; };
 		9B3159CF173801B3004D9E16 /* MTDMapViewProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTDMapViewProxy.h; path = Common/MTDMapViewProxy.h; sourceTree = "<group>"; };
 		9B3159D0173801B4004D9E16 /* MTDMapViewProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTDMapViewProxy.m; path = Common/MTDMapViewProxy.m; sourceTree = "<group>"; };
-		9B3159D31738026D004D9E16 /* MTDMapViewProxyPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTDMapViewProxyPrivate.h; path = Common/MTDMapViewProxyPrivate.h; sourceTree = "<group>"; };
 		9B4E98DE15AD77E5002F0302 /* MTDAddressTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDAddressTest.h; sourceTree = "<group>"; };
 		9B4E98DF15AD77E5002F0302 /* MTDAddressTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDAddressTest.m; sourceTree = "<group>"; };
 		9B528112167A784200D4A816 /* MTDCustomization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDCustomization.h; sourceTree = "<group>"; };
@@ -551,10 +549,10 @@
 		9B3159961737A2FC004D9E16 /* GoogleMapsSDK */ = {
 			isa = PBXGroup;
 			children = (
-				9B3159B21737A6A9004D9E16 /* MTDGMSMapView.h */,
-				9B3159B31737A6A9004D9E16 /* MTDGMSMapView.m */,
 				9B3159BA1737AF4C004D9E16 /* MTDGMSDirectionsOverlayView.h */,
 				9B3159BB1737AF4C004D9E16 /* MTDGMSDirectionsOverlayView.m */,
+				9B3159B21737A6A9004D9E16 /* MTDGMSMapView.h */,
+				9B3159B31737A6A9004D9E16 /* MTDGMSMapView.m */,
 				9B3159C21737B0A6004D9E16 /* MTDRoute+MTDGoogleMapsSDK.h */,
 				9B3159C31737B0A7004D9E16 /* MTDRoute+MTDGoogleMapsSDK.m */,
 			);
@@ -581,7 +579,6 @@
 			children = (
 				9B3159CF173801B3004D9E16 /* MTDMapViewProxy.h */,
 				9B3159D0173801B4004D9E16 /* MTDMapViewProxy.m */,
-				9B3159D31738026D004D9E16 /* MTDMapViewProxyPrivate.h */,
 				9B3159B81737A727004D9E16 /* MTDDirectionsDelegate.h */,
 				9B3159B71737A70B004D9E16 /* MTDMapViewProtocol.h */,
 			);
@@ -779,7 +776,6 @@
 				9B3159C41737B0A9004D9E16 /* MTDRoute+MTDGoogleMapsSDK.h in Headers */,
 				9B3159C61737B76E004D9E16 /* MTDMapViewProtocol.h in Headers */,
 				9B3159D1173801B4004D9E16 /* MTDMapViewProxy.h in Headers */,
-				9B3159D41738026E004D9E16 /* MTDMapViewProxyPrivate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
