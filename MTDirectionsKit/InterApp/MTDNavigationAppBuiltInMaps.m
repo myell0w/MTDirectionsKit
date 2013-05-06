@@ -18,7 +18,7 @@
 + (BOOL)openDirectionsFrom:(MTDWaypoint *)from to:(MTDWaypoint *)to routeType:(MTDDirectionsRouteType)routeType {
     if ((from.hasValidCoordinate || from == [MTDWaypoint waypointForCurrentLocation]) &&
         (to.hasValidCoordinate || to == [MTDWaypoint waypointForCurrentLocation])) {
-        if (MTDDirectionsSupportsAppleMaps()) {
+        if (MTDDirectionsUsesAppleMaps()) {
             MKMapItem *fromMapItem = nil;
             MKMapItem *toMapItem = nil;
 

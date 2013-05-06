@@ -101,7 +101,14 @@ UIImage *MTDColoredImage(CGSize size, UIColor *color);
 
  @return YES, if we are on iOS6 or up, NO otherwise
  */
-BOOL MTDDirectionsSupportsAppleMaps(void);
+BOOL MTDDirectionsUsesAppleMaps(void);
+
+/**
+ This function returns a flag that indicates whether the Google Maps SDK is used.
+
+ @return YES, if the Google Maps SDK is used, NO otherwise
+ */
+BOOL MTDDirectionsUsesGoogleMapsSDK(void);
 
 /**
  If there exists an element in the array with the given index, this function returns it.

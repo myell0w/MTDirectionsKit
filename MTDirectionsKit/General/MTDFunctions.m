@@ -173,13 +173,24 @@ UIImage *MTDColoredImage(CGSize size, UIColor *color) {
     return image;
 }
 
-BOOL MTDDirectionsSupportsAppleMaps(void) {
-    static BOOL supportsAppleMaps = NO;
+BOOL MTDDirectionsUsesAppleMaps(void) {
+    static BOOL usesAppleMaps = NO;
 
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        supportsAppleMaps = NSClassFromString(@"MKDirectionsRequest") != nil;
+        usesAppleMaps = NSClassFromString(@"MKDirectionsRequest") != nil && !MTDDirectionsUsesGoogleMapsSDK();
     });
 
-    return supportsAppleMaps;
+    return usesAppleMaps;
+}
+
+BOOL MTDDirectionsUsesGoogleMapsSDK(void) {
+    static BOOL usesGoogleMapsSDK = NO;
+
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        usesGoogleMapsSDK = NSClassFromString(@"GMSMapView") != nil;
+    });
+
+    return usesGoogleMapsSDK;
 }
