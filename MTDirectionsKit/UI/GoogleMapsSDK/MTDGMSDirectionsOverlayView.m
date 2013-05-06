@@ -32,7 +32,7 @@
     if (overlayLineWidthFactor >= kMTDMinimumLineWidthFactor && overlayLineWidthFactor <= kMTDMaximumLineWidthFactor) {
         _overlayLineWidthFactor = overlayLineWidthFactor;
 
-        self.strokeWidth = overlayLineWidthFactor * 2.f;
+        self.strokeWidth = overlayLineWidthFactor * 4.f;
     }
 }
 
