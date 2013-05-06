@@ -21,7 +21,7 @@
 
 @interface GMSMapView (MTDGoogleMapsSDK)
 
-// the not exposed, but designated initializer of GMSMapView. we declare it here to keep the compiler silent
+// the designated initializer of GMSMapView is not exposed. we declare it here to keep the compiler silent
 - (id)initWithFrame:(CGRect)frame camera:(GMSCameraPosition *)camera;
 
 @end
@@ -534,31 +534,6 @@
 
     return nil;
 }
-
-//- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay {
-//    id<MKMapViewDelegate> trueDelegate = self.mtd_trueDelegate;
-//    BOOL overlayIsDirectionsOverlay = [overlay isKindOfClass:[MTDDirectionsOverlay class]];
-//
-//    // first check if the delegate provides a custom overlay view
-//    if ([trueDelegate respondsToSelector:@selector(mapView:viewForOverlay:)]) {
-//        MKOverlayView *delegateResult = [trueDelegate mapView:mapView viewForOverlay:overlay];
-//
-//        if (delegateResult != nil) {
-//            if (overlayIsDirectionsOverlay) {
-//                MTDLogInfo(@"MKMapViewDelegate provided a custom overlay view for MTDDirectionsOverlay, make sure this is really what you want.");
-//            }
-//
-//            return delegateResult;
-//        }
-//    }
-//
-//    // otherwise provide a default overlay for directions
-//    if (overlayIsDirectionsOverlay) {
-//        return [self mtd_viewForDirectionsOverlay:overlay];
-//    }
-//
-//    return nil;
-//}
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Private
