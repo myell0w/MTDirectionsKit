@@ -19,6 +19,13 @@
 #import "MTDInterApp.h"
 
 
+@interface GMSMapView (MTDGoogleMapsSDK)
+
+// the not exposed, but designated initializer of GMSMapView. we declare it here to keep the compiler silent
+- (id)initWithFrame:(CGRect)frame camera:(GMSCameraPosition *)camera;
+
+@end
+
 @interface MTDGMSMapView () <GMSMapViewDelegate> {
     // flags for methods implemented in the delegate
     struct {
@@ -58,8 +65,8 @@
 #pragma mark - Lifecycle
 ////////////////////////////////////////////////////////////////////////
 
-- (id)initWithFrame:(CGRect)frame {
-    if ((self = [super initWithFrame:frame])) {
+- (id)initWithFrame:(CGRect)frame camera:(GMSCameraPosition *)camera {
+    if ((self = [super initWithFrame:frame camera:camera])) {
         [self mtd_setup];
     }
 
@@ -251,17 +258,16 @@
 
 - (void)activateRoute:(MTDRoute *)route {
     // TODO: GoogleMapsSDK
-    //    MTDRoute *activeRouteBefore = self.directionsOverlay.activeRoute;
-    //
-    //    if (route != nil && route != activeRouteBefore) {
-    //        [self.directionsOverlay mtd_activateRoute:route];
-    //        MTDRoute *activeRouteAfter = self.directionsOverlay.activeRoute;
-    //
-    //        if (activeRouteBefore != activeRouteAfter) {
-    //            [self mtd_notifyDelegateDidActivateRoute:activeRouteAfter ofOverlay:self.directionsOverlay];
-    //            [self.directionsOverlayView setNeedsDisplayInMapRect:MKMapRectWorld];
-    //        }
-    //    }
+    MTDRoute *activeRouteBefore = self.directionsOverlay.activeRoute;
+
+    if (route != nil && route != activeRouteBefore) {
+        [self.directionsOverlay mtd_activateRoute:route];
+        MTDRoute *activeRouteAfter = self.directionsOverlay.activeRoute;
+
+        if (activeRouteBefore != activeRouteAfter) {
+            [self mtd_notifyDelegateDidActivateRoute:activeRouteAfter ofOverlay:self.directionsOverlay];
+        }
+    }
 }
 
 - (CGFloat)distanceBetweenActiveRouteAndCoordinate:(CLLocationCoordinate2D)coordinate {
@@ -482,6 +488,16 @@
  */
 - (void)mapView:(GMSMapView *)mapView didTapOverlay:(GMSOverlay *)overlay {
     id<GMSMapViewDelegate> trueDelegate = self.mtd_trueDelegate;
+    __block MTDRoute *routeToActivate = nil;
+
+    [self.directionsOverlayViews enumerateKeysAndObjectsUsingBlock:^(MTDRoute *route, MTDGMSDirectionsOverlayView *overlayView, BOOL *stop) {
+        if (overlay == overlayView) {
+            routeToActivate = route;
+            *stop = YES;
+        }
+    }];
+
+    [self activateRoute:routeToActivate];
 
     if ([trueDelegate respondsToSelector:@selector(mapView:didTapOverlay:)]) {
         [trueDelegate mapView:mapView didTapOverlay:overlay];

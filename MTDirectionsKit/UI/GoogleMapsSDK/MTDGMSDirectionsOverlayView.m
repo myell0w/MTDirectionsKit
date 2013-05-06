@@ -16,6 +16,7 @@
 - (id)initWithRoute:(MTDRoute *)route {
     if ((self = [super init])) {
         self.path = route.path;
+        self.tappable = YES;
 
         self.overlayLineWidthFactor = kMTDDefaultLineWidthFactor;
     }
