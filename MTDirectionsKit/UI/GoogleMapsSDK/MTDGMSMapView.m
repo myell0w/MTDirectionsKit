@@ -619,7 +619,7 @@
     }
     // same goes for the line width factor
     if (overlayLineWidthFactor > 0.f) {
-        overlayView.strokeWidth = overlayLineWidthFactor;
+        overlayView.overlayLineWidthFactor = overlayLineWidthFactor;
     }
 
     return overlayView;
