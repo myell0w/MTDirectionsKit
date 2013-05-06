@@ -257,7 +257,6 @@
 }
 
 - (void)activateRoute:(MTDRoute *)route {
-    // TODO: GoogleMapsSDK
     MTDRoute *activeRouteBefore = self.directionsOverlay.activeRoute;
 
     if (route != nil && route != activeRouteBefore) {
@@ -584,32 +583,6 @@
     }
 }
 
-// TODO: GoogleMapsSDK
-//- (void)mtd_handleMapTap:(UITapGestureRecognizer *)tap {
-//    if ((tap.state & UIGestureRecognizerStateRecognized) == UIGestureRecognizerStateRecognized) {
-//        // Check if the directionsOverlay got tapped
-//        if (self.directionsOverlayView != nil) {
-//            // Get view frame rect in the mapView's coordinate system
-//            CGRect viewFrameInMapView = [self.directionsOverlayView.superview convertRect:self.directionsOverlayView.frame toView:self];
-//            // Get touch point in the mapView's coordinate system
-//            CGPoint point = [tap locationInView:self];
-//
-//            // we outset the frame of the overlay to also handle touches that are a bit outside
-//            viewFrameInMapView = CGRectInset(viewFrameInMapView, -50.f, -50.f);
-//
-//            // Check if the touch is within the view bounds
-//            if (CGRectContainsPoint(viewFrameInMapView, point)) {
-//                MTDRoute *selectedRoute = [self.directionsOverlayView mtd_routeTouchedByPoint:[tap locationInView:self.directionsOverlayView]];
-//
-//                // ask delegate if we should activate the route
-//                if ([self mtd_askDelegateForSelectionEnabledStateOfRoute:selectedRoute ofOverlay:self.directionsOverlay]) {
-//                    [self activateRoute:selectedRoute];
-//                }
-//            }
-//        }
-//    }
-//}
-
 - (void)mtd_updateUIForDirectionsDisplayType:(MTDDirectionsDisplayType) __unused displayType {
     // TODO: GoogleMapsSDK
     //    _directionsOverlayView.map = nil;
@@ -629,21 +602,23 @@
         return nil;
     }
 
+    MTDGMSDirectionsOverlayView *overlayView = nil;
     CGFloat overlayLineWidthFactor = [self mtd_askDelegateForLineWidthFactorOfOverlay:self.directionsOverlay];
-    // TODO: GoogleMapsSDK
-    // Class directionsOverlayClass = MTDOverriddenClass([MTDDirectionsOverlayView class]);
+    Class directionsOverlayClass = MTDOverriddenClass([MTDGMSDirectionsOverlayView class]);
 
-    MTDGMSDirectionsOverlayView *overlayView = [[MTDGMSDirectionsOverlayView alloc] initWithDirectionsOverlay:self.directionsOverlay route:route];
-    UIColor *overlayColor = [self mtd_askDelegateForColorOfRoute:route ofOverlay:self.directionsOverlay];
+    if (directionsOverlayClass != Nil) {
+        overlayView = [[directionsOverlayClass alloc] initWithDirectionsOverlay:self.directionsOverlay route:route];
+        UIColor *overlayColor = [self mtd_askDelegateForColorOfRoute:route ofOverlay:self.directionsOverlay];
 
-    // If we always set the color it breaks UIAppearance because it deactivates the proxy color if we
-    // call the setter, even if we don't accept nil there.
-    if (overlayColor != nil) {
-        overlayView.strokeColor = overlayColor;
-    }
-    // same goes for the line width factor
-    if (overlayLineWidthFactor > 0.f) {
-        overlayView.overlayLineWidthFactor = overlayLineWidthFactor;
+        // If we always set the color it breaks UIAppearance because it deactivates the proxy color if we
+        // call the setter, even if we don't accept nil there.
+        if (overlayColor != nil) {
+            overlayView.strokeColor = overlayColor;
+        }
+        // same goes for the line width factor
+        if (overlayLineWidthFactor > 0.f) {
+            overlayView.overlayLineWidthFactor = overlayLineWidthFactor;
+        }
     }
 
     return overlayView;
