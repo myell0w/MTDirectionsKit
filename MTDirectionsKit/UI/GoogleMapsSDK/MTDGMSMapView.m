@@ -567,7 +567,7 @@
     [super setDelegate:self];
 
     _directionsDisplayType = MTDDirectionsDisplayTypeNone;
-    _directionsEdgePadding = 35.f;
+    _directionsEdgePadding = 125.f;
     // TODO: GoogleMapsSDK
     //_mtd_delegateProxy = [[MTDMapViewDelegateProxy alloc] initWithMapView:self];
 }

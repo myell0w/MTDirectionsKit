@@ -91,7 +91,7 @@
 
 /**
  The padding that will be used when zooming the map to the displayed directions.
- If not specified, a default padding 35.f will be used.
+ If not specified, a default padding of 125.f will be used.
  */
 @property (nonatomic, assign) CGFloat directionsEdgePadding;
 
