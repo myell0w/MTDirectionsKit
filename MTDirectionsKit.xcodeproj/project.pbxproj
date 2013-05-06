@@ -93,18 +93,26 @@
 		9B2C42BC155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2C42B7155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B2C42BD155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C42B8155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.m */; };
 		9B2C42BE155EB85B00C0E4CE /* MTDDirectionsRouteType+Google.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2C42B9155EB85B00C0E4CE /* MTDDirectionsRouteType+Google.h */; };
-		9B3159A41737A2FC004D9E16 /* MTDDirectionsDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159981737A2FC004D9E16 /* MTDDirectionsDelegate.h */; };
 		9B3159A51737A2FC004D9E16 /* MTDDirectionsOverlay+MTDirectionsPrivateAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159991737A2FC004D9E16 /* MTDDirectionsOverlay+MTDirectionsPrivateAPI.h */; };
-		9B3159A61737A2FC004D9E16 /* MTDDirectionsOverlay.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B31599A1737A2FC004D9E16 /* MTDDirectionsOverlay.h */; };
+		9B3159A61737A2FC004D9E16 /* MTDDirectionsOverlay.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B31599A1737A2FC004D9E16 /* MTDDirectionsOverlay.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B3159A71737A2FC004D9E16 /* MTDDirectionsOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B31599B1737A2FC004D9E16 /* MTDDirectionsOverlay.m */; };
 		9B3159A81737A2FC004D9E16 /* MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B31599C1737A2FC004D9E16 /* MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h */; };
-		9B3159A91737A2FC004D9E16 /* MTDDirectionsOverlayView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B31599D1737A2FC004D9E16 /* MTDDirectionsOverlayView.h */; };
+		9B3159A91737A2FC004D9E16 /* MTDDirectionsOverlayView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B31599D1737A2FC004D9E16 /* MTDDirectionsOverlayView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B3159AA1737A2FC004D9E16 /* MTDDirectionsOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B31599E1737A2FC004D9E16 /* MTDDirectionsOverlayView.m */; };
 		9B3159AB1737A2FC004D9E16 /* MTDMapView+MTDirectionsPrivateAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B31599F1737A2FC004D9E16 /* MTDMapView+MTDirectionsPrivateAPI.h */; };
-		9B3159AC1737A2FC004D9E16 /* MTDMapView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159A01737A2FC004D9E16 /* MTDMapView.h */; };
+		9B3159AC1737A2FC004D9E16 /* MTDMapView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159A01737A2FC004D9E16 /* MTDMapView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B3159AD1737A2FC004D9E16 /* MTDMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3159A11737A2FC004D9E16 /* MTDMapView.m */; };
 		9B3159AE1737A2FC004D9E16 /* MTDMapViewDelegateProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159A21737A2FC004D9E16 /* MTDMapViewDelegateProxy.h */; };
 		9B3159AF1737A2FC004D9E16 /* MTDMapViewDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3159A31737A2FC004D9E16 /* MTDMapViewDelegateProxy.m */; };
+		9B3159B11737A65B004D9E16 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B3159B01737A65B004D9E16 /* GoogleMaps.framework */; };
+		9B3159B41737A6A9004D9E16 /* MTDGMSMapView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159B21737A6A9004D9E16 /* MTDGMSMapView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B3159B51737A6A9004D9E16 /* MTDGMSMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3159B31737A6A9004D9E16 /* MTDGMSMapView.m */; };
+		9B3159B91737A727004D9E16 /* MTDDirectionsDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159B81737A727004D9E16 /* MTDDirectionsDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B3159BC1737AF4C004D9E16 /* MTDGMSDirectionsOverlayView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159BA1737AF4C004D9E16 /* MTDGMSDirectionsOverlayView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B3159BD1737AF4C004D9E16 /* MTDGMSDirectionsOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3159BB1737AF4C004D9E16 /* MTDGMSDirectionsOverlayView.m */; };
+		9B3159C41737B0A9004D9E16 /* MTDRoute+MTDGoogleMapsSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159C21737B0A6004D9E16 /* MTDRoute+MTDGoogleMapsSDK.h */; };
+		9B3159C51737B0A9004D9E16 /* MTDRoute+MTDGoogleMapsSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3159C31737B0A7004D9E16 /* MTDRoute+MTDGoogleMapsSDK.m */; };
+		9B3159C61737B76E004D9E16 /* MTDMapViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159B71737A70B004D9E16 /* MTDMapViewProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B4E98E015AD77E5002F0302 /* MTDAddressTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4E98DF15AD77E5002F0302 /* MTDAddressTest.m */; };
 		9B528114167A784200D4A816 /* MTDCustomization.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B528112167A784200D4A816 /* MTDCustomization.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B528115167A784200D4A816 /* MTDCustomization.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B528113167A784200D4A816 /* MTDCustomization.m */; };
@@ -253,7 +261,6 @@
 		9B2C42B7155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDDirectionsRequestGoogle.h; sourceTree = "<group>"; };
 		9B2C42B8155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDDirectionsRequestGoogle.m; sourceTree = "<group>"; };
 		9B2C42B9155EB85B00C0E4CE /* MTDDirectionsRouteType+Google.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTDDirectionsRouteType+Google.h"; sourceTree = "<group>"; };
-		9B3159981737A2FC004D9E16 /* MTDDirectionsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDDirectionsDelegate.h; sourceTree = "<group>"; };
 		9B3159991737A2FC004D9E16 /* MTDDirectionsOverlay+MTDirectionsPrivateAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTDDirectionsOverlay+MTDirectionsPrivateAPI.h"; sourceTree = "<group>"; };
 		9B31599A1737A2FC004D9E16 /* MTDDirectionsOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDDirectionsOverlay.h; sourceTree = "<group>"; };
 		9B31599B1737A2FC004D9E16 /* MTDDirectionsOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDDirectionsOverlay.m; sourceTree = "<group>"; };
@@ -265,6 +272,15 @@
 		9B3159A11737A2FC004D9E16 /* MTDMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDMapView.m; sourceTree = "<group>"; };
 		9B3159A21737A2FC004D9E16 /* MTDMapViewDelegateProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDMapViewDelegateProxy.h; sourceTree = "<group>"; };
 		9B3159A31737A2FC004D9E16 /* MTDMapViewDelegateProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDMapViewDelegateProxy.m; sourceTree = "<group>"; };
+		9B3159B01737A65B004D9E16 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = Vendor/GoogleMaps.framework; sourceTree = "<group>"; };
+		9B3159B21737A6A9004D9E16 /* MTDGMSMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDGMSMapView.h; sourceTree = "<group>"; };
+		9B3159B31737A6A9004D9E16 /* MTDGMSMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDGMSMapView.m; sourceTree = "<group>"; };
+		9B3159B71737A70B004D9E16 /* MTDMapViewProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MTDMapViewProtocol.h; path = Common/MTDMapViewProtocol.h; sourceTree = "<group>"; };
+		9B3159B81737A727004D9E16 /* MTDDirectionsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTDDirectionsDelegate.h; path = Common/MTDDirectionsDelegate.h; sourceTree = "<group>"; };
+		9B3159BA1737AF4C004D9E16 /* MTDGMSDirectionsOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDGMSDirectionsOverlayView.h; sourceTree = "<group>"; };
+		9B3159BB1737AF4C004D9E16 /* MTDGMSDirectionsOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDGMSDirectionsOverlayView.m; sourceTree = "<group>"; };
+		9B3159C21737B0A6004D9E16 /* MTDRoute+MTDGoogleMapsSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTDRoute+MTDGoogleMapsSDK.h"; sourceTree = "<group>"; };
+		9B3159C31737B0A7004D9E16 /* MTDRoute+MTDGoogleMapsSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MTDRoute+MTDGoogleMapsSDK.m"; sourceTree = "<group>"; };
 		9B4E98DE15AD77E5002F0302 /* MTDAddressTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDAddressTest.h; sourceTree = "<group>"; };
 		9B4E98DF15AD77E5002F0302 /* MTDAddressTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDAddressTest.m; sourceTree = "<group>"; };
 		9B528112167A784200D4A816 /* MTDCustomization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDCustomization.h; sourceTree = "<group>"; };
@@ -349,6 +365,7 @@
 				9B2C4297155EB6A400C0E4CE /* UIKit.framework in Frameworks */,
 				9B6C18F414A7E40A00087893 /* libxml2.dylib in Frameworks */,
 				9B6C18C414A7E18200087893 /* Foundation.framework in Frameworks */,
+				9B3159B11737A65B004D9E16 /* GoogleMaps.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,6 +540,7 @@
 		9B3159951737A2FC004D9E16 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				9B3159B61737A6F7004D9E16 /* Common */,
 				9B3159961737A2FC004D9E16 /* GoogleMapsSDK */,
 				9B3159971737A2FC004D9E16 /* MapKit */,
 			);
@@ -533,6 +551,12 @@
 		9B3159961737A2FC004D9E16 /* GoogleMapsSDK */ = {
 			isa = PBXGroup;
 			children = (
+				9B3159B21737A6A9004D9E16 /* MTDGMSMapView.h */,
+				9B3159B31737A6A9004D9E16 /* MTDGMSMapView.m */,
+				9B3159BA1737AF4C004D9E16 /* MTDGMSDirectionsOverlayView.h */,
+				9B3159BB1737AF4C004D9E16 /* MTDGMSDirectionsOverlayView.m */,
+				9B3159C21737B0A6004D9E16 /* MTDRoute+MTDGoogleMapsSDK.h */,
+				9B3159C31737B0A7004D9E16 /* MTDRoute+MTDGoogleMapsSDK.m */,
 			);
 			path = GoogleMapsSDK;
 			sourceTree = "<group>";
@@ -540,7 +564,6 @@
 		9B3159971737A2FC004D9E16 /* MapKit */ = {
 			isa = PBXGroup;
 			children = (
-				9B3159981737A2FC004D9E16 /* MTDDirectionsDelegate.h */,
 				9B3159991737A2FC004D9E16 /* MTDDirectionsOverlay+MTDirectionsPrivateAPI.h */,
 				9B31599A1737A2FC004D9E16 /* MTDDirectionsOverlay.h */,
 				9B31599B1737A2FC004D9E16 /* MTDDirectionsOverlay.m */,
@@ -554,6 +577,15 @@
 				9B3159A31737A2FC004D9E16 /* MTDMapViewDelegateProxy.m */,
 			);
 			path = MapKit;
+			sourceTree = "<group>";
+		};
+		9B3159B61737A6F7004D9E16 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				9B3159B81737A727004D9E16 /* MTDDirectionsDelegate.h */,
+				9B3159B71737A70B004D9E16 /* MTDMapViewProtocol.h */,
+			);
+			name = Common;
 			sourceTree = "<group>";
 		};
 		9B3F802415BF4479003C70EE /* Resources */ = {
@@ -598,6 +630,7 @@
 		9B6C18C214A7E18200087893 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9B3159B01737A65B004D9E16 /* GoogleMaps.framework */,
 				9B6C18F314A7E40A00087893 /* libxml2.dylib */,
 				9B76F451157146BA00B54B05 /* CoreGraphics.framework */,
 				9B10A9B2155D5A17002A3052 /* CoreLocation.framework */,
@@ -735,7 +768,6 @@
 				9B7638741680E429007C0C81 /* MTDNavigationAppGoogleMaps.h in Headers */,
 				9B7638761680E9CD007C0C81 /* MTDInterApp.h in Headers */,
 				9B7638E816864359007C0C81 /* MTDWaypoint+MTDirectionsPrivateAPI.h in Headers */,
-				9B3159A41737A2FC004D9E16 /* MTDDirectionsDelegate.h in Headers */,
 				9B3159A51737A2FC004D9E16 /* MTDDirectionsOverlay+MTDirectionsPrivateAPI.h in Headers */,
 				9B3159A61737A2FC004D9E16 /* MTDDirectionsOverlay.h in Headers */,
 				9B3159A81737A2FC004D9E16 /* MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h in Headers */,
@@ -743,6 +775,11 @@
 				9B3159AB1737A2FC004D9E16 /* MTDMapView+MTDirectionsPrivateAPI.h in Headers */,
 				9B3159AC1737A2FC004D9E16 /* MTDMapView.h in Headers */,
 				9B3159AE1737A2FC004D9E16 /* MTDMapViewDelegateProxy.h in Headers */,
+				9B3159B41737A6A9004D9E16 /* MTDGMSMapView.h in Headers */,
+				9B3159B91737A727004D9E16 /* MTDDirectionsDelegate.h in Headers */,
+				9B3159BC1737AF4C004D9E16 /* MTDGMSDirectionsOverlayView.h in Headers */,
+				9B3159C41737B0A9004D9E16 /* MTDRoute+MTDGoogleMapsSDK.h in Headers */,
+				9B3159C61737B76E004D9E16 /* MTDMapViewProtocol.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -951,6 +988,9 @@
 				9B3159AA1737A2FC004D9E16 /* MTDDirectionsOverlayView.m in Sources */,
 				9B3159AD1737A2FC004D9E16 /* MTDMapView.m in Sources */,
 				9B3159AF1737A2FC004D9E16 /* MTDMapViewDelegateProxy.m in Sources */,
+				9B3159B51737A6A9004D9E16 /* MTDGMSMapView.m in Sources */,
+				9B3159BD1737AF4C004D9E16 /* MTDGMSDirectionsOverlayView.m in Sources */,
+				9B3159C51737B0A9004D9E16 /* MTDRoute+MTDGoogleMapsSDK.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1149,6 +1189,10 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/MTDirections.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Vendor\"",
+				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MTDirectionsKit/Prefix.pch;
@@ -1170,6 +1214,10 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/MTDirections.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Vendor\"",
+				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MTDirectionsKit/Prefix.pch;

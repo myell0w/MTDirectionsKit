@@ -34,12 +34,20 @@
 #import <MTDirectionsKit/MTDManeuverTableViewController.h>
 #import <MTDirectionsKit/MTDManeuverTableViewControllerDelegate.h>
 
+// UI
+#import <MTDirectionsKit/MTDMapViewProtocol.h>
+
 // MapKit
 #import <MTDirectionsKit/MTDMapView.h>
 #import <MTDirectionsKit/MTDDirectionsDelegate.h>
 #import <MTDirectionsKit/MTDDirectionsOverlay.h>
 #import <MTDirectionsKit/MTDDirectionsOverlayView.h>
 #import <MTDirectionsKit/MTDRoute.h>
+
+// GoogleMapsSDK
+#import <MTDirectionsKit/MTDGMSMapView.h>
+#import <MTDirectionsKit/MTDGMSDirectionsOverlayView.h>
+#import <MTDirectionsKit/MTDGMSMapView.h>
 
 // Request
 #import <MTDirectionsKit/MTDDirectionsRequest.h>
