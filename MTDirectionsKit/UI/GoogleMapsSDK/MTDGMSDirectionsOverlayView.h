@@ -10,6 +10,7 @@
 #import <GoogleMaps/GoogleMaps.h>
 
 
+@class MTDDirectionsOverlay;
 @class MTDRoute;
 
 
@@ -21,6 +22,6 @@
  */
 @property (nonatomic, assign) CGFloat overlayLineWidthFactor UI_APPEARANCE_SELECTOR;
 
-- (id)initWithRoute:(MTDRoute *)route;
+- (id)initWithDirectionsOverlay:(MTDDirectionsOverlay *)directionsOverlay route:(MTDRoute *)route;
 
 @end

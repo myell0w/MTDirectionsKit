@@ -266,6 +266,14 @@
 
         if (activeRouteBefore != activeRouteAfter) {
             [self mtd_notifyDelegateDidActivateRoute:activeRouteAfter ofOverlay:self.directionsOverlay];
+
+            // Update colors depending on active state
+            for (MTDRoute *r in self.directionsOverlay.routes) {
+                UIColor *color = [self mtd_askDelegateForColorOfRoute:r ofOverlay:self.directionsOverlay];
+                MTDGMSDirectionsOverlayView *overlayView = [self directionsOverlayViewForRoute:r];
+
+                overlayView.strokeColor = color;
+            }
         }
     }
 }
@@ -625,7 +633,7 @@
     // TODO: GoogleMapsSDK
     // Class directionsOverlayClass = MTDOverriddenClass([MTDDirectionsOverlayView class]);
 
-    MTDGMSDirectionsOverlayView *overlayView = [[MTDGMSDirectionsOverlayView alloc] initWithRoute:route];
+    MTDGMSDirectionsOverlayView *overlayView = [[MTDGMSDirectionsOverlayView alloc] initWithDirectionsOverlay:self.directionsOverlay route:route];
     UIColor *overlayColor = [self mtd_askDelegateForColorOfRoute:route ofOverlay:self.directionsOverlay];
 
     // If we always set the color it breaks UIAppearance because it deactivates the proxy color if we
