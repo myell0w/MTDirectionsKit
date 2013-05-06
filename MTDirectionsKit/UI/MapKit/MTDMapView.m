@@ -54,6 +54,8 @@
 @implementation MTDMapView
 
 @synthesize directionsOverlay = _directionsOverlay;
+@synthesize directionsDisplayType = _directionsDisplayType;
+@synthesize routeType = _routeType;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle

@@ -60,6 +60,8 @@
 @implementation MTDGMSMapView
 
 @synthesize directionsOverlay = _directionsOverlay;
+@synthesize directionsDisplayType = _directionsDisplayType;
+@synthesize routeType = _routeType;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
@@ -583,13 +585,14 @@
     }
 }
 
-- (void)mtd_updateUIForDirectionsDisplayType:(MTDDirectionsDisplayType) __unused displayType {
-    // TODO: GoogleMapsSDK
-    //    _directionsOverlayView.map = nil;
-    //
-    //    if (displayType != MTDDirectionsDisplayTypeNone) {
-    //        _directionsOverlayView.map = nil;
-    //    }
+- (void)mtd_updateUIForDirectionsDisplayType:(MTDDirectionsDisplayType)displayType {
+    for (MTDGMSDirectionsOverlayView *overlayView in [self.directionsOverlayViews allValues]) {
+       overlayView.map = nil;
+   
+       if (displayType != MTDDirectionsDisplayTypeNone) {
+           overlayView.map = self;
+       }
+    }
 }
 
 - (MTDGMSDirectionsOverlayView *)mtd_viewForRoute:(MTDRoute *)route {

@@ -8,8 +8,6 @@
 
 
 #import "MTDMapViewProtocol.h"
-#import "MTDDirectionsRouteType.h"
-#import "MTDDirectionsDisplayType.h"
 #import "MTDDirectionsDefines.h"
 #import "MTDDirectionsRequestOption.h"
 #import "MTDWeak.h"
@@ -54,18 +52,6 @@
  @name Directions
  ******************************************/
 
-/** 
- The current display type of the directions overlay. You can change the way the directions
- are shown on top of your instance of MTDMapView by changing the property. A change results
- in a re-draw of the overlay.
- 
- Currently there are the following types supported:
- 
- - MTDDirectionsDisplayTypeNone: don't display anything
- - MTDDirectionsDisplayTypeOverview: displays a polyline with all Waypoints of the route
- */
-@property (nonatomic, assign) MTDDirectionsDisplayType directionsDisplayType;
-
 /** the starting coordinate of the directions of the currently displayed overlay */
 @property (nonatomic, readonly) CLLocationCoordinate2D fromCoordinate;
 /** the end coordinate of the directions of the currently displayed overlay */
@@ -76,18 +62,6 @@
 /** the total estimated time of the directions */
 @property (nonatomic, readonly) NSTimeInterval timeInSeconds;
 
-/** 
- The type of travelling used to compute the directions of the currently displayed overlay 
- 
- The following types of travelling are supported:
- 
- - MTDDirectionsRouteTypeFastestDriving
- - MTDDirectionsRouteTypeShortestDriving
- - MTDDirectionsRouteTypePedestrian
- - MTDDirectionsRouteTypePedestrianIncludingPublicTransport
- - MTDDirectionsRouteTypeBicycle
- */
-@property (nonatomic, readonly) MTDDirectionsRouteType routeType;
 
 /**
  The padding that will be used when zooming the map to the displayed directions.
