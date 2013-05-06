@@ -36,19 +36,6 @@
 @property (nonatomic, assign) MTDDirectionsDisplayType directionsDisplayType;
 
 /**
- The type of travelling used to compute the directions of the currently displayed overlay
-
- The following types of travelling are supported:
-
- - MTDDirectionsRouteTypeFastestDriving
- - MTDDirectionsRouteTypeShortestDriving
- - MTDDirectionsRouteTypePedestrian
- - MTDDirectionsRouteTypePedestrianIncludingPublicTransport
- - MTDDirectionsRouteTypeBicycle
- */
-@property (nonatomic, readonly) MTDDirectionsRouteType routeType;
-
-/**
  The current active direction overlay. Setting the directions overlay automatically removes
  the previous directionsOverlay (if existing) and adds the new directionsOverlay as an overlay
  to the underlying MKMapView.
@@ -94,34 +81,6 @@
                         toAddress:(NSString *)toAddress
                         routeType:(MTDDirectionsRouteType)routeType
              zoomToShowDirections:(BOOL)zoomToShowDirections;
-
-/**
- Deprecated, use loadDirectionsFrom:to:intermediateGoals:routeType:options:zoomToShowDirections: instead.
-
- Starts a request and loads the directions between the specified start and end waypoints while
- travelling to all intermediate goals along the route. When the request is finished the
- directionsOverlay gets set on the MapView and the region gets zoomed (animated) to show the
- whole overlay, if the flag zoomToShowDirections is set.
-
- @param from the starting waypoint of the route
- @param to the end waypoint of the route
- @param intermediateGoals an optional array of waypoint we want to travel to along the route
- @param optimizeRoute a flag that indicates whether the route shall get optimized if there are intermediate goals.
- if YES, the intermediate goals can get reordered to guarantee a fast route traversal
- @param routeType the type of the route requested, e.g. pedestrian, cycling, fastest driving
- @param zoomToShowDirections flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)
-
- @see loadDirectionsFrom:to:routeType:zoomToShowDirections:
- @see loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:
- @see loadAlternativeDirectionsFrom:to:routeType:zoomToShowDirections:
- @see cancelLoadOfDirections
- */
-- (void)loadDirectionsFrom:(MTDWaypoint *)from
-                        to:(MTDWaypoint *)to
-         intermediateGoals:(NSArray *)intermediateGoals
-             optimizeRoute:(BOOL)optimizeRoute
-                 routeType:(MTDDirectionsRouteType)routeType
-      zoomToShowDirections:(BOOL)zoomToShowDirections  __attribute__((deprecated));
 
 /**
  Starts a request and loads the directions between the specified start and end waypoints while

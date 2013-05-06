@@ -59,16 +59,10 @@
  */
 @property (nonatomic, strong, readonly) MTDDirectionsOverlayView *directionsOverlayView;
 
-
 /** the starting coordinate of the directions of the currently displayed overlay */
 @property (nonatomic, readonly) CLLocationCoordinate2D fromCoordinate;
 /** the end coordinate of the directions of the currently displayed overlay */
 @property (nonatomic, readonly) CLLocationCoordinate2D toCoordinate;
-
-/** the total distance of the directions of the currenty displayed overlay in meters */
-@property (nonatomic, readonly) CLLocationDistance distanceInMeter;
-/** the total estimated time of the directions */
-@property (nonatomic, readonly) NSTimeInterval timeInSeconds;
 
 /**
  The padding that will be used when zooming the map to the displayed directions.

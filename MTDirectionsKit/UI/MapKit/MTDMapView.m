@@ -45,7 +45,6 @@
 
 @synthesize directionsOverlay = _directionsOverlay;
 @synthesize directionsDisplayType = _directionsDisplayType;
-@synthesize routeType = _routeType;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
@@ -123,26 +122,6 @@
                      options:MTDDirectionsRequestOptionNone
         zoomToShowDirections:zoomToShowDirections];
 }
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-implementations"
-
-- (void)loadDirectionsFrom:(MTDWaypoint *)from
-                        to:(MTDWaypoint *)to
-         intermediateGoals:(NSArray *)intermediateGoals
-             optimizeRoute:(BOOL)optimizeRoute
-                 routeType:(MTDDirectionsRouteType)routeType
-      zoomToShowDirections:(BOOL)zoomToShowDirections {
-
-    [self loadDirectionsFrom:from
-                          to:to
-           intermediateGoals:intermediateGoals
-                   routeType:routeType
-                     options:optimizeRoute ? MTDDirectionsRequestOptionOptimizeRoute : MTDDirectionsRequestOptionNone
-        zoomToShowDirections:zoomToShowDirections];
-}
-
-#pragma clang diagnostic pop
 
 - (void)loadAlternativeDirectionsFrom:(MTDWaypoint *)from
                                    to:(MTDWaypoint *)to
@@ -345,18 +324,6 @@
     }
 
     return kCLLocationCoordinate2DInvalid;
-}
-
-- (CLLocationDistance)distanceInMeter {
-    return [self.directionsOverlay.distance distanceInMeter];
-}
-
-- (NSTimeInterval)timeInSeconds {
-    return self.directionsOverlay.timeInSeconds;
-}
-
-- (MTDDirectionsRouteType)routeType {
-    return self.directionsOverlay.routeType;
 }
 
 ////////////////////////////////////////////////////////////////////////
