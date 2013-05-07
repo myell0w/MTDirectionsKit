@@ -1,5 +1,5 @@
 //
-//  MTDirectionsKit.h
+//  MTDirectionsKitCommon.h
 //  MTDirectionsKit
 //
 //  Created by Matthias Tretter
@@ -43,14 +43,6 @@
 #import <MTDirectionsKit/MTDDirectionsOverlay.h>
 #import <MTDirectionsKit/MTDDirectionsOverlayView.h>
 #import <MTDirectionsKit/MTDRoute.h>
-
-// GoogleMapsSDK
-#ifdef MTD_USING_GOOGLE_MAPS_SDK
-#import <GoogleMaps/GoogleMaps.h>
-#import <MTDirectionsKit/MTDGMSMapView.h>
-#import <MTDirectionsKit/MTDGMSDirectionsOverlayView.h>
-#import <MTDirectionsKit/MTDGMSMapView.h>
-#endif
 
 // Request
 #import <MTDirectionsKit/MTDDirectionsRequest.h>

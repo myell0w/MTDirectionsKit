@@ -46,6 +46,10 @@
 		9B0364F915F62B9E00538307 /* bing_driving.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B0364F515F62B9E00538307 /* bing_driving.xml */; };
 		9B0364FA15F62B9E00538307 /* bing_transit.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B0364F615F62B9E00538307 /* bing_transit.xml */; };
 		9B0364FB15F62B9E00538307 /* bing_walking.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B0364F715F62B9E00538307 /* bing_walking.xml */; };
+		9B0D385D17391E3E00CF641D /* MTDirectionsKitCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B0D385C17391E3E00CF641D /* MTDirectionsKitCommon.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B0D385F17391E6300CF641D /* MTDirectionsKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B0D385E17391E6300CF641D /* MTDirectionsKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B0D386117391E9600CF641D /* MTDirectionsKitCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B0D385C17391E3E00CF641D /* MTDirectionsKitCommon.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B0D386217391EA200CF641D /* MTDirectionsKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B0D386017391E7F00CF641D /* MTDirectionsKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B10A99F155D5867002A3052 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B10A99E155D5867002A3052 /* SenTestingKit.framework */; };
 		9B10A9A2155D5867002A3052 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18C314A7E18200087893 /* Foundation.framework */; };
 		9B10A9A8155D5867002A3052 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9B10A9A6155D5867002A3052 /* InfoPlist.strings */; };
@@ -148,7 +152,6 @@
 		9B315A04173916DA004D9E16 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B2C4296155EB6A400C0E4CE /* UIKit.framework */; };
 		9B315A06173916DA004D9E16 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18C314A7E18200087893 /* Foundation.framework */; };
 		9B315A07173916DA004D9E16 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B3159B01737A65B004D9E16 /* GoogleMaps.framework */; };
-		9B315A09173916DA004D9E16 /* MTDirectionsKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B8F515E155C516E00A9C10C /* MTDirectionsKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B315A0A173916DA004D9E16 /* Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 9B8F515F155C516E00A9C10C /* Prefix.pch */; };
 		9B315A0B173916DA004D9E16 /* MTDDirectionsParserMapQuest.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B10AA0B155D85B8002A3052 /* MTDDirectionsParserMapQuest.h */; settings = {ATTRIBUTES = (); }; };
 		9B315A0C173916DA004D9E16 /* MTDDirectionsRequestMapQuest.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B10AA0D155D85B8002A3052 /* MTDDirectionsRequestMapQuest.h */; };
@@ -235,7 +238,6 @@
 		9B817C65160A7F5D00842890 /* mapquest_intermediate_optimized.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9B817C5F160A7F5D00842890 /* mapquest_intermediate_optimized.xml */; };
 		9B8A2C1B1560129F00BAAE7B /* MTDXMLElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B8A2C191560129F00BAAE7B /* MTDXMLElement.h */; };
 		9B8A2C1C1560129F00BAAE7B /* MTDXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B8A2C1A1560129F00BAAE7B /* MTDXMLElement.m */; };
-		9B8F5160155C516E00A9C10C /* MTDirectionsKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B8F515E155C516E00A9C10C /* MTDirectionsKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B8F5161155C516E00A9C10C /* Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 9B8F515F155C516E00A9C10C /* Prefix.pch */; };
 		9B92435815F51A19000BC591 /* MTDDirectionsParserBing.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B92435615F51A19000BC591 /* MTDDirectionsParserBing.h */; };
 		9B92435915F51A19000BC591 /* MTDDirectionsParserBing.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92435715F51A19000BC591 /* MTDDirectionsParserBing.m */; };
@@ -302,6 +304,9 @@
 		9B0364F515F62B9E00538307 /* bing_driving.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = bing_driving.xml; sourceTree = "<group>"; };
 		9B0364F615F62B9E00538307 /* bing_transit.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = bing_transit.xml; sourceTree = "<group>"; };
 		9B0364F715F62B9E00538307 /* bing_walking.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = bing_walking.xml; sourceTree = "<group>"; };
+		9B0D385C17391E3E00CF641D /* MTDirectionsKitCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDirectionsKitCommon.h; sourceTree = "<group>"; };
+		9B0D385E17391E6300CF641D /* MTDirectionsKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDirectionsKit.h; sourceTree = "<group>"; };
+		9B0D386017391E7F00CF641D /* MTDirectionsKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTDirectionsKit.h; sourceTree = "<group>"; };
 		9B10A99D155D5867002A3052 /* MTDirectionsKitTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MTDirectionsKitTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B10A99E155D5867002A3052 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		9B10A9A5155D5867002A3052 /* MTDirectionsKitTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MTDirectionsKitTest-Info.plist"; sourceTree = "<group>"; };
@@ -412,7 +417,6 @@
 		9B8A2BFF156007B800BAAE7B /* README.mdown */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.mdown; sourceTree = SOURCE_ROOT; };
 		9B8A2C191560129F00BAAE7B /* MTDXMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDXMLElement.h; sourceTree = "<group>"; };
 		9B8A2C1A1560129F00BAAE7B /* MTDXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDXMLElement.m; sourceTree = "<group>"; };
-		9B8F515E155C516E00A9C10C /* MTDirectionsKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTDirectionsKit.h; path = MTDirectionsKit/MTDirectionsKit.h; sourceTree = SOURCE_ROOT; };
 		9B8F515F155C516E00A9C10C /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Prefix.pch; path = MTDirectionsKit/Prefix.pch; sourceTree = SOURCE_ROOT; };
 		9B92435615F51A19000BC591 /* MTDDirectionsParserBing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDDirectionsParserBing.h; sourceTree = "<group>"; };
 		9B92435715F51A19000BC591 /* MTDDirectionsParserBing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDDirectionsParserBing.m; sourceTree = "<group>"; };
@@ -514,6 +518,33 @@
 				9B00100E1621B5A500E5FF03 /* MTDirectionsKit.bundle */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		9B0D385917391E3E00CF641D /* Includes */ = {
+			isa = PBXGroup;
+			children = (
+				9B0D385A17391E3E00CF641D /* GoogleMapsSDK */,
+				9B0D385B17391E3E00CF641D /* MapKit */,
+				9B0D385C17391E3E00CF641D /* MTDirectionsKitCommon.h */,
+			);
+			name = Includes;
+			path = MTDirectionsKit/Includes;
+			sourceTree = SOURCE_ROOT;
+		};
+		9B0D385A17391E3E00CF641D /* GoogleMapsSDK */ = {
+			isa = PBXGroup;
+			children = (
+				9B0D386017391E7F00CF641D /* MTDirectionsKit.h */,
+			);
+			path = GoogleMapsSDK;
+			sourceTree = "<group>";
+		};
+		9B0D385B17391E3E00CF641D /* MapKit */ = {
+			isa = PBXGroup;
+			children = (
+				9B0D385E17391E6300CF641D /* MTDirectionsKit.h */,
+			);
+			path = MapKit;
 			sourceTree = "<group>";
 		};
 		9B10A9A3155D5867002A3052 /* MTDirectionsKitTest */ = {
@@ -769,8 +800,8 @@
 		9B6C18C614A7E18200087893 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9B0D385917391E3E00CF641D /* Includes */,
 				9B23F65715BEFAB40069EAD1 /* MTDAssert.h */,
-				9B8F515E155C516E00A9C10C /* MTDirectionsKit.h */,
 				9B23F65915BEFAC00069EAD1 /* MTDWeak.h */,
 				9B8F515F155C516E00A9C10C /* Prefix.pch */,
 			);
@@ -827,7 +858,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B315A09173916DA004D9E16 /* MTDirectionsKit.h in Headers */,
 				9B315A0A173916DA004D9E16 /* Prefix.pch in Headers */,
 				9B315A0B173916DA004D9E16 /* MTDDirectionsParserMapQuest.h in Headers */,
 				9B315A0C173916DA004D9E16 /* MTDDirectionsRequestMapQuest.h in Headers */,
@@ -884,6 +914,8 @@
 				9B315A3F173916DA004D9E16 /* MTDMapViewProtocol.h in Headers */,
 				9B315A40173916DA004D9E16 /* MTDMapViewProxy.h in Headers */,
 				9B315A41173916DA004D9E16 /* MTDWaypoint+MTDDirectionsAPI.h in Headers */,
+				9B0D386117391E9600CF641D /* MTDirectionsKitCommon.h in Headers */,
+				9B0D386217391EA200CF641D /* MTDirectionsKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -891,7 +923,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B8F5160155C516E00A9C10C /* MTDirectionsKit.h in Headers */,
 				9B8F5161155C516E00A9C10C /* Prefix.pch in Headers */,
 				9B10AA2B155D85B8002A3052 /* MTDDirectionsParserMapQuest.h in Headers */,
 				9B10AA2D155D85B8002A3052 /* MTDDirectionsRequestMapQuest.h in Headers */,
@@ -945,6 +976,8 @@
 				9B3159C61737B76E004D9E16 /* MTDMapViewProtocol.h in Headers */,
 				9B3159D1173801B4004D9E16 /* MTDMapViewProxy.h in Headers */,
 				9B3159DA1738FC29004D9E16 /* MTDWaypoint+MTDDirectionsAPI.h in Headers */,
+				9B0D385D17391E3E00CF641D /* MTDirectionsKitCommon.h in Headers */,
+				9B0D385F17391E6300CF641D /* MTDirectionsKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1339,7 +1372,7 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_UNUSED_FUNCTION = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				OTHER_CFLAGS = "-DMTD_USING_GOOGLE_MAPS_SDK";
+				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = MTDirectionsKit;
 				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
@@ -1366,7 +1399,7 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_UNUSED_FUNCTION = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				OTHER_CFLAGS = "-DMTD_USING_GOOGLE_MAPS_SDK";
+				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = MTDirectionsKit;
 				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
