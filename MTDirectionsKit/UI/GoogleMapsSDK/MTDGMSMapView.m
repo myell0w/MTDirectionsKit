@@ -194,14 +194,7 @@ static char myLocationContext;
 
         if (activeRouteBefore != activeRouteAfter) {
             [self.mtd_proxy notifyDelegateDidActivateRoute:activeRouteAfter ofOverlay:self.directionsOverlay];
-
-            // Update colors depending on active state
-            for (MTDRoute *r in self.directionsOverlay.routes) {
-                UIColor *color = [self.mtd_proxy askDelegateForColorOfRoute:r ofOverlay:self.directionsOverlay];
-                MTDGMSDirectionsOverlayView *overlayView = [self directionsOverlayViewForRoute:r];
-
-                overlayView.strokeColor = color;
-            }
+            [self mtd_updateRouteAppearance];
         }
     }
 }
@@ -466,6 +459,8 @@ static char myLocationContext;
         self.directionsOverlayViews[route] = overlayView;
         overlayView.map = self;
     }
+
+    [self mtd_updateRouteAppearance];
 }
 
 - (void)mtd_updateUIForDirectionsDisplayType:(MTDDirectionsDisplayType)displayType {
@@ -499,7 +494,7 @@ static char myLocationContext;
         // If we always set the color it breaks UIAppearance because it deactivates the proxy color if we
         // call the setter, even if we don't accept nil there.
         if (overlayColor != nil) {
-            overlayView.strokeColor = overlayColor;
+            overlayView.overlayColor = overlayColor;
         }
         // same goes for the line width factor
         if (overlayLineWidthFactor > 0.f) {
@@ -508,6 +503,39 @@ static char myLocationContext;
     }
 
     return overlayView;
+}
+
+- (void)mtd_updateRouteAppearance {
+    UIColor *previousColor = nil;
+    BOOL allColorsSame = YES;
+
+    // first detect if the delegate returns the same color for each route
+    // if it does we apply a default alpha to the color for non-active routes
+    for (MTDRoute *route in self.directionsOverlay.routes) {
+        UIColor *color = [self.mtd_proxy askDelegateForColorOfRoute:route ofOverlay:self.directionsOverlay];
+
+        if (previousColor != nil && previousColor != color) {
+            allColorsSame = NO;
+        }
+
+        MTDGMSDirectionsOverlayView *overlayView = [self directionsOverlayViewForRoute:route];
+        overlayView.overlayColor = color;
+
+        previousColor = color;
+    }
+
+    // if all colors are the same apply a color with an alpha channel to the non-active routes
+    if (allColorsSame && self.directionsOverlay.routes.count > 1) {
+        UIColor *nonActiveColor = [previousColor colorWithAlphaComponent:0.65f];
+
+        for (MTDRoute *route in self.directionsOverlay.routes) {
+            MTDGMSDirectionsOverlayView *overlayView = [self directionsOverlayViewForRoute:route];
+
+            if (self.directionsOverlay.activeRoute != route) {
+                overlayView.overlayColor = nonActiveColor;
+            }
+        }
+    }
 }
 
 @end

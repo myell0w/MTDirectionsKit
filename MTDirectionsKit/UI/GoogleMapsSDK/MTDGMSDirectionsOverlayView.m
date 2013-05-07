@@ -41,23 +41,27 @@
 #pragma mark - GMSPolyline
 ////////////////////////////////////////////////////////////////////////
 
-- (void)setStrokeColor:(UIColor *)strokeColor {
-    if (self.directionsOverlay.activeRoute != self.route) {
-        strokeColor = [strokeColor colorWithAlphaComponent:0.65f];
+- (CGFloat)strokeWidth {
+    if (self.directionsOverlay.activeRoute == self.route) {
+        return self.overlayLineWidthFactor * kMTDMultiplicationFactor;
+    } else {
+        return self.overlayLineWidthFactor * kMTDMultiplicationFactor * 0.75f;
     }
-
-    [super setStrokeColor:strokeColor];
 }
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - MTDGMSDirectionsOverlayView
 ////////////////////////////////////////////////////////////////////////
 
+- (void)setOverlayColor:(UIColor *)overlayColor {
+    if (overlayColor != nil) {
+        self.strokeColor = overlayColor;
+    }
+}
+
 - (void)setOverlayLineWidthFactor:(CGFloat)overlayLineWidthFactor {
     if (overlayLineWidthFactor >= kMTDMinimumLineWidthFactor && overlayLineWidthFactor <= kMTDMaximumLineWidthFactor) {
         _overlayLineWidthFactor = overlayLineWidthFactor;
-
-        self.strokeWidth = overlayLineWidthFactor * kMTDMultiplicationFactor;
     }
 }
 

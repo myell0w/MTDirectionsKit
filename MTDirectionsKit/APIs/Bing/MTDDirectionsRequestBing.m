@@ -3,6 +3,7 @@
 #import "MTDDirectionsRequestOption.h"
 #import "MTDDirectionsRouteType+Bing.h"
 #import "MTDWaypoint.h"
+#import "MTDWaypoint+MTDDirectionsAPI.h"
 #import "MTDFunctions.h"
 #import "MTDLocale+Bing.h"
 

@@ -112,6 +112,9 @@
 		9B3159C61737B76E004D9E16 /* MTDMapViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159B71737A70B004D9E16 /* MTDMapViewProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B3159D1173801B4004D9E16 /* MTDMapViewProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159CF173801B3004D9E16 /* MTDMapViewProxy.h */; };
 		9B3159D2173801B4004D9E16 /* MTDMapViewProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3159D0173801B4004D9E16 /* MTDMapViewProxy.m */; };
+		9B3159D517386629004D9E16 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B3159B01737A65B004D9E16 /* GoogleMaps.framework */; };
+		9B3159DA1738FC29004D9E16 /* MTDWaypoint+MTDDirectionsAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159D81738FC28004D9E16 /* MTDWaypoint+MTDDirectionsAPI.h */; };
+		9B3159DB1738FC29004D9E16 /* MTDWaypoint+MTDDirectionsAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3159D91738FC28004D9E16 /* MTDWaypoint+MTDDirectionsAPI.m */; };
 		9B4E98E015AD77E5002F0302 /* MTDAddressTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4E98DF15AD77E5002F0302 /* MTDAddressTest.m */; };
 		9B528114167A784200D4A816 /* MTDCustomization.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B528112167A784200D4A816 /* MTDCustomization.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B528115167A784200D4A816 /* MTDCustomization.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B528113167A784200D4A816 /* MTDCustomization.m */; };
@@ -279,6 +282,8 @@
 		9B3159C31737B0A7004D9E16 /* MTDRoute+MTDGoogleMapsSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MTDRoute+MTDGoogleMapsSDK.m"; sourceTree = "<group>"; };
 		9B3159CF173801B3004D9E16 /* MTDMapViewProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTDMapViewProxy.h; path = Common/MTDMapViewProxy.h; sourceTree = "<group>"; };
 		9B3159D0173801B4004D9E16 /* MTDMapViewProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTDMapViewProxy.m; path = Common/MTDMapViewProxy.m; sourceTree = "<group>"; };
+		9B3159D81738FC28004D9E16 /* MTDWaypoint+MTDDirectionsAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTDWaypoint+MTDDirectionsAPI.h"; sourceTree = "<group>"; };
+		9B3159D91738FC28004D9E16 /* MTDWaypoint+MTDDirectionsAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MTDWaypoint+MTDDirectionsAPI.m"; sourceTree = "<group>"; };
 		9B4E98DE15AD77E5002F0302 /* MTDAddressTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDAddressTest.h; sourceTree = "<group>"; };
 		9B4E98DF15AD77E5002F0302 /* MTDAddressTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDAddressTest.m; sourceTree = "<group>"; };
 		9B528112167A784200D4A816 /* MTDCustomization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDCustomization.h; sourceTree = "<group>"; };
@@ -345,6 +350,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B3159D517386629004D9E16 /* GoogleMaps.framework in Frameworks */,
 				9B76F452157146BA00B54B05 /* CoreGraphics.framework in Frameworks */,
 				9B8126121569577E00C9A6C8 /* UIKit.framework in Frameworks */,
 				9B8126111569576700C9A6C8 /* libxml2.dylib in Frameworks */,
@@ -396,6 +402,8 @@
 				9B2A5AE41629F14B00CE4709 /* MTDRoute.m */,
 				9B2A5AE61629F14B00CE4709 /* MTDWaypoint.h */,
 				9B2A5AE71629F14B00CE4709 /* MTDWaypoint.m */,
+				9B3159D81738FC28004D9E16 /* MTDWaypoint+MTDDirectionsAPI.h */,
+				9B3159D91738FC28004D9E16 /* MTDWaypoint+MTDDirectionsAPI.m */,
 				9B7638E616864359007C0C81 /* MTDWaypoint+MTDirectionsPrivateAPI.h */,
 			);
 			name = General;
@@ -627,11 +635,11 @@
 		9B6C18C214A7E18200087893 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9B3159B01737A65B004D9E16 /* GoogleMaps.framework */,
 				9B6C18F314A7E40A00087893 /* libxml2.dylib */,
 				9B76F451157146BA00B54B05 /* CoreGraphics.framework */,
 				9B10A9B2155D5A17002A3052 /* CoreLocation.framework */,
 				9B6C18C314A7E18200087893 /* Foundation.framework */,
+				9B3159B01737A65B004D9E16 /* GoogleMaps.framework */,
 				9B10A9B4155D5A1B002A3052 /* MapKit.framework */,
 				9B10A99E155D5867002A3052 /* SenTestingKit.framework */,
 				9B2C4296155EB6A400C0E4CE /* UIKit.framework */,
@@ -776,6 +784,7 @@
 				9B3159C41737B0A9004D9E16 /* MTDRoute+MTDGoogleMapsSDK.h in Headers */,
 				9B3159C61737B76E004D9E16 /* MTDMapViewProtocol.h in Headers */,
 				9B3159D1173801B4004D9E16 /* MTDMapViewProxy.h in Headers */,
+				9B3159DA1738FC29004D9E16 /* MTDWaypoint+MTDDirectionsAPI.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -884,7 +893,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/appledoc \\\n--project-name \"MTDirectionsKit\" \\\n--project-company \"@myell0w\" \\\n--company-id \"at.myell0w\" \\\n--docset-atom-filename \"MTDirectionsKit.atom\" \\\n--docset-feed-url \"http://myell0w.github.com/MTDirectionsKit/%DOCSETATOMFILENAME\" \\\n--docset-package-url \"http://myell0w.github.com/MTDirectionsKit/%DOCSETPACKAGEFILENAME\" \\\n--docset-fallback-url \"http://myell0w.github.com/MTDirectionsKit/\" \\\n--output \"~/Projects/Documentation/MTDirectionsKit\" \\\n--publish-docset \\\n--logformat xcode \\\n--keep-undocumented-objects \\\n--keep-undocumented-members \\\n--keep-intermediate-files \\\n--no-repeat-first-par \\\n--no-warn-invalid-crossref \\\n--ignore \"*.m\" \\\n--ignore \"*+MTDirectionsPrivateAPI.h\" \\\n--ignore \"MTDirectionsDemo\" \\\n--ignore \"MTDirectionsKitTest\" \\\n\"${PROJECT_DIR}\"";
+			shellScript = "/usr/local/bin/appledoc \\\n--project-name \"MTDirectionsKit\" \\\n--project-company \"@myell0w\" \\\n--company-id \"at.myell0w\" \\\n--docset-atom-filename \"MTDirectionsKit.atom\" \\\n--docset-feed-url \"http://myell0w.github.com/MTDirectionsKit/%DOCSETATOMFILENAME\" \\\n--docset-package-url \"http://myell0w.github.com/MTDirectionsKit/%DOCSETPACKAGEFILENAME\" \\\n--docset-fallback-url \"http://myell0w.github.com/MTDirectionsKit/\" \\\n--output \"~/Projects/Documentation/MTDirectionsKit\" \\\n--publish-docset \\\n--logformat xcode \\\n--keep-undocumented-objects \\\n--keep-undocumented-members \\\n--keep-intermediate-files \\\n--no-repeat-first-par \\\n--no-warn-invalid-crossref \\\n--ignore \"*.m\" \\\n--ignore \"*+MTDirectionsPrivateAPI.h\" \\\n--ignore \"MTDirectionsDemo\" \\\n--ignore \"MTDirectionsKitTest\" \\\n--ignore \"GMS*\" \\\n\"${PROJECT_DIR}\"";
 		};
 		9B10A99B155D5867002A3052 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -987,6 +996,7 @@
 				9B3159BD1737AF4C004D9E16 /* MTDGMSDirectionsOverlayView.m in Sources */,
 				9B3159C51737B0A9004D9E16 /* MTDRoute+MTDGoogleMapsSDK.m in Sources */,
 				9B3159D2173801B4004D9E16 /* MTDMapViewProxy.m in Sources */,
+				9B3159DB1738FC29004D9E16 /* MTDWaypoint+MTDDirectionsAPI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1042,6 +1052,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"\"$(SRCROOT)/Vendor\"",
 				);
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = NO;
@@ -1062,6 +1073,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"\"$(SRCROOT)/Vendor\"",
 				);
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = NO;
@@ -1101,7 +1113,6 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
@@ -1148,7 +1159,6 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;

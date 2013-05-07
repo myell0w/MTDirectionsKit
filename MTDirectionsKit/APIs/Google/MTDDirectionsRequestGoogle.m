@@ -4,6 +4,7 @@
 #import "MTDDirectionsRouteType+Google.h"
 #import "MTDDirectionsParserGoogle.h"
 #import "MTDWaypoint.h"
+#import "MTDWaypoint+MTDDirectionsAPI.h"
 #import "MTDFunctions.h"
 #import "MTDBase64.h"
 #import "MTDLocale+Google.h"

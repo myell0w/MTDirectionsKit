@@ -155,5 +155,5 @@ NS_INLINE NSString* MTDLocalizedStringFromUIKit(NSString *string) {
  @return MTDirectionsKit version string
  */
 NS_INLINE NSString* MTDDirectionsKitGetVersionString() {
-    return @"1.6.0";
+    return @"1.7";
 }
