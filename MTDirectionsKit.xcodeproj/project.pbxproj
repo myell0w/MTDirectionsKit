@@ -26,7 +26,7 @@
 				9B10A971155D4A0F002A3052 /* Generate AppleDoc */,
 			);
 			dependencies = (
-				9B10A970155D4A0B002A3052 /* PBXTargetDependency */,
+				9B0D38751739232800CF641D /* PBXTargetDependency */,
 			);
 			name = Documentation;
 			productName = Documentation;
@@ -276,12 +276,12 @@
 			remoteGlobalIDString = 9B3159DC173916DA004D9E16;
 			remoteInfo = MTDirectionsKitGoogleMapsSDK;
 		};
-		9B10A96F155D4A0B002A3052 /* PBXContainerItemProxy */ = {
+		9B0D38741739232800CF641D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9B6C18B714A7E18200087893 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 9B6C18BF14A7E18200087893;
-			remoteInfo = MTDirectionsKit;
+			remoteGlobalIDString = 9B3159DC173916DA004D9E16;
+			remoteInfo = MTDirectionsKitGoogleMapsSDK;
 		};
 		9B10A9B0155D5876002A3052 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1139,7 +1139,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/appledoc \\\n--project-name \"MTDirectionsKit\" \\\n--project-company \"@myell0w\" \\\n--company-id \"at.myell0w\" \\\n--docset-atom-filename \"MTDirectionsKit.atom\" \\\n--docset-feed-url \"http://myell0w.github.com/MTDirectionsKit/%DOCSETATOMFILENAME\" \\\n--docset-package-url \"http://myell0w.github.com/MTDirectionsKit/%DOCSETPACKAGEFILENAME\" \\\n--docset-fallback-url \"http://myell0w.github.com/MTDirectionsKit/\" \\\n--output \"~/Projects/Documentation/MTDirectionsKit\" \\\n--publish-docset \\\n--logformat xcode \\\n--keep-undocumented-objects \\\n--keep-undocumented-members \\\n--keep-intermediate-files \\\n--no-repeat-first-par \\\n--no-warn-invalid-crossref \\\n--ignore \"*.m\" \\\n--ignore \"*+MTDirectionsPrivateAPI.h\" \\\n--ignore \"MTDirectionsDemo\" \\\n--ignore \"MTDirectionsKitTest\" \\\n--ignore \"GMS*\" \\\n\"${PROJECT_DIR}\"";
+			shellScript = "/usr/local/bin/appledoc \\\n--project-name \"MTDirectionsKit\" \\\n--project-company \"@myell0w\" \\\n--company-id \"at.myell0w\" \\\n--docset-atom-filename \"MTDirectionsKit.atom\" \\\n--docset-feed-url \"http://myell0w.github.com/MTDirectionsKit/%DOCSETATOMFILENAME\" \\\n--docset-package-url \"http://myell0w.github.com/MTDirectionsKit/%DOCSETPACKAGEFILENAME\" \\\n--docset-fallback-url \"http://myell0w.github.com/MTDirectionsKit/\" \\\n--output \"~/Projects/Documentation/MTDirectionsKit\" \\\n--publish-docset \\\n--logformat xcode \\\n--keep-undocumented-objects \\\n--keep-undocumented-members \\\n--keep-intermediate-files \\\n--no-repeat-first-par \\\n--no-warn-invalid-crossref \\\n--ignore \"*.m\" \\\n--ignore \"*+MTDirectionsPrivateAPI.h\" \\\n--ignore \"*MTDMapViewProxy.h\" \\\n--ignore \"MTDirectionsDemo\" \\\n--ignore \"MTDirectionsKitTest\" \\\n--ignore \"Vendor\" \\\n\"${PROJECT_DIR}\"";
 		};
 		9B10A99B155D5867002A3052 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1309,10 +1309,10 @@
 			target = 9B3159DC173916DA004D9E16 /* MTDirectionsKitGoogleMapsSDK */;
 			targetProxy = 9B0D38701739216700CF641D /* PBXContainerItemProxy */;
 		};
-		9B10A970155D4A0B002A3052 /* PBXTargetDependency */ = {
+		9B0D38751739232800CF641D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 9B6C18BF14A7E18200087893 /* MTDirectionsKit */;
-			targetProxy = 9B10A96F155D4A0B002A3052 /* PBXContainerItemProxy */;
+			target = 9B3159DC173916DA004D9E16 /* MTDirectionsKitGoogleMapsSDK */;
+			targetProxy = 9B0D38741739232800CF641D /* PBXContainerItemProxy */;
 		};
 		9B10A9B1155D5876002A3052 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

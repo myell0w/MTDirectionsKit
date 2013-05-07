@@ -13,20 +13,26 @@
 @class MTDWaypoint;
 
 
+/**
+ This abstract class provides the API for opening given directions in another App on your iOS device
+ */
 @interface MTDNavigationApp : NSObject
 
+/**
+ This method indicates whether the given app is installed on the device. Subclasses must override.
+ 
+ @return YES if the app is istalled, NO otherwise
+ */
 + (BOOL)isAppInstalled;
 
-/*
- Opens the built-in Maps.app and displays the directions from fromCoordinate to toCoordinate
- with the chosen routeType. Since the built-in Maps application only supports travelling per pedes,
- by public transport or by car, MTDDirectionsRouteTypePedestrian is used in case MTDDirectionsRouteTypeBicycle
- was specified.
+/**
+ Opens the given app and displays the directions from fromCoordinate to toCoordinate
+ with the chosen routeType.
 
  @param from the starting waypoint of the route
  @param to the end waypoint of the route
  @param routeType the specified form of travelling, e.g. walking, by bike, by car
- @return YES, if the Maps App was opened successfully, NO otherwise
+ @return YES, if the app was opened successfully, NO otherwise
  */
 + (BOOL)openDirectionsFrom:(MTDWaypoint *)from
                         to:(MTDWaypoint *)to

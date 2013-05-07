@@ -29,8 +29,6 @@
 /**
  The color used to draw the overlay, default is a blue color.
  This color is used if you don't set a specific color for a route with setOverlayColor:forRoute:
-
- @see setOverlayColor:forRoute:
  */
 @property (nonatomic, strong) UIColor *overlayColor;
 
@@ -40,6 +38,12 @@
  */
 @property (nonatomic, assign) CGFloat overlayLineWidthFactor;
 
+/**
+ The designated initializer.
+ 
+ @param directionsOverlay a weak reference to the overlay that contains the model data for this overlay view
+ @param route the route that is represented/displayed by this overlay view
+ */
 - (id)initWithDirectionsOverlay:(MTDDirectionsOverlay *)directionsOverlay route:(MTDRoute *)route;
 
 /**

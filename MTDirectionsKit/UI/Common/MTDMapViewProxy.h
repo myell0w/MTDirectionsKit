@@ -58,9 +58,6 @@
  @param options mask of options that can be specified on the request, e.g. optimization of the route, avoiding toll roads etc.
  @param zoomToShowDirections flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)
 
- @see loadDirectionsFrom:to:routeType:zoomToShowDirections:
- @see loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:
- @see loadAlternativeDirectionsFrom:to:routeType:zoomToShowDirections:
  @see cancelLoadOfDirections
  */
 - (void)loadDirectionsFrom:(MTDWaypoint *)from
@@ -74,7 +71,7 @@
  Cancels a possible ongoing request for loading directions.
  Does nothing if there is no request active.
 
- @see loadDirectionsFrom:to:routeType:zoomToShowDirections:
+ @see loadDirectionsFrom:to:intermediateGoals:routeType:options:zoomToShowDirections:
  */
 
 - (void)cancelLoadOfDirections;

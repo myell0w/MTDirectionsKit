@@ -17,6 +17,14 @@
 @class MTDDirectionsOverlayView;
 @class MTDRoute;
 
+
+/**
+ This protocol includes the common functionality that all MapView classes of MTDirectionsKit support.
+ The subclasses are:
+ 
+   - MTDMapView (MapKit)
+   - MTDGMSMapView (Google Maps iOS SDK)
+ */
 @protocol MTDMapView <NSObject>
 
 /******************************************

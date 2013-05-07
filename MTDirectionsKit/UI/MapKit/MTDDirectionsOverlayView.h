@@ -20,7 +20,7 @@
  
  This class can be overridden with a subclass by using MTDOverrideClass.
  */
-@interface MTD_CUSTOMIZATION_SUPPORTED MTDDirectionsOverlayView : MKOverlayView
+@interface MTDDirectionsOverlayView : MKOverlayView
 
 /** Current line width at the current zoom level */
 @property (nonatomic, readonly) CGFloat fullLineWidth;
@@ -34,13 +34,13 @@
  
  @see setOverlayColor:forRoute:
  */
-@property (nonatomic, strong) UIColor *overlayColor UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) UIColor *overlayColor;
 
 /**
  The factor MKRoadWidthAtZoomScale gets multiplicated with to compute the width of the overlay.
  The default value is 1.8f, the valid range is between 0.7f and 3.f.
  */
-@property (nonatomic, assign) CGFloat overlayLineWidthFactor UI_APPEARANCE_SELECTOR;
+@property (nonatomic, assign) CGFloat overlayLineWidthFactor;
 
 /**
  Returns the shortest distance between a given point and a route.

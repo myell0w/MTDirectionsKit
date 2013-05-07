@@ -116,7 +116,7 @@
  updates while running in the background, you must use the Core Location framework.
 
  @param mapView the map view that is tracking the user’s location
- @param userLocation the location object representing the user’s latest location 
+ @param location the location object representing the user’s latest location 
  @param distanceToActiveRoute the distance in points between the userLocation and the active route on the mapView
  @param directionsOverlay the overlay that contains the active route
  */
