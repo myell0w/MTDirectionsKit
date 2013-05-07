@@ -1,9 +1,6 @@
 #import "MTDDirectionsRequest.h"
-#import "MTDDirectionsRequestMapQuest.h"
-#import "MTDDirectionsRequestGoogle.h"
 #import "MTDDirectionsParser.h"
 #import "MTDFunctions.h"
-#import "MTDDirectionsDefines.h"
 
 
 static BOOL mtd_prefersHTTPS = NO;

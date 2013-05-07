@@ -2,22 +2,14 @@
 #import "MTDAddress.h"
 #import "MTDWaypoint.h"
 #import "MTDWaypoint+MTDirectionsPrivateAPI.h"
-#import "MTDManeuver.h"
-#import "MTDDistance.h"
 #import "MTDDirectionsDelegate.h"
 #import "MTDDirectionsRequest.h"
-#import "MTDDirectionsRequestOption.h"
 #import "MTDDirectionsOverlay.h"
 #import "MTDDirectionsOverlay+MTDirectionsPrivateAPI.h"
 #import "MTDRoute.h"
 #import "MTDRoute+MTDGoogleMapsSDK.h"
 #import "MTDGMSDirectionsOverlayView.h"
-#import "MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h"
 #import "MTDMapViewProxy.h"
-#import "MTDFunctions.h"
-#import "MTDCustomization.h"
-#import "MTDInterApp.h"
-#import "MTDAssert.h"
 
 
 static char myLocationContext;

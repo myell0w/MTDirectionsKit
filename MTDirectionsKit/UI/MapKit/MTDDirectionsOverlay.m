@@ -4,7 +4,6 @@
 #import "MTDFunctions.h"
 #import "MTDRoute.h"
 #import "MTDRoute+MTDirectionsPrivateAPI.h"
-#import "MTDDirectionsDefines.h"
 
 
 @interface MTDDirectionsOverlay () {

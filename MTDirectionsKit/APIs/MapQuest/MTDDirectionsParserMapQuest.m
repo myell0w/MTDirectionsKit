@@ -7,7 +7,6 @@
 #import "MTDRoute.h"
 #import "MTDManeuver.h"
 #import "MTDDirectionsOverlay.h"
-#import "MTDDirectionsRouteType.h"
 #import "MTDXMLElement.h"
 #import "MTDStatusCodeMapQuest.h"
 #import "MTDCardinalDirection+MapQuest.h"

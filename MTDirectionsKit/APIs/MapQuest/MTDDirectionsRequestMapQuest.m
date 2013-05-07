@@ -1,10 +1,8 @@
 #import "MTDDirectionsRequestMapQuest.h"
 #import "MTDDirectionsRequest+MTDirectionsPrivateAPI.h"
-#import "MTDDirectionsRequestOption.h"
 #import "MTDDirectionsRouteType+MapQuest.h"
 #import "MTDWaypoint.h"
 #import "MTDWaypoint+MTDDirectionsAPI.h"
-#import "MTDFunctions.h"
 #import "MTDLocale+MapQuest.h"
 
 

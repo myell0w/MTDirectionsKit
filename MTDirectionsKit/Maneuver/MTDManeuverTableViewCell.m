@@ -1,6 +1,5 @@
 #import "MTDManeuverTableViewCell.h"
 #import <MTDirectionsKit/MTDirectionsKit.h>
-#import <QuartzCore/QuartzCore.h>
 
 
 #define kMTDRunInTestTarget                 (NSClassFromString(@"SenTestCase") != Nil)

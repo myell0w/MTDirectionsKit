@@ -1,7 +1,6 @@
 #import "MTDDirectionsOverlayView.h"
 #import "MTDDirectionsOverlay.h"
 #import "MTDManeuver.h"
-#import "MTDDirectionsOverlay+MTDirectionsPrivateAPI.h"
 #import "MTDRoute.h"
 #import "MTDFunctions.h"
 #import "MTDWaypoint.h"
