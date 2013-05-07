@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
+		9B0D38691739215500CF641D /* FrameworkGoogleMapsSDK */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 9B0D386D1739215500CF641D /* Build configuration list for PBXAggregateTarget "FrameworkGoogleMapsSDK" */;
+			buildPhases = (
+				9B0D386C1739215500CF641D /* Build Fat Framework */,
+			);
+			dependencies = (
+				9B0D38711739216700CF641D /* PBXTargetDependency */,
+			);
+			name = FrameworkGoogleMapsSDK;
+			productName = Framework;
+		};
 		9B10A96A155D4A06002A3052 /* Documentation */ = {
 			isa = PBXAggregateTarget;
 			buildConfigurationList = 9B10A96D155D4A06002A3052 /* Build configuration list for PBXAggregateTarget "Documentation" */;
@@ -257,6 +269,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		9B0D38701739216700CF641D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9B6C18B714A7E18200087893 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B3159DC173916DA004D9E16;
+			remoteInfo = MTDirectionsKitGoogleMapsSDK;
+		};
 		9B10A96F155D4A0B002A3052 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9B6C18B714A7E18200087893 /* Project object */;
@@ -1065,6 +1084,7 @@
 				9B3159DC173916DA004D9E16 /* MTDirectionsKitGoogleMapsSDK */,
 				9B10A96A155D4A06002A3052 /* Documentation */,
 				9BEE27C0155EB2B8008A42F8 /* Framework */,
+				9B0D38691739215500CF641D /* FrameworkGoogleMapsSDK */,
 				9B10A99C155D5867002A3052 /* MTDirectionsKitTest */,
 			);
 		};
@@ -1093,6 +1113,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		9B0D386C1739215500CF641D /* Build Fat Framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build Fat Framework";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\nset +u\n# Avoid recursively calling this script.\nif [[ $SF_MASTER_SCRIPT_RUNNING ]]\nthen\nexit 0\nfi\nset -u\nexport SF_MASTER_SCRIPT_RUNNING=1\n\nSF_TARGET_NAME=${PROJECT_NAME}\nSF_EXECUTABLE_PATH=\"lib${SF_TARGET_NAME}.a\"\nSF_WRAPPER_NAME=\"${SF_TARGET_NAME}.framework\"\n\n# The following conditionals come from\n# https://github.com/kstenerud/iOS-Universal-Framework\n\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]\nthen\nSF_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\necho \"Could not find platform name from SDK_NAME: $SDK_NAME\"\nexit 1\nfi\n\nif [[ \"$SDK_NAME\" =~ ([0-9]+.*$) ]]\nthen\nSF_SDK_VERSION=${BASH_REMATCH[1]}\nelse\necho \"Could not find sdk version from SDK_NAME: $SDK_NAME\"\nexit 1\nfi\n\nif [[ \"$SF_SDK_PLATFORM\" = \"iphoneos\" ]]\nthen\nSF_OTHER_PLATFORM=iphonesimulator\nelse\nSF_OTHER_PLATFORM=iphoneos\nfi\n\nif [[ \"$BUILT_PRODUCTS_DIR\" =~ (.*)$SF_SDK_PLATFORM$ ]]\nthen\nSF_OTHER_BUILT_PRODUCTS_DIR=\"${BASH_REMATCH[1]}${SF_OTHER_PLATFORM}\"\nelse\necho \"Could not find platform name from build products directory: $BUILT_PRODUCTS_DIR\"\nexit 1\nfi\n\n# Build the other platform.\nxcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${SF_OTHER_PLATFORM}${SF_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" OBJROOT=\"${OBJROOT}\" BUILD_ROOT=\"${BUILD_ROOT}\" SYMROOT=\"${SYMROOT}\" $ACTION\n\n# Smash the two static libraries into one fat binary and store it in the .framework\nlipo -create \"${BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}\" \"${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}\" -output \"${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}\"\n\n# Copy the binary to the other architecture folder to have a complete framework in both.\ncp -a \"${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}\" \"${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}\"\n";
+		};
 		9B10A971155D4A0F002A3052 /* Generate AppleDoc */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1270,6 +1304,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		9B0D38711739216700CF641D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B3159DC173916DA004D9E16 /* MTDirectionsKitGoogleMapsSDK */;
+			targetProxy = 9B0D38701739216700CF641D /* PBXContainerItemProxy */;
+		};
 		9B10A970155D4A0B002A3052 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9B6C18BF14A7E18200087893 /* MTDirectionsKit */;
@@ -1299,6 +1338,32 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		9B0D386E1739215500CF641D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					"i386,",
+					"armv6,",
+					armv7,
+				);
+				GCC_THUMB_SUPPORT = NO;
+				PRODUCT_NAME = FrameworkGoogleMapsSDK;
+			};
+			name = Debug;
+		};
+		9B0D386F1739215500CF641D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					"i386,",
+					"armv6,",
+					armv7,
+				);
+				GCC_THUMB_SUPPORT = NO;
+				PRODUCT_NAME = FrameworkGoogleMapsSDK;
+			};
+			name = Release;
+		};
 		9B10A96B155D4A06002A3052 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1588,6 +1653,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9B0D386D1739215500CF641D /* Build configuration list for PBXAggregateTarget "FrameworkGoogleMapsSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B0D386E1739215500CF641D /* Debug */,
+				9B0D386F1739215500CF641D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		9B10A96D155D4A06002A3052 /* Build configuration list for PBXAggregateTarget "Documentation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
