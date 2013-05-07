@@ -494,6 +494,9 @@
             if (!_mtd_wm_) {
                 [self removeOverlays:self.overlays];
             }
+
+            _mtd_wm_ = 0;
+            [self.directionsOverlayView setNeedsDisplayInMapRect:MKMapRectWorld];
         });
         CFRunLoopAddTimer(CFRunLoopGetCurrent(), timer, kCFRunLoopCommonModes);
     }
