@@ -4,7 +4,6 @@
 #import "MTDDirectionsOverlay.h"
 #import "MTDWaypoint.h"
 #import "MTDWaypoint+MTDirectionsPrivateAPI.h"
-#import "MTDLogging.h"
 #import "MTDDirectionsRequest.h"
 #import "MTDFunctions.h"
 

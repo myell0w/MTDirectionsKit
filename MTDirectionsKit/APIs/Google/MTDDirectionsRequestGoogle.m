@@ -1,11 +1,8 @@
 #import "MTDDirectionsRequestGoogle.h"
 #import "MTDDirectionsRequest+MTDirectionsPrivateAPI.h"
-#import "MTDDirectionsRequestOption.h"
 #import "MTDDirectionsRouteType+Google.h"
-#import "MTDDirectionsParserGoogle.h"
 #import "MTDWaypoint.h"
 #import "MTDWaypoint+MTDDirectionsAPI.h"
-#import "MTDFunctions.h"
 #import "MTDBase64.h"
 #import "MTDLocale+Google.h"
 #import <CommonCrypto/CommonDigest.h>

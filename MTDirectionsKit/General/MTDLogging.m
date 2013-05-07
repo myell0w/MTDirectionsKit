@@ -1,5 +1,3 @@
-#import "MTDLogging.h"
-
 // current active log level
 static MTDLogLevel mtd_logLevel = MTDLogLevelError;
 

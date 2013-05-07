@@ -1,7 +1,6 @@
 #import "MTDWaypoint.h"
 #import "MTDAddress.h"
 #import "MTDFunctions.h"
-#import "MTDDirectionsDefines.h"
 
 
 @interface MTDWaypoint ()

@@ -1,6 +1,5 @@
 #import "MTDDirectionsAPI.h"
 #import "MTDFunctions.h"
-#import "MTDLogging.h"
 #import "MTDDirectionsRequest.h"
 #import "MTDDirectionsParser.h"
 #import "MTDDirectionsRequestGoogle.h"
@@ -9,7 +8,6 @@
 #import "MTDDirectionsParserGoogle.h"
 #import "MTDDIrectionsParserMapQuest.h"
 #import "MTDDirectionsParserBing.h"
-#import "MTDLocale.h"
 
 
 #define kMTDDirectionsDefaultAPI              MTDDirectionsAPIMapQuest

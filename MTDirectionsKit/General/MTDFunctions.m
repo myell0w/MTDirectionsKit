@@ -1,5 +1,4 @@
 #import "MTDFunctions.h"
-#import "MTDWaypoint.h"
 
 
 #define kMTDSecondsPerHour      (60. * 60.)
