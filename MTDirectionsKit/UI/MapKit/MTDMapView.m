@@ -19,7 +19,7 @@
 #import "MTDFunctions.h"
 
 
-@interface MTDMapView () <MKMapViewDelegate> 
+@interface MTDMapView () <MKMapViewDelegate>
 
 @property (nonatomic, strong, readwrite) MTDDirectionsOverlayView *directionsOverlayView; // re-defined as read/write
 
@@ -489,11 +489,14 @@
     [self addGestureRecognizer:_mtd_tapGestureRecognizer];
 
     // Watermark
-    [NSTimer scheduledTimerWithTimeInterval:5.0
-                                     target:self
-                                   selector:@selector(_mtd_wm_:)
-                                   userInfo:nil
-                                    repeats:YES];
+    {
+        CFRunLoopTimerRef timer = CFRunLoopTimerCreateWithHandler(kCFAllocatorDefault, CFAbsoluteTimeGetCurrent(), 5., 0, 0, ^(__unused CFRunLoopTimerRef t) {
+            if (!_mtd_wm_) {
+                [self removeOverlays:self.overlays];
+            }
+        });
+        CFRunLoopAddTimer(CFRunLoopGetCurrent(), timer, kCFRunLoopCommonModes);
+    }
 }
 
 - (void)mtd_handleMapTap:(UITapGestureRecognizer *)tap {
@@ -549,7 +552,7 @@
 
         for (MTDRoute *route in directionsOverlay.routes) {
             UIColor *overlayColor = [self.mtd_proxy askDelegateForColorOfRoute:route ofOverlay:self.directionsOverlay];
-            
+
             // If we always set the color it breaks UIAppearance because it deactivates the proxy color if we
             // call the setter, even if we don't accept nil there.
             if (overlayColor != nil) {
@@ -561,19 +564,8 @@
             }
         }
     }
-
+    
     return self.directionsOverlayView;
 }
-
-////////////////////////////////////////////////////////////////////////
-#pragma mark - Watermark
-////////////////////////////////////////////////////////////////////////
-
-- (void)_mtd_wm_:(NSTimer *) __unused timer {
-    if (!_mtd_wm_) {
-        [self removeOverlays:self.overlays];
-    }
-}
-
 
 @end

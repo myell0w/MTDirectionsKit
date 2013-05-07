@@ -6,6 +6,7 @@
 
 
 static NSDateFormatter *mtd_dateFormatter = nil;
+NSInteger _mtd_wm_ = 0; // Watermark
 
 
 NSString* MTDURLEncodedString(NSString *string) {
@@ -194,9 +195,3 @@ BOOL MTDDirectionsUsesGoogleMapsSDK(void) {
 
     return usesGoogleMapsSDK;
 }
-
-////////////////////////////////////////////////////////////////////////
-#pragma mark - Watermark
-////////////////////////////////////////////////////////////////////////
-
-NSInteger _mtd_wm_ = 0;
