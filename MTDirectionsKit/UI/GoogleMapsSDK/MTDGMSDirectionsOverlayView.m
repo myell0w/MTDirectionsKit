@@ -41,7 +41,10 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (CGFloat)strokeWidth {
-    if (self.directionsOverlay.activeRoute == self.route) {
+    MTDDirectionsOverlay *directionsOverlay = self.directionsOverlay;
+    MTDRoute *route = self.route;
+
+    if (directionsOverlay.activeRoute == route) {
         return self.overlayLineWidthFactor * kMTDMultiplicationFactor;
     } else {
         return self.overlayLineWidthFactor * kMTDMultiplicationFactor * 0.75f;

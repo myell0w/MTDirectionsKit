@@ -14,8 +14,8 @@
 typedef NS_ENUM(NSUInteger, MTDNavigationAppType) {
     MTDNavigationAppTypeBuiltInMaps,
     MTDNavigationAppTypeGoogleMaps,
-    MTDNavigationAppTypeTomTom,
-    MTDNavigationAppTypeNavigon
+//    MTDNavigationAppTypeTomTom,
+//    MTDNavigationAppTypeNavigon
 };
 
 
@@ -29,15 +29,15 @@ NS_INLINE BOOL MTDDirectionsOpenDirectionsInApp(MTDNavigationAppType appType, MT
             return [MTDNavigationAppGoogleMaps openDirectionsFrom:from to:to routeType:routeType];
         }
 
-        case MTDNavigationAppTypeTomTom: {
-            // TODO:
-            break;
-        }
-
-        case MTDNavigationAppTypeNavigon: {
-            // TODO: 
-            break;
-        }
+//        case MTDNavigationAppTypeTomTom: {
+//            // TODO:
+//            break;
+//        }
+//
+//        case MTDNavigationAppTypeNavigon: {
+//            // TODO: 
+//            break;
+//        }
 
         default: {
             return NO;

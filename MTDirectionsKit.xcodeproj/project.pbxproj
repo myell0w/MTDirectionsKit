@@ -101,20 +101,110 @@
 		9B3159AA1737A2FC004D9E16 /* MTDDirectionsOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B31599E1737A2FC004D9E16 /* MTDDirectionsOverlayView.m */; };
 		9B3159AC1737A2FC004D9E16 /* MTDMapView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159A01737A2FC004D9E16 /* MTDMapView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B3159AD1737A2FC004D9E16 /* MTDMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3159A11737A2FC004D9E16 /* MTDMapView.m */; };
-		9B3159B11737A65B004D9E16 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B3159B01737A65B004D9E16 /* GoogleMaps.framework */; };
-		9B3159B41737A6A9004D9E16 /* MTDGMSMapView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159B21737A6A9004D9E16 /* MTDGMSMapView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9B3159B51737A6A9004D9E16 /* MTDGMSMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3159B31737A6A9004D9E16 /* MTDGMSMapView.m */; };
 		9B3159B91737A727004D9E16 /* MTDDirectionsDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159B81737A727004D9E16 /* MTDDirectionsDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9B3159BC1737AF4C004D9E16 /* MTDGMSDirectionsOverlayView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159BA1737AF4C004D9E16 /* MTDGMSDirectionsOverlayView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9B3159BD1737AF4C004D9E16 /* MTDGMSDirectionsOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3159BB1737AF4C004D9E16 /* MTDGMSDirectionsOverlayView.m */; };
-		9B3159C41737B0A9004D9E16 /* MTDRoute+MTDGoogleMapsSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159C21737B0A6004D9E16 /* MTDRoute+MTDGoogleMapsSDK.h */; };
-		9B3159C51737B0A9004D9E16 /* MTDRoute+MTDGoogleMapsSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3159C31737B0A7004D9E16 /* MTDRoute+MTDGoogleMapsSDK.m */; };
 		9B3159C61737B76E004D9E16 /* MTDMapViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159B71737A70B004D9E16 /* MTDMapViewProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B3159D1173801B4004D9E16 /* MTDMapViewProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159CF173801B3004D9E16 /* MTDMapViewProxy.h */; };
 		9B3159D2173801B4004D9E16 /* MTDMapViewProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3159D0173801B4004D9E16 /* MTDMapViewProxy.m */; };
 		9B3159D517386629004D9E16 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B3159B01737A65B004D9E16 /* GoogleMaps.framework */; };
 		9B3159DA1738FC29004D9E16 /* MTDWaypoint+MTDDirectionsAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159D81738FC28004D9E16 /* MTDWaypoint+MTDDirectionsAPI.h */; };
 		9B3159DB1738FC29004D9E16 /* MTDWaypoint+MTDDirectionsAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3159D91738FC28004D9E16 /* MTDWaypoint+MTDDirectionsAPI.m */; };
+		9B3159DE173916DA004D9E16 /* MTDDirectionsParserMapQuest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B10AA0C155D85B8002A3052 /* MTDDirectionsParserMapQuest.m */; };
+		9B3159DF173916DA004D9E16 /* MTDDirectionsRequestMapQuest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B10AA0E155D85B8002A3052 /* MTDDirectionsRequestMapQuest.m */; };
+		9B3159E0173916DA004D9E16 /* MTDDirectionsAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B10AA11155D85B8002A3052 /* MTDDirectionsAPI.m */; };
+		9B3159E1173916DA004D9E16 /* MTDDirectionsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B10AA26155D85B8002A3052 /* MTDDirectionsParser.m */; };
+		9B3159E2173916DA004D9E16 /* MTDDirectionsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B10AA2A155D85B8002A3052 /* MTDDirectionsRequest.m */; };
+		9B3159E3173916DA004D9E16 /* MTDHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEE26EA155E92FC008A42F8 /* MTDHTTPRequest.m */; };
+		9B3159E4173916DA004D9E16 /* MTDDirectionsParserGoogle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C42B6155EB85B00C0E4CE /* MTDDirectionsParserGoogle.m */; };
+		9B3159E5173916DA004D9E16 /* MTDDirectionsRequestGoogle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C42B8155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.m */; };
+		9B3159E6173916DA004D9E16 /* MTDXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B8A2C1A1560129F00BAAE7B /* MTDXMLElement.m */; };
+		9B3159E7173916DA004D9E16 /* MTDBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF3ED2015DC140100FAD2E6 /* MTDBase64.m */; };
+		9B3159E8173916DA004D9E16 /* MTDGTMStringEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF3ED2415DC1AC500FAD2E6 /* MTDGTMStringEncoding.m */; };
+		9B3159E9173916DA004D9E16 /* MTDDirectionsParserBing.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92435715F51A19000BC591 /* MTDDirectionsParserBing.m */; };
+		9B3159EA173916DA004D9E16 /* MTDDirectionsRequestBing.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92435B15F51A3A000BC591 /* MTDDirectionsRequestBing.m */; };
+		9B3159EB173916DA004D9E16 /* MTDFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B000FBA1620656700E5FF03 /* MTDFunctions.m */; };
+		9B3159EC173916DA004D9E16 /* MTDMeasurementSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B000FC01620656700E5FF03 /* MTDMeasurementSystem.m */; };
+		9B3159ED173916DA004D9E16 /* MTDLocale.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B000FF51620981E00E5FF03 /* MTDLocale.m */; };
+		9B3159EE173916DA004D9E16 /* MTDLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B000FBC1620656700E5FF03 /* MTDLogging.m */; };
+		9B3159EF173916DA004D9E16 /* MTDManeuverTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2A5AC91629EFA800CE4709 /* MTDManeuverTableViewCell.m */; };
+		9B3159F0173916DA004D9E16 /* MTDManeuverTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2A5ACB1629EFA800CE4709 /* MTDManeuverTableViewController.m */; };
+		9B3159F1173916DA004D9E16 /* MTDManeuver.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2A5AD31629F07100CE4709 /* MTDManeuver.m */; };
+		9B3159F2173916DA004D9E16 /* MTDAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2A5ADD1629F14B00CE4709 /* MTDAddress.m */; };
+		9B3159F3173916DA004D9E16 /* MTDDirectionsRouteType.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2A5AE01629F14B00CE4709 /* MTDDirectionsRouteType.m */; };
+		9B3159F4173916DA004D9E16 /* MTDDistance.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2A5AE21629F14B00CE4709 /* MTDDistance.m */; };
+		9B3159F5173916DA004D9E16 /* MTDRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2A5AE41629F14B00CE4709 /* MTDRoute.m */; };
+		9B3159F6173916DA004D9E16 /* MTDWaypoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2A5AE71629F14B00CE4709 /* MTDWaypoint.m */; };
+		9B3159F7173916DA004D9E16 /* MTDCustomization.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B528113167A784200D4A816 /* MTDCustomization.m */; };
+		9B3159F8173916DA004D9E16 /* MTDNavigationApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B76386B1680E21F007C0C81 /* MTDNavigationApp.m */; };
+		9B3159F9173916DA004D9E16 /* MTDNavigationAppBuiltInMaps.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B76386F1680E347007C0C81 /* MTDNavigationAppBuiltInMaps.m */; };
+		9B3159FA173916DA004D9E16 /* MTDNavigationAppGoogleMaps.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B7638731680E429007C0C81 /* MTDNavigationAppGoogleMaps.m */; };
+		9B3159FB173916DA004D9E16 /* MTDDirectionsOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B31599B1737A2FC004D9E16 /* MTDDirectionsOverlay.m */; };
+		9B3159FC173916DA004D9E16 /* MTDDirectionsOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B31599E1737A2FC004D9E16 /* MTDDirectionsOverlayView.m */; };
+		9B3159FD173916DA004D9E16 /* MTDMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3159A11737A2FC004D9E16 /* MTDMapView.m */; };
+		9B3159FE173916DA004D9E16 /* MTDGMSMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3159B31737A6A9004D9E16 /* MTDGMSMapView.m */; };
+		9B3159FF173916DA004D9E16 /* MTDGMSDirectionsOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3159BB1737AF4C004D9E16 /* MTDGMSDirectionsOverlayView.m */; };
+		9B315A00173916DA004D9E16 /* MTDRoute+MTDGoogleMapsSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3159C31737B0A7004D9E16 /* MTDRoute+MTDGoogleMapsSDK.m */; };
+		9B315A01173916DA004D9E16 /* MTDMapViewProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3159D0173801B4004D9E16 /* MTDMapViewProxy.m */; };
+		9B315A02173916DA004D9E16 /* MTDWaypoint+MTDDirectionsAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3159D91738FC28004D9E16 /* MTDWaypoint+MTDDirectionsAPI.m */; };
+		9B315A04173916DA004D9E16 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B2C4296155EB6A400C0E4CE /* UIKit.framework */; };
+		9B315A06173916DA004D9E16 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18C314A7E18200087893 /* Foundation.framework */; };
+		9B315A07173916DA004D9E16 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B3159B01737A65B004D9E16 /* GoogleMaps.framework */; };
+		9B315A09173916DA004D9E16 /* MTDirectionsKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B8F515E155C516E00A9C10C /* MTDirectionsKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A0A173916DA004D9E16 /* Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 9B8F515F155C516E00A9C10C /* Prefix.pch */; };
+		9B315A0B173916DA004D9E16 /* MTDDirectionsParserMapQuest.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B10AA0B155D85B8002A3052 /* MTDDirectionsParserMapQuest.h */; settings = {ATTRIBUTES = (); }; };
+		9B315A0C173916DA004D9E16 /* MTDDirectionsRequestMapQuest.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B10AA0D155D85B8002A3052 /* MTDDirectionsRequestMapQuest.h */; };
+		9B315A0D173916DA004D9E16 /* MTDDirectionsRouteType+MapQuest.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B10AA0F155D85B8002A3052 /* MTDDirectionsRouteType+MapQuest.h */; };
+		9B315A0E173916DA004D9E16 /* MTDDirectionsAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B10AA10155D85B8002A3052 /* MTDDirectionsAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A0F173916DA004D9E16 /* MTDDirectionsParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B10AA25155D85B8002A3052 /* MTDDirectionsParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A10173916DA004D9E16 /* MTDDirectionsRequest+MTDirectionsPrivateAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B10AA28155D85B8002A3052 /* MTDDirectionsRequest+MTDirectionsPrivateAPI.h */; };
+		9B315A11173916DA004D9E16 /* MTDDirectionsRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B10AA29155D85B8002A3052 /* MTDDirectionsRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A12173916DA004D9E16 /* MTDHTTPRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BEE26E9155E92FC008A42F8 /* MTDHTTPRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A13173916DA004D9E16 /* MTDDirectionsParserGoogle.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2C42B5155EB85B00C0E4CE /* MTDDirectionsParserGoogle.h */; };
+		9B315A14173916DA004D9E16 /* MTDDirectionsRequestGoogle.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2C42B7155EB85B00C0E4CE /* MTDDirectionsRequestGoogle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A15173916DA004D9E16 /* MTDDirectionsRouteType+Google.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2C42B9155EB85B00C0E4CE /* MTDDirectionsRouteType+Google.h */; };
+		9B315A16173916DA004D9E16 /* MTDXMLElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B8A2C191560129F00BAAE7B /* MTDXMLElement.h */; };
+		9B315A17173916DA004D9E16 /* MTDWeak.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B23F65915BEFAC00069EAD1 /* MTDWeak.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A18173916DA004D9E16 /* MTDDirectionsRequestOption.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BE7A0FE15C52DA60025164A /* MTDDirectionsRequestOption.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A19173916DA004D9E16 /* MTDBase64.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BF3ED1F15DC140100FAD2E6 /* MTDBase64.h */; };
+		9B315A1A173916DA004D9E16 /* MTDGTMStringEncoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BF3ED2315DC1AC500FAD2E6 /* MTDGTMStringEncoding.h */; };
+		9B315A1B173916DA004D9E16 /* MTDDirectionsParserBing.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B92435615F51A19000BC591 /* MTDDirectionsParserBing.h */; };
+		9B315A1C173916DA004D9E16 /* MTDDirectionsRequestBing.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B92435A15F51A3A000BC591 /* MTDDirectionsRequestBing.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A1D173916DA004D9E16 /* MTDDirectionsRouteType+Bing.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B92435E15F51A6A000BC591 /* MTDDirectionsRouteType+Bing.h */; };
+		9B315A1E173916DA004D9E16 /* MTDDirectionsDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B000FB31620656700E5FF03 /* MTDDirectionsDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A1F173916DA004D9E16 /* MTDFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B000FB91620656700E5FF03 /* MTDFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A20173916DA004D9E16 /* MTDMeasurementSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B000FBF1620656700E5FF03 /* MTDMeasurementSystem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A21173916DA004D9E16 /* MTDLocale.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B000FF41620981D00E5FF03 /* MTDLocale.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A22173916DA004D9E16 /* MTDLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B000FBB1620656700E5FF03 /* MTDLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A23173916DA004D9E16 /* MTDManeuverTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2A5AC81629EFA800CE4709 /* MTDManeuverTableViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A24173916DA004D9E16 /* MTDManeuverTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2A5ACA1629EFA800CE4709 /* MTDManeuverTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A25173916DA004D9E16 /* MTDManeuverTableViewControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2A5ACC1629EFA800CE4709 /* MTDManeuverTableViewControllerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A26173916DA004D9E16 /* MTDManeuver.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2A5AD21629F07100CE4709 /* MTDManeuver.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A27173916DA004D9E16 /* MTDAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2A5ADC1629F14B00CE4709 /* MTDAddress.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A28173916DA004D9E16 /* MTDDirectionsDisplayType.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2A5ADE1629F14B00CE4709 /* MTDDirectionsDisplayType.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A29173916DA004D9E16 /* MTDDirectionsRouteType.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2A5ADF1629F14B00CE4709 /* MTDDirectionsRouteType.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A2A173916DA004D9E16 /* MTDDistance.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2A5AE11629F14B00CE4709 /* MTDDistance.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A2B173916DA004D9E16 /* MTDRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2A5AE31629F14B00CE4709 /* MTDRoute.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A2C173916DA004D9E16 /* MTDRoute+MTDirectionsPrivateAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2A5AE51629F14B00CE4709 /* MTDRoute+MTDirectionsPrivateAPI.h */; };
+		9B315A2D173916DA004D9E16 /* MTDWaypoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2A5AE61629F14B00CE4709 /* MTDWaypoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A2E173916DA004D9E16 /* MTDCardinalDirection.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2A5AF41629F1CB00CE4709 /* MTDCardinalDirection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A2F173916DA004D9E16 /* MTDTurnType.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B2A5AF51629F1CB00CE4709 /* MTDTurnType.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A30173916DA004D9E16 /* MTDCustomization.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B528112167A784200D4A816 /* MTDCustomization.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A31173916DA004D9E16 /* MTDNavigationApp.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B76386A1680E21F007C0C81 /* MTDNavigationApp.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A32173916DA004D9E16 /* MTDNavigationAppBuiltInMaps.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B76386E1680E347007C0C81 /* MTDNavigationAppBuiltInMaps.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A33173916DA004D9E16 /* MTDNavigationAppGoogleMaps.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B7638721680E429007C0C81 /* MTDNavigationAppGoogleMaps.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A34173916DA004D9E16 /* MTDInterApp.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B7638611680E079007C0C81 /* MTDInterApp.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A35173916DA004D9E16 /* MTDWaypoint+MTDirectionsPrivateAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B7638E616864359007C0C81 /* MTDWaypoint+MTDirectionsPrivateAPI.h */; };
+		9B315A36173916DA004D9E16 /* MTDDirectionsOverlay+MTDirectionsPrivateAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159991737A2FC004D9E16 /* MTDDirectionsOverlay+MTDirectionsPrivateAPI.h */; };
+		9B315A37173916DA004D9E16 /* MTDDirectionsOverlay.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B31599A1737A2FC004D9E16 /* MTDDirectionsOverlay.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A38173916DA004D9E16 /* MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B31599C1737A2FC004D9E16 /* MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h */; };
+		9B315A39173916DA004D9E16 /* MTDDirectionsOverlayView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B31599D1737A2FC004D9E16 /* MTDDirectionsOverlayView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A3A173916DA004D9E16 /* MTDMapView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159A01737A2FC004D9E16 /* MTDMapView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A3B173916DA004D9E16 /* MTDGMSMapView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159B21737A6A9004D9E16 /* MTDGMSMapView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A3C173916DA004D9E16 /* MTDDirectionsDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159B81737A727004D9E16 /* MTDDirectionsDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A3D173916DA004D9E16 /* MTDGMSDirectionsOverlayView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159BA1737AF4C004D9E16 /* MTDGMSDirectionsOverlayView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A3E173916DA004D9E16 /* MTDRoute+MTDGoogleMapsSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159C21737B0A6004D9E16 /* MTDRoute+MTDGoogleMapsSDK.h */; };
+		9B315A3F173916DA004D9E16 /* MTDMapViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159B71737A70B004D9E16 /* MTDMapViewProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B315A40173916DA004D9E16 /* MTDMapViewProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159CF173801B3004D9E16 /* MTDMapViewProxy.h */; };
+		9B315A41173916DA004D9E16 /* MTDWaypoint+MTDDirectionsAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B3159D81738FC28004D9E16 /* MTDWaypoint+MTDDirectionsAPI.h */; };
 		9B4E98E015AD77E5002F0302 /* MTDAddressTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4E98DF15AD77E5002F0302 /* MTDAddressTest.m */; };
 		9B528114167A784200D4A816 /* MTDCustomization.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B528112167A784200D4A816 /* MTDCustomization.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B528115167A784200D4A816 /* MTDCustomization.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B528113167A784200D4A816 /* MTDCustomization.m */; };
@@ -122,7 +212,6 @@
 		9B68099916234FD700A12B83 /* MTDLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B000FBB1620656700E5FF03 /* MTDLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B68099A16234FE100A12B83 /* MTDLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B000FBC1620656700E5FF03 /* MTDLogging.m */; };
 		9B6C18C414A7E18200087893 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18C314A7E18200087893 /* Foundation.framework */; };
-		9B6C18F414A7E40A00087893 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18F314A7E40A00087893 /* libxml2.dylib */; };
 		9B76386C1680E21F007C0C81 /* MTDNavigationApp.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B76386A1680E21F007C0C81 /* MTDNavigationApp.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B76386D1680E21F007C0C81 /* MTDNavigationApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B76386B1680E21F007C0C81 /* MTDNavigationApp.m */; };
 		9B7638701680E348007C0C81 /* MTDNavigationAppBuiltInMaps.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B76386E1680E347007C0C81 /* MTDNavigationAppBuiltInMaps.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -284,6 +373,7 @@
 		9B3159D0173801B4004D9E16 /* MTDMapViewProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTDMapViewProxy.m; path = Common/MTDMapViewProxy.m; sourceTree = "<group>"; };
 		9B3159D81738FC28004D9E16 /* MTDWaypoint+MTDDirectionsAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTDWaypoint+MTDDirectionsAPI.h"; sourceTree = "<group>"; };
 		9B3159D91738FC28004D9E16 /* MTDWaypoint+MTDDirectionsAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MTDWaypoint+MTDDirectionsAPI.m"; sourceTree = "<group>"; };
+		9B315A46173916DA004D9E16 /* libMTDirectionsKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMTDirectionsKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B4E98DE15AD77E5002F0302 /* MTDAddressTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDAddressTest.h; sourceTree = "<group>"; };
 		9B4E98DF15AD77E5002F0302 /* MTDAddressTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDAddressTest.m; sourceTree = "<group>"; };
 		9B528112167A784200D4A816 /* MTDCustomization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDCustomization.h; sourceTree = "<group>"; };
@@ -362,14 +452,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B315A03173916DA004D9E16 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B315A04173916DA004D9E16 /* UIKit.framework in Frameworks */,
+				9B315A06173916DA004D9E16 /* Foundation.framework in Frameworks */,
+				9B315A07173916DA004D9E16 /* GoogleMaps.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B6C18BD14A7E18200087893 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				9B2C4297155EB6A400C0E4CE /* UIKit.framework in Frameworks */,
-				9B6C18F414A7E40A00087893 /* libxml2.dylib in Frameworks */,
 				9B6C18C414A7E18200087893 /* Foundation.framework in Frameworks */,
-				9B3159B11737A65B004D9E16 /* GoogleMaps.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -628,6 +726,7 @@
 			children = (
 				9B6C18C014A7E18200087893 /* libMTDirectionsKit.a */,
 				9B10A99D155D5867002A3052 /* MTDirectionsKitTest.octest */,
+				9B315A46173916DA004D9E16 /* libMTDirectionsKit.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -724,6 +823,70 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		9B315A08173916DA004D9E16 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B315A09173916DA004D9E16 /* MTDirectionsKit.h in Headers */,
+				9B315A0A173916DA004D9E16 /* Prefix.pch in Headers */,
+				9B315A0B173916DA004D9E16 /* MTDDirectionsParserMapQuest.h in Headers */,
+				9B315A0C173916DA004D9E16 /* MTDDirectionsRequestMapQuest.h in Headers */,
+				9B315A0D173916DA004D9E16 /* MTDDirectionsRouteType+MapQuest.h in Headers */,
+				9B315A0E173916DA004D9E16 /* MTDDirectionsAPI.h in Headers */,
+				9B315A0F173916DA004D9E16 /* MTDDirectionsParser.h in Headers */,
+				9B315A10173916DA004D9E16 /* MTDDirectionsRequest+MTDirectionsPrivateAPI.h in Headers */,
+				9B315A11173916DA004D9E16 /* MTDDirectionsRequest.h in Headers */,
+				9B315A12173916DA004D9E16 /* MTDHTTPRequest.h in Headers */,
+				9B315A13173916DA004D9E16 /* MTDDirectionsParserGoogle.h in Headers */,
+				9B315A14173916DA004D9E16 /* MTDDirectionsRequestGoogle.h in Headers */,
+				9B315A15173916DA004D9E16 /* MTDDirectionsRouteType+Google.h in Headers */,
+				9B315A16173916DA004D9E16 /* MTDXMLElement.h in Headers */,
+				9B315A17173916DA004D9E16 /* MTDWeak.h in Headers */,
+				9B315A18173916DA004D9E16 /* MTDDirectionsRequestOption.h in Headers */,
+				9B315A19173916DA004D9E16 /* MTDBase64.h in Headers */,
+				9B315A1A173916DA004D9E16 /* MTDGTMStringEncoding.h in Headers */,
+				9B315A1B173916DA004D9E16 /* MTDDirectionsParserBing.h in Headers */,
+				9B315A1C173916DA004D9E16 /* MTDDirectionsRequestBing.h in Headers */,
+				9B315A1D173916DA004D9E16 /* MTDDirectionsRouteType+Bing.h in Headers */,
+				9B315A1E173916DA004D9E16 /* MTDDirectionsDefines.h in Headers */,
+				9B315A1F173916DA004D9E16 /* MTDFunctions.h in Headers */,
+				9B315A20173916DA004D9E16 /* MTDMeasurementSystem.h in Headers */,
+				9B315A21173916DA004D9E16 /* MTDLocale.h in Headers */,
+				9B315A22173916DA004D9E16 /* MTDLogging.h in Headers */,
+				9B315A23173916DA004D9E16 /* MTDManeuverTableViewCell.h in Headers */,
+				9B315A24173916DA004D9E16 /* MTDManeuverTableViewController.h in Headers */,
+				9B315A25173916DA004D9E16 /* MTDManeuverTableViewControllerDelegate.h in Headers */,
+				9B315A26173916DA004D9E16 /* MTDManeuver.h in Headers */,
+				9B315A27173916DA004D9E16 /* MTDAddress.h in Headers */,
+				9B315A28173916DA004D9E16 /* MTDDirectionsDisplayType.h in Headers */,
+				9B315A29173916DA004D9E16 /* MTDDirectionsRouteType.h in Headers */,
+				9B315A2A173916DA004D9E16 /* MTDDistance.h in Headers */,
+				9B315A2B173916DA004D9E16 /* MTDRoute.h in Headers */,
+				9B315A2C173916DA004D9E16 /* MTDRoute+MTDirectionsPrivateAPI.h in Headers */,
+				9B315A2D173916DA004D9E16 /* MTDWaypoint.h in Headers */,
+				9B315A2E173916DA004D9E16 /* MTDCardinalDirection.h in Headers */,
+				9B315A2F173916DA004D9E16 /* MTDTurnType.h in Headers */,
+				9B315A30173916DA004D9E16 /* MTDCustomization.h in Headers */,
+				9B315A31173916DA004D9E16 /* MTDNavigationApp.h in Headers */,
+				9B315A32173916DA004D9E16 /* MTDNavigationAppBuiltInMaps.h in Headers */,
+				9B315A33173916DA004D9E16 /* MTDNavigationAppGoogleMaps.h in Headers */,
+				9B315A34173916DA004D9E16 /* MTDInterApp.h in Headers */,
+				9B315A35173916DA004D9E16 /* MTDWaypoint+MTDirectionsPrivateAPI.h in Headers */,
+				9B315A36173916DA004D9E16 /* MTDDirectionsOverlay+MTDirectionsPrivateAPI.h in Headers */,
+				9B315A37173916DA004D9E16 /* MTDDirectionsOverlay.h in Headers */,
+				9B315A38173916DA004D9E16 /* MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h in Headers */,
+				9B315A39173916DA004D9E16 /* MTDDirectionsOverlayView.h in Headers */,
+				9B315A3A173916DA004D9E16 /* MTDMapView.h in Headers */,
+				9B315A3B173916DA004D9E16 /* MTDGMSMapView.h in Headers */,
+				9B315A3C173916DA004D9E16 /* MTDDirectionsDelegate.h in Headers */,
+				9B315A3D173916DA004D9E16 /* MTDGMSDirectionsOverlayView.h in Headers */,
+				9B315A3E173916DA004D9E16 /* MTDRoute+MTDGoogleMapsSDK.h in Headers */,
+				9B315A3F173916DA004D9E16 /* MTDMapViewProtocol.h in Headers */,
+				9B315A40173916DA004D9E16 /* MTDMapViewProxy.h in Headers */,
+				9B315A41173916DA004D9E16 /* MTDWaypoint+MTDDirectionsAPI.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B6C18BE14A7E18200087893 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -778,10 +941,7 @@
 				9B3159A81737A2FC004D9E16 /* MTDDirectionsOverlayView+MTDirectionsPrivateAPI.h in Headers */,
 				9B3159A91737A2FC004D9E16 /* MTDDirectionsOverlayView.h in Headers */,
 				9B3159AC1737A2FC004D9E16 /* MTDMapView.h in Headers */,
-				9B3159B41737A6A9004D9E16 /* MTDGMSMapView.h in Headers */,
 				9B3159B91737A727004D9E16 /* MTDDirectionsDelegate.h in Headers */,
-				9B3159BC1737AF4C004D9E16 /* MTDGMSDirectionsOverlayView.h in Headers */,
-				9B3159C41737B0A9004D9E16 /* MTDRoute+MTDGoogleMapsSDK.h in Headers */,
 				9B3159C61737B76E004D9E16 /* MTDMapViewProtocol.h in Headers */,
 				9B3159D1173801B4004D9E16 /* MTDMapViewProxy.h in Headers */,
 				9B3159DA1738FC29004D9E16 /* MTDWaypoint+MTDDirectionsAPI.h in Headers */,
@@ -809,6 +969,24 @@
 			productName = MTDirectionsKitTest;
 			productReference = 9B10A99D155D5867002A3052 /* MTDirectionsKitTest.octest */;
 			productType = "com.apple.product-type.bundle";
+		};
+		9B3159DC173916DA004D9E16 /* MTDirectionsKitGoogleMapsSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B315A43173916DA004D9E16 /* Build configuration list for PBXNativeTarget "MTDirectionsKitGoogleMapsSDK" */;
+			buildPhases = (
+				9B3159DD173916DA004D9E16 /* Sources */,
+				9B315A03173916DA004D9E16 /* Frameworks */,
+				9B315A08173916DA004D9E16 /* Headers */,
+				9B315A42173916DA004D9E16 /* Prepare Framework */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MTDirectionsKitGoogleMapsSDK;
+			productName = MTDirections;
+			productReference = 9B315A46173916DA004D9E16 /* libMTDirectionsKit.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 		9B6C18BF14A7E18200087893 /* MTDirectionsKit */ = {
 			isa = PBXNativeTarget;
@@ -851,6 +1029,7 @@
 			projectRoot = "";
 			targets = (
 				9B6C18BF14A7E18200087893 /* MTDirectionsKit */,
+				9B3159DC173916DA004D9E16 /* MTDirectionsKitGoogleMapsSDK */,
 				9B10A96A155D4A06002A3052 /* Documentation */,
 				9BEE27C0155EB2B8008A42F8 /* Framework */,
 				9B10A99C155D5867002A3052 /* MTDirectionsKitTest */,
@@ -908,6 +1087,20 @@
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
 		};
+		9B315A42173916DA004D9E16 /* Prepare Framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Prepare Framework";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nmkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\n\n# Link the \"Current\" version to \"A\"\n/bin/ln -sfh A \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/Current\"\n/bin/ln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Headers\"\n/bin/ln -sfh \"Versions/Current/${PRODUCT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\"\n\n# The -a ensures that the headers maintain the source modification date so that we don't constantly\n# cause propagating rebuilds of files that import these headers.\n/bin/cp -a \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"";
+		};
 		9BEE27BF155EB19F008A42F8 /* Prepare Framework */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -956,6 +1149,50 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B3159DD173916DA004D9E16 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B3159DE173916DA004D9E16 /* MTDDirectionsParserMapQuest.m in Sources */,
+				9B3159DF173916DA004D9E16 /* MTDDirectionsRequestMapQuest.m in Sources */,
+				9B3159E0173916DA004D9E16 /* MTDDirectionsAPI.m in Sources */,
+				9B3159E1173916DA004D9E16 /* MTDDirectionsParser.m in Sources */,
+				9B3159E2173916DA004D9E16 /* MTDDirectionsRequest.m in Sources */,
+				9B3159E3173916DA004D9E16 /* MTDHTTPRequest.m in Sources */,
+				9B3159E4173916DA004D9E16 /* MTDDirectionsParserGoogle.m in Sources */,
+				9B3159E5173916DA004D9E16 /* MTDDirectionsRequestGoogle.m in Sources */,
+				9B3159E6173916DA004D9E16 /* MTDXMLElement.m in Sources */,
+				9B3159E7173916DA004D9E16 /* MTDBase64.m in Sources */,
+				9B3159E8173916DA004D9E16 /* MTDGTMStringEncoding.m in Sources */,
+				9B3159E9173916DA004D9E16 /* MTDDirectionsParserBing.m in Sources */,
+				9B3159EA173916DA004D9E16 /* MTDDirectionsRequestBing.m in Sources */,
+				9B3159EB173916DA004D9E16 /* MTDFunctions.m in Sources */,
+				9B3159EC173916DA004D9E16 /* MTDMeasurementSystem.m in Sources */,
+				9B3159ED173916DA004D9E16 /* MTDLocale.m in Sources */,
+				9B3159EE173916DA004D9E16 /* MTDLogging.m in Sources */,
+				9B3159EF173916DA004D9E16 /* MTDManeuverTableViewCell.m in Sources */,
+				9B3159F0173916DA004D9E16 /* MTDManeuverTableViewController.m in Sources */,
+				9B3159F1173916DA004D9E16 /* MTDManeuver.m in Sources */,
+				9B3159F2173916DA004D9E16 /* MTDAddress.m in Sources */,
+				9B3159F3173916DA004D9E16 /* MTDDirectionsRouteType.m in Sources */,
+				9B3159F4173916DA004D9E16 /* MTDDistance.m in Sources */,
+				9B3159F5173916DA004D9E16 /* MTDRoute.m in Sources */,
+				9B3159F6173916DA004D9E16 /* MTDWaypoint.m in Sources */,
+				9B3159F7173916DA004D9E16 /* MTDCustomization.m in Sources */,
+				9B3159F8173916DA004D9E16 /* MTDNavigationApp.m in Sources */,
+				9B3159F9173916DA004D9E16 /* MTDNavigationAppBuiltInMaps.m in Sources */,
+				9B3159FA173916DA004D9E16 /* MTDNavigationAppGoogleMaps.m in Sources */,
+				9B3159FB173916DA004D9E16 /* MTDDirectionsOverlay.m in Sources */,
+				9B3159FC173916DA004D9E16 /* MTDDirectionsOverlayView.m in Sources */,
+				9B3159FD173916DA004D9E16 /* MTDMapView.m in Sources */,
+				9B3159FE173916DA004D9E16 /* MTDGMSMapView.m in Sources */,
+				9B3159FF173916DA004D9E16 /* MTDGMSDirectionsOverlayView.m in Sources */,
+				9B315A00173916DA004D9E16 /* MTDRoute+MTDGoogleMapsSDK.m in Sources */,
+				9B315A01173916DA004D9E16 /* MTDMapViewProxy.m in Sources */,
+				9B315A02173916DA004D9E16 /* MTDWaypoint+MTDDirectionsAPI.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B6C18BC14A7E18200087893 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -992,9 +1229,6 @@
 				9B3159A71737A2FC004D9E16 /* MTDDirectionsOverlay.m in Sources */,
 				9B3159AA1737A2FC004D9E16 /* MTDDirectionsOverlayView.m in Sources */,
 				9B3159AD1737A2FC004D9E16 /* MTDMapView.m in Sources */,
-				9B3159B51737A6A9004D9E16 /* MTDGMSMapView.m in Sources */,
-				9B3159BD1737AF4C004D9E16 /* MTDGMSDirectionsOverlayView.m in Sources */,
-				9B3159C51737B0A9004D9E16 /* MTDRoute+MTDGoogleMapsSDK.m in Sources */,
 				9B3159D2173801B4004D9E16 /* MTDMapViewProxy.m in Sources */,
 				9B3159DB1738FC29004D9E16 /* MTDWaypoint+MTDDirectionsAPI.m in Sources */,
 			);
@@ -1085,6 +1319,60 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+		9B315A44173916DA004D9E16 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = NO;
+				DSTROOT = /tmp/MTDirections.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Vendor\"",
+				);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = MTDirectionsKit/Prefix.pch;
+				GCC_THUMB_SUPPORT = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DMTD_USING_GOOGLE_MAPS_SDK";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = MTDirectionsKit;
+				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SKIP_INSTALL = YES;
+				STRIP_STYLE = "non-global";
+			};
+			name = Debug;
+		};
+		9B315A45173916DA004D9E16 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = NO;
+				DSTROOT = /tmp/MTDirections.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Vendor\"",
+				);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = MTDirectionsKit/Prefix.pch;
+				GCC_THUMB_SUPPORT = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DMTD_USING_GOOGLE_MAPS_SDK";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = MTDirectionsKit;
+				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SKIP_INSTALL = YES;
+				STRIP_STYLE = "non-global";
 			};
 			name = Release;
 		};
@@ -1281,6 +1569,15 @@
 			buildConfigurations = (
 				9B10A9AE155D5867002A3052 /* Debug */,
 				9B10A9AF155D5867002A3052 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9B315A43173916DA004D9E16 /* Build configuration list for PBXNativeTarget "MTDirectionsKitGoogleMapsSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B315A44173916DA004D9E16 /* Debug */,
+				9B315A45173916DA004D9E16 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

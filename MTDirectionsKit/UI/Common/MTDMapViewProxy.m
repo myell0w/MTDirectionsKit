@@ -120,15 +120,16 @@
                                                               options:options
                                                            completion:^(MTDDirectionsOverlay *overlay, NSError *error) {
                                                                __strong __typeof__(self) strongSelf = weakSelf;
+                                                               __strong __typeof__(strongSelf.mapView) mapView = strongSelf.mapView;
 
                                                                if (overlay != nil && strongSelf != nil) {
                                                                    overlay = [strongSelf notifyDelegateDidFinishLoadingOverlay:overlay];
 
-                                                                   strongSelf.mapView.directionsDisplayType = MTDDirectionsDisplayTypeOverview;
-                                                                   strongSelf.mapView.directionsOverlay = overlay;
+                                                                   mapView.directionsDisplayType = MTDDirectionsDisplayTypeOverview;
+                                                                   mapView.directionsOverlay = overlay;
 
                                                                    if (zoomToShowDirections) {
-                                                                       [strongSelf.mapView setRegionToShowDirectionsAnimated:YES];
+                                                                       [mapView setRegionToShowDirectionsAnimated:YES];
                                                                    }
                                                                } else {
                                                                    [strongSelf notifyDelegateDidFailLoadingOverlayWithError:error];
@@ -309,28 +310,30 @@
 }
 
 - (void)notifyDelegateDidUpdateUserLocation:(CLLocation *)location {
+    __strong __typeof__(self.mapView) mapView = self.mapView;
+
     // is also nil if directionsOverlay == nil. If the location manager fires instantly we crash otherwise.
-    if (self.mapView.directionsOverlay.activeRoute != nil) {
+    if (mapView.directionsOverlay.activeRoute != nil) {
         id<MTDDirectionsDelegate> delegate = self.directionsDelegate;
-        CGFloat distance = [self.mapView distanceBetweenActiveRouteAndCoordinate:location.coordinate];
+        CGFloat distance = [mapView distanceBetweenActiveRouteAndCoordinate:location.coordinate];
 
         if (distance != FLT_MAX) {
             if (_directionsDelegateFlags.didUpdateUserLocationWithDistance) {
-                [delegate mapView:self.mapView
+                [delegate mapView:mapView
             didUpdateUserLocation:location
             distanceToActiveRoute:distance
-              ofDirectionsOverlay:self.mapView.directionsOverlay];
+              ofDirectionsOverlay:mapView.directionsOverlay];
             }
 
             // post corresponding notification
             NSDictionary *userInfo = (@{
                                       MTDDirectionsNotificationKeyUserLocation: location,
                                       MTDDirectionsNotificationKeyDistanceToActiveRoute: @(distance),
-                                      MTDDirectionsNotificationKeyOverlay: self.mapView.directionsOverlay,
-                                      MTDDirectionsNotificationKeyRoute: self.mapView.directionsOverlay.activeRoute
+                                      MTDDirectionsNotificationKeyOverlay: mapView.directionsOverlay,
+                                      MTDDirectionsNotificationKeyRoute: mapView.directionsOverlay.activeRoute
                                       });
             NSNotification *notification = [NSNotification notificationWithName:MTDMapViewDidUpdateUserLocationWithDistanceToActiveRoute
-                                                                         object:self.mapView
+                                                                         object:mapView
                                                                        userInfo:userInfo];
             [[NSNotificationCenter defaultCenter] postNotification:notification];
         }

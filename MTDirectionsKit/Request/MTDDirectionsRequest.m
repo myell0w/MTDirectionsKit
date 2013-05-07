@@ -112,7 +112,9 @@ static BOOL mtd_prefersHTTPS = NO;
 }
 
 - (void)cancel {
-    [_parser cancel];
+    __strong __typeof((_parser)) strongParser = _parser;
+
+    [strongParser cancel];
     _parser = nil;
     _completion = nil;
     [self.mtd_HTTPRequest cancel];
