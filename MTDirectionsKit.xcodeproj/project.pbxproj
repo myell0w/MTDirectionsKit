@@ -62,6 +62,17 @@
 		9B0D385F17391E6300CF641D /* MTDirectionsKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B0D385E17391E6300CF641D /* MTDirectionsKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B0D386117391E9600CF641D /* MTDirectionsKitCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B0D385C17391E3E00CF641D /* MTDirectionsKitCommon.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B0D386217391EA200CF641D /* MTDirectionsKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B0D386017391E7F00CF641D /* MTDirectionsKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B0D38781739265200CF641D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B0D38771739265200CF641D /* AVFoundation.framework */; };
+		9B0D387A1739265B00CF641D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B0D38791739265B00CF641D /* CoreData.framework */; };
+		9B0D387C1739266C00CF641D /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B0D387B1739266C00CF641D /* CoreText.framework */; };
+		9B0D387E1739267500CF641D /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B0D387D1739267500CF641D /* GLKit.framework */; };
+		9B0D38801739267A00CF641D /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B0D387F1739267A00CF641D /* ImageIO.framework */; };
+		9B0D38821739268300CF641D /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B0D38811739268300CF641D /* libc++.dylib */; };
+		9B0D38841739268B00CF641D /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B0D38831739268B00CF641D /* libicucore.dylib */; };
+		9B0D38861739269300CF641D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B0D38851739269300CF641D /* libz.dylib */; };
+		9B0D38881739269D00CF641D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B0D38871739269D00CF641D /* OpenGLES.framework */; };
+		9B0D388A173926A300CF641D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B0D3889173926A300CF641D /* QuartzCore.framework */; };
+		9B0D388C173926AC00CF641D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B0D388B173926AC00CF641D /* SystemConfiguration.framework */; };
 		9B10A99F155D5867002A3052 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B10A99E155D5867002A3052 /* SenTestingKit.framework */; };
 		9B10A9A2155D5867002A3052 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6C18C314A7E18200087893 /* Foundation.framework */; };
 		9B10A9A8155D5867002A3052 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9B10A9A6155D5867002A3052 /* InfoPlist.strings */; };
@@ -326,6 +337,17 @@
 		9B0D385C17391E3E00CF641D /* MTDirectionsKitCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDirectionsKitCommon.h; sourceTree = "<group>"; };
 		9B0D385E17391E6300CF641D /* MTDirectionsKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDirectionsKit.h; sourceTree = "<group>"; };
 		9B0D386017391E7F00CF641D /* MTDirectionsKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTDirectionsKit.h; sourceTree = "<group>"; };
+		9B0D38771739265200CF641D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		9B0D38791739265B00CF641D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		9B0D387B1739266C00CF641D /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		9B0D387D1739267500CF641D /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		9B0D387F1739267A00CF641D /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		9B0D38811739268300CF641D /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		9B0D38831739268B00CF641D /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		9B0D38851739269300CF641D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		9B0D38871739269D00CF641D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		9B0D3889173926A300CF641D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		9B0D388B173926AC00CF641D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		9B10A99D155D5867002A3052 /* MTDirectionsKitTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MTDirectionsKitTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B10A99E155D5867002A3052 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		9B10A9A5155D5867002A3052 /* MTDirectionsKitTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MTDirectionsKitTest-Info.plist"; sourceTree = "<group>"; };
@@ -463,6 +485,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B0D388C173926AC00CF641D /* SystemConfiguration.framework in Frameworks */,
+				9B0D388A173926A300CF641D /* QuartzCore.framework in Frameworks */,
+				9B0D38881739269D00CF641D /* OpenGLES.framework in Frameworks */,
+				9B0D38861739269300CF641D /* libz.dylib in Frameworks */,
+				9B0D38841739268B00CF641D /* libicucore.dylib in Frameworks */,
+				9B0D38821739268300CF641D /* libc++.dylib in Frameworks */,
+				9B0D38801739267A00CF641D /* ImageIO.framework in Frameworks */,
+				9B0D387E1739267500CF641D /* GLKit.framework in Frameworks */,
+				9B0D387C1739266C00CF641D /* CoreText.framework in Frameworks */,
+				9B0D387A1739265B00CF641D /* CoreData.framework in Frameworks */,
+				9B0D38781739265200CF641D /* AVFoundation.framework in Frameworks */,
 				9B3159D517386629004D9E16 /* GoogleMaps.framework in Frameworks */,
 				9B76F452157146BA00B54B05 /* CoreGraphics.framework in Frameworks */,
 				9B8126121569577E00C9A6C8 /* UIKit.framework in Frameworks */,
@@ -784,13 +817,24 @@
 		9B6C18C214A7E18200087893 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9B0D38811739268300CF641D /* libc++.dylib */,
+				9B0D38831739268B00CF641D /* libicucore.dylib */,
 				9B6C18F314A7E40A00087893 /* libxml2.dylib */,
+				9B0D38851739269300CF641D /* libz.dylib */,
+				9B0D38771739265200CF641D /* AVFoundation.framework */,
+				9B0D38791739265B00CF641D /* CoreData.framework */,
 				9B76F451157146BA00B54B05 /* CoreGraphics.framework */,
 				9B10A9B2155D5A17002A3052 /* CoreLocation.framework */,
+				9B0D387B1739266C00CF641D /* CoreText.framework */,
 				9B6C18C314A7E18200087893 /* Foundation.framework */,
+				9B0D387D1739267500CF641D /* GLKit.framework */,
 				9B3159B01737A65B004D9E16 /* GoogleMaps.framework */,
+				9B0D387F1739267A00CF641D /* ImageIO.framework */,
 				9B10A9B4155D5A1B002A3052 /* MapKit.framework */,
+				9B0D38871739269D00CF641D /* OpenGLES.framework */,
+				9B0D3889173926A300CF641D /* QuartzCore.framework */,
 				9B10A99E155D5867002A3052 /* SenTestingKit.framework */,
+				9B0D388B173926AC00CF641D /* SystemConfiguration.framework */,
 				9B2C4296155EB6A400C0E4CE /* UIKit.framework */,
 			);
 			name = Frameworks;
