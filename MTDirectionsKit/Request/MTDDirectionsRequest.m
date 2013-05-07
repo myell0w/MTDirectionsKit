@@ -11,6 +11,8 @@ static BOOL mtd_prefersHTTPS = NO;
 
 @interface MTDDirectionsRequest ()
 
+@property (nonatomic, mtd_weak) id<MTDDirectionsParser> parser;
+
 /** Dictionary containing all parameter key-value pairs of the request */
 @property (nonatomic, strong, setter = mtd_setParameters:) NSMutableDictionary *mtd_parameters;
 /** Appends all parameters to httpAddress */
@@ -77,6 +79,10 @@ static BOOL mtd_prefersHTTPS = NO;
     return self;
 }
 
+- (void)dealloc {
+    [self cancel];
+}
+
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - MTDDirectionRequest
 ////////////////////////////////////////////////////////////////////////
@@ -106,6 +112,10 @@ static BOOL mtd_prefersHTTPS = NO;
 }
 
 - (void)cancel {
+    __strong __typeof((_parser)) strongParser = _parser;
+
+    [strongParser cancel];
+    _parser = nil;
     _completion = nil;
     [self.mtd_HTTPRequest cancel];
 }
@@ -115,15 +125,22 @@ static BOOL mtd_prefersHTTPS = NO;
         MTDAssert([self.mtd_parserClass isSubclassOfClass:[MTDDirectionsParser class]], @"Parser class must be subclass of MTDDirectionsParser.");
 
         if (self.completion != nil) {
-            MTDDirectionsParser *parser = [[self.mtd_parserClass alloc] initWithFrom:self.from
-                                                                                  to:self.to
-                                                                   intermediateGoals:self.intermediateGoals
-                                                                           routeType:self.routeType
-                                                                                data:httpRequest.data];
+            id<MTDDirectionsParser> parser = [[self.mtd_parserClass alloc] initWithFrom:self.from
+                                                                                     to:self.to
+                                                                      intermediateGoals:self.intermediateGoals
+                                                                              routeType:self.routeType
+                                                                                   data:httpRequest.data];
 
             dispatch_queue_t parserQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0L);
             dispatch_async(parserQueue, ^{
-                [parser parseWithCompletion:self.completion];
+                self.parser = parser;
+                [parser parseWithCompletion:^(MTDDirectionsOverlay *overlay, NSError *error) {
+                    self.parser = nil;
+
+                    if (self.completion != nil) {
+                        self.completion(overlay, error);
+                    }
+                }];
             });
         } else {
             MTDLogWarning(@"No completion block set, didn't parse.");
@@ -135,7 +152,9 @@ static BOOL mtd_prefersHTTPS = NO;
 
         MTDLogError(@"Error occurred requesting directions from %@ to %@: %@", self.from, self.to, error);
 
-        self.completion(nil, error);
+        if (self.completion != nil) {
+            self.completion(nil, error);
+        }
     }
 }
 

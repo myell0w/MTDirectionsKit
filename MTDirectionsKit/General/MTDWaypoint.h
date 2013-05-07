@@ -104,17 +104,4 @@
  */
 - (id)initWithAddress:(MTDAddress *)address;
 
-
-/******************************************
- @name API
- ******************************************/
-
-/**
- Returns a string representation of this waypoint used for the call to the given API.
- 
- @param api the API we use to retreive the directions
- @return string representation that can be used as part of the URL to call the API
- */
-- (NSString *)descriptionForAPI:(MTDDirectionsAPI)api;
-
 @end

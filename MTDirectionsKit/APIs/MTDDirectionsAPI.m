@@ -36,7 +36,7 @@ void MTDDirectionsSetActiveAPI(MTDDirectionsAPI activeAPI) {
         mtd_activeAPI = activeAPI;
         
         // Google Directions API Terms allow the usage only in combination with Google Maps data
-        if (activeAPI == MTDDirectionsAPIGoogle && MTDDirectionsSupportsAppleMaps()) {
+        if (activeAPI == MTDDirectionsAPIGoogle && MTDDirectionsUsesAppleMaps()) {
             MTDLogAlways(@"The Google Directions API Terms forbid using MTDDirectionsAPIGoogle to display directions"
                          @"on top of Apple Maps. You should switch the active API by calling MTDDirectionsSetActiveAPI().");
         }

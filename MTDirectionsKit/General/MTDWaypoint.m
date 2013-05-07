@@ -90,27 +90,6 @@
     return self == [MTDWaypoint waypointForCurrentLocation];
 }
 
-// Would love to put this in a category, but then we need to specify -ObjC
-// for "Other Linker Flags" which complicates setup, that's why it's here
-- (NSString *)descriptionForAPI:(MTDDirectionsAPI)api {
-    switch (api) {
-        // Currently there's no difference between the used APIs here
-        case MTDDirectionsAPIMapQuest:
-        case MTDDirectionsAPIGoogle:
-        case MTDDirectionsAPIBing: {
-            if (self.hasValidCoordinate) {
-                return [NSString stringWithFormat:@"%f,%f",self.coordinate.latitude, self.coordinate.longitude];
-            } else {
-                return self.address.description;
-            }
-        }
-
-        default: {
-            return @"";
-        }
-    }
-}
-
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - NSObject
 ////////////////////////////////////////////////////////////////////////

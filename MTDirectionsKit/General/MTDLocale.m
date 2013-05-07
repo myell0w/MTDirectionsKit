@@ -34,6 +34,12 @@ NS_INLINE __attribute__((constructor)) void MTDLoadLocale(void) {
 void MTDDirectionsSetLocale(NSLocale *locale) {
     MTDDirectionsAPI API = MTDDirectionsGetActiveAPI();
 
+    // TODO: this is just a quick workaround for Austria
+    NSString *identifier = [locale localeIdentifier];
+    if ([identifier isEqualToString:@"de_AT"]) {
+        locale = [[NSLocale alloc] initWithLocaleIdentifier:@"de_DE"];
+    }
+
     if (MTDDirectionsLocaleIsSupportedByAPI(locale, API)) {
         mtd_locale = locale;
         MTDLogVerbose(@"Locale was set to %@", [locale localeIdentifier]);
