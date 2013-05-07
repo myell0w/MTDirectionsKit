@@ -84,7 +84,7 @@ static char myLocationContext;
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if (context == &myLocationContext) {
         CLLocation *location = change[NSKeyValueChangeNewKey];
-        
+
         [MTDWaypoint mtd_updateCurrentLocationCoordinate:location.coordinate];
         [self.mtd_proxy notifyDelegateDidUpdateUserLocation:location];
     } else {
@@ -200,20 +200,20 @@ static char myLocationContext;
 }
 
 - (CGFloat)distanceBetweenActiveRouteAndCoordinate:(CLLocationCoordinate2D)coordinate {
-    // TODO: GoogleMapsSDK
-    //    MTDAssert(CLLocationCoordinate2DIsValid(coordinate), @"We can't measure distance to invalid coordinates");
-    //
-    //    MTDRoute *activeRoute = self.directionsOverlay.activeRoute;
-    //
-    //    if (activeRoute == nil || !CLLocationCoordinate2DIsValid(coordinate)) {
-    //        return FLT_MAX;
-    //    }
-    //
-    //    CGPoint point = [self convertCoordinate:coordinate toPointToView:self.directionsOverlayView];
-    //    CGFloat distance = [self.directionsOverlayView distanceBetweenPoint:point route:self.directionsOverlay.activeRoute];
-    //
-    //    return distance;
-    return FLT_MAX;
+    MTDAssert(CLLocationCoordinate2DIsValid(coordinate), @"We can't measure distance to invalid coordinates");
+
+    MTDRoute *activeRoute = self.directionsOverlay.activeRoute;
+
+    if (activeRoute == nil || !CLLocationCoordinate2DIsValid(coordinate)) {
+        return FLT_MAX;
+    }
+
+    CGPoint point = [self.projection pointForCoordinate:coordinate];
+
+    MTDGMSDirectionsOverlayView *overlayView = [self directionsOverlayViewForRoute:self.directionsOverlay.activeRoute];
+    CGFloat distance = [overlayView distanceBetweenPoint:point route:self.directionsOverlay.activeRoute];
+
+    return distance;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -497,13 +497,13 @@ static char myLocationContext;
     for (MTDRoute *route in self.directionsOverlay.routes) {
         MTDGMSDirectionsOverlayView *overlayView = [self directionsOverlayViewForRoute:route];
         CGFloat distance = [overlayView distanceBetweenPoint:point route:route];
-
+        
         if (distance < minimumDistance) {
             minimumDistance = distance;
             nearestRoute = route;
         }
     }
-
+    
     return nearestRoute;
 }
 

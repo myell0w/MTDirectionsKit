@@ -83,12 +83,11 @@
         }]];
 
         if (waypointsWithoutCurrentLocation.count > 0) {
-            CGPoint tapPoint = point; // TODO: [mapView convertPoint:point fromView:self];
             CGPoint startPoint = [mapView.projection pointForCoordinate:[waypointsWithoutCurrentLocation[0] coordinate]];
 
             for (MTDWaypoint *waypoint in [waypointsWithoutCurrentLocation subarrayWithRange:NSMakeRange(1, waypointsWithoutCurrentLocation.count - 1)]) {
                 CGPoint cgWaypoint = [mapView.projection pointForCoordinate:waypoint.coordinate];
-                CGFloat distance = MTDDistanceToSegment(tapPoint, startPoint, cgWaypoint);
+                CGFloat distance = MTDDistanceToSegment(point, startPoint, cgWaypoint);
 
                 if (distance < shortestDistance) {
                     shortestDistance = distance;
