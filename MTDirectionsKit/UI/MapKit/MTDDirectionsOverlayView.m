@@ -9,11 +9,8 @@
 
 #define kMTDDefaultOverlayColor         [UIColor colorWithRed:0.f green:0.25f blue:1.f alpha:1.f]
 #define kMTDDefaultLineWidthFactor      1.8f
-#define kMTDMinimumLineWidthFactor      0.7f
-#define kMTDMaximumLineWidthFactor      3.0f
-
-
-NS_INLINE CGFloat MTDDistanceToSegment(CGPoint point, CGPoint segmentPointV, CGPoint segmentPointW);
+#define kMTDMinimumLineWidthFactor      0.5f
+#define kMTDMaximumLineWidthFactor      4.0f
 
 
 @interface MTDDirectionsOverlayView ()
@@ -360,43 +357,3 @@ NS_INLINE CGFloat MTDDistanceToSegment(CGPoint point, CGPoint segmentPointV, CGP
 }
 
 @end
-
-
-////////////////////////////////////////////////////////////////////////
-#pragma mark - Helper Functions
-////////////////////////////////////////////////////////////////////////
-
-// Helper functions for calculating the distance to each line segment
-// Taken from http://stackoverflow.com/a/12185597/235297
-
-NS_INLINE CGFloat MTDSqr(CGFloat x) {
-	return x*x;
-}
-
-NS_INLINE CGFloat MTDDist2(CGPoint v, CGPoint w) {
-	return MTDSqr(v.x - w.x) + MTDSqr(v.y - w.y);
-}
-
-NS_INLINE CGFloat MTDDistanceToSegmentSquared(CGPoint p, CGPoint v, CGPoint w) {
-    CGFloat l2 = MTDDist2(v, w);
-
-    if (l2 == 0.f) {
-        return MTDDist2(p, v);
-    }
-
-    CGFloat t = ((p.x - v.x) * (w.x - v.x) + (p.y - v.y) * (w.y - v.y)) / l2;
-
-    if (t < 0.f) {
-        return MTDDist2(p, v);
-    }
-
-    if (t > 1.f) {
-        return MTDDist2(p, w);
-    }
-
-    return MTDDist2(p, CGPointMake(v.x + t * (w.x - v.x), v.y + t * (w.y - v.y)));
-}
-
-NS_INLINE CGFloat MTDDistanceToSegment(CGPoint point, CGPoint segmentPointV, CGPoint segmentPointW) {
-    return sqrtf(MTDDistanceToSegmentSquared(point, segmentPointV, segmentPointW));
-}

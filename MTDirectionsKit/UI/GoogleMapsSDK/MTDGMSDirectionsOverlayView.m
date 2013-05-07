@@ -3,8 +3,8 @@
 
 
 #define kMTDDefaultLineWidthFactor      1.8f
-#define kMTDMinimumLineWidthFactor      0.7f
-#define kMTDMaximumLineWidthFactor      3.0f
+#define kMTDMinimumLineWidthFactor      0.5f
+#define kMTDMaximumLineWidthFactor      4.0f
 
 #define kMTDMultiplicationFactor         4.f
 
@@ -25,7 +25,6 @@
 - (id)initWithDirectionsOverlay:(MTDDirectionsOverlay *)directionsOverlay route:(MTDRoute *)route {
     if ((self = [super init])) {
         self.path = route.path;
-        self.tappable = YES;
 
         _directionsOverlay = directionsOverlay;
         _route = route;
@@ -63,6 +62,44 @@
     if (overlayLineWidthFactor >= kMTDMinimumLineWidthFactor && overlayLineWidthFactor <= kMTDMaximumLineWidthFactor) {
         _overlayLineWidthFactor = overlayLineWidthFactor;
     }
+}
+
+// check whether a touch at the given point tried to select the given route
+- (CGFloat)distanceBetweenPoint:(CGPoint)point route:(MTDRoute *)route {
+    if (route != self.route) {
+        MTDLogInfo(@"distanceBetweenPoint:route: called with wrong route");
+        return FLT_MAX;
+    }
+    
+	CGFloat shortestDistance = FLT_MAX;
+	GMSMapView *mapView = self.map;
+
+    if (mapView != nil) {
+        // we remove all instances of [MTDWaypoint waypointForCurrentLocation] from the list because if point
+        // refers to the user location (which is the most common use-case for this method) the distance will
+        // always be 0.f otherwise
+        NSArray *waypointsWithoutCurrentLocation = [route.waypoints filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(MTDWaypoint *evaluatedObject, __unused NSDictionary *bindings) {
+            return ![evaluatedObject isWaypointForCurrentLocation];
+        }]];
+
+        if (waypointsWithoutCurrentLocation.count > 0) {
+            CGPoint tapPoint = point; // TODO: [mapView convertPoint:point fromView:self];
+            CGPoint startPoint = [mapView.projection pointForCoordinate:[waypointsWithoutCurrentLocation[0] coordinate]];
+
+            for (MTDWaypoint *waypoint in [waypointsWithoutCurrentLocation subarrayWithRange:NSMakeRange(1, waypointsWithoutCurrentLocation.count - 1)]) {
+                CGPoint cgWaypoint = [mapView.projection pointForCoordinate:waypoint.coordinate];
+                CGFloat distance = MTDDistanceToSegment(tapPoint, startPoint, cgWaypoint);
+
+                if (distance < shortestDistance) {
+                    shortestDistance = distance;
+                }
+
+                startPoint = cgWaypoint;
+            }
+        }
+    }
+    
+    return shortestDistance;
 }
 
 @end

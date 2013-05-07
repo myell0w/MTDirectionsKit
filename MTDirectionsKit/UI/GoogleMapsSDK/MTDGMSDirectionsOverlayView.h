@@ -42,4 +42,16 @@
 
 - (id)initWithDirectionsOverlay:(MTDDirectionsOverlay *)directionsOverlay route:(MTDRoute *)route;
 
+/**
+ Returns the shortest distance between a given point and the route. 
+ For API compatibility there is a route parameter specified that must match the route
+ of the overlay.
+
+ @param point a (touch) point on the overlay view
+ @param route must be equal to the route of this overlay view
+
+ @return the shortest distance between the point and the route, or FLT_MAX
+ */
+- (CGFloat)distanceBetweenPoint:(CGPoint)point route:(MTDRoute *)route;
+
 @end

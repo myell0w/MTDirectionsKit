@@ -317,12 +317,6 @@ static char myLocationContext;
 #pragma mark - GMSMapViewDelegate Proxies
 ////////////////////////////////////////////////////////////////////////
 
-
-/**
- * Called after the camera position has changed. During an animation, this
- * delegate might not be notified of intermediate camera positions. However, it
- * will always be called eventually with the final position of an the animation.
- */
 - (void)mapView:(GMSMapView *)mapView didChangeCameraPosition:(GMSCameraPosition *)position {
     id<GMSMapViewDelegate> trueDelegate = self.mtd_trueDelegate;
 
@@ -331,25 +325,22 @@ static char myLocationContext;
     }
 }
 
-/**
- * Called after a tap gesture at a particular coordinate, but only if a marker
- * was not tapped.  This is called before deselecting any currently selected
- * marker (the implicit action for tapping on the map).
- */
 - (void)mapView:(GMSMapView *)mapView didTapAtCoordinate:(CLLocationCoordinate2D)coordinate {
     id<GMSMapViewDelegate> trueDelegate = self.mtd_trueDelegate;
+
+    CGPoint point = [mapView.projection pointForCoordinate:coordinate];
+    MTDRoute *selectedRoute = [self mtd_routeTouchedByPoint:point];
+
+    // ask delegate if we should activate the route
+    if ([self.mtd_proxy askDelegateForSelectionEnabledStateOfRoute:selectedRoute ofOverlay:self.directionsOverlay]) {
+        [self activateRoute:selectedRoute];
+    }
 
     if ([trueDelegate respondsToSelector:@selector(mapView:didTapAtCoordinate:)]) {
         [trueDelegate mapView:mapView didTapAtCoordinate:coordinate];
     }
 }
 
-/**
- * Called after a long-press gesture at a particular coordinate.
- *
- * @param mapView The map view that was pressed.
- * @param coordinate The location that was pressed.
- */
 - (void)mapView:(GMSMapView *)mapView didLongPressAtCoordinate:(CLLocationCoordinate2D)coordinate {
     id<GMSMapViewDelegate> trueDelegate = self.mtd_trueDelegate;
 
@@ -358,15 +349,6 @@ static char myLocationContext;
     }
 }
 
-/**
- * Called after a marker has been tapped.
- *
- * @param mapView The map view that was pressed.
- * @param marker The marker that was pressed.
- * @return YES if this delegate handled the tap event, which prevents the map
- *         from performing its default selection behavior, and NO if the map
- *         should continue with its default selection behavior.
- */
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker {
     id<GMSMapViewDelegate> trueDelegate = self.mtd_trueDelegate;
 
@@ -377,9 +359,6 @@ static char myLocationContext;
     return NO;
 }
 
-/**
- * Called after a marker's info window has been tapped.
- */
 - (void)mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker {
     id<GMSMapViewDelegate> trueDelegate = self.mtd_trueDelegate;
 
@@ -388,43 +367,15 @@ static char myLocationContext;
     }
 }
 
-/**
- * Called after an overlay has been tapped.
- * This method is not called for taps on markers.
- *
- * @param mapView The map view that was pressed.
- * @param overlay The overlay that was pressed.
- */
+// we don't use this method to detect the tapped route because it isn't accurate enough, we use mapView:didTapAtCoordinate: instead
 - (void)mapView:(GMSMapView *)mapView didTapOverlay:(GMSOverlay *)overlay {
     id<GMSMapViewDelegate> trueDelegate = self.mtd_trueDelegate;
-    __block MTDRoute *routeToActivate = nil;
-
-    [self.directionsOverlayViews enumerateKeysAndObjectsUsingBlock:^(MTDRoute *route, MTDGMSDirectionsOverlayView *overlayView, BOOL *stop) {
-        if (overlay == overlayView) {
-            routeToActivate = route;
-            *stop = YES;
-        }
-    }];
-
-    [self activateRoute:routeToActivate];
 
     if ([trueDelegate respondsToSelector:@selector(mapView:didTapOverlay:)]) {
         [trueDelegate mapView:mapView didTapOverlay:overlay];
     }
 }
 
-/**
- * Called when a marker is about to become selected, and provides an optional
- * custom info window to use for that marker if this method returns a UIView.
- * If you change this view after this method is called, those changes will not
- * necessarily be reflected in the rendered version.
- *
- * The returned UIView must not have bounds greater than 500 points on either
- * dimension.  As there is only one info window shown at any time, the returned
- * view may be reused between other info windows.
- *
- * @return The custom info window for the specified marker, or nil for default
- */
 - (UIView *)mapView:(GMSMapView *)mapView markerInfoWindow:(GMSMarker *)marker {
     id<GMSMapViewDelegate> trueDelegate = self.mtd_trueDelegate;
 
@@ -536,6 +487,24 @@ static char myLocationContext;
             }
         }
     }
+}
+
+// returns the first route that get's hit by the touch at the given point
+- (MTDRoute *)mtd_routeTouchedByPoint:(CGPoint)point {
+    MTDRoute *nearestRoute = nil;
+    CGFloat minimumDistance = 25.f;
+
+    for (MTDRoute *route in self.directionsOverlay.routes) {
+        MTDGMSDirectionsOverlayView *overlayView = [self directionsOverlayViewForRoute:route];
+        CGFloat distance = [overlayView distanceBetweenPoint:point route:route];
+
+        if (distance < minimumDistance) {
+            minimumDistance = distance;
+            nearestRoute = route;
+        }
+    }
+
+    return nearestRoute;
 }
 
 @end

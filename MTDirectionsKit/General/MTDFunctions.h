@@ -157,3 +157,38 @@ NS_INLINE NSString* MTDLocalizedStringFromUIKit(NSString *string) {
 NS_INLINE NSString* MTDDirectionsKitGetVersionString() {
     return @"1.7";
 }
+
+// Helper functions for calculating the distance to each line segment
+// Taken from http://stackoverflow.com/a/12185597/235297
+
+NS_INLINE CGFloat MTDSqr(CGFloat x) {
+	return x*x;
+}
+
+NS_INLINE CGFloat MTDDist2(CGPoint v, CGPoint w) {
+	return MTDSqr(v.x - w.x) + MTDSqr(v.y - w.y);
+}
+
+NS_INLINE CGFloat MTDDistanceToSegmentSquared(CGPoint p, CGPoint v, CGPoint w) {
+    CGFloat l2 = MTDDist2(v, w);
+
+    if (l2 == 0.f) {
+        return MTDDist2(p, v);
+    }
+
+    CGFloat t = ((p.x - v.x) * (w.x - v.x) + (p.y - v.y) * (w.y - v.y)) / l2;
+
+    if (t < 0.f) {
+        return MTDDist2(p, v);
+    }
+
+    if (t > 1.f) {
+        return MTDDist2(p, w);
+    }
+
+    return MTDDist2(p, CGPointMake(v.x + t * (w.x - v.x), v.y + t * (w.y - v.y)));
+}
+
+NS_INLINE CGFloat MTDDistanceToSegment(CGPoint point, CGPoint segmentPointV, CGPoint segmentPointW) {
+    return sqrtf(MTDDistanceToSegmentSquared(point, segmentPointV, segmentPointW));
+}
