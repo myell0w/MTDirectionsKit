@@ -10,9 +10,11 @@
 #import "MTDRoute+MTDGoogleMapsSDK.h"
 #import "MTDGMSDirectionsOverlayView.h"
 #import "MTDMapViewProxy.h"
+#import <objc/runtime.h>
 
 
 static char myLocationContext;
+static char wmContext;
 
 
 @interface GMSMapView (MTDGoogleMapsSDK)
@@ -391,6 +393,37 @@ static char myLocationContext;
     _mtd_proxy = [[MTDMapViewProxy alloc] initWithMapView:self];
 
     [self addObserver:self forKeyPath:MTDKey(myLocation) options:NSKeyValueObservingOptionNew context:&myLocationContext];
+
+    // Watermark
+    {
+        UIView *wmView = [[UIView alloc] initWithFrame:CGRectInset(self.bounds, 30.f, 30.f)];
+        objc_setAssociatedObject(self, &wmContext, wmView, OBJC_ASSOCIATION_RETAIN);
+        
+        CFRunLoopTimerRef timer = CFRunLoopTimerCreateWithHandler(kCFAllocatorDefault, CFAbsoluteTimeGetCurrent(), 3., 0, 0, ^(__unused CFRunLoopTimerRef t) {
+            UIView *view = objc_getAssociatedObject(self, &wmContext);
+            if (view.superview != self) {
+                view = [[UIView alloc] initWithFrame:CGRectInset(self.bounds, 30.f, 30.f)];
+                objc_setAssociatedObject(self, &wmContext, view, OBJC_ASSOCIATION_RETAIN);
+                [self addSubview:view];
+            }
+
+            float components[] = {1.f, 0.f, 0.f, 0.35f};
+            CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+            CGColorRef wmColor = CGColorCreate(colorSpace, components);
+
+            [self bringSubviewToFront:view];
+            view.userInteractionEnabled = NO;
+            view.alpha = 1.f;
+            view.hidden = NO;
+            view.frame = CGRectInset(self.bounds, 30.f, 30.f);
+            view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+            view.layer.backgroundColor = wmColor;
+
+            CGColorRelease(wmColor);
+            CGColorSpaceRelease(colorSpace);
+        });
+        CFRunLoopAddTimer(CFRunLoopGetCurrent(), timer, kCFRunLoopCommonModes);
+    }
 }
 
 - (void)mtd_addOverlay:(MTDDirectionsOverlay *)overlay {
