@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<><!DOCTYPE html>
 <html lang="en">
 <head>
 	<title>MTDirectionsKit - Let your iOS App guide you wherever you want!</title>
@@ -83,7 +83,7 @@
 			</a>
 			<!-- End Logo -->
 			<span class="tagline">drop-in solution to show routes directly inside your iOS App</span>
-			<span class="current_info">Works great on iOS 4, iOS 5 and iOS 6,<br />now supporting textual instructions!</span>
+			<span class="current_info">Now supporting the Google Maps SDK for iOS!</span>
 			<p>
 				Did you ever wonder why Apple didn’t provide a way to show directions directly on top of MKMapView and force you to take your users to their built-in Maps.app just to guide them somewhere? </br>
 				 We too, that’s why we built MTDirectionsKit. MTDirectionsKit is an <strong>easy-to-use</strong> and <strong>easy-to-integrate</strong> <strong>framework for iOS</strong> that let's you do just that - guiding your users in the easiest and most professional way available!
@@ -248,7 +248,7 @@
 					<div class="one_half column_last">
 						<h2 class="icon versatile">Versatile</h2>
 						<p>MTDirectionsKit can be used with 3 different APIs: <strong>Google Directions API</strong>, <strong>MapQuest Open Directions API</strong> and <strong>Bing Routes 						   API</strong>. About every aspect of MTDirectionsKit is configurable and allows you to customize it the way you need to. 
-						   There are even hooks available that allow you to customize the computed directions right before they get displayed or to provide a complete custom appearance of the directions to the user. You can moreover specify intermediate goals along your route, request alternative routes or display textual instructions to your users.</p>
+						   MTDirectionsKit can be used with Apple's <strong>MapKit</strong> as well as the <strong>Google Maps SDK for iOS</strong> and can moreover specify intermediate goals along your route, request alternative routes or display textual instructions to your users.</p>
 					</div>
 					
 					<div class="one_half">
@@ -280,6 +280,11 @@
 			<div id="faq" class="page" style="width:100%; max-width: 510px;">
 				<h1>FAQs</h1>
 				
+				<p class="faq">Can I use MTDirectionsKit in combination with the Google Maps iOS SDK?</p>
+				<p class="faq_answer"> 
+					Starting with MTDirectionsKit 1.7 we have support for the Google Maps iOS SDK in addition to Apple's MapKit. This allows you to use all the great features of MTDirectionsKit while using tested and trusted Google map data in your app.
+				</p>
+				
 				<p class="faq"> Which Features of MTDirectionsKit are supported by which APIs?</p>
 				<div class="datagrid">
 				<table>
@@ -294,10 +299,6 @@
 					<tr class="indented alt"><td>Start and Destination</td><td class="check"></td><td class="check"></td><td class="check"></td></tr>
 					<tr class="indented"><td>Intermediate Goals</td><td class="check"></td><td class="check"></td><td class="unsupported"></td></tr>
 					<tr class="indented alt"><td>Atomar Adresses</td><td class="check"></td><td class="unsupported"></td><td class="check"></td></tr>
-					<tr><td colspan="4">iOS Version</td></tr>
-					<tr class="indented alt"><td>iOS 4</td><td class="check"></td><td class="check"></td><td class="check"></td></tr>
-					<tr class="indented"><td>iOS 5</td><td class="check"></td><td class="check"></td><td class="check"></td></tr>
-					<tr class="indented alt"><td>iOS 6</td><td class="check"></td><td class="unsupported"></td><td class="check"></td></tr>
 				</tbody>
 				</table>
 				</div>
@@ -316,15 +317,18 @@
 				
 				<p class="faq"> Can I use the Google Directions API on iOS 6?</p>
 				<p class="faq_answer"> 
+					Starting with MTDirectionsKit 1.7 the Google Directions API can be used in combination with the <strong>Google Maps SDK for iOS</strong>. <br /><br />
 					Unfortunately Google's <a href="https://developers.google.com/maps/terms">Terms of Service</a> prohibit using their data in combination with other map data then Google‘s. That means you can use the Google Directions API on iOS 4 and iOS 5, but are not allowed to use it on iOS 6 as long as you are using MapKit to display your maps. You can easily switch to one of our other supported data providers - MapQuest as well as Bing can be used on iOS 6.
-					
-					<br /> <br />
-					<strong>Update:</strong> Since Google released an iOS SDK for Google Maps it will be possible to use the Google Directions API on iOS 6 once MTDirectionsKit supports it. Stay tuned!
 				</p>
 				
 				<p class="faq"> Is it possible to upgrade from the binary version to the full source version? </p>
 				<p class="faq_answer"> 
 					An upgrade is possible, <a href="mailto:support@mtdirectionsk.it">contact us</a> for more information.
+				</p>
+				
+				<p class="faq"> I see the error '-[MTDWaypoint descriptionForAPI:]: unrecognized selector sent to instance', what can I do? </p>
+				<p class="faq_answer"> 
+					You most likely forgot to add <strong>-ObjC</strong> to your Other Linker Flags section in the Build Settings.
 				</p>
 				
 				<p class="faq"> Who created the stunning looking turn type images for MTDirectionsKit? </p>
@@ -339,6 +343,18 @@
 				<h1>Updates</h1>
 				
 				<div class="releases">
+					<article class="release">
+						<h2>Version 1.7</h2>
+						<span class="date">Released on May 13th, 2013</span>
+						<ul>							
+							<li class="new"><span><b>New</b></span>Support for the <b>Google Maps SDK for iOS</b></li>
+							<li class="new"><span><b>New</b></span>Changed MTDDirectionsSupportsAppleMaps() to MTDDirectionsUsesAppleMaps() and changed semantics: returns NO, if the Google Maps SDK for iOS is present</li>
+							<li class="fix"><span><b>Fix</b></span>Fixed a possible crash when deallocating an instance of MTDMapView while directions are currently requested</li>
+							<li class="fix"><span><b>Fix</b></span>Fixed a bug affecting MTDDirectionsSetLocale() when called very early in the lifecycle of your app</li>
+							<li class="fix"><span><b>Fix</b></span>New protocol MTDMapView, changed delegate calls from (MTDMapView *) to (id<MTDMapView>)</li>
+					    </ul>
+					</article>
+					
 					<article class="release">
 						<h2>Version 1.6.1</h2>
 						<span class="date">Released on February 6th, 2013</span>
@@ -608,13 +624,20 @@
 							 <li>libxml2.dylib</li>
 						 </ul>
 						 					  
-					<p> to your target's linked libraries found under Build Phases. If you want to use the built-in images for the textual instructions make sure to alse add <strong>MTDirectionsKit.bundle</strong> to your projects resources. You can find MTDirectionsKit.bundle under the Resources folder of MTDirectionsKit.
+					<p> to your target's linked libraries found under Build Phases. Moreover open the Build Settings of your project and add <strong>-ObjC</strong> to the Other Linker Flags section. If you want to use the built-in images for the textual instructions make sure to alse add <strong>MTDirectionsKit.bundle</strong> to your projects resources. You can find MTDirectionsKit.bundle under the Resources folder of MTDirectionsKit.
 					</p>
 					<br />
 					<p>
 						<a href="http://f.cl.ly/items/0o1D0n1W050603373j1z/MTDirectionsKit_bundle.png" 
 						   rel="documentation" class="fancybox" title="Adding MTDirectionsKit.bundle">
 						<img src="http://f.cl.ly/items/0o1D0n1W050603373j1z/MTDirectionsKit_bundle.png" alt="MTDirectionsKit.bundle" /></a>
+					</p>
+				</div>
+				
+				<div class="full">
+					<h2>Google Maps SDK for iOS</h2>
+					<p>
+						If you use the Google Maps SDK version of MTDirectionsKit be sure to checkout Google's guide for integrating their SDK at <a href="https://developers.google.com/maps/documentation/ios/start">https://developers.google.com/maps/documentation</a>. Official support is only provided for the Google Maps SDK version included in the MTDirectionsKit distribution bundle, other versions may be unstable or buggy.
 					</p>
 				</div>
 				
@@ -629,7 +652,7 @@
 					<h2>Requirements</h2>
 					<p>
 						The source code version of MTDirectionsKit needs Xcode ≥ 4.5, iOS Base SDK ≥ 6.0 and Clang LLVM >= 3.1 to compile, because it uses handy new features provided by Clang. It doesn't work with the old LLVM GCC compiler.
-						MTDirectionsKit works on a deployment target of <b>≥ iOS 4.3</b> on <b>armv7</b> and <b>armv7s</b> and can be used in <b>ARC as well as non-ARC</b> applications.
+						MTDirectionsKit works on a deployment target of <b>≥ iOS 4.3 (≥ iOS 5.1 for Google Maps SDK version)</b> on <b>armv7</b> and <b>armv7s</b> and can be used in <b>ARC as well as non-ARC</b> applications.
 					</p>
 				</div>
 				
@@ -784,7 +807,7 @@
 	
 	<!-- Start Footer -->
 	<footer class="container">
-		<p>Matthias Tretter (<a href="http://twitter.com/myell0w">@myell0w</a>) &copy; 2012. All Rights Reserved.</p>
+		<p><a href="mailto:support@mtdirectionsk.it">Matthias Tretter</a> (<a href="http://twitter.com/myell0w">@myell0w</a>) &copy; 2012. All Rights Reserved.</p>
 	</footer>
 	<!-- End Footer -->
 	
