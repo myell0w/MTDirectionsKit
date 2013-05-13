@@ -2,12 +2,12 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
-		<title>MTDMapViewDelegateProxy Class Reference</title>
+		<title>MTDGMSDirectionsOverlayView Class Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
 		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
-		<meta name="generator" content="appledoc 2.0.5 (build 789)" />
+		<meta name="generator" content="appledoc 2.1 (build 840)" />
 	</head>
 	<body>
 		<header id="top_header">
@@ -17,7 +17,7 @@
 			</div>
 			
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">MTDMapViewDelegateProxy Class Reference</h1>
+				<h1 class="hideInXcode">MTDGMSDirectionsOverlayView Class Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -40,7 +40,9 @@
 	
 	<option value="properties">Properties</option>
 	
-	<option value="//api/name/mapView">&nbsp;&nbsp;&nbsp;&nbsp;mapView</option>
+	<option value="//api/name/overlayColor">&nbsp;&nbsp;&nbsp;&nbsp;overlayColor</option>
+	
+	<option value="//api/name/overlayLineWidthFactor">&nbsp;&nbsp;&nbsp;&nbsp;overlayLineWidthFactor</option>
 	
 	
 	
@@ -49,7 +51,9 @@
 	
 	<option value="instance_methods">Instance Methods</option>
 	
-	<option value="//api/name/initWithMapView:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithMapView:</option>
+	<option value="//api/name/distanceBetweenPoint:route:">&nbsp;&nbsp;&nbsp;&nbsp;- distanceBetweenPoint:route:</option>
+	
+	<option value="//api/name/initWithDirectionsOverlay:route:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithDirectionsOverlay:route:</option>
 	
 	
 	
@@ -75,7 +79,9 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mapView">mapView</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/overlayColor">overlayColor</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/overlayLineWidthFactor">overlayLineWidthFactor</a></span></li>
 	
 </ul></li>
 
@@ -85,7 +91,9 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithMapView:">initWithMapView:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/distanceBetweenPoint:route:">distanceBetweenPoint:route:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithDirectionsOverlay:route:">initWithDirectionsOverlay:route:</a></span></li>
 	
 </ul></li>
 
@@ -94,7 +102,7 @@
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="MTDMapViewDelegateProxy Class Reference" name="top"></a>
+				<a title="MTDGMSDirectionsOverlayView Class Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -103,7 +111,7 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">MTDMapViewDelegateProxy Class Reference</h1>
+						<h1 class="title title-header">MTDGMSDirectionsOverlayView Class Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
@@ -111,13 +119,10 @@
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
 	<td class="specification-title">Inherits from</td>
-	<td class="specification-value">NSObject</td>
-</tr><tr>
-	<td class="specification-title">Conforms to</td>
-	<td class="specification-value">CLLocationManagerDelegate<br />UIGestureRecognizerDelegate</td>
+	<td class="specification-value">GMSPolyline</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">MTDMapViewDelegateProxy.h</td>
+	<td class="specification-value">MTDGMSDirectionsOverlayView.h</td>
 </tr>
 						</tbody></table></div>
 					
@@ -127,9 +132,14 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>Since we subclass MKMapView we don&rsquo;t want to interfere with it&rsquo;s delegate-behaviour. MKMapView is known
-to at least respond to the protocol UIGestureRecognizerDelegate (not public), so we use an instance of
-MTDMapViewDelegateProxy as our delegate.</p>
+						<p>An instance of MTDGMSDirectionsOverlayView is a subclass of GMSPolyline and is used
+to draw the directions/route on top your instance of <a href="../Classes/MTDGMSMapView.html">MTDGMSMapView</a> (Google Maps SDK).
+It draws a path including all waypoints stored in one route of the underlying instance of <a href="../Classes/MTDDirectionsOverlay.html">MTDDirectionsOverlay</a>.</p>
+
+<p>Therefore this class behaves different from its analog class in the MapKit version of MTDirectionsKit as it is
+only responsible for drawing one route and not several alternative routes.</p>
+
+<p>Remark: This class currently cannot be customized using UIAppearance.</p>
 					</div>
 					
 					
@@ -147,15 +157,33 @@ MTDMapViewDelegateProxy as our delegate.</p>
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/mapView">&nbsp;&nbsp;mapView</a></code>
-		<span class="tooltip"><p>The MapView to call back, when a delegate call happens</p></span>
+		<code><a href="#//api/name/overlayColor">&nbsp;&nbsp;overlayColor</a></code>
+		<span class="tooltip"><p>The color used to draw the overlay, default is a blue color.
+This color is used if you don&rsquo;t set a specific color for a route with setOverlayColor:forRoute:</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initWithMapView:">&ndash;&nbsp;initWithMapView:</a></code>
-		<span class="tooltip"><p>Creates an instance of the delegate proxy that doesn‘t retain the <a href="#//api/name/mapView">mapView</a> to not create a retain cycle.</p></span>
+		<code><a href="#//api/name/overlayLineWidthFactor">&nbsp;&nbsp;overlayLineWidthFactor</a></code>
+		<span class="tooltip"><p>The factor MKRoadWidthAtZoomScale gets multiplicated with to compute the width of the overlay.
+The default value is 1.8f, the valid range is between 0.7f and 3.f.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithDirectionsOverlay:route:">&ndash;&nbsp;initWithDirectionsOverlay:route:</a></code>
+		<span class="tooltip"><p>The designated initializer.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/distanceBetweenPoint:route:">&ndash;&nbsp;distanceBetweenPoint:route:</a></code>
+		<span class="tooltip"><p>Returns the shortest distance between a given point and the route.
+For API compatibility there is a route parameter specified that must match the route
+of the overlay.</p></span>
 	</span>
 	
 	
@@ -173,17 +201,18 @@ MTDMapViewDelegateProxy as our delegate.</p>
 						<h2 class="subtitle subtitle-methods">Properties</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/mapView" title="mapView"></a>
-	<h3 class="subsubtitle method-title">mapView</h3>
+	<a name="//api/name/overlayColor" title="overlayColor"></a>
+	<h3 class="subsubtitle method-title">overlayColor</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The MapView to call back, when a delegate call happens</p>
+		<p>The color used to draw the overlay, default is a blue color.
+This color is used if you don&rsquo;t set a specific color for a route with setOverlayColor:forRoute:</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, mtd_weak) MTDMapView *mapView</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) UIColor *overlayColor</code></div>
 	
 	
 	
@@ -200,7 +229,42 @@ MTDMapViewDelegateProxy as our delegate.</p>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDMapViewDelegateProxy.h</code><br />
+		<code class="declared-in-ref">MTDGMSDirectionsOverlayView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/overlayLineWidthFactor" title="overlayLineWidthFactor"></a>
+	<h3 class="subsubtitle method-title">overlayLineWidthFactor</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The factor MKRoadWidthAtZoomScale gets multiplicated with to compute the width of the overlay.
+The default value is 1.8f, the valid range is between 0.7f and 3.f.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) CGFloat overlayLineWidthFactor</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDGMSDirectionsOverlayView.h</code><br />
 	</div>				
 	
 	
@@ -217,25 +281,32 @@ MTDMapViewDelegateProxy as our delegate.</p>
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/initWithMapView:" title="initWithMapView:"></a>
-	<h3 class="subsubtitle method-title">initWithMapView:</h3>
+	<a name="//api/name/distanceBetweenPoint:route:" title="distanceBetweenPoint:route:"></a>
+	<h3 class="subsubtitle method-title">distanceBetweenPoint:route:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Creates an instance of the delegate proxy that doesn‘t retain the <a href="#//api/name/mapView">mapView</a> to not create a retain cycle.</p>
+		<p>Returns the shortest distance between a given point and the route.
+For API compatibility there is a route parameter specified that must match the route
+of the overlay.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (id)initWithMapView:(MTDMapView *)<em>mapView</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (CGFloat)distanceBetweenPoint:(CGPoint)<em>point</em> route:(MTDRoute *)<em>route</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>mapView</em></dt>
-			<dd><p>the <a href="#//api/name/mapView">mapView</a> to call back</p></dd>
+			<dt><em>point</em></dt>
+			<dd><p>a (touch) point on the overlay view</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>route</em></dt>
+			<dd><p>must be equal to the route of this overlay view</p></dd>
 		</dl>
 		
 	</div>
@@ -244,7 +315,7 @@ MTDMapViewDelegateProxy as our delegate.</p>
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>an instance of MTDMapViewDelegateProxy</p>
+		<p>the shortest distance between the point and the route, or FLT_MAX</p>
 	</div>
 	
 	
@@ -259,7 +330,56 @@ MTDMapViewDelegateProxy as our delegate.</p>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDMapViewDelegateProxy.h</code><br />
+		<code class="declared-in-ref">MTDGMSDirectionsOverlayView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/initWithDirectionsOverlay:route:" title="initWithDirectionsOverlay:route:"></a>
+	<h3 class="subsubtitle method-title">initWithDirectionsOverlay:route:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The designated initializer.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (id)initWithDirectionsOverlay:(MTDDirectionsOverlay *)<em>directionsOverlay</em> route:(MTDRoute *)<em>route</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>directionsOverlay</em></dt>
+			<dd><p>a weak reference to the overlay that contains the model data for this overlay view</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>route</em></dt>
+			<dd><p>the route that is represented/displayed by this overlay view</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDGMSDirectionsOverlayView.h</code><br />
 	</div>				
 	
 	
@@ -278,9 +398,9 @@ MTDMapViewDelegateProxy as our delegate.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 @myell0w. All rights reserved. (Last updated: 2013-02-06)</span><br />
+						<p><span class="copyright">&copy; 2013 @myell0w. All rights reserved. (Last updated: 2013-05-13)</span><br />
 						
-						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						
 					</div>
 				</div>

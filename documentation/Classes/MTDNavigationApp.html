@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
-		<title>MTDDirectionsRequestBing Class Reference</title>
+		<title>MTDNavigationApp Class Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
@@ -17,7 +17,7 @@
 			</div>
 			
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">MTDDirectionsRequestBing Class Reference</h1>
+				<h1 class="hideInXcode">MTDNavigationApp Class Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -42,9 +42,9 @@
 	
 	<option value="class_methods">Class Methods</option>
 	
-	<option value="//api/name/isAPIKeyRegistered">&nbsp;&nbsp;&nbsp;&nbsp;+ isAPIKeyRegistered</option>
+	<option value="//api/name/isAppInstalled">&nbsp;&nbsp;&nbsp;&nbsp;+ isAppInstalled</option>
 	
-	<option value="//api/name/registerAPIKey:">&nbsp;&nbsp;&nbsp;&nbsp;+ registerAPIKey:</option>
+	<option value="//api/name/openDirectionsFrom:to:routeType:">&nbsp;&nbsp;&nbsp;&nbsp;+ openDirectionsFrom:to:routeType:</option>
 	
 	
 	
@@ -74,9 +74,9 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isAPIKeyRegistered">isAPIKeyRegistered</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isAppInstalled">isAppInstalled</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/registerAPIKey:">registerAPIKey:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/openDirectionsFrom:to:routeType:">openDirectionsFrom:to:routeType:</a></span></li>
 	
 </ul></li>
 
@@ -87,7 +87,7 @@
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="MTDDirectionsRequestBing Class Reference" name="top"></a>
+				<a title="MTDNavigationApp Class Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -96,7 +96,7 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">MTDDirectionsRequestBing Class Reference</h1>
+						<h1 class="title title-header">MTDNavigationApp Class Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
@@ -104,10 +104,10 @@
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
 	<td class="specification-title">Inherits from</td>
-	<td class="specification-value"><a href="../Classes/MTDDirectionsRequest.html">MTDDirectionsRequest</a> : NSObject</td>
+	<td class="specification-value">NSObject</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">MTDDirectionsRequestBing.h</td>
+	<td class="specification-value">MTDNavigationApp.h</td>
 </tr>
 						</tbody></table></div>
 					
@@ -117,8 +117,7 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>An instance of MTDDirectionsRequestBing is a concrete instance to request directions data of a route
-from the <a href="http://msdn.microsoft.com/en-us/library/ff701705" title="Bing Routes API">Bing Routes API</a>.</p>
+						<p>This abstract class provides the API for opening given directions in another App on your iOS device</p>
 					</div>
 					
 					
@@ -136,16 +135,16 @@ from the <a href="http://msdn.microsoft.com/en-us/library/ff701705" title="Bing 
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/registerAPIKey:">+&nbsp;registerAPIKey:</a></code>
-		<span class="tooltip"><p>Set your Bing Maps API Key to be used, this key is mandatory.</p></span>
+		<code><a href="#//api/name/isAppInstalled">+&nbsp;isAppInstalled</a></code>
+		<span class="tooltip"><p>This method indicates whether the given app is installed on the device. Subclasses must override.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/isAPIKeyRegistered">+&nbsp;isAPIKeyRegistered</a></code>
-		<span class="tooltip"><p>This method indicates whether an API Key was set or not. It delivers no information
-whether the set API Key is valid or not.</p></span>
+		<code><a href="#//api/name/openDirectionsFrom:to:routeType:">+&nbsp;openDirectionsFrom:to:routeType:</a></code>
+		<span class="tooltip"><p>Opens the given app and displays the directions from fromCoordinate to toCoordinate
+with the chosen routeType.</p></span>
 	</span>
 	
 	
@@ -165,25 +164,24 @@ whether the set API Key is valid or not.</p></span>
 						<h2 class="subtitle subtitle-methods">Class Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/isAPIKeyRegistered" title="isAPIKeyRegistered"></a>
-	<h3 class="subsubtitle method-title">isAPIKeyRegistered</h3>
+	<a name="//api/name/isAppInstalled" title="isAppInstalled"></a>
+	<h3 class="subsubtitle method-title">isAppInstalled</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>This method indicates whether an API Key was set or not. It delivers no information
-whether the set API Key is valid or not.</p>
+		<p>This method indicates whether the given app is installed on the device. Subclasses must override.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>+ (BOOL)isAPIKeyRegistered</code></div>
+	<div class="method-subsection method-declaration"><code>+ (BOOL)isAppInstalled</code></div>
 	
 	
 	
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>YES if an API Key was set, NO otherwise</p>
+		<p>YES if the app is istalled, NO otherwise</p>
 	</div>
 	
 	
@@ -198,37 +196,53 @@ whether the set API Key is valid or not.</p>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDDirectionsRequestBing.h</code><br />
+		<code class="declared-in-ref">MTDNavigationApp.h</code><br />
 	</div>				
 	
 	
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/registerAPIKey:" title="registerAPIKey:"></a>
-	<h3 class="subsubtitle method-title">registerAPIKey:</h3>
+	<a name="//api/name/openDirectionsFrom:to:routeType:" title="openDirectionsFrom:to:routeType:"></a>
+	<h3 class="subsubtitle method-title">openDirectionsFrom:to:routeType:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Set your Bing Maps API Key to be used, this key is mandatory.</p>
+		<p>Opens the given app and displays the directions from fromCoordinate to toCoordinate
+with the chosen routeType.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>+ (void)registerAPIKey:(NSString *)<em>APIKey</em></code></div>
+	<div class="method-subsection method-declaration"><code>+ (BOOL)openDirectionsFrom:(MTDWaypoint *)<em>from</em> to:(MTDWaypoint *)<em>to</em> routeType:(MTDDirectionsRouteType)<em>routeType</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>APIKey</em></dt>
-			<dd><p>your Bing Maps API Key to use for making requests</p></dd>
+			<dt><em>from</em></dt>
+			<dd><p>the starting waypoint of the route</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>to</em></dt>
+			<dd><p>the end waypoint of the route</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>routeType</em></dt>
+			<dd><p>the specified form of travelling, e.g. walking, by bike, by car</p></dd>
 		</dl>
 		
 	</div>
 	
 	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>YES, if the app was opened successfully, NO otherwise</p>
+	</div>
 	
 	
 	
@@ -242,7 +256,7 @@ whether the set API Key is valid or not.</p>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MTDDirectionsRequestBing.h</code><br />
+		<code class="declared-in-ref">MTDNavigationApp.h</code><br />
 	</div>				
 	
 	

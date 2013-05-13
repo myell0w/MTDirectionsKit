@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
 		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
-		<meta name="generator" content="appledoc 2.0.5 (build 789)" />
+		<meta name="generator" content="appledoc 2.1 (build 840)" />
 	</head>
 	<body>
 		<header id="top_header">
@@ -141,7 +141,7 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>The <a href="MTDDirectionsDelegate.html">MTDDirectionsDelegate</a> protocol defines a set of optional methods that you can implement to receive
+						<p>The MTDDirectionsDelegate protocol defines a set of optional methods that you can implement to receive
 information updates about MTDirectionsKit-related stuff.</p>
 					</div>
 					
@@ -246,7 +246,7 @@ The default value, if not implemented, is 1.8f</p></span>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (UIColor *)mapView:(MTDMapView *)<em>mapView</em> colorForRoute:(MTDRoute *)<em>route</em> ofDirectionsOverlay:(MTDDirectionsOverlay *)<em>directionsOverlay</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (UIColor *)mapView:(id&lt;MTDMapView&gt;)<em>mapView</em> colorForRoute:(MTDRoute *)<em>route</em> ofDirectionsOverlay:(MTDDirectionsOverlay *)<em>directionsOverlay</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
@@ -300,7 +300,7 @@ The default value, if not implemented, is 1.8f</p></span>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (void)mapView:(MTDMapView *)<em>mapView</em> didActivateRoute:(MTDRoute *)<em>route</em> ofDirectionsOverlay:(MTDDirectionsOverlay *)<em>directionsOverlay</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)mapView:(id&lt;MTDMapView&gt;)<em>mapView</em> didActivateRoute:(MTDRoute *)<em>route</em> ofDirectionsOverlay:(MTDDirectionsOverlay *)<em>directionsOverlay</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
@@ -354,7 +354,7 @@ The default value, if not implemented, is 1.8f</p></span>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (void)mapView:(MTDMapView *)<em>mapView</em> didFailLoadingDirectionsOverlayWithError:(NSError *)<em>error</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)mapView:(id&lt;MTDMapView&gt;)<em>mapView</em> didFailLoadingDirectionsOverlayWithError:(NSError *)<em>error</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
@@ -405,7 +405,7 @@ by returning a different overlay than the one received as parameter</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (MTDDirectionsOverlay *)mapView:(MTDMapView *)<em>mapView</em> didFinishLoadingDirectionsOverlay:(MTDDirectionsOverlay *)<em>directionsOverlay</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (MTDDirectionsOverlay *)mapView:(id&lt;MTDMapView&gt;)<em>mapView</em> didFinishLoadingDirectionsOverlay:(MTDDirectionsOverlay *)<em>directionsOverlay</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
@@ -459,7 +459,7 @@ by returning a different overlay than the one received as parameter</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (void)mapView:(MTDMapView *)<em>mapView</em> didUpdateUserLocation:(MKUserLocation *)<em>userLocation</em> distanceToActiveRoute:(CGFloat)<em>distanceToActiveRoute</em> ofDirectionsOverlay:(MTDDirectionsOverlay *)<em>directionsOverlay</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)mapView:(id&lt;MTDMapView&gt;)<em>mapView</em> didUpdateUserLocation:(CLLocation *)<em>location</em> distanceToActiveRoute:(CGFloat)<em>distanceToActiveRoute</em> ofDirectionsOverlay:(MTDDirectionsOverlay *)<em>directionsOverlay</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
@@ -471,7 +471,7 @@ by returning a different overlay than the one received as parameter</p>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>userLocation</em></dt>
+			<dt><em>location</em></dt>
 			<dd><p>the location object representing the user’s latest location</p></dd>
 		</dl>
 		
@@ -530,7 +530,7 @@ The default value, if not implemented, is 1.8f</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (CGFloat)mapView:(MTDMapView *)<em>mapView</em> lineWidthFactorForDirectionsOverlay:(MTDDirectionsOverlay *)<em>directionsOverlay</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (CGFloat)mapView:(id&lt;MTDMapView&gt;)<em>mapView</em> lineWidthFactorForDirectionsOverlay:(MTDDirectionsOverlay *)<em>directionsOverlay</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
@@ -580,7 +580,7 @@ If this method isn&rsquo;t implemented route activation is enabled by default.</
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (BOOL)mapView:(MTDMapView *)<em>mapView</em> shouldActivateRoute:(MTDRoute *)<em>route</em> ofDirectionsOverlay:(MTDDirectionsOverlay *)<em>directionsOverlay</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (BOOL)mapView:(id&lt;MTDMapView&gt;)<em>mapView</em> shouldActivateRoute:(MTDRoute *)<em>route</em> ofDirectionsOverlay:(MTDDirectionsOverlay *)<em>directionsOverlay</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
@@ -634,7 +634,7 @@ If this method isn&rsquo;t implemented route activation is enabled by default.</
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (void)mapView:(MTDMapView *)<em>mapView</em> willStartLoadingDirectionsFrom:(MTDWaypoint *)<em>from</em> to:(MTDWaypoint *)<em>to</em> routeType:(MTDDirectionsRouteType)<em>routeType</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)mapView:(id&lt;MTDMapView&gt;)<em>mapView</em> willStartLoadingDirectionsFrom:(MTDWaypoint *)<em>from</em> to:(MTDWaypoint *)<em>to</em> routeType:(MTDDirectionsRouteType)<em>routeType</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
@@ -695,9 +695,9 @@ If this method isn&rsquo;t implemented route activation is enabled by default.</
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 @myell0w. All rights reserved. (Last updated: 2013-02-06)</span><br />
+						<p><span class="copyright">&copy; 2013 @myell0w. All rights reserved. (Last updated: 2013-05-13)</span><br />
 						
-						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						
 					</div>
 				</div>

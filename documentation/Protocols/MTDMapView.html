@@ -1,0 +1,1105 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>MTDMapView Protocol Reference</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<meta name="viewport" content="width=550" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.1 (build 840)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">MTDirectionsKit </a></h1>
+				<a id="developerHome" href="../index.html">@myell0w</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">MTDMapView Protocol Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar">
+				<li id="toc_button">
+					<button aria-label="Show Table of Contents" role="checkbox" class="open" id="table_of_contents"><span class="disclosure"></span>Table of Contents</button>
+				</li>
+				<li id="jumpto_button" role="navigation">
+					<select id="jumpTo">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+	
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+	
+	
+	
+	<option value="properties">Properties</option>
+	
+	<option value="//api/name/directionsDisplayType">&nbsp;&nbsp;&nbsp;&nbsp;directionsDisplayType</option>
+	
+	<option value="//api/name/directionsOverlay">&nbsp;&nbsp;&nbsp;&nbsp;directionsOverlay</option>
+	
+	
+	
+	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/activateRoute:">&nbsp;&nbsp;&nbsp;&nbsp;- activateRoute:</option>
+	
+	<option value="//api/name/cancelLoadOfDirections">&nbsp;&nbsp;&nbsp;&nbsp;- cancelLoadOfDirections</option>
+	
+	<option value="//api/name/distanceBetweenActiveRouteAndCoordinate:">&nbsp;&nbsp;&nbsp;&nbsp;- distanceBetweenActiveRouteAndCoordinate:</option>
+	
+	<option value="//api/name/loadAlternativeDirectionsFrom:to:routeType:zoomToShowDirections:">&nbsp;&nbsp;&nbsp;&nbsp;- loadAlternativeDirectionsFrom:to:routeType:zoomToShowDirections:</option>
+	
+	<option value="//api/name/loadDirectionsFrom:to:intermediateGoals:routeType:options:zoomToShowDirections:">&nbsp;&nbsp;&nbsp;&nbsp;- loadDirectionsFrom:to:intermediateGoals:routeType:options:zoomToShowDirections:</option>
+	
+	<option value="//api/name/loadDirectionsFrom:to:routeType:zoomToShowDirections:">&nbsp;&nbsp;&nbsp;&nbsp;- loadDirectionsFrom:to:routeType:zoomToShowDirections:</option>
+	
+	<option value="//api/name/loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:">&nbsp;&nbsp;&nbsp;&nbsp;- loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:</option>
+	
+	<option value="//api/name/openDirectionsInMapsApp">&nbsp;&nbsp;&nbsp;&nbsp;- openDirectionsInMapsApp</option>
+	
+	<option value="//api/name/removeDirectionsOverlay">&nbsp;&nbsp;&nbsp;&nbsp;- removeDirectionsOverlay</option>
+	
+	<option value="//api/name/setRegionToShowDirectionsAnimated:">&nbsp;&nbsp;&nbsp;&nbsp;- setRegionToShowDirectionsAnimated:</option>
+	
+	
+	
+</select>
+				</li>
+			</ul>
+		</header>
+		<nav id="tocContainer" class="isShowingTOC">
+			<ul id="toc" role="tree">
+				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
+
+
+
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Directions">Directions</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Inter-App">Inter-App</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Region">Region</a></span></li>
+	
+</ul></li>
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/directionsDisplayType">directionsDisplayType</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/directionsOverlay">directionsOverlay</a></span></li>
+	
+</ul></li>
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/activateRoute:">activateRoute:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/cancelLoadOfDirections">cancelLoadOfDirections</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/distanceBetweenActiveRouteAndCoordinate:">distanceBetweenActiveRouteAndCoordinate:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/loadAlternativeDirectionsFrom:to:routeType:zoomToShowDirections:">loadAlternativeDirectionsFrom:to:routeType:zoomToShowDirections:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/loadDirectionsFrom:to:intermediateGoals:routeType:options:zoomToShowDirections:">loadDirectionsFrom:to:intermediateGoals:routeType:options:zoomToShowDirections:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/loadDirectionsFrom:to:routeType:zoomToShowDirections:">loadDirectionsFrom:to:routeType:zoomToShowDirections:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:">loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/openDirectionsInMapsApp">openDirectionsInMapsApp</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/removeDirectionsOverlay">removeDirectionsOverlay</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setRegionToShowDirectionsAnimated:">setRegionToShowDirectionsAnimated:</a></span></li>
+	
+</ul></li>
+
+
+			</ul>
+		</nav>
+		<article>
+			<div id="contents" class="isShowingTOC" role="main">
+				<a title="MTDMapView Protocol Reference" name="top"></a>
+				<div class="main-navigation navigation-top">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">MTDMapView Protocol Reference</h1>
+					</div>		
+				</div>
+				<div id="container">	
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<td class="specification-title">Conforms to</td>
+	<td class="specification-value">NSObject</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">MTDMapViewProtocol.h</td>
+</tr>
+						</tbody></table></div>
+					
+					
+					
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>This protocol includes the common functionality that all MapView classes of MTDirectionsKit support.
+The subclasses are:</p>
+
+<ul>
+<li> MTDMapView (MapKit)</li>
+<li> <a href="../Classes/MTDGMSMapView.html">MTDGMSMapView</a> (Google Maps iOS SDK)</li>
+</ul>
+
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						<a title="Directions" name="task_Directions"></a>
+						<h3 class="subsubtitle task-title">Directions</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/directionsDisplayType">&nbsp;&nbsp;directionsDisplayType</a></code>
+		<span class="tooltip"><p>The current display type of the directions overlay. You can change the way the directions
+are shown on top of your instance of MTDMapView by changing the property. A change results
+in a re-draw of the overlay.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	<span class="task-item-suffix">required method</span>
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/directionsOverlay">&nbsp;&nbsp;directionsOverlay</a></code>
+		<span class="tooltip"><p>The current active direction overlay. Setting the directions overlay automatically removes
+the previous directionsOverlay (if existing) and adds the new directionsOverlay as an overlay
+to the underlying MKMapView.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	<span class="task-item-suffix">required method</span>
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/loadDirectionsFrom:to:routeType:zoomToShowDirections:">&ndash;&nbsp;loadDirectionsFrom:to:routeType:zoomToShowDirections:</a></code>
+		<span class="tooltip"><p>Starts a request and loads the directions between the specified coordinates.
+When the request is finished the <a href="#//api/name/directionsOverlay">directionsOverlay</a> gets set on the MapView and
+the region gets zoomed (animated) to show the whole overlay, if the flag zoomToShowDirections is set.</p></span>
+	</span>
+	
+	<span class="task-item-suffix">required method</span>
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:">&ndash;&nbsp;loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:</a></code>
+		<span class="tooltip"><p>Starts a request and loads the directions between the specified addresses.
+When the request is finished the <a href="#//api/name/directionsOverlay">directionsOverlay</a> gets set on the MapView and
+the region gets zoomed (animated) to show the whole overlay, if the flag zoomToShowDirections is set.</p></span>
+	</span>
+	
+	<span class="task-item-suffix">required method</span>
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/loadDirectionsFrom:to:intermediateGoals:routeType:options:zoomToShowDirections:">&ndash;&nbsp;loadDirectionsFrom:to:intermediateGoals:routeType:options:zoomToShowDirections:</a></code>
+		<span class="tooltip"><p>Starts a request and loads the directions between the specified start and end waypoints while
+travelling to all intermediate goals along the route. When the request is finished the
+<a href="#//api/name/directionsOverlay">directionsOverlay</a> gets set on the MapView and the region gets zoomed (animated) to show the
+whole overlay, if the flag zoomToShowDirections is set.</p></span>
+	</span>
+	
+	<span class="task-item-suffix">required method</span>
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/loadAlternativeDirectionsFrom:to:routeType:zoomToShowDirections:">&ndash;&nbsp;loadAlternativeDirectionsFrom:to:routeType:zoomToShowDirections:</a></code>
+		<span class="tooltip"><p>Starts a request and loads maximumNumberOfAlternatives different routes between the
+specified start and end waypoints. When the request is finished the <a href="#//api/name/directionsOverlay">directionsOverlay</a> gets set
+on the MapView and the region gets zoomed (animated) to show the whole overlay, if the flag
+zoomToShowDirections is set.</p></span>
+	</span>
+	
+	<span class="task-item-suffix">required method</span>
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/cancelLoadOfDirections">&ndash;&nbsp;cancelLoadOfDirections</a></code>
+		<span class="tooltip"><p>Cancels a possible ongoing request for loading directions.
+Does nothing if there is no request active.</p></span>
+	</span>
+	
+	<span class="task-item-suffix">required method</span>
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/removeDirectionsOverlay">&ndash;&nbsp;removeDirectionsOverlay</a></code>
+		<span class="tooltip"><p>Removes the currenty displayed <a href="#//api/name/directionsOverlay">directionsOverlay</a> view from the MapView,
+if one exists. Does nothing otherwise.</p></span>
+	</span>
+	
+	<span class="task-item-suffix">required method</span>
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/activateRoute:">&ndash;&nbsp;activateRoute:</a></code>
+		<span class="tooltip"><p>If multiple routes are available, selects the active route.
+The delegate will be called as if the user had changed the active route by tapping on it</p></span>
+	</span>
+	
+	<span class="task-item-suffix">required method</span>
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/distanceBetweenActiveRouteAndCoordinate:">&ndash;&nbsp;distanceBetweenActiveRouteAndCoordinate:</a></code>
+		<span class="tooltip"><p>Returns the minimum distance in points between the givon coordinate and the currently active route.
+You can use this method to determine if the user has moved away a specified value from the desired
+route and reload the directions in that case.</p></span>
+	</span>
+	
+	<span class="task-item-suffix">required method</span>
+</li>
+						</ul>
+						
+						
+						<a title="Inter-App" name="task_Inter-App"></a>
+						<h3 class="subsubtitle task-title">Inter-App</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/openDirectionsInMapsApp">&ndash;&nbsp;openDirectionsInMapsApp</a></code>
+		<span class="tooltip"><p>If <a href="#//api/name/directionsOverlay">directionsOverlay</a> is currently set, this method opens the same directions
+that are currently displayed on top of your MTDMapView in the built-in Maps.app
+of the user&rsquo;s device. Does nothing otherwise.</p></span>
+	</span>
+	
+	<span class="task-item-suffix">required method</span>
+</li>
+						</ul>
+						
+						
+						<a title="Region" name="task_Region"></a>
+						<h3 class="subsubtitle task-title">Region</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setRegionToShowDirectionsAnimated:">&ndash;&nbsp;setRegionToShowDirectionsAnimated:</a></code>
+		<span class="tooltip"><p>Sets the region of the MapView to show the whole <a href="#//api/name/directionsOverlay">directionsOverlay</a> at once.</p></span>
+	</span>
+	
+	<span class="task-item-suffix">required method</span>
+</li>
+						</ul>
+						
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Properties" name="properties"></a>
+						<h2 class="subtitle subtitle-methods">Properties</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/directionsDisplayType" title="directionsDisplayType"></a>
+	<h3 class="subsubtitle method-title">directionsDisplayType</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The current display type of the directions overlay. You can change the way the directions
+are shown on top of your instance of MTDMapView by changing the property. A change results
+in a re-draw of the overlay.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) MTDDirectionsDisplayType directionsDisplayType</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Currently there are the following types supported:</p>
+
+<ul>
+<li>MTDDirectionsDisplayTypeNone: don&rsquo;t display anything</li>
+<li>MTDDirectionsDisplayTypeOverview: displays a polyline with all Waypoints of the route</li>
+</ul>
+
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDMapViewProtocol.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/directionsOverlay" title="directionsOverlay"></a>
+	<h3 class="subsubtitle method-title">directionsOverlay</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The current active direction overlay. Setting the directions overlay automatically removes
+the previous directionsOverlay (if existing) and adds the new directionsOverlay as an overlay
+to the underlying MKMapView.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) MTDDirectionsOverlay *directionsOverlay</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDMapViewProtocol.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/activateRoute:" title="activateRoute:"></a>
+	<h3 class="subsubtitle method-title">activateRoute:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>If multiple routes are available, selects the active route.
+The delegate will be called as if the user had changed the active route by tapping on it</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)activateRoute:(MTDRoute *)<em>route</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>route</em></dt>
+			<dd><p>the new active route</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDMapViewProtocol.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/cancelLoadOfDirections" title="cancelLoadOfDirections"></a>
+	<h3 class="subsubtitle method-title">cancelLoadOfDirections</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Cancels a possible ongoing request for loading directions.
+Does nothing if there is no request active.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)cancelLoadOfDirections</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/loadDirectionsFrom:to:routeType:zoomToShowDirections:">&ndash; loadDirectionsFrom:to:routeType:zoomToShowDirections:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDMapViewProtocol.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/distanceBetweenActiveRouteAndCoordinate:" title="distanceBetweenActiveRouteAndCoordinate:"></a>
+	<h3 class="subsubtitle method-title">distanceBetweenActiveRouteAndCoordinate:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns the minimum distance in points between the givon coordinate and the currently active route.
+You can use this method to determine if the user has moved away a specified value from the desired
+route and reload the directions in that case.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (CGFloat)distanceBetweenActiveRouteAndCoordinate:(CLLocationCoordinate2D)<em>coordinate</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>coordinate</em></dt>
+			<dd><p>a coordinate on the map</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>in case there currently is an active route the minimum distance between the coordinate to any line segment of the route.
+In case there is no active route, FLT_MAX is returned</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDMapViewProtocol.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/loadAlternativeDirectionsFrom:to:routeType:zoomToShowDirections:" title="loadAlternativeDirectionsFrom:to:routeType:zoomToShowDirections:"></a>
+	<h3 class="subsubtitle method-title">loadAlternativeDirectionsFrom:to:routeType:zoomToShowDirections:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Starts a request and loads maximumNumberOfAlternatives different routes between the
+specified start and end waypoints. When the request is finished the <a href="#//api/name/directionsOverlay">directionsOverlay</a> gets set
+on the MapView and the region gets zoomed (animated) to show the whole overlay, if the flag
+zoomToShowDirections is set.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)loadAlternativeDirectionsFrom:(MTDWaypoint *)<em>from</em> to:(MTDWaypoint *)<em>to</em> routeType:(MTDDirectionsRouteType)<em>routeType</em> zoomToShowDirections:(BOOL)<em>zoomToShowDirections</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>from</em></dt>
+			<dd><p>the starting waypoint of the route</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>to</em></dt>
+			<dd><p>the end waypoint of the route</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>routeType</em></dt>
+			<dd><p>the type of the route requested, e.g. pedestrian, cycling, fastest driving</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>zoomToShowDirections</em></dt>
+			<dd><p>flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/loadDirectionsFrom:to:routeType:zoomToShowDirections:">&ndash; loadDirectionsFrom:to:routeType:zoomToShowDirections:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:">&ndash; loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/loadDirectionsFrom:to:intermediateGoals:routeType:options:zoomToShowDirections:">&ndash; loadDirectionsFrom:to:intermediateGoals:routeType:options:zoomToShowDirections:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/cancelLoadOfDirections">&ndash; cancelLoadOfDirections</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDMapViewProtocol.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/loadDirectionsFrom:to:intermediateGoals:routeType:options:zoomToShowDirections:" title="loadDirectionsFrom:to:intermediateGoals:routeType:options:zoomToShowDirections:"></a>
+	<h3 class="subsubtitle method-title">loadDirectionsFrom:to:intermediateGoals:routeType:options:zoomToShowDirections:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Starts a request and loads the directions between the specified start and end waypoints while
+travelling to all intermediate goals along the route. When the request is finished the
+<a href="#//api/name/directionsOverlay">directionsOverlay</a> gets set on the MapView and the region gets zoomed (animated) to show the
+whole overlay, if the flag zoomToShowDirections is set.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)loadDirectionsFrom:(MTDWaypoint *)<em>from</em> to:(MTDWaypoint *)<em>to</em> intermediateGoals:(NSArray *)<em>intermediateGoals</em> routeType:(MTDDirectionsRouteType)<em>routeType</em> options:(MTDDirectionsRequestOptions)<em>options</em> zoomToShowDirections:(BOOL)<em>zoomToShowDirections</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>from</em></dt>
+			<dd><p>the starting waypoint of the route</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>to</em></dt>
+			<dd><p>the end waypoint of the route</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>intermediateGoals</em></dt>
+			<dd><p>an optional array of waypoint we want to travel to along the route</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>routeType</em></dt>
+			<dd><p>the type of the route requested, e.g. pedestrian, cycling, fastest driving</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>options</em></dt>
+			<dd><p>mask of options that can be specified on the request, e.g. optimization of the route, avoiding toll roads etc.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>zoomToShowDirections</em></dt>
+			<dd><p>flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/loadDirectionsFrom:to:routeType:zoomToShowDirections:">&ndash; loadDirectionsFrom:to:routeType:zoomToShowDirections:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:">&ndash; loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/loadAlternativeDirectionsFrom:to:routeType:zoomToShowDirections:">&ndash; loadAlternativeDirectionsFrom:to:routeType:zoomToShowDirections:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/cancelLoadOfDirections">&ndash; cancelLoadOfDirections</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDMapViewProtocol.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/loadDirectionsFrom:to:routeType:zoomToShowDirections:" title="loadDirectionsFrom:to:routeType:zoomToShowDirections:"></a>
+	<h3 class="subsubtitle method-title">loadDirectionsFrom:to:routeType:zoomToShowDirections:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Starts a request and loads the directions between the specified coordinates.
+When the request is finished the <a href="#//api/name/directionsOverlay">directionsOverlay</a> gets set on the MapView and
+the region gets zoomed (animated) to show the whole overlay, if the flag zoomToShowDirections is set.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)loadDirectionsFrom:(CLLocationCoordinate2D)<em>fromCoordinate</em> to:(CLLocationCoordinate2D)<em>toCoordinate</em> routeType:(MTDDirectionsRouteType)<em>routeType</em> zoomToShowDirections:(BOOL)<em>zoomToShowDirections</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>fromCoordinate</em></dt>
+			<dd><p>the start point of the direction</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>toCoordinate</em></dt>
+			<dd><p>the end point of the direction</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>routeType</em></dt>
+			<dd><p>the type of the route requested, e.g. pedestrian, cycling, fastest driving</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>zoomToShowDirections</em></dt>
+			<dd><p>flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:">&ndash; loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/loadDirectionsFrom:to:intermediateGoals:routeType:options:zoomToShowDirections:">&ndash; loadDirectionsFrom:to:intermediateGoals:routeType:options:zoomToShowDirections:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/loadAlternativeDirectionsFrom:to:routeType:zoomToShowDirections:">&ndash; loadAlternativeDirectionsFrom:to:routeType:zoomToShowDirections:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/cancelLoadOfDirections">&ndash; cancelLoadOfDirections</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDMapViewProtocol.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:" title="loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:"></a>
+	<h3 class="subsubtitle method-title">loadDirectionsFromAddress:toAddress:routeType:zoomToShowDirections:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Starts a request and loads the directions between the specified addresses.
+When the request is finished the <a href="#//api/name/directionsOverlay">directionsOverlay</a> gets set on the MapView and
+the region gets zoomed (animated) to show the whole overlay, if the flag zoomToShowDirections is set.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)loadDirectionsFromAddress:(NSString *)<em>fromAddress</em> toAddress:(NSString *)<em>toAddress</em> routeType:(MTDDirectionsRouteType)<em>routeType</em> zoomToShowDirections:(BOOL)<em>zoomToShowDirections</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>fromAddress</em></dt>
+			<dd><p>the address of the starting point of the route</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>toAddress</em></dt>
+			<dd><p>the addresss of the end point of the route</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>routeType</em></dt>
+			<dd><p>the type of the route requested, e.g. pedestrian, cycling, fastest driving</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>zoomToShowDirections</em></dt>
+			<dd><p>flag whether the mapView gets zoomed to show the overlay (gets zoomed animated)</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/loadDirectionsFrom:to:routeType:zoomToShowDirections:">&ndash; loadDirectionsFrom:to:routeType:zoomToShowDirections:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/loadDirectionsFrom:to:intermediateGoals:routeType:options:zoomToShowDirections:">&ndash; loadDirectionsFrom:to:intermediateGoals:routeType:options:zoomToShowDirections:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/loadAlternativeDirectionsFrom:to:routeType:zoomToShowDirections:">&ndash; loadAlternativeDirectionsFrom:to:routeType:zoomToShowDirections:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/cancelLoadOfDirections">&ndash; cancelLoadOfDirections</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDMapViewProtocol.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/openDirectionsInMapsApp" title="openDirectionsInMapsApp"></a>
+	<h3 class="subsubtitle method-title">openDirectionsInMapsApp</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>If <a href="#//api/name/directionsOverlay">directionsOverlay</a> is currently set, this method opens the same directions
+that are currently displayed on top of your MTDMapView in the built-in Maps.app
+of the user&rsquo;s device. Does nothing otherwise.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (BOOL)openDirectionsInMapsApp</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>YES in case the <a href="#//api/name/directionsOverlay">directionsOverlay</a> is currently set and the Maps App was opened, NO otherwise</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDMapViewProtocol.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/removeDirectionsOverlay" title="removeDirectionsOverlay"></a>
+	<h3 class="subsubtitle method-title">removeDirectionsOverlay</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Removes the currenty displayed <a href="#//api/name/directionsOverlay">directionsOverlay</a> view from the MapView,
+if one exists. Does nothing otherwise.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)removeDirectionsOverlay</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDMapViewProtocol.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/setRegionToShowDirectionsAnimated:" title="setRegionToShowDirectionsAnimated:"></a>
+	<h3 class="subsubtitle method-title">setRegionToShowDirectionsAnimated:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Sets the region of the MapView to show the whole <a href="#//api/name/directionsOverlay">directionsOverlay</a> at once.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)setRegionToShowDirectionsAnimated:(BOOL)<em>animated</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>animated</em></dt>
+			<dd><p>flag whether the region gets changed animated, or not</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MTDMapViewProtocol.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2013 @myell0w. All rights reserved. (Last updated: 2013-05-13)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+		<script type="text/javascript">
+			function jumpToChange()
+			{
+				window.location.hash = this.options[this.selectedIndex].value;
+			}
+			
+			function toggleTOC()
+			{
+				var contents = document.getElementById('contents');
+				var tocContainer = document.getElementById('tocContainer');
+				
+				if (this.getAttribute('class') == 'open')
+				{
+					this.setAttribute('class', '');
+					contents.setAttribute('class', '');
+					tocContainer.setAttribute('class', '');
+					
+					window.name = "hideTOC";
+				}
+				else
+				{
+					this.setAttribute('class', 'open');
+					contents.setAttribute('class', 'isShowingTOC');
+					tocContainer.setAttribute('class', 'isShowingTOC');
+					
+					window.name = "";
+				}
+				return false;
+			}
+			
+			function toggleTOCEntryChildren(e)
+			{
+				e.stopPropagation();
+				var currentClass = this.getAttribute('class');
+				if (currentClass == 'children') {
+					this.setAttribute('class', 'children open');
+				}
+				else if (currentClass == 'children open') {
+					this.setAttribute('class', 'children');
+				}
+				return false;
+			}
+			
+			function tocEntryClick(e)
+			{
+				e.stopPropagation();
+				return true;
+			}
+			
+			function init()
+			{
+				var selectElement = document.getElementById('jumpTo');
+				selectElement.addEventListener('change', jumpToChange, false);
+				
+				var tocButton = document.getElementById('table_of_contents');
+				tocButton.addEventListener('click', toggleTOC, false);
+				
+				var taskTreeItem = document.getElementById('task_treeitem');
+				if (taskTreeItem.getElementsByTagName('li').length > 0)
+				{
+					taskTreeItem.setAttribute('class', 'children');
+					taskTreeItem.firstChild.setAttribute('class', 'disclosure');
+				}
+				
+				var tocList = document.getElementById('toc');
+				
+				var tocEntries = tocList.getElementsByTagName('li');
+				for (var i = 0; i < tocEntries.length; i++) {
+					tocEntries[i].addEventListener('click', toggleTOCEntryChildren, false);
+				}
+				
+				var tocLinks = tocList.getElementsByTagName('a');
+				for (var i = 0; i < tocLinks.length; i++) {
+					tocLinks[i].addEventListener('click', tocEntryClick, false);
+				}
+				
+				if (window.name == "hideTOC") {
+					toggleTOC.call(tocButton);
+				}
+			}
+			
+			window.onload = init;
+		</script>
+	</body>
+</html>
