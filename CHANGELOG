@@ -1,3 +1,13 @@
+=1.7 13.5.2013
+ * Support for Google Maps SDK for iOS
+    - MTDGSMMapView has one slight difference: there is one instance of MTDGSMDirectionsOverlayView per Route as apposed to just one view for all routes
+ * Fixed a possible crash when deallocating an instance of MTDMapView while directions are currently requested
+ * Fixed a bug affecting MTDDirectionsSetLocale() when called very early in the lifecycle of your app
+ * Changed MTDDirectionsSupportsAppleMaps() to MTDDirectionsUsesAppleMaps() and change semantics: 
+   returns NO, if the Google Maps SDK for iOS is present
+ * Extracted common functionality between MapKit and Google Maps SDK, new protocol MTDMapView
+ * Changed delegate calls from (MTDMapView *) to (id<MTDMapView>)
+
 =1.6.1 6.2.2013
  * Removed fromLocation/fromAddress & toLocation/toAddress in favor of from and to in MTDDirectionsOverlay
  * Convenience method on MTDWaypoint to check if it represents the current location

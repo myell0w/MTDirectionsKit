@@ -21,7 +21,14 @@ MTDirectionsKit can use the following three APIs for gathering routing informati
 
 MTDirectionsKit is very easy to use, here's a sample call:
 
-    MTDMapView *_mapView = [[MTDMapView alloc] initWithFrame:self.view.bounds];
+	// MapKit
+	MTDMapView *_mapView = [[MTDMapView alloc] initWithFrame:frame];
+ 
+	// Google Maps SDK for iOS
+	GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:51.3871
+    														longitude:-1.0316
+                                                            	 zoom:6];
+	MTDGSMMapView *_mapView = [MTDGMSMapView mapWithFrame:self.view.bounds camera:camera];
     
     // ...
     // setup _mapView
@@ -64,7 +71,13 @@ For MTDirectionsKit to work you have to add
     MapKit.framework
     libxml2.dylib
 
-to your target's linked libraries (found under *Build Phases*, see pictures below).
+to your target's linked libraries (found under *Build Phases*, see pictures below). 
+Moreover open the Build Settings of your project and add **-ObjC** to the *Other Linker Flags* section.
+
+If you want to use the built-in images for the textual instructions make sure to alse add **MTDirectionsKit.bundle** to your projects resources. 
+You can find MTDirectionsKit.bundle under the Resources folder of MTDirectionsKit.
+
+![MTDirectionsKit.bundle](http://f.cl.ly/items/0o1D0n1W050603373j1z/MTDirectionsKit_bundle.png "Bundle")
 
 ### Integrating Binary Framework
 
@@ -74,7 +87,7 @@ Just drag MTDirectionsKit.framework onto the *Frameworks*-group of your App, add
 
 everywhere you want to use it and you are good to go.
 
-![MTDirectionsKit.framework](http://f.cl.ly/items/3x0F1L400f3r1T142p14/MTDirectionsKit_Framework.png "Binary Framework")
+[MTDirectionsKit.framework](http://f.cl.ly/items/3x0F1L400f3r1T142p14/MTDirectionsKit_Framework.png)
 
 ### Integrating MTDirectionsKit.xcodeproj (Dependency)
 
@@ -91,6 +104,13 @@ You are good to go, just
 everywhere where you want to use it.
 
 ![MTDirectionsKit.xcodeproj as Dependency](http://f.cl.ly/items/3D40042w200D0a3u0h0R/MTDirectionsKit_Dependency.png "Dependency")
+
+### Google Maps SDK for iOS
+If you use the Google Maps SDK version of MTDirectionsKit be sure to check out 
+[Google's Guide for integrating their SDK](https://developers.google.com/maps/documentation/ios/start).
+
+Official support is only provided for the Google Maps SDK version included in the MTDirectionsKit distribution bundle, 
+other versions may be unstable or buggy.
 
 ## Requirements
 
