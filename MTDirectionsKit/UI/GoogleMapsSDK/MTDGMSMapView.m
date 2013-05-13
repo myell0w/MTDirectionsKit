@@ -38,7 +38,9 @@ static char wmContext;
 @end
 
 
-@implementation MTDGMSMapView
+@implementation MTDGMSMapView {
+    BOOL _observingLocation;
+}
 
 @synthesize directionsOverlay = _directionsOverlay;
 @synthesize directionsDisplayType = _directionsDisplayType;
@@ -47,12 +49,21 @@ static char wmContext;
 #pragma mark - Lifecycle
 ////////////////////////////////////////////////////////////////////////
 
-- (id)initWithFrame:(CGRect)frame camera:(GMSCameraPosition *)camera {
++ (instancetype)mapWithFrame:(CGRect)frame camera:(GMSCameraPosition *)camera {
+    return (MTDGMSMapView *)[super mapWithFrame:frame camera:camera];
+}
+
+- (instancetype)initWithFrame:(CGRect)frame camera:(GMSCameraPosition *)camera {
     if ((self = [super initWithFrame:frame camera:camera])) {
         [self mtd_setup];
     }
 
     return self;
+}
+
+- (id)initWithFrame:(__unused CGRect)frame {
+    MTDAssert(NO, @"Unable to create an instance of MTDGSMMapView with initWithFrame:. Use + [MTDGSMMapView mapViewWithFrame:camera:] instead.");
+    return nil;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -68,7 +79,10 @@ static char wmContext;
     _mtd_proxy = nil;
     self.delegate = nil;
     [self cancelLoadOfDirections];
-    [self removeObserver:self forKeyPath:MTDKey(myLocation)];
+
+    if (_observingLocation) {
+        [self removeObserver:self forKeyPath:MTDKey(myLocation)];
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -392,7 +406,10 @@ static char wmContext;
     _directionsEdgePadding = 125.f;
     _mtd_proxy = [[MTDMapViewProxy alloc] initWithMapView:self];
 
-    [self addObserver:self forKeyPath:MTDKey(myLocation) options:NSKeyValueObservingOptionNew context:&myLocationContext];
+    @synchronized(self) {
+        [self addObserver:self forKeyPath:MTDKey(myLocation) options:NSKeyValueObservingOptionNew context:&myLocationContext];
+        _observingLocation = YES;
+	}
 
     // Watermark
     {

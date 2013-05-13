@@ -42,6 +42,20 @@
 @interface MTDGMSMapView : GMSMapView <MTDMapView>
 
 /******************************************
+ @name Lifecycle
+ ******************************************/
+
+/**
+ Creates and returns an instance of MTDGMSMapView.
+ 
+ @param frame The frame rectangle for the view, measured in points. The origin of the frame is relative to the superview in which you plan to add it. This method uses the frame rectangle to set the center and bounds properties accordingly.
+ @param camera Controls the camera, which defines how the map is oriented
+
+ @return an instance of MTDGMSMapView
+ */
++ (instancetype)mapWithFrame:(CGRect)frame camera:(GMSCameraPosition *)camera;
+
+/******************************************
  @name Delegate
  ******************************************/
 
