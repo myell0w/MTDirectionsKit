@@ -139,6 +139,27 @@
 		width: 100%;
 	}
 		div.team_members .person:last-child { margin-bottom: 0; }
+		
+	/* Purchase */
+	div.purchase_list .one_third {
+		float: none;
+		width: 100%;
+	}
+	div.purchase_list .one_third:last-child {
+		margin-bottom: 0;
+	}
+	div.purchase_list .one_third.column_last {
+		margin-right: 4% !important;
+	}
+	
+	div.purchase div.content {
+		height: auto;
+	}
+
+	div.purchase div.content ul {
+		height: auto;
+	}
+		
 	/* Features */
 	div.feature_list .one_half {
 		float: none;
@@ -163,6 +184,7 @@
 		width: 100%;
 	}
 	div.press_mentions ul li:last-child { margin-bottom: 0; }
+	div.app_references { width: 100% };
 	/* Contact */
 	div#contact_form p.left,
 	div#contact_form p.right {
@@ -229,6 +251,13 @@
 	section #pages .bottom_shadow { display: none; }
 	section #pages div.page 			{ padding-top: 30px; }
 	section #pages .content_box 	{ padding-top: 5px; }
+		
+	/* Purchase */
+	div.purchase .large_button#apple {
+		width: 110px;
+	}
+	
 	/* Footer */
 	footer { padding-top: 20px;	}
+	div.app_references { width: 100% };
 }

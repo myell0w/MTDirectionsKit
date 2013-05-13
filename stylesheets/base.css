@@ -23,6 +23,7 @@
 	13. Buttons
 	14. Lists
 	15. Forms	
+	16. Gists
 
 -----------------------------------------------------------------------------------*/
 * { margin: 0; padding: 0; }
@@ -35,12 +36,12 @@ body {
 	background: #fff;
 }
 .container {
-	width: 1000px;
+	width: 1200px;
 	margin: 0 auto;
 }
 section #pages {
 	float: right;
-	width: 525px;
+	width: 725px;
 	background: transparent url('../images/light-page_shadow.png') repeat-y top left;
 	padding: 0px 0px 0px 50px;
 	position: relative;
@@ -66,17 +67,22 @@ section #pages {
 		top: 0px;
 		padding-top: 40px;
 	}
-		section #pages .content_box {
+section #pages .content_box {
 			padding-top: 15px;
 		}
-		section #pages p,
-		section #pages ul {
+section #pages p, section #pages ul {
 			color: #6b6b6b;
 		}
-		section #pages img {
+section #pages img {
 			-webkit-border-radius: 3px;
 			-moz-border-radius: 3px;
 			border-radius: 3px;
+		}	
+div.app_references {
+			margin-top:15px;
+			margin-left: auto;
+			margin-right:auto;
+			width:1000px;
 		}
 /*--------------------------------------------
 2. Header & Navigation
@@ -448,7 +454,7 @@ div.releases {
 		margin-bottom: 25px;
 		padding-bottom: 15px;
 		border-bottom: 1px solid #e1e1e1;
-		width: 525px;
+		width: 625px;
 	}
 	article.release:last-child { border: none; padding-bottom: 0; }
 			article.release h2{
@@ -635,12 +641,19 @@ h1 {
 	font-weight: normal;
 	letter-spacing: -0.05em;
 }
+h1.purchase {
+	font-size: 18px;
+	color:#888;
+	margin-top: 2px;
+	margin-bottom:2px;
+}
 h2 {
 	font-size: 16px;
 	color: #353535;
 }
 h2.price {
-	margin-bottom:5px;
+	font-size: 14px;
+	margin-bottom:2px;
 	
 }
 h2.saleOldPrice {
@@ -983,7 +996,7 @@ div.one_fourth  { width: 22%; }
 }
 .button.black a { color: #fff }
 /*--------------------------------------------
-15. Lists
+14. Lists
 ---------------------------------------------*/
 ul.social {
 	list-style: none;
@@ -1017,8 +1030,32 @@ ul.social {
 div.toggle_list {
 	margin-bottom: 25px;
 }
+
+div.purchase div.content {
+	height: 225px;
+}
+
+div.purchase div.content ul {
+	height: 150px;
+}
+div.purchase .large_button#apple {
+	width: 155px;
+}
 	div.toggle_list ul {
 		list-style: none;
+	}
+	
+	div.toggle_list div.content ul {
+		list-style: disc;
+		list-style-position: outside;
+		padding-left: 20px;
+		margin-top: 10px;
+		margin-bottom: 15px;
+	}
+	
+	div.toggle_list div.content ul li {
+		margin-bottom: 4px;
+		margin-top: 4px;
 	}
 		div.toggle_list ul li {
 			margin-bottom: 10px;
@@ -1050,7 +1087,7 @@ div.toggle_list {
 				div.toggle_list ul li div.content p { margin-bottom: 15px; font-size: 12px; }
 				div.toggle_list ul li div.content p:last-child { margin-bottom: 0; }
 /*--------------------------------------------
-16. Forms
+15. Forms
 ---------------------------------------------*/
 input,textarea {
 	font-family: "Helvetica Neue", helvetica, sans-serif;
@@ -1103,15 +1140,15 @@ img { border: none; }
 .clear { clear: both; }
 
 /*-------------------------------------------------
-17. Gists
+16. Gists
 ---------------------------------------------------*/
 .gist{
   margin: 15px 0 !important;
   min-width:320px;
-  max-width: 525px;
+  max-width: 725px;
 }
 
-.gist-file{
+.gist-file {
   border: none !important;
 }
 
