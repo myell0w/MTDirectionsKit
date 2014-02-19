@@ -2,12 +2,9 @@
 
 Did you ever wonder why Apple didn't provide a way to show directions directly on top of MKMapView and force you to switch
 to their built-in Maps.app just to guide your users somewhere? We too, that's why we built MTDirectionsKit.
-Switching to Maps.app just to show directions results in a context-switch and can confuse your users, thus increasing the
-chance that they won't return to your Application.
 
-MTDirectionsKit is a full-featured and easy to use solution to show directions in your App, directly on top of MKMapView.
-Not only will your users thank you for not throwing them out of your App, it will also distinguish your App from all the 
-others that don't offer this functionality.
+MTDirectionsKit is a full-featured and easy to use solution to show directions in your App, directly on top of MKMapView and
+works pre-iOS7.
 
 Convinced? Let's get you started.
 
@@ -21,13 +18,17 @@ MTDirectionsKit can use the following three APIs for gathering routing informati
 
 The honest answer: it's not worth the investment anymore. Since Apple previewed iOS 7 at WWDC 2013 sales basically vanished and I 
 couldn't justify my time investment anymore. The MapQuest API changed, there is still no 64 Bit support and the API could need some
-adjustments to fit iOS7's built-in routing API. The worst I could have done would have been to let MTDirectionsKit die. By open sourcing
-it I have high hopes that someone will pick it up and make it up-to-date again.
+adjustments to fit iOS7's built-in routing API. The worst I could have done would have been to let MTDirectionsKit die. 
+
+By open sourcing it I have high hopes that someone will pick it up and make it up-to-date again. At least I hope that some of you
+will be able to learn from the code and how to setup an iOS component.
+
+Tell me how you like it, you can find me on Twitter as [@myell0w](https://twitter.com/myell0w).
 
 ## Can I still buy a commercial license?
 
-MTDirectionsKit is now free to use, if you add a license to your app or to your settings bundle. You can still purchase
-a commercial license, if you don't want to add the license file to your app, or simply if you want to support me.
+MTDirectionsKit is now free to use, if you add a license to your app or to your settings bundle. You can still [purchase
+a non-attribution license](http://sites.fastspring.com/mtdirectionskit/product/mtdirectionskit), if you don't want to add the license file to your app, or simply if you want to support me.
 
 
 ## How to use?
