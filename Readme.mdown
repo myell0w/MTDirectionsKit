@@ -17,6 +17,19 @@ MTDirectionsKit can use the following three APIs for gathering routing informati
 2. [Google Directions API](https://developers.google.com/maps/documentation/directions/)
 3. [Bing Routes API](http://msdn.microsoft.com/en-us/library/ff701705)
 
+## Why did you open source it?
+
+The honest answer: it's not worth the investment anymore. Since Apple previewed iOS 7 at WWDC 2013 sales basically vanished and I 
+couldn't justify my time investment anymore. The MapQuest API changed, there is still no 64 Bit support and the API could need some
+adjustments to fit iOS7's built-in routing API. The worst I could have done would have been to let MTDirectionsKit die. By open sourcing
+it I have high hopes that someone will pick it up and make it up-to-date again.
+
+## Can I still buy a commercial license?
+
+MTDirectionsKit is now free to use, if you add a license to your app or to your settings bundle. You can still purchase
+a commercial license, if you don't want to add the license file to your app, or simply if you want to support me.
+
+
 ## How to use?
 
 MTDirectionsKit is very easy to use, here's a sample call:
