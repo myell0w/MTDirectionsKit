@@ -69,7 +69,17 @@ MTDirectionsKit is very easy to use, here's a sample call:
             
 To see a detailed example on how to use MTDirectionsKit have a look at the provided Demo Application.
 
-## Integration
+## Installation with CocoaPods
+
+[CocoaPods](http://cocoapods.org) is a dependency manager for Objective-C, which automates and simplifies the process of using 3rd-party libraries like MTDirectionsKit in your projects. 
+
+#### Podfile
+
+```ruby
+platform :ios, '6.0'
+pod "MTDirectionsKit", "~> 1.7.0"
+
+## Integration without CocoaPods
 
 There are two ways to integrate MTDirectionsKit into your App: 
 
