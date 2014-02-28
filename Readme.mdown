@@ -35,38 +35,37 @@ a non-attribution license](http://sites.fastspring.com/mtdirectionskit/product/m
 
 MTDirectionsKit is very easy to use, here's a sample call:
 
-	// MapKit
-	MTDMapView *_mapView = [[MTDMapView alloc] initWithFrame:frame];
+```objective-c
+// MapKit
+MTDMapView *_mapView = [[MTDMapView alloc] initWithFrame:frame];
  
-	// Google Maps SDK for iOS
-	GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:51.3871
-    														longitude:-1.0316
-                                                            	 zoom:6];
-	MTDGSMMapView *_mapView = [MTDGMSMapView mapWithFrame:self.view.bounds camera:camera];
+// Google Maps SDK for iOS
+GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:51.3871 zoom:6];
+MTDGSMMapView *_mapView = [MTDGMSMapView mapWithFrame:self.view.bounds camera:camera];
     
-    // ...
-    // setup _mapView
-    // ...
+// ...
+// setup _mapView
+// ...
     
-    // configure MTDirectionsKit (optional)
-    // log more messages
-    MTDDirectionsSetLogLevel(MTDLogLevelInfo);
-    // change used API to Google Directions
-    MTDDirectionsSetActiveAPI(MTDDirectionsAPIGoogle);
-    // manually change measurement system 
-    // Warning: MTDirectionsKit automatically sets it to the preferred one of the user's device,
-    // only override if you have a really good reason to
-    MTDDirectionsSetMeasurementSystem(MTDMeasurementSystemMetric);
+// configure MTDirectionsKit (optional)
+// log more messages
+MTDDirectionsSetLogLevel(MTDLogLevelInfo);
+// change used API to Google Directions
+MTDDirectionsSetActiveAPI(MTDDirectionsAPIGoogle);
+// manually change measurement system 
+// Warning: MTDirectionsKit automatically sets it to the preferred one of the user's device,
+// only override if you have a really good reason to
+MTDDirectionsSetMeasurementSystem(MTDMeasurementSystemMetric);
     
-    // set the delegate of MKMapView. This automatically sets the directionsDelegate, if self
-    // conforms to the protocol MTDDirectionsDelegate
-    _mapView.delegate = self;
+// set the delegate of MKMapView. This automatically sets the directionsDelegate, if self
+// conforms to the protocol MTDDirectionsDelegate
+_mapView.delegate = self;
     
-    [_mapView loadDirectionsFrom:CLLocationCoordinate2DMake(51.38713, -1.0316)
+[_mapView loadDirectionsFrom:CLLocationCoordinate2DMake(51.38713, -1.0316)
                               to:CLLocationCoordinate2DMake(51.4554, -0.9742)
                        routeType:MTDDirectionsRouteTypeFastestDriving
             zoomToShowDirections:YES];
-            
+```      
 To see a detailed example on how to use MTDirectionsKit have a look at the provided Demo Application.
 
 ## Installation with CocoaPods
@@ -78,6 +77,7 @@ To see a detailed example on how to use MTDirectionsKit have a look at the provi
 ```ruby
 platform :ios, '6.0'
 pod "MTDirectionsKit", "~> 1.7.0"
+```
 
 ## Integration without CocoaPods
 
